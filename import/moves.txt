@@ -1,0 +1,4670 @@
+1
+Absorb
+grass
+special move
+20
+100
+25
+User recovers half of the HP inflicted on opponent.
+0
+1
+2
+Acid
+poison
+special move
+40
+100
+30
+May lower opponent's Defense or Special Defense one stage.
+10
+1
+3
+Acid Armor
+poison
+status move
+0
+0
+40
+Increases user's Defense by two stages.
+0
+1
+4
+Acupressure
+normal
+status move
+0
+0
+30
+Randomly raises one of the user's stats by two stages.
+0
+1
+5
+Aerial Ace
+flying
+physical move
+60
+101
+20
+Cannot miss, regardless of Accuracy or Evasiveness.
+0
+0
+6
+Aeroblast
+flying
+special move
+100
+95
+5
+High Critical-Hit ratio.
+0
+1
+7
+Agility
+psychic
+status move
+0
+0
+30
+Raises the user's Speed by two stages.
+0
+1
+8
+Air Cutter
+flying
+special move
+55
+95
+25
+High Critical-Hit ratio.
+0
+1
+9
+Air Slash
+flying
+special move
+75
+95
+20
+May cause flinching.
+30
+1
+10
+Amnesia
+psychic
+status move
+0
+0
+20
+Raises user's Special Defense by two stages.
+0
+1
+11
+Ancientpower
+rock
+special move
+60
+100
+5
+Might raise all of the user's stats by one stage.
+10
+1
+12
+Aqua Jet
+water
+physical move
+40
+100
+20
+User goes first.
+0
+1
+13
+Aqua Ring
+water
+status move
+0
+0
+20
+Restores a little HP each turn.
+0
+0
+14
+Aqua Tail
+water
+physical move
+90
+90
+10
+
+0
+1
+15
+Arm Thrust
+fighting
+physical move
+15
+100
+20
+Hits 2-5 times.
+0
+1
+16
+Aromatherapy
+grass
+status move
+0
+0
+5
+Cures all status problems in your party.
+0
+0
+17
+Assist
+normal
+status move
+0
+0
+20
+In a Double Battle, user randomly attacks with a partner's move.
+0
+2
+18
+Assurance
+dark
+physical move
+50
+100
+10
+Power doubles if opponent already took damage in the same turn.
+0
+0
+19
+Astonish
+ghost
+special move
+30
+100
+15
+May cause flinching.
+30
+1
+20
+Attack Order
+bug
+physical move
+90
+100
+15
+High Critical-Hit ratio.
+0
+1
+21
+Attract
+normal
+status move
+0
+100
+15
+If opponent is the opposite gender, it's less likely to attack.
+0
+0
+22
+Aura Sphere
+fighting
+special move
+90
+101
+20
+Cannot miss, regardless of Accuracy or Evasiveness.
+0
+0
+23
+Aurora Beam
+ice
+special move
+65
+100
+20
+Might lower opponent's Attack.
+10
+1
+24
+Avalanche
+ice
+physical move
+60
+100
+10
+Power doubles if user took damage first.
+0
+0
+25
+Barrage
+normal
+physical move
+15
+85
+20
+Hits 2-5 times.
+0
+1
+26
+Barrier
+psychic
+status move
+0
+0
+30
+Raises user's Defense by two stages.
+0
+1
+27
+Baton Pass
+normal
+status move
+0
+0
+40
+Allows user to switch but gives stat changes to the new Pokemon.
+0
+0
+28
+Beat Up
+dark
+physical move
+10
+100
+30
+Each Pokemon in your party attacks.
+0
+0
+29
+Belly Drum
+normal
+status move
+0
+0
+10
+User loses 50% of its max HP, but Attack raises to maximum.
+0
+1
+30
+Bide
+normal
+physical move
+0
+0
+10
+User takes damage for two turns and strikes back double on 3rd.
+0
+0
+31
+Bind
+normal
+physical move
+15
+75
+20
+Damages opponent for 2-5 turns, opponent cannot escape/switch.
+0
+0
+32
+Bite
+dark
+physical move
+60
+100
+25
+May cause flinching.
+30
+1
+33
+Blast Burn
+fire
+special move
+150
+90
+5
+User cannot move next turn.
+0
+0
+34
+Blaze Kick
+fire
+physical move
+85
+90
+10
+High Critical-Hit ratio. May cause a burn.
+10
+1
+35
+Blizzard
+ice
+special move
+120
+70
+5
+May cause freezing.
+10
+1
+36
+Block
+normal
+status move
+0
+0
+5
+Opponent cannot flee or switch.
+0
+0
+37
+Body Slam
+normal
+physical move
+85
+100
+15
+May cause paralysis.
+30
+1
+38
+Bone Club
+ground
+physical move
+65
+85
+20
+May cause flinching.
+10
+1
+39
+Bone Rush
+ground
+physical move
+25
+80
+10
+Hits 2-5 times.
+0
+1
+40
+Bonemerang
+ground
+physical move
+50
+90
+10
+Hits twice.
+0
+1
+41
+Bounce
+flying
+physical move
+85
+85
+5
+Flies up on the first turn, hits on the 2nd. May cause paralysis.
+30
+0
+42
+Brave Bird
+flying
+physical move
+120
+100
+15
+User receives recoil damage.
+0
+1
+43
+Brick Break
+fighting
+physical move
+75
+100
+30
+Destroys Reflect, Light Screen, and Barrier.
+0
+0
+44
+Brine
+water
+special move
+65
+100
+10
+Power doubles if opponent's HP is less than 50%.
+0
+1
+45
+Bubble
+water
+special move
+20
+100
+30
+May lower opponent's Speed by one stage.
+10
+1
+46
+Bubblebeam
+water
+special move
+65
+100
+20
+May lower opponent's Speed by one stage.
+10
+1
+47
+Bug Bite
+bug
+physical move
+60
+100
+20
+Receives the effect from the opponent's held berry.
+0
+0
+48
+Bug Buzz
+bug
+special move
+90
+100
+10
+May lower opponent's Special Defense by one stage.
+10
+1
+49
+Bulk Up
+fighting
+status move
+0
+0
+20
+Increases user's Attack and Defense by one stage.
+0
+1
+50
+Bullet Punch
+steel
+physical move
+40
+100
+30
+User goes first.
+0
+1
+51
+Bullet Seed
+grass
+physical move
+10
+100
+30
+Hits 2-5 times.
+0
+1
+52
+Calm Mind
+psychic
+status move
+0
+0
+20
+Increases user's Special Attack and Special Defense by one stage.
+0
+1
+53
+Camouflage
+normal
+status move
+0
+0
+20
+Changes user's type according to the location.
+0
+1
+54
+Captivate
+normal
+status move
+0
+100
+20
+Foe with opposite gender has its Sp. Attack lowered by 2 stages.
+0
+0
+55
+Charge
+electric
+status move
+0
+0
+20
+Power of your Electric-type attacks increase next turn.
+0
+0
+56
+Charge Beam
+electric
+special move
+50
+90
+10
+Likely to lower opponent's Special Attack by one stage.
+70
+1
+57
+Charm
+normal
+status move
+0
+100
+20
+Lowers opponent's Attack by two stages.
+0
+1
+58
+Chatter
+flying
+special move
+60
+100
+20
+Likely to confuse the opponent.
+50
+1
+59
+Clamp
+water
+physical move
+35
+75
+10
+Damages opponent for 2-5 turns, oponent cannot escape/switch.
+0
+0
+60
+Close Combat
+fighting
+physical move
+120
+100
+5
+Decreases user's Defense and Special Defense by one stage.
+0
+1
+61
+Comet Punch
+normal
+physical move
+18
+85
+15
+Hits 2-5 times.
+0
+1
+62
+Confuse Ray
+ghost
+status move
+0
+100
+10
+Confuses opponent.
+0
+1
+63
+Confusion
+psychic
+special move
+50
+100
+25
+May confuse opponent.
+10
+1
+64
+Constrict
+normal
+physical move
+10
+100
+35
+May lower opponent's Speed by one stage.
+10
+1
+65
+Conversion
+normal
+status move
+0
+0
+30
+Changes user's type to a type of one of its own moves.
+0
+0
+66
+Conversion2
+normal
+status move
+0
+0
+30
+User changes type to become resistant to opponent's last move.
+0
+0
+67
+Copycat
+normal
+status move
+0
+0
+20
+Copies opponent's last move.
+0
+0
+68
+Cosmic Power
+psychic
+status move
+0
+0
+20
+Increase user's Defense and Special Defense by one stage.
+0
+1
+69
+Cotton Spore
+grass
+status move
+0
+85
+40
+Opponent's Speed decreases by two stages.
+0
+1
+70
+Counter
+fighting
+physical move
+0
+100
+20
+When hit by a Physical Attack, user strikes back with 2x power.
+0
+0
+71
+Covet
+normal
+physical move
+40
+100
+40
+
+0
+1
+72
+Crabhammer
+water
+physical move
+90
+85
+10
+High Critical-Hit ratio.
+0
+1
+73
+Cross Chop
+fighting
+physical move
+100
+80
+5
+High Critical-Hit ratio.
+0
+1
+74
+Cross Poison
+poison
+physical move
+70
+100
+20
+Likely to land a Critical Hit, may poison opponent.
+10
+1
+75
+Crunch
+dark
+physical move
+80
+100
+15
+May decrease opponent's Defense by one stage.
+20
+1
+76
+Crush Claw
+normal
+physical move
+75
+95
+10
+May decrease opponent's Defense by one stage.
+50
+1
+77
+Crush Grip
+normal
+physical move
+0
+100
+5
+Attack power depends on opponent's remaining HP.
+0
+1
+78
+Curse
+???
+status move
+0
+0
+10
+Ghosts - Lose 50% of max HP, opponent loses 25% of max HP at the end of each turn. Non-Ghosts - Raises user's Attack and Defense one stage each, but lowers Speed by one stage.
+0
+0
+79
+Cut
+normal
+physical move
+50
+95
+30
+
+0
+1
+80
+Dark Pulse
+dark
+special move
+80
+100
+15
+May cause flinching.
+20
+1
+81
+Dark Void
+dark
+status move
+0
+80
+10
+Puts all Pokemon on the field to sleep.
+0
+0
+82
+Defend Order
+bug
+status move
+0
+0
+10
+Increases user's Defense and Special Defense by one stage each.
+0
+1
+83
+Defense Curl
+normal
+status move
+0
+0
+40
+Increases user's Defense by one stage. Rollout is now stronger.
+0
+0
+84
+Defog
+flying
+status move
+0
+0
+15
+Lowers opponent's Evasiveness by one stage.
+0
+1
+85
+Destiny Bond
+ghost
+status move
+0
+0
+5
+If the user faints, the opponent also faints.
+0
+2
+86
+Detect
+fighting
+status move
+0
+0
+5
+Opponent's attack doesn't affect you, but may fail if used often.
+0
+0
+87
+Dig
+ground
+physical move
+80
+100
+10
+Digs down first turn, attacks in the 2nd. Acts like an Escape Rope on the field.
+0
+0
+88
+Disable
+normal
+status move
+0
+80
+20
+Opponent can't use its last attack for a few turns.
+0
+0
+89
+Discharge
+electric
+special move
+80
+100
+15
+May cause paralysis.
+30
+1
+90
+Dive
+water
+physical move
+80
+100
+10
+Dives down for the first turn, attacks on the second turn.
+0
+0
+91
+Dizzy Punch
+normal
+physical move
+70
+100
+10
+May cause confusion.
+20
+1
+92
+Doom Desire
+normal
+special move
+120
+85
+5
+Damage occurs 2 turns later.
+0
+0
+93
+Double Hit
+normal
+physical move
+35
+90
+10
+Hits twice.
+0
+1
+94
+Double Kick
+fighting
+physical move
+30
+100
+30
+Hits twice.
+0
+1
+95
+Double Team
+normal
+status move
+0
+0
+15
+Increases user's Evasiveness by one stage.
+0
+1
+96
+Double-Edge
+normal
+physical move
+120
+100
+15
+User receives recoil damage equal to 1/8th the damage inflicted.
+0
+1
+97
+Doubleslap
+normal
+physical move
+15
+85
+10
+Hits 2-5 times.
+0
+1
+98
+Draco Meteor
+dragon
+special move
+140
+90
+5
+Decreases user's Special Attack by 2 stages.
+0
+1
+99
+Dragon Claw
+dragon
+physical move
+80
+100
+15
+
+0
+1
+100
+Dragon Dance
+dragon
+status move
+0
+0
+20
+Increases user's Attack and Speed by one stage each.
+0
+1
+101
+Dragon Pulse
+dragon
+special move
+90
+100
+10
+
+0
+1
+102
+Dragon Rage
+dragon
+special move
+0
+100
+10
+Always inflicts 40 HP.
+0
+1
+103
+Dragon Rush
+dragon
+physical move
+100
+75
+10
+May cause flinching.
+20
+1
+104
+Dragonbreath
+dragon
+special move
+60
+100
+20
+May cause paralysis.
+0
+1
+105
+Drain Punch
+fighting
+physical move
+60
+100
+5
+User recovers half of the damage inflicted on opponent.
+0
+1
+106
+Dream Eater
+psychic
+special move
+100
+100
+15
+Can only be used on a sleeping target. User recovers half of the damage inflicted on opponent.
+0
+1
+107
+Drill Peck
+flying
+physical move
+80
+100
+20
+
+0
+1
+108
+Dynamicpunch
+fighting
+physical move
+100
+50
+5
+Causes confusion, if it hits.
+100
+1
+109
+Earth Power
+ground
+special move
+90
+100
+10
+May decrease opponent's Special Defense by on stage.
+10
+1
+110
+Earthquake
+ground
+physical move
+100
+100
+10
+Power is doubled if opponent is underground from using Dig.
+0
+0
+111
+Egg Bomb
+normal
+physical move
+100
+75
+10
+
+0
+1
+112
+Embargo
+dark
+status move
+0
+100
+15
+Opponent cannot use hold items.
+0
+2
+113
+Ember
+fire
+special move
+40
+100
+25
+May cause a burn.
+10
+1
+114
+Encore
+normal
+status move
+0
+100
+5
+Forces opponent to keep using its last more for 2-6 turns.
+0
+0
+115
+Endeavor
+normal
+physical move
+0
+100
+5
+Stronger is user's HP is lower than the opponent's.
+0
+0
+116
+Endure
+normal
+status move
+0
+0
+10
+Always left with at least 1 HP, but may fail if used in a row.
+0
+0
+117
+Energy Ball
+grass
+special move
+80
+100
+10
+May decrease opponent's Special Defense by one stage.
+0
+1
+118
+Eruption
+fire
+special move
+150
+100
+5
+Stronger when the user's HP is higher.
+0
+0
+119
+Explosion
+normal
+special move
+250
+100
+5
+User faints.
+0
+1
+120
+Extrasensory
+psychic
+special move
+80
+100
+30
+May cause flinching.
+10
+1
+121
+Extremespeed
+normal
+physical move
+80
+100
+5
+User attacks first.
+0
+1
+122
+Facade
+normal
+physical move
+70
+100
+20
+Stronger if user is Burned, Poisoned, or Paralyzed.
+0
+0
+123
+Faint Attack
+dark
+physical move
+60
+101
+20
+Cannot miss, regardless of Accuracy or Evasiveness.
+0
+1
+124
+Fake Out
+normal
+physical move
+40
+100
+10
+Can only be used in first turn. User goes first, foe flinches.
+100
+0
+125
+Fake Tears
+dark
+status move
+0
+100
+20
+Decreases opponent's Special Defense by two stages.
+0
+1
+126
+False Swipe
+normal
+physical move
+40
+100
+40
+Always leaves opponent with at least 1 HP.
+0
+1
+127
+Featherdance
+flying
+status move
+0
+100
+15
+Decreases opponent't Attack by two stages.
+0
+1
+128
+Feint
+normal
+physical move
+50
+100
+10
+Only hits if opponent uses Protect or Detect in the same turn.
+0
+0
+129
+Fire Blast
+fire
+special move
+120
+85
+5
+May cause a burn.
+10
+1
+130
+Fire Fang
+fire
+physical move
+65
+95
+15
+May cause a burn or flinching.
+10
+1
+131
+Fire Punch
+fire
+physical move
+75
+100
+15
+May cause a burn.
+10
+1
+132
+Fire Spin
+fire
+special move
+15
+70
+15
+Damages opponent each turn, opponent cannot escape/switch.
+0
+0
+133
+Fissure
+ground
+physical move
+0
+30
+5
+An instant 1-hit KO, if it hits.
+0
+1
+134
+Flail
+normal
+physical move
+0
+100
+15
+The lower the user's HP, the higher the power.
+0
+0
+135
+Flame Wheel
+fire
+physical move
+60
+100
+25
+May cause a burn.
+10
+1
+136
+Flamethrower
+fire
+special move
+95
+100
+15
+May cause a burn.
+10
+1
+137
+Flare Blitz
+fire
+physical move
+120
+100
+15
+User receives recoil damage.
+0
+1
+138
+Flash
+normal
+status move
+0
+100
+20
+Decreases opponent's Accuracy by one stage.
+0
+1
+139
+Flash Cannon
+steel
+special move
+80
+100
+10
+May decrease opponent's Sp. Attack or Sp. Defense by one stage.
+10
+1
+140
+Flatter
+dark
+status move
+0
+100
+15
+Confuses opponent, but raises its Special Attack by two stages.
+0
+1
+141
+Fling
+dark
+physical move
+40
+100
+10
+
+0
+1
+142
+Fly
+flying
+physical move
+90
+95
+15
+Flies up on the first turn, attacks on the second turn.
+0
+0
+143
+Focus Blast
+fighting
+special move
+120
+70
+5
+May decrease opponent's Special Defense by one stage.
+10
+1
+144
+Focus Energy
+normal
+status move
+0
+0
+30
+Increases Critical-Hit ratio by one stage
+0
+1
+145
+Focus Punch
+fighting
+physical move
+150
+100
+20
+Pokemon waits on the first turn, attacks on the second. If the Pokemon is hit between this, the Pokemon flinches instead of attacking.
+0
+0
+146
+Follow Me
+normal
+status move
+0
+0
+20
+In Double Battle, the user takes all the attacks.
+0
+1
+147
+Force Palm
+fighting
+physical move
+60
+100
+10
+May cause paralysis.
+30
+1
+148
+Foresight
+normal
+physical move
+0
+0
+40
+Resets opponent's Evasiveness, Normal-type and Fighting-type attacks can now hit Ghosts, and Ghost-type attacks hit Normal.
+0
+0
+149
+Frenzy Plant
+grass
+special move
+150
+90
+5
+User cannot move in the following turn.
+0
+0
+150
+Frustration
+normal
+physical move
+0
+100
+20
+Power raises with the more the user dislikes its trainer.
+0
+0
+151
+Fury Attack
+normal
+physical move
+15
+85
+20
+Hits 2-5 times.
+0
+1
+152
+Fury Cutter
+bug
+physical move
+10
+95
+20
+Power increases with each consecutive hit.
+0
+0
+153
+Fury Swipes
+normal
+physical move
+18
+80
+15
+Hits 2-5 times.
+0
+1
+154
+Future Sight
+psychic
+special move
+80
+90
+15
+Damage occurs 2 turs later.
+0
+0
+155
+Gastro Acid
+poison
+status move
+0
+100
+10
+Cancels out the effect of the opponent's Ability.
+0
+0
+156
+Giga Drain
+grass
+special move
+60
+100
+10
+User recovers 50% of the damage inflicted on the opponent.
+0
+1
+157
+Giga Impact
+normal
+physical move
+150
+90
+5
+User cannot move in the following turn.
+0
+0
+158
+Glare
+normal
+physical move
+0
+75
+30
+Causes paralysis, if it hits.
+0
+1
+159
+Grass Knot
+grass
+special move
+0
+100
+20
+The heavier the opponent, the stronger the attack.
+0
+0
+160
+Grasswhistle
+grass
+status move
+0
+55
+15
+Puts opponent to sleep, if it hits.
+0
+1
+161
+Gravity
+psychic
+status move
+0
+0
+5
+Prevents moves like Fly and Bounce and the Ability Levitate for 5 turns.
+0
+0
+162
+Growl
+normal
+status move
+0
+100
+40
+Decreases opponent's Attack by one stage.
+0
+1
+163
+Growth
+normal
+status move
+0
+0
+40
+Increases user's Special Attack by one stage.
+0
+1
+164
+Grudge
+ghost
+status move
+0
+0
+5
+If the users faints after using this move, the PP for the opponent's last move is depleted.
+0
+0
+165
+Guard Swap
+psychic
+status move
+0
+0
+10
+User and opponent swap Defense and Special Defense.
+0
+0
+166
+Guillotine
+normal
+physical move
+0
+30
+5
+An instand 1-hit KO, if it hits.
+0
+1
+167
+Gunk Shot
+poison
+physical move
+120
+70
+5
+May cause poison.
+30
+1
+168
+Gust
+flying
+special move
+40
+100
+35
+
+0
+1
+169
+Gyro Ball
+steel
+physical move
+0
+100
+5
+The slower the opponent, the stronger the attack.
+0
+0
+170
+Hail
+ice
+status move
+0
+0
+10
+All Pokemon except Ice-types are damaged for 5 turns.
+0
+0
+171
+Hammer Arm
+fighting
+physical move
+100
+90
+10
+Decreases the user's Speed by one stage.
+0
+1
+172
+Harden
+normal
+status move
+0
+0
+30
+Increases the user's Defense by one stage.
+0
+1
+173
+Haze
+ice
+status move
+0
+0
+30
+Resets are stat changes.
+0
+0
+174
+Head Smash
+rock
+physical move
+150
+80
+5
+User receives recoil damage.
+0
+1
+175
+Headbutt
+normal
+physical move
+70
+100
+15
+May cause flinching.
+30
+1
+176
+Heal Bell
+normal
+status move
+0
+0
+5
+Heals the user's party's status conditions.
+0
+0
+177
+Heal Block
+psychic
+status move
+0
+0
+15
+Prevents the opponent from restoring HP for 5 turns.
+0
+0
+178
+Heal Order
+bug
+status move
+0
+0
+10
+Recovers half of the user's max HP.
+0
+0
+179
+Healing Wish
+psychic
+status move
+0
+0
+10
+The user faints and the next Pokemon released is fully healed.
+0
+0
+180
+Heart Swap
+psychic
+status move
+0
+0
+10
+Stat changes are swapped with the opponent.
+0
+0
+181
+Heat Wave
+fire
+special move
+100
+90
+10
+May cause a burn.
+10
+1
+182
+Helping Hand
+normal
+status move
+0
+0
+20
+In Double Battles, boosts the power of the partner's move.
+0
+0
+183
+Hi Jump Kick
+fighting
+physical move
+100
+90
+20
+If this attack misses, the user takes 1/8 of the would-be damage.
+0
+0
+184
+Hidden Power
+normal
+special move
+0
+100
+15
+Type and power depends on user's IV's.
+0
+0
+185
+Horn Attack
+normal
+physical move
+65
+100
+25
+
+0
+1
+186
+Horn Drill
+normal
+physical move
+0
+30
+5
+An instant 1-hit KO, if it hits.
+0
+1
+187
+Howl
+normal
+status move
+0
+0
+40
+Increases the user's Attack by one stage.
+0
+1
+188
+Hydro Cannon
+water
+special move
+150
+90
+5
+User cannot move in the following turn.
+0
+0
+189
+Hydro Pump
+water
+special move
+120
+80
+5
+
+0
+1
+190
+Hyper Beam
+normal
+special move
+150
+90
+5
+User cannot move on the following turn.
+0
+0
+191
+Hyper Fang
+normal
+physical move
+80
+90
+15
+May cause flinching.
+10
+1
+192
+Hyper Voice
+normal
+special move
+90
+100
+10
+
+0
+1
+193
+Hypnosis
+psychic
+status move
+0
+70
+20
+Put opponent to sleep, if it hits.
+0
+1
+194
+Ice Ball
+ice
+physical move
+30
+90
+20
+An attack lasting for 5 turns that grows in power.
+0
+0
+195
+Ice Beam
+ice
+special move
+95
+100
+10
+May cause freezing.
+10
+1
+196
+Ice Fang
+ice
+physical move
+65
+95
+15
+May cause freezing and flinching.
+10
+1
+197
+Ice Punch
+ice
+physical move
+75
+100
+15
+May cause freezing.
+10
+1
+198
+Ice Shard
+ice
+physical move
+40
+100
+30
+User attacks first.
+0
+1
+199
+Icicle Spear
+ice
+physical move
+10
+100
+30
+Hits 2-5 times.
+0
+1
+200
+Icy Wind
+ice
+special move
+55
+95
+15
+Decreases opponent's Speed by one stage.
+100
+1
+201
+Imprison
+psychic
+status move
+0
+0
+10
+Opponent is unable to use moves that the user also knows.
+0
+0
+202
+Ingrain
+grass
+status move
+0
+0
+20
+User restores HP each turn. User cannot escape/switch.
+0
+0
+203
+Iron Defense
+steel
+status move
+0
+0
+15
+Increases the user's Defense by two stages.
+0
+1
+204
+Iron Head
+steel
+physical move
+80
+100
+15
+May cause flinching.
+30
+1
+205
+Iron Tail
+steel
+physical move
+100
+75
+15
+May decrease opponent's Defense by one stage.
+30
+1
+206
+Judgment
+normal
+special move
+100
+100
+10
+Type depends on the Arceus Plate being held.
+0
+0
+207
+Jump Kick
+fighting
+physical move
+85
+95
+25
+If this attack misses, the user takes 1/8 of the would-be damage.
+0
+0
+208
+Karate Chop
+fighting
+physical move
+50
+100
+25
+High Critical-Hit ratio.
+0
+1
+209
+Kinesis
+psychic
+status move
+0
+80
+15
+Decreases opponent's Accuracy by one stage, if it hits.
+0
+1
+210
+Knock Off
+dark
+physical move
+20
+100
+20
+Opponent cannot use its hold item for the duration of the battle.
+0
+0
+211
+Last Resort
+normal
+physical move
+130
+100
+5
+Can only be used after all over moves are used.
+0
+0
+212
+Lava Plume
+fire
+special move
+80
+100
+15
+May cause a burn.
+30
+1
+213
+Leaf Blade
+grass
+physical move
+90
+100
+15
+High Critcal-Hit ratio.
+0
+1
+214
+Leaf Storm
+grass
+special move
+140
+90
+5
+Decreases user's Special Attack by two stages.
+0
+1
+215
+Leech Life
+bug
+physical move
+20
+100
+15
+User recovers half of the damage inflicted on the opponent.
+0
+1
+216
+Leech Seed
+grass
+status move
+0
+90
+10
+User steals HP from opponent each turn.
+0
+0
+217
+Leer
+normal
+status move
+0
+100
+30
+Decreases opponent's Defense by one stage.
+0
+1
+218
+Lick
+ghost
+physical move
+20
+100
+30
+May cause paralysis.
+30
+1
+219
+Light Screen
+psychic
+status move
+0
+0
+30
+User's party receives 1/2 damage from Sp. Attacks for 5 turns.
+0
+0
+220
+Lock-on
+normal
+status move
+0
+0
+5
+The next move the user uses is guaranteed to hit.
+0
+0
+221
+Lovely Kiss
+normal
+status move
+0
+75
+10
+Puts the opponent to sleep, if it hits.
+0
+1
+222
+Low Kick
+fighting
+status move
+0
+100
+20
+The heavier the opponent, the stronger the attack.
+0
+0
+223
+Lucky Chant
+normal
+status move
+0
+0
+30
+Opponent cannot land Critical Hits for 5 turns.
+0
+0
+224
+Lunar Dance
+psychic
+status move
+0
+0
+10
+The user faints but the next Pokemon released is fully healed.
+0
+0
+225
+Luster Purge
+psychic
+special move
+70
+100
+5
+May decrease opponent's Special Defense by one stage.
+0
+1
+226
+Mach Punch
+fighting
+physical move
+40
+100
+30
+User goes first.
+0
+1
+227
+Magic Coat
+psychic
+status move
+0
+0
+15
+Any special move is reflected back to the attacker.
+0
+0
+228
+Magical Leaf
+grass
+special move
+60
+101
+20
+Cannot miss, regardless of Accuracy or Evasiveness.
+0
+1
+229
+Magma Storm
+fire
+special move
+120
+70
+5
+Opponent cannot escape/switch.
+0
+0
+230
+Magnet Bomb
+steel
+physical move
+60
+101
+20
+Cannot miss, regardless of Accuracy or Evasiveness.
+0
+1
+231
+Magnet Rise
+steel
+status move
+0
+0
+10
+Changes user's Ability to Levitate.
+0
+0
+232
+Magnitude
+ground
+physical move
+0
+100
+30
+Move power is random. Magnitude 4 = Power: 10 Magnitude 5 = Power: 30 Magnitude 6 = Power: 50 Magnitude 7 = Power: 70 Magnitude 8 = Power: 90 Magnitude 9 = Power: 110 Magnitude 10 = Power: 150
+0
+1
+233
+Me First
+normal
+status move
+0
+0
+20
+User goes first with the opponent's attack at 1.5x power.
+0
+0
+234
+Mean Look
+normal
+status move
+0
+0
+5
+Opponent cannot escape/switch.
+0
+0
+235
+Meditate
+psychic
+status move
+0
+0
+40
+Increases user's Attack by one stage.
+0
+1
+236
+Mega Drain
+grass
+special move
+40
+100
+15
+User recovers 1/2 of the damage inflicted onto the opponent.
+0
+1
+237
+Mega Kick
+normal
+physical move
+120
+75
+5
+
+0
+1
+238
+Mega Punch
+normal
+physical move
+80
+85
+20
+
+0
+1
+239
+Megahorn
+bug
+physical move
+120
+85
+10
+
+0
+1
+240
+Memento
+dark
+status move
+0
+100
+10
+User faints, opponent's Attack is dropped to the lowest stage.
+0
+0
+241
+Metal Burst
+steel
+physical move
+0
+100
+10
+Deals opponent damage equal to its last attack x 2.
+0
+0
+242
+Metal Claw
+steel
+physical move
+50
+95
+35
+May increase the user's Attack by one stage.
+10
+1
+243
+Metal Sound
+steel
+status move
+0
+85
+40
+Decreases opponent's Special Defense by two stages.
+0
+1
+244
+Meteor Mash
+steel
+physical move
+100
+85
+10
+May increase user's Attack by one stage.
+20
+1
+245
+Metronome
+normal
+status move
+0
+0
+10
+User performs any move in the game at random.
+0
+0
+246
+Milk Drink
+normal
+status move
+0
+0
+10
+User recoves 50% of its maximum HP.
+0
+1
+247
+Mimic
+normal
+status move
+0
+0
+10
+Replaces this move with the opponent's last move, for the battle.
+0
+0
+248
+Mind Reader
+psychic
+status move
+0
+0
+5
+User's next attack is guaranteed to hit.
+0
+0
+249
+Minimize
+normal
+status move
+0
+0
+20
+Increases user's Evasiveness by one stage.
+0
+1
+250
+Miracle Eye
+psychic
+status move
+0
+0
+40
+Resets opponent's Evasiveness, removes Dark's Psychic immunity.
+0
+0
+251
+Mirror Coat
+psychic
+special move
+0
+100
+20
+When hit by a Special Attack, user strikes back with 2x power.
+0
+0
+252
+Mirror Move
+flying
+status move
+0
+0
+20
+User performs the opponent's last move.
+0
+0
+253
+Mirror Shot
+steel
+special move
+65
+85
+10
+May decrease opponent's Accuracy by one stage.
+0
+1
+254
+Mist
+ice
+status move
+0
+0
+30
+User's stats cannot be changed for a period of time.
+0
+0
+255
+Mist Ball
+psychic
+special move
+70
+100
+5
+Likely to decrease opponent's Special Attack by one stage.
+50
+1
+256
+Moonlight
+normal
+status move
+0
+0
+5
+User recovers HP. Amount varies with the weather.
+0
+0
+257
+Morning Sun
+normal
+status move
+0
+0
+5
+User recovers HP. Amount varies with the weather.
+0
+0
+258
+Mud Bomb
+ground
+special move
+65
+85
+10
+May decrease opponent's Accuracy by one stage.
+30
+1
+259
+Mud Shot
+ground
+special move
+55
+95
+15
+Decreases opponent's Speed by one stage.
+100
+1
+260
+Mud Sport
+ground
+status move
+0
+0
+15
+Weakens the power of Electric-type moves.
+0
+0
+261
+Mud-Slap
+ground
+special move
+20
+100
+10
+Lowers opponent's accuracy by one stage
+100
+1
+262
+Muddy Water
+water
+special move
+95
+85
+10
+May decrease opponent's Accuracy by one stage.
+30
+1
+263
+Nasty Plot
+dark
+status move
+0
+0
+20
+Increases the user's Special Attack by two stages.
+0
+1
+264
+Natural Gift
+normal
+physical move
+0
+100
+15
+The type and power depends on the user's held berry.
+0
+0
+265
+Nature Power
+normal
+status move
+0
+0
+20
+Uses a certain move based on the current location.
+0
+1
+266
+Needle Arm
+grass
+physical move
+60
+100
+15
+May cause flinching.
+30
+1
+267
+Night Shade
+ghost
+special move
+0
+100
+15
+Damage = User's level.
+0
+1
+268
+Night Slash
+dark
+physical move
+70
+100
+15
+High Critical-Hit ratio.
+0
+1
+269
+Nightmare
+ghost
+special move
+0
+100
+15
+The sleeping opponent loses 25% of its max HP each turn.
+0
+0
+270
+Octazooka
+water
+special move
+65
+85
+10
+Likely to decrease opponent's Accuracy by one stage.
+50
+1
+271
+Odor Sleuth
+normal
+status move
+0
+0
+40
+Resets opponent's Evasiveness, Normal-type and Fighting-type attacks can now hit Ghosts, and Ghost-type attacks hit Normal.
+0
+0
+272
+Ominous Wind
+ghost
+special move
+60
+100
+5
+May increase all stats of the user by one stage each.
+10
+1
+273
+Outrage
+dragon
+physical move
+120
+100
+15
+User attacks for 2-3 turns and then becomes confused.
+0
+0
+274
+Overheat
+fire
+special move
+140
+90
+5
+Decreases user's Special Attack by two stages.
+0
+1
+275
+Pain Split
+normal
+status move
+0
+0
+20
+The user's and opponent's HP becomes the average of both.
+0
+0
+276
+Pay Day
+normal
+physical move
+40
+100
+20
+A small amount of money is gained after the battle resolves.
+0
+0
+277
+Payback
+dark
+physical move
+50
+100
+10
+Power doubles if the user was attacked first.
+0
+0
+278
+Peck
+flying
+physical move
+35
+100
+35
+
+0
+1
+279
+Perish Song
+normal
+status move
+0
+0
+5
+Any Pokemon in play when this attack is used faints in 3 turns.
+0
+0
+280
+Petal Dance
+grass
+special move
+90
+100
+20
+User attacks for 2-3 turns and then becomes confused.
+0
+0
+281
+Pin Missile
+bug
+physical move
+14
+85
+20
+Hits 2-5 times.
+0
+1
+282
+Pluck
+flying
+physical move
+60
+100
+20
+If the opponent is holding a berry, its effect is stolen by user.
+0
+0
+283
+Poison Fang
+poison
+physical move
+50
+100
+15
+May cause poison that gets worse each turn.
+30
+1
+284
+Poison Gas
+poison
+status move
+0
+55
+40
+Poisons the opponent, if it hits.
+0
+1
+285
+Poison Jab
+poison
+physical move
+80
+100
+20
+May poison the opponent.
+30
+1
+286
+Poison Sting
+poison
+physical move
+15
+100
+35
+May poison the opponent.
+30
+1
+287
+Poison Tail
+poison
+physical move
+50
+100
+25
+High Critical-Hit ratio. May poison the opponent.
+10
+1
+288
+Poisonpowder
+poison
+status move
+0
+75
+35
+Poisons the opponent, if it hits.
+0
+1
+289
+Pound
+normal
+physical move
+40
+100
+35
+
+0
+1
+290
+Powder Snow
+ice
+special move
+40
+100
+25
+May cause freezing.
+10
+1
+291
+Power Gem
+rock
+special move
+70
+100
+20
+
+0
+1
+292
+Power Swap
+psychic
+status move
+0
+0
+10
+User and opponent swap Attack and Special Attack.
+0
+0
+293
+Power Trick
+psychic
+status move
+0
+0
+10
+User's own Attack and Defense switch.
+0
+0
+294
+Power Whip
+grass
+physical move
+120
+85
+10
+
+0
+1
+295
+Present
+normal
+physical move
+0
+90
+15
+Either deals damage or heals.
+0
+0
+296
+Protect
+normal
+status move
+0
+0
+10
+User is not affected by opponent's move. May fail if used often.
+0
+0
+297
+Psybeam
+psychic
+special move
+65
+100
+20
+May confuse the opponent.
+10
+1
+298
+Psych Up
+normal
+status move
+0
+0
+10
+Copies the opponent's stat changes.
+0
+0
+299
+Psychic
+psychic
+special move
+90
+100
+10
+May decreases the opponent's Special Defense by one stage.
+10
+1
+300
+Psycho Boost
+psychic
+special move
+140
+90
+5
+Decreases user's Special Attack by two stages.
+0
+1
+301
+Psycho Cut
+psychic
+physical move
+70
+100
+20
+High Critical-Hit ratio.
+0
+1
+302
+Psycho Shift
+psychic
+status move
+0
+90
+10
+Gives the opponent the user's status condition, if it hits.
+0
+0
+303
+Psywave
+psychic
+special move
+0
+80
+15
+Damage = 1x to 1.5x user's level.
+0
+1
+304
+Punishment
+dark
+physical move
+0
+100
+5
+Power depends on opponent's stats.
+0
+0
+305
+Pursuit
+dark
+physical move
+40
+100
+20
+Double power if the opponent is switching out.
+0
+0
+306
+Quick Attack
+normal
+physical move
+40
+100
+30
+User goes first.
+0
+1
+307
+Rage
+normal
+physical move
+20
+100
+20
+Increases user's Attack by one stage when hit.
+0
+1
+308
+Rain Dance
+water
+status move
+0
+0
+5
+Causes the weather to change to rain for 5 turns.
+0
+1
+309
+Rapid Spin
+normal
+physical move
+20
+100
+40
+Removes Spikes, Leech Seed, Bind, Wrap, etc.
+0
+0
+310
+Razor Leaf
+grass
+physical move
+55
+95
+25
+High Critical-Hit ratio.
+0
+1
+311
+Razor Wind
+normal
+special move
+80
+100
+10
+Immobile on the first turn, attacks on the second turn. High Critical-Hit ratio.
+0
+0
+312
+Recover
+normal
+status move
+0
+0
+10
+User recovers 50% of its max HP.
+0
+1
+313
+Recycle
+normal
+status move
+0
+0
+10
+User's used hold item is restored.
+0
+0
+314
+Reflect
+psychic
+status move
+0
+0
+20
+User's party receives 1/2 damage from Ph. Attacks for 5 turns.
+0
+0
+315
+Refresh
+normal
+status move
+0
+0
+20
+Cures paralysis, poison, and burns.
+0
+0
+316
+Rest
+psychic
+status move
+0
+0
+10
+User sleeps for 2 turns, but user is fully healed.
+0
+0
+317
+Return
+normal
+physical move
+0
+100
+20
+Power increases with user's Happiness.
+0
+0
+318
+Revenge
+fighting
+physical move
+60
+100
+10
+Power increases if user was hit first.
+0
+0
+319
+Reversal
+fighting
+physical move
+0
+100
+15
+The lower the user's HP is, the higher the power.
+0
+0
+320
+Roar
+normal
+status move
+0
+100
+20
+In battles, the opponent switches. In the wild, the Pokemon runs.
+0
+0
+321
+Roar of Time
+dragon
+special move
+150
+90
+5
+The user cannot move in the following turn.
+0
+0
+322
+Rock Blast
+rock
+physical move
+25
+80
+10
+Hits 2-5 times.
+0
+1
+323
+Rock Climb
+normal
+physical move
+90
+85
+20
+May cause confusion.
+20
+1
+324
+Rock Polish
+rock
+status move
+0
+0
+20
+Increases the user's Speed by two stages.
+0
+1
+325
+Rock Slide
+rock
+physical move
+75
+90
+10
+May cause flinching, if it hits.
+30
+1
+326
+Rock Smash
+fighting
+physical move
+40
+100
+15
+Likely to decrease the opponent's Defense by one stage.
+50
+1
+327
+Rock Throw
+rock
+physical move
+50
+90
+15
+
+0
+1
+328
+Rock Tomb
+rock
+physical move
+50
+80
+10
+Decreases the opponent's Speed by one stage, if it hits.
+100
+1
+329
+Rock Wrecker
+rock
+physical move
+150
+90
+5
+The user cannot move in the following turn.
+0
+0
+330
+Role Play
+psychic
+status move
+0
+0
+15
+User copies the opponent's Ability.
+0
+2
+331
+Rolling Kick
+fighting
+physical move
+60
+85
+15
+May cause flinching.
+30
+1
+332
+Rollout
+rock
+physical move
+30
+90
+20
+An attack lasting for 5 turns that grows in power.
+0
+0
+333
+Roost
+flying
+status move
+0
+0
+10
+User recovers 50% of its max HP. Flying-type users are not immune to Ground-type moves immediately following this move.
+0
+0
+334
+Sacred Fire
+fire
+special move
+100
+95
+5
+Likely to cause a burn.
+50
+1
+335
+Safeguard
+normal
+status move
+0
+0
+25
+The user's party is protected from status conditions.
+0
+0
+336
+Sand Tomb
+ground
+physical move
+15
+70
+15
+Damages opponent for 2-5 turns, opponent cannot switch/escape.
+0
+0
+337
+Sand-attack
+ground
+status move
+0
+100
+15
+Decreases the opponent's Accuracy by one stage.
+0
+1
+338
+Sandstorm
+rock
+status move
+0
+0
+10
+Damages all Pokemon except Rock-, Ground-, and Steel-types.
+0
+0
+339
+Scary Face
+normal
+status move
+0
+90
+10
+Decreases the opponent's Speed by two stages, if it hits.
+0
+1
+340
+Scratch
+normal
+physical move
+40
+100
+35
+
+0
+1
+341
+Screech
+normal
+status move
+0
+85
+40
+Decreases the opponent's Defense by two stages, if it hits.
+0
+1
+342
+Secret Power
+normal
+physical move
+70
+100
+20
+
+30
+1
+343
+Seed Bomb
+grass
+physical move
+80
+100
+15
+
+0
+1
+344
+Seed Flare
+grass
+special move
+120
+85
+5
+May decrease the opponent's Special Defense by one stage.
+40
+1
+345
+Seismic Toss
+fighting
+physical move
+0
+100
+20
+Damage = User's level.
+0
+1
+346
+Selfdestruct
+normal
+physical move
+200
+100
+5
+User faints.
+0
+1
+347
+Shadow Ball
+ghost
+special move
+80
+100
+15
+May decrease opponent's Special Defense.
+20
+0
+348
+Shadow Claw
+ghost
+physical move
+70
+100
+15
+High Critical-Hit ratio.
+0
+1
+349
+Shadow Force
+ghost
+physical move
+120
+100
+5
+Disappears on the 1st turn, attacks on the 2nd turn.
+0
+0
+350
+Shadow Punch
+ghost
+physical move
+60
+101
+20
+Cannot miss, regardless of Accuracy and Evasiveness.
+0
+1
+351
+Shadow Sneak
+ghost
+physical move
+40
+100
+30
+User goes first.
+0
+1
+352
+Sharpen
+normal
+status move
+0
+0
+30
+Increases the user's Attack by one stage.
+0
+1
+353
+Sheer Cold
+ice
+special move
+0
+30
+5
+A 1-hit KO, if it hits.
+0
+1
+354
+Shock Wave
+electric
+special move
+60
+101
+20
+Cannot miss, regardless of Accuracy and Evasiveness.
+0
+0
+355
+Signal Beam
+bug
+special move
+75
+100
+15
+May cause confusion.
+10
+1
+356
+Silver Wind
+bug
+special move
+60
+100
+5
+May increase all of the user's stats by one stage each.
+10
+1
+357
+Sing
+normal
+status move
+0
+55
+15
+Puts the opponent to sleep, if it hits.
+100
+1
+358
+Sketch
+normal
+status move
+0
+0
+1
+Permanently copies the opponent's last move.
+0
+0
+359
+Skill Swap
+psychic
+status move
+0
+0
+10
+The user swaps Abilities with the opponent.
+0
+0
+360
+Skull Bash
+normal
+physical move
+100
+100
+15
+Increases user's Defense one stage in the 1st turn, attacks in the 2nd turn.
+100
+0
+361
+Sky Attack
+flying
+physical move
+140
+90
+5
+User cannot move in the 1st turn, attacks 2nd turn. May cause flinching.
+30
+0
+362
+Sky Uppercut
+fighting
+physical move
+85
+90
+15
+Hits the opponent, even during Fly.
+0
+0
+363
+Slack Off
+normal
+status move
+0
+0
+10
+User recovers 50% of its max HP.
+0
+1
+364
+Slam
+normal
+physical move
+80
+75
+20
+
+0
+1
+365
+Slash
+normal
+physical move
+70
+100
+20
+High Critical-Hit ratio.
+0
+1
+366
+Sleep Powder
+grass
+status move
+0
+75
+15
+Puts the opponent to sleep, if it hits.
+0
+1
+367
+Sleep Talk
+normal
+status move
+0
+0
+10
+User performs one of its own moves while sleeping.
+0
+0
+368
+Sludge
+poison
+special move
+65
+100
+20
+May poison the opponent.
+30
+1
+369
+Sludge Bomb
+poison
+special move
+90
+100
+10
+May poison the opponent.
+30
+1
+370
+Smellingsalt
+normal
+special move
+60
+100
+10
+Power increases when used on a paralyzed opponent, but cures it.
+0
+0
+371
+Smog
+poison
+special move
+20
+70
+20
+May poison the opponent.
+40
+1
+372
+Smokescreen
+normal
+status move
+0
+100
+20
+Decreases the opponent's Accuracy by one stage.
+0
+1
+373
+Snatch
+dark
+status move
+0
+0
+10
+User steals the effects of the opponent's next move.
+0
+0
+374
+Snore
+normal
+special move
+40
+100
+15
+Can only be used while the user is sleeping.
+0
+0
+375
+Softboiled
+normal
+status move
+0
+0
+10
+User recovers 50% of its max HP.
+0
+1
+376
+Solarbeam
+grass
+special move
+120
+100
+10
+User cannot move in the 1st turn, attacks in the 2nd turn.
+0
+0
+377
+Sonicboom
+normal
+special move
+0
+90
+20
+Always inflicts 20 HP.
+0
+1
+378
+Spacial Rend
+dragon
+special move
+100
+95
+5
+High Critical-Hit ratio.
+0
+1
+379
+Spark
+electric
+physical move
+65
+100
+20
+May cause paralysis.
+30
+1
+380
+Spider Web
+bug
+status move
+0
+0
+10
+Opponent cannot escape/switch.
+0
+0
+381
+Spike Cannon
+normal
+physical move
+20
+100
+15
+Hits 2-5 times.
+0
+1
+382
+Spikes
+ground
+status move
+0
+0
+20
+Hurts opponents when they switch into battle.
+0
+0
+383
+Spit Up
+normal
+special move
+0
+100
+10
+Power depends on how many times the user performed Stockpile.
+0
+0
+384
+Spite
+ghost
+status move
+0
+100
+10
+The opponent's last move loses 2-5 PP.
+0
+0
+385
+Splash
+normal
+status move
+0
+0
+40
+Doesn't do ANYTHING.
+0
+1
+386
+Spore
+grass
+physical move
+0
+100
+15
+Puts the opponent to sleep.
+100
+1
+387
+Stealth Rock
+rock
+status move
+0
+0
+20
+Damages opponent when they switch into battle.
+0
+0
+388
+Steel Wing
+steel
+physical move
+70
+90
+25
+May increases user's Defense by one stage.
+10
+1
+389
+Stockpile
+normal
+status move
+0
+0
+20
+Temporarily increases user's Defense by one stage. To be used with Spit Up and Swallow.
+0
+0
+390
+Stomp
+normal
+physical move
+65
+100
+20
+May cause flinching.
+30
+1
+391
+Stone Edge
+rock
+physical move
+100
+80
+5
+High Critical-Hit ratio.
+0
+1
+392
+Strength
+normal
+physical move
+80
+100
+15
+
+0
+1
+393
+String Shot
+bug
+status move
+0
+95
+40
+Decreases opponent's Speed by one stage.
+0
+1
+394
+Struggle
+normal
+physical move
+50
+100
+0
+Only usable when all PP are gone. Hurts the user.
+0
+1
+395
+Stun Spore
+grass
+status move
+0
+75
+30
+Causes paralysis, if it hits.
+0
+1
+396
+Submission
+fighting
+physical move
+80
+80
+25
+User receives recoil damage.
+0
+1
+397
+Substitute
+normal
+status move
+0
+0
+10
+User loses 1/4 of its max HP, but can take hits without losing HP for awhile.
+0
+0
+398
+Sucker Punch
+dark
+physical move
+80
+100
+5
+User goes first, but won't work if opponent doesn't use an attacking move.
+0
+0
+399
+Sunny Day
+fire
+status move
+0
+0
+5
+Changes the weather to sunny.
+0
+2
+400
+Super Fang
+normal
+physical move
+0
+90
+10
+Always takes off half of the opponent's HP.
+0
+1
+401
+Superpower
+fighting
+physical move
+120
+100
+5
+Decreases user's Attack and Defense by one stage each.
+0
+1
+402
+Supersonic
+normal
+status move
+0
+55
+20
+Causes confusion, if it hits.
+0
+1
+403
+Surf
+water
+special move
+95
+100
+15
+
+0
+1
+404
+Swagger
+normal
+status move
+0
+90
+15
+Opponent becomes confused, but its Attack is raised by 2 stages.
+0
+1
+405
+Swallow
+normal
+status move
+0
+0
+10
+The more times the user has performed Stockpile, the more HP is recovered.
+0
+0
+406
+Sweet Kiss
+normal
+status move
+0
+75
+10
+Causes confusion, if it hits.
+0
+1
+407
+Sweet Scent
+normal
+status move
+0
+0
+20
+Decreases opponent's Evasiveness by one stage.
+0
+1
+408
+Swift
+normal
+special move
+60
+101
+20
+Cannot miss, regardless of Accuracy and Evasiveness.
+0
+0
+409
+Switcheroo
+dark
+status move
+0
+100
+15
+Swaps held items with the opponent.
+0
+2
+410
+Swords Dance
+normal
+status move
+0
+0
+30
+Increases the user's Attack by two stages.
+0
+1
+411
+Synthesis
+grass
+status move
+0
+0
+5
+User recovers 50% of its max HP.
+0
+1
+412
+Tackle
+normal
+physical move
+35
+95
+35
+
+0
+1
+413
+Tail Glow
+bug
+status move
+0
+0
+20
+Increases user's Special Attack by two stages.
+0
+1
+414
+Tail Whip
+normal
+status move
+0
+100
+30
+Decreases opponent's Defense by one stage.
+0
+1
+415
+Tailwind
+flying
+status move
+0
+0
+30
+The user's party's Speed is increased by one stage for 5 turns.
+0
+0
+416
+Take Down
+normal
+physical move
+90
+85
+20
+User receives recoil damage.
+0
+1
+417
+Taunt
+dark
+status move
+0
+100
+20
+Opponent can only use moves that attack.
+0
+0
+418
+Teeter Dance
+normal
+status move
+0
+100
+20
+All Pokemon on the field become confused.
+0
+1
+419
+Teleport
+psychic
+status move
+0
+0
+20
+Allows user to switch out. In the wild, the battle ends. Can be used like an Escape Rope outside of battles.
+0
+0
+420
+Thief
+dark
+physical move
+40
+100
+10
+
+40
+1
+421
+Thrash
+normal
+physical move
+90
+100
+20
+User attacks for 2-3 turns, but becomes confused.
+0
+0
+422
+Thunder
+electric
+special move
+120
+70
+10
+May cause paralysis.
+30
+1
+423
+Thunder Fang
+electric
+physical move
+65
+95
+15
+May cause paralysis and flinching.
+10
+1
+424
+Thunder Wave
+electric
+status move
+0
+100
+20
+Causes paralysis.
+100
+1
+425
+Thunderbolt
+electric
+special move
+95
+100
+15
+May cause paralysis.
+10
+1
+426
+Thunderpunch
+electric
+physical move
+75
+100
+15
+May cause paralysis.
+10
+1
+427
+Thundershock
+electric
+special move
+40
+100
+30
+May cause paralysis.
+10
+1
+428
+Tickle
+normal
+status move
+0
+100
+20
+Decreases the opponent's Attack and Defense by one stage each.
+0
+1
+429
+Torment
+dark
+status move
+0
+100
+15
+Opponent cannot use the same move in a row.
+0
+0
+430
+Toxic
+poison
+status move
+0
+85
+10
+Causes poison that doubles in damage each turn.
+0
+1
+431
+Toxic Spikes
+poison
+status move
+0
+0
+20
+Hurts opponents when they switch into battle.
+0
+0
+432
+Transform
+normal
+status move
+0
+0
+10
+User takes on the form and attacks of the opponent.
+0
+0
+433
+Tri Attack
+normal
+special move
+80
+100
+10
+May cause paralysis, freezing, or a burn
+20
+1
+434
+Trick
+psychic
+status move
+0
+100
+10
+Swaps held items with the opponent.
+0
+2
+435
+Trick Room
+psychic
+status move
+0
+0
+5
+Slower Pokemon move first in the turn for 5 turns.
+0
+0
+436
+Triple Kick
+fighting
+physical move
+10
+90
+10
+Hits 3 times, growing in power each with each hit.
+0
+0
+437
+Trump Card
+normal
+special move
+0
+100
+5
+The lower the PP, the higher the power.
+0
+1
+438
+Twineedle
+bug
+special move
+25
+100
+20
+Hits twice. May cause poison.
+20
+1
+439
+Twister
+dragon
+special move
+40
+100
+20
+May cause flinching. 2x damage against an opponent using Fly.
+20
+1
+440
+U-turn
+bug
+physical move
+70
+100
+20
+User switches out immediately after attacking.
+0
+0
+441
+Uproar
+normal
+special move
+50
+100
+10
+User attacks for 2-5 turns and cannot sleep during that time.
+0
+0
+442
+Vacuum Wave
+fighting
+special move
+40
+100
+30
+User goes first.
+0
+1
+443
+Vicegrip
+normal
+physical move
+55
+100
+30
+
+0
+1
+444
+Vine Whip
+grass
+physical move
+35
+100
+15
+
+0
+1
+445
+Vital Throw
+fighting
+physical move
+70
+101
+10
+User attacks last, but cannot miss.
+0
+0
+446
+Volt Tackle
+electric
+physical move
+120
+100
+15
+User receives recoil damage.
+0
+1
+447
+Wake-up Slap
+fighting
+physical move
+60
+100
+10
+Power doubles if used on a sleeping opponent, but wakes it up.
+0
+1
+448
+Water Gun
+water
+special move
+40
+100
+25
+
+0
+1
+449
+Water Pulse
+water
+special move
+60
+100
+20
+May cause confusion.
+20
+1
+450
+Water Sport
+water
+status move
+0
+0
+15
+Increases the user's Fire resistance.
+0
+0
+451
+Water Spout
+water
+special move
+150
+100
+5
+The higher the user's HP, the higher the damage caused.
+0
+0
+452
+Waterfall
+water
+physical move
+80
+100
+15
+May cause flinching.
+20
+1
+453
+Weather Ball
+normal
+special move
+50
+100
+10
+
+0
+1
+454
+Whirlpool
+water
+status move
+15
+70
+15
+Damages opponent for 2-5 turns, opponent cannot switch/escape.
+0
+0
+455
+Whirlwind
+normal
+status move
+0
+100
+20
+In battles, the opponent switches. In the wild, the Pokemon runs.
+0
+0
+456
+Will-o-wisp
+fire
+status move
+0
+75
+15
+Causes a burn, if it hits.
+100
+1
+457
+Wing Attack
+flying
+physical move
+60
+100
+35
+
+0
+1
+458
+Wish
+normal
+status move
+0
+0
+10
+The user recovers HP in the following turn.
+0
+0
+459
+Withdraw
+water
+status move
+0
+0
+40
+Increases the user's Defense by one stage.
+0
+1
+460
+Wood Hammer
+grass
+physical move
+120
+100
+15
+User receives recoil damage.
+0
+1
+461
+Worry Seed
+grass
+status move
+0
+100
+10
+Changes the opponent's Ability to Insomnia.
+0
+0
+462
+Wrap
+normal
+physical move
+15
+85
+20
+Damages opponent for 2-5 turns, opponent cannot switch/escape.
+0
+0
+463
+Wring Out
+normal
+special move
+0
+100
+5
+The higher the opponent's HP, the higher the damage.
+0
+1
+464
+X-Scissor
+bug
+physical move
+80
+100
+15
+
+0
+1
+465
+Yawn
+normal
+status move
+0
+0
+10
+Puts the opponent to sleep in the following turn.
+0
+0
+466
+Zap Cannon
+electric
+special move
+120
+50
+5
+Guaranteed to paralyze target, if it hits.
+100
+1
+467
+Zen Headbutt
+psychic
+physical move
+80
+90
+15
+May cause flinching.
+20
+1
