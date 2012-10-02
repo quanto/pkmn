@@ -34,7 +34,6 @@ class FightPlayer {
     int evasionStage
     Move move
     String learnMoves = ""
-    int escapeAttempts
     int holdMove
     int holdTurns
     Move continueMove

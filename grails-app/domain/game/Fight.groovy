@@ -6,6 +6,7 @@ class Fight {
 
     FightPlayer fightPlayer1
     FightPlayer fightPlayer2
+    int escapeAttempts = 0
 
     String log = ""
 

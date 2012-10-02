@@ -37,7 +37,7 @@ class BattleFunctions {
             // :TODO implement
         }
 
-        FightPlayer fightPlayer1 = setBaseStats(fight,owner1Pokemon, PlayerType.user);
+        FightPlayer fightPlayer1 = Stats.setBaseStats(fight,owner1Pokemon, PlayerType.user);
 
 
 
@@ -52,11 +52,11 @@ class BattleFunctions {
 
 
 
-        FightPlayer fightPlayer2 = setBaseStats(fight,owner2Pokemon, PlayerType.wildPokemon);
+        FightPlayer fightPlayer2 = Stats.setBaseStats(fight,owner2Pokemon, PlayerType.wildPokemon);
         if (battleType == battleType.PVE){
             fightPlayer2.playerType = PlayerType.wildPokemon
         }
-//
+
         fightPlayer2.playerNr = 2
         fightPlayer2.save()
         fight.fightPlayer2 = fightPlayer2
@@ -92,63 +92,6 @@ class BattleFunctions {
             return 1.0
         }
     }
-
-    /**
-     * Neemt stats van pokemon over naar fight
-     */
-    FightPlayer setBaseStats(Fight fight, OwnerPokemon ownerPokemon, PlayerType playerType)
-    {
-        FightPlayer fightPlayer = new FightPlayer(
-                fight: fight,
-                ownerPokemon:ownerPokemon,
-                owner: ownerPokemon.owner,
-                attack:calcStat(ownerPokemon,ownerPokemon.attackIV,ownerPokemon.pokemon.baseAttack),
-                defense: calcStat(ownerPokemon,ownerPokemon.defenseIV,ownerPokemon.pokemon.baseDefense),
-                spAttack: calcStat(ownerPokemon,ownerPokemon.spAttackIV,ownerPokemon.pokemon.baseSpAttack),
-                spDefense : calcStat(ownerPokemon,ownerPokemon.spDefenseIV,ownerPokemon.pokemon.baseSpDefense),
-                speed : calcStat(ownerPokemon,ownerPokemon.speedIV,ownerPokemon.pokemon.baseSpeed),
-                maxHp : ownerPokemon.calculateHP(),
-                hp : ownerPokemon.hp,
-                level : ownerPokemon.level,
-                burn : ownerPokemon.burn,
-                freeze : ownerPokemon.freeze,
-                paralysis : ownerPokemon.paralysis,
-                poison : ownerPokemon.poison,
-                badlypoisond : ownerPokemon.badlyPoisond,
-                sleep : ownerPokemon.sleep,
-                confusion : ownerPokemon.confusion,
-                curse :ownerPokemon.curse,
-                attackStage :ownerPokemon.attackStage,
-                defenseStage : ownerPokemon.defenseStage,
-                spAttackStage : ownerPokemon.spAttackStage,
-                spDefenseStage : ownerPokemon.spDefenseStage,
-                speedStage : ownerPokemon.speedStage,
-                accuracyStage : ownerPokemon.accuracyStage,
-                criticalStage : ownerPokemon.criticalStage,
-                evasionStage : ownerPokemon.evasionStage,
-                //   move
-                //   learnMoves
-                escapeAttempts : 0,
-                holdMove : 0,
-                holdTurns : 0,
-                continueMove : null, //
-                lastMove: null,
-                playerType:playerType
-        )
-        return fightPlayer
-    }
-
-    // Bereken huidige stats behlve hp
-    int calcStat(OwnerPokemon ownerPokemon, int ivStat, int baseStat)
-    {
-        int level = ownerPokemon.level
-
-        int nature = 1; // Natuur van de pokemon (nog) niet gebruikt
-        int ev = 0; // EV wordt (nog) niet gebruikt
-        int stat = (((ivStat + 2 * baseStat + (ev/4)) * level/100) + 5) * nature;
-        return Math.floor(stat);
-    }
-
 
     OwnerPokemon getWildPokemon(Pokemon pokemon, int wildPokemonLevel){
         OwnerPokemon ownerPokemon = new OwnerPokemon(

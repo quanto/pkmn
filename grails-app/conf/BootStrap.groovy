@@ -41,7 +41,7 @@ class BootStrap {
                 gender: Gender.Male,
                 partyPosition: 1,
                 xp:0,
-                level:1
+                level:5
         )
         ownerPokemon.save()
 
