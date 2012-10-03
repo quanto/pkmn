@@ -36,20 +36,14 @@
         }
 
         </style>
-        <script language="javascript" type="text/javascript" src="${resource(uri:'')}/js/mootools-1.2.1-core-yc.js"></script>
-        <script language="javascript" type="text/javascript" src="${resource(uri:'')}/js/ajax.js"></script>
+        <script language="javascript" type="text/javascript" src="${resource(uri:'')}/js/jquery-1.7.min.js"></script>
     <script type="text/javascript">
-
-        var player1healthbar;
-        var player2healthbar;
 
         // Player variables
         var player1maxHealth = ${fight.fightPlayer1.maxHp};
         var player1health = ${fight.fightPlayer1.hp}; // Health after actions
         var player2maxHealth = ${fight.fightPlayer2.maxHp};
         var player2health = ${fight.fightPlayer2.hp};
-        var player1name = "Kevin";
-        var player2name = "Fabian";
         var player1pokemonName = "${fight.fightPlayer1.ownerPokemon.pokemon.name}";
         var player2pokemonName = "${fight.fightPlayer2.ownerPokemon.pokemon.name}";
         var player1pokemonLevel = ${fight.fightPlayer1.level};
@@ -64,73 +58,47 @@
 
         var currentAction = 0;
 
-        // Ajax
-        var ajax = new Array();
-
-        window.addEvent('domready', function()
-        {
-            player1healthbar = new Fx.Morph($('player1health'));
-            player2healthbar = new Fx.Morph($('player2health'));
+        $(document).ready(function() {
 
             // Get actions
-            getMenu("",true);
+            //getMenu("");
             //getLog();
             //prepareActions();
             //combatActions();
+            <g:render template="log" model="[fight:fight]" />
         });
 
         function doAction(url)
         {
-            var index = ajax.length;
-            ajax[index] = new sack();
 
-            ajax[index].requestFile = url;
-            ajax[index].onCompletion = function()
-            {
-                //alert (ajax[index].response);
-                getMenu("",true);
-            };
-            ajax[index].runAJAX();
-
-            return false;
-        }
-
-        function getMenu(params, requestLog)
-        {
-
-            var index = ajax.length;
-            ajax[index] = new sack();
-
-            ajax[index].requestFile = "${createLink(action:'menuRequest')}?menuRequest" + params;
-            ajax[index].onCompletion = function()
-            {
-
-                $('menu').innerHTML = ajax[index].response;
-                if (requestLog)
-                {
-                    getLog();
-                    $("menu").style.display = "none";
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: url,
+                success: function(data) {
+                    eval(data);
+                },
+                error: function() {
                 }
-
-            };
-            ajax[index].runAJAX();
+            });
 
             return false;
         }
 
-        function getLog()
+        function getMenu(params)
         {
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "${createLink(action:'menuRequest')}?menuRequest" + params,
+                success: function(data) {
+                    $('#menu').html(data);
+                },
+                error: function() {
+                }
+            });
 
-            var index = ajax.length;
-            ajax[index] = new sack();
-
-            ajax[index].requestFile = "${createLink(action:'logRequest')}";
-            ajax[index].onCompletion = function()
-            {
-                //alert (ajax[index].response)
-                eval(ajax[index].response);
-            };
-            ajax[index].runAJAX();
+            return false;
         }
 
         function combatActions()
@@ -190,10 +158,14 @@
             if (currentAction > totalActions - 1)
             {
                 // Toon menu
-                $("menu").style.display = "block";
-                $("log").innerHTML = "";
+                if (player1health > 0 && player2health){
+                    getMenu("");
+                }
+                else {
+                    //:TODO impelemnt
+                }
+                $("#log").html("");
             }
-
             // Format:
             // a: damage action
             // m: message
@@ -204,8 +176,8 @@
         function updateUI()
         {
             // set the pokemon
-            $("player1pokemonName").innerHTML = player1pokemonName + "<br>lv. " + player1pokemonLevel;
-            $("player2pokemonName").innerHTML = player2pokemonName + "<br>lv. " + player2pokemonLevel;
+            $("player1pokemonName").html(player1pokemonName + "<br>lv. " + player1pokemonLevel);
+            $("player2pokemonName").html(player2pokemonName + "<br>lv. " + player2pokemonLevel);
         }
 
         function prepareActions()
@@ -246,7 +218,7 @@
         {
             if (player == 1)
             {
-                $('player1image').src = "images/pkmn/back" + imgLink;
+                $('#player1image').css("src","images/pkmn/back" + imgLink);
             }
         }
 
@@ -258,10 +230,10 @@
 
                 var barLength = calcBarLength(player1maxHealth, player1health);
 
-                player1healthbar.start({
-                    width: barLength + 'px',
-                    backgroundColor: getColor(barLength)
+                $('#player1health').animate({
+                    width: barLength + 'px'
                 });
+
             }
             else
             {
@@ -269,10 +241,11 @@
 
                 var barLength = calcBarLength(player2maxHealth, player2health);
 
-                player2healthbar.start({
-                    width: barLength + 'px',
-                    backgroundColor: getColor(barLength)
+
+                $('#player2health').animate({
+                    width: barLength + 'px'
                 });
+
             }
         }
 
@@ -288,10 +261,10 @@
         {
             var player1scale = calcBarLength(player1maxHealth, player1health);
             var player2scale = calcBarLength(player2maxHealth, player2health);
-            $('player1health').style.width = player1scale + 'px';
-            $('player1health').style.backgroundColor = getColor(player1scale);
-            $('player2health').style.width = player2scale + 'px';
-            $('player2health').style.backgroundColor = getColor(player2scale);
+            $('#player1health').css("width",player1scale + 'px');
+            $('#player1health').css("background-color",getColor(player1scale));
+            $('#player2health').css("width",player2scale + 'px');
+            $('#player2health').css("background-color",getColor(player2scale));
         }
 
         function calcBarLength(maxvalue, value)
@@ -305,7 +278,7 @@
 
         function displayMessage(message)
         {
-            $('log').innerHTML = "<a href='javascript:combatActions()'>X</a> " + message;
+            $('#log').html("<a href='javascript:combatActions()'>X</a> " + message);
         }
 
     </script>
@@ -341,7 +314,7 @@
     <p>
     <div id="log"></div>
     <p>
-    <div id="menu" style="display:none;">
+    <div id="menu">
 
     </div>
 

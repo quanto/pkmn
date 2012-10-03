@@ -31,6 +31,9 @@ class BattleController {
 
             render view: 'index', model: [fight:fight]
         }
+        else {
+            render text:"No fight"
+        }
     }
 
     def logRequest = {
@@ -92,7 +95,14 @@ class BattleController {
 //                    exit();
 //                    //header("Location: index.php?action=fight");
 //                }
-                redirect action: "index"
+
+                // After displaying last message we can destroy the fight
+                if (fight.battleOver){
+                    fightFactoryService.endFight(fight)
+                }
+
+                render template: "log", model : [fight:fight]
+                //redirect action: "index"
 //            }
         }
     }

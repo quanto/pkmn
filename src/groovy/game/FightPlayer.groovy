@@ -56,10 +56,22 @@ class FightPlayer {
 
     }
 
+    /**
+     * When making use of this object
+     * we merge to attatch the object
+     * to the session again.
+     * @return
+     */
     public Owner getOwner(){
         owner = owner?.merge()
     }
 
+    /**
+     * When making use of this object
+     * we merge to attatch the object
+     * to the session again.
+     * @return
+     */
     public OwnerPokemon getOwnerPokemon(){
         ownerPokemon = ownerPokemon?.merge()
     }

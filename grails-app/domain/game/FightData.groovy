@@ -6,6 +6,12 @@ package game
  */
 class FightData {
 
+    String fightLog
+
+    static mapping = {
+        fightLog type:"text"
+    }
+
     static constraints = {
     }
 }

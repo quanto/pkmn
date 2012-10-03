@@ -8,6 +8,14 @@ class FightFactoryService {
     int fightCount = 0
 
 
+    void endFight(Fight fight){
+        fights.remove(fight)
+        FightData fightData = new FightData(
+                fightLog :fight.logHistory + fight.log
+        )
+        fightData.save()
+    }
+
     public Fight getFight(int nr){
         return fights.find{ it.nr == nr }
     }
@@ -73,8 +81,6 @@ class FightFactoryService {
 
         return fight
     }
-
-
 
     OwnerPokemon getWildPokemon(Pokemon pokemon, int wildPokemonLevel){
         OwnerPokemon ownerPokemon = new OwnerPokemon(
