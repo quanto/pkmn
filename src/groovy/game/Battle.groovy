@@ -790,20 +790,19 @@ class Battle {
 
                 if (stageAction)
                 {
-                    // :TODO implement
-//                    if (moveSucces)
-//                    {
-//                        if ($addToDefenseStage != 0)
-//                            modifyStage("defense",$addToDefenseStage, $selfStageAction, $openentStageAction, effectSucces, attackFightPlayer, defendingFightPlayer);
-//                        if ($addToAttackStage != 0)
-//                            modifyStage("attack",$addToAttackStage, $selfStageAction, $openentStageAction, effectSucces, attackFightPlayer, defendingFightPlayer);
-//                        if ($addToSpDefenseStage != 0)
-//                            modifyStage("spDefense",$addToSpDefenseStage, $selfStageAction, $openentStageAction, effectSucces, attackFightPlayer, defendingFightPlayer);
-//                        if ($addToSpAttackStage != 0)
-//                            modifyStage("spAttack",$addToSpAttackStage, $selfStageAction, $openentStageAction, effectSucces, attackFightPlayer, defendingFightPlayer);
-//                        if ($addToSpeedStage != 0)
-//                            modifyStage("speed",$addToSpeedStage, $selfStageAction, $openentStageAction, effectSucces, attackFightPlayer, defendingFightPlayer);
-//                    }
+                    if (moveSucces)
+                    {
+                        if (addToDefenseStage != 0)
+                            Stage.modifyStage(fight,"defense",addToDefenseStage, selfStageAction, openentStageAction, effectSucces, attackFightPlayer, defendingFightPlayer);
+                        if (addToAttackStage != 0)
+                            Stage.modifyStage(fight,"attack",addToAttackStage, selfStageAction, openentStageAction, effectSucces, attackFightPlayer, defendingFightPlayer);
+                        if (addToSpDefenseStage != 0)
+                            Stage.modifyStage(fight,"spDefense",addToSpDefenseStage, selfStageAction, openentStageAction, effectSucces, attackFightPlayer, defendingFightPlayer);
+                        if (addToSpAttackStage != 0)
+                            Stage.modifyStage(fight,"spAttack",addToSpAttackStage, selfStageAction, openentStageAction, effectSucces, attackFightPlayer, defendingFightPlayer);
+                        if (addToSpeedStage != 0)
+                            Stage.modifyStage(fight,"speed",addToSpeedStage, selfStageAction, openentStageAction, effectSucces, attackFightPlayer, defendingFightPlayer);
+                    }
                 }
 
             }
