@@ -14,7 +14,7 @@ class BattleTestController {
         Fight fight = fightFactoryService.startFight(BattleType.PVE,owner,wildPokemon,1)
         owner.fightNr = fight.nr
 
-        render text:"Done ${session.owner}"
+        redirect controller : 'battle'
     }
 
 
