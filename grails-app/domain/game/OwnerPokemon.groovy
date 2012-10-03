@@ -9,7 +9,7 @@ package game
  */
 class OwnerPokemon {
 
-    Owner owner
+    static belongsTo = [owner: Owner]
     boolean isNpc
     Pokemon pokemon
     int hpIV

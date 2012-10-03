@@ -2,7 +2,7 @@ package game
 
 class OwnerMove {
 
-    OwnerPokemon ownerPokemon
+    static belongsTo = [ownerPokemon: OwnerPokemon]
     Move move
     int ppLeft
 
