@@ -14,7 +14,7 @@ class MoveImport {
     public static void importMoves(){
         def file = new File('import/moves.txt')
 
-        println "Import moves"
+        println "Import move lines"
 
         int index = 0
         def parts = []

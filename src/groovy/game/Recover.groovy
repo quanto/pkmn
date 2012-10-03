@@ -69,9 +69,7 @@ class Recover {
             /**
              * Reset moves
              */
-            List<OwnerMove> ownerMoveList = OwnerMove.findByOwnerPokemon(ownerPokemon)
-
-            ownerMoveList.each { OwnerMove ownerMove ->
+            ownerPokemon.ownerMoves.each { OwnerMove ownerMove ->
                 ownerMove.ppLeft = ownerMove.move.pp
                 ownerMove.save()
             }

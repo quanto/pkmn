@@ -1,9 +1,15 @@
 package game
 
+/**
+ * Created with IntelliJ IDEA.
+ * User: kevinverhoef
+ * Date: 03-10-12
+ * Time: 13:37
+ * To change this template use File | Settings | File Templates.
+ */
 class FightPlayer {
 
-    static belongsTo = [fight: Fight]
-
+    Fight fight
     int playerNr
     Owner owner
     PlayerType playerType
@@ -39,13 +45,6 @@ class FightPlayer {
     Move continueMove
     Move lastMove
 
-    static constraints = {
-        owner nullable:true
-        move nullable: true
-        continueMove nullable :true
-        lastMove nullable : true
-    }
-
     FightPlayer opponentFightPlayer(){
 
         if(fight.fightPlayer1 == this){
@@ -55,6 +54,14 @@ class FightPlayer {
             return fight.fightPlayer1
         }
 
+    }
+
+    public Owner getOwner(){
+        owner = owner?.merge()
+    }
+
+    public OwnerPokemon getOwnerPokemon(){
+        ownerPokemon = ownerPokemon?.merge()
     }
 
 }

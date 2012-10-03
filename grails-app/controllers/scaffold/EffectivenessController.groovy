@@ -1,8 +1,8 @@
 package scaffold
 
-import game.Effectiveness
+import game.Effective
 
 class EffectivenessController {
 
-    def scaffold = Effectiveness
+    def scaffold = Effective
 }

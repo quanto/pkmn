@@ -2,6 +2,8 @@ package game
 
 class BattleTestController {
 
+    FightFactoryService fightFactoryService
+
     def index() {
         // Set test Owner
         Owner owner = Owner.findByName("Kevin")
@@ -9,7 +11,8 @@ class BattleTestController {
         // Set test fight
 //        session.fight = Fight.findByPlayer1(session.owner)
         Pokemon wildPokemon = Pokemon.findByNr(1)
-        new BattleFunctions().startFight(BattleType.PVE,owner,wildPokemon,1)
+        Fight fight = fightFactoryService.startFight(BattleType.PVE,owner,wildPokemon,1)
+        owner.fightNr = fight.nr
 
         render text:"Done ${session.owner}"
     }

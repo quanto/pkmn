@@ -66,9 +66,8 @@ class Moves {
     {
         // kijk of er nog een move geleerd kan worden
         // Criteria
-        def c = OwnerMove.createCriteria()
 
-        int totalMoves = OwnerMove.countByOwnerPokemon(fightPlayer.ownerPokemon)
+        int totalMoves = fightPlayer.ownerPokemon.ownerMoves.size()
 
 //        sql = "select * from ownerpokemonmove where ownerId = '" . fight->{"player" . player . "Id"} . "' and ownerPokemonId = '" . fight->{"player" . player . "OwnerPokemonId"} . "'";
 
@@ -80,7 +79,9 @@ class Moves {
                     move : move,
                     ppLeft : move.pp
             )
-            ownerMove.save()
+            fightPlayer.ownerPokemon.addToOwnerMoves(ownerMove)
+            fightPlayer.ownerPokemon.save()
+
             fight.log += "m:" + fightPlayer.ownerPokemon.pokemon.name + "learned " + move.name + ".;";
         }
         else

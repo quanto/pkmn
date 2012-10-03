@@ -7,9 +7,9 @@ class Owner {
     int pveBattlesLost = 0
     int pvnBattlesWon = 0
     int pvnBattlesLost = 0
-    Fight fight
+    Integer fightNr
 
     static constraints = {
-        fight nullable :true
+        fightNr nullable :true
     }
 }

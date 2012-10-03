@@ -43,20 +43,26 @@ class BootStrap {
                 xp:0,
                 level:5
         )
-        ownerPokemon.save()
+
 
         OwnerMove ownerMove1 = new OwnerMove(
                 ownerPokemon : ownerPokemon,
                 move : moveTackle,
                 ppLeft : 40
         )
-        ownerMove1.save()
+
         OwnerMove ownerMove2 = new OwnerMove(
                 ownerPokemon : ownerPokemon,
                 move : move,
                 ppLeft : 30
         )
-        ownerMove2.save()
+
+
+        ownerPokemon.addToOwnerMoves(ownerMove1)
+        ownerPokemon.addToOwnerMoves(ownerMove2)
+
+        ownerPokemon.save()
+
     }
 
     def destroy = {

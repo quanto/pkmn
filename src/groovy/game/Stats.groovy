@@ -12,7 +12,7 @@ class Stats {
     /**
      * Neemt stats van pokemon over naar fight
      */
-    public static FightPlayer setBaseStats(Fight fight, OwnerPokemon ownerPokemon, PlayerType playerType)
+    public static setBaseStats(Fight fight, OwnerPokemon ownerPokemon, PlayerType playerType)
     {
         FightPlayer fightPlayer = new FightPlayer(
                 fight: fight,

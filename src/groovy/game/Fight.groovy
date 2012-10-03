@@ -1,27 +1,35 @@
 package game
 
+import game.BattleType
+import game.Owner
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: kevinverhoef
+ * Date: 03-10-12
+ * Time: 13:36
+ * To change this template use File | Settings | File Templates.
+ */
 class Fight {
 
-    //int player1
-
+    int nr
     FightPlayer fightPlayer1
     FightPlayer fightPlayer2
     int escapeAttempts = 0
 
     String log = ""
+    String fullLog = "" // :TODO implement
 
     BattleType battleType
     boolean battleOver
 
-    static constraints = {
-        fightPlayer2 nullable: true
-    }
+    Date createDate = new Date()
 
     FightPlayer myPlayer(Owner owner){
-        if(owner == fightPlayer1.owner){
+        if(owner?.id == fightPlayer1.owner?.id){
             return fightPlayer1
         }
-        else if(owner == fightPlayer2.owner){
+        else if(owner?.id == fightPlayer2.owner?.id){
             return fightPlayer2
         }
     }
@@ -36,4 +44,5 @@ class Fight {
             }
         }
     }
+
 }

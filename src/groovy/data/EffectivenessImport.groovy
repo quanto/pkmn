@@ -1,5 +1,6 @@
 package data
 
+import game.Effective
 import game.Effectiveness
 
 /**

@@ -10,6 +10,7 @@ package game
 class OwnerPokemon {
 
     static belongsTo = [owner: Owner]
+    static hasMany = [ownerMoves: OwnerMove]
     boolean isNpc
     Pokemon pokemon
     int hpIV

@@ -1,13 +1,16 @@
 package game
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 29-09-12
- * Time: 12:47
- * To change this template use File | Settings | File Templates.
- */
-class BattleFunctions {
+class FightFactoryService {
+
+    // :TODO not transactional
+
+    private static List<Fight> fights = new ArrayList<Fight>();
+    int fightCount = 0
+
+
+    public Fight getFight(int nr){
+        return fights.find{ it.nr == nr }
+    }
 
     Fight startFight(BattleType battleType, Owner player1, Pokemon wildPokemon, Integer wildPokemonLevel){
         Fight fight = new Fight()
@@ -39,12 +42,8 @@ class BattleFunctions {
 
         FightPlayer fightPlayer1 = Stats.setBaseStats(fight,owner1Pokemon, PlayerType.user);
 
-
-
-
 //        fight.fightPlayer2.save()
         // :TODO implement else
-        fightPlayer1.save()
         fight.fightPlayer1 = fightPlayer1
         fightPlayer1.playerNr = 1
         fight.fightPlayer1.owner = player1
@@ -58,40 +57,24 @@ class BattleFunctions {
         }
 
         fightPlayer2.playerNr = 2
-        fightPlayer2.save()
         fight.fightPlayer2 = fightPlayer2
-
-        fight.save(flush: true)
 
 
         // Weird have to set it again to set the right fightPlayer. For some reason player 2 is set
         fight.fightPlayer1 = fightPlayer1
 
+        fight.nr = fightCount++
+
+        fights.add(fight)
+
         // koppel gevecht aan speler
-        player1.fight = fight
+        player1.fightNr = fight.nr
         player1.save()
-
-
 
         return fight
     }
 
-    public static double effectiveness(String attackType, String pokemonType1, String pokemonType2)
-    {
-        Effectiveness effectiveness = Effectiveness.findByType1AndType2AndAttackType(pokemonType1,pokemonType2,attackType)
 
-        // Probeer type andersom voor resultaat
-        if (pokemonType2 != "" && effectiveness != null){
-            effectiveness = Effectiveness.findByType1AndType2AndAttackType(pokemonType2,pokemonType1,attackType)
-        }
-
-        if (effectiveness){
-            return effectiveness.effect
-        }
-        else {
-            return 1.0
-        }
-    }
 
     OwnerPokemon getWildPokemon(Pokemon pokemon, int wildPokemonLevel){
         OwnerPokemon ownerPokemon = new OwnerPokemon(

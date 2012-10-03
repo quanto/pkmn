@@ -2,12 +2,15 @@ package game
 
 class BattleController {
 
+    FightFactoryService fightFactoryService
+
     def index() {
         boolean debug = true
 
         Owner owner = session.owner
         //owner = owner.merge()
-        Fight fight = owner.fight
+
+        Fight fight = fightFactoryService.getFight(owner.fightNr)
 
         if (owner && fight){
             /*
@@ -33,7 +36,7 @@ class BattleController {
     def logRequest = {
         Owner owner = session.owner
         //owner = owner.merge()
-        Fight fight = owner.fight
+        Fight fight = fightFactoryService.getFight(owner.fightNr)
 
         render text: g.render(template: 'log',model: [fight:fight])
     }
@@ -42,7 +45,7 @@ class BattleController {
 
         Owner owner = session.owner
         //owner = owner.merge()
-        Fight fight = owner.fight
+        Fight fight = fightFactoryService.getFight(owner.fightNr)
         //fight = fight.refresh()
 
 
@@ -97,7 +100,7 @@ class BattleController {
     def menuRequest = {
         Owner owner = session.owner
         //owner = owner.merge()
-        Fight fight = owner.fight
+        Fight fight = fightFactoryService.getFight(owner.fightNr)
         FightPlayer myFightPlayer = fight.myPlayer(session.owner)
 
         // wil move leren
@@ -152,9 +155,9 @@ class BattleController {
         {
             Battle.beforeChosingMove(fight, myFightPlayer, owner);
 
-            List<OwnerMove> ownerMoveList = OwnerMove.findAllByOwnerPokemon(myFightPlayer.ownerPokemon)
+            myFightPlayer.ownerPokemon = myFightPlayer.ownerPokemon.refresh()
 
-            render text: g.render(template: 'moveList', model: [ownerMoveList:ownerMoveList])
+            render text: g.render(template: 'moveList', model: [ownerMoveList:myFightPlayer.ownerPokemon.ownerMoves])
         }
         // Switch pokemon list
         else if (params.pkmn != null && !fight.battleOver)
@@ -171,7 +174,7 @@ class BattleController {
     def run = {
         Owner owner = session.owner
         //owner = owner.merge()
-        Fight fight = owner.fight
+        Fight fight = fightFactoryService.getFight(owner.fightNr)
 
         Run.run(fight)
 

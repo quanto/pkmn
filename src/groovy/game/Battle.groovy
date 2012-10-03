@@ -438,7 +438,7 @@ class Battle {
                             }
 
                             // effectieviteit
-                            effectiveness = BattleFunctions.effectiveness(attackMove.type,attackOwnerPokemon.pokemon.type1,attackOwnerPokemon.pokemon.type2)
+                            effectiveness = Effective.effectiveness(attackMove.type,attackOwnerPokemon.pokemon.type1,attackOwnerPokemon.pokemon.type2)
 
                             if (attackMove.type == "special move")
                             {
@@ -878,7 +878,10 @@ class Battle {
         // continue last move
         if (fightPlayer.lastMove?.id == 376 || fightPlayer.lastMove?.id == 360)
         {
-
+//            if (fightPlayer.playerType != PlayerType.wildPokemon){
+//
+//                fightPlayer.lastMove
+//            }
             // :TODO implement
 //            $sql = "select id from ownerpokemonmove where moveId = '" . fight.{"player" . $player . "lastMove"} . "' and ownerPokemonId = '" . fight.{"player" . $player . "OwnerPokemonId"} . "'";
 //            $row = mysql_fetch_row(DatabaseQuery::Execute($sql));

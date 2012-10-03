@@ -5,7 +5,7 @@
   Time: 12:55
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="game.Fight" contentType="text/html;charset=UTF-8" %>
+<%@ page import="game.Fight;" contentType="text/html;charset=UTF-8" %>
 <%
     Fight fight = fight
 %>

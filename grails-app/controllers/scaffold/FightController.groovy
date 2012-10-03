@@ -1,8 +1,8 @@
 package scaffold
 
-import game.Fight
+import game.FightData
 
 class FightController {
 
-    def scaffold = Fight
+    def scaffold = FightData
 }
