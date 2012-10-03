@@ -354,6 +354,7 @@ class Battle {
         boolean calculateDamage = true;
         boolean defaultAttackPower = true; // useDefault?
 
+
         int attackPower
         int damage
 
@@ -364,6 +365,8 @@ class Battle {
         boolean poisonActionSucces = false
         boolean burnActionSucces = false
         boolean effectActionOnBoth = false
+        String attackMovetype
+        String attackMovecategory
 
 
         // Kijk of er een move wordt gedaan
@@ -462,12 +465,11 @@ class Battle {
                             // User recovers half of the damage inflicted on opponent.
                             if (attackMove.name == "Drain Punch" || attackMove.name == "Absorb" || attackMove.name == "Giga Drain" || attackMove.name == "Leech Life" || attackMove.name == "Mega Drain" || attackMove.name == "Dream Eater")
                             {
-//                                // :TODO implement
-//                                recoverAction = true;
-//                                effectAction = true;
-//                                recover = damage / 2;
-//                                if (recover < 1)
-//                                    recover = 1;
+                                recoverAction = true;
+                                effectAction = true;
+                                recover = damage / 2;
+                                if (recover < 1)
+                                    recover = 1;
                             }
 
                         }
@@ -552,13 +554,12 @@ class Battle {
 
             }
 
-            // TODO implement
-//            // Kijk of een aanval een status opheft
-//            if (attackMovetype == "fire" && defendingFightPlayer.freeze == 1)
-//            {
-//                defendingFightPlayer.freeze == 0;
-//                fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is no longer frozen.;";
-//            }
+            // Kijk of een aanval een status opheft
+            if (attackMovetype == "fire" && defendingFightPlayer.freeze == 1)
+            {
+                defendingFightPlayer.freeze == 0;
+                fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is no longer frozen.;";
+            }
 
             // set hold move
             if (holdMove && moveSucces)
@@ -581,19 +582,18 @@ class Battle {
 
             // Kijk of het effect slaagt
             effectSucces = false;
-            // :TODO implement
-//            if (attackMoveeffectProb == 0 || random.nextInt(100)+1 <= attackMoveeffectProb)
-//            {
-//                if (effectAction && attackMovecategory == "status move")
-//                {
-//                    moveSucces = true;
-//                    effectSucces = true;
-//                }
-//                else if (moveSucces)
-//                {
-//                    effectSucces = true;
-//                }
-//            }
+            if (attackMoveeffectProb == 0 || random.nextInt(100)+1 <= attackMoveeffectProb)
+            {
+                if (effectAction && attackMovecategory == "status move")
+                {
+                    moveSucces = true;
+                    effectSucces = true;
+                }
+                else if (moveSucces)
+                {
+                    effectSucces = true;
+                }
+            }
 
             if ((effectAction && moveSucces))
             {
