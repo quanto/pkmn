@@ -396,11 +396,10 @@ class Battle {
             }
 
             // openent moves die ervoor zogen dat er niet gemist kan worden
-            // :TODO implement
-//            if (fight.{"player" . defendingFightPlayer . "move"} == 376)
-//            {
-//                cantMiss = true;
-//            }
+            if (defendingFightPlayer.move?.id == 376)
+            {
+                cantMiss = true
+            }
 
             // bereken accuracy
             int accuracy = Accuraccy.getAccuracy(attackMove.accuracy,attackFightPlayer.accuracyStage);
