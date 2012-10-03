@@ -97,9 +97,9 @@ class BattleController {
 //                }
 
                 // After displaying last message we can destroy the fight
-                if (fight.battleOver){
-                    fightFactoryService.endFight(fight)
-                }
+//                if (fight.battleOver){
+//                    fightFactoryService.endFight(fight)
+//                }
 
                 render template: "log", model : [fight:fight]
                 //redirect action: "index"
@@ -161,7 +161,10 @@ class BattleController {
 //            exit();
 
         // moveList
-        if (params.fight != null && !fight.battleOver)
+        if (fight.battleOver){
+            render text: g.render(template: 'exit')
+        }
+        else if (params.fight != null && !fight.battleOver)
         {
             Battle.beforeChosingMove(fight, myFightPlayer, owner);
 

@@ -158,12 +158,7 @@
             if (currentAction > totalActions - 1)
             {
                 // Toon menu
-                if (player1health > 0 && player2health){
-                    getMenu("");
-                }
-                else {
-                    //:TODO impelemnt
-                }
+                getMenu("");
                 $("#log").html("");
             }
             // Format:
