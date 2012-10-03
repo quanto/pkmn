@@ -24,7 +24,7 @@ class Moves {
         fightPlayer.move = Move.get(moveId)
 
         // Kijk of tegen de computer wordt gespeelt, dan wordt er een move gekozen
-        if (fight.battleType == BattleType.PVE || fight.battleType == BattleType.PVN)
+        if (fightPlayer.playerType == PlayerType.user && (fight.battleType == BattleType.PVE || fight.battleType == BattleType.PVN))
         {
             if (fight.battleType == BattleType.PVE)
             {

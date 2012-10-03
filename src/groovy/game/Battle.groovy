@@ -868,12 +868,12 @@ class Battle {
 
         // freeze
         Freeze.checkFreeze(fight,fightPlayer);
-//        // paralyses              :TODO implement
-//        checkParalyses($mp);
-//        // confusion
-//        checkConfusion($mp);
-//        // sleep
-//        checkSleep($mp);
+        // paralyses
+        Paralyses.checkParalyses(fight,fightPlayer);
+        // confusion
+        Confusion.checkConfusion(fight,fightPlayer);
+        // sleep
+        Sleep.checkSleep(fight,fightPlayer);
 
         // continue last move
         if (fightPlayer.lastMove?.id == 376 || fightPlayer.lastMove?.id == 360)

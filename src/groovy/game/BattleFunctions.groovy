@@ -81,7 +81,7 @@ class BattleFunctions {
         Effectiveness effectiveness = Effectiveness.findByType1AndType2AndAttackType(pokemonType1,pokemonType2,attackType)
 
         // Probeer type andersom voor resultaat
-        if (pokemonType2 != "" && !effectiveness){
+        if (pokemonType2 != "" && effectiveness != null){
             effectiveness = Effectiveness.findByType1AndType2AndAttackType(pokemonType2,pokemonType1,attackType)
         }
 
