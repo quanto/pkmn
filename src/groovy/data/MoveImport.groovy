@@ -14,12 +14,14 @@ class MoveImport {
     public static void importMoves(){
         def file = new File('import/moves.txt')
 
+        println "Import moves"
+
         int index = 0
         def parts = []
         file.eachLine { line ->
             parts.add( line )
             if (index%10==9){
-                println "Import move: " + parts[0]
+
                 Move move = new Move(
                         id: Integer.parseInt(parts[0]),
                         name: parts[1],

@@ -14,7 +14,7 @@ import game.Move
 class LearnableMovesImport {
 
     public static void importLearnableMoves(){
-        println "Import learnableMoves"
+        println "Import learnableMove lines"
         def file = new File('import/learnableMoves.txt')
 
         int index = 0

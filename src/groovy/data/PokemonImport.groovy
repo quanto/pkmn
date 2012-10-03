@@ -13,13 +13,14 @@ class PokemonImport {
 
     public static void importPokemon(){
         def file = new File('import/pokemon.txt')
+        println "Import pokemon lines"
 
         int index = 0
         def parts = []
         file.eachLine { line ->
             parts.add( line )
             if (index%17==16){
-                println "Import pokemon: " + parts[0]
+
                 Pokemon pokemon = new Pokemon(
                         nr : Integer.parseInt(parts[0]),
                         name : parts[1],

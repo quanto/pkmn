@@ -15,12 +15,14 @@ class EvolutionImport {
     public static void importEvolution(){
         def file = new File('import/evolution.txt')
 
+        println "Import evolution lines"
+
         int index = 0
         def parts = []
         file.eachLine { line ->
             parts.add( line )
             if (index%4==3){
-                println "Import evolution: " + parts[0] + " to " + parts[2]
+
                 Evolution evolution = new Evolution(
                         fromPokemon : Pokemon.get(Integer.parseInt(parts[0])),
                         toPokemon: Pokemon.get(Integer.parseInt(parts[2])),
