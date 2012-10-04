@@ -14,4 +14,15 @@ class ChatController {
 
         render text: string
     }
+
+    def send(){
+        Player player = session.owner
+
+        new ChatMessage(
+                message: params.chatMessage,
+                player: player
+        ).save()
+        render text: ""
+    }
+
 }

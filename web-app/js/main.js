@@ -46,7 +46,7 @@ $(document).ready( function () {
 // 		 chat = false;
 //    });
 //
-//	$(document).keypress(function(e){
+	$(document).keypress(function(e){
 //		if(chat == false)
 //		{
 //			switch (e.which)
@@ -99,11 +99,11 @@ $(document).ready( function () {
 //			}
 //		};
 //
-//		if(e.which == 13)
-//		{
-//			sendChatMessage();
-//		}
-//	});
+		if(e.which == 13)
+		{
+			sendChatMessage();
+		}
+	});
 });
 
 function getMenu()
@@ -340,19 +340,19 @@ function updateChat()
 
 function sendChatMessage()
 {
-//	message = $("#chatMessage").attr("value");
-//	if(message != "")
-//	{
-//		$("#chatMessage").attr({value: ""});
-//		$.ajax({
-//			type: "POST",
-//			url: "Gajax.php",
-//			data: "ajax=chatMessage&chatMessage="+message,
-//			success: function(chatMessages){
-//				updateChat();
-//			}
-//		});
-//	}
+	message = $("#chatMessage").attr("value");
+	if(message != "")
+	{
+		$("#chatMessage").attr({value: ""});
+		$.ajax({
+			type: "POST",
+			url: "/game/chat/send",
+			data: "chatMessage="+message,
+			success: function(chatMessages){
+				updateChat();
+			}
+		});
+	}
 };
 
 function actionA()
