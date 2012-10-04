@@ -36,15 +36,15 @@ $(document).ready( function () {
 //	setInterval ("mediumWait()", 8000); //Update chat elke 8 sec
 //	setInterval ("longWait()", 60000); //Kijk of server down is en serverbericht 60 Seconden
 //
-//	$("#chatMessage").focus(function () {
-//         freeze = true;
-//		 chat = true;
-//    });
-//
-//	$("#chatMessage").blur(function () {
-//         freeze = false;
-// 		 chat = false;
-//    });
+	$("#chatMessage").focus(function () {
+         freeze = true;
+		 chat = true;
+    });
+
+	$("#chatMessage").blur(function () {
+         freeze = false;
+		 chat = false;
+    });
 //
 	$(document).keypress(function(e){
 //		if(chat == false)
@@ -69,35 +69,35 @@ $(document).ready( function () {
 //			}
 //		}
 //
-//		if(freeze == false)
-//			{
-//			switch (e.which){
-//				case 97:
-//				//links
-//				movePlayer(3);
-//				break;
-//
-//				case 119:
-//				//boven
-//				movePlayer(0);
-//				break;
-//
-//				case 100:
-//				//rechts
-//				movePlayer(1);
-//				break;
-//
-//				case 115:
-//				//onder
-//				movePlayer(2);
-//				break;
-//
-//				case 32:
-//				//spatie
-//				actionA();
-//				break;
-//			}
-//		};
+		if(freeze == false)
+			{
+			switch (e.which){
+				case 97:
+				//links
+				movePlayer(3);
+				break;
+
+				case 119:
+				//boven
+				movePlayer(0);
+				break;
+
+				case 100:
+				//rechts
+				movePlayer(1);
+				break;
+
+				case 115:
+				//onder
+				movePlayer(2);
+				break;
+
+				case 32:
+				//spatie
+				actionA();
+				break;
+			}
+		};
 //
 		if(e.which == 13)
 		{
@@ -393,6 +393,7 @@ function actionA()
 //			//freeze = false;
 //		}
 //	});
+    freeze = false;
 };
 
 function getPlayerLocation()
@@ -413,7 +414,6 @@ function getPlayerLocation()
 
 function movePlayer(direction)
 {
-	
 	pos = $("#player").attr("alt");
 	
 	coords = pos.split("-");
@@ -427,45 +427,49 @@ function movePlayer(direction)
 
 function checkMove(direction, x, y)
 {	
-//	freeze = true;
-//	$.ajax({
-//		type: "POST",
-//		url: "Gajax.php",
-//		data: "ajax=3&dir="+direction,
-//		cache: false,
-//		success: function(msg){
-//			if(msg == 1)
-//			{
-//				$("#player").remove();
-//				switch (direction)
-//				{
-//					case 0:
-//					y--;
-//					break;
-//
-//					case 1:
-//					x++;
-//					break;
-//
-//					case 2:
-//					y++;
-//					break;
-//
-//					case 3:
-//					x--;
-//					break;
-//				}
-//
-//				setPlayer(x, y);
-//				updateLocation(x, y);
-//				checkBattle();
-//			}
+	freeze = true;
+	$.ajax({
+        async:false,
+		type: "POST",
+		url: "/game/map/checkMove",
+		data: "direction="+direction,
+		cache: false,
+		success: function(msg){
+			if(msg == "1")
+			{
+				$("#player").remove();
+				switch (direction)
+				{
+					case 0:
+					y--;
+					break;
+
+					case 1:
+					x++;
+					break;
+
+					case 2:
+					y++;
+					break;
+
+					case 3:
+					x--;
+					break;
+				}
+
+//                setPlayer(y, x);
+				setPlayer(x, y);
+				updateLocation(x, y);
+				checkBattle();
+			}
 //			else
 //			{
 //				actionA();
 //			}
-//		}
-//	});
+
+		}
+	});
+    freeze = false
 };
 
 function checkBattle()
@@ -483,6 +487,7 @@ function checkBattle()
 //			freeze = false;
 //		}
 //	});
+    freeze = false
 };
 
 function setOtherPlayers()

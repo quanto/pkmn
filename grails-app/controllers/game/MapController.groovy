@@ -31,6 +31,56 @@ class MapController {
         render text: json
     }
 
+    def checkMove(){
+        Player player = session.owner
+        
+        int direction = params.direction
+
+        MapLayout mapLayout = createMapArray(player.map)
+
+        if(direction == "3")
+        {
+            player.positionX = player.positionX - 1;
+        }
+        else if(direction == "0")
+        {
+            player.positionY = player.positionY - 1
+        }
+        else if(direction == "1")
+        {
+            player.positionX = player.positionX + 1
+        }
+        else if(direction == "2")
+        {
+            player.positionY = player.positionY + 1
+        }
+
+        boolean moveToTile = getCurrentTile(mapLayout,player);
+
+        if (moveToTile){
+            player.save(flush: true)
+            render text : "1"
+        }
+        else {
+            player.discard()
+            render text : "0"
+        }
+
+        
+    }
+
+    public static boolean getCurrentTile(MapLayout mapLayout, Player player)
+    {
+        if (player.positionX >= 0 && player.positionY >= 0 && player.positionX < mapLayout.background.last().size() && player.positionY < mapLayout.background.size()){
+            return true
+        }
+//        if(isset($mapArray['foreground'][$x][$y]))
+//        {
+//            $tile = $mapArray['foreground'][$x][$y];
+//        }
+
+        return false
+    }
 
     def view(){
 
