@@ -8,13 +8,19 @@ package game
  * To change this template use File | Settings | File Templates.
  */
 class Tile {
-    int mainCat
-    int subCat1
-    int subCat2
-    int subCat3
+    String mainCat
+    String subCat1
+    String subCat2
+    String subCat3
     String url
-    int walkable
-    int tileBlock
-    int xDim
-    int yDim
+    boolean walkable
+    boolean tileBlock
+    Integer xDim
+    Integer yDim
+
+    static constraints = {
+        xDim nullable :true
+        yDim nullable :true
+    }
+
 }

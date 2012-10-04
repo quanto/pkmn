@@ -5,6 +5,7 @@ import data.EvolutionImport
 import data.LearnableMovesImport
 import data.EffectivenessImport
 import data.MapImport
+import data.TilesImport
 
 class BootStrap {
 
@@ -24,6 +25,8 @@ class BootStrap {
         EffectivenessImport.importEffectiveness()
 
         MapImport.importMaps()
+
+        TilesImport.importTiles()
 
         Move move = Move.findByName("Growl")
         Move moveTackle = Move.findByName("Tackle")
