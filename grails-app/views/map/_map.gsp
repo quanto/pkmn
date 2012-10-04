@@ -10,6 +10,9 @@
                 <%--
                     foreground image
                 --%>
+                <g:if test="${mapLayout.background[x][y]}">
+                    <img src='tiles/sheet1/${mapLayout.background[x][y]}.png' />
+                </g:if>
             </div>
             </td>
         </g:each>

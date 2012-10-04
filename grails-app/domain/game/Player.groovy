@@ -10,8 +10,8 @@ class Player extends Owner{
 
     int positionX
     int positionY
-    int map
-    int online
+    Map map
+    boolean online
     int adminlvl
     Date registerDate
     Date lastLogin
@@ -23,6 +23,7 @@ class Player extends Owner{
         mail nullable: true
         ip nullable: true
         lastLogin nullable: true
+        map nullable: true
     }
 
 }

@@ -63,7 +63,7 @@
             </g:if>
         </tr>
     </g:each>
-    <g:each in="${(ownerPokemonList?.size()+1..7)}" var="i">
+    <g:each in="${(ownerPokemonList?.size()+1..6)}" var="i">
         <tr>
             <td style='text-align:center;'>${i}</td>
             <td></td>
