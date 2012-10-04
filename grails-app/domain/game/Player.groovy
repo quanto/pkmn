@@ -1,5 +1,7 @@
 package game
 
+import map.View
+
 class Player extends Owner{
 
     String password
@@ -14,6 +16,7 @@ class Player extends Owner{
     Date registerDate
     Date lastLogin
     int money
+    View view = View.ChosePokemon
     // view
 
     static constraints = {

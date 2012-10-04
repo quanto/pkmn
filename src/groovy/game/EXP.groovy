@@ -81,6 +81,15 @@ class EXP {
         return xp;
     }
 
+    public static int getExpPercentage(int level, String levelRate, int exp)
+    {
+        int xpPrev = getExp(level,levelRate)
+        int xpNext = getExp(level + 1,levelRate)
+
+        return Math.round(100 / (xpNext - xpPrev) * (exp - xpPrev));
+    }
+
+
     public static int getExp(int lvl, String levelRate)
     {
         int xp
