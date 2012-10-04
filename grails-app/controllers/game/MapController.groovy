@@ -33,7 +33,7 @@ class MapController {
 
             MapLayout mapLayout = createMapArray(player.map);
 
-            render text: g.render(template: 'map', model: [mapLayout:mapLayout])
+            render text: g.render(template: 'map', model: [mapLayout: mapLayout, player: player])
         }
         else if (player.view == View.ShowMarket){
 

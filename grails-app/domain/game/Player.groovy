@@ -8,8 +8,8 @@ class Player extends Owner{
     String mail
     String ip
 
-    int positionX
-    int positionY
+    int positionX = 1
+    int positionY = 1
     Map map
     boolean online
     int adminlvl

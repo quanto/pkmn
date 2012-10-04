@@ -14,6 +14,11 @@ class BootStrap {
         Player owner = new Player(name: "Kevin", password: "12345", money: 1000, registerDate : new Date())
         owner.save()
 
+        new ChatMessage(
+            message: "Hello World!",
+            player: owner
+        ).save()
+
         PokemonImport.importPokemon()
 
         Pokemon pokemon = Pokemon.get(1)

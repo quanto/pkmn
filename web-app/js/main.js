@@ -325,17 +325,17 @@ function updateWhoisList()
 
 function updateChat()
 {
-//	$.ajax({
-//		type: "GET",
-//		url: "Gajax.php",
-//		data: "ajax=chat",
-//		cache: false,
-//		success: function(chatMessages){
-//			$("#chatBox").html(chatMessages);
-//			el = document.getElementById("chatBox");
-//			el.scrollTop = el.scrollHeight;
-//		}
-//	});
+	$.ajax({
+		type: "GET",
+		url: "/game/chat/index",
+		data: "",
+		cache: false,
+		success: function(chatMessages){
+			$("#chatBox").html(chatMessages);
+			el = document.getElementById("chatBox");
+			el.scrollTop = el.scrollHeight;
+		}
+	});
 };
 
 function sendChatMessage()
