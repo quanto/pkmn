@@ -16,7 +16,7 @@ class Player extends Owner{
     Date registerDate
     Date lastLogin
     int money
-    View view = View.ChosePokemon
+    View view = View.ShowMap
     // view
 
     static constraints = {
