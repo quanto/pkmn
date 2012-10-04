@@ -397,18 +397,18 @@ function actionA()
 
 function getPlayerLocation()
 {
-//	$.ajax({
-//		type: "GET",
-//		url: "Gajax.php",
-//		data: "ajax=4",
-//		cache: false,
-//		success: function(json){
-//			var playerData = $.evalJSON(json);
-//			$("#mapName").text(playerData.player[0].map);
-//			setPlayer(playerData.player[0].x, playerData.player[0].y, playerData.player[0].name);
-//			$("#location").text("X: "+playerData.player[0].x+" Y: "+playerData.player[0].y);
-//		}
-//	});
+	$.ajax({
+		type: "GET",
+		url: "/game/map/playerLocation",
+		data: "",
+		cache: false,
+		success: function(json){
+			var playerData = $.evalJSON(json);
+			$("#mapName").text(playerData.player[0].map);
+			setPlayer(playerData.player[0].x, playerData.player[0].y, playerData.player[0].name);
+			$("#location").text("X: "+playerData.player[0].x+" Y: "+playerData.player[0].y);
+		}
+	});
 };
 
 function movePlayer(direction)
@@ -516,7 +516,7 @@ function setOtherPlayers()
 };
 function setPlayer(x, y, name)
 {
-	$("#"+x+"-"+y).append("<img id='player' class='"+name+"' src='images/ash.gif' alt='"+x+"-"+y+"' />"); 
+	$("#"+x+"-"+y).append("<img id='player' class='"+name+"' src='/game/images/tiles/sheet1/32.png' alt='"+x+"-"+y+"' />");
 };
 
 function setOtherPlayer(x, y, name)

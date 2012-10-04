@@ -21,6 +21,16 @@ class MapController {
         render text: g.render(template: 'party',model: [computerView:computerView,ownerPokemonList:ownerPokemonList])
     }
 
+    def playerLocation(){
+        Player player = session.owner
+
+        String json = """
+            {"player":[{"name" : "${player.name}", "x" : "${player.positionX}", "y" : "${player.positionY}", "map" : "${player.map.name}"}]}
+        """
+
+        render text: json
+    }
+
 
     def view(){
 
