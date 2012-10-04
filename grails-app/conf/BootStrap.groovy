@@ -4,6 +4,7 @@ import data.PokemonImport
 import data.EvolutionImport
 import data.LearnableMovesImport
 import data.EffectivenessImport
+import data.MapImport
 
 class BootStrap {
 
@@ -21,6 +22,8 @@ class BootStrap {
         EvolutionImport.importEvolution()
 
         EffectivenessImport.importEffectiveness()
+
+        MapImport.importMaps()
 
         Move move = Move.findByName("Growl")
         Move moveTackle = Move.findByName("Tackle")
