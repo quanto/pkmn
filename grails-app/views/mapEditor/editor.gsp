@@ -11,27 +11,47 @@
 
         $(document).ready( function () {
 
-            field = new Array();
+            <g:if test="${mapLayout}">
 
-            // background layer
-            field[0] = new Array();
-            // foreground
-            field[1] = new Array();
-            // Object/Action layer
-            field[2] = new Array();
-            // Top layer
-            field[3] = new Array();
+                field = new Array();
 
-            setSize(${mapLayout.getRows()},${mapLayout.getColumns()});
+                // background layer
+                field[0] = new Array();
+                // foreground
+                field[1] = new Array();
+                // Object/Action layer
+                field[2] = new Array();
+                // Top layer
+                field[3] = new Array();
 
-            <g:each in="${mapLayout.background}" var="row" status="y">
-                field[0][${y}] = new Array();
-                <g:each in="${row}" var="tileNr" status="x">
-                    field[0][${y}][${x}] = "${tileNr}"
+                setSize(${mapLayout.getRows()},${mapLayout.getColumns()});
+
+                <g:each in="${mapLayout.background}" var="row" status="y">
+                    field[0][${y}] = new Array();
+                    <g:each in="${row}" var="tileNr" status="x">
+                        field[0][${y}][${x}] = "${tileNr}"
+                    </g:each>
                 </g:each>
-            </g:each>
+
+            </g:if>
+            <g:else>
+
+                // create the field with random tiles if there's no map set
+                if (field[0].length == 0){
+                    setSize(25,25)
+                    fillRandom(0,0,width - 1,height - 1);
+                }
+
+            </g:else>
+//        addHistoryAction();
 
             drawField();
+
+            //init();
+            initTabs("tab");
+            // Select first tab
+            tabClick("tab", 2);
+            loadNextTiles(0);
         });
     </script>
     <style>
@@ -75,7 +95,7 @@
     </style>
 </head>
 <body>
-
+    <g:hiddenField name="map" value="${map?.id}" />
 <table>
     <tr>
         <td valign="top">
@@ -174,13 +194,4 @@
 
 </body>
 
-<script language="javascript">
-
-    //init();
-    initTabs("tab");
-    // Select first tab
-    tabClick("tab", 2);
-    loadNextTiles(0);
-
-</script>
 </html>

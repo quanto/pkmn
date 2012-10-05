@@ -635,17 +635,7 @@
         drawField();
 		
     }
-    
-    function init()
-    {
-		// create the field with random tiles if there's no map set
-//        if (field[0].length == 0){
-//            setSize(25,25)
-//            fillRandom(0,0,width - 1,height - 1);
-//        }
-//        addHistoryAction();
-	}
-    
+
     /*
     User functions
     */

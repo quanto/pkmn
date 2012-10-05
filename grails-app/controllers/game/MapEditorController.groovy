@@ -17,6 +17,6 @@ class MapEditorController {
             map = Map.get(params.id)
             mapLayout = MapLayout.createMapArray(map);
         }
-        render view: "editor", model: [mapLayout:mapLayout]
+        render view: "editor", model: [map: map, mapLayout:mapLayout]
     }
 }
