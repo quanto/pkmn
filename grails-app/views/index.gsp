@@ -103,19 +103,35 @@
 			</ul>
 		</div>
 		<div id="page-body" role="main">
-			<h1>Welcome to Grails</h1>
-			<p>Congratulations, you have successfully started your first Grails application! At the moment
-			   this is the default page, feel free to modify it to either redirect to a controller or display whatever
-			   content you may choose. Below is a list of controllers that are currently deployed in this application,
-			   click on each to execute its default action:</p>
 
 			<div id="controller-list" role="navigation">
-				<h2>Available Controllers:</h2>
-				<ul>
-					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-						<li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-					</g:each>
-				</ul>
+				<h1>Available Controllers:</h1>
+                <table style="width:auto;">
+                    <tr>
+                        <td>
+                            <h2>Controllers:</h2>
+                            <ul>
+                                <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
+                                    <g:if test="${!c.fullName.contains('scaffold')}">
+                                        <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.logicalPropertyName}</g:link></li>
+                                    </g:if>
+                                </g:each>
+                            </ul>
+                        </td>
+                        <td style="padding-left: 100px">
+                            <h2>Scaffold Controllers:</h2>
+                            <ul>
+                                <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
+                                    <g:if test="${c.fullName.contains('scaffold')}">
+                                        <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.logicalPropertyName}</g:link></li>
+                                    </g:if>
+                                </g:each>
+                            </ul>
+                        </td>
+                    </tr>
+
+
+                </table>
 			</div>
 		</div>
 	</body>
