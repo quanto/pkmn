@@ -1,3 +1,4 @@
+<%@ page import="game.MapLayout" %>
 <html>
 <head>
     <script type="text/javascript" src="${resource(uri:'')}/js/jquery-1.7.min.js"></script>
@@ -6,6 +7,33 @@
     <script type="text/javascript" src="${resource(uri:'')}/js/mapEditor/tabs.js"></script>
     <script type="text/javascript" src="${resource(uri:'')}/js/mapEditor/tiles.js"></script>
     <script type="text/javascript" src="${resource(uri:'')}/js/mapEditor/data.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready( function () {
+
+            field = new Array();
+
+            // background layer
+            field[0] = new Array();
+            // foreground
+            field[1] = new Array();
+            // Object/Action layer
+            field[2] = new Array();
+            // Top layer
+            field[3] = new Array();
+
+            setSize(${mapLayout.getRows()},${mapLayout.getColumns()});
+
+            <g:each in="${mapLayout.background}" var="row" status="y">
+                field[0][${y}] = new Array();
+                <g:each in="${row}" var="tileNr" status="x">
+                    field[0][${y}][${x}] = "${tileNr}"
+                </g:each>
+            </g:each>
+
+            drawField();
+        });
+    </script>
     <style>
 
     body
@@ -148,7 +176,7 @@
 
 <script language="javascript">
 
-    init();
+    //init();
     initTabs("tab");
     // Select first tab
     tabClick("tab", 2);

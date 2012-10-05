@@ -8,6 +8,15 @@ class MapEditorController {
 
 
     def editor(){
-        render view: "editor" //, model: [map:Map.get(Integer.parseInt(params.id))]
+
+        Map map
+
+        MapLayout mapLayout
+
+        if (params.id){
+            map = Map.get(params.id)
+            mapLayout = MapLayout.createMapArray(map);
+        }
+        render view: "editor", model: [mapLayout:mapLayout]
     }
 }
