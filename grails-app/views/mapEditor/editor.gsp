@@ -106,7 +106,7 @@
 
     <g:form action="saveMap" controller="mapEditor">
 
-        <g:hiddenField name="mapId" value="${map?.id}" />
+        <g:hiddenField name="id" value="${map?.id}" />
 
         <table>
             <tr>
@@ -193,14 +193,19 @@
                     </div>
 
                     <div id="tab7" title="Other">
-                        <br />
-                        <input type="button" value="mapdata" onclick="mapdata()" />
-                        <input type="button" value="gamedata" onclick="gamedata()" />
-                        <br />
-                        <textarea style="width:300px;height:200px;" id="mapdata" name="mapdata"></textarea>
+                        <div style="display: none">
+                            <br />
+                            <input type="button" value="mapdata" onclick="mapdata()" />
+                            <input type="button" value="gamedata" onclick="gamedata()" />
+                            <br />
+                            <textarea style="width:300px;height:200px;" id="mapdata" name="mapdata"></textarea>
 
-                        <textarea style="width:300px;height:200px;" id="foreground" name="foreground"></textarea>
-                        <textarea style="width:300px;height:200px;" id="background" name="background"></textarea>
+                            <textarea style="width:300px;height:200px;" id="foreground" name="map.dataForeground"></textarea>
+                            <textarea style="width:300px;height:200px;" id="background" name="map.dataBackground"></textarea>
+                        </div>
+                        Name: <g:textField name="map.name" value="${map?.name}" /> <br />
+                        Active: <g:checkBox name="map.active" value="${map?.active}" /><br />
+                        Pokemon: <g:textField name="map.pokemon" value="${map?.pokemon}" /><br />
 
                         <g:actionSubmit value="saveMap" onclick="createMapData();">Save</g:actionSubmit>
 
