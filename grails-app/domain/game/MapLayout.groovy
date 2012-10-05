@@ -35,7 +35,7 @@ class MapLayout {
 //        tilesInfo = new tiles;
 //        tiles = (tilesInfo -> getBackgroundTiles());
 
-        def mapRowsBackground = map.databackground.split('-')
+        def mapRowsBackground = map.dataBackground.split('-')
 
         mapLayout.background = []
         for(int y=0; y<mapRowsBackground.length; y++)

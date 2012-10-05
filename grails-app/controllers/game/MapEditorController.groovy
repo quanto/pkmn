@@ -15,8 +15,17 @@ class MapEditorController {
 
         if (params.id){
             map = Map.get(params.id)
-            mapLayout = MapLayout.createMapArray(map);
+
+            if (map){
+                mapLayout = MapLayout.createMapArray(map)
+            }
         }
         render view: "editor", model: [map: map, mapLayout:mapLayout]
+    }
+
+    def saveMap(){
+        println params.mapId
+
+        redirect action:"index"
     }
 }

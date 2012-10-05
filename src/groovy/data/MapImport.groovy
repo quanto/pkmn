@@ -24,7 +24,7 @@ class MapImport {
                 Map map = new Map(
                         name : parts[0],
                         dataForeground : parts[1],
-                        databackground : parts[2],
+                        dataBackground : parts[2],
                         pokemon: parts[3],
                         active : parts[0] == '1'
                 )
