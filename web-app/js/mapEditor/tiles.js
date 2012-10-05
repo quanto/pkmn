@@ -30,7 +30,7 @@ function loadTiles(startrow,rows)
         var cell = Math.floor((i % 24) / 8);
         var y = row + (cell * 15) + startrow;
         
-        html += "<a href='#' onclick='return setTile(" + x + y + ")'><img height='16' width='16' src='tiles/" + x + y + ".png' /></a>";
+        html += "<a href='#' onclick='return setTile(" + x + y + ")'><img height='16' width='16' src='/game/images/tiles/sheet1/" + x + y + ".png' /></a>";
 
         if (i % 24 == 23)
         {

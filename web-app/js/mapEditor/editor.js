@@ -656,7 +656,7 @@
         selectedTile = tile;
         
         // Show tile
-        document.getElementById("selectedTile").src = "tiles/" + tile + ".png";
+        document.getElementById("selectedTile").src = "/game/images/tiles/sheet1/" + tile + ".png";
         
         return false;
     }

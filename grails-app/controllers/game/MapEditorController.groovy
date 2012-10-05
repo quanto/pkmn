@@ -24,7 +24,25 @@ class MapEditorController {
     }
 
     def saveMap(){
-        println params.mapId
+        // :TODO set name and active
+        Map map
+
+        if (params.mapId){
+            map = Map.get(params.mapId)
+            if (map){
+                map.dataBackground = params.background
+                map.dataForeground = params.foreground
+                map.save()
+            }
+        }
+        else {
+            map = new Map(
+                    dataBackground: params.background,
+                    dataForeground: params.foreground
+            )
+        }
+
+        println params
 
         redirect action:"index"
     }

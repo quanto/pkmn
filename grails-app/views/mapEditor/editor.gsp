@@ -104,7 +104,7 @@
 </head>
 <body>
 
-    <g:form action="saveMap">
+    <g:form action="saveMap" controller="mapEditor">
 
         <g:hiddenField name="mapId" value="${map?.id}" />
 
@@ -197,9 +197,12 @@
                         <input type="button" value="mapdata" onclick="mapdata()" />
                         <input type="button" value="gamedata" onclick="gamedata()" />
                         <br />
-                        <textarea style="width:300px;height:200px;" id="mapdata"></textarea>
+                        <textarea style="width:300px;height:200px;" id="mapdata" name="mapdata"></textarea>
 
-                        <g:actionSubmit value="save">Save</g:actionSubmit>
+                        <textarea style="width:300px;height:200px;" id="foreground" name="foreground"></textarea>
+                        <textarea style="width:300px;height:200px;" id="background" name="background"></textarea>
+
+                        <g:actionSubmit value="saveMap" onclick="createMapData();">Save</g:actionSubmit>
 
                     </div>
 

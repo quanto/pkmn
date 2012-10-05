@@ -1,24 +1,65 @@
 
-    function mapdata()
+//    function createMapData()
+//    {
+//        data = "{" + height + "," + width + "}";
+//        // For layers
+//        for (var l=0;l<2;l++)
+//        {
+//            data += "{";
+//            for (var h=0;h<height;h++)
+//            {
+//                for (var w=0;w<width;w++)
+//                {
+//                	// background
+//                    data += field[l][h][w] + ",";
+//                }
+//            }
+//            data = data.substr(0,data.length - 1);
+//            data += "}";
+//        }
+//
+//        document.getElementById("mapdata").value = data;
+//    }
+
+    function createMapData()
     {
-        data = "{" + height + "," + width + "}";
-        // For layers
-        for (var l=0;l<2;l++)
+        var data = "";
+
+        for (var h=0;h<height;h++)
         {
-            data += "{";
-            for (var h=0;h<height;h++)
+            for (var w=0;w<width;w++)
             {
-                for (var w=0;w<width;w++)
-                {
-                	// background  
-                    data += field[l][h][w] + ",";
-                }
+                // background
+                data += field[0][h][w] + ",";
             }
             data = data.substr(0,data.length - 1);
-            data += "}";
+            data += "-";
         }
-        
-        document.getElementById("mapdata").value = data;	 
+        data = data.substr(0,data.length - 1);
+
+        $("#background").val(data)
+
+        data = "";
+
+        for (var h=0;h<height;h++)
+        {
+            for (var w=0;w<width;w++)
+            {
+                if (field[1][h][w] != ''){
+                    data += field[1][h][w] + ",";
+                }
+                else {
+                    // Empty cell
+                    data += "0,";
+                }
+
+            }
+            data = data.substr(0,data.length - 1);
+            data += "-";
+        }
+        data = data.substr(0,data.length - 1);
+
+        $("#foreground").val(data)
     }
      
     // create mapdata
