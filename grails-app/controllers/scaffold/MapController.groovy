@@ -2,7 +2,7 @@ package scaffold
 
 import game.Map
 
-class MapsController {
+class MapController {
 
     def scaffold = Map
 

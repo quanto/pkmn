@@ -19,14 +19,13 @@ class MapImport {
         def parts = []
         file.eachLine { line ->
             parts.add( line )
-            if (index%5==4){
+            if (index%4==3){
 
                 Map map = new Map(
                         name : parts[0],
                         dataForeground : parts[1],
                         dataBackground : parts[2],
-                        pokemon: parts[3],
-                        active : parts[0] == '1'
+                        active : parts[3] == '1'
                 )
 
                 map.save()

@@ -20,6 +20,13 @@
                 <td>
                     ${map.active?'Active':''}
                 </td>
+                <td>
+                    <g:link action="editor" id="${map.id}">Map</g:link>
+                </td>
+                <td>
+                    <g:link controller="map" action="edit" id="${map.id}">Pokemon</g:link>
+                </td>
+
             </tr>
         </g:each>
 

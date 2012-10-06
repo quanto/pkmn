@@ -10,4 +10,9 @@ class MapPokemon {
 
     static constraints = {
     }
+
+    public String toString(){
+        return "MapPokemon: ${pokemon.toString()} lvl. ${fromLevel}-${toLevel}"
+    }
+
 }

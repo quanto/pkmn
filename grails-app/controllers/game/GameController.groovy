@@ -2,7 +2,7 @@ package game
 
 import map.View
 
-class MapController {
+class GameController {
 
     FightFactoryService fightFactoryService
 

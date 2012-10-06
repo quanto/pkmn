@@ -283,10 +283,10 @@
     <table>
         <tr>
             <td>
-                <img src='${resource(uri:'')}/images/pkmn/back${fight.fightPlayer1.ownerPokemon.pokemon.threeValueNumber()}.gif2'>   ${fight.fightPlayer1.hp}
+                <img src='${resource(uri:'')}/images/pkmn/back${fight.fightPlayer1.ownerPokemon.pokemon.threeValueNumber()}.gif'>   ${fight.fightPlayer1.hp}
             </td>
             <td>
-                <img src='${resource(uri:'')}/images/pkmn/front${fight.fightPlayer2.ownerPokemon.pokemon.threeValueNumber()}.gif2'>  ${fight.fightPlayer2.hp}
+                <img src='${resource(uri:'')}/images/pkmn/front${fight.fightPlayer2.ownerPokemon.pokemon.threeValueNumber()}.gif'>  ${fight.fightPlayer2.hp}
             </td>
         </tr>
         <tr>

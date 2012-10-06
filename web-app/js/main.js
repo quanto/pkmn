@@ -214,7 +214,7 @@ function getView()
 	$("#textBox").text("");
 	$.ajax({
 		type: "GET",
-		url: "/game/map/view",
+		url: "/game/game/view",
 		data: "",
 		cache: false,
 		success: function(view){
@@ -230,7 +230,7 @@ function getParty()
 {
 	$.ajax({
 		type: "GET",
-		url: "/game/map/party",
+		url: "/game/game/party",
 		cache: false,
 		success: function(party){
 			createDialog("Party", party);
@@ -274,7 +274,7 @@ function checkBattle()
 	$.ajax({
         async:false,
 		type: "GET",
-		url: "/game/map/checkBattle",
+		url: "/game/game/checkBattle",
 		data: "",
 		cache: false,
 		success: function(battleFrame){
@@ -362,7 +362,7 @@ function actionA()
 	$.ajax({
         async : true,
 		type: "GET",
-		url: "/game/map/action",
+		url: "/game/game/action",
 		data: "",
 		cache: false,
 		success: function(msg){
@@ -402,7 +402,7 @@ function getPlayerLocation()
 {
 	$.ajax({
 		type: "GET",
-		url: "/game/map/playerLocation",
+		url: "/game/game/playerLocation",
 		data: "",
 		cache: false,
 		success: function(json){
@@ -433,7 +433,7 @@ function checkMove(direction, x, y)
 	$.ajax({
         async:false,
 		type: "POST",
-		url: "/game/map/checkMove",
+		url: "/game/game/checkMove",
 		data: "direction="+direction,
 		cache: false,
 		success: function(msg){
