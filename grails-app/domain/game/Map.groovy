@@ -7,7 +7,7 @@ class Map {
     String dataBackground
     boolean active
 
-    static hasMany = [mapPokemonList: MapPokemon]
+    static hasMany = [mapPokemonList: MapPokemon, actions:Action]
 
     static mapping = {
         dataForeground type:"text"
@@ -21,4 +21,10 @@ class Map {
     //    pokemon display:false
         active display:true
     }
+
+    @Override
+    public String toString(){
+        return "Map: ${id} ${name}"
+    }
+
 }

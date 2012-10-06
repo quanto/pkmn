@@ -60,9 +60,12 @@ class BootStrap {
                 jumpTo: mapTransition1
 
         )
-        mapTransition2.save()
+//        mapTransition2.save()
         mapTransition1.jumpTo = mapTransition2
-        mapTransition1.save()
+//        mapTransition1.save()
+
+        map.addToActions(mapTransition1)
+        map2.addToActions(mapTransition2)
 
         TilesImport.importTiles()
 
