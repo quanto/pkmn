@@ -1,18 +1,31 @@
 package game
 
+import map.View
+
 class BattleController {
 
     FightFactoryService fightFactoryService
 
+    def exit(){
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
+        player.view = View.ShowMap
+        player.save()
+        println "!"
+        //:TODO battle over check
+        render text: g.render(template: 'getView')
+    }
+
     def index() {
         boolean debug = true
 
-        Owner owner = session.owner
-        //owner = owner.merge()
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
 
-        Fight fight = fightFactoryService.getFight(owner.fightNr)
+        Fight fight = fightFactoryService.getFight(player.fightNr)
 
-        if (owner && fight){
+        if (player && fight){
             /*
             // active player en openent player
             if (fight.player1Id == $owner->id)
@@ -37,18 +50,21 @@ class BattleController {
     }
 
     def logRequest = {
-        Owner owner = session.owner
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
         //owner = owner.merge()
-        Fight fight = fightFactoryService.getFight(owner.fightNr)
+        Fight fight = fightFactoryService.getFight(player.fightNr)
 
         render text: g.render(template: 'log',model: [fight:fight])
     }
 
     def doMove = {
 
-        Owner owner = session.owner
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
         //owner = owner.merge()
-        Fight fight = fightFactoryService.getFight(owner.fightNr)
+        Fight fight = fightFactoryService.getFight(player.fightNr)
         //fight = fight.refresh()
 
 
@@ -108,10 +124,11 @@ class BattleController {
     }
 
     def menuRequest = {
-        Owner owner = session.owner
-        //owner = owner.merge()
-        Fight fight = fightFactoryService.getFight(owner.fightNr)
-        FightPlayer myFightPlayer = fight.myPlayer(session.owner)
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
+        Fight fight = fightFactoryService.getFight(player.fightNr)
+        FightPlayer myFightPlayer = fight.myPlayer(player)
 
         // wil move leren
 //			if (fight.{"player" . $mp . "learnMoves"} != "" && isset($_GET["forgetMove"]) && $_GET["forgetMove"] == "yes")
@@ -166,7 +183,7 @@ class BattleController {
         }
         else if (params.fight != null && !fight.battleOver)
         {
-            Battle.beforeChosingMove(fight, myFightPlayer, owner);
+            Battle.beforeChosingMove(fight, myFightPlayer, player);
 
             myFightPlayer.ownerPokemon = myFightPlayer.ownerPokemon.refresh()
 
@@ -175,7 +192,7 @@ class BattleController {
         // Switch pokemon list
         else if (params.pkmn != null && !fight.battleOver)
         {
-            List<OwnerPokemon> ownerPokemonList = OwnerPokemon.findAllByOwnerAndPartyPositionGreaterThan(owner,0)
+            List<OwnerPokemon> ownerPokemonList = OwnerPokemon.findAllByOwnerAndPartyPositionGreaterThan(player,0)
             FightPlayer fightPlayer = fight.fightPlayer1
             render text: g.render(template: 'pokemonList',model: [mustChoose:false,ownerPokemonList:ownerPokemonList,fightPlayer:fightPlayer])
         }
@@ -185,9 +202,10 @@ class BattleController {
     }
 
     def run = {
-        Owner owner = session.owner
-        //owner = owner.merge()
-        Fight fight = fightFactoryService.getFight(owner.fightNr)
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
+        Fight fight = fightFactoryService.getFight(player.fightNr)
 
         Run.run(fight)
 

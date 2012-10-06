@@ -2,7 +2,7 @@ package game
 
 class FightFactoryService {
 
-    // :TODO not transactional
+    static transactional = false
 
     private static List<Fight> fights = new ArrayList<Fight>();
     int fightCount = 0
@@ -20,7 +20,19 @@ class FightFactoryService {
         return fights.find{ it.nr == nr }
     }
 
-    Fight startFight(BattleType battleType, Owner player1, Pokemon wildPokemon, Integer wildPokemonLevel){
+    Fight startFight(BattleType battleType, Player player1, MapPokemon mapPokemon){
+        Random random = new Random()
+
+        // Take a random level
+        int level = mapPokemon.fromLevel
+        if(mapPokemon.toLevel - mapPokemon.fromLevel > 0){
+            level = mapPokemon.fromLevel + random.nextInt(mapPokemon.toLevel - mapPokemon.fromLevel)
+        }
+
+        return startFight(battleType, player1, mapPokemon.pokemon, level)
+    }
+
+    Fight startFight(BattleType battleType, Player player1, Pokemon wildPokemon, Integer wildPokemonLevel){
         Fight fight = new Fight()
         fight.battleType = battleType
 
@@ -75,9 +87,8 @@ class FightFactoryService {
 
         fights.add(fight)
 
-        // koppel gevecht aan speler
-        player1.fightNr = fight.nr
-        player1.save()
+
+        //player1.save()
 
         return fight
     }

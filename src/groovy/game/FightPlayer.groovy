@@ -1,5 +1,7 @@
 package game
 
+import org.hibernate.StaleObjectStateException
+
 /**
  * Created with IntelliJ IDEA.
  * User: kevinverhoef
@@ -63,7 +65,7 @@ class FightPlayer {
      * @return
      */
     public Owner getOwner(){
-        owner = owner?.merge()
+        return getOwnerPokemon()?.owner
     }
 
     /**
@@ -73,7 +75,7 @@ class FightPlayer {
      * @return
      */
     public OwnerPokemon getOwnerPokemon(){
-        ownerPokemon = ownerPokemon?.merge()
+        return OwnerPokemon.get(ownerPokemon.id)
     }
 
 }

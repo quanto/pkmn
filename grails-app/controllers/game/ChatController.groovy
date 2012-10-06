@@ -16,7 +16,8 @@ class ChatController {
     }
 
     def send(){
-        Player player = session.owner
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
 
         new ChatMessage(
                 message: params.chatMessage,

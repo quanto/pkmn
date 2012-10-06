@@ -31,6 +31,16 @@ class BootStrap {
 
         MapImport.importMaps()
 
+        Map map = Map.get(1)
+        MapPokemon mapPokemon = new MapPokemon(
+                map: map,
+                pokemon:pokemon,
+                chance : 50,
+                fromLevel:1,
+                toLevel:1
+        )
+        map.addToMapPokemonList(mapPokemon)
+
         TilesImport.importTiles()
 
         Move move = Move.findByName("Growl")

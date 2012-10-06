@@ -33,7 +33,7 @@ $(document).ready( function () {
 	getMenu();
 	
 //	setInterval ("setOtherPlayers()", 2000); // Update andere spelers elke 2 sec
-//	setInterval ("mediumWait()", 8000); //Update chat elke 8 sec
+	setInterval ("mediumWait()", 8000); //Update chat elke 8 sec
 //	setInterval ("longWait()", 60000); //Kijk of server down is en serverbericht 60 Seconden
 //
 	$("#chatMessage").focus(function () {
@@ -269,20 +269,21 @@ function disconnect()
 };
 
 
-function startBattle()
+function checkBattle()
 {
-//	$.ajax({
-//		type: "GET",
-//		url: "Gajax.php",
-//		data: "ajax=battle",
-//		cache: false,
-//		success: function(battleFrame){
-//			if(battleFrame != 0)
-//			{
-//				$("#theMap").html(battleFrame);
-//			}
-//		}
-//	});
+	$.ajax({
+        async:false,
+		type: "GET",
+		url: "/game/map/checkBattle",
+		data: "",
+		cache: false,
+		success: function(battleFrame){
+			if(battleFrame != "")
+			{
+				$("#theMap").html(battleFrame);
+			}
+		}
+	});
 };
 
 function continueBattle()
@@ -469,24 +470,6 @@ function checkMove(direction, x, y)
 
 		}
 	});
-    freeze = false
-};
-
-function checkBattle()
-{
-//	$.ajax({
-//		type: "POST",
-//		url: "Gajax.php",
-//		data: "ajax=checkBattle",
-//		cache: false,
-//		success: function(tile){
-//			if(tile == 1)
-//			{
-//				startBattle();
-//			}
-//			freeze = false;
-//		}
-//	});
     freeze = false
 };
 

@@ -263,7 +263,7 @@ class Battle {
 //                $owner->update();
 //
                 fight.log += "m:You lose, your pokemon have been recovered in town.;";
-                Recover.recoverParty(fight.fightPlayer1)
+                Recover.recoverParty(fight.fightPlayer1.owner)
                 fight.battleOver = true
 //                $fight->update();
 

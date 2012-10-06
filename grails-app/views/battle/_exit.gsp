@@ -2,7 +2,7 @@
 <table>
     <tr>
         <td>
-            <a href='index.php?action=exit' onclick='parent.getView();' >Exit</a>
+            <a href='${createLink(action:'exit')}'>Exit</a>
         </td>
     </tr>
 </table>

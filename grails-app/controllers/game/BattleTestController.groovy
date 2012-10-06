@@ -7,7 +7,9 @@ class BattleTestController {
     def index() {
         // Set test Owner
         Owner owner = Owner.findByName("Kevin")
-        session.owner = owner
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
         // Set test fight
 //        session.fight = Fight.findByPlayer1(session.owner)
         Pokemon wildPokemon = Pokemon.findByNr(1)

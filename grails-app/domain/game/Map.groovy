@@ -5,8 +5,10 @@ class Map {
     String name
     String dataForeground
     String dataBackground
-    String pokemon
+    String pokemon // :TODO remove
     boolean active
+
+    static hasMany = [mapPokemonList: MapPokemon]
 
     static mapping = {
         dataForeground type:"text"
