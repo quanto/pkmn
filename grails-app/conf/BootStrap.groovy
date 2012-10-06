@@ -27,7 +27,7 @@ class BootStrap {
 
         Map map = Map.get(14)
 
-        Player player = new Player(name: "Kevin", password: "12345", money: 1000, registerDate : new Date(), map:map)
+        Player player = new Player(username: "kevin", name: "Kevin Verhoef", password: "12345", money: 1000, registerDate : new Date(), map:map)
         player.save()
 
         new ChatMessage(
