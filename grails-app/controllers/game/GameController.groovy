@@ -8,7 +8,7 @@ class GameController {
 
     def index() {
         // Test data
-        Player player = Player.findByName("Kevin")
+        Player player = Player.findByUsername("kevin")
         session.playerData = new PlayerData(player.id)
 
     }
@@ -39,6 +39,10 @@ class GameController {
                 player.setMap mapTransition.jumpTo.map
                 player.save(flush:true)
                 render text: "refreshMap"
+            }
+            else if (action in MapMessage){
+                MapMessage mapMessage = (MapMessage)action
+                render text: mapMessage.message
             }
         }
         render text : ""

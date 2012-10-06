@@ -45,7 +45,14 @@ class BootStrap {
         map.addToMapPokemonList(mapPokemon)
 
         Map map2 = Map.get(17)
-        println map2
+
+        MapMessage mapMessage = new MapMessage(
+            map:map2,
+            positionX:12,
+            positionY:13,
+            message: "Hello there :)"
+        )
+        map2.addToActions(mapMessage)
 
         MapTransition mapTransition1 = new MapTransition(
                 positionX : 7,

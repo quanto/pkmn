@@ -380,15 +380,15 @@ function actionA()
 //			{
 //				getView();
 //			}
-//			else if(msg != 0)
-//			{
-//				$("#textBox").text(msg);
-//				freeze = false;
-//			}
-//			else
-//			{
-//				freeze = false;
-//			}
+			else if(msg != "")
+			{
+				$("#textBox").text(msg);
+				freeze = false;
+			}
+			else
+			{
+				freeze = false;
+			}
 //
 //			getMenu();
 
