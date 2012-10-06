@@ -1,12 +1,5 @@
 package game
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 29-09-12
- * Time: 08:18
- * To change this template use File | Settings | File Templates.
- */
 class Pokemon {
 
     int nr
@@ -32,5 +25,9 @@ class Pokemon {
         return String.format("%3s", nr.toString()).replaceAll(' ','0')
     }
 
+    @Override
+    public String toString(){
+        return "#${nr} ${name}"
+    }
 
 }

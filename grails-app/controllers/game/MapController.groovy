@@ -88,7 +88,6 @@ class MapController {
                     }
                 }
 
-
                 player.save(flush: true)
                 render text : "1"
             }
@@ -101,7 +100,6 @@ class MapController {
         else {
             render text: ""
         }
-        println "1"
     }
 
     public boolean checkForWildPokemon(String currentTile){
@@ -158,7 +156,7 @@ class MapController {
         if (player.view == View.ShowMap){
 
             // :TODO remove test map
-            player.map = Map.get(1)
+            player.map = Map.get(14)
 
             MapLayout mapLayout = MapLayout.createMapArray(player.map);
 

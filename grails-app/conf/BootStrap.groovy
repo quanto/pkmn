@@ -31,7 +31,7 @@ class BootStrap {
 
         MapImport.importMaps()
 
-        Map map = Map.get(1)
+        Map map = Map.get(14)
         MapPokemon mapPokemon = new MapPokemon(
                 map: map,
                 pokemon:pokemon,
@@ -40,6 +40,22 @@ class BootStrap {
                 toLevel:1
         )
         map.addToMapPokemonList(mapPokemon)
+
+        Map map2 = Map.get(17)
+
+        MapTransition mapTransition1 = new MapTransition(
+                positionX : 7,
+                positionY : 0,
+                map : map
+        )
+        MapTransition mapTransition2 = new MapTransition(
+                positionX : 7,
+                positionY : 7,
+                map : map2,
+                jumpTo: mapTransition1
+
+        )
+        mapTransition1.jumpTo = mapTransition2
 
         TilesImport.importTiles()
 
