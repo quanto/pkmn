@@ -11,13 +11,7 @@ class BootStrap {
 
     def init = { servletContext ->
 
-        Player owner = new Player(name: "Kevin", password: "12345", money: 1000, registerDate : new Date())
-        owner.save()
 
-        new ChatMessage(
-            message: "Hello World!",
-            player: owner
-        ).save()
 
         PokemonImport.importPokemon()
 
@@ -32,6 +26,15 @@ class BootStrap {
         MapImport.importMaps()
 
         Map map = Map.get(14)
+
+        Player player = new Player(name: "Kevin", password: "12345", money: 1000, registerDate : new Date(), map:map)
+        player.save()
+
+        new ChatMessage(
+                message: "Hello World!",
+                player: player
+        ).save()
+
         MapPokemon mapPokemon = new MapPokemon(
                 map: map,
                 pokemon:pokemon,
@@ -42,20 +45,24 @@ class BootStrap {
         map.addToMapPokemonList(mapPokemon)
 
         Map map2 = Map.get(17)
+        println map2
 
         MapTransition mapTransition1 = new MapTransition(
                 positionX : 7,
                 positionY : 0,
                 map : map
         )
+        mapTransition1.save()
         MapTransition mapTransition2 = new MapTransition(
                 positionX : 7,
-                positionY : 7,
+                positionY : 19,
                 map : map2,
                 jumpTo: mapTransition1
 
         )
+        mapTransition2.save()
         mapTransition1.jumpTo = mapTransition2
+        mapTransition1.save()
 
         TilesImport.importTiles()
 
@@ -65,7 +72,7 @@ class BootStrap {
         LearnableMovesImport.importLearnableMoves()
 
         OwnerPokemon ownerPokemon = new OwnerPokemon(
-                owner : owner,
+                owner : player,
                 isNpc : false,
                 pokemon: pokemon,
                 hpIV :29,

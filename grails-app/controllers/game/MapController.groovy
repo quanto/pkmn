@@ -23,6 +23,27 @@ class MapController {
         render text: g.render(template: 'party', model: [computerView:computerView,ownerPokemonList:ownerPokemonList])
     }
 
+    def action(){
+
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
+
+        Action action = Action.findByMapAndPositionXAndPositionY(player.map,player.positionX,player.positionY)
+
+        if (action){
+            if (action in MapTransition){
+                MapTransition mapTransition = (MapTransition)action
+                player.positionX = mapTransition.jumpTo.positionX
+                player.positionY = mapTransition.jumpTo.positionY
+                player.setMap mapTransition.jumpTo.map
+                player.save(flush:true)
+                render text: "refreshMap"
+            }
+        }
+        render text : ""
+    }
+
     def playerLocation(){
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
@@ -155,9 +176,6 @@ class MapController {
 
         if (player.view == View.ShowMap){
 
-            // :TODO remove test map
-            player.map = Map.get(14)
-
             MapLayout mapLayout = MapLayout.createMapArray(player.map);
 
             render text: g.render(template: 'map', model: [mapLayout: mapLayout, player: player])
@@ -174,31 +192,6 @@ class MapController {
         else if (player.view == View.Battle){
             render text : "<iframe src='/game/battle' frameborder='0' width='500' height='300'></iframe>"
         }
-    }
-
-    public static void createTheMap()
-    {
-
-        //Tile formaat
-//        tilesSize["x"] = 16;
-//        tilesSize["y"] = 16;
-
-        //Get player info
-//        playerData = player::getPlayerData();
-//
-//        //Get Other players
-//        otherPlayers = player::getOtherPlayers();
-//
-//        playerLocX = playerData['positionX'];
-//        playerLocY = playerData['positionY'];
-//        loadMap = playerData['map'];
-
-        //return loadMap."jaa";
-
-
-        //Create the actual map
-
-
     }
 
 }

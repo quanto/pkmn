@@ -358,19 +358,20 @@ function sendChatMessage()
 
 function actionA()
 {
-//	freeze = true;
-//	$.ajax({
-//		type: "GET",
-//		url: "Gajax.php",
-//		data: "ajax=8",
-//		cache: false,
-//		success: function(msg){
-//
-//			msg = jQuery.trim(msg);
-//			if(msg == "refreshMap")
-//			{
-//				getView();
-//			}
+	freeze = true;
+	$.ajax({
+        async : true,
+		type: "GET",
+		url: "/game/map/action",
+		data: "",
+		cache: false,
+		success: function(msg){
+
+			msg = $.trim(msg);
+			if(msg == "refreshMap")
+			{
+				getView();
+			}
 //			else if(msg == "showMarket")
 //			{
 //				getView();
@@ -390,10 +391,10 @@ function actionA()
 //			}
 //
 //			getMenu();
-//
-//			//freeze = false;
-//		}
-//	});
+
+			//freeze = false;
+		}
+	});
     freeze = false;
 };
 
@@ -463,10 +464,10 @@ function checkMove(direction, x, y)
 				updateLocation(x, y);
 				checkBattle();
 			}
-//			else
-//			{
-//				actionA();
-//			}
+			else
+			{
+				actionA();
+			}
 
 		}
 	});

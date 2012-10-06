@@ -1,10 +1,6 @@
 package game
 
-class MapTransition {
-
-    int positionX
-    int positionY
-    Map map
+class MapTransition extends Action {
 
     // Defining no jumpTo means there's no way back
     MapTransition jumpTo
