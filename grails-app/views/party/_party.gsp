@@ -40,7 +40,7 @@
             <td><a href='battleEngine/pokedex.php?nr=" . $row["nr"] . "'>${ownerPokemon.pokemon.name}</a></td>
             <td>${ownerPokemon.hp}/${ownerPokemon.calculateHP()}</td>
             <td style='text-align:center;'>${ownerPokemon.level}</td>
-            <td style='text-align:center;'>
+            <td style='text-align:center;width:70px;white-space:nowrap;'>
                 <g:render template="hpBar" model="${[hp:ownerPokemon.hp,maxHp:ownerPokemon.calculateHP()]}" />
                 <br><g:render template="expBar" model="${[level:ownerPokemon.level, levelRate: ownerPokemon.pokemon.levelRate, xp:ownerPokemon.xp]}" />
             <g:if test="${i != 0}">
