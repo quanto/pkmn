@@ -205,7 +205,6 @@
                         </div>
                         Name: <g:textField name="map.name" value="${map?.name}" /> <br />
                         Active: <g:checkBox name="map.active" value="${map?.active}" /><br />
-                        Pokemon: <g:textField name="map.pokemon" value="${map?.pokemon}" /><br />
 
                         <g:actionSubmit value="saveMap" onclick="createMapData();">Save</g:actionSubmit>
 
