@@ -45,6 +45,8 @@ class OwnerPokemon {
         owner nullable:true
     }
 
+    static transients = ['baseExp']
+
     int calculateHP()
     {
         int ivHP = hpIV
@@ -54,6 +56,10 @@ class OwnerPokemon {
         //$hp =  floor( floor( $baseHP * 2 + $ivHP + floor( $ev / 4 ) ) * $level / 100 + 10 + $level );
 
         return Math.floor(hp);
+    }
+
+    public int getBaseExp(){
+        EXP.getExp(level,pokemon.levelRate)
     }
 
 }

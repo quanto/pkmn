@@ -81,6 +81,7 @@ class BootStrap {
 
         LearnableMovesImport.importLearnableMoves()
 
+        // Balbasaur
         OwnerPokemon ownerPokemon = new OwnerPokemon(
                 owner : player,
                 isNpc : false,
@@ -94,9 +95,9 @@ class BootStrap {
                 hp:12,
                 gender: Gender.Male,
                 partyPosition: 1,
-                xp:0,
                 level:5
         )
+        ownerPokemon.xp = ownerPokemon.getBaseExp()
 
 
         OwnerMove ownerMove1 = new OwnerMove(
@@ -117,6 +118,35 @@ class BootStrap {
 
         ownerPokemon.save()
 
+        // Charmander
+        OwnerPokemon ownerPokemon2 = new OwnerPokemon(
+                owner : player,
+                isNpc : false,
+                pokemon: Pokemon.get(4),
+                hpIV :29,
+                attackIV:16,
+                defenseIV:22,
+                spAttackIV:2,
+                spDefenseIV:13,
+                speedIV:20,
+                hp:12,
+                gender: Gender.Female,
+                partyPosition: 2,
+                level:3
+        )
+        ownerPokemon2.xp = ownerPokemon2.getBaseExp()
+
+
+        OwnerMove ownerMove3 = new OwnerMove(
+                ownerPokemon : ownerPokemon,
+                move : moveTackle,
+                ppLeft : 40
+        )
+
+
+        ownerPokemon2.addToOwnerMoves(ownerMove3)
+
+        ownerPokemon2.save()
     }
 
     def destroy = {
