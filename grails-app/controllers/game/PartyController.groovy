@@ -1,5 +1,7 @@
 package game
 
+import com.sun.java.util.jar.pack.Instruction
+
 class PartyController {
 
     def index() {
@@ -17,40 +19,70 @@ class PartyController {
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
 
-//        // error checking
-//        if ($ownerpokemon->ownerId != $owner->id)
-//        {
-//            die("Pokemon niet van eigenaar!");
-//        }
-//        else if ($ownerpokemon->partyPosition == 1)
-//        {
-//            die ("Pokemon kan niet verplaatst worden");
-//        }
-//        else if ($ownerpokemon->partyPosition == 0)
-//        {
-//            die ("Pokemon is niet in party");
-//        }
-//
-//        $sql = "select * from ownerpokemon where partyPosition = '" . ($ownerpokemon->partyPosition - 1) . "' and ownerId = '" . $owner->id . "'";
-//        $result = DatabaseQuery::execute($sql);
-//
-//        if (mysql_num_rows($result) != 0)
-//        {
-//            $row = mysql_fetch_array($result);
-//            DatabaseQuery::execute("update ownerpokemon set partyPosition = '" . $ownerpokemon->partyPosition . "' where partyPosition = '" . $row["partyPosition"] . "' AND ownerId = '" . $owner->id . "'");
-//        }
-//
-//        $ownerpokemon->partyPosition -= 1;
-//        $ownerpokemon->update();
-//
-//        if ($owner->view != 2)
-//            header("Location: game.php");
-//        else
-//            header("Location: computer.php");
+        OwnerPokemon ownerPokemon = OwnerPokemon.get(params.id)
+
+        // error checking
+        if (!ownerPokemon || ownerPokemon.owner != player)
+        {
+            render text:"Pokemon niet van eigenaar!"
+        }
+        else if (ownerPokemon.partyPosition == 1)
+        {
+            render text:"Pokemon kan niet verplaatst worden"
+        }
+        else if (ownerPokemon.partyPosition == 0)
+        {
+            render text:"Pokemon is niet in party"
+        }
+        else {
+            OwnerPokemon switchOwnerPokemon = OwnerPokemon.findByOwnerAndPartyPosition(player,ownerPokemon.partyPosition-1)
+
+            if (!switchOwnerPokemon){
+                println "2"
+                render text:"Pokemon kan niet verplaatst worden"
+            }
+            else {
+                ownerPokemon.partyPosition -= 1
+                switchOwnerPokemon.partyPosition += 1
+                redirect controller:'game',action:"index"
+            }
+        }
+
     }
 
     def moveDown = {
 
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
+        OwnerPokemon ownerPokemon = OwnerPokemon.get(params.id)
+
+        // error checking
+        if (!ownerPokemon || ownerPokemon.owner != player)
+        {
+            render text:"Pokemon niet van eigenaar!"
+        }
+        else if (ownerPokemon.partyPosition == 6)
+        {
+            render text:"Pokemon kan niet verplaatst worden"
+        }
+        else if (ownerPokemon.partyPosition == 0)
+        {
+            render text:"Pokemon is niet in party"
+        }
+        else {
+            OwnerPokemon switchOwnerPokemon = OwnerPokemon.findByOwnerAndPartyPosition(player,ownerPokemon.partyPosition+1)
+
+            if (!switchOwnerPokemon){
+                println "2"
+                render text:"Pokemon kan niet verplaatst worden"
+            }
+            else {
+                ownerPokemon.partyPosition += 1
+                switchOwnerPokemon.partyPosition -= 1
+                redirect controller:'game',action:"index"
+            }
+        }
     }
 
 }

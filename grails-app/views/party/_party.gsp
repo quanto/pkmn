@@ -14,7 +14,7 @@
         <td></td>
         <td></td>
     </tr>
-    <g:each in="${ownerPokemonList}" var="ownerPokemon" status="i">
+    <g:each in="${ownerPokemonList.sort{it.partyPosition}}" var="ownerPokemon" status="i">
 
         <tr>
             <td style='text-align:center;'>${ownerPokemon.partyPosition}</td>
