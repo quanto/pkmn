@@ -8,7 +8,7 @@ class TestController {
         render text: fightFactoryService.fights
     }
 
-    def index() {
+    def index() {                  //
         def test = """
             if (pokemonType1 == "fire" && pokemonType2 == "")
                 effectiveness = 0.5
