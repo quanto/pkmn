@@ -74,6 +74,14 @@ class BootStrap {
         map.addToActions(mapTransition1)
         map2.addToActions(mapTransition2)
 
+        RecoverAction recoverAction = new RecoverAction(
+                positionX : 12,
+                positionY : 9,
+                map : map
+        )
+        map.addToActions(recoverAction)
+
+
         TilesImport.importTiles()
 
         Move move = Move.findByName("Growl")

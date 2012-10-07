@@ -22,6 +22,7 @@ class GameController {
         Action action = Action.findByMapAndPositionXAndPositionY(player.map,player.positionX,player.positionY)
 
         if (action){
+
             if (action in MapTransition){
                 MapTransition mapTransition = (MapTransition)action
                 player.positionX = mapTransition.jumpTo.positionX
@@ -33,6 +34,10 @@ class GameController {
             else if (action in MapMessage){
                 MapMessage mapMessage = (MapMessage)action
                 render text: mapMessage.message
+            }
+            else if (action in RecoverAction){
+                Recover.recoverParty(player)
+                render text: "Your pokemon have been recovered!"
             }
         }
         render text : ""
