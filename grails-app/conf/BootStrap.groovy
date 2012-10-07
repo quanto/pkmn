@@ -76,11 +76,17 @@ class BootStrap {
 
         RecoverAction recoverAction = new RecoverAction(
                 positionX : 12,
-                positionY : 9,
+                positionY : 10,
                 map : map
         )
         map.addToActions(recoverAction)
 
+        ComputerAction computerAction = new ComputerAction(
+                positionX : 13,
+                positionY : 10,
+                map : map
+        )
+        map.addToActions(computerAction)
 
         TilesImport.importTiles()
 
