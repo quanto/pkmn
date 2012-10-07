@@ -56,11 +56,11 @@
                 <td></td>
             </g:else>
             <td>
-
+                <g:if test="${computerView}">
+                    <a href='computer.php?action=remove&id=" . $row["id"] . "'>deposit</a>
+                </g:if>
             </td>
-            <g:if test="${computerView}">
-                <a href='computer.php?action=remove&id=" . $row["id"] . "'>deposit</a>
-            </g:if>
+
         </tr>
     </g:each>
     <g:each in="${(ownerPokemonList?.size()+1..6)}" var="i">

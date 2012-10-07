@@ -1,6 +1,6 @@
 package game
 
-import com.sun.java.util.jar.pack.Instruction
+import map.View
 
 class PartyController {
 
@@ -82,6 +82,26 @@ class PartyController {
                 switchOwnerPokemon.partyPosition -= 1
                 redirect controller:'game',action:"index"
             }
+        }
+    }
+
+    def computer = {
+
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
+        if (player.view != View.ShowComputer){
+            render text : "Zit niet bij de computer"
+        }
+        else {
+
+            boolean computerView = true
+
+            def ownerPokemonList = OwnerPokemon.findAllByOwner(player)
+            def partyList = ownerPokemonList?.findAll() { it.partyPosition > 0 }
+            def computerList = ownerPokemonList?.findAll() { it.partyPosition == 0 }
+
+            render text: g.render(template: 'computer', model: [computerView:computerView,partyList:partyList,computerList:computerList])
         }
     }
 

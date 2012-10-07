@@ -18,7 +18,6 @@ class GameController {
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
 
-
         Action action = Action.findByMapAndPositionXAndPositionY(player.map,player.positionX,player.positionY)
 
         if (action){
@@ -38,6 +37,12 @@ class GameController {
             else if (action in RecoverAction){
                 Recover.recoverParty(player)
                 render text: "Your pokemon have been recovered!"
+            }
+            else if (action in ComputerAction){
+                println "1"
+                player.view = View.ShowComputer
+                player.save(flush:true)
+                render text : "showComputer"
             }
         }
         render text : ""
@@ -183,7 +188,7 @@ class GameController {
 
         }
         else if (player.view == View.ShowComputer){
-
+            redirect controller : "party", action: "computer"
         }
         else if (player.view == View.ChosePokemon){
             render text: g.render(template: 'chosePokemon')

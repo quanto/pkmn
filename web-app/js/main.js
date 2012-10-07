@@ -376,10 +376,10 @@ function actionA()
 //			{
 //				getView();
 //			}
-//			else if(msg == "showComputer")
-//			{
-//				getView();
-//			}
+			else if(msg == "showComputer")
+			{
+				getView();
+			}
 			else if(msg != "")
 			{
 				$("#textBox").text(msg);

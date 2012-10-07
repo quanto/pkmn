@@ -161,6 +161,36 @@ class BootStrap {
         ownerPokemon2.addToOwnerMoves(ownerMove3)
 
         ownerPokemon2.save()
+
+        // Squirtle - stored pokemon
+        OwnerPokemon ownerPokemon3 = new OwnerPokemon(
+                owner : player,
+                isNpc : false,
+                pokemon: Pokemon.get(7),
+                hpIV :29,
+                attackIV:16,
+                defenseIV:22,
+                spAttackIV:2,
+                spDefenseIV:13,
+                speedIV:20,
+                hp:12,
+                gender: Gender.Female,
+                partyPosition: 0,
+                level:3
+        )
+        ownerPokemon3.xp = ownerPokemon2.getBaseExp()
+
+
+        OwnerMove ownerMove4 = new OwnerMove(
+                ownerPokemon : ownerPokemon,
+                move : moveTackle,
+                ppLeft : 40
+        )
+
+
+        ownerPokemon3.addToOwnerMoves(ownerMove4)
+
+        ownerPokemon3.save()
     }
 
     def destroy = {
