@@ -96,12 +96,15 @@ class MapEditorController {
 
     def exportMaps(){
         Map.list().each { Map map ->
+            String mapPokemonData = map.mapPokemonList.each { it.pokemon.id + ";" + it.chance + ";" + it.fromLevel + ";" + it.toLevel }
+
             render text : """
-                ${map.id}
-                ${map.name}
-                ${map.dataBackground}
-                ${map.dataForeground}
-                ${map.active}
+                ${map.id}<br />
+                ${map.name}<br />
+                ${map.dataBackground}<br />
+                ${map.dataForeground}<br />
+                ${map.active}<br />
+                ${mapPokemonData}<br />
             """
         }
     }

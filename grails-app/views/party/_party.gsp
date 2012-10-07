@@ -43,14 +43,14 @@
             <td style='text-align:center;'>
                 <g:render template="hpBar" model="${[hp:ownerPokemon.hp,maxHp:ownerPokemon.calculateHP()]}" />
                 <br><g:render template="expBar" model="${[level:ownerPokemon.level, levelRate: ownerPokemon.pokemon.levelRate, xp:ownerPokemon.xp]}" />
-            <g:if test="${i != 1}">
-                <td><a href='computer.php?action=moveUp&id=" . $row["id"] . "'>up</a></td>
+            <g:if test="${i != 0}">
+                <td><a href='${createLink(action:'moveUp',id:ownerPokemon.id)}'>up</a></td>
             </g:if>
             <g:else>
                 <td></td>
             </g:else>
-            <g:if test="${i != 6}">
-                <td><a href='computer.php?action=moveDown&id=" . $row["id"] . "'>down</a></td>
+            <g:if test="${i != ownerPokemonList.size()-1}">
+                <td><a href='${createLink(action:'moveDown',id:ownerPokemon.id)}'>down</a></td>
             </g:if>
             <g:else>
                 <td></td>

@@ -230,7 +230,7 @@ function getParty()
 {
 	$.ajax({
 		type: "GET",
-		url: "/game/game/party",
+		url: "/game/party/index",
 		cache: false,
 		success: function(party){
 			createDialog("Party", party);

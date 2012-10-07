@@ -13,16 +13,6 @@ class GameController {
 
     }
 
-    def party(){
-        PlayerData playerData = session.playerData
-        Player player = playerData.getPlayer()
-
-        boolean computerView = false
-        def ownerPokemonList = OwnerPokemon.findAllByPartyPositionGreaterThanAndOwner(0,player)
-
-        render text: g.render(template: 'party', model: [computerView:computerView,ownerPokemonList:ownerPokemonList])
-    }
-
     def action(){
 
         PlayerData playerData = session.playerData
