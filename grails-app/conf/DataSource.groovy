@@ -13,8 +13,15 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:h2:mem:devDb;MVCC=TRUE"
+
+//            driverClassName = "com.mysql.jdbc.Driver"
+//            dialect= "org.hibernate.dialect.MySQLInnoDBDialect"
+//            username = "root"
+//            password = ""
+//            url = "jdbc:mysql://127.0.0.1/game"
+
         }
     }
     test {
