@@ -1,6 +1,11 @@
 package data
 
 import game.Map
+import game.MapMessage
+import game.MapPokemon
+import game.Pokemon
+import game.ComputerAction
+import game.RecoverAction
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,27 +18,133 @@ class MapImport {
 
     public static void importMaps(){
         println "Import map lines"
-        def file = new File('import/maps.txt')
+//        def file = new File('import/maps.txt')
+//
+//        int index = 0
+//        def parts = []
+//        file.eachLine { line ->
+//            parts.add( line )
+//            if (index%4==3){
+//
+//                Map map = new Map(
+//                        name : parts[0],
+//                        dataForeground : parts[1],
+//                        dataBackground : parts[2],
+//                        active : parts[3] == '1'
+//                )
+//
+//                map.save()
+//
+//                parts = []
+//
+//            }
+//            index++
+//        }
 
-        int index = 0
-        def parts = []
-        file.eachLine { line ->
-            parts.add( line )
-            if (index%4==3){
 
-                Map map = new Map(
-                        name : parts[0],
-                        dataForeground : parts[1],
-                        dataBackground : parts[2],
-                        active : parts[3] == '1'
-                )
+        def file = new File('import/maps/').listFiles().each { File file ->
 
-                map.save()
+            int index = 0
+            def parts = []
+            file.eachLine { line ->
+                parts.add( line )
+                if (index%10==9){
+                    Map map = new Map(
+                            id : Integer.parseInt(parts[0]),
+                            name : parts[1],
+                            dataForeground : parts[3],
+                            dataBackground : parts[2],
+                            active : parts[4] == '1'
+                    )
 
-                parts = []
+                    map.save()
 
+                    String mapPokemonData = parts[5]
+                    def mapPokemonParts = mapPokemonData.split(';')
+                    importMapPokemon(mapPokemonParts,map)
+
+                    String mapTransitions = parts[6]
+                    def mapTransitionParts = mapTransitions.split(';')
+
+
+                    String computerActions = parts[7]
+                    def computerActionParts = computerActions.split(';')
+                    importComputerActions(computerActionParts,map)
+
+                    String recoverActions = parts[8]
+                    def recoverActionParts = recoverActions.split(';')
+                    importRecoverActions(recoverActionParts,map)
+
+                    String messageActions = parts[9]
+                    def messageParts = messageActions.split(';')
+                    importMessages(messageParts, map)
+
+                    parts = []
+
+                }
+                index++
             }
-            index++
+
+        }
+    }
+
+    public static void importRecoverActions(def parts, Map map){
+        int total = Math.floor(parts.size() / 4)
+        for (int i=0; i<total;i++){
+            int s = i*4
+
+            RecoverAction recoverAction = new RecoverAction(
+                    map:map,
+                    positionX:Integer.parseInt(parts[s+2]),
+                    positionY:Integer.parseInt(parts[s+3]),
+            )
+            map.addToActions(recoverAction)
+        }
+    }
+
+    public static void importComputerActions(def parts, Map map){
+        int total = Math.floor(parts.size() / 4)
+        for (int i=0; i<total;i++){
+            int s = i*4
+
+            ComputerAction computerAction = new ComputerAction(
+
+                    map:map,
+                    positionX:Integer.parseInt(parts[s+2]),
+                    positionY:Integer.parseInt(parts[s+3]),
+            )
+            map.addToActions(computerAction)
+        }
+    }
+
+    public static void importMapPokemon(def parts, Map map){
+        int total = Math.floor(parts.size() / 4)
+        for (int i=0; i<total;i++){
+            int s = i*4
+
+            MapPokemon mapPokemon = new MapPokemon(
+                    map: map,
+                    pokemon:Pokemon.get(Integer.parseInt(parts[s+0])),
+                    chance : Integer.parseInt(parts[s+1]),
+                    fromLevel:Integer.parseInt(parts[s+2]),
+                    toLevel:Integer.parseInt(parts[s+3])
+            )
+            map.addToMapPokemonList(mapPokemon)
+        }
+    }
+
+    public static void importMessages(def messageParts, Map map){
+        int total = Math.floor(messageParts.size() / 5)
+        for (int i=0; i<total;i++){
+            int s = i*5
+
+            MapMessage mapMessage = new MapMessage(
+                    map:map,
+                    positionX:Integer.parseInt(messageParts[s+2]),
+                    positionY:Integer.parseInt(messageParts[s+3]),
+                    message: messageParts[s+3]
+            )
+            map.addToActions(mapMessage)
         }
     }
 

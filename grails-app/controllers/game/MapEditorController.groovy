@@ -98,14 +98,64 @@ class MapEditorController {
         Map.list().each { Map map ->
             String mapPokemonData = map.mapPokemonList.each { it.pokemon.id + ";" + it.chance + ";" + it.fromLevel + ";" + it.toLevel }
 
-            render text : """
-                ${map.id}<br />
-                ${map.name}<br />
-                ${map.dataBackground}<br />
-                ${map.dataForeground}<br />
-                ${map.active}<br />
-                ${mapPokemonData}<br />
-            """
+//            render text : """
+//                ${map.id}<br />
+//                ${map.name}<br />
+//                ${map.dataBackground}<br />
+//                ${map.dataForeground}<br />
+//                ${map.active}<br />
+//                ${mapPokemonData}<br />
+//            """
+            exportMap(map)
+        }
+        render text : "Done"
+    }
+
+    public static void exportMap(Map map){
+        try{
+            File file = new File("import/maps/${map.id} " + map.name + ".txt")
+            //println file.getAbsolutePath()
+            FileWriter fstream = new FileWriter(file);
+            BufferedWriter out = new BufferedWriter(fstream);
+
+            String mapPokemonData = ""
+            map.mapPokemonList.each { mapPokemonData += it.pokemon.id + ";" + it.chance + ";" + it.fromLevel + ";" + it.toLevel + ";" }
+
+            String mapTransitions = ""
+            String computerActions = ""
+            String recoverActions = ""
+            String messageActions = ""
+
+            map.actions.each { Action action ->
+                if(action in MapTransition){
+                    mapTransitions += "${action.id};${action.map.id};${action.positionX};${action.positionY};${action.jumpTo?.id}"
+                }
+                else if (action in ComputerAction){
+                    computerActions += "${action.id};${action.map.id};${action.positionX};${action.positionY};"
+                }
+                else if (action in RecoverAction){
+                    recoverActions += "${action.id};${action.map.id};${action.positionX};${action.positionY};"
+                }
+                else if (action in MapMessage){
+                    messageActions += "${action.id};${action.map.id};${action.positionX};${action.positionY};${action.message};"
+                }
+            }
+
+out.write("""${map.id}
+${map.name}
+${map.dataBackground}
+${map.dataForeground}
+${map.active}
+${mapPokemonData}
+${mapTransitions}
+${computerActions}
+${recoverActions}
+${messageActions}
+""");
+
+            out.close();
+        }catch (Exception e){
+            System.err.println("Error: " + e.getMessage());
         }
     }
 }

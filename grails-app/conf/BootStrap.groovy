@@ -46,47 +46,47 @@ class BootStrap {
 
         Map map2 = Map.get(17)
 
-        MapMessage mapMessage = new MapMessage(
-            map:map2,
-            positionX:12,
-            positionY:13,
-            message: "Hello there :)"
-        )
-        map2.addToActions(mapMessage)
+//        MapMessage mapMessage = new MapMessage(
+//            map:map2,
+//            positionX:12,
+//            positionY:13,
+//            message: "Hello there :)"
+//        )
+//        map2.addToActions(mapMessage)
 
-        MapTransition mapTransition1 = new MapTransition(
-                positionX : 7,
-                positionY : 0,
-                map : map
-        )
-        mapTransition1.save()
-        MapTransition mapTransition2 = new MapTransition(
-                positionX : 7,
-                positionY : 19,
-                map : map2,
-                jumpTo: mapTransition1
-
-        )
-//        mapTransition2.save()
-        mapTransition1.jumpTo = mapTransition2
+//        MapTransition mapTransition1 = new MapTransition(
+//                positionX : 7,
+//                positionY : 0,
+//                map : map
+//        )
 //        mapTransition1.save()
+//        MapTransition mapTransition2 = new MapTransition(
+//                positionX : 7,
+//                positionY : 19,
+//                map : map2,
+//                jumpTo: mapTransition1
+//
+//        )
+////        mapTransition2.save()
+//        mapTransition1.jumpTo = mapTransition2
+////        mapTransition1.save()
+//
+//        map.addToActions(mapTransition1)
+//        map2.addToActions(mapTransition2)
 
-        map.addToActions(mapTransition1)
-        map2.addToActions(mapTransition2)
+//        RecoverAction recoverAction = new RecoverAction(
+//                positionX : 12,
+//                positionY : 10,
+//                map : map
+//        )
+//        map.addToActions(recoverAction)
 
-        RecoverAction recoverAction = new RecoverAction(
-                positionX : 12,
-                positionY : 10,
-                map : map
-        )
-        map.addToActions(recoverAction)
-
-        ComputerAction computerAction = new ComputerAction(
-                positionX : 13,
-                positionY : 10,
-                map : map
-        )
-        map.addToActions(computerAction)
+//        ComputerAction computerAction = new ComputerAction(
+//                positionX : 13,
+//                positionY : 10,
+//                map : map
+//        )
+//        map.addToActions(computerAction)
 
         TilesImport.importTiles()
 
