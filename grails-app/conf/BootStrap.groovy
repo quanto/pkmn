@@ -11,8 +11,6 @@ class BootStrap {
 
     def init = { servletContext ->
 
-
-
         PokemonImport.importPokemon()
 
         Pokemon pokemon = Pokemon.get(1)
@@ -25,7 +23,7 @@ class BootStrap {
 
         MapImport.importMaps()
 
-        Map map = Map.get(14)
+        Map map = Map.findByName("Blossom_town")
 
         Player player = new Player(username: "kevin", name: "Kevin Verhoef", password: "12345", money: 1000, registerDate : new Date(), map:map)
         player.save()
@@ -35,58 +33,61 @@ class BootStrap {
                 player: player
         ).save()
 
-        MapPokemon mapPokemon = new MapPokemon(
-                map: map,
-                pokemon:pokemon,
-                chance : 50,
-                fromLevel:1,
-                toLevel:1
-        )
-        map.addToMapPokemonList(mapPokemon)
+        boolean newImport = true
 
-        Map map2 = Map.get(17)
+        if (!newImport){
+            MapPokemon mapPokemon = new MapPokemon(
+                    map: map,
+                    pokemon:pokemon,
+                    chance : 50,
+                    fromLevel:1,
+                    toLevel:1
+            )
+            map.addToMapPokemonList(mapPokemon)
 
-//        MapMessage mapMessage = new MapMessage(
-//            map:map2,
-//            positionX:12,
-//            positionY:13,
-//            message: "Hello there :)"
-//        )
-//        map2.addToActions(mapMessage)
+            Map map2 = Map.findByName("Blossom_town3")
 
-//        MapTransition mapTransition1 = new MapTransition(
-//                positionX : 7,
-//                positionY : 0,
-//                map : map
-//        )
-//        mapTransition1.save()
-//        MapTransition mapTransition2 = new MapTransition(
-//                positionX : 7,
-//                positionY : 19,
-//                map : map2,
-//                jumpTo: mapTransition1
-//
-//        )
-////        mapTransition2.save()
-//        mapTransition1.jumpTo = mapTransition2
-////        mapTransition1.save()
-//
-//        map.addToActions(mapTransition1)
-//        map2.addToActions(mapTransition2)
+            MapMessage mapMessage = new MapMessage(
+                map:map2,
+                positionX:12,
+                positionY:13,
+                message: "Hello there :)"
+            )
+            map2.addToActions(mapMessage)
 
-//        RecoverAction recoverAction = new RecoverAction(
-//                positionX : 12,
-//                positionY : 10,
-//                map : map
-//        )
-//        map.addToActions(recoverAction)
+            MapTransition mapTransition1 = new MapTransition(
+                    positionX : 7,
+                    positionY : 0,
+                    map : map
+            )
+            mapTransition1.save()
+            MapTransition mapTransition2 = new MapTransition(
+                    positionX : 7,
+                    positionY : 19,
+                    map : map2,
+                    jumpTo: mapTransition1
+            )
 
-//        ComputerAction computerAction = new ComputerAction(
-//                positionX : 13,
-//                positionY : 10,
-//                map : map
-//        )
-//        map.addToActions(computerAction)
+            mapTransition1.jumpTo = mapTransition2
+
+
+            map.addToActions(mapTransition1)
+            map2.addToActions(mapTransition2)
+
+            RecoverAction recoverAction = new RecoverAction(
+                    positionX : 12,
+                    positionY : 10,
+                    map : map
+            )
+            map.addToActions(recoverAction)
+
+            ComputerAction computerAction = new ComputerAction(
+                    positionX : 13,
+                    positionY : 10,
+                    map : map
+            )
+            map.addToActions(computerAction)
+        }
 
         TilesImport.importTiles()
 
