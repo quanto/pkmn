@@ -23,6 +23,19 @@ class MapEditorController {
         render view: "editor", model: [map: map, mapLayout:mapLayout]
     }
 
+    def worldMap = {
+        def model = [:]
+
+        List<Map> worldMaps = Map.findAllByWorldXIsNotNullAndWorldYIsNotNull()
+        model.worldMaps = worldMaps
+        model.lowestX = worldMaps.min{ it.worldX }.worldX
+        model.lowestY = worldMaps.min{ it.worldY }.worldY
+        model.highestX = worldMaps.max{ it.worldX }.worldX
+        model.highestY = worldMaps.max{ it.worldY }.worldY
+
+        render view: "worldMap", model:model
+    }
+
     def actions(){
         Map map
 
@@ -143,6 +156,8 @@ ${mapTransitions}
 ${computerActions}
 ${recoverActions}
 ${messageActions}
+${map.worldX}
+${map.worldY}
 """);
 
             out.close();

@@ -10,8 +10,12 @@
                 <%--
                     foreground image
                 --%>
-                <g:if test="${mapLayout.background[x][y]}">
-                    <img src='${resource(uri:'')}/images/tiles/sheet1/${mapLayout.foreground[y][x]}.png' />
+                <%
+                    String f = mapLayout.foreground[y][x]?.trim()
+                %>
+                <g:if test="${f && f != "0"}">
+
+                    <img src='${resource(uri:'')}/images/tiles/sheet1/${f}.png' />
                 </g:if>
             </div>
             </td>

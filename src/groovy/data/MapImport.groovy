@@ -56,13 +56,15 @@ class MapImport {
                     def parts = []
                     file.eachLine { line ->
                         parts.add( line )
-                        if (index%10==9){
+                        if (index%12==11){
                             Map map = new Map(
                                     id : Integer.parseInt(parts[0]),
                                     name : parts[1],
                                     dataForeground : parts[3],
                                     dataBackground : parts[2],
-                                    active : parts[4] == '1'
+                                    active : parts[4] == '1',
+                                    worldX: parts[10]=='null'?null:parts[10],
+                                    worldY: parts[11]=='null'?null:parts[11]
                             )
 
                             map.save()

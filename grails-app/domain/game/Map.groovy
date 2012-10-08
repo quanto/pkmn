@@ -6,6 +6,8 @@ class Map {
     String dataForeground
     String dataBackground
     boolean active
+    Integer worldX
+    Integer worldY
 
     static hasMany = [mapPokemonList: MapPokemon, actions:Action]
 
@@ -20,6 +22,8 @@ class Map {
     //    dataBackground display:false
     //    pokemon display:false
         active display:true
+        worldX nullable: true
+        worldY nullable: true
     }
 
     @Override
