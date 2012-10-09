@@ -459,7 +459,6 @@ function checkMove(direction, x, y)
 					break;
 				}
 
-//                setPlayer(y, x);
 				setPlayer(x, y);
 				updateLocation(x, y);
 				checkBattle();
@@ -505,7 +504,7 @@ function setOtherPlayers()
 };
 function setPlayer(x, y, name)
 {
-	$("#"+x+"-"+y).append("<img id='player' class='"+name+"' src='/game/images/tiles/sheet1/32.png' alt='"+x+"-"+y+"' />");
+	$("#"+x+"-"+y).append("<img id='player' class='"+name+"' src='/game/images/player/down.png' alt='"+x+"-"+y+"' />");
 };
 
 function setOtherPlayer(x, y, name)

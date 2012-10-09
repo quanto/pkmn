@@ -98,11 +98,19 @@ class GameController {
                 player.positionY = player.positionY + 1
             }
 
-            String currentTile = getCurrentTile(mapLayout,player);
+            String currentForegroundTile = getCurrentTile(mapLayout,player,false)
+            println currentForegroundTile
+            if (currentForegroundTile != "0"){
+                player.discard()
+                render text : "0"
+                return
+            }
 
-            if (currentTile){
+            String currentBackgroundTile = getCurrentTile(mapLayout,player,true)
 
-                if (checkForWildPokemon(currentTile)){
+            if (currentBackgroundTile){
+
+                if (checkForWildPokemon(currentBackgroundTile)){
                     MapPokemon mapPokemon = getRandomPokemon(player)
                     if (mapPokemon){
                         Fight fight = fightFactoryService.startFight(BattleType.PVE,player,mapPokemon)
@@ -115,16 +123,18 @@ class GameController {
 
                 player.save(flush: true)
                 render text : "1"
+                return
             }
             else {
                 player.discard()
                 render text : "0"
+                return
             }
 
         }
-        else {
-            render text: ""
-        }
+
+        render text: "0"
+
     }
 
     public boolean checkForWildPokemon(String currentTile){
@@ -165,10 +175,15 @@ class GameController {
         return null
     }
 
-    public static String getCurrentTile(MapLayout mapLayout, Player player)
+    public static String getCurrentTile(MapLayout mapLayout, Player player, boolean background)
     {
         if (player.positionX >= 0 && player.positionY >= 0 && player.positionX < mapLayout.background.last().size() && player.positionY < mapLayout.background.size()){
-            return mapLayout.background[player.positionY][player.positionX]
+            if(background){
+                return mapLayout.background[player.positionY][player.positionX]
+            }
+            else {
+                return mapLayout.foreground[player.positionY][player.positionX]
+            }
         }
 
     }
