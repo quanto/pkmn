@@ -23,10 +23,14 @@
                             mapLayout = MapLayout.createMapArray(map)
                         }
                     %>
-                    <td>${y}-${x} ${map?.name}
-                        <g:if test="${mapLayout}">
-                            <g:render template="/game/map" model="${[mapLayout:mapLayout]}" />
-                        </g:if>
+                    <td>
+                        <center>
+                            (${x})-(${y})
+                            <g:if test="${mapLayout}">
+                                <g:link action="editor" id="${map.id}">${mapLayout.map?.name}</g:link>
+                                <g:render template="/game/map" model="${[mapLayout:mapLayout]}" />
+                            </g:if>
+                        </center>
                     </td>
 
 
