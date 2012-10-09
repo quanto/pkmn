@@ -79,8 +79,8 @@ class MapLayout {
     }
 
     public RenderedImage writeTiles(def data) {
-        int width = getRows()*16;
-        int height = getColumns()*16;
+        int width = 24*16//getRows()*16;
+        int height = 407*16//getColumns()*16;
 
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
@@ -95,16 +95,14 @@ class MapLayout {
             row.eachWithIndex { def tileNr, def x ->
                 if (tileNr && tileNr != "0" && tileNr != "undefined"){
                     Image img
+                    if (new File("web-app/images/tiles/sheet1/${tileNr}.png").exists()){
                         while (!img || img.getHeight(null) < 0 || img.getWidth(null) < 0)
-                        img = Toolkit.getDefaultToolkit().getImage("web-app/images/tiles/sheet1/${tileNr}.png");
+                            img = Toolkit.getDefaultToolkit().getImage("web-app/images/tiles/sheet1/${tileNr}.png")
+                    }
+
                     if (img && img.getWidth(null) > 0 && img.getHeight(null) > 0){
                         g2d.drawImage(toBufferedImage(img), x*16, y*16,img.getWidth(null),img.getHeight(null), null);
                     }
-                    else {
-                       println tileNr + "-" + img.getWidth(null)
-                    }
-                    //g2d.drawImage(img, x*16, y*16,img.getWidth(null),img.getHeight(null), null);
-                    //img.
                 }
             }
 

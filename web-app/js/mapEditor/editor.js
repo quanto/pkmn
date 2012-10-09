@@ -553,8 +553,8 @@
             html += "<tr>";
             for (var w=0;w<width;w++)
             {
-                html += "<td style=\"background-image:url('/game/images/tiles/sheet1/" + field[0][h][w] + ".png');height:18px;width:16px;\" onmouseover=\"mouseOverEvent(" + h + "," + w + ")\" id='" + h + "-" + w + "'>";
-                html += "<div style='position:relative;'>";
+                html += "<td  style=\"background-image:url('/game/images/tiles/sheet1/" + field[0][h][w] + ".png');height:18px;width:16px;\" onmouseover=\"mouseOverEvent(" + h + "," + w + ")\" id='" + h + "-" + w + "'>";
+                html += "<div title=\"" + w + "-" + h + "\" style='position:relative;'>";
                 html += "<a onclick=\"return fieldClick(" + h + "," + w + ");\">";
                 
                 if (field[1][h][w] != "")

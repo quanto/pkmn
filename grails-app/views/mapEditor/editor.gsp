@@ -135,6 +135,11 @@
                         <input type="button" value="multiple" onclick="toggleSelection(this)" />
                         <br />Layer<br />
                         <input type="button" value="foreground" onclick="toggleLayer(this)" />
+
+                        <div style="height:300px;overflow:scroll;">
+                            <img src="${resource(uri:'')}/images/tiles/tileset.png" id="tileset" />
+                        </div>
+                        <%--
                         <p>
 
                             <input type="button" value="prev" onclick="loadNextTiles(-1);" />
@@ -144,6 +149,7 @@
 
                         <input type="button" value="next" onclick="loadNextTiles(1);" />
                         <input type="button" value="forward" onclick="loadNextTiles(45);" />
+                        --%>
 
                     </div>
 
