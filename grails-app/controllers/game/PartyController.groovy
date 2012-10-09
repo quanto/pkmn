@@ -105,4 +105,127 @@ class PartyController {
         }
     }
 
+    def add = {
+
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
+        if (player.view != View.ShowComputer){
+            render text : "Zit niet bij de computer"
+        }
+        else {
+            OwnerPokemon ownerPokemon = OwnerPokemon.get(params.id)
+
+            if (!ownerPokemon || ownerPokemon.owner != player)
+            {
+                render text:"Pokemon niet van eigenaar!"
+            }
+            else if (ownerPokemon.partyPosition != 0)
+            {
+                render text:"Pokemon al in team!"
+            }
+
+            int openPartyPosition = getOpenPartyPosition(player)
+
+            if (openPartyPosition){
+                ownerPokemon.partyPosition = openPartyPosition
+                ownerPokemon.save()
+            }
+            else {
+                render text:"Kan pokemon niet toevoegen!"
+            }
+        }
+
+        redirect controller: 'game', action:'index'
+    }
+
+    def release = {
+
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
+        if (player.view != View.ShowComputer){
+            render text : "Zit niet bij de computer"
+        }
+        else {
+            OwnerPokemon ownerPokemon = OwnerPokemon.get(params.id)
+
+            if (!ownerPokemon || ownerPokemon.owner != player)
+            {
+                render text:"Pokemon niet van eigenaar!"
+            }
+            else if (ownerPokemon.partyPosition != 0)
+            {
+                render text:"Pokemon zit in team!"
+            }
+            else {
+                ownerPokemon.delete()
+            }
+        }
+        redirect controller: 'game', action:'index'
+    }
+
+    def deposit = {
+
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
+        if (player.view != View.ShowComputer){
+            render text : "Zit niet bij de computer"
+        }
+        else {
+            OwnerPokemon ownerPokemon = OwnerPokemon.get(params.id)
+
+            if (!ownerPokemon || ownerPokemon.owner != player)
+            {
+                render text:"Pokemon niet van eigenaar!"
+            }
+            else if (OwnerPokemon.countByPartyPositionGreaterThanAndHpGreaterThan(0,0) > 0)
+            {
+                render text:"Pokemon kan niet uit het team worden gezet. Er moet minstens 1 levende pokemon aanwezig zijn"
+            }
+
+            ownerPokemon.partyPosition = 0
+            ownerPokemon.save()
+        }
+
+        redirect controller: 'game', action:'index'
+    }
+
+    public static int getOpenPartyPosition(Owner owner)
+    {
+        List<OwnerPokemon> ownerPokemonList = OwnerPokemon.findAllByPartyPositionGreaterThanAndOwner(0,owner)?.sort{ it.partyPosition }
+
+        if (ownerPokemonList.size() == 6)
+        {
+            return 0;
+        }
+
+        for (int i=1;i<7;i++)
+        {
+            if (ownerPokemonList.get(i).partyPosition != i)
+            {
+                return i
+                break
+            }
+        }
+
+        return 0
+    }
+
+    def exit = {
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
+        if (player.view != View.ShowComputer){
+            render text : "Zit niet bij de computer"
+        }
+        else {
+            player.view = View.ShowMap
+            player.save()
+            redirect controller: 'game', action:'index'
+        }
+
+    }
+
 }

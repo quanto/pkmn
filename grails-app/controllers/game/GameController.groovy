@@ -39,7 +39,6 @@ class GameController {
                 render text: "Your pokemon have been recovered!"
             }
             else if (action in ComputerAction){
-                println "1"
                 player.view = View.ShowComputer
                 player.save(flush:true)
                 render text : "showComputer"
@@ -99,7 +98,6 @@ class GameController {
             }
 
             String currentForegroundTile = getCurrentTile(mapLayout,player,false)
-            println currentForegroundTile
             if (currentForegroundTile != "0"){
                 player.discard()
                 render text : "0"

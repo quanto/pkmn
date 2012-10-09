@@ -18,7 +18,9 @@
         <g:each in="${computerList}" var="ownerPokemon" status="i">
             <tr>
                 <td></td>
-                <td><img src='battleEngine/images/pkmn/${ownerPokemon.pokemon.threeValueNumber()}ani.gif'></td>
+                <td>
+                    <img src='${resource(uri:'')}/images/pkmn/${ownerPokemon.pokemon.threeValueNumber()}ani.gif'>
+                </td>
                 <td>
                     <g:if test="${ownerPokemon.pokemon.type1}">
                         <img src='${resource(uri:'')}/images/types/${ownerPokemon.pokemon.type1}.png'>
@@ -44,8 +46,8 @@
                 <g:render template="hpBar" model="${[hp:ownerPokemon.hp,maxHp:ownerPokemon.calculateHP()]}" />
                 <br><g:render template="expBar" model="${[level:ownerPokemon.level, levelRate: ownerPokemon.pokemon.levelRate, xp:ownerPokemon.xp]}" />
 
-                <td><a href='computer.php?action=add&id=" . $row["id"] . "'>withdraw</a></td>
-                <td><a href='computer.php?action=release&id=" . $row["id"] . "' onclick="return confirm('Are you sure you want to release this pokemon?');">release</a></td>
+                <td><a href='${createLink(action:'add',id:ownerPokemon.id)}'>withdraw</a></td>
+                <td><a href='${createLink(action:'release',id:ownerPokemon.id)}' onclick="return confirm('Are you sure you want to release this pokemon?');">release</a></td>
             </tr>
         </g:each>
     </table>

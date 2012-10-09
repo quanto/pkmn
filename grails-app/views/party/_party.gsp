@@ -18,7 +18,9 @@
 
         <tr>
             <td style='text-align:center;'>${ownerPokemon.partyPosition}</td>
-            <td><img src='battleEngine/images/pkmn/${ownerPokemon.pokemon.threeValueNumber()}ani.gif'></td>
+            <td>
+                <img src='${resource(uri:'')}/images/pkmn/${ownerPokemon.pokemon.threeValueNumber()}ani.gif'>
+            </td>
             <td>
                 <g:if test="${ownerPokemon.pokemon.type1}">
                     <img src='${resource(uri:'')}/images/types/${ownerPokemon.pokemon.type1}.png'>
@@ -57,7 +59,7 @@
             </g:else>
             <td>
                 <g:if test="${computerView}">
-                    <a href='computer.php?action=remove&id=" . $row["id"] . "'>deposit</a>
+                    <a href='${createLink(action:'deposit',id:ownerPokemon.id)}'>deposit</a>
                 </g:if>
             </td>
 

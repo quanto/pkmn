@@ -40,3 +40,5 @@
         </td>
     </tr>
 </table>
+
+<a href='${createLink(action:'exit')}'>Close</a>
