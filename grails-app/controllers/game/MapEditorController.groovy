@@ -107,6 +107,15 @@ class MapEditorController {
         redirect action:"index"
     }
 
+    def export(){
+        Map map
+        if (params.id){
+            map = Map.get(params.id)
+            render text: exportMap(map).replace('\n','<br />')
+        }
+
+    }
+
     def exportMaps(){
         Map.list().each { Map map ->
             String mapPokemonData = map.mapPokemonList.each { it.pokemon.id + ";" + it.chance + ";" + it.fromLevel + ";" + it.toLevel }
@@ -116,7 +125,10 @@ class MapEditorController {
         render text : "Done"
     }
 
-    public static void exportMap(Map map){
+    public static String exportMap(Map map){
+
+        String data = ""
+
         try{
             File file = new File("import/maps/" + map.name + ".txt")
             //println file.getAbsolutePath()
@@ -146,7 +158,7 @@ class MapEditorController {
                 }
             }
 
-out.write("""${map.id}
+data = """${map.id}
 ${map.name}
 ${map.dataBackground}
 ${map.dataForeground}
@@ -158,11 +170,15 @@ ${recoverActions}
 ${messageActions}
 ${map.worldX}
 ${map.worldY}
-""");
+"""
+            out.write(data)
 
             out.close();
         }catch (Exception e){
             System.err.println("Error: " + e.getMessage());
         }
+
+
+        return data
     }
 }

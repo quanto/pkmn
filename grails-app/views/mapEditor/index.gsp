@@ -29,6 +29,9 @@
                 <td>
                     <g:link action="actions" id="${map.id}">Actions</g:link>
                 </td>
+                <td>
+                    <g:link action="export" id="${map.id}">Export</g:link>
+                </td>
 
             </tr>
         </g:each>
