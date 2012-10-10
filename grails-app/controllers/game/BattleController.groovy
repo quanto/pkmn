@@ -197,6 +197,25 @@ class BattleController {
         }
     }
 
+    def switchPokemon = {
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
+        Fight fight = fightFactoryService.getFight(player.fightNr)
+
+        OwnerPokemon ownerPokemon = OwnerPokemon.findByOwnerAndPartyPositionAndHpGreaterThan(player,params.id,0)
+        if (ownerPokemon){
+            fight.log = ""
+            fight.fightPlayer1 = Stats.setBaseStats(fight,ownerPokemon, PlayerType.user, 1)
+            Moves.setMove(fight,fight.fightPlayer1, null, false)
+
+
+        }
+
+
+        render template: "log", model : [fight:fight]
+    }
+
     def run = {
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()

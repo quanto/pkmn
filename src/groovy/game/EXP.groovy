@@ -41,8 +41,8 @@ class EXP {
 
                     fight.log += "m:" + ownfightPlayer.ownerPokemon.pokemon.name + " evolved into " + evolution.toPokemon.name + ".;";
 
-                    fight.log += "n:player:" + evolution.toPokemon.name + ";";
-                    fight.log += "s:player:" + evolution.toPokemon.threeValueNumber() + ".gif;";
+                    fight.log += "n:${ownfightPlayer.playerNr}:" + evolution.toPokemon.name + ";";
+                    fight.log += "s:${ownfightPlayer.playerNr}:${evolution.toPokemon.threeValueNumber()}.gif;";
 
                     ownfightPlayer.ownerPokemon = evolution.toPokemon
                 }

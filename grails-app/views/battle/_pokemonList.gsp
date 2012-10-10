@@ -10,7 +10,7 @@
             <td>${ownerPokemon.level}</td>
             <td>${ownerPokemon.gender}</td>
             <g:if test="${ownerPokemon.hp > 0 && fightPlayer.ownerPokemon.pokemon.id != ownerPokemon.pokemon.id}">
-                <td><a href='' onclick="return doAction('index.php?action=switch&position=${ownerPokemon.partyPosition}');">switch</a></td>
+                <td><a href='' onclick="return doAction('${createLink(action:'switchPokemon',id:ownerPokemon.partyPosition)}');">switch</a></td>
             </g:if>
         </tr>
     </g:each>

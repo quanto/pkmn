@@ -25,7 +25,7 @@ class Moves {
         // Kijk of tegen de computer wordt gespeelt, dan wordt er een move gekozen
         if (fightPlayer.playerType == PlayerType.user && (fight.battleType == BattleType.PVE || fight.battleType == BattleType.PVN))
         {
-            if (!fightPlayer.doNoMove){
+            if (!fightPlayer.doNoMove || fightPlayer.playerType == PlayerType.user){
 
                 Battle.beforeChosingMove(fight, fightPlayer.opponentFightPlayer(), fightPlayer.opponentFightPlayer().owner)
 

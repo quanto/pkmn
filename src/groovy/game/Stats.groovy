@@ -12,8 +12,16 @@ class Stats {
     /**
      * Neemt stats van pokemon over naar fight
      */
-    public static setBaseStats(Fight fight, OwnerPokemon ownerPokemon, PlayerType playerType)
+    public static setBaseStats(Fight fight, OwnerPokemon ownerPokemon, PlayerType playerType, int playerNr)
     {
+
+        if (ownerPokemon.owner){
+            fight.log += "m:${ownerPokemon.owner.name} brings out ${ownerPokemon.pokemon.name};"
+        }
+        else {
+            fight.log += "m:A wild ${ownerPokemon.pokemon.name} appears;"
+        }
+
         FightPlayer fightPlayer = new FightPlayer(
                 fight: fight,
                 ownerPokemon:ownerPokemon,
@@ -48,8 +56,12 @@ class Stats {
                 holdTurns : 0,
                 continueMove : null, //
                 lastMove: null,
-                playerType:playerType
+                playerType:playerType,
+                playerNr: playerNr
         )
+
+        fight.log += "s:${playerNr}:" + ownerPokemon.pokemon.threeValueNumber() + ".gif;";
+
         return fightPlayer
     }
 

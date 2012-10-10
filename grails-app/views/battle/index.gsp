@@ -213,7 +213,10 @@
         {
             if (player == 1)
             {
-                $('#player1image').css("src","images/pkmn/back" + imgLink);
+                $('#player1image').attr("src","${resource(uri:'')}/images/pkmn/back" + imgLink);
+            }
+            else {
+                $('#player2image').attr("src","${resource(uri:'')}/images/pkmn/front" + imgLink);
             }
         }
 
@@ -283,10 +286,10 @@
     <table>
         <tr>
             <td>
-                <img src='${resource(uri:'')}/images/pkmn/back${fight.fightPlayer1.ownerPokemon.pokemon.threeValueNumber()}.gif'>   ${fight.fightPlayer1.hp}
+                <img id="player1image" src='${resource(uri:'')}/images/pkmn/back${fight.fightPlayer1.ownerPokemon.pokemon.threeValueNumber()}.gif'>   ${fight.fightPlayer1.hp}
             </td>
             <td>
-                <img src='${resource(uri:'')}/images/pkmn/front${fight.fightPlayer2.ownerPokemon.pokemon.threeValueNumber()}.gif'>  ${fight.fightPlayer2.hp}
+                <img id="player2image" src='${resource(uri:'')}/images/pkmn/front${fight.fightPlayer2.ownerPokemon.pokemon.threeValueNumber()}.gif'>  ${fight.fightPlayer2.hp}
             </td>
         </tr>
         <tr>

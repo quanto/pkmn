@@ -292,7 +292,7 @@ class Battle {
             // Log de switch
             fight.log += "m:NPC brings out " + nextOwnerPokemon.pokemon.name + ".;";
 
-            fight.fightPlayer2 = Stats.setBaseStats(fight,nextOwnerPokemon, PlayerType.npc);
+            fight.fightPlayer2 = Stats.setBaseStats(fight,nextOwnerPokemon, PlayerType.npc, 2);
 
             return false
         }
@@ -468,7 +468,7 @@ class Battle {
                         else if (oneHitKO)
                         {
                             defendingFightPlayer.hp = 0;
-                            fight.log += "m:" . "It\'s a one hit KO!.;";
+                            fight.log += "m:It\'s a one hit KO!.;";
                         }
 
                         if (!oneHitKO)
@@ -722,13 +722,13 @@ class Battle {
                     {
                         if (defendingOwnerPokemon.pokemon.type1 == "poison" || defendingOwnerPokemon.pokemon.type2== "poison" || defendingOwnerPokemon.pokemon.type1 == "steel" || defendingOwnerPokemon.pokemon.type2 == "steel")
                         {
-                            fight.log += "m:" . defendingOwnerPokemon.pokemon.name + " is immune to poison.;";
+                            fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is immune to poison.;";
                         }
                         else
                         {
                             Recover.removeAllStatusAfflictions(defendingFightPlayer);
-                            fight.{"player" . defendingFightPlayer . "poison"} = 1;
-                            fight.log += "m:" . defendingOwnerPokemon.pokemon.name + " is poisoned.;";
+                            defendingFightPlayer.poison = 1
+                            fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is poisoned.;";
                             poisonActionSucces = true;
                         }
                     }
@@ -736,7 +736,7 @@ class Battle {
                     {
                         // Bericht bij move die bedoelt is om te poisenen
                         if (attackMoveeffectProb == 0 || attackMoveeffectProb == 100)
-                            fight.log += "m:" . defendingOwnerPokemon.pokemon.name + " is already poisoned.;";
+                            fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is already poisoned.;";
                     }
                 }
 

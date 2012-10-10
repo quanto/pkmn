@@ -65,23 +65,21 @@ class FightFactoryService {
         assert owner1Pokemon
         assert owner2Pokemon
 
-        FightPlayer fightPlayer1 = Stats.setBaseStats(fight,owner1Pokemon, PlayerType.user);
+        FightPlayer fightPlayer1 = Stats.setBaseStats(fight,owner1Pokemon, PlayerType.user, 1);
 
 //        fight.fightPlayer2.save()
         // :TODO implement else
         fight.fightPlayer1 = fightPlayer1
-        fightPlayer1.playerNr = 1
         fight.fightPlayer1.owner = player1
 
 
 
 
-        FightPlayer fightPlayer2 = Stats.setBaseStats(fight,owner2Pokemon, PlayerType.wildPokemon);
+        FightPlayer fightPlayer2 = Stats.setBaseStats(fight,owner2Pokemon, PlayerType.wildPokemon, 2);
         if (battleType == battleType.PVE){
             fightPlayer2.playerType = PlayerType.wildPokemon
         }
 
-        fightPlayer2.playerNr = 2
         fight.fightPlayer2 = fightPlayer2
 
 
