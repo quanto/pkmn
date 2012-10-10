@@ -51,7 +51,7 @@
                 }
 
             </g:else>
-//        addHistoryAction();
+        addHistoryAction();
 
             drawField();
 
@@ -59,7 +59,12 @@
             initTabs("tab");
             // Select first tab
             tabClick("tab", 2);
-            loadNextTiles(0);
+
+            $("#undoBtn").click(function(e){
+                undo()
+            });
+
+
         });
     </script>
     <style>
@@ -115,7 +120,7 @@
                     </table>
                 </td>
                 <td valign="top">
-                    <input type="image" src="${resource(uri:'')}/images/mapEditor/undo.png" value="undo" onclick="undo()" />
+                    <img id="undoBtn" src="${resource(uri:'')}/images/mapEditor/undo.png" height="32" width="32" />
                     <img id="selectedTile" src="${resource(uri:'')}/images/mapEditor/empty.gif" height="32" width="32" />
                     <br />
 
@@ -136,20 +141,12 @@
                         <br />Layer<br />
                         <input type="button" value="foreground" onclick="toggleLayer(this)" />
 
+                        <br /><br />
+                        <input id="tileNr" /> <input type="button" value="set" onclick="setTile($('#tileNr').val())" /> <br />
+
                         <div style="height:300px;overflow:scroll;">
                             <img src="${resource(uri:'')}/images/tiles/tileset.png" id="tileset" />
                         </div>
-                        <%--
-                        <p>
-
-                            <input type="button" value="prev" onclick="loadNextTiles(-1);" />
-                            <input type="button" value="backward" onclick="loadNextTiles(-45);" />
-
-                        <div id="tileWrapper"></div>
-
-                        <input type="button" value="next" onclick="loadNextTiles(1);" />
-                        <input type="button" value="forward" onclick="loadNextTiles(45);" />
-                        --%>
 
                     </div>
 

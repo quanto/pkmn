@@ -44,10 +44,10 @@
     */                
     var randomTiles = new Array(
                     // tile, chance
-                     "00",50
-                    ,"10",10
-                    ,"20",10
-                    ,"30",10
+                     "00",91
+                    ,"10",3
+                    ,"20",3
+                    ,"30",3
                     );    
                        
               
@@ -483,6 +483,7 @@
             // redraw
             drawField();
 		}
+        return false
     }
     
     /*
