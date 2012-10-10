@@ -203,8 +203,8 @@ class GameController {
         else if (player.view == View.ShowComputer){
             redirect controller : "party", action: "computer"
         }
-        else if (player.view == View.ChosePokemon){
-            render text: g.render(template: 'chosePokemon')
+        else if (player.view == View.ChoosePokemon){
+            render text: g.render(template: 'choosePokemon')
         }
         else if (player.view == View.Battle){
             render text : "<iframe src='/game/battle' frameborder='0' width='500' height='300'></iframe>"
