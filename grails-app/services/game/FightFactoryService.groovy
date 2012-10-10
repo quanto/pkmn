@@ -94,28 +94,12 @@ class FightFactoryService {
     }
 
     OwnerPokemon getWildPokemon(Pokemon pokemon, int wildPokemonLevel){
-        OwnerPokemon ownerPokemon = new OwnerPokemon(
-                isNpc : false,
-                pokemon: pokemon,
-                hpIV:0,
-                attackIV:0,
-                defenseIV:0,
-                spAttackIV:0,
-                spDefenseIV:0,
-                speedIV:0,
-                hp:40,
-                gender:Gender.Male,
-                partyPosition: 0,
-                xp:0,
-                level:wildPokemonLevel
-        )
-        ownerPokemon.hp = ownerPokemon.calculateHP();
-        return ownerPokemon
+        return PokemonCreator.getOwnerPokemon(pokemon,wildPokemonLevel)
     }
 
     OwnerPokemon getFirstAlivePokemon(Owner owner){
-        // :TODO Kan efficienter. Kan lijst met pokemon hebben
-        List<OwnerPokemon> ownerPokemonList = OwnerPokemon.findAllByOwner(owner)
+        // :TODO Move method
+        List<OwnerPokemon> ownerPokemonList = OwnerPokemon.findAllByOwnerAndPartyPositionGreaterThan(owner,0)
         return ownerPokemonList.sort{ !it.partyPosition }.last()
     }
 

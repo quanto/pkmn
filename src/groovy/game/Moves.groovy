@@ -1,12 +1,5 @@
 package game
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 02-10-12
- * Time: 11:09
- * To change this template use File | Settings | File Templates.
- */
 class Moves {
 
     /**
@@ -34,7 +27,7 @@ class Moves {
                 }
                 // kies random wild move
 
-                fightPlayer.opponentFightPlayer().move = WildMove.choseWildMove(fightPlayer.opponentFightPlayer());
+                fightPlayer.opponentFightPlayer().move = WildMove.choseWildMove(fightPlayer.opponentFightPlayer())
             }
             else
             {
@@ -88,6 +81,26 @@ class Moves {
         {
             // zet learnMoves om te kunnen kiezen
             fightPlayer.learnMoves += move.id + ";";
+        }
+    }
+
+    public static void setBaseMoves(OwnerPokemon ownerPokemon)
+    {
+        List<LearnableMove> learnableMoveList = LearnableMove.findAllByPokemonAndLearnLevelLessThanEquals(ownerPokemon.pokemon,ownerPokemon.level).findAll{ it.move.implemented }
+        Collections.shuffle(learnableMoveList)
+
+        int moves = learnableMoveList.size() > 4?4:learnableMoveList.size()
+
+        (0..moves-1).each{ int i ->
+
+            Move move = learnableMoveList.get(i).move
+            OwnerMove ownerMove = new OwnerMove(
+                    ownerPokemon : ownerPokemon,
+                    move : move,
+                    ppLeft : move.pp
+            )
+            ownerPokemon.addToOwnerMoves(ownerMove)
+            ownerPokemon.save()
         }
 
     }

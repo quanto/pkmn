@@ -8,5 +8,5 @@ package game
  * To change this template use File | Settings | File Templates.
  */
 enum Gender {
-    Male, Female
+    Male, Female, None
 }

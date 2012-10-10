@@ -9,6 +9,25 @@ package game
  */
 class Party {
 
+    public static int getOpenPartyPosition(Owner owner)
+    {
+        List<OwnerPokemon> ownerPokemonList = OwnerPokemon.findAllByPartyPositionGreaterThanAndOwner(0,owner)?.sort{ it.partyPosition }
 
+        if (ownerPokemonList.size() == 6)
+        {
+            return 0;
+        }
+
+        for (int i=1;i<7;i++)
+        {
+            if (ownerPokemonList.get(i).partyPosition != i)
+            {
+                return i
+                break
+            }
+        }
+
+        return 0
+    }
 
 }

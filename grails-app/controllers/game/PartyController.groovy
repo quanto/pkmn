@@ -125,7 +125,7 @@ class PartyController {
                 render text:"Pokemon al in team!"
             }
 
-            int openPartyPosition = getOpenPartyPosition(player)
+            int openPartyPosition = Party.getOpenPartyPosition(player)
 
             if (openPartyPosition){
                 ownerPokemon.partyPosition = openPartyPosition
@@ -190,27 +190,6 @@ class PartyController {
         }
 
         redirect controller: 'game', action:'index'
-    }
-
-    public static int getOpenPartyPosition(Owner owner)
-    {
-        List<OwnerPokemon> ownerPokemonList = OwnerPokemon.findAllByPartyPositionGreaterThanAndOwner(0,owner)?.sort{ it.partyPosition }
-
-        if (ownerPokemonList.size() == 6)
-        {
-            return 0;
-        }
-
-        for (int i=1;i<7;i++)
-        {
-            if (ownerPokemonList.get(i).partyPosition != i)
-            {
-                return i
-                break
-            }
-        }
-
-        return 0
     }
 
     def exit = {
