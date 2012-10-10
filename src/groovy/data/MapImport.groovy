@@ -124,12 +124,9 @@ class MapImport {
 
             MapTransition mapTransition = MapTransition.findByMapAndPositionXAndPositionY(map,Integer.parseInt(parts[s+0]),Integer.parseInt(parts[s+1]))
             Map mapTo = Map.findByName(parts[s+2])
-            println mapTo.name
-            println parts[s+2]
-            println parts[s+3]
-            println parts[s+4]
+
             MapTransition mapTransitionTo = MapTransition.findByMapAndPositionXAndPositionY(mapTo,Integer.parseInt(parts[s+3]),Integer.parseInt(parts[s+4]))
-            println mapTransitionTo
+
             mapTransition.jumpTo = mapTransitionTo
             mapTransition.save()
         }
