@@ -28,6 +28,11 @@ class BootStrap {
         Player player = new Player(username: "kevin", name: "Kevin Verhoef", password: "12345", money: 1000, registerDate : new Date(), map:map)
         player.save()
 
+        Owner npc = new Owner(
+                name: "Npc1"
+        )
+        npc.save()
+
         new ChatMessage(
                 message: "Hello World!",
                 player: player
@@ -118,13 +123,13 @@ class BootStrap {
         OwnerMove ownerMove1 = new OwnerMove(
                 ownerPokemon : ownerPokemon,
                 move : moveTackle,
-                ppLeft : 40
+                ppLeft : moveTackle.pp
         )
 
         OwnerMove ownerMove2 = new OwnerMove(
                 ownerPokemon : ownerPokemon,
                 move : move,
-                ppLeft : 30
+                ppLeft : move.pp
         )
 
 
@@ -155,7 +160,7 @@ class BootStrap {
         OwnerMove ownerMove3 = new OwnerMove(
                 ownerPokemon : ownerPokemon,
                 move : moveTackle,
-                ppLeft : 40
+                ppLeft : moveTackle.pp
         )
 
 
@@ -185,13 +190,54 @@ class BootStrap {
         OwnerMove ownerMove4 = new OwnerMove(
                 ownerPokemon : ownerPokemon,
                 move : moveTackle,
-                ppLeft : 40
+                ppLeft : moveTackle.pp
         )
 
 
         ownerPokemon3.addToOwnerMoves(ownerMove4)
 
         ownerPokemon3.save()
+
+
+
+        // NPC
+        OwnerPokemon ownerPokemonNPC = new OwnerPokemon(
+                owner : npc,
+                isNpc : false,
+                pokemon: pokemon,
+                hpIV :29,
+                attackIV:16,
+                defenseIV:22,
+                spAttackIV:2,
+                spDefenseIV:13,
+                speedIV:20,
+                hp:12,
+                gender: Gender.Male,
+                partyPosition: 1,
+                level:5
+        )
+        ownerPokemonNPC.xp = ownerPokemonNPC.getBaseExp()
+
+
+        OwnerMove ownerMoveNPC1 = new OwnerMove(
+                ownerPokemon : ownerPokemonNPC,
+                move : moveTackle,
+                ppLeft : moveTackle.pp
+        )
+
+        OwnerMove ownerMoveNPC2 = new OwnerMove(
+                ownerPokemon : ownerPokemonNPC,
+                move : move,
+                ppLeft : move.pp
+        )
+
+
+        ownerPokemonNPC.addToOwnerMoves(ownerMoveNPC1)
+        ownerPokemonNPC.addToOwnerMoves(ownerMoveNPC2)
+
+        ownerPokemonNPC.save()
+
+
     }
 
     def destroy = {

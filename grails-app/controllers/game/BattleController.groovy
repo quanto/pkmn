@@ -10,10 +10,13 @@ class BattleController {
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
 
-        player.view = View.ShowMap
-        player.save()
-        println "!"
-        //:TODO battle over check
+        Fight fight = fightFactoryService.getFight(player.fightNr)
+
+        if (fight.battleOver){
+            player.view = View.ShowMap
+            player.save()
+        }
+
         render text: g.render(template: 'getView')
     }
 

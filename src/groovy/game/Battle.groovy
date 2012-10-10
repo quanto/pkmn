@@ -57,16 +57,14 @@ class Battle {
                 player1first = false;
         }
 
-        boolean battleOver = false
-
         if (player1first)
         {
             // Speler 1 begint
             attack(fight,fightPlayer1,fightPlayer2,true)
 
-            battleOver = checkPokemonFainted(fight)
+            checkPokemonFainted(fight)
 
-            if (!battleOver){
+            if (!fight.battleOver){
                 attack(fight,fightPlayer2,fightPlayer1,false)
 
                 checkPokemonFainted(fight)
@@ -76,22 +74,22 @@ class Battle {
         {
             // Speler 2 begint
             attack(fight,fightPlayer2,fightPlayer1,true)
-            battleOver = checkPokemonFainted(fight)
+            checkPokemonFainted(fight)
 
-            if (!battleOver){
+            if (!fight.battleOver){
                 attack(fight,fightPlayer1,fightPlayer2,false)
                 checkPokemonFainted(fight)
             }
         }
 
-        if (!battleOver){
-            afterBattle(fight,fightPlayer1,fightPlayer2);
-            afterBattle(fight,fightPlayer2,fightPlayer1);
+        if (!fight.battleOver){
+            afterBattle(fight,fightPlayer1,fightPlayer2)
+            afterBattle(fight,fightPlayer2,fightPlayer1)
 
             // Check again after the affterBattle effects
-            checkPokemonFainted(fight);
+            checkPokemonFainted(fight)
 
-            afterTurn(fight);
+            afterTurn(fight)
         }
 
     }
@@ -190,7 +188,7 @@ class Battle {
         fight.battleOver = true
     }
 
-    static boolean checkPokemonFainted(Fight fight)
+    static void checkPokemonFainted(Fight fight)
     {
         boolean battleOver = false
 
@@ -202,11 +200,11 @@ class Battle {
             // normal win pve
             fight.fightPlayer1.owner.pveBattlesWon += 1;
             win(fight,true);
-            battleOver = true
+            fight.battleOver = true
         }
         else if (fight.battleType == BattleType.PVN && player2fainted && !player1fainted)
         {
-            battleOver = checkNpcLoses()
+            fight.battleOver = checkNpcLoses(fight)
         }
         else if (player1fainted) //  && !$player2fainted
         {
@@ -227,11 +225,11 @@ class Battle {
                     fight.fightPlayer1.owner.pveBattlesWon += 1
 
                     win(fight,false)
-                    battleOver = true
+                    fight.battleOver = true
                 }
                 else if (fight.battleType == BattleType.PVN && player2fainted)
                 {
-                    battleOver = checkNpcLoses()
+                    fight.battleOver = checkNpcLoses(fight)
                 }
                 else
                 {
@@ -269,9 +267,7 @@ class Battle {
                 fight.battleOver = true
 //                $fight->update();
 
-                battleOver = true
             }
-            return battleOver
         }
 
     }

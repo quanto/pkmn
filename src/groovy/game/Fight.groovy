@@ -26,7 +26,6 @@ class Fight {
         // If where cleaning the log we take the old log and set it into the history
         if (!log){
             logHistory += this.log
-            println logHistory
         }
         this.log = log
     }

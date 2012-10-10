@@ -38,7 +38,6 @@ class PartyController {
             OwnerPokemon switchOwnerPokemon = OwnerPokemon.findByOwnerAndPartyPosition(player,ownerPokemon.partyPosition-1)
 
             if (!switchOwnerPokemon){
-                println "2"
                 render text:"Pokemon kan niet verplaatst worden"
             }
             else {
@@ -74,7 +73,6 @@ class PartyController {
             OwnerPokemon switchOwnerPokemon = OwnerPokemon.findByOwnerAndPartyPosition(player,ownerPokemon.partyPosition+1)
 
             if (!switchOwnerPokemon){
-                println "2"
                 render text:"Pokemon kan niet verplaatst worden"
             }
             else {

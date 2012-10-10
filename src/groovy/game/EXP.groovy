@@ -33,8 +33,7 @@ class EXP {
                 fight.log += "m:" + ownfightPlayer.ownerPokemon.pokemon.name + " grew to level ${newLevelLoop}!;";
 
 
-                Evolution evolution = Evolution.findAllByFromPokemonAndLevel(ownfightPlayer.ownerPokemon.pokemon,newLevelLoop)
-
+                Evolution evolution = Evolution.findByFromPokemonAndLevel(ownfightPlayer.ownerPokemon.pokemon,newLevelLoop)
                 // kijk of pokemon evalueert
 
                 if (evolution)
@@ -49,7 +48,7 @@ class EXP {
                 }
 
                 // Kijk of er move geleerd kan worden
-                List<LearnableMove> learnableMoveList = LearnableMove.findAllByPokemonAndLearnLevel(ownfightPlayer.ownerPokemon,newLevelLoop)
+                List<LearnableMove> learnableMoveList = LearnableMove.findAllByPokemonAndLearnLevel(ownfightPlayer.ownerPokemon.pokemon,newLevelLoop)
 
                 learnableMoveList.each { LearnableMove learnableMove ->
                     if (learnableMove.move.implemented){

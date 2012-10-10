@@ -1,5 +1,7 @@
 package game
 
+import game.fight.NPCHelper
+
 class Moves {
 
     /**
@@ -38,9 +40,8 @@ class Moves {
                 }
                 else
                 {
-                    // :TODO implement
-    //                // kies random move van npc
-    //                fightPlayer.opponentFightPlayer().move = choseNpcMove(); // Testmove gezet
+                    // kies random move van npc
+                    fightPlayer.opponentFightPlayer().move = NPCHelper.choseNpcMove(fightPlayer.opponentFightPlayer().ownerPokemon);
                 }
             }
         }

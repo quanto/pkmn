@@ -29,12 +29,14 @@ class FightFactoryService {
             level = mapPokemon.fromLevel + random.nextInt(mapPokemon.toLevel - mapPokemon.fromLevel)
         }
 
-        return startFight(battleType, player1, mapPokemon.pokemon, level)
+        return startFight(battleType, player1, null, mapPokemon.pokemon, level)
     }
 
-    Fight startFight(BattleType battleType, Player player1, Pokemon wildPokemon, Integer wildPokemonLevel){
+    Fight startFight(BattleType battleType, Owner player1, Owner player2, Pokemon wildPokemon, Integer wildPokemonLevel){
         Fight fight = new Fight()
         fight.battleType = battleType
+
+        assert player1
 
         OwnerPokemon owner1Pokemon = getFirstAlivePokemon(player1)
         OwnerPokemon owner2Pokemon
@@ -57,8 +59,11 @@ class FightFactoryService {
             // :TODO implement
         }
         else if (battleType == battleType.PVN){
-            // :TODO implement
+            owner2Pokemon = getFirstAlivePokemon(player2)
         }
+
+        assert owner1Pokemon
+        assert owner2Pokemon
 
         FightPlayer fightPlayer1 = Stats.setBaseStats(fight,owner1Pokemon, PlayerType.user);
 
