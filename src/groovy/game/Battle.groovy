@@ -190,7 +190,6 @@ class Battle {
 
     static void checkPokemonFainted(Fight fight)
     {
-        boolean battleOver = false
 
         boolean player1fainted = checkFainted(fight,fight.fightPlayer1);
         boolean player2fainted = checkFainted(fight,fight.fightPlayer2);
@@ -249,23 +248,18 @@ class Battle {
                     fight.fightPlayer1.owner.pvnBattlesLost += 1
                 }
 
-                // :TODO implement
-//                /**
-//                 * todo: kies dichtsbijzijnde map
-//                 */
-//                $pokeCenters = new pokeCenters();
-//                $pokeCenters->id = 1;
-//                $pokeCenters->get();
-//
-//                $owner->map = $pokeCenters->mapName;
-//                $owner->positionX = $pokeCenters->positionX;
-//                $owner->positionY = $pokeCenters->positionY;
-//                $owner->update();
-//
+                // Stuur speler terug naar laatste recover punt
+                Player player = (Player)fight.fightPlayer1.owner
+                RecoverAction recoverAction = player.lastRecoverAction
+
+                player.map = recoverAction.map
+                player.positionX = recoverAction.positionX
+                player.positionY = recoverAction.positionX
+                player.save()
+
                 fight.log += "m:You lose, your pokemon have been recovered in town.;";
                 Recover.recoverParty(fight.fightPlayer1.owner)
                 fight.battleOver = true
-//                $fight->update();
 
             }
         }

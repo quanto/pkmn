@@ -24,6 +24,8 @@ class Player extends Owner{
     Date lastLogin
     int money
     View view = View.ChoosePokemon
+    // Stored to send the player back to the last recover location when he loses
+    RecoverAction lastRecoverAction
     // view
 
     static constraints = {
