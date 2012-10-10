@@ -208,8 +208,6 @@ class BattleController {
             fight.log = ""
             fight.fightPlayer1 = Stats.setBaseStats(fight,ownerPokemon, PlayerType.user, 1)
             Moves.setMove(fight,fight.fightPlayer1, null, false)
-
-
         }
 
 
@@ -222,9 +220,10 @@ class BattleController {
 
         Fight fight = fightFactoryService.getFight(player.fightNr)
 
+        println "run"
         Run.run(fight)
 
-        render text: ""
+        render template: "log", model : [fight:fight]
     }
 
 

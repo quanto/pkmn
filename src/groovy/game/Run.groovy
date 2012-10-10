@@ -17,7 +17,7 @@ class Run {
             Random random = new Random()
 
             int a = fight.fightPlayer1.speed
-            int b = (fight.fightPlayer2.speed / 4) % 255
+            int b = Math.round(fight.fightPlayer2.speed / 4) % 255
             int c = fight.escapeAttempts
             int x = (a * 32 / b) + (30 * c)
 
@@ -26,20 +26,20 @@ class Run {
             if (x > 255 || random.nextInt(255) <= x || b == 0)
             {
                 Stats.saveStats(fight.fightPlayer1)
-                fight.log = "m:You run away safely."
+                fight.log = "m:You run away safely.;"
                 fight.battleOver = 1
             }
             else
             {
                 fight.escapeAttempts += 1
-                fight.log = "m:You fail to run away."
-                Moves.setMove(fight,fight.fightPlayer1,null)
+                fight.log = "m:You fail to run away.;"
+                Moves.setMove(fight,fight.fightPlayer1,null,false)
             }
 
         }
         else
         {
-            fight.log = "m:You can not run away from this battle."
+            fight.log = "m:You can not run away from this battle.;"
         }
     }
 
