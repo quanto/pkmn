@@ -237,6 +237,24 @@ class BootStrap {
 
         ownerPokemonNPC.save()
 
+        OwnerPokemon ownerPokemonNPC2 = new OwnerPokemon(
+                owner : npc,
+                isNpc : false,
+                pokemon: Pokemon.get(15),
+                hpIV :29,
+                attackIV:16,
+                defenseIV:22,
+                spAttackIV:2,
+                spDefenseIV:13,
+                speedIV:20,
+                hp:20,
+                gender: Gender.Female,
+                partyPosition: 2,
+                level:5
+        )
+        ownerPokemonNPC2.xp = ownerPokemonNPC2.getBaseExp()
+        ownerPokemonNPC2.save()
+
 
     }
 

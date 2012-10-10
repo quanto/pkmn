@@ -105,7 +105,7 @@ class FightFactoryService {
     OwnerPokemon getFirstAlivePokemon(Owner owner){
         // :TODO Move method
         List<OwnerPokemon> ownerPokemonList = OwnerPokemon.findAllByOwnerAndPartyPositionGreaterThan(owner,0)
-        return ownerPokemonList.sort{ !it.partyPosition }.last()
+        return ownerPokemonList.sort{ it.partyPosition * -1 }.last()
     }
 
 }

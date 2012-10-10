@@ -277,8 +277,11 @@ class Battle {
 
         FightPlayer fightPlayer1 = fight.fightPlayer1
 
+        // geef xp voor verslaan
+        EXP.giveEXP(fight,fightPlayer1,fight.fightPlayer2,false);
+
         // haal volgende op als deze bestaat
-        OwnerPokemon nextOwnerPokemon = OwnerPokemon.findByOwnerAndPartyPosition(fightPlayer1.owner,fightPlayer1.ownerPokemon.partyPosition + 1)
+        OwnerPokemon nextOwnerPokemon = OwnerPokemon.findByOwnerAndPartyPosition(fightPlayer1.owner,fight.fightPlayer2.ownerPokemon.partyPosition + 1)
 
         if (!nextOwnerPokemon)
         {
@@ -292,13 +295,10 @@ class Battle {
         }
         else
         {
-            // geef xp voor verslaan
-            EXP.giveEXP(fight,fightPlayer1,fight.fightPlayer2,false);
-
             // Log de switch
             fight.log += "m:NPC brings out " + nextOwnerPokemon.pokemon.name + ".;";
 
-            fight.fightPlayer2 = Stats.setBaseStats(fight,fight.fightPlayer2.ownerPokemon, PlayerType.npc);
+            fight.fightPlayer2 = Stats.setBaseStats(fight,nextOwnerPokemon, PlayerType.npc);
 
             return false
         }
