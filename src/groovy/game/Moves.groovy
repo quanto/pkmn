@@ -5,7 +5,7 @@ class Moves {
     /**
      * Player sets a move
      */
-    public static void setMove(Fight fight, FightPlayer fightPlayer, int moveId, boolean clearLog = true)
+    public static void setMove(Fight fight, FightPlayer fightPlayer, Move move, boolean clearLog = true)
     {
 
         // reset log
@@ -13,43 +13,40 @@ class Moves {
             fight.log = "";
         }
 
-        // :TODO not safe
-        fightPlayer.move = Move.get(moveId)
+        if (move){
+            fightPlayer.move = move
+        }
+        else {
+            fightPlayer.doNoMove = true
+        }
 
         // Kijk of tegen de computer wordt gespeelt, dan wordt er een move gekozen
         if (fightPlayer.playerType == PlayerType.user && (fight.battleType == BattleType.PVE || fight.battleType == BattleType.PVN))
         {
-            if (fight.battleType == BattleType.PVE)
-            {
-                // reset escape attempts
-                if (moveId != -1){
-                    fightPlayer.fight.escapeAttempts = 0
+            if (!fightPlayer.doNoMove){
+
+                Battle.beforeChosingMove(fight, fightPlayer.opponentFightPlayer(), fightPlayer.opponentFightPlayer().owner)
+
+                if (fight.battleType == BattleType.PVE)
+                {
+                    // reset escape attempts
+                    if (move){
+                        fightPlayer.fight.escapeAttempts = 0
+                    }
+                    // kies random wild move
+                    fightPlayer.opponentFightPlayer().move = WildMove.choseWildMove(fightPlayer.opponentFightPlayer())
                 }
-                // kies random wild move
-
-                fightPlayer.opponentFightPlayer().move = WildMove.choseWildMove(fightPlayer.opponentFightPlayer())
+                else
+                {
+                    // :TODO implement
+    //                // kies random move van npc
+    //                fightPlayer.opponentFightPlayer().move = choseNpcMove(); // Testmove gezet
+                }
             }
-            else
-            {
-                // :TODO implement
-//                // kies random move van npc
-//                fightPlayer.opponentFightPlayer().move = choseNpcMove(); // Testmove gezet
-            }
-            // overide move door status
-
-            // freeze
-            Freeze.checkFreeze(fight, fightPlayer);
-            // :TODO implement
-//            // paralyses
-//            checkParalyses(2);
-//            // confusion
-//            checkConfusion(2);
-//            // sleep
-//            checkSleep(2);
         }
 
         // Kijk of ronde gedaan kan worden
-        if (fight.fightPlayer1.move != null && fight.fightPlayer2.move != null)
+        if ((fight.fightPlayer1.move != null || fight.fightPlayer1.doNoMove) && (fight.fightPlayer2.move != null  || fight.fightPlayer1.doNoMove))
         {
             Battle.battle(fight)
         }
@@ -61,8 +58,6 @@ class Moves {
         // Criteria
 
         int totalMoves = fightPlayer.ownerPokemon.ownerMoves.size()
-
-//        sql = "select * from ownerpokemonmove where ownerId = '" . fight->{"player" . player . "Id"} . "' and ownerPokemonId = '" . fight->{"player" . player . "OwnerPokemonId"} . "'";
 
         if (totalMoves < 4)
         {

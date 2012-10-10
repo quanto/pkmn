@@ -20,7 +20,7 @@ class Paralyses {
             {
                 fight.log += "m:${fightPlayer.ownerPokemon.pokemon.name} is paralyzed. It can`t move.;";
                 // geen move
-                Moves.setMove(fight,fightPlayer,-1)
+                Moves.setMove(fight,fightPlayer,null)
             }
         }
     }

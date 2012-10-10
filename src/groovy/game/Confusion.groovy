@@ -37,7 +37,7 @@ class Confusion {
                     // verlaag beurten
                     fightPlayer.confusion -= 1;
                     // geen move
-                    Moves.setMove(fight,fightPlayer,-1)
+                    Moves.setMove(fight,fightPlayer,null)
                 }
             }
         }

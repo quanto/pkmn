@@ -41,6 +41,7 @@ class FightPlayer {
     int criticalStage
     int evasionStage
     Move move
+    boolean doNoMove = false
     String learnMoves = ""
     int holdMove
     int holdTurns

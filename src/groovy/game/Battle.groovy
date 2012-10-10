@@ -113,6 +113,8 @@ class Battle {
         fight.fightPlayer1.move = null
         fight.fightPlayer2.move = null
 
+        fight.fightPlayer1.doNoMove = false
+        fight.fightPlayer2.doNoMove = false
     }
 
     static void afterBattle(Fight fight, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer)

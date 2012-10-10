@@ -18,7 +18,6 @@ class BattleController {
     }
 
     def index() {
-        boolean debug = true
 
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
@@ -63,20 +62,16 @@ class BattleController {
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
 
-        //owner = owner.merge()
         Fight fight = fightFactoryService.getFight(player.fightNr)
-        //fight = fight.refresh()
-
 
         int ownerPokemonMoveId = Integer.parseInt(params.id)
-        // :TODO make safe
 
-        OwnerMove ownerMove = OwnerMove.get(ownerPokemonMoveId)
+        OwnerMove ownerMove = OwnerMove.findByIdAndOwnerPokemon(ownerPokemonMoveId,fight.fightPlayer1.ownerPokemon)
         int moveId = ownerMove.move.id
 
         if (moveId == -1 || moveId == 394) // strangle || geen move
         {
-            Moves.setMove(fight,fight.fightPlayer1, moveId)
+            Moves.setMove(fight,fight.fightPlayer1, ownerMove.move)
         }
         else
         {
@@ -104,7 +99,7 @@ class BattleController {
 //                        ownerPokemonMove->ppLeft -= 1;
 //                    }
 //                    ownerPokemonMove->update();
-                Moves.setMove(fight,fight.fightPlayer1,moveId);
+                Moves.setMove(fight,fight.fightPlayer1,ownerMove.move)
 //                }
 //                else
 //                {
@@ -184,8 +179,6 @@ class BattleController {
         else if (params.fight != null && !fight.battleOver)
         {
             Battle.beforeChosingMove(fight, myFightPlayer, player);
-
-            myFightPlayer.ownerPokemon = myFightPlayer.ownerPokemon.refresh()
 
             render text: g.render(template: 'moveList', model: [ownerMoveList:myFightPlayer.ownerPokemon.ownerMoves])
         }

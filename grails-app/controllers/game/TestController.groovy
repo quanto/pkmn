@@ -1,11 +1,59 @@
 package game
 
+import javax.imageio.ImageIO
+import game.MapLayout
+import game.FightFactoryService
+
 class TestController {
 
     FightFactoryService fightFactoryService
 
     def test(){
         render text: fightFactoryService.fights
+    }
+
+    def test2(){
+        // 0, 407 rows
+
+
+
+
+
+        int total = 407 * 24;
+
+        int i=0;
+
+        def data = []
+        def rowData = []
+        for(i=0;i<total;i++)
+        {
+            int x = i % 8;
+
+            int row = Math.floor(i / 24);
+            int cell = Math.floor((i % 24) / 8);
+            int y = row + (cell * 15);
+
+            rowData.add("${x}${y}")
+
+            if (i % 24 == 23)
+            {
+                data.add(rowData)
+                rowData = []
+            }
+        }
+
+        String filePath = "/images/generatedMaps/tileset.png"
+
+        File file = new File("web-app" + filePath)
+
+        println data
+
+        MapLayout mapLayout = new MapLayout(
+            background: data
+        )
+
+        ImageIO.write(mapLayout.writeTiles(data), "png", file)
+        render text: "done"
     }
 
     def index() {                  //

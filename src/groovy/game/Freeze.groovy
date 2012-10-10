@@ -18,15 +18,13 @@ class Freeze {
             // Kijk of freeze ophoud
             if (r.nextInt(10)+1 == 1)
             {
-
                 fightPlayer.fight.log += "m:${fightPlayer.ownerPokemon.pokemon.name} is no longer frozen.;";
                 fightPlayer.freeze = 0;
             }
             else
             {
                 fightPlayer.fight.log += "m:${fightPlayer.ownerPokemon.pokemon.name} is frozen solid!;";
-
-                Moves.setMove(fight,fightPlayer,-1)
+                Moves.setMove(fight,fightPlayer,null)
             }
         }
     }

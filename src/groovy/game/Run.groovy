@@ -33,7 +33,7 @@ class Run {
             {
                 fight.escapeAttempts += 1
                 fight.log = "m:You fail to run away."
-                Moves.setMove(-1,false)
+                Moves.setMove(fight,fight.fightPlayer1,null)
             }
 
         }

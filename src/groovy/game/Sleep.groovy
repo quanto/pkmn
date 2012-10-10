@@ -34,7 +34,7 @@ class Sleep {
                 fightPlayer.sleep -= 1;
 
                 // geen move
-                Moves.setMove(fight,fightPlayer,-1)
+                Moves.setMove(fight,fightPlayer,null)
             }
         }
     }

@@ -1,8 +1,5 @@
 package game
 
-import game.BattleType
-import game.Owner
-
 /**
  * Created with IntelliJ IDEA.
  * User: kevinverhoef
