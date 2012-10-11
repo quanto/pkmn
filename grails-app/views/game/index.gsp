@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>GameEngine</title>
+    <meta name='layout' content='main'/>
     <script type="text/javascript" src="${resource(uri:'')}/js/jquery-1.7.min.js"></script>
     <script type="text/javascript" src="${resource(uri:'')}/js/main.js"></script>
     <script type="text/javascript" src="${resource(uri:'')}/js/jquery_json.js"></script>
@@ -29,7 +30,7 @@
 
 		<style type="text/css">
 			/*demo page css*/
-			body{ font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
+
 			.demoHeaders { margin-top: 2em; }
 			#dialog_link {padding: .4em 1em .4em 20px;text-decoration: none;position: relative;}
 			#dialog_link span.ui-icon {margin: 0 5px 0 0;position: absolute;left: .2em;top: 50%;margin-top: -8px;}
@@ -166,12 +167,7 @@
 <body>
 <script type="text/javascript" src="js/tooltip.js"></script> 
 <h3 id="firebug" style="color:#FF0000;"></h3>
-<div style="width:300px; font-size:18px; color:#00FF00;"><marquee id="serverMessage" scrollamount="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</marquee></div>
 
-<a href="logOut.php">LogOut</a> | 
-<g:if test="${1==1}">
-    <a href="adminPannel.php"> Admin panel </a>
-</g:if>
 <table border="0">
     <tr>
     	<td valign="top">

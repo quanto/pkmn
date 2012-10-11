@@ -24,6 +24,9 @@
                 Ingelogd als: <sec:loggedInUserInfo field="username"/>
                 | <a href="${createLink(controller: 'logout')}">Uitloggen</a>
             </sec:ifLoggedIn>
+            <sec:ifAnyGranted roles="ROLE_ADMIN">
+                | <a href="${createLink(controller: 'mapEditor')}">Map editor</a>
+            </sec:ifAnyGranted>
         </div>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>
