@@ -11,6 +11,7 @@ import org.springframework.security.authentication.LockedException
 import org.springframework.security.core.context.SecurityContextHolder as SCH
 import org.springframework.security.web.WebAttributes
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import grails.util.Environment
 
 class LoginController {
 
@@ -48,10 +49,13 @@ class LoginController {
 			return
 		}
 
-		String view = 'auth'
+        boolean development = Environment.currentEnvironment == Environment.DEVELOPMENT
+
+
+        String view = 'auth'
 		String postUrl = "${request.contextPath}${config.apf.filterProcessesUrl}"
 		render view: view, model: [postUrl: postUrl,
-		                           rememberMeParameter: config.rememberMe.parameter]
+		                           rememberMeParameter: config.rememberMe.parameter,development:development]
 	}
 
 	/**

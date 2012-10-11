@@ -17,4 +17,6 @@ beans = {
       //  expiredUrl = '/login/concurrentSession'
     }
 
+    securityEventListener(security.AuthenticationSuccessListener)
+
 }

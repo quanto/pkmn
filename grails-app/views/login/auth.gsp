@@ -96,12 +96,12 @@
 		<form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
 			<p>
 				<label for='username'><g:message code="springSecurity.login.username.label"/>:</label>
-				<input type='text' class='text_' name='j_username' id='username'/>
+				<input type='text' class='text_' name='j_username' id='username' value="${development?'kevin':''}" />
 			</p>
 
 			<p>
 				<label for='password'><g:message code="springSecurity.login.password.label"/>:</label>
-				<input type='password' class='text_' name='j_password' id='password'/>
+				<input type='password' class='text_' name='j_password' id='password' value="${development?'12345':''}" />
 			</p>
 
 			<p id="remember_me_holder">

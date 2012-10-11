@@ -26,7 +26,7 @@ class UrlMappings {
 			}
 		}
 
-		"/"(controller:'game', view:"/index")
+		"/"(controller:'game')
 		"500"(view:'/error')
 	}
 }

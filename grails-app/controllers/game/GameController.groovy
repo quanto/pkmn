@@ -7,9 +7,9 @@ class GameController {
     FightFactoryService fightFactoryService
 
     def index() {
-        // Test data
-        Player player = Player.findByUsername("kevin")
-        session.playerData = new PlayerData(player.id)
+//        // Test data
+//        Player player = Player.findByUsername("kevin")
+//        session.playerData = new PlayerData(player.id)
 
     }
 
