@@ -20,9 +20,9 @@ class Player extends Owner{
     Map map
     boolean online
     int adminlvl
-    Date registerDate
+    Date registerDate = new Date()
     Date lastLogin
-    int money
+    int money = 100
     View view = View.ChoosePokemon
     // Stored to send the player back to the last recover location when he loses
     RecoverAction lastRecoverAction

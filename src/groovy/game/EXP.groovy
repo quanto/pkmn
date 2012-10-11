@@ -17,8 +17,6 @@ class EXP {
         int exp = calcXP(opponentfightPlayer.ownerPokemon.pokemon.baseEXP,opponentfightPlayer.level,isWild)
         fight.log += "m:" + ownfightPlayer.ownerPokemon.pokemon.name + " gains ${exp} exp.;"
 
-
-        println ownfightPlayer.ownerPokemon.xp
         ownfightPlayer.ownerPokemon.xp += exp
 
         // Kijk voor lvl up
@@ -62,7 +60,6 @@ class EXP {
             ownfightPlayer.level = newLevel
 
         }
-        println ownfightPlayer.ownerPokemon.xp
         ownfightPlayer.ownerPokemon.save(flush: true)
     }
 

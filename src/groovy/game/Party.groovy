@@ -20,10 +20,14 @@ class Party {
 
         for (int i=1;i<7;i++)
         {
-            if (i > ownerPokemonList.size() || ownerPokemonList.get(i).partyPosition != i)
-            {
+            try {
+                if (ownerPokemonList.get(i).partyPosition != i)
+                {
+                    return i
+                    break
+                }
+            } catch (IndexOutOfBoundsException ibe){
                 return i
-                break
             }
         }
 
