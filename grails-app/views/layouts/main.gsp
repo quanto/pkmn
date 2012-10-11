@@ -24,8 +24,12 @@
                 Ingelogd als: <sec:loggedInUserInfo field="username"/>
                 | <a href="${createLink(controller: 'logout')}">Uitloggen</a>
             </sec:ifLoggedIn>
+            	| <a href="${createLink(controller: 'game')}">Game</a>
             <sec:ifAnyGranted roles="ROLE_ADMIN">
                 | <a href="${createLink(controller: 'mapEditor')}">Map editor</a>
+            </sec:ifAnyGranted>
+            <sec:ifAnyGranted roles="ROLE_ADMIN">
+                | <a href="${createLink(controller: 'adminPanel')}">Admin panel</a>
             </sec:ifAnyGranted>
         </div>
 		<g:layoutBody/>
