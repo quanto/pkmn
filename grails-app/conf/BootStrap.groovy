@@ -6,6 +6,7 @@ import data.LearnableMovesImport
 import data.EffectivenessImport
 import data.MapImport
 import data.TilesImport
+import data.ItemImport
 
 class BootStrap {
 
@@ -22,6 +23,8 @@ class BootStrap {
         EffectivenessImport.importEffectiveness()
 
         MapImport.importMaps()
+
+        ItemImport.importItems()
 
         Map map = Map.findByName("Blossom_town")
 

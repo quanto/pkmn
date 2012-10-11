@@ -4,13 +4,6 @@ import game.Pokemon
 import game.LearnableMove
 import game.Move
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 01-10-12
- * Time: 20:19
- * To change this template use File | Settings | File Templates.
- */
 class LearnableMovesImport {
 
     public static void importLearnableMoves(){

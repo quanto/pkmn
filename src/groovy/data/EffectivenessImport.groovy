@@ -3,13 +3,6 @@ package data
 import game.Effective
 import game.Effectiveness
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 02-10-12
- * Time: 14:16
- * To change this template use File | Settings | File Templates.
- */
 class EffectivenessImport {
 
     public static void importEffectiveness(){
