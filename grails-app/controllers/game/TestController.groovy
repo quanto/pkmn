@@ -8,6 +8,12 @@ class TestController {
 
     FightFactoryService fightFactoryService
 
+    def sessionRegistry
+
+    def test3(){
+        render text:  sessionRegistry.getAllPrincipals()
+    }
+
     def test(){
         render text: fightFactoryService.fights
     }
