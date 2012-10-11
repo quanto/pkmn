@@ -312,16 +312,16 @@ function longWait()
 
 function updateWhoisList()
 {
-//	$.ajax({
-//		type: "GET",
-//		url: "Gajax.php",
-//		data: "ajax=whois",
-//		cache: false,
-//		success: function(whoisList){
-//			//$("#whois").html(whoisList);
-//			createDialog("Online", whoisList);
-//		}
-//	});
+	$.ajax({
+		type: "GET",
+		url: "/game/online/index",
+		data: "",
+		cache: false,
+		success: function(whoisList){
+			//$("#whois").html(whoisList);
+			createDialog("Online", whoisList);
+		}
+	});
 };
 
 function updateChat()
