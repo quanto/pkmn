@@ -2,7 +2,33 @@ package game
 
 class PokemonCreator {
 
+    /**
+     * Creates an Owner Pokemon with it's base moves,
+     * partyPosition and Exp.
+     * @param pokemon
+     * @param level
+     * @param owner
+     */
+    public static void addOwnerPokemonToOwner(Pokemon pokemon, int level, Owner owner)
+    {
+        OwnerPokemon ownerPokemon = PokemonCreator.getOwnerPokemon(pokemon,level)
+        ownerPokemon.owner = owner
 
+        ownerPokemon.partyPosition = Party.getOpenPartyPosition(owner)
+        ownerPokemon.xp = EXP.getExp(ownerPokemon.level,pokemon.levelRate)
+
+        Moves.setBaseMoves(ownerPokemon)
+
+        ownerPokemon.save()
+    }
+
+    /**
+     * Creates an empty ownerPokemon. This does
+     * NOT create the moves.
+     * @param pokemon
+     * @param level
+     * @return
+     */
     public static OwnerPokemon getOwnerPokemon(Pokemon pokemon, int level){
         Random random = new Random()
 

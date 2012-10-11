@@ -83,20 +83,27 @@ class Moves {
     public static void setBaseMoves(OwnerPokemon ownerPokemon)
     {
         List<LearnableMove> learnableMoveList = LearnableMove.findAllByPokemonAndLearnLevelLessThanEquals(ownerPokemon.pokemon,ownerPokemon.level).findAll{ it.move.implemented }
-        Collections.shuffle(learnableMoveList)
 
-        int moves = learnableMoveList.size() > 4?4:learnableMoveList.size()
 
-        (0..moves-1).each{ int i ->
+        if (learnableMoveList){
+            Collections.shuffle(learnableMoveList)
 
-            Move move = learnableMoveList.get(i).move
-            OwnerMove ownerMove = new OwnerMove(
-                    ownerPokemon : ownerPokemon,
-                    move : move,
-                    ppLeft : move.pp
-            )
-            ownerPokemon.addToOwnerMoves(ownerMove)
-            ownerPokemon.save()
+            int moves = learnableMoveList.size() > 4?4:learnableMoveList.size()
+
+            (0..moves-1).each{ int i ->
+
+                Move move = learnableMoveList.get(i).move
+                OwnerMove ownerMove = new OwnerMove(
+                        ownerPokemon : ownerPokemon,
+                        move : move,
+                        ppLeft : move.pp
+                )
+                ownerPokemon.addToOwnerMoves(ownerMove)
+                ownerPokemon.save()
+            }
+        }
+        else {
+            println "No learnable moves for ${ownerPokemon.pokemon} lvl. ${ownerPokemon.level}"
         }
 
     }

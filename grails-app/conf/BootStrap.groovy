@@ -107,9 +107,7 @@ class BootStrap {
                 lastRecoverAction:RecoverAction.list().last()
         )
         player2.save()
-        OwnerPokemon ownerPokemon1Player2 = PokemonCreator.getOwnerPokemon(Pokemon.get(16), 5)
-        ownerPokemon1Player2.owner = player2
-        ownerPokemon1Player2.save()
+        PokemonCreator.addOwnerPokemonToOwner(Pokemon.get(16), 5, player)
 
         Owner npc = new Owner(
                 name: "Npc1"

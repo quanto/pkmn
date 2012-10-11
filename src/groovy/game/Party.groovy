@@ -20,7 +20,7 @@ class Party {
 
         for (int i=1;i<7;i++)
         {
-            if (ownerPokemonList.get(i).partyPosition != i)
+            if (i > ownerPokemonList.size() || ownerPokemonList.get(i).partyPosition != i)
             {
                 return i
                 break
