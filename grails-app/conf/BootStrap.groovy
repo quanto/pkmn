@@ -10,7 +10,15 @@ import data.ItemImport
 
 class BootStrap {
 
+    def grailsApplication
+
     def init = { servletContext ->
+
+        // init Roles
+        Role adminRole = new Role(
+                authority:"ROLE_ADMIN"
+        )
+        adminRole.save()
 
         PokemonImport.importPokemon()
 
@@ -290,6 +298,11 @@ class BootStrap {
         ownerPokemonNPC2.xp = ownerPokemonNPC2.getBaseExp()
         ownerPokemonNPC2.save()
 
+        // Player 1 admin role
+        new PlayerRole(
+                player:player,
+                role:adminRole
+        ).save()
 
     }
 

@@ -113,7 +113,10 @@
 				<input type='submit' id="submit" value='${message(code: "springSecurity.login.button")}'/>
 			</p>
 		</form>
+
+
 	</div>
+    <g:link controller="register">Register</g:link>
 </div>
 <script type='text/javascript'>
 	<!--
