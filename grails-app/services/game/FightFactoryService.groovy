@@ -56,7 +56,7 @@ class FightFactoryService {
             owner2Pokemon.save()
         }
         else if (battleType == battleType.PVP){
-            // :TODO implement
+            owner2Pokemon = getFirstAlivePokemon(player2)
         }
         else if (battleType == battleType.PVN){
             owner2Pokemon = getFirstAlivePokemon(player2)
