@@ -97,6 +97,20 @@ class BootStrap {
         )
         player.save()
 
+        Player player2 = new Player(
+                username: "player2",
+                name: "Player Two",
+                password: "12345",
+                money: 1000,
+                registerDate : new Date(),
+                map:map,
+                lastRecoverAction:RecoverAction.list().last()
+        )
+        player2.save()
+        OwnerPokemon ownerPokemon1Player2 = PokemonCreator.getOwnerPokemon(Pokemon.get(16), 5)
+        ownerPokemon1Player2.owner = player2
+        ownerPokemon1Player2.save()
+
         Owner npc = new Owner(
                 name: "Npc1"
         )
