@@ -100,7 +100,9 @@ class BootStrap {
                 password: "12345",
                 money: 1000,
                 registerDate : new Date(),
-                map:map,
+                map: Map.findByName("Glooming forest -2x0"),
+                positionX : 12,
+                positionY : 12,
                 lastRecoverAction:RecoverAction.list().last()
         )
         player.save()
