@@ -97,6 +97,18 @@ class BootStrap {
         )
         player.save()
 
+        new OwnerItem(
+            item: Item.findByName("Poke Ball"),
+            quantity: 100,
+            owner: player
+        ).save()
+
+        new OwnerItem(
+                item: Item.findByName("Premier Ball"),
+                quantity: 50,
+                owner: player
+        ).save()
+
         Player player2 = new Player(
                 username: "player2",
                 name: "Player Two",

@@ -30,7 +30,7 @@ Park Ball
 Captures Pal Park-transfered PokÃƒÂ©mon without fail
 0
 0
-PokÃƒÂ© Ball
+Poke Ball
 Normal chance of catching a PokÃƒÂ©mon
 200
 1

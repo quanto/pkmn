@@ -9,6 +9,8 @@ class Owner {
     int pvnBattlesLost = 0
     Integer fightNr
 
+    static hasMany = [ownerItems: OwnerItem]
+
     static constraints = {
         fightNr nullable :true
     }
