@@ -30,4 +30,9 @@ class Party {
         return 0
     }
 
+    public static OwnerPokemon getFirstAlivePokemon(Owner owner){
+        List<OwnerPokemon> ownerPokemonList = OwnerPokemon.findAllByOwnerAndPartyPositionGreaterThan(owner,0)
+        return ownerPokemonList.sort{ it.partyPosition * -1 }.last()
+    }
+
 }

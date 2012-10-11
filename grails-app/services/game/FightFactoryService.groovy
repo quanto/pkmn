@@ -38,7 +38,7 @@ class FightFactoryService {
 
         assert player1
 
-        OwnerPokemon owner1Pokemon = getFirstAlivePokemon(player1)
+        OwnerPokemon owner1Pokemon = Party.getFirstAlivePokemon(player1)
         OwnerPokemon owner2Pokemon
 
         if (battleType == battleType.PVE) // player vs enemy
@@ -56,10 +56,10 @@ class FightFactoryService {
             owner2Pokemon.save()
         }
         else if (battleType == battleType.PVP){
-            owner2Pokemon = getFirstAlivePokemon(player2)
+            owner2Pokemon = Party.getFirstAlivePokemon(player2)
         }
         else if (battleType == battleType.PVN){
-            owner2Pokemon = getFirstAlivePokemon(player2)
+            owner2Pokemon = Party.getFirstAlivePokemon(player2)
         }
 
         assert owner1Pokemon
@@ -98,12 +98,6 @@ class FightFactoryService {
 
     OwnerPokemon getWildPokemon(Pokemon pokemon, int wildPokemonLevel){
         return PokemonCreator.getOwnerPokemon(pokemon,wildPokemonLevel)
-    }
-
-    OwnerPokemon getFirstAlivePokemon(Owner owner){
-        // :TODO Move method
-        List<OwnerPokemon> ownerPokemonList = OwnerPokemon.findAllByOwnerAndPartyPositionGreaterThan(owner,0)
-        return ownerPokemonList.sort{ it.partyPosition * -1 }.last()
     }
 
 }
