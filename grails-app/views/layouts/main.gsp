@@ -20,6 +20,10 @@
 	<body>
 		<div id="grailsLogo" role="banner">
             <a href="http://kevinverhoef.nl"></a>
+            <sec:ifLoggedIn>
+                Ingelogd als: <sec:loggedInUserInfo field="username"/>
+                | <a href="${createLink(controller: 'logout')}">Uitloggen</a>
+            </sec:ifLoggedIn>
         </div>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>
