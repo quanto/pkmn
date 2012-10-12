@@ -1,12 +1,5 @@
 package game
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 10-10-12
- * Time: 14:41
- * To change this template use File | Settings | File Templates.
- */
 class FightTests extends GroovyTestCase {
 
     FightFactoryService fightFactoryService
@@ -33,7 +26,8 @@ class FightTests extends GroovyTestCase {
         Fight fight = fightFactoryService.startFight(BattleType.PVN,player,npc,null,null)
         assertNotNull fight
 
-        while (!fight.battleOver || fight.fightPlayer1.ownerPokemon.hp <= 0){  // Stop if the user has to chose another pokemon
+        while (!fight.battleOver && fight.fightPlayer1.ownerPokemon.hp > 0){  // Stop if the user has to chose another pokemon
+
             Moves.setMove(fight,fight.fightPlayer1, move)
             println fight.log
         }

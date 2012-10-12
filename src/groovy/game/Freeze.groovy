@@ -1,12 +1,5 @@
 package game
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 02-10-12
- * Time: 20:14
- * To change this template use File | Settings | File Templates.
- */
 class Freeze {
 
     public static void checkFreeze(Fight fight, FightPlayer fightPlayer)
@@ -25,6 +18,35 @@ class Freeze {
             {
                 fightPlayer.fight.log += "m:${fightPlayer.ownerPokemon.pokemon.name} is frozen solid!;";
                 Moves.setMove(fight,fightPlayer,null)
+            }
+        }
+    }
+
+    public static void freezeAction(Fight fight, MoveInfo moveInfo, FightPlayer defendingFightPlayer){
+
+        OwnerPokemon defendingOwnerPokemon = defendingFightPlayer.ownerPokemon
+
+        // freeze
+        if (moveInfo.freezeAction && moveInfo.effectSucces)
+        {
+            if (defendingFightPlayer.freeze == 0)
+            {
+                if (defendingOwnerPokemon.pokemon.type1 == "ice" || defendingOwnerPokemon.pokemon.type2 == "ice")
+                {
+                    fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is immune to freeze.;";
+                }
+                else
+                {
+                    Recover.removeAllStatusAfflictions(defendingFightPlayer);
+                    defendingFightPlayer.freeze = 1;
+                    fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is frozen.;";
+                    moveInfo.freezeActionSucces = true
+                }
+            }
+            else
+            {
+                if (moveInfo.attackMoveeffectProb == 0 || moveInfo.attackMoveeffectProb == 100)
+                    fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is already frozen.;";
             }
         }
     }

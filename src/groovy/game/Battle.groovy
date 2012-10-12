@@ -1,61 +1,22 @@
 package game
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 02-10-12
- * Time: 20:19
- * To change this template use File | Settings | File Templates.
- */
+import game.fight.status.Poison
+import game.fight.status.Burn
+
 class Battle {
 
+    /**
+     * If both player moves are set we can do a round.
+     * @param fight
+     */
     public static void battle(Fight fight)
     {
-        boolean player1first = false
+        boolean player1first = BattleOrder.player1First(fight)
         FightPlayer fightPlayer1 = fight.fightPlayer1
         FightPlayer fightPlayer2 = fight.fightPlayer2
         Random random = new Random()
 
-        // Bepaal wie begint
-        if (Speed.isSpeedMove(fight.fightPlayer1))
-        {
-            if (!Speed.isSpeedMove(fight.fightPlayer2))
-            {
-                player1first = true;
-            }
-            else
-            {
-                if (fightPlayer1.speed > fightPlayer2.speed)
-                    player1first = true;
-                else if (fightPlayer1.speed == fightPlayer1.speed)
-                {
-                    if (random.nextInt(2) == 1)
-                        player1first = true;
-                    else
-                        player1first = false;
-                }
-                else
-                    player1first = false;
-            }
-        }
-        else if (Speed.isSpeedMove(fight.fightPlayer2))
-        {
-            player1first = false;
-        }
-        else
-        {
-            if (fightPlayer1.speed > fightPlayer2.speed)
-                player1first = true;
-            else if (fightPlayer1.speed == fightPlayer2.speed)
-            {
-                if (random.nextInt(2) == 1)
-                    player1first = true;
-                else
-                    player1first = false;
-            }
-            else
-                player1first = false;
-        }
+
 
         if (player1first)
         {
@@ -301,61 +262,17 @@ class Battle {
     public static void attack(Fight fight, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer, boolean firstMove)
     {
 
-        // Start waarden
-        int criticalHitStage = 1;
-        int addToAccuracyStage = 0;
-        boolean canNotUseAction = false;
-        boolean oneHitKO = false;
-        boolean cantMiss = false;
-        boolean recoil = false;
-        boolean flinch = false;
-        boolean paralysisActionSucces = false;
-        boolean confusionActionSucces = false;
-        boolean sleepActionSucces = false;
-        boolean freezeActionSucces = false;
-        boolean flinchAction = false;
-        boolean sleepAction = false;
-        boolean confusionAction = false;
-        boolean effectSucces = false;
-        boolean burnAction = false;
-        boolean freezeAction = false;
-        boolean paralysisAction = false;
-        boolean poisonAction = false;
-        boolean badlypoisondAction = false;
-        boolean addToDefenseStage = false;
-        boolean selfStageAction = false;
-        boolean openentStageAction = false;
-        boolean addToAttackStage = false;
-        boolean addToSpDefenseStage = false;
-        boolean addToSpAttackStage = false;
-        boolean addToSpeedStage = false;
-        double effectiveness = 1;
-        boolean effectAction = false;
-        boolean stageAction = false;
-        boolean holdMove = false;
-        boolean continueMove = false;
+        MoveInfo moveInfo = new MoveInfo()
+
         Move attackMove = attackFightPlayer.move
         OwnerPokemon attackOwnerPokemon = attackFightPlayer.ownerPokemon
         OwnerPokemon defendingOwnerPokemon = defendingFightPlayer.ownerPokemon
 
         Random random = new Random()
 
-        boolean damageAction = true;
-        boolean recoverAction = false;
-        int loop = 1;
-        boolean calculateDamage = true;
-        boolean defaultAttackPower = true; // useDefault?
-
-
-        int attackPower
-        int damage
-
         // :TODO added these but are they needed
-        int attackMoveeffectProb = 0
         int recover = 0
-        boolean badlypoisondActionSucces = false
-        boolean poisonActionSucces = false
-        boolean burnActionSucces = false
+
         boolean effectActionOnBoth = false
         String attackMovetype
         String attackMovecategory
@@ -365,26 +282,26 @@ class Battle {
         if (attackFightPlayer.move)
         {
 
-            criticalHitStage += attackFightPlayer.criticalStage;
+            moveInfo.criticalHitStage += attackFightPlayer.criticalStage;
 
             fight.log += "m:" + attackFightPlayer.ownerPokemon.pokemon.name + " uses " + attackMove.name + ".;";
 
             if (attackMove.category == "physical move" || attackMove.category == "special move")
             {
 
-                effectAction = false;
+                moveInfo.effectAction = false
 
-                poisonAction = false;
-                badlypoisondAction = false;
-                stageAction = false;
+                moveInfo.poisonAction = false
+                moveInfo.badlypoisondAction = false
+                moveInfo.stageAction = false
 
                 // :TODO implement
                 //include("fightMove.php");
             }
             else if (attackMove.category == "status move")
             {
-                damageAction = false;
-                recoverAction = false;
+                moveInfo.damageAction = false
+                moveInfo.recoverAction = false
 
                 // :TODO implement
                 //include("statusMove.php");
@@ -393,7 +310,7 @@ class Battle {
             // openent moves die ervoor zogen dat er niet gemist kan worden
             if (defendingFightPlayer.move?.id == 376)
             {
-                cantMiss = true
+                moveInfo.cantMiss = true
             }
 
             // bereken accuracy
@@ -403,36 +320,36 @@ class Battle {
             int chanceOnHitting = Evasion.getEvasion(accuracy,defendingFightPlayer.evasionStage);
 
             boolean moveSucces = false;
-            if (random.nextInt(100)+1 <= chanceOnHitting || cantMiss)
+            if (random.nextInt(100)+1 <= chanceOnHitting || moveInfo.cantMiss)
             {
                 moveSucces = true;
             }
 
-            if (damageAction)
+            if (moveInfo.damageAction)
             {
-                for (int i=0;i<loop;i++)
+                for (int i=0;i<moveInfo.loop;i++)
                 {
 
-                    if (moveSucces && !canNotUseAction)
+                    if (moveSucces && !moveInfo.canNotUseAction)
                     {
 
-                        if (calculateDamage && !oneHitKO)
+                        if (moveInfo.calculateDamage && !moveInfo.oneHitKO)
                         {
 
                             // attackpower
-                            if (defaultAttackPower)
+                            if (moveInfo.defaultAttackPower)
                             {
-                                attackPower = attackMove.power;
+                                moveInfo.attackPower = attackMove.power
                             }
 
                             // 277 Payback physical move Power doubles if the user was attacked first.
                             if (attackMove.id == 277 && !firstMove)
                             {
-                                attackPower = attackPower * 2;
+                                moveInfo.attackPower = moveInfo.attackPower * 2
                             }
 
                             // effectieviteit
-                            effectiveness = Effective.effectiveness(attackMove.type,attackOwnerPokemon.pokemon.type1,attackOwnerPokemon.pokemon.type2)
+                            moveInfo.effectiveness = Effective.effectiveness(attackMove.type,attackOwnerPokemon.pokemon.type1,attackOwnerPokemon.pokemon.type2)
 
                             if (attackMove.type == "special move")
                             {
@@ -440,7 +357,7 @@ class Battle {
                                 int attackStat = Stat.getStat(attackFightPlayer.spAttack, attackFightPlayer.spAttackStage);
                                 int defenseStat = Stat.getStat(defendingFightPlayer.spDefense, defendingFightPlayer.spDefenseStage);
                                 // bereken schade
-                                damage = Damage.calcDmg(attackFightPlayer.level,attackStat,attackPower,defenseStat,effectiveness);
+                                moveInfo.damage = Damage.calcDmg(attackFightPlayer.level,attackStat,moveInfo.attackPower,defenseStat,moveInfo.effectiveness);
                             }
                             else
                             {
@@ -450,89 +367,88 @@ class Battle {
                                 int defenseStat = Stat.getStat(defendingFightPlayer.defense, defendingFightPlayer.defenseStage);
 
                                 // bereken schade
-                                damage = Damage.calcDmg(attackFightPlayer.level,attackStat,attackPower,defenseStat,effectiveness);
+                                moveInfo.damage = Damage.calcDmg(attackFightPlayer.level,attackStat,moveInfo.attackPower,defenseStat,moveInfo.effectiveness);
                             }
 
 
                             // User recovers half of the damage inflicted on opponent.
                             if (attackMove.name == "Drain Punch" || attackMove.name == "Absorb" || attackMove.name == "Giga Drain" || attackMove.name == "Leech Life" || attackMove.name == "Mega Drain" || attackMove.name == "Dream Eater")
                             {
-                                recoverAction = true;
-                                effectAction = true;
-                                recover = damage / 2;
+                                moveInfo.recoverAction = true;
+                                moveInfo.effectAction = true;
+                                recover = moveInfo.damage / 2;
                                 if (recover < 1)
                                     recover = 1;
                             }
 
                         }
-                        else if (oneHitKO)
+                        else if (moveInfo.oneHitKO)
                         {
                             defendingFightPlayer.hp = 0;
                             fight.log += "m:It\'s a one hit KO!.;";
                         }
 
-                        if (!oneHitKO)
+                        if (!moveInfo.oneHitKO)
                         {
                             // Critcal hits
-                            if (CriticalHit.tryCriticalHit(criticalHitStage))
+                            if (CriticalHit.tryCriticalHit(moveInfo.criticalHitStage))
                             {
-                                damage = damage * 2;
+                                moveInfo.damage = moveInfo.damage * 2;
                                 fight.log += "m:" + "Critical hit!.;";
                             }
 
-                            damage = Math.floor(damage);
+                            moveInfo.damage = Math.floor(moveInfo.damage);
 
                             // acties na schade berekening
 
                             // Always leaves opponent with at least 1 HP.
                             if (attackMove.name == "False Swipe")
                             {
-                                if (defendingFightPlayer.hp - damage < 0)
+                                if (defendingFightPlayer.hp - moveInfo.damage < 0)
                                 {
-                                    damage = defendingFightPlayer.hp - 1;
+                                    moveInfo.damage = defendingFightPlayer.hp - 1;
                                 }
                             }
                             // 2x damage against an opponent using Fly.
                             if (attackMove.name == "Twister" && (defendingOwnerPokemon.pokemon.type1 == "flying" || defendingOwnerPokemon.pokemon.type2 == "flying"))
                             {
-                                damage = damage * 2;
+                                moveInfo.damage = moveInfo.damage * 2;
                             }
 
                             if (i == 0)
                             {
                                 // bericht effectiveness
-                                if (effectiveness == 0)
+                                if (moveInfo.effectiveness == 0)
                                     fight.log += "m:" + "It has no effect.;";
-                                else if (effectiveness == 0.25 || effectiveness == 0.5)
+                                else if (moveInfo.effectiveness == 0.25 || moveInfo.effectiveness == 0.5)
                                     fight.log += "m:" + "It`s not very effective.;";
-                                else if (effectiveness == 2 || effectiveness == 4)
+                                else if (moveInfo.effectiveness == 2 || moveInfo.effectiveness == 4)
                                     fight.log += "m:" + "It`s super effective.;";
                             }
 
-                            fight.log += "m:" + attackOwnerPokemon.pokemon.name + " hits " + defendingOwnerPokemon.pokemon.name + " with " + attackMove.name + " ${damage} dmg.;";
-                            Recover.healthSlideLogAction(fight, defendingFightPlayer,damage);
+                            fight.log += "m:" + attackOwnerPokemon.pokemon.name + " hits " + defendingOwnerPokemon.pokemon.name + " with " + attackMove.name + " ${moveInfo.damage} dmg.;";
+                            Recover.healthSlideLogAction(fight, defendingFightPlayer,moveInfo.damage);
                             // Doe schade
-                            defendingFightPlayer.hp = defendingFightPlayer.hp - damage;
+                            defendingFightPlayer.hp = defendingFightPlayer.hp - moveInfo.damage;
 
-                            if (recoil)
+                            if (moveInfo.recoil)
                             {
-
-                                damage = Math.floor(damage / 100 * recoil);
-                                attackFightPlayer.hp = Math.round(attackFightPlayer.hp - damage);
-                                fight.log += "m:" + attackOwnerPokemon.pokemon.name + " hurts from recoil damage. damage dmg.;";
-                                Recover.healthSlideLogAction(fight, attackFightPlayer,damage);
-                                fight.log += "m:Recoil did damage dmg.;";
+                                moveInfo.damage = Math.floor(moveInfo.damage / 100 * moveInfo.recoil);
+                                attackFightPlayer.hp = Math.round(attackFightPlayer.hp - moveInfo.damage);
+                                fight.log += "m:" + attackOwnerPokemon.pokemon.name + " hurts from recoil damage. ${moveInfo.damage} dmg.;";
+                                Recover.healthSlideLogAction(fight, attackFightPlayer,moveInfo.damage);
+                                fight.log += "m:Recoil did ${moveInfo.damage} dmg.;";
                             }
 
                             // Bericht bij loop
-                            if (loop > 1 && loop == (i + 1))
+                            if (moveInfo.loop > 1 && moveInfo.loop == (i + 1))
                             {
                                 fight.log += "m:" + "Hits " + (i + 1) + " times;";
                             }
 
                         }
                     }
-                    else if (canNotUseAction)
+                    else if (moveInfo.canNotUseAction)
                     {
 
                     }
@@ -554,7 +470,7 @@ class Battle {
             }
 
             // set hold move
-            if (holdMove && moveSucces)
+            if (moveInfo.holdMove && moveSucces)
             {
                 // bij 0 kan de move gezet worden
                 if (attackFightPlayer.holdTurns == 0)
@@ -573,42 +489,42 @@ class Battle {
 
 
             // Kijk of het effect slaagt
-            effectSucces = false;
-            if (attackMoveeffectProb == 0 || random.nextInt(100)+1 <= attackMoveeffectProb)
+            moveInfo.effectSucces = false
+            if (moveInfo.attackMoveeffectProb == 0 || random.nextInt(100)+1 <= moveInfo.attackMoveeffectProb)
             {
-                if (effectAction && attackMovecategory == "status move")
+                if (moveInfo.effectAction && attackMovecategory == "status move")
                 {
-                    moveSucces = true;
-                    effectSucces = true;
+                    moveSucces = true
+                    moveInfo.effectSucces = true
                 }
                 else if (moveSucces)
                 {
-                    effectSucces = true;
+                    moveInfo.effectSucces = true
                 }
             }
 
-            if ((effectAction && moveSucces))
+            if ((moveInfo.effectAction && moveSucces))
             {
                 // continues move
-                if (continueMove && effectSucces)
+                if (moveInfo.continueMove && moveInfo.effectSucces)
                 {
-                    attackFightPlayer.continueMove = attackMove;
+                    attackFightPlayer.continueMove = attackMove
                 }
 
                 // flinch
-                if (flinchAction && effectSucces)
+                if (moveInfo.flinchAction && moveInfo.effectSucces)
                 {
-                    flinch = true;
+                    moveInfo.flinch = true
                 }
 
                 // accuracy
-                if (addToAccuracyStage != 0 && effectSucces)
+                if (moveInfo.addToAccuracyStage != 0 && moveInfo.effectSucces)
                 {
-                    addToAccuracyStage(addToAccuracyStage,attackFightPlayer,defendingFightPlayer);
+                    Accuraccy.addToAccuracyStage(fight,moveInfo.addToAccuracyStage,attackFightPlayer,defendingFightPlayer)
                 }
 
                 // sleep
-                if (sleepAction && effectSucces)
+                if (moveInfo.sleepAction && moveInfo.effectSucces)
                 {
                     // kijk of de tegenstander al niet slaapt
                     if (defendingFightPlayer.sleep > 0)
@@ -621,12 +537,12 @@ class Battle {
                         Recover.removeAllStatusAfflictions(defendingFightPlayer);
                         defendingFightPlayer.sleep = random.nextInt(6)+2
                         fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " fell asleep.;";
-                        sleepActionSucces = true;
+                        moveInfo.sleepActionSucces = true;
                     }
                 }
 
                 // confusion
-                if (confusionAction && effectSucces)
+                if (moveInfo.confusionAction && moveInfo.effectSucces)
                 {
                     // kijk of de tegenstander confusion is
                     if (defendingFightPlayer.confusion > 0)
@@ -639,7 +555,7 @@ class Battle {
                         Recover.removeAllStatusAfflictions(defendingFightPlayer);
                         defendingFightPlayer.confusion = random.nextInt(3)+2;
                         fight.log += "m:" + defendingOwnerPokemon.pokemon.name  + " became confused.;";
-                        confusionActionSucces = true;
+                        moveInfo.confusionActionSucces = true
                         if (effectActionOnBoth)
                         {
                             Recover.removeAllStatusAfflictions(attackFightPlayer);
@@ -650,163 +566,68 @@ class Battle {
                 }
 
                 // paralysis
-                if (paralysisAction && effectSucces)
+                if (moveInfo.paralysisAction && moveInfo.effectSucces)
                 {
                     if (defendingFightPlayer.paralysis == 0)
                     {
                         Recover.removeAllStatusAfflictions(defendingFightPlayer);
                         defendingFightPlayer.paralysis = 1;
                         fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is paralyzed.;";
-                        paralysisActionSucces = true;
+                        moveInfo.paralysisActionSucces = true;
                     }
                     else
                     {
-                        if (attackMoveeffectProb == 0 || attackMoveeffectProb == 100)
+                        if (moveInfo.attackMoveeffectProb == 0 || moveInfo.attackMoveeffectProb == 100)
                             fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is already paralyzed.;";
                     }
                 }
 
-                // burn
-                if (burnAction && effectSucces)
-                {
-                    if (defendingFightPlayer.burn == 0)
-                    {
-                        if (defendingOwnerPokemon.pokemon.type1 == "fire" || defendingOwnerPokemon.pokemon.type2 == "fire")
-                        {
-                            fight.log += "m:" + defendingOwnerPokemon.pokemon.name  + " is immune to fire.;";
-                        }
-                        else
-                        {
-                            Recover.removeAllStatusAfflictions(defendingFightPlayer);
-                            defendingFightPlayer.burn = 1;
-                            fight.log += "m:" + defendingOwnerPokemon.pokemon.name  + " is burning.;";
-                            burnActionSucces = true;
-                        }
-                    }
-                    else
-                    {
-                        if (attackMoveeffectProb == 0 || attackMoveeffectProb == 100)
-                            fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is already burning.;";
-                    }
-                }
+                Burn.burnAction(fight, moveInfo, defendingFightPlayer)
 
-                // freeze
-                if (freezeAction && effectSucces)
-                {
-                    if (defendingFightPlayer.freeze == 0)
-                    {
-                        if (defendingOwnerPokemon.pokemon.type1 == "ice" || defendingOwnerPokemon.pokemon.type2 == "ice")
-                        {
-                            fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is immune to freeze.;";
-                        }
-                        else
-                        {
-                            Recover.removeAllStatusAfflictions(defendingFightPlayer);
-                            defendingFightPlayer.freeze = 1;
-                            fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is frozen.;";
-                            freezeActionSucces = true;
-                        }
-                    }
-                    else
-                    {
-                        if (attackMoveeffectProb == 0 || attackMoveeffectProb == 100)
-                            fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is already frozen.;";
-                    }
-                }
+                Freeze.freezeAction(fight, moveInfo, defendingFightPlayer)
 
-                // Poison
-                if (poisonAction)
-                {
-                    // controlleer of de status al staat
-                    if (defendingFightPlayer.poison == 0 && defendingFightPlayer.badlypoisond == 0 && effectSucces)
-                    {
-                        if (defendingOwnerPokemon.pokemon.type1 == "poison" || defendingOwnerPokemon.pokemon.type2== "poison" || defendingOwnerPokemon.pokemon.type1 == "steel" || defendingOwnerPokemon.pokemon.type2 == "steel")
-                        {
-                            fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is immune to poison.;";
-                        }
-                        else
-                        {
-                            Recover.removeAllStatusAfflictions(defendingFightPlayer);
-                            defendingFightPlayer.poison = 1
-                            fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is poisoned.;";
-                            poisonActionSucces = true;
-                        }
-                    }
-                    else
-                    {
-                        // Bericht bij move die bedoelt is om te poisenen
-                        if (attackMoveeffectProb == 0 || attackMoveeffectProb == 100)
-                            fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is already poisoned.;";
-                    }
-                }
+                Poison.poisonAction(fight, moveInfo, defendingFightPlayer)
 
-                //badlypoisend wordt meer met iedere beurt
-                if (badlypoisondAction)
-                {
-                    // kijk of niet al poisond
-                    if (defendingFightPlayer.poison == 0 && defendingFightPlayer.badlypoisond == 0 && effectSucces)
-                    {
-                        if (defendingOwnerPokemon.pokemon.type1 == "poison" || defendingOwnerPokemon.pokemon.type2 == "poison" || defendingOwnerPokemon.pokemon.type1 == "steel" || defendingOwnerPokemon.pokemon.type2 == "steel")
-                        {
-                            fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is immune to poison.;";
-                        }
-                        else
-                        {
-                            Recover.removeAllStatusAfflictions(defendingFightPlayer);
-                            // Zet de status
-                            defendingFightPlayer.badlypoisond = 1;
-                            fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is badly poisoned.;";
-                            badlypoisondActionSucces = true;
-                        }
-                    }
-                    else
-                    {
-                        // Bericht bij move die bedoelt is om te poisenen
-                        if (attackMoveeffectProb == 0 || attackMoveeffectProb == 100)
-                            fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is already poisoned.;";
-                    }
-                }
+                Poison.badlyPoisondAction(fight, moveInfo, defendingFightPlayer)
 
-                if (recoverAction)
+                if (moveInfo.recoverAction)
                 {
-                    if (moveSucces && effectSucces)
+                    if (moveSucces && moveInfo.effectSucces)
                     {
                         Recover.recover(fight,recover, attackFightPlayer);
                     }
                     else
                     {
-                        if (attackMoveeffectProb == 0 || attackMoveeffectProb == 100)
+                        if (moveInfo.attackMoveeffectProb == 0 || moveInfo.attackMoveeffectProb == 100)
                             fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " fails to recover.;";
                     }
                 }
 
-                if (stageAction)
+                if (moveSucces)
                 {
-                    if (moveSucces)
-                    {
-                        if (addToDefenseStage != 0)
-                            Stage.modifyStage(fight,"defense",addToDefenseStage, selfStageAction, openentStageAction, effectSucces, attackFightPlayer, defendingFightPlayer);
-                        if (addToAttackStage != 0)
-                            Stage.modifyStage(fight,"attack",addToAttackStage, selfStageAction, openentStageAction, effectSucces, attackFightPlayer, defendingFightPlayer);
-                        if (addToSpDefenseStage != 0)
-                            Stage.modifyStage(fight,"spDefense",addToSpDefenseStage, selfStageAction, openentStageAction, effectSucces, attackFightPlayer, defendingFightPlayer);
-                        if (addToSpAttackStage != 0)
-                            Stage.modifyStage(fight,"spAttack",addToSpAttackStage, selfStageAction, openentStageAction, effectSucces, attackFightPlayer, defendingFightPlayer);
-                        if (addToSpeedStage != 0)
-                            Stage.modifyStage(fight,"speed",addToSpeedStage, selfStageAction, openentStageAction, effectSucces, attackFightPlayer, defendingFightPlayer);
-                    }
+                    if (moveInfo.addToDefenseStage != 0)
+                        Stage.modifyStage(fight,"defense",moveInfo.addToDefenseStage, moveInfo.selfStageAction, moveInfo.openentStageAction, moveInfo.effectSucces, attackFightPlayer, defendingFightPlayer);
+                    if (moveInfo.addToAttackStage != 0)
+                        Stage.modifyStage(fight,"attack",moveInfo.addToAttackStage, moveInfo.selfStageAction, moveInfo.openentStageAction, moveInfo.effectSucces, attackFightPlayer, defendingFightPlayer);
+                    if (moveInfo.addToSpDefenseStage != 0)
+                        Stage.modifyStage(fight,"spDefense",moveInfo.addToSpDefenseStage, moveInfo.selfStageAction, moveInfo.openentStageAction, moveInfo.effectSucces, attackFightPlayer, defendingFightPlayer);
+                    if (moveInfo.addToSpAttackStage != 0)
+                        Stage.modifyStage(fight,"spAttack",moveInfo.addToSpAttackStage, moveInfo.selfStageAction, moveInfo.openentStageAction, moveInfo.effectSucces, attackFightPlayer, defendingFightPlayer);
+                    if (moveInfo.addToSpeedStage != 0)
+                        Stage.modifyStage(fight,"speed",moveInfo.addToSpeedStage, moveInfo.selfStageAction, moveInfo.openentStageAction, moveInfo.effectSucces, attackFightPlayer, defendingFightPlayer);
                 }
+
 
             }
 
             // bericht bij falen van effect
-            else if (effectAction && !moveSucces)
+            else if (moveInfo.effectAction && !moveSucces)
             {
                 fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " fails to perform move.;";
             }
 
             // Flinch
-            if (flinch && firstMove)
+            if (moveInfo.flinch && firstMove)
             {
                 defendingFightPlayer.move = null
                 fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " flinched!.;";
@@ -824,7 +645,7 @@ class Battle {
             }
 
             // kijk of de volgende actie faalt
-            if (paralysisActionSucces)
+            if (moveInfo.paralysisActionSucces)
             {
                 if (random.nextInt(4) == 1)
                 {
@@ -832,7 +653,7 @@ class Battle {
                     defendingFightPlayer.move = null;
                 }
             }
-            if (confusionActionSucces)
+            if (moveInfo.confusionActionSucces)
             {
                 if (random.nextInt(2) == 1)
                 {
@@ -840,12 +661,12 @@ class Battle {
                     defendingFightPlayer.move = null;
                 }
             }
-            if (sleepActionSucces)
+            if (moveInfo.sleepActionSucces)
             {
                 fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is a sleep.;";
                 defendingFightPlayer.move = null;
             }
-            if (freezeActionSucces)
+            if (moveInfo.freezeActionSucces)
             {
                 fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is frozen solid!;";
                 defendingFightPlayer.move= null;
@@ -916,6 +737,9 @@ class Battle {
 //                }
             }
         }
+
     }
+
+
 
 }

@@ -1,13 +1,31 @@
 package game
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 30-09-12
- * Time: 09:16
- * To change this template use File | Settings | File Templates.
- */
 class Accuraccy {
+
+    /**
+     *
+     */
+    public static void addToAccuracyStage(Fight fight, int addToStage,FightPlayer attackingFightPlayer, FightPlayer defendingFightPlayer)
+    {
+        if (addToStage > 0)
+        {
+            // Max 6
+            if (attackingFightPlayer.accuracyStage < 6)
+            {
+                attackingFightPlayer.accuracyStage += addToStage
+                fight.log += "m:${attackingFightPlayer.ownerPokemon.pokemon.name}`s accuracy raises.;"
+            }
+        }
+        else
+        {
+            // min -6
+            if (defendingFightPlayer.accuracyStage> -6)
+            {
+                defendingFightPlayer.accuracyStage += addToStage
+                fight.log += "m:${defendingFightPlayer.ownerPokemon.pokemon.name}`s accuracy lowers.;";
+            }
+        }
+    }
 
     public static int getAccuracy(int accuraccy, int stage)
     {

@@ -42,7 +42,7 @@ class EXP {
                     fight.log += "n:${ownfightPlayer.playerNr}:" + evolution.toPokemon.name + ";";
                     fight.log += "s:${ownfightPlayer.playerNr}:${evolution.toPokemon.threeValueNumber()}.gif;";
 
-                    ownfightPlayer.ownerPokemon = evolution.toPokemon
+                    ownfightPlayer.ownerPokemon.pokemon = evolution.toPokemon
                 }
 
                 // Kijk of er move geleerd kan worden

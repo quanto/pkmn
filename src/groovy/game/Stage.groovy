@@ -1,12 +1,5 @@
 package game
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 03-10-12
- * Time: 18:19
- * To change this template use File | Settings | File Templates.
- */
 class Stage {
 
     public static void modifyStage(Fight fight, String statName, int addToStage,int  selfStageAction, int openentStageAction, boolean effectSucces, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer)
@@ -31,7 +24,7 @@ class Stage {
                 else
                 {
                     if (!selfStageAction)
-                        fight.log += "m:${attackFightPlayer.ownerPokemon.pokemon.name}`s statName can`t go up anymore.;";
+                        fight.log += "m:${attackFightPlayer.ownerPokemon.pokemon.name}`s ${statName} can`t go up anymore.;";
                 }
             }
             else
@@ -39,7 +32,7 @@ class Stage {
                 attackFightPlayer["${statName}Stage"]  = attackFightPlayer["${statName}Stage"]  + addToStage;
 
                 if (!selfStageAction)
-                    fight.log += "m:\${attackFightPlayer.ownerPokemon.pokemon.name}`s statName went up.;";
+                    fight.log += "m:\${attackFightPlayer.ownerPokemon.pokemon.name}`s ${statName} went up.;";
             }
         }
         else if ((addToStage < 0 || openentStageAction) && effectSucces)
@@ -53,7 +46,7 @@ class Stage {
                     if ((defendingFightPlayer["${statName}Stage"] + addToStage) <= 6)
                     {
                         defendingFightPlayer["${statName}Stage"] += addToStage;
-                        fight.log += "m:${attackFightPlayer.ownerPokemon.pokemon.name}`s statName went up.;";
+                        fight.log += "m:${attackFightPlayer.ownerPokemon.pokemon.name}`s ${statName} went up.;";
                     }
                     else
                     {
@@ -63,17 +56,17 @@ class Stage {
                 else if ((defendingFightPlayer["${statName}Stage"] + addToStage) == -6)
                 {
                     defendingFightPlayer["${statName}Stage"] = -6;
-                    fight.log += "m:${defendingFightPlayer.ownerPokemon.pokemon.name}`s statName lowers.;";
+                    fight.log += "m:${defendingFightPlayer.ownerPokemon.pokemon.name}`s ${statName} lowers.;";
                 }
                 else
                 {
-                    fight.log += "m:${defendingFightPlayer.ownerPokemon.pokemon.name}`s statName can`t lower anymore.;";
+                    fight.log += "m:${defendingFightPlayer.ownerPokemon.pokemon.name}`s ${statName} can`t lower anymore.;";
                 }
             }
             else
             {
                 defendingFightPlayer["${statName}Stage"] = defendingFightPlayer["${statName}Stage"] + addToStage;
-                fight.log += "m:${defendingFightPlayer.ownerPokemon.pokemon.name}`s statName lowers.;";
+                fight.log += "m:${defendingFightPlayer.ownerPokemon.pokemon.name}`s ${statName} lowers.;";
             }
         }
     }
