@@ -6,6 +6,6 @@
     </tr>
     <tr>
         <td><a href="" onclick="return getMenu('&pkmn');">PKMN</a></td>
-        <td><a href="index.php?action=item" onclick="return getMenu('&item');">Item</a></td>
+        <td><a href="" onclick="return getMenu('&items');">Item</a></td>
     </tr>
 </table>

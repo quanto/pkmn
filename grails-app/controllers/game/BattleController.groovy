@@ -179,6 +179,9 @@ class BattleController {
         if (fight.battleOver){
             render text: g.render(template: 'exit')
         }
+        else if (params.items != null){
+            render template: "itemList", model : [fight:fight,ownerItems:player.ownerItems]
+        }
         else if (params.fight != null && !fight.battleOver)
         {
             Battle.beforeChosingMove(fight, myFightPlayer, player);
@@ -220,12 +223,19 @@ class BattleController {
 
         Fight fight = fightFactoryService.getFight(player.fightNr)
 
-        println "run"
         Run.run(fight)
 
         render template: "log", model : [fight:fight]
     }
 
+    def useItem = {
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
 
+        Fight fight = fightFactoryService.getFight(player.fightNr)
+
+        println "1"
+        render text :"use item"
+    }
 
 }
