@@ -24,8 +24,8 @@
             <sec:ifLoggedIn>
                 Ingelogd als: <sec:loggedInUserInfo field="username"/>
                 | <a href="${createLink(controller: 'logout')}">Uitloggen</a>
-            </sec:ifLoggedIn>
             	| <a href="${createLink(controller: 'game')}">Game</a>
+            </sec:ifLoggedIn>
             <sec:ifAnyGranted roles="ROLE_ADMIN">
                 | <a href="${createLink(controller: 'mapEditor')}">Map editor</a>
             </sec:ifAnyGranted>
@@ -34,7 +34,11 @@
             </sec:ifAnyGranted>
         </div>
 		<g:layoutBody/>
-		<div class="footer" role="contentinfo"></div>
+		<div class="footer" role="contentinfo">
+
+            <g:link url="https://github.com/quanto/pkmn"><img src="${resource(uri:'')}/images/github_icon.png"> github</g:link>
+
+		</div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
 		<g:javascript library="application"/>
         <r:layoutResources />
