@@ -5,7 +5,7 @@ class Accuraccy {
     /**
      *
      */
-    public static void addToAccuracyStage(Fight fight, int addToStage,FightPlayer attackingFightPlayer, FightPlayer defendingFightPlayer)
+    public static void addToAccuracyStage(Fight fight, int addToStage, FightPlayer attackingFightPlayer, FightPlayer defendingFightPlayer)
     {
         if (addToStage > 0)
         {

@@ -1,13 +1,29 @@
 package game
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 30-09-12
- * Time: 09:20
- * To change this template use File | Settings | File Templates.
- */
 class Evasion {
+
+    public static void addToEvasionStage(int addToStage, FightPlayer attackingFightPlayer, FightPlayer defendingFightPlayer)
+    {
+
+        if (addToStage > 0)
+        {
+            // Max 6
+            if (attackingFightPlayer.evasionStage != 6)
+            {
+                attackingFightPlayer.evasionStage += addToStage;
+                attackingFightPlayer.fight.log += "m:${attackingFightPlayer.ownerPokemon.pokemon.name}`s evasiveness raises.;";
+            }
+        }
+        else
+        {
+            // min -6
+            if (defendingFightPlayer.evasionStage != -6)
+            {
+                defendingFightPlayer.evasionStage += addToStage;
+                attackingFightPlayer.fight.log += "m:${defendingFightPlayer.ownerPokemon.pokemon.name}`s evasiveness lowers.;";
+            }
+        }
+    }
 
     public static int getEvasion(int evasion, int stage)
     {

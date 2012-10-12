@@ -270,10 +270,6 @@ class Battle {
 
         Random random = new Random()
 
-        // :TODO added these but are they needed
-        int recover = 0
-
-        boolean effectActionOnBoth = false
         String attackMovetype
         String attackMovecategory
 
@@ -302,12 +298,11 @@ class Battle {
                 moveInfo.damageAction = false
                 moveInfo.recoverAction = false
 
-                // :TODO implement
-                //include("statusMove.php");
+                StatusMove.getMoveInfo(moveInfo, attackFightPlayer.move, fight, attackFightPlayer, defendingFightPlayer)
             }
 
             // openent moves die ervoor zogen dat er niet gemist kan worden
-            if (defendingFightPlayer.move?.id == 376)
+            if (defendingFightPlayer.move?.name == "Solarbeam")
             {
                 moveInfo.cantMiss = true
             }
@@ -375,9 +370,9 @@ class Battle {
                             {
                                 moveInfo.recoverAction = true;
                                 moveInfo.effectAction = true;
-                                recover = moveInfo.damage / 2;
-                                if (recover < 1)
-                                    recover = 1;
+                                moveInfo.recover = moveInfo.damage / 2;
+                                if (moveInfo.recover < 1)
+                                    moveInfo.recover = 1;
                             }
 
                         }
@@ -555,7 +550,7 @@ class Battle {
                         defendingFightPlayer.confusion = random.nextInt(3)+2;
                         fight.log += "m:" + defendingOwnerPokemon.pokemon.name  + " became confused.;";
                         moveInfo.confusionActionSucces = true
-                        if (effectActionOnBoth)
+                        if (moveInfo.effectActionOnBoth)
                         {
                             Recover.removeAllStatusAfflictions(attackFightPlayer);
                             attackFightPlayer.confusion = random.nextInt(3)+2;
@@ -593,7 +588,7 @@ class Battle {
                 {
                     if (moveSucces && moveInfo.effectSucces)
                     {
-                        Recover.recover(fight,recover, attackFightPlayer);
+                        Recover.recover(fight,moveInfo.recover, attackFightPlayer);
                     }
                     else
                     {

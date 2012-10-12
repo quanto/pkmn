@@ -51,4 +51,6 @@ class MoveInfo {
     boolean badlypoisondActionSucces = false
     boolean poisonActionSucces = false
     boolean burnActionSucces = false
+    boolean effectActionOnBoth = false
+    int recover = 0
 }
