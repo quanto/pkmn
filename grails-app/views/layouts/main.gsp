@@ -20,6 +20,7 @@
 	<body>
 		<div id="grailsLogo" role="banner">
             <a href="http://kevinverhoef.nl"></a>
+            <a href="http://fabianwouters.nl"></a>
             <sec:ifLoggedIn>
                 Ingelogd als: <sec:loggedInUserInfo field="username"/>
                 | <a href="${createLink(controller: 'logout')}">Uitloggen</a>
@@ -29,7 +30,7 @@
                 | <a href="${createLink(controller: 'mapEditor')}">Map editor</a>
             </sec:ifAnyGranted>
             <sec:ifAnyGranted roles="ROLE_ADMIN">
-                | <a href="${createLink(controller: 'adminPanel')}">Admin panel</a>
+                | <a href="${createLink(controller: 'admin')}">Admin panel</a>
             </sec:ifAnyGranted>
         </div>
 		<g:layoutBody/>
