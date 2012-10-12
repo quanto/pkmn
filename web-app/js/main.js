@@ -118,7 +118,7 @@ function getMenu()
 	}
 	else if(view == "news")
 	{
-		getNews();
+		loadNewsItems();
 	}
 	else if(view == "quests")
 	{
@@ -139,7 +139,7 @@ function loadLink(menuItem)
 	}
 	else if(menuItem == "news")
 	{
-		getNews();
+		loadNewsItems();
 	}
 	else if(menuItem == "quests")
 	{
@@ -308,6 +308,19 @@ function longWait()
 {
 	disconnect();
 	serverMessage();	
+};
+
+function loadNewsItems()
+{
+	$.ajax({
+		type: "GET",
+		url: "/game/admin/showNewsItems",
+		data: "",
+		cache: false,
+		success: function(newsItems){
+			createDialog("News", newsItems);
+		}
+	});
 };
 
 function updateWhoisList()
