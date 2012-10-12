@@ -3,8 +3,9 @@ package game
 class FightMove {
     
     public static void getMoveInfo(MoveInfo moveInfo, Move move, Fight fight, FightPlayer attackingFightPlayer, FightPlayer defendingFightPlayer){
-        /*
+
         Random random = new Random()
+
         // Hits 2-5 times.
         if (move.name == "Arm Thrust" || move.name == "Bone Rush" || move.name == "Bullet Seed" || move.name == "Barrage" || move.name == "Pin Missile" || move.name == "Comet Punch" || move.name == "Icicle Spear" || move.name == "Rock Blast" || move.name == "Doubleslap" || move.name == "Fury Attack" || move.name == "Fury Swipes" || move.name == "Spike Cannon")
         {
@@ -352,10 +353,8 @@ class FightMove {
             moveInfo.selfStageAction = true;
             moveInfo.addToSpAttackStage = -2;
         }
-        else
-          */
         // High Critical-Hit ratio.
-         if (move.name == "Aeroblast" || move.name == "Air Cutter" || move.name == "Attack Order" || move.name == "Crabhammer" || move.name == "Cross Chop" || move.name == "Karate Chop" || move.name == "Night Slash" || move.name == "Stone Edge" || move.name == "Leaf Blade" || move.name == "Psycho Cut" || move.name == "Razor Leaf" || move.name == "Shadow Claw" || move.name == "Slash" || move.name == "Spacial Rend") //
+        else if (move.name == "Aeroblast" || move.name == "Air Cutter" || move.name == "Attack Order" || move.name == "Crabhammer" || move.name == "Cross Chop" || move.name == "Karate Chop" || move.name == "Night Slash" || move.name == "Stone Edge" || move.name == "Leaf Blade" || move.name == "Psycho Cut" || move.name == "Razor Leaf" || move.name == "Shadow Claw" || move.name == "Slash" || move.name == "Spacial Rend") //
         {
             Critical.addCriticalStage(1,attackingFightPlayer)
             // :TODO effect action?
@@ -415,153 +414,148 @@ class FightMove {
             moveInfo.poisonAction = true;
             Critical.addCriticalStage(1,attackingFightPlayer);
         }
+        // An instant 1-hit KO, if it hits.
+        else if (move.name == "Fissure" || move.name == "Guillotine" || move.name == "Horn Drill" || move.name == "Sheer Cold") //
+        {
+            moveInfo.oneHitKO = true;
+        }
+        // User receives recoil damage.
+        else if (move.name == "Brave Bird" || move.name == "Double-Edge" || move.name == "Flare Blitz" || move.name == "Head Smash" || move.name == "Submission" || move.name == "Take Down" || move.name == "Volt Tackle" || move.name == "Wood Hammer") //
+        {
+            moveInfo.recoil = 12.5;
+        }
+        // 106 Dream Eater special move Can only be used on a sleeping target. User recovers half of the damage inflicted on opponent.
+        else if (move.name == "Dream Eater")
+        {
+            if (defendingFightPlayer.sleep == 0)
+            {
+                fight.log += "Dream Eater can only be used at an sleeping target.;";
+                moveInfo.canNotUseAction = true;
+            }
+        }
+        // 447 Wake-up Slap physical move Power doubles if used on a sleeping opponent, but wakes it up.
+        else if (move.name == "Wake-up Slap")
+        {
+            if (defendingFightPlayer.sleep != 0)
+            {
+                moveInfo.defaultAttackPower = false;
+                moveInfo.attackPower = move.power * 2;
+                defendingFightPlayer.sleep = 0;
+                fight.log = "${defendingFightPlayer.ownerPokemon.pokemon.name} wakes up.;";
+            }
+        }
+        // Trump Card special move The lower the PP, the higher the power.
+        else if (move.name == "Trump Card")
+        {
+            int ppLeft = attackOwnerPokemon.ownerMoves.sum { it.move.name == "Trump Card"?it.ppLeft:0 }
+
+            while (row = mysql_fetch_array(result))
+            {
+                moveInfo.defaultAttackPower = false
+                if (ppLeft > 4)
+                    moveInfo.attackPower = 40;
+                else if (ppLeft == 4)
+                    moveInfo.attackPower = 50;
+                else if (ppLeft == 3)
+                    moveInfo.attackPower = 60;
+                else if (ppLeft == 2)
+                    moveInfo.attackPower = 75;
+                else if (ppLeft == 1)
+                    moveInfo.attackPower = 190;
+            }
+        }
+        // Explosion status move User faints.
+        else if (move.name == "Explosion" || move.name == "Selfdestruct")
+        {
+            attackingFightPlayer.hp = 0;
+        }
+        //400 Super Fang physical move Always takes off half of the opponent's HP.
+        else if (move.name == "Super Fang")
+        {
+            moveInfo.calculateDamage = false;
+            moveInfo.damage = Math.round(defendingFightPlayer.hp / 2);
+        }
+        // 463 Wring Out special move The higher the opponent's HP, the higher the damage.
+        else if (move.name == "Wring Out" || move.name == "Crush Grip")
+        {
+            moveInfo.defaultAttackPower = false;
+            moveInfo.attackPower = Math.round(110 * attackingFightPlayer.hp / attackingFightPlayer.maxHp);
+        }
+        // May cause freezing.
+        else if (move.name == "Blizzard" || move.name == "Ice Beam" || move.name == "Ice Punch" || move.name == "Powder Snow") //
+        {
+            moveInfo.effectAction = true;
+            moveInfo.freezeAction = true;
+        }
+        // 196 Ice Fang physical move May cause freezing and flinching.
+        else if (move.name == "Ice Fang")
+        {
+            moveInfo.effectAction = true;
+            moveInfo.freezeAction = true;
+            moveInfo.flinchAction = true;
+        }
+        // 433 Tri Attack special move May cause paralysis, freezing, or a burn
+        else if (move.name == "Tri Attack")
+        {
+            moveInfo.effectAction = true;
+
+            int r = random.nextInt(3)
+            if (r == 1)
+                moveInfo.freezeAction = true;
+            else if (r == 2)
+                moveInfo.burnAction = true;
+            else
+                moveInfo.paralysisAction = true;
+        }
+        // Cannot miss, regardless of Accuracy and Evasiveness.
+        else if (move.name == "Shadow Punch" || move.name == "Faint Attack" || move.name == "Magical Leaf" || move.name == "Magnet Bomb" || move.name == "Aerial Ace") //
+        {
+            moveInfo.cantMiss = true;
+        }
+        else if (move.name == "Struggle")
+        {
+            moveInfo.recoil = 50;
+        }
+        else if (move.name == "Rapid Spin")
+        {
+            attackingFightPlayer.continueMove = 0;
+            attackingFightPlayer.holdMove = 0;
+            //attackingFightPlayer.continueTurns = 0; :TODO whats this?
+        }
+        else if (move.name == "Solarbeam")
+        {
+            if (attackingFightPlayer.lastMove?.name != "Solarbeam")
+            {
+                fight.log += "${attackingFightPlayer.ownerPokemon.pokemon.name} gathers light.;";
+                moveInfo.damageAction = false // do nothing
+            }
+            else
+            {
+                attackingFightPlayer.move = null // zet op 0 zodat deze niet wordt herhaalt
+            }
+        }
+        // Increases user's Defense one stage in the 1st turn, attacks in the 2nd turn.
+        else if (move.name == "Skull Bash")
+        {
+            if (attackingFightPlayer.lastMove?.name != "Skull Bash")
+            {
+                moveInfo.effectAction = true
+                moveInfo.stageAction = true
+                moveInfo.addToDefenseStage = 1
+                moveInfo.damageAction = false // do nothing
+            }
+            else
+            {
+                attackingFightPlayer.move = null; // zet op 0 zodat deze niet wordt herhaalt
+            }
+        }
+
+        else if (move.name == "Bind")
+        {
+            moveInfo.holdMove = true;
+        }
 
 
-        /*
-                // An instant 1-hit KO, if it hits.
-                else if (move.name == "Fissure" || move.name == "Guillotine" || move.name == "Horn Drill" || move.name == "Sheer Cold") //
-                {
-                    oneHitKO = true;
-                }
-                // User receives recoil damage.
-                else if (move.name == "Brave Bird" || move.name == "Double-Edge" || move.name == "Flare Blitz" || move.name == "Head Smash" || move.name == "Submission" || move.name == "Take Down" || move.name == "Volt Tackle" || move.name == "Wood Hammer") //
-                {
-                    recoil = 12.5;
-                }
-                // 106 Dream Eater special move Can only be used on a sleeping target. User recovers half of the damage inflicted on opponent.
-                else if (move.name == "Dream Eater")
-                {
-                    if (fight.{"player" . ip . "sleep"} == 0)
-                    {
-                        fight.log .= "Dream Eater can only be used at an sleeping target.;";
-                        canNotUseAction = true;
-                    }
-                }
-                // 447 Wake-up Slap physical move Power doubles if used on a sleeping opponent, but wakes it up.
-                else if (move.name == "Wake-up Slap")
-                {
-                    if (fight.{"player" . ip . "sleep"} != 0)
-                    {
-                        defaultAttackPower = false;
-                        attackPower = move.power * 2;
-                        fight.{"player" . ip . "sleep"} == 0;
-                        fight.log = {"pokemonap"}.name . " wakes up.;";
-                    }
-                }
-                // Trump Card special move The lower the PP, the higher the power.
-                else if (move.name == "Trump Card")
-                {
-                    sql = "select ppLeft from ownerpokemon moves where ownerId = '" . fight.{"player" . ap . "Id"} . "' and ownerPokemonId = '" . fight.{"player" . ap . "OwnerPokemonId"} . "' and moveId = '" . move.id . "'";
-
-                    result = DatabaseQuery::execute(sql);
-
-                    while (row = mysql_fetch_array(result))
-                    {
-                        defaultAttackPower = false;
-                        if (row["ppLeft"] > 4)
-                            attackPower = 40;
-                        else if (row["ppLeft"] == 4)
-                            attackPower = 50;
-                        else if (row["ppLeft"] == 3)
-                            attackPower = 60;
-                        else if (row["ppLeft"] == 2)
-                            attackPower = 75;
-                        else if (row["ppLeft"] == 1)
-                            attackPower = 190;
-                    }
-                }
-                // Explosion status move User faints.
-                else if (move.name == "Explosion" || move.name == "Selfdestruct")
-                {
-                    fight.{"player" . ap . "Hp"} = 0;
-                }
-                //400 Super Fang physical move Always takes off half of the opponent's HP.
-                else if (move.name == "Super Fang")
-                {
-                    calculateDamage = false;
-                    damage = round(fight.{"player" . ip . "Hp"} / 2);
-                }
-                // 463 Wring Out special move The higher the opponent's HP, the higher the damage.
-                else if (move.name == "Wring Out" || move.name == "Crush Grip")
-                {
-                    defaultAttackPower = false;
-                    attackPower = round(110 * fight.{"player" . ip . "Hp"} / fight.{"player" . ip . "MaxHp"});
-                }
-                // May cause freezing.
-                else if (move.name == "Blizzard" || move.name == "Ice Beam" || move.name == "Ice Punch" || move.name == "Powder Snow") //
-                {
-                    effectAction = true;
-                    freezeAction = true;
-                }
-                // 196 Ice Fang physical move May cause freezing and flinching.
-                else if (move.name == "Ice Fang")
-                {
-                    effectAction = true;
-                    freezeAction = true;
-                    flinchAction = true;
-                }
-                // 433 Tri Attack special move May cause paralysis, freezing, or a burn
-                else if (move.name == "Tri Attack")
-                {
-                    effectAction = true;
-                    r = rand(1,3);
-                    if (r == 1)
-                        freezeAction = true;
-                    else if (r == 2)
-                        burnAction = true;
-                    else
-                        paralysisAction = true;
-                }
-
-                // Cannot miss, regardless of Accuracy and Evasiveness.
-                else if (move.name == "Shadow Punch" || move.name == "Faint Attack" || move.name == "Magical Leaf" || move.name == "Magnet Bomb" || move.name == "Aerial Ace") //
-                {
-                    cantMiss = true;
-                }
-                else if (move.name == "Struggle")
-                {
-                    recoil = 50;
-                }
-                else if (move.name == "Rapid Spin")
-                {
-                    fight.{"player" . ap . "continueMove"} = 0;
-                    fight.{"player" . ap . "holdMove"} = 0;
-                    fight.{"player" . ap . "continueTurns"} = 0;
-                }
-                else if (move.name == "Solarbeam")
-                {
-                    if (fight.{"player" . ap . "lastMove"} != 376)
-                    {
-                        fight.log .= {"pokemonap"}.name . " gathers light.;";
-                        damageAction = false; // do nothing
-                    }
-                    else
-                    {
-                        fight.{"player" . ap . "move"} = 0; // zet op 0 zodat deze niet wordt herhaalt
-                    }
-                }
-                // Increases user's Defense one stage in the 1st turn, attacks in the 2nd turn.
-                else if (move.name == "Skull Bash")
-                {
-                    if (fight.{"player" . ap . "lastMove"} != 360)
-                    {
-                        effectAction = true;
-                        stageAction = true;
-                        addToDefenseStage = 1;
-                        damageAction = false; // do nothing
-                    }
-                    else
-                    {
-                        fight.{"player" . ap . "move"} = 0; // zet op 0 zodat deze niet wordt herhaalt
-                    }
-                }
-
-                else if (move.name == "Bind")
-                {
-                    holdMove = true;
-                }
-
-        */
     }
     
 }

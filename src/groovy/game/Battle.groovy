@@ -295,8 +295,7 @@ class Battle {
                 moveInfo.badlypoisondAction = false
                 moveInfo.stageAction = false
 
-                // :TODO implement
-                //include("fightMove.php");
+                FightMove.getMoveInfo(moveInfo, attackFightPlayer.move, fight, attackFightPlayer, defendingFightPlayer)
             }
             else if (attackMove.category == "status move")
             {
