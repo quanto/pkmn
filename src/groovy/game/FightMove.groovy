@@ -447,22 +447,21 @@ class FightMove {
         // Trump Card special move The lower the PP, the higher the power.
         else if (move.name == "Trump Card")
         {
-            int ppLeft = attackOwnerPokemon.ownerMoves.sum { it.move.name == "Trump Card"?it.ppLeft:0 }
+            def ownerMoves = OwnerMove.findAllByOwnerAndPartyPositionGreaterThen(attackingFightPlayer.owner,0)
+            int ppLeft = ownerMoves.sum { it.move.name == "Trump Card"?it.ppLeft:0 }
 
-            while (row = mysql_fetch_array(result))
-            {
-                moveInfo.defaultAttackPower = false
-                if (ppLeft > 4)
-                    moveInfo.attackPower = 40;
-                else if (ppLeft == 4)
-                    moveInfo.attackPower = 50;
-                else if (ppLeft == 3)
-                    moveInfo.attackPower = 60;
-                else if (ppLeft == 2)
-                    moveInfo.attackPower = 75;
-                else if (ppLeft == 1)
-                    moveInfo.attackPower = 190;
-            }
+            moveInfo.defaultAttackPower = false
+            if (ppLeft > 4)
+                moveInfo.attackPower = 40;
+            else if (ppLeft == 4)
+                moveInfo.attackPower = 50;
+            else if (ppLeft == 3)
+                moveInfo.attackPower = 60;
+            else if (ppLeft == 2)
+                moveInfo.attackPower = 75;
+            else if (ppLeft == 1)
+                moveInfo.attackPower = 190;
+
         }
         // Explosion status move User faints.
         else if (move.name == "Explosion" || move.name == "Selfdestruct")

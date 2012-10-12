@@ -56,9 +56,9 @@ class StatusMove {
         // Decreases opponent's Special Defense by two stages. 
         else if (move.name == "Metal Sound")
         {
-            effectAction = true;
-            stageAction = true;
-            addToSpDefenseStage = -2;
+            moveInfo.effectAction = true;
+            moveInfo.stageAction = true;
+            moveInfo.addToSpDefenseStage = -2;
         }
         // Increases user's Special Attack by one stage. 
         else if (move.name == "Growth")
@@ -70,9 +70,9 @@ class StatusMove {
         // Increases user's Defense by two stages.
         else if (move.name == "Acid Armor")
         {
-            effectAction = true;
-            stageAction = true;
-            addToDefenseStage = 2;
+            moveInfo.effectAction = true;
+            moveInfo.stageAction = true;
+            moveInfo.addToDefenseStage = 2;
         }
         // Raises the user's Speed by two stages.
         else if (move.name == "Agility")
@@ -215,9 +215,9 @@ class StatusMove {
         // Increases the user's Defense by two stages. 
         else if (move.name == "Iron Defense")
         {
-            effectAction = true;
-            stageAction = true;
-            addToDefenseStage = 2;
+            moveInfo.effectAction = true;
+            moveInfo.stageAction = true;
+            moveInfo.addToDefenseStage = 2;
         }
         // Decreases opponent's Defense by one stage. 
         else if (move.name == "Tail Whip")
