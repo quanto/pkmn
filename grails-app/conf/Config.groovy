@@ -105,6 +105,8 @@ grails.plugins.springsecurity.securityConfigType = "InterceptUrlMap"
 grails.plugins.springsecurity.interceptUrlMap = [
         '/mapEditor/**': ['ROLE_ADMIN'],
         '/scaffold/**':  ['ROLE_ADMIN'],
+        '/admin/**':     ['ROLE_ADMIN'],
+        '/battleTest/**':['ROLE_ADMIN'],
         '/register/**':  ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/js/**':        ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/css/**':       ['IS_AUTHENTICATED_ANONYMOUSLY'],
