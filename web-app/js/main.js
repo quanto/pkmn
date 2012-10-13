@@ -429,14 +429,16 @@ function getPlayerLocation()
 
 function movePlayer(direction)
 {
-	pos = $("#player").attr("alt");
-	
-	coords = pos.split("-");
-	
-	x = coords[0];
-	y = coords[1];
-	
-	checkMove(direction, x, y);
+    if (!freeze){
+        pos = $("#player").attr("alt");
+
+        coords = pos.split("-");
+
+        x = coords[0];
+        y = coords[1];
+
+        checkMove(direction, x, y);
+    }
 
 };
 

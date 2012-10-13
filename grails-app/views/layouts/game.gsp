@@ -13,7 +13,9 @@
     <link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
     <link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
     <script type="text/javascript" src="${resource(uri:'')}/js/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="${resource(uri:'')}/js/tablet/move.js"></script>
     <script>
+
         $(document).ready(function() {
             $('#right').attr('height',($(window).height() - $("#top").height()) + "px");
         });
@@ -21,7 +23,6 @@
         $(window).resize(function() {
             $('#right').attr('height',($(window).height() - $("#top").height()) + "px");
         });
-
 
     </script>
     <style>
@@ -110,6 +111,15 @@
         background-color: #FF9999;
     }
 
+    img {
+        -webkit-user-select: none;
+    }
+
+    /* Special tablet navigation */
+    #tableNavigation {
+        display:none;
+    }
+
     </style>
     <g:layoutHead/>
     <r:layoutResources />
@@ -154,6 +164,7 @@
             <div id="party">
 
             </div>
+
         </td>
 
     </tr>
@@ -168,6 +179,26 @@
     </tr>
 
 </table>
+
+<div id="tableNavigation" style="position:absolute;bottom:15px;right:15px;">
+    <table style="width:0;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td></td>
+            <td><img id="moveUp" src="${resource(uri:'')}/images/move/button.png" style="position: relative;top:30px;" onclick="" /></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><img id="moveLeft" src="${resource(uri:'')}/images/move/button.png" style="position: relative;left:30px;" /></td>
+            <td></td>
+            <td><img id="moveRight" src="${resource(uri:'')}/images/move/button.png" style="position: relative;right:30px;" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><img id="moveDown" src="${resource(uri:'')}/images/move/button.png" style="position: relative;bottom:30px;" /></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
 
 <g:javascript library="application"/>
 <r:layoutResources />
