@@ -2,7 +2,7 @@ package game
 
 class Stage {
 
-    public static void modifyStage(Fight fight, String statName, int addToStage, boolean selfStageAction, int openentStageAction, boolean effectSucces, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer)
+    public static void modifyStage(Fight fight, String statName, int addToStage, boolean selfStageAction, boolean openentStageAction, boolean effectSucces, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer)
     {
 
         if ((addToStage > 0 || selfStageAction) && effectSucces && !openentStageAction)
@@ -32,7 +32,7 @@ class Stage {
                 attackFightPlayer["${statName}Stage"]  = attackFightPlayer["${statName}Stage"]  + addToStage;
 
                 if (!selfStageAction)
-                    fight.log += "m:\${attackFightPlayer.ownerPokemon.pokemon.name}`s ${statName} went up.;";
+                    fight.log += "m:${attackFightPlayer.ownerPokemon.pokemon.name}`s ${statName} went up.;";
             }
         }
         else if ((addToStage < 0 || openentStageAction) && effectSucces)

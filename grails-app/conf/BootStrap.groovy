@@ -8,6 +8,7 @@ import data.MapImport
 import data.TilesImport
 import data.ItemImport
 import map.View
+import data.PlayerImport
 
 class BootStrap {
 
@@ -35,6 +36,11 @@ class BootStrap {
 
         ItemImport.importItems()
 
+        LearnableMovesImport.importLearnableMoves()
+
+        PlayerImport.importPlayers()
+
+        /*
         Map map = Map.findByName("Blossom_town")
 
         boolean newImport = true
@@ -146,7 +152,7 @@ class BootStrap {
         Move move = Move.findByName("Growl")
         Move moveTackle = Move.findByName("Tackle")
 
-        LearnableMovesImport.importLearnableMoves()
+
 
         // Balbasaur
         OwnerPokemon ownerPokemon = new OwnerPokemon(
@@ -307,6 +313,7 @@ class BootStrap {
                 player:player,
                 role:adminRole
         ).save()
+        */
 
     }
 

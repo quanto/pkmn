@@ -8,13 +8,6 @@ import game.ComputerAction
 import game.RecoverAction
 import game.MapTransition
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 04-10-12
- * Time: 09:37
- * To change this template use File | Settings | File Templates.
- */
 class MapImport {
 
     public static void importMaps(){

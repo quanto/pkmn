@@ -16,7 +16,6 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
             def session = RequestContextHolder.currentRequestAttributes().session
             String username = SecurityContextHolder.context.authentication?.getPrincipal()?.username
-            System.out.println(username)
             Player player = Player.findByUsername(username)
             session.playerData = new PlayerData(player.id)
         }

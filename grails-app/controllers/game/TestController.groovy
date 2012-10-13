@@ -10,6 +10,73 @@ class TestController {
 
     def sessionRegistry
 
+
+    def test4(){
+       Player player = Player.findByUsername("kevin")
+
+
+        String playerData =
+"""<playerData>
+${player.username}
+${player.name}
+${player.password}
+${player.enabled}
+${player.mail}
+${player.ip}
+${player.registerDate}
+${player.map.name}
+${player.lastRecoverAction.map.name}
+${player.lastRecoverAction.positionX}
+${player.lastRecoverAction.positionY}
+${player.positionX}
+${player.positionY}
+${player.money}
+${player.view}
+${player.pveBattlesWon}
+${player.pveBattlesLost}
+${player.pvnBattlesWon}
+${player.pvnBattlesLost}
+</playerData>
+"""
+        List<OwnerPokemon> ownerPokemonList = OwnerPokemon.findAllByOwner(player)
+
+        String ownerPokemonData = ""
+
+        ownerPokemonList.each { OwnerPokemon op ->
+            String ownerMoves = ""
+            op.ownerMoves.each { OwnerMove om ->
+                ownerMoves +=
+"""<ownerMove>
+${om.move.name}
+${om.ppLeft}
+</ownerMove>
+"""
+            }
+
+ownerPokemonData += """<ownerPokemon>
+${op.isNpc}
+${op.pokemon.nr}
+${op.hpIV}
+${op.attackIV}
+${op.defenseIV}
+${op.spAttackIV}
+${op.spDefenseIV}
+${op.speedIV}
+${op.hp}
+${op.gender}
+${op.partyPosition}
+${op.xp}
+${op.level}
+</ownerPokemon>
+${ownerMoves}
+"""
+        }
+
+        playerData += ownerPokemonData
+
+        render text: playerData
+    }
+
     def test3(){
         render text:  sessionRegistry.getAllPrincipals()
     }

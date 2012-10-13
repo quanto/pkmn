@@ -180,7 +180,7 @@
 
 </table>
 
-<div id="tableNavigation" style="position:absolute;bottom:15px;right:15px;">
+<div id="tableNavigation" style="position:absolute;bottom:-5px;right:0px;">
     <table style="width:0;" cellpadding="0" cellspacing="0">
         <tr>
             <td></td>
