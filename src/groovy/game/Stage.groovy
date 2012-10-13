@@ -2,7 +2,7 @@ package game
 
 class Stage {
 
-    public static void modifyStage(Fight fight, String statName, int addToStage,int  selfStageAction, int openentStageAction, boolean effectSucces, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer)
+    public static void modifyStage(Fight fight, String statName, int addToStage, boolean selfStageAction, int openentStageAction, boolean effectSucces, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer)
     {
 
         if ((addToStage > 0 || selfStageAction) && effectSucces && !openentStageAction)
