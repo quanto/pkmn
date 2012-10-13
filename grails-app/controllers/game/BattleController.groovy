@@ -179,6 +179,12 @@ class BattleController {
         if (fight.battleOver){
             render text: g.render(template: 'exit')
         }
+        else if (fight.fightPlayer1.hp <= 0 && fight.fightPlayer2.hp > 0)
+        {
+            List<OwnerPokemon> ownerPokemonList = OwnerPokemon.findAllByOwnerAndPartyPositionGreaterThan(player,0)
+            FightPlayer fightPlayer = fight.fightPlayer1
+            render text: g.render(template: 'pokemonList',model: [mustChoose:true,ownerPokemonList:ownerPokemonList,fightPlayer:fightPlayer])
+        }
         else if (params.items != null){
             render template: "itemList", model : [fight:fight,ownerItems:player.ownerItems]
         }
