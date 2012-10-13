@@ -15,7 +15,7 @@ class Fight {
     int escapeAttempts = 0
 
     String log = ""
-    String logHistory = "" // :TODO implement
+    String logHistory = ""
 
     BattleType battleType
     boolean battleOver

@@ -1,5 +1,7 @@
 package game
 
+import map.View
+
 class BattleTestController {
 
     FightFactoryService fightFactoryService
@@ -9,13 +11,18 @@ class BattleTestController {
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
 
-        // Set test fight
-//        session.fight = Fight.findByPlayer1(session.owner)
-        Pokemon wildPokemon = Pokemon.findByNr(1)
-        Fight fight = fightFactoryService.startFight(BattleType.PVE,player,null,wildPokemon,1)
-        player.fightNr = fight.nr
+        if (request.post){
+            Pokemon pokemon = Pokemon.get(params.pokemon)
+            int level = Integer.parseInt(params.level)
 
-        redirect controller : 'battle'
+            Fight fight = fightFactoryService.startFight(BattleType.PVE,player,null,pokemon,level)
+
+            player.fightNr = fight.nr
+            player.view = View.Battle
+            redirect controller : 'game'
+        }
+
+        render view : "index"
     }
 
 

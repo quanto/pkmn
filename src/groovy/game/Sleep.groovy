@@ -17,8 +17,8 @@ class Sleep {
             // Geef bericht
             if (fightPlayer.sleep == 1)
             {
-                fight.log += "m:${fightPlayer.ownerPokemon.pokemon.name} wakes up.;";
-                fightPlayer.sleep = 0;
+                fight.log += "m:${fightPlayer.ownerPokemon.pokemon.name} wakes up.;"
+                fightPlayer.sleep = 0
                 // :TODO What to do
 //                if (player != 2 || fight.battleType != "pve")
 //                {
@@ -28,10 +28,10 @@ class Sleep {
             }
             else
             {
-                fight.log += "m:${fightPlayer.ownerPokemon.pokemon.name} is a sleep.;";
+                fight.log += "m:${fightPlayer.ownerPokemon.pokemon.name} is a sleep.;"
 
                 // verlaag slaap beurten
-                fightPlayer.sleep -= 1;
+                fightPlayer.sleep -= 1
 
                 // geen move
                 Moves.setMove(fight,fightPlayer,null)
