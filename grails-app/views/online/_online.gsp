@@ -1,9 +1,9 @@
 <%@ page import="game.Player" %>
 <table>
     <tr>
-        <th>Player</th>
-        <th>Map</th>
-        <th>Online?</th>
+        <td>Player</td>
+        <td>Map</td>
+        <td>Online?</td>
     </tr>
     <g:each in="${players}" var="player">
         <g:if test="${ownPlayer != player || 1==1}">

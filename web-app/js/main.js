@@ -233,7 +233,7 @@ function getParty()
 		url: "/game/party/index",
 		cache: false,
 		success: function(party){
-			createDialog("Party", party);
+            $("#party").html(party)
 		}
 	});
 }
@@ -331,8 +331,8 @@ function updateWhoisList()
 		data: "",
 		cache: false,
 		success: function(whoisList){
-			//$("#whois").html(whoisList);
-			createDialog("Online", whoisList);
+			$("#online").html(whoisList);
+			//createDialog("Online", whoisList);
 		}
 	});
 };
