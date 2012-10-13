@@ -26,6 +26,8 @@ class BattleTestController {
     }
 
 
+    def moveOverview(){
 
+    }
 
 }

@@ -10,5 +10,6 @@
             <g:select name="pokemon" from="${Pokemon.list()}" optionKey="id" />
             <g:submitButton name="start" value="start" />
         </g:form>
+        <g:link action="moveOverview">Move Overview</g:link>
     </body>
 </html>
