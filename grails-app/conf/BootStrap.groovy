@@ -7,6 +7,7 @@ import data.EffectivenessImport
 import data.MapImport
 import data.TilesImport
 import data.ItemImport
+import map.View
 
 class BootStrap {
 
@@ -103,7 +104,8 @@ class BootStrap {
                 map: Map.findByName("Glooming forest -2x0"),
                 positionX : 12,
                 positionY : 12,
-                lastRecoverAction:RecoverAction.list().last()
+                lastRecoverAction:RecoverAction.list().last(),
+                view: View.ShowMap
         )
         player.save()
 

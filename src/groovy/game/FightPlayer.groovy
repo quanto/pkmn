@@ -42,7 +42,7 @@ class FightPlayer {
     int evasionStage
     Move move
     boolean doNoMove = false
-    String learnMoves = ""
+    List<Move> learnMoves = []
     int holdMove
     int holdTurns
     Move continueMove

@@ -128,6 +128,17 @@ class BattleController {
         Fight fight = fightFactoryService.getFight(player.fightNr)
         FightPlayer myFightPlayer = fight.myPlayer(player)
 
+        // forget learn move
+        if (fight.fightPlayer1.learnMoves && params.forgetMove != null)
+        {
+            removeLearnMove(fight)
+        }
+        // forget old move
+        if (params.replaceMoveId != null){
+            replaceMove(fight,Integer.parseInt(params.replaceMoveId))
+        }
+        // continue normal flow and show the menu
+
         // wil move leren
 //			if (fight.{"player" . $mp . "learnMoves"} != "" && isset($_GET["forgetMove"]) && $_GET["forgetMove"] == "yes")
 //			{
@@ -174,9 +185,27 @@ class BattleController {
 //                actionList();
 //            }
 //            exit();
+        // wil move leren
+//        if (fight.fightPlayer1.learnMoves != "" && isset($_GET["forgetMove"]) && $_GET["forgetMove"] == "yes")
+//        {
+//            forgetMoveList();
+//        }
+//        else
+        // Replace old move
+        if (fight.fightPlayer1.learnMoves && params.replaceMove != null)
+        {
+            render text: g.render(template: 'replaceMoveList', model: [ownerMoves:fight.fightPlayer1.ownerPokemon.ownerMoves])
+        }
+        // leer moves
+        else if (fight.fightPlayer1.learnMoves)
+        {
+            // haal move op
+            Move move = fight.fightPlayer1.learnMoves[0]
 
+            render text: g.render(template: 'chooseLearnMove', model: [move:move,ownerPokemon: fight.fightPlayer1.ownerPokemon])
+        }
         // moveList
-        if (fight.battleOver){
+        else if (fight.battleOver){
             render text: g.render(template: 'exit')
         }
         else if (fight.fightPlayer1.hp <= 0 && fight.fightPlayer2.hp > 0)
@@ -219,8 +248,36 @@ class BattleController {
             Moves.setMove(fight,fight.fightPlayer1, null, false)
         }
 
-
         render template: "log", model : [fight:fight]
+    }
+
+    public static void removeLearnMove(Fight fight)
+    {
+        fight.fightPlayer1.learnMoves.remove(fight.fightPlayer1.learnMoves[0])
+    }
+
+    public static void replaceMove(Fight fight, int forgetMoveId)
+    {
+        OwnerMove oldOwnerMove = fight.fightPlayer1.ownerPokemon.ownerMoves.find { it.id == forgetMoveId }
+
+        if (oldOwnerMove){
+            Move learnMove = fight.fightPlayer1.learnMoves[0]
+            if (learnMove){
+                fight.fightPlayer1.ownerPokemon.removeFromOwnerMoves(oldOwnerMove)
+                oldOwnerMove.delete()
+                OwnerMove newOwnerMove = new OwnerMove(
+                        ownerPokemon:fight.fightPlayer1.ownerPokemon,
+                        move: learnMove,
+                        ppLeft: learnMove.pp
+                )
+
+                fight.fightPlayer1.ownerPokemon.addToOwnerMoves(
+                        newOwnerMove
+                )
+                fight.fightPlayer1.ownerPokemon.save()
+                removeLearnMove(fight)
+            }
+        }
     }
 
     def run = {

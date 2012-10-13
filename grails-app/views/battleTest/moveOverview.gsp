@@ -15,7 +15,7 @@
         <table id="pokemonList">
             <g:each in="${Pokemon.list()}" var="pokemon">
                 <tr>
-                    <td style="background-color: #eee;">
+                    <td style="background-color: #eee;" colspan="3">
                         ${pokemon.name}
                     </td>
                 </tr>

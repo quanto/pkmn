@@ -76,7 +76,7 @@ class Moves {
         else
         {
             // zet learnMoves om te kunnen kiezen
-            fightPlayer.learnMoves += move.id + ";";
+            fightPlayer.learnMoves.add(move)
         }
     }
 
