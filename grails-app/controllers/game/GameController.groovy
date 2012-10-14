@@ -46,7 +46,71 @@ class GameController {
                 player.save(flush:true)
                 render text : "showComputer"
             }
+            else {
+                // Should not be reachable
+                assert false
+            }
+            return
         }
+
+
+        // Auto Map Transitions
+        if (player.map.worldX != null && player.map.worldY != null){
+            MapLayout mapLayout = MapLayout.createMapArray(player.map)
+            if (player.positionY == mapLayout.rows-1){ // down
+                Map toMap = Map.findByWorldXAndWorldY(player.map.worldX,player.map.worldY+1)
+                if (toMap){
+                    MapLayout mapToLayout = MapLayout.createMapArray(toMap)
+                    String tile = mapToLayout.foreground[0][player.positionX]
+                    if (tile == "" || tile == "0"){
+                        player.positionY = 0
+                        player.setMap toMap
+                        player.save(flush:true)
+                        render text: "refreshMap"
+                    }
+                }
+            }
+            else if (player.positionY == 0){ // up
+                Map toMap = Map.findByWorldXAndWorldY(player.map.worldX,player.map.worldY-1)
+                if (toMap){
+                    MapLayout mapToLayout = MapLayout.createMapArray(toMap)
+                    String tile = mapToLayout.foreground[mapToLayout.rows-1][player.positionX]
+                    if (tile == "" || tile == "0"){
+                        player.positionY = mapToLayout.rows-1
+                        player.setMap toMap
+                        player.save(flush:true)
+                        render text: "refreshMap"
+                    }
+                }
+            }
+            else if (player.positionX == 0){ // left
+                Map toMap = Map.findByWorldXAndWorldY(player.map.worldX-1,player.map.worldY)
+                if (toMap){
+                    MapLayout mapToLayout = MapLayout.createMapArray(toMap)
+                    String tile = mapToLayout.foreground[player.positionY][mapToLayout.columns-1]
+                    if (tile == "" || tile == "0"){
+                        player.positionX = mapToLayout.columns-1
+                        player.setMap toMap
+                        player.save(flush:true)
+                        render text: "refreshMap"
+                    }
+                }
+            }
+            else if (player.positionX == mapLayout.columns-1){ // right
+                Map toMap = Map.findByWorldXAndWorldY(player.map.worldX+1,player.map.worldY)
+                if (toMap){
+                    MapLayout mapToLayout = MapLayout.createMapArray(toMap)
+                    String tile = mapToLayout.foreground[player.positionY][0]
+                    if (tile == "" || tile == "0"){
+                        player.positionX = 0
+                        player.setMap toMap
+                        player.save(flush:true)
+                        render text: "refreshMap"
+                    }
+                }
+            }
+        }
+
         render text : ""
     }
 
