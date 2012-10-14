@@ -10,11 +10,11 @@ Glooming forest -2x1
 Glooming forest center
 4
 6
-5
-1
+14
+9
 1000
 ShowMap
-11
+16
 0
 0
 0
@@ -32,18 +32,22 @@ false
 22
 10
 21
-22
+8
 Male
 1
-180
-6
+256
+7
 </ownerPokemon>
 <ownerMove>
+Bubble
+30
+</ownerMove>
+<ownerMove>
 Tackle
-35
+25
 </ownerMove>
 <ownerMove>
 Tail Whip
-30
+29
 </ownerMove>
 

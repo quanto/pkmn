@@ -60,10 +60,11 @@ class BattleController {
         int ownerPokemonMoveId = Integer.parseInt(params.id)
 
         OwnerMove ownerMove = OwnerMove.findByIdAndOwnerPokemon(ownerPokemonMoveId,fight.fightPlayer1.ownerPokemon)
-        int moveId = ownerMove.move.id
+        Move move = ownerMove.move
 
-        if (moveId == -1 || moveId == 394) // strangle || geen move
+        if (move == null || move.name == "Struggle") // Struggle || geen move
         {
+            // Dit is geen eigen move, pp hoeft er niet af
             Moves.setMove(fight,fight.fightPlayer1, ownerMove.move)
         }
         else
@@ -89,7 +90,8 @@ class BattleController {
 //                    }
 //                    else
 //                    {
-//                        ownerPokemonMove->ppLeft -= 1;
+                ownerMove.ppLeft -= 1
+                ownerMove.save()
 //                    }
 //                    ownerPokemonMove->update();
                 Moves.setMove(fight,fight.fightPlayer1,ownerMove.move)
