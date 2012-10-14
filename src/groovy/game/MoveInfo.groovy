@@ -12,7 +12,7 @@ class MoveInfo {
     boolean defaultAttackPower = true
 
     Integer attackPower = null
-
+    // Default critical hit stage
     int criticalHitStage = 1
     int addToAccuracyStage = 0
     boolean canNotUseAction = false
@@ -33,13 +33,13 @@ class MoveInfo {
     boolean paralysisAction = false
     boolean poisonAction = false
     boolean badlypoisondAction = false
-    int addToDefenseStage = 1
+    int addToDefenseStage = 0
     boolean selfStageAction = false
     boolean openentStageAction = false
-    int addToAttackStage = 1
-    int addToSpDefenseStage = 1
-    int addToSpAttackStage = 1
-    int addToSpeedStage = 1
+    int addToAttackStage = 0
+    int addToSpDefenseStage = 0
+    int addToSpAttackStage = 0
+    int addToSpeedStage = 0
     double effectiveness = 1
     boolean effectAction = false
     boolean stageAction = false
