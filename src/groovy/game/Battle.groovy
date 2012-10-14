@@ -219,7 +219,7 @@ class Battle {
 
                 player.map = recoverAction.map
                 player.positionX = recoverAction.positionX
-                player.positionY = recoverAction.positionX
+                player.positionY = recoverAction.positionY
                 player.save()
 
                 fight.log += "m:You lose, your pokemon have been recovered in town.;";
