@@ -214,9 +214,9 @@ class GameController {
     {
         Random random = new Random()
 
-        int encouterPkmnNr = random.nextInt(100)
+        int encouterPkmnNr = random.nextInt(100)+1
 
-        if(encouterPkmnNr < 30)
+        if(encouterPkmnNr < 10)
         {
             def mapPokemonList = player.map.merge().mapPokemonList
 

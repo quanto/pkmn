@@ -17,12 +17,12 @@
         body
         {
             font-family:verdana;
-            font-size:12px;
+            font-size:14px;
         }
 
         table
         {
-            font-size:11px;
+            font-size:14px;
         }
 
         table td
