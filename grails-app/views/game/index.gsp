@@ -35,6 +35,8 @@
     <h3 id="firebug" style="color:#FF0000;"></h3>
 
     <div id="theMap"></div>
+
+    <div id="textBox"></div>
         
 </body>
 </html>

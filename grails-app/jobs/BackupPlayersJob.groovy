@@ -2,6 +2,7 @@ import game.Player
 import game.OwnerPokemon
 import game.OwnerMove
 import game.Role
+import map.View
 
 class BackupPlayersJob {
 
@@ -44,7 +45,7 @@ ${player.lastRecoverAction.positionY}
 ${player.positionX}
 ${player.positionY}
 ${player.money}
-${player.view}
+${player.view == View.Battle?View.ShowMap:player.view}
 ${player.pveBattlesWon}
 ${player.pveBattlesLost}
 ${player.pvnBattlesWon}

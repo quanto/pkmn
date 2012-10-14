@@ -25,38 +25,20 @@ class BattleController {
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
 
-        if (player.fightNr){
+        Fight fight
 
-            Fight fight = fightFactoryService.getFight(player.fightNr)
+        if (player.fightNr != null){
+            fight = fightFactoryService.getFight(player.fightNr)
+        }
 
-            if (player && fight){
-                /*
-                // active player en openent player
-                if (fight.player1Id == $owner->id)
-                {
-                    $mp = 1;
-                    $op = 2;
-                }
-                else
-                {
-                    $mp = 2;
-                    $op = 1;
-                }
-                */
-                int player1protect = 0
-                int player2protect = 0
+        if (player && fight){
 
-                render view: 'index', model: [fight:fight]
-            }
-            else {
-                render text:"No fight"
-            }
+            render view: 'index', model: [fight:fight]
         }
         else {
-            player.view = View.ShowMap
-            player.save()
-            redirect controller: "game"
+            render text:"No fight"
         }
+
     }
 
     def logRequest = {
@@ -111,12 +93,6 @@ class BattleController {
 //                    }
 //                    ownerPokemonMove->update();
                 Moves.setMove(fight,fight.fightPlayer1,ownerMove.move)
-
-                if (fight.battleOver){
-                    player.view = View.ShowMap
-                    redirect controller: "game"
-                    return
-                }
 
 //                }
 //                else

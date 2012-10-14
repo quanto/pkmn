@@ -143,9 +143,11 @@ class MapEditorController {
             String recoverActions = ""
             String messageActions = ""
 
-            map.actions.each { Action action ->
+            // Sort so we always have the same order in the actions
+            map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
                 if(action in MapTransition){
-                    mapTransitions += "${action.positionX};${action.positionY};${action.jumpTo?.map?.name};${action.jumpTo?.positionX};${action.jumpTo?.positionY};"
+                    if (action.jumpTo)
+                        mapTransitions += "${action.positionX};${action.positionY};${action.jumpTo?.map?.name};${action.jumpTo?.positionX};${action.jumpTo?.positionY};"
                 }
                 else if (action in ComputerAction){
                     computerActions += "${action.positionX};${action.positionY};"

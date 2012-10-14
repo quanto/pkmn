@@ -171,8 +171,12 @@ class Battle {
 
             // update pokemon hp
             fight.fightPlayer1.ownerPokemon.hp = 0
+            fight.fightPlayer1.ownerPokemon.save(flush: true)
+
             // kijk of er nog levende pokemon zijn
-            int alivePokemonNr = OwnerPokemon.countByOwnerAndPartyPositionGreaterThanAndHpGreaterThan(fight.fightPlayer1.owner,0,0)
+            def list = OwnerPokemon.findAllByOwnerAndPartyPositionGreaterThanAndHpGreaterThan(fight.fightPlayer1.owner,0,0)
+
+            int alivePokemonNr = list.size()
 
             if (alivePokemonNr > 0)
             {
