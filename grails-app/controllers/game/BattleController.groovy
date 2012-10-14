@@ -90,11 +90,15 @@ class BattleController {
 //                    }
 //                    else
 //                    {
-                ownerMove.ppLeft -= 1
-                ownerMove.save()
-//                    }
-//                    ownerPokemonMove->update();
-                Moves.setMove(fight,fight.fightPlayer1,ownerMove.move)
+
+                if (ownerMove.ppLeft <= 0){
+                    fight.log = "m:No pp left for move ${ownerMove.move.name}.;" // :TODO real message
+                }
+                else {
+                    ownerMove.ppLeft -= 1
+                    ownerMove.save()
+                    Moves.setMove(fight,fight.fightPlayer1,ownerMove.move)
+                }
 
 //                }
 //                else
@@ -109,7 +113,7 @@ class BattleController {
 //                }
 
                 render template: "log", model : [fight:fight]
-                //redirect action: "index"
+
 //            }
         }
     }
