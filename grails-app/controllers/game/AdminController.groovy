@@ -40,7 +40,7 @@ class AdminController {
 
 		newsItems.each { NewsItem newsItem ->
 
-			string += "<strong>${newsItem.player.name}:</strong><em class='chatTime'>(${newsItem.date.format("dd/MM-mm:ss")})</em> ${newsItem.message.encodeAsHTML()}<br />"
+			string += "<strong>${newsItem.player.username}:</strong><em class='chatTime'>(${newsItem.date.format("dd/MM-mm:ss")})</em> ${newsItem.message.encodeAsHTML()}<br />"
 		}
 
 		render text: string

@@ -5,13 +5,13 @@ Kevin Verhoef
 true
 null
 null
-2012-10-14 18:34:53.251
+2012-10-14 19:28:17.917
 Glooming forest -2x1
 Glooming forest center
 4
 6
 7
-10
+11
 1000
 ShowMap
 31
@@ -39,15 +39,15 @@ Male
 9
 </ownerPokemon>
 <ownerMove>
+Tackle
+32
+</ownerMove>
+<ownerMove>
 Bubble
 30
 </ownerMove>
 <ownerMove>
 Tail Whip
 30
-</ownerMove>
-<ownerMove>
-Tackle
-32
 </ownerMove>
 

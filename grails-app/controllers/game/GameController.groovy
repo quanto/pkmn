@@ -216,14 +216,14 @@ class GameController {
 
         int encouterPkmnNr = random.nextInt(100)+1
 
-        if(encouterPkmnNr < 10)
+        if(encouterPkmnNr <= 10)
         {
             def mapPokemonList = player.map.merge().mapPokemonList
 
             if (mapPokemonList){
                 int totalCount = mapPokemonList.sum{ it.chance }
 
-                int random_number = random.nextInt(totalCount);
+                int random_number = random.nextInt(totalCount) + 1;
 
                 int chanceCount = 0
                 for (MapPokemon mapPokemon:mapPokemonList){

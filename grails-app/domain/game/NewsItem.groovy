@@ -6,6 +6,10 @@ class NewsItem {
     String message
     Player player
 
+    static mapping = {
+        message type:"text"
+    }
+
     static constraints = {
     }
 

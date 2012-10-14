@@ -3,7 +3,11 @@ var chat = false;
 var view = "pokemon";
 
 $(document).ready( function () {
-	
+
+    $("#accordion").accordion({
+        heightStyle: "content"
+    });
+
 	/*
 	if (typeof window.loadFirebugConsole == "undefined") {
 	}
@@ -27,6 +31,7 @@ $(document).ready( function () {
 	getView();
 	updateChat();
 	updateWhoisList();
+    loadNewsItems();
 	disconnect();
 	serverMessage();
 	//getParty();
@@ -318,7 +323,8 @@ function loadNewsItems()
 		data: "",
 		cache: false,
 		success: function(newsItems){
-			createDialog("News", newsItems);
+            $("#news").html(newsItems);
+			//createDialog("News", newsItems);
 		}
 	});
 };
