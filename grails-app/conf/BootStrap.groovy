@@ -317,7 +317,7 @@ class BootStrap {
                 existing php code to Grails to bring the game back to live.
                 The game is almost back at it's original state.
                 Where even implementing new functionalities now.
-                A new feature is the iPad move support, a new layout and an improved map editor
+                Some new feature are the iPad move support, a new layout and an improved map editor
                 that allowes us to rapidly draw maps.
                 """,
                 player: Player.findByUsername("kevin")
