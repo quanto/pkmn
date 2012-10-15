@@ -17,7 +17,7 @@ class Confusion {
             // Geef bericht
             if (fightPlayer.confusion == 1)
             {
-                fight.log += "m:\${fightPlayer.ownerPokemon.pokemon.name} is no longer confused.;";
+                fight.log += "m:${fightPlayer.ownerPokemon.pokemon.name} is no longer confused.;";
                 fightPlayer.confusion = 0
 //                if (player != 2 || fight.battleType != "pve")
 //                {
