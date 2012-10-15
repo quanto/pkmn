@@ -5,7 +5,6 @@ import data.EvolutionImport
 import data.LearnableMovesImport
 import data.EffectivenessImport
 import data.MapImport
-import data.TilesImport
 import data.ItemImport
 import map.View
 import data.PlayerImport
@@ -98,8 +97,6 @@ class BootStrap {
             )
             map.addToActions(computerAction)
         }
-
-        TilesImport.importTiles()
 
         Player player = new Player(
                 username: "kevin",
