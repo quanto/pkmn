@@ -208,7 +208,8 @@
                         </div>
                         Name: <g:textField name="map.name" value="${map?.name}" /> <br />
                         Active: <g:checkBox name="map.active" value="${map?.active}" /><br />
-
+                        WorldX: <g:textField name="map.worldX" value="${map?.worldX}" /><br />
+                        WorldY: <g:textField name="map.worldY" value="${map?.worldY}" /><br />
                         <g:actionSubmit value="saveMap" onclick="createMapData();">Save</g:actionSubmit>
 
                     </div>

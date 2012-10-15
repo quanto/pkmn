@@ -23,8 +23,6 @@ class BootStrap {
 
         PokemonImport.importPokemon()
 
-        Pokemon pokemon = Pokemon.get(1)
-
         MoveImport.importMoves()
 
         EvolutionImport.importEvolution()
@@ -40,6 +38,8 @@ class BootStrap {
         PlayerImport.importPlayers()
 
         /*
+        Pokemon pokemon = Pokemon.get(1)
+
         Map map = Map.findByName("Blossom_town")
 
         boolean newImport = true

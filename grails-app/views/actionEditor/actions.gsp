@@ -7,6 +7,10 @@
         selectMap()
     });
 
+    function selectTile(){
+
+    }
+
 
     function selectMap(){
         $.ajax({
