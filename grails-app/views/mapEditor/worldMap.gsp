@@ -25,7 +25,7 @@
                     %>
                     <td>
                         <center>
-                            (${x})-(${y})
+                            (${x})-(${y}) <g:link action="editor" id="${map.id}">Edit</g:link>
                             <g:if test="${mapLayout}">
                                 <g:link action="editor" id="${map.id}">${mapLayout.map?.name}</g:link>
                                 <g:render template="/game/map" model="${[mapLayout:mapLayout]}" />

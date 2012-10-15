@@ -28,7 +28,7 @@
                     <g:link controller="map" action="edit" id="${map.id}">Pokemon</g:link>
                 </td>
                 <td>
-                    <g:link action="actions" id="${map.id}">Actions</g:link>
+                    <g:link controller="actionEditor" action="actions" id="${map.id}">Actions</g:link>
                 </td>
                 <td>
                     <g:link action="export" id="${map.id}">Export</g:link>
