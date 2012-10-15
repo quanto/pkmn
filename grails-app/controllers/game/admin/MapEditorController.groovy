@@ -1,4 +1,12 @@
-package game
+package game.admin
+
+import game.Map
+import game.MapLayout
+import game.MapTransition
+import game.Action
+import game.ComputerAction
+import game.RecoverAction
+import game.MapMessage
 
 class MapEditorController {
 

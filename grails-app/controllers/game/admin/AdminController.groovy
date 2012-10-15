@@ -1,4 +1,9 @@
-package game
+package game.admin
+
+import game.ChatMessage
+import game.PlayerData
+import game.Player
+import game.NewsItem
 
 class AdminController {
 

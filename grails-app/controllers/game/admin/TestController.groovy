@@ -1,8 +1,11 @@
-package game
+package game.admin
 
 import javax.imageio.ImageIO
 import game.MapLayout
 import game.FightFactoryService
+import game.Player
+import game.OwnerPokemon
+import game.OwnerMove
 
 class TestController {
 

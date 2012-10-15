@@ -1,4 +1,7 @@
-package game
+package game.admin
+
+import game.Map
+import game.MapLayout
 
 class ActionEditorController {
 

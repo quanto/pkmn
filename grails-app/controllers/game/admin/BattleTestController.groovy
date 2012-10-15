@@ -1,6 +1,12 @@
-package game
+package game.admin
 
 import map.View
+import game.FightFactoryService
+import game.PlayerData
+import game.Player
+import game.Pokemon
+import game.Fight
+import game.BattleType
 
 class BattleTestController {
 
