@@ -391,10 +391,10 @@ function actionA()
 			{
 				getView();
 			}
-//			else if(msg == "showMarket")
-//			{
-//				getView();
-//			}
+			else if(msg == "showMarket")
+			{
+				getView();
+			}
 			else if(msg == "showComputer")
 			{
 				getView();

@@ -46,6 +46,11 @@ class GameController {
                 player.save(flush:true)
                 render text : "showComputer"
             }
+            else if (action in MarketAction){
+                player.view = View.ShowMarket
+                player.save(flush:true)
+                render text : "showMarket"
+            }
             else {
                 // Should not be reachable
                 assert false

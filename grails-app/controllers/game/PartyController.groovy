@@ -202,7 +202,6 @@ class PartyController {
             player.save()
             redirect controller: 'game', action:'index'
         }
-
     }
 
 }
