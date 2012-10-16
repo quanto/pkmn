@@ -197,9 +197,7 @@ class Battle {
                 }
                 else
                 {
-                    // :TODO do something
-                    //header("Location: index.php");
-                    //exit(0);
+
                 }
             }
             else //Speler gaat dood

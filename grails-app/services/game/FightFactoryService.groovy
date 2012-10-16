@@ -61,23 +61,25 @@ class FightFactoryService {
         else if (battleType == battleType.PVN){
             owner2Pokemon = Party.getFirstAlivePokemon(player2)
         }
+        else if (battleType == battleType.PVP){
+            owner2Pokemon = Party.getFirstAlivePokemon(player2)
+        }
 
         assert owner1Pokemon
         assert owner2Pokemon
 
         FightPlayer fightPlayer1 = Stats.setBaseStats(fight,owner1Pokemon, PlayerType.user, 1);
 
-//        fight.fightPlayer2.save()
-        // :TODO implement else
         fight.fightPlayer1 = fightPlayer1
         fight.fightPlayer1.owner = player1
 
-
-
-
         FightPlayer fightPlayer2 = Stats.setBaseStats(fight,owner2Pokemon, PlayerType.wildPokemon, 2);
+
         if (battleType == battleType.PVE){
             fightPlayer2.playerType = PlayerType.wildPokemon
+        }
+        else if (battleType == battleType.PVP){
+            fightPlayer2.playerType = PlayerType.user
         }
 
         fight.fightPlayer2 = fightPlayer2
@@ -89,9 +91,6 @@ class FightFactoryService {
         fight.nr = fightCount++
 
         fights.add(fight)
-
-
-        //player1.save()
 
         return fight
     }

@@ -19,12 +19,6 @@ class Sleep {
             {
                 fight.log += "m:${fightPlayer.ownerPokemon.pokemon.name} wakes up.;"
                 fightPlayer.sleep = 0
-                // :TODO What to do
-//                if (player != 2 || fight.battleType != "pve")
-//                {
-//                    fight.update();
-//                    header("Location: index.php");
-//                }
             }
             else
             {
