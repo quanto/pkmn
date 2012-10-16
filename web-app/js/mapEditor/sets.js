@@ -3,6 +3,17 @@
 */
 
 // trees
+var gloomtree = new Array(
+    new Array("0277",1,"1277",1,"2277",1),
+    new Array("0278",1,"1278",1,"2278",1),
+    new Array("0279",1,"1279",1,"2279",1),
+    new Array("0280",1,"1280",1,"2280",1)
+);
+
+var gloomtreebetween = new Array(
+    new Array("3281",1,"4281",1,"5281",1),
+    new Array("0278",1,"1278",1,"2278",1)
+);
 
 var foresttree = new Array(
 new Array("60",1,"70",1),

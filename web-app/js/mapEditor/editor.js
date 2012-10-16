@@ -29,7 +29,7 @@
     // History of the field for undo
     var historyFields = new Array();
     
-    // pattern | random | stamp | path | tile
+    // pattern | random | stamp | path | tile | select
     var action = "path";
     
     // for path & tile, option to select single or multiple tiles
@@ -253,7 +253,7 @@
     	if (action == "path" && singleSelection)
         {	
 			selectPathTile(y,x);
-        }  
+        }
         // single tile
 		else if (action == "tile" && singleSelection)
         {
@@ -265,7 +265,7 @@
             fillPattern(x,y,x + ((pattern[0].length - 1) / 2),y + pattern.length - 1);
         }
         // random or pattern
-        else if (action == "random" || action == "pattern" || action == "path" || action == "tile")
+        else if (action == "random" || action == "pattern" || action == "path" || action == "tile" || action == "select")
         {
             
 	        // See if this is the first point
@@ -314,6 +314,10 @@
 		        {
 		            fillSquare(startPointX,startPointY,x,y);
 		        }
+                else if (action == "select")
+                {
+                    makeSelection(startPointX,startPointY,x,y);
+                }
 	            
                 // Reset points
 	            startPointX = -1;
@@ -333,6 +337,25 @@
                 selectPathTile(h,w);
             }
         }
+    }
+
+    /**
+     * Make a selection on the map. The selection becomes an new array
+     */
+    function makeSelection(startPointX,startPointY,endPointX,endPointY)
+    {
+        var newPattern = new Array()
+        for (var h=startPointY;h<=endPointY;h++)
+        {
+            newPattern[h - startPointY] = new Array()
+            for (var w=startPointX;w<=endPointX;w++)
+            {
+                //alert ((w-startPointX)*2)
+                newPattern[h-startPointY][(w-startPointX)*2] = field[selectedLayer][h][w]
+                newPattern[h-startPointY][((w-startPointX)*2)+1] = selectedLayer
+            }
+        }
+        setStamp(newPattern)
     }
     
     function fillSquare(startPointX,startPointY,endPointX,endPointY)
@@ -640,6 +663,13 @@
     /*
     User functions
     */
+    function setSelect()
+    {
+        startPointX = -1;
+        startPointY = -1;
+        action = 'select';
+        //pathPattern = path;
+    }
 
     function setPath(path)
     {
@@ -677,12 +707,13 @@
             selectedLayer = 1;
             obj.value = "foreground";
         }
+        // obj layer not supported
+//        else if (selectedLayer == 1)
+//        {
+//            selectedLayer = 3;
+//            obj.value = "top layer";
+//        }
         else if (selectedLayer == 1)
-        {
-            selectedLayer = 3;
-            obj.value = "top layer";
-        }
-        else if (selectedLayer == 3)
         {
             selectedLayer = 0;
             obj.value = "background";

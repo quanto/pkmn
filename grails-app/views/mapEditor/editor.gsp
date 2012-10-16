@@ -51,7 +51,7 @@
                 }
 
             </g:else>
-        addHistoryAction();
+            addHistoryAction();
 
             drawField();
 
@@ -127,6 +127,9 @@
                     <div id="tabWrapper">
                     </div>
 
+                    <br />Layer<br />
+                    <input type="button" value="foreground" onclick="toggleLayer(this)" />
+
                     <div id="tab5" title="Background">
                         <input type="button" value="Grass" onclick="action = 'random';" />
                     </div>
@@ -138,8 +141,6 @@
                     <div id="tab3" title="Tiles">
                         <br />Selection<br />
                         <input type="button" value="multiple" onclick="toggleSelection(this)" />
-                        <br />Layer<br />
-                        <input type="button" value="foreground" onclick="toggleLayer(this)" />
 
                         <br /><br />
                         <input id="tileNr" /> <input type="button" value="set" onclick="setTile($('#tileNr').val())" /> <br />
@@ -168,6 +169,7 @@
                         <br />
                         <input type="button" value="stones path 1" onclick="setPath(stonepath1)" />
                         <input type="button" value="stones path 2" onclick="setPath(stonepath2)" />
+                        <input type="button" value="select" onclick="setSelect()" />
                     </div>
 
                     <div id="tab2" title="Objects">
@@ -175,6 +177,10 @@
                         <input type="button" value="forest tree" onclick="setStamp(foresttree)" />
                         <input type="button" value="big tree" onclick="setStamp(bigtree)" />
                         <input type="button" value="small tree" onclick="setStamp(smalltree)" />
+                        <input type="button" value="gloom tree" onclick="setStamp(gloomtree)" />
+                        <input type="button" value="gloomtreebetween" onclick="setStamp(gloomtreebetween)" />
+
+
 
                         <br />Houses<br />
                         <input type="button" value="mart" onclick="setStamp(mart)" />
