@@ -201,7 +201,7 @@
 
                     </div>
 
-                    <div id="tab7" title="Other">
+                    <div id="tab7" title="Save">
                         <div style="display: none">
                             <br />
                             <input type="button" value="mapdata" onclick="mapdata()" />
@@ -218,6 +218,11 @@
                         WorldY: <g:textField name="map.worldY" value="${map?.worldY}" /><br />
                         <g:actionSubmit value="saveMap" onclick="createMapData();">Save</g:actionSubmit>
 
+                    </div>
+
+                    <div id="tab8" title="Other">
+                        <input type="button" value="stampData" onclick="createStampData()" />
+                        <textarea style="width:300px;height:200px;" id="stampData"></textarea>
                     </div>
 
                 </td>

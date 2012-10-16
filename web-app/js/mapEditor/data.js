@@ -92,3 +92,29 @@
         
         document.getElementById("mapdata").value = data;
     }
+
+
+    function createStampData(){
+        var stampStr = "new Array("
+//        alert(pattern)
+        for (var h=0;h<pattern.length;h++)
+        {
+            stampStr += "new Array("
+
+            for (var w=0;w<pattern[h].length;w++)
+            {
+                if (typeof pattern[h][w] === "string"){
+                    stampStr += "'" + pattern[h][w] + "',"
+                }
+                else {
+                    stampStr += pattern[h][w] + ","
+                }
+
+            }
+            // remove last ,
+            stampStr = stampStr.substr(0,stampStr.length - 1) + "),";
+        }
+        stampStr = stampStr.substr(0,stampStr.length - 1)
+        stampStr += ");"
+        $("#stampData").val(stampStr)
+    }
