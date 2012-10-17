@@ -43,4 +43,31 @@ class Confusion {
         }
     }
 
+    public static void confusionAction(Fight fight, MoveInfo moveInfo, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer){
+        Random random = new Random()
+        // confusion
+        if (moveInfo.confusionAction && moveInfo.effectSucces)
+        {
+            // kijk of de tegenstander confusion is
+            if (defendingFightPlayer.confusion > 0)
+            {
+                fight.log += "m:" + defendingFightPlayer.ownerPokemon.pokemon.name  + " is already confused.;";
+            }
+            // confusion
+            else
+            {
+                Recover.removeAllStatusAfflictions(defendingFightPlayer);
+                defendingFightPlayer.confusion = random.nextInt(3)+2;
+                fight.log += "m:" + defendingFightPlayer.ownerPokemon.pokemon.name  + " became confused.;";
+                moveInfo.confusionActionSucces = true
+                if (moveInfo.effectActionOnBoth)
+                {
+                    Recover.removeAllStatusAfflictions(attackFightPlayer);
+                    attackFightPlayer.confusion = random.nextInt(3)+2;
+                    fight.log += "m:" + defendingFightPlayer.ownerPokemon.pokemon.name + " became confused.;";
+                }
+            }
+        }
+    }
+
 }

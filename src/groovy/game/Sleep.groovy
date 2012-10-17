@@ -32,5 +32,25 @@ class Sleep {
             }
         }
     }
+
+    public static void sleepAction(Fight fight, MoveInfo moveInfo, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer){
+        Random random = new Random()
+        if (moveInfo.sleepAction && moveInfo.effectSucces)
+        {
+            // kijk of de tegenstander al niet slaapt
+            if (defendingFightPlayer.sleep > 0)
+            {
+                fight.log += "m:" + defendingFightPlayer.ownerPokemon.pokemon.name + " is already asleep.;";
+            }
+            // laat de tegenstander slapen
+            else
+            {
+                Recover.removeAllStatusAfflictions(defendingFightPlayer);
+                defendingFightPlayer.sleep = random.nextInt(6)+2
+                fight.log += "m:" + defendingFightPlayer.ownerPokemon.pokemon.name + " fell asleep.;";
+                moveInfo.sleepActionSucces = true;
+            }
+        }
+    }
     
 }

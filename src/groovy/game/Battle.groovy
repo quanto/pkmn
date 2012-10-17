@@ -520,63 +520,11 @@ class Battle {
                 }
 
                 // sleep
-                if (moveInfo.sleepAction && moveInfo.effectSucces)
-                {
-                    // kijk of de tegenstander al niet slaapt
-                    if (defendingFightPlayer.sleep > 0)
-                    {
-                        fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is already asleep.;";
-                    }
-                    // laat de tegenstander slapen
-                    else
-                    {
-                        Recover.removeAllStatusAfflictions(defendingFightPlayer);
-                        defendingFightPlayer.sleep = random.nextInt(6)+2
-                        fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " fell asleep.;";
-                        moveInfo.sleepActionSucces = true;
-                    }
-                }
+                Sleep.sleepAction(fight, moveInfo, attackFightPlayer, defendingFightPlayer)
 
-                // confusion
-                if (moveInfo.confusionAction && moveInfo.effectSucces)
-                {
-                    // kijk of de tegenstander confusion is
-                    if (defendingFightPlayer.confusion > 0)
-                    {
-                        fight.log += "m:" + defendingOwnerPokemon.pokemon.name  + " is already confused.;";
-                    }
-                    // confusion
-                    else
-                    {
-                        Recover.removeAllStatusAfflictions(defendingFightPlayer);
-                        defendingFightPlayer.confusion = random.nextInt(3)+2;
-                        fight.log += "m:" + defendingOwnerPokemon.pokemon.name  + " became confused.;";
-                        moveInfo.confusionActionSucces = true
-                        if (moveInfo.effectActionOnBoth)
-                        {
-                            Recover.removeAllStatusAfflictions(attackFightPlayer);
-                            attackFightPlayer.confusion = random.nextInt(3)+2;
-                            fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " became confused.;";
-                        }
-                    }
-                }
+                Confusion.confusionAction(fight, moveInfo, attackFightPlayer, defendingFightPlayer)
 
-                // paralysis
-                if (moveInfo.paralysisAction && moveInfo.effectSucces)
-                {
-                    if (defendingFightPlayer.paralysis == 0)
-                    {
-                        Recover.removeAllStatusAfflictions(defendingFightPlayer);
-                        defendingFightPlayer.paralysis = 1;
-                        fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is paralyzed.;";
-                        moveInfo.paralysisActionSucces = true;
-                    }
-                    else
-                    {
-                        if (moveInfo.attackMoveeffectProb == 0 || moveInfo.attackMoveeffectProb == 100)
-                            fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is already paralyzed.;";
-                    }
-                }
+                Paralyses.paralysisAction(fight, moveInfo, attackFightPlayer, defendingFightPlayer)
 
                 Burn.burnAction(fight, moveInfo, defendingFightPlayer)
 

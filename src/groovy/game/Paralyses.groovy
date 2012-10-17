@@ -25,4 +25,23 @@ class Paralyses {
         }
     }
 
+    public static void paralysisAction(Fight fight, MoveInfo moveInfo, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer){
+        // paralysis
+        if (moveInfo.paralysisAction && moveInfo.effectSucces)
+        {
+            if (defendingFightPlayer.paralysis == 0)
+            {
+                Recover.removeAllStatusAfflictions(defendingFightPlayer);
+                defendingFightPlayer.paralysis = 1;
+                fight.log += "m:" + defendingFightPlayer.ownerPokemon.pokemon.name + " is paralyzed.;";
+                moveInfo.paralysisActionSucces = true;
+            }
+            else
+            {
+                if (moveInfo.attackMoveeffectProb == 0 || moveInfo.attackMoveeffectProb == 100)
+                    fight.log += "m:" + defendingFightPlayer.ownerPokemon.pokemon.name + " is already paralyzed.;";
+            }
+        }
+    }
+
 }
