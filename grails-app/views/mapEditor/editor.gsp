@@ -147,6 +147,7 @@
 
                         <div style="height:300px;overflow:scroll;">
                             <img src="${resource(uri:'')}/images/tiles/tileset.png" id="tileset" />
+                            <div id="tilesetSelection" style="border:1px solid black;position:absolute;top:0;left:0;"></div>
                         </div>
 
                     </div>
