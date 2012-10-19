@@ -6,7 +6,7 @@
 </head>
 <body>
 
-    <g:link action="editor">New Map</g:link>
+    <g:link action="editor">New Map</g:link> | <g:link action="worldMap">World Map</g:link>
     <br/>
     <table>
 
