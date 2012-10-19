@@ -51,6 +51,17 @@ class GameController {
                 player.save(flush:true)
                 render text : "showMarket"
             }
+            else if (action in NpcAction){
+                NpcAction npcAction = action
+                Fight fight = fightFactoryService.startFight(BattleType.PVP,player,npcAction.owner,null,null)
+
+                // koppel gevecht aan speler
+                player.fightNr = fight.nr
+                player.view = View.Battle
+
+                player.save(flush:true)
+                render text : "showMarket"
+            }
             else {
                 // Should not be reachable
                 assert false
