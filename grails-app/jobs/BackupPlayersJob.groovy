@@ -55,7 +55,7 @@ ${player.pvnBattlesLost}
 ${roleData}
 """
 
-                playerData += OwnerBackup.ownerPokemonData(player)
+                playerData += OwnerBackup.getOwnerPokemonBackupData(player)
 
                 FileWriter fstream = new FileWriter(file);
                 BufferedWriter out = new BufferedWriter(fstream);
