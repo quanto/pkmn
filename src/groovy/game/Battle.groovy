@@ -248,6 +248,12 @@ class Battle {
             fight.log += "m:Defeated NPC!.;";
             win(fight, true)
 
+            // Create an NPC lock
+            new NpcLock(
+                    player: fightPlayer1.owner,
+                    npc : fight.fightPlayer2.owner
+            ).save()
+
             return true
         }
         else

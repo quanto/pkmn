@@ -52,15 +52,22 @@ class GameController {
                 render text : "showMarket"
             }
             else if (action in NpcAction){
+
                 NpcAction npcAction = action
-                Fight fight = fightFactoryService.startFight(BattleType.PVN,player,npcAction.owner,null,null)
 
-                // koppel gevecht aan speler
-                player.fightNr = fight.nr
-                player.view = View.Battle
+                if (NpcLock.findByPlayerAndNpc(player,npcAction.owner)){
+                    render text : "You already defeated ${npcAction.owner.name} today. Come back later."
+                }
+                else {
+                    Fight fight = fightFactoryService.startFight(BattleType.PVN,player,npcAction.owner,null,null)
 
-                player.save(flush:true)
-                render text : "showMarket"
+                    // koppel gevecht aan speler
+                    player.fightNr = fight.nr
+                    player.view = View.Battle
+
+                    player.save(flush:true)
+                    render text : "refreshMap"
+                }
             }
             else {
                 // Should not be reachable
