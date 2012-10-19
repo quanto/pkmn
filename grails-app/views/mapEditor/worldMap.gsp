@@ -27,10 +27,12 @@
                         <center>
                             (${x})-(${y})
                             <g:if test="${map}">
-                                <g:link action="editor" id="${map.id}">Edit</g:link>
+                                <g:link action="editor" id="${map.id}">${mapLayout.map?.name}</g:link>
+                                <g:link controller="pokemonEditor" action="edit" id="${map.id}">Pokemon</g:link>
+                                <g:link controller="actionEditor" action="actions" id="${map.id}">Actions</g:link>
                             </g:if>
                             <g:if test="${mapLayout}">
-                                <g:link action="editor" id="${map.id}">${mapLayout.map?.name}</g:link>
+
                                 <g:render template="/game/map" model="${[mapLayout:mapLayout]}" />
                             </g:if>
                         </center>
