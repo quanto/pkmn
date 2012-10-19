@@ -8,6 +8,7 @@ import game.RecoverAction
 import game.ComputerAction
 import game.MarketAction
 import game.MapMessage
+import game.NpcAction
 
 class ActionEditorController {
 
@@ -88,7 +89,7 @@ class ActionEditorController {
     }
 
     def createAction(){
-        println params
+
         if (params.actionType == 'RecoverAction'){
             RecoverAction recoverAction = new RecoverAction(params)
             recoverAction.save()
@@ -104,6 +105,10 @@ class ActionEditorController {
         else if (params.actionType == 'MarketAction'){
             MarketAction marketAction = new MarketAction(params)
             marketAction.save()
+        }
+        else if (params.actionType == 'NpcAction'){
+            NpcAction npcAction = new NpcAction(params)
+            npcAction.save()
         }
 
         redirect action:'actions', id: params.map.id
