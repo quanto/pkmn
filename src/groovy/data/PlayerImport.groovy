@@ -118,7 +118,7 @@ class PlayerImport {
                 enabled:new Boolean(parts[3]),
                 mail:parts[4]!='null'?parts[4]:null,
                 ip:parts[5]!='null'?parts[5]:null,
-                registerDate:new Date(), // TODO implement
+                registerDate:new Date().parse("dd-MM-yyyy HH:mm:ss",parts[6]),
                 map: Map.findByName(parts[7]),
                 lastRecoverAction: RecoverAction.findByMapAndPositionXAndPositionY(Map.findByName(parts[8]),Integer.parseInt(parts[9]),Integer.parseInt(parts[10])),
                 positionX: Integer.parseInt(parts[11]),

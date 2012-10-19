@@ -38,7 +38,7 @@ ${player.password}
 ${player.enabled}
 ${player.mail}
 ${player.ip}
-${player.registerDate}
+${player.registerDate.format("dd-MM-yyyy HH:mm:ss")}
 ${player.map.name}
 ${player.lastRecoverAction.map.name}
 ${player.lastRecoverAction.positionX}
