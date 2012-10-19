@@ -53,7 +53,7 @@ class GameController {
             }
             else if (action in NpcAction){
                 NpcAction npcAction = action
-                Fight fight = fightFactoryService.startFight(BattleType.PVP,player,npcAction.owner,null,null)
+                Fight fight = fightFactoryService.startFight(BattleType.PVN,player,npcAction.owner,null,null)
 
                 // koppel gevecht aan speler
                 player.fightNr = fight.nr
