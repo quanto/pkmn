@@ -9,6 +9,9 @@ import game.ComputerAction
 import game.MarketAction
 import game.MapMessage
 import game.NpcAction
+import game.Owner
+import game.Pokemon
+import game.PokemonCreator
 
 class ActionEditorController {
 
@@ -108,10 +111,21 @@ class ActionEditorController {
         }
         else if (params.actionType == 'NpcAction'){
             NpcAction npcAction = new NpcAction(params)
+            npcAction.owner = new Owner()
+            npcAction.owner.name = params.name
+            npcAction.owner.save()
             npcAction.save()
         }
 
         redirect action:'actions', id: params.map.id
+    }
+
+    def addPokemonToNpc(){
+        Owner owner = Owner.get(Integer.parseInt(params.owner))
+        int pkmnId = Integer.parseInt(params.pokemon)
+        Pokemon pokemon = Pokemon.get(pkmnId)
+        PokemonCreator.addOwnerPokemonToOwner(pokemon, Integer.parseInt(params.level), owner)
+        render text: "done"
     }
 
 }

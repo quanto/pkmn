@@ -28,6 +28,12 @@ class Player extends Owner{
     RecoverAction lastRecoverAction
     // view
 
+    int pveBattlesWon = 0
+    int pveBattlesLost = 0
+    int pvnBattlesWon = 0
+    int pvnBattlesLost = 0
+    Integer fightNr
+
     static constraints = {
         mail nullable: true
         ip nullable: true
@@ -35,6 +41,7 @@ class Player extends Owner{
         map nullable: true
         username blank: false, unique: true
         password blank: false
+        fightNr nullable :true
     }
 
     static mapping = {

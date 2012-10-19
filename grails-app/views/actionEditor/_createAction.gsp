@@ -11,7 +11,9 @@ Create action
     <div id="MapTransition" style="display: none">
         <g:select name="mapId" from="${game.Map.list()}" optionKey="${ { it.id } }" onchange="selectMap(this)" noSelection="['':'-Choose Map-']" />
     </div>
-
+    <div id="NpcAction" style="display: none">
+        <g:textField name="name" />
+    </div>
 
     <g:submitButton name="create" />
 </g:form>
