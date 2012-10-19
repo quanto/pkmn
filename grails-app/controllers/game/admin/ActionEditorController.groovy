@@ -12,6 +12,7 @@ import game.NpcAction
 import game.Owner
 import game.Pokemon
 import game.PokemonCreator
+import game.Npc
 
 class ActionEditorController {
 
@@ -111,7 +112,7 @@ class ActionEditorController {
         }
         else if (params.actionType == 'NpcAction'){
             NpcAction npcAction = new NpcAction(params)
-            npcAction.owner = new Owner()
+            npcAction.owner = new Npc()
             npcAction.owner.name = params.name
             npcAction.owner.save()
             npcAction.save()
@@ -121,7 +122,7 @@ class ActionEditorController {
     }
 
     def addPokemonToNpc(){
-        Owner owner = Owner.get(Integer.parseInt(params.owner))
+        Owner owner = Npc.get(Integer.parseInt(params.owner))
         int pkmnId = Integer.parseInt(params.pokemon)
         Pokemon pokemon = Pokemon.get(pkmnId)
         PokemonCreator.addOwnerPokemonToOwner(pokemon, Integer.parseInt(params.level), owner)
