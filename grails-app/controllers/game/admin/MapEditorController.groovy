@@ -7,6 +7,8 @@ import game.Action
 import game.ComputerAction
 import game.RecoverAction
 import game.MapMessage
+import game.NpcAction
+import data.OwnerBackup
 
 class MapEditorController {
 
@@ -70,8 +72,6 @@ class MapEditorController {
 
     def exportMaps(){
         Map.list().each { Map map ->
-            String mapPokemonData = map.mapPokemonList.each { it.pokemon.id + ";" + it.chance + ";" + it.fromLevel + ";" + it.toLevel }
-
             exportMap(map)
         }
         render text : "Done"
@@ -94,6 +94,7 @@ class MapEditorController {
             String computerActions = ""
             String recoverActions = ""
             String messageActions = ""
+            String npcActions = ""
 
             // Sort so we always have the same order in the actions
             map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
@@ -110,6 +111,10 @@ class MapEditorController {
                 else if (action in MapMessage){
                     messageActions += "${action.positionX};${action.positionY};${action.message};"
                 }
+                else if (action in NpcAction){
+                    npcActions += "${action.positionX};${action.positionY};${action.owner.identifier};${action.owner.name};"
+                    OwnerBackup.saveNpc(action.owner)
+                }
             }
 
 data = """${map.id}
@@ -124,6 +129,7 @@ ${recoverActions}
 ${messageActions}
 ${map.worldX}
 ${map.worldY}
+${npcActions}
 """
             out.write(data)
 

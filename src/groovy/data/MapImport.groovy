@@ -7,6 +7,8 @@ import game.Pokemon
 import game.ComputerAction
 import game.RecoverAction
 import game.MapTransition
+import game.NpcAction
+import game.Npc
 
 class MapImport {
 
@@ -49,7 +51,7 @@ class MapImport {
                     def parts = []
                     file.eachLine { line ->
                         parts.add( line )
-                        if (index%12==11){
+                        if (index%13==12){
                             Map map = new Map(
                                     id : Integer.parseInt(parts[0]),
                                     name : parts[1],
@@ -82,6 +84,10 @@ class MapImport {
                             def messageParts = messageActions.split(';')
                             importMessages(messageParts, map)
 
+                            String npcActions = parts[12]
+                            def npcParts = npcActions.split(';')
+                            importNpcActions(npcParts, map)
+
                             parts = []
 
                         }
@@ -107,6 +113,32 @@ class MapImport {
                 }
 
             }
+        }
+    }
+
+    public static void importNpcActions(def parts, Map map){
+        int total = Math.floor(parts.size() / 4)
+        for (int i=0; i<total;i++){
+            int s = i*4
+
+            // First create the NPC
+            Npc npc = new Npc(
+                    identifier : parts[s+2],
+                    name: parts[s+3]
+            )
+            npc.save()
+
+            // Import it's data
+            NpcImport.importNpc(npc)
+
+            // Next the action
+            NpcAction npcAction = new NpcAction(
+                    map:map,
+                    positionX:Integer.parseInt(parts[s+0]),
+                    positionY:Integer.parseInt(parts[s+1]),
+                    owner: npc
+            )
+            map.addToActions(npcAction)
         }
     }
 

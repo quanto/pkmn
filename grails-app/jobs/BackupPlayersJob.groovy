@@ -3,6 +3,7 @@ import game.OwnerPokemon
 import game.OwnerMove
 import game.Role
 import map.View
+import data.OwnerBackup
 
 class BackupPlayersJob {
 
@@ -54,43 +55,7 @@ ${player.pvnBattlesLost}
 ${roleData}
 """
 
-
-
-                List<OwnerPokemon> ownerPokemonList = OwnerPokemon.findAllByOwner(player)
-
-                String ownerPokemonData = ""
-
-                ownerPokemonList.each { OwnerPokemon op ->
-                    String ownerMoves = ""
-                    op.ownerMoves.each { OwnerMove om ->
-                        ownerMoves +=
-                            """<ownerMove>
-${om.move.name}
-${om.ppLeft}
-</ownerMove>
-"""
-                    }
-
-                    ownerPokemonData += """<ownerPokemon>
-${op.isNpc}
-${op.pokemon.nr}
-${op.hpIV}
-${op.attackIV}
-${op.defenseIV}
-${op.spAttackIV}
-${op.spDefenseIV}
-${op.speedIV}
-${op.hp}
-${op.gender}
-${op.partyPosition}
-${op.xp}
-${op.level}
-</ownerPokemon>
-${ownerMoves}
-"""
-                }
-
-                playerData += ownerPokemonData
+                playerData += OwnerBackup.ownerPokemonData(player)
 
                 FileWriter fstream = new FileWriter(file);
                 BufferedWriter out = new BufferedWriter(fstream);

@@ -11,6 +11,7 @@ import game.OwnerMove
 import game.Move
 import game.PlayerRole
 import game.Role
+import game.Owner
 
 class PlayerImport {
 
@@ -89,7 +90,7 @@ class PlayerImport {
         playerRole.save()
     }
 
-    public static OwnerPokemon createOwnerPokemon(Player player, def parts){
+    public static OwnerPokemon createOwnerPokemon(Owner player, def parts){
         OwnerPokemon ownerPokemon = new OwnerPokemon(
                 isNpc:new Boolean(parts[0]),
                 pokemon:Pokemon.findByNr(Integer.parseInt(parts[1])),
