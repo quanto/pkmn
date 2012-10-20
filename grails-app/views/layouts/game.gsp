@@ -170,6 +170,10 @@
                 <div id="news">
 
                 </div>
+                <h1>Stats</h1>
+                <div id="stats">
+
+                </div>
             </div>
         </td>
 

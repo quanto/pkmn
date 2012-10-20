@@ -30,6 +30,7 @@ $(document).ready( function () {
 	//getMap(); staat in de game samen met startbattle();
 	getView();
 	updateChat();
+    updateStats();
 	updateWhoisList();
     loadNewsItems();
 	disconnect();
@@ -324,7 +325,6 @@ function loadNewsItems()
 		cache: false,
 		success: function(newsItems){
             $("#news").html(newsItems);
-			//createDialog("News", newsItems);
 		}
 	});
 };
@@ -416,6 +416,18 @@ function actionA()
 	});
     freeze = false;
 };
+
+function updateStats(){
+    $.ajax({
+        type: "GET",
+        url: "/game/stats/index",
+        data: "",
+        cache: false,
+        success: function(data){
+            $("#stats").html(data);
+        }
+    });
+}
 
 function getPlayerLocation()
 {
