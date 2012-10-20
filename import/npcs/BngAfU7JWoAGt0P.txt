@@ -1,22 +1,26 @@
 <playerData>
-RNyn8n09NTaOSqS
+BngAfU7JWoAGt0P
 Bird watcher
 </playerData>
 <ownerPokemon>
 false
-16
-16
-26
-23
-18
-8
-16
+10
+4
+1
+9
+21
+4
+24
 17
 Female
 1
-96
+64
 4
 </ownerPokemon>
+<ownerMove>
+String Shot
+40
+</ownerMove>
 <ownerMove>
 Tackle
 35
@@ -24,13 +28,13 @@ Tackle
 
 <ownerPokemon>
 false
-21
+13
+19
 10
-24
-2
-11
-2
-1
+10
+6
+27
+27
 17
 Male
 2
@@ -38,12 +42,28 @@ Male
 4
 </ownerPokemon>
 <ownerMove>
-Growl
-40
-</ownerMove>
-<ownerMove>
-Peck
+Poison Sting
 35
 </ownerMove>
+<ownerMove>
+String Shot
+40
+</ownerMove>
+
+<ownerPokemon>
+false
+11
+24
+12
+1
+2
+4
+12
+21
+Male
+3
+125
+5
+</ownerPokemon>
 
 

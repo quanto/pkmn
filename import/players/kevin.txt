@@ -5,18 +5,18 @@ Kevin Verhoef
 true
 null
 null
-20-10-2012 11:42:36
-Glooming forest -2x0
+20-10-2012 15:47:24
+Glooming forest -1x1
 Glooming forest center
 4
 6
-6
-23
+12
+8
 1000
 ShowMap
-31
+35
 2
-8
+9
 0
 </playerData>
 <role>
@@ -32,18 +32,18 @@ false
 22
 10
 21
-35
+33
 Male
 1
-1104
-12
+1420
+13
 </ownerPokemon>
 <ownerMove>
-Tail Whip
-30
+Water Gun
+25
 </ownerMove>
 <ownerMove>
-Bubble
+Tackle
 30
 </ownerMove>
 <ownerMove>
@@ -51,7 +51,7 @@ Withdraw
 40
 </ownerMove>
 <ownerMove>
-Tackle
-34
+Bubble
+30
 </ownerMove>
 

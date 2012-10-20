@@ -129,6 +129,7 @@
 
                     <br />Layer<br />
                     <input type="button" value="foreground" onclick="toggleLayer(this)" />
+                    <input type="button" value="select" onclick="setSelect()" />
 
                     <div id="tab5" title="Background">
                         <input type="button" value="Grass" onclick="action = 'random';" />
@@ -170,7 +171,7 @@
                         <br />
                         <input type="button" value="stones path 1" onclick="setPath(stonepath1)" />
                         <input type="button" value="stones path 2" onclick="setPath(stonepath2)" />
-                        <input type="button" value="select" onclick="setSelect()" />
+
                     </div>
 
                     <div id="tab2" title="Objects">

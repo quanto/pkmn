@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<%@ page import="game.MapLayout" contentType="text/html;charset=UTF-8" %>
+<%@ page import="game.MapPokemon; game.MapLayout" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
   <title></title>
@@ -30,6 +30,9 @@
                                 <g:link action="editor" id="${map.id}">${mapLayout.map?.name}</g:link>
                                 <g:link controller="pokemonEditor" action="edit" id="${map.id}">Pokemon</g:link>
                                 <g:link controller="actionEditor" action="actions" id="${map.id}">Actions</g:link>
+                                <%
+                                    println MapPokemon.countByMap(map)
+                                %>
                             </g:if>
                             <g:if test="${mapLayout}">
 
