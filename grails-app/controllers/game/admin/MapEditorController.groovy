@@ -117,8 +117,7 @@ class MapEditorController {
                 }
             }
 
-data = """${map.id}
-${map.name}
+data = """${map.name}
 ${map.dataBackground}
 ${map.dataForeground}
 ${map.active}

@@ -15,105 +15,75 @@ class MapImport {
     public static void importMaps(){
         println "Import map lines"
 
-        boolean newImport = true
-
-        if (!newImport){
-
-            def file = new File('import/maps.txt')
-
-            int index = 0
-            def parts = []
-            file.eachLine { line ->
-                parts.add( line )
-                if (index%4==3){
-
-                    Map map = new Map(
-                            name : parts[0],
-                            dataForeground : parts[1],
-                            dataBackground : parts[2],
-                            active : parts[3] == '1'
-                    )
-
-                    map.save()
-
-                    parts = []
-
-                }
-                index++
-            }
-        }
-        else {
-
-            Map.withTransaction {
-                new File('import/maps/').listFiles().each { File file ->
-
-                    int index = 0
-                    def parts = []
-                    file.eachLine { line ->
-                        parts.add( line )
-                        if (index%13==12){
-                            Map map = new Map(
-                                    id : Integer.parseInt(parts[0]),
-                                    name : parts[1],
-                                    dataForeground : parts[3],
-                                    dataBackground : parts[2],
-                                    active : parts[4] == '1',
-                                    worldX: parts[10]=='null'?null:parts[10],
-                                    worldY: parts[11]=='null'?null:parts[11]
-                            )
-
-                            map.save()
-
-                            String mapPokemonData = parts[5]
-                            def mapPokemonParts = mapPokemonData.split(';')
-                            importMapPokemon(mapPokemonParts,map)
-
-                            String mapTransitions = parts[6]
-                            def mapTransitionParts = mapTransitions.split(';')
-                            importMapTransitions(mapTransitionParts,map)
-
-                            String computerActions = parts[7]
-                            def computerActionParts = computerActions.split(';')
-                            importComputerActions(computerActionParts,map)
-
-                            String recoverActions = parts[8]
-                            def recoverActionParts = recoverActions.split(';')
-                            importRecoverActions(recoverActionParts,map)
-
-                            String messageActions = parts[9]
-                            def messageParts = messageActions.split(';')
-                            importMessages(messageParts, map)
-
-                            String npcActions = parts[12]
-                            def npcParts = npcActions.split(';')
-                            importNpcActions(npcParts, map)
-
-                            parts = []
-
-                        }
-                        index++
-                    }
-
-                }
-            }
-
+        Map.withTransaction {
             new File('import/maps/').listFiles().each { File file ->
+
                 int index = 0
                 def parts = []
                 file.eachLine { line ->
                     parts.add( line )
-                    if (index%10==9){
-                        Map map = Map.findByName(parts[1])
-                        String mapTransitions = parts[6]
+                    if (index%12==11){
+                        Map map = new Map(
+                                name : parts[0],
+                                dataForeground : parts[2],
+                                dataBackground : parts[1],
+                                active : parts[3] == '1',
+                                worldX: parts[9]=='null'?null:parts[9],
+                                worldY: parts[10]=='null'?null:parts[10]
+                        )
+
+                        map.save()
+
+                        String mapPokemonData = parts[4]
+                        def mapPokemonParts = mapPokemonData.split(';')
+                        importMapPokemon(mapPokemonParts,map)
+
+                        String mapTransitions = parts[5]
                         def mapTransitionParts = mapTransitions.split(';')
-                        coupleMapTransitions(mapTransitionParts,map)
+                        importMapTransitions(mapTransitionParts,map)
+
+                        String computerActions = parts[6]
+                        def computerActionParts = computerActions.split(';')
+                        importComputerActions(computerActionParts,map)
+
+                        String recoverActions = parts[7]
+                        def recoverActionParts = recoverActions.split(';')
+                        importRecoverActions(recoverActionParts,map)
+
+                        String messageActions = parts[8]
+                        def messageParts = messageActions.split(';')
+                        importMessages(messageParts, map)
+
+                        String npcActions = parts[11]
+                        def npcParts = npcActions.split(';')
+                        importNpcActions(npcParts, map)
+
                         parts = []
+
                     }
                     index++
                 }
 
             }
         }
+
+        new File('import/maps/').listFiles().each { File file ->
+            int index = 0
+            def parts = []
+            file.eachLine { line ->
+                parts.add( line )
+                if (index%10==9){
+                    Map map = Map.findByName(parts[1])
+                    String mapTransitions = parts[6]
+                    def mapTransitionParts = mapTransitions.split(';')
+                    coupleMapTransitions(mapTransitionParts,map)
+                    parts = []
+                }
+                index++
+            }
+
+        }
+
     }
 
     public static void importNpcActions(def parts, Map map){

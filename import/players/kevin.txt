@@ -5,13 +5,13 @@ Kevin Verhoef
 true
 null
 null
-20-10-2012 18:21:53
+20-10-2012 18:27:30
 Glooming forest -1x1
 Glooming forest center
 4
 6
-12
-8
+14
+17
 1000
 ShowMap
 35
@@ -43,15 +43,15 @@ Tackle
 30
 </ownerMove>
 <ownerMove>
-Water Gun
-25
-</ownerMove>
-<ownerMove>
 Bubble
 30
 </ownerMove>
 <ownerMove>
 Withdraw
 40
+</ownerMove>
+<ownerMove>
+Water Gun
+25
 </ownerMove>
 
