@@ -15,6 +15,9 @@ class NpcLock {
     Owner npc
     Date dateCreated
 
+    // Permanent locks are never released. Gym leaders for example.
+    boolean permanent
+
     static constraints = {
     }
 }

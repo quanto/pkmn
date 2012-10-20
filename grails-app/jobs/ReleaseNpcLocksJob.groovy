@@ -9,7 +9,7 @@ class ReleaseNpcLocksJob {
     def concurrent = false
 
     def execute() {
-        NpcLock.executeUpdate("delete NpcLock where dateCreated < :yesterday",['yesterday':new Date()-1])
+        NpcLock.executeUpdate("delete NpcLock where dateCreated < :yesterday and permanent = :false",['yesterday':new Date()-1,'false':false])
     }
 
 }

@@ -129,4 +129,10 @@ class ActionEditorController {
         render text: "done"
     }
 
+    def editNpc(){
+        Npc owner = Npc.get(Integer.parseInt(params.owner))
+        owner.properties = params
+        render text: "done"
+    }
+
 }

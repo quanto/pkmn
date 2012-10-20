@@ -251,7 +251,8 @@ class Battle {
             // Create an NPC lock
             new NpcLock(
                     player: fightPlayer1.owner,
-                    npc : fight.fightPlayer2.owner
+                    npc : fight.fightPlayer2.owner,
+                    permanent: fight.fightPlayer2.owner.permanentLock
             ).save()
 
             return true

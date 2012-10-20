@@ -34,6 +34,18 @@
              </tr>
             <tr>
                 <td>
+                    Permanent Lock:
+                </td>
+                <td>
+                    <g:form action="editNpc">
+                        <g:hiddenField name="owner" value="${action.owner.id}" />
+                        <g:checkBox name="permanentLock" value="${action.owner.permanentLock}" />
+                        <g:submitButton name="save" />
+                    </g:form>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     Pokemon:
                 </td>
                 <td>

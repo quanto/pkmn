@@ -1,7 +1,8 @@
-<playerData>
+<npcData>
 12345
 Bird watcher
-</playerData>
+false
+</npcData>
 <ownerPokemon>
 false
 10
@@ -18,12 +19,12 @@ Female
 2
 </ownerPokemon>
 <ownerMove>
-Tackle
-35
-</ownerMove>
-<ownerMove>
 String Shot
 40
+</ownerMove>
+<ownerMove>
+Tackle
+35
 </ownerMove>
 
 

@@ -30,10 +30,11 @@ class OwnerBackup {
     }
 
     public static String getNpcData(Npc npc){
-        String npcData = """<playerData>
+        String npcData = """<npcData>
 ${npc.identifier}
 ${npc.name}
-</playerData>
+${npc.permanentLock}
+</npcData>
 ${getOwnerPokemonBackupData(npc)}
 """
         return npcData

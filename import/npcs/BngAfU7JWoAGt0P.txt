@@ -1,7 +1,8 @@
-<playerData>
+<npcData>
 BngAfU7JWoAGt0P
 Bird watcher
-</playerData>
+false
+</npcData>
 <ownerPokemon>
 false
 10

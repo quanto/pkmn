@@ -1,7 +1,8 @@
-<playerData>
+<npcData>
 RNyn8n09NTaOSqS
 Bird watcher
-</playerData>
+false
+</npcData>
 <ownerPokemon>
 false
 16
@@ -38,12 +39,12 @@ Male
 4
 </ownerPokemon>
 <ownerMove>
-Growl
-40
-</ownerMove>
-<ownerMove>
 Peck
 35
+</ownerMove>
+<ownerMove>
+Growl
+40
 </ownerMove>
 
 

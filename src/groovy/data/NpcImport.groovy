@@ -34,6 +34,12 @@ class NpcImport {
                 PlayerImport.createOwnerMove(ownerPokemon, parts)
                 parts = []
             }
+            else if (line.contains("</npcData>")){
+                node = ""
+                updateNpcData(npc, parts)
+                parts = []
+            }
+
             if (node){
                 parts.add(line)
             }
@@ -44,9 +50,18 @@ class NpcImport {
             else if (line.contains("<ownerMove>")){
                 node = "ownerMove"
             }
+            else if (line.contains("<npcData>")){
+                node = "npcData"
+            }
+
         }
 
 
+    }
+
+    public static void updateNpcData(Npc npc, def parts){
+        npc.name = new Boolean(parts[1])
+        npc.permanentLock = new Boolean(parts[2])
     }
 
 }

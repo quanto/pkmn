@@ -5,7 +5,7 @@ Kevin Verhoef
 true
 null
 null
-20-10-2012 15:47:24
+20-10-2012 18:21:53
 Glooming forest -1x1
 Glooming forest center
 4
@@ -39,19 +39,19 @@ Male
 13
 </ownerPokemon>
 <ownerMove>
+Tackle
+30
+</ownerMove>
+<ownerMove>
 Water Gun
 25
 </ownerMove>
 <ownerMove>
-Tackle
+Bubble
 30
 </ownerMove>
 <ownerMove>
 Withdraw
 40
-</ownerMove>
-<ownerMove>
-Bubble
-30
 </ownerMove>
 
