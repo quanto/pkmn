@@ -1,12 +1,5 @@
 package game
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 02-10-12
- * Time: 20:54
- * To change this template use File | Settings | File Templates.
- */
 class Party {
 
     public static int getOpenPartyPosition(Owner owner)
@@ -20,13 +13,7 @@ class Party {
 
         for (int i=1;i<7;i++)
         {
-            try {
-                if (ownerPokemonList.get(i).partyPosition != i)
-                {
-                    return i
-                    break
-                }
-            } catch (IndexOutOfBoundsException ibe){
+            if (!ownerPokemonList.find{ it.partyPosition == i} ){
                 return i
             }
         }
