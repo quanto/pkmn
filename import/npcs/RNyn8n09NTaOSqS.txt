@@ -33,17 +33,17 @@ false
 1
 17
 Male
-1
+2
 64
 4
 </ownerPokemon>
 <ownerMove>
-Growl
-40
-</ownerMove>
-<ownerMove>
 Peck
 35
+</ownerMove>
+<ownerMove>
+Growl
+40
 </ownerMove>
 
 
