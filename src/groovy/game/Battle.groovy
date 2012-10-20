@@ -238,7 +238,7 @@ class Battle {
         EXP.giveEXP(fight,fightPlayer1,fight.fightPlayer2,false);
 
         // haal volgende op als deze bestaat
-        OwnerPokemon nextOwnerPokemon = OwnerPokemon.findByOwnerAndPartyPosition(fightPlayer1.owner,fight.fightPlayer2.ownerPokemon.partyPosition + 1)
+        OwnerPokemon nextOwnerPokemon = OwnerPokemon.findByOwnerAndPartyPosition(fight.fightPlayer2.owner,fight.fightPlayer2.ownerPokemon.partyPosition + 1)
 
         if (!nextOwnerPokemon)
         {
