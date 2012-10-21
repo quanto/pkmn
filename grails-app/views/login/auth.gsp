@@ -116,7 +116,7 @@
 
 
 	</div>
-    <g:link controller="register">Register</g:link>
+    <g:link controller="register">Register</g:link> | <g:link controller="register" action="forgotPassword">Forgot Password</g:link>
 </div>
 <script type='text/javascript'>
 	<!--

@@ -61,6 +61,8 @@ grails.hibernate.cache.queries = true
 
 grails.gorm.failOnError = true
 
+grails.serverURL = "http://localhost:8080/game"
+
 // set per-environment serverURL stem for creating absolute links
 environments {
     development {
@@ -115,3 +117,19 @@ grails.plugins.springsecurity.interceptUrlMap = [
         '/logout/**':    ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/**':           ['IS_AUTHENTICATED_FULLY'],
 ]
+
+grails {
+    mail {
+        "default" {
+            from = "pkmngame0001@gmail.com"
+        }
+        host = "smtp.gmail.com"
+        port = 465
+        username = "pkmngame0001@gmail.com"
+        password = "1@345678"
+        props = ["mail.smtp.auth": "true",
+                "mail.smtp.socketFactory.port": "465",
+                "mail.smtp.socketFactory.class": "javax.net.ssl.SSLSocketFactory",
+                "mail.smtp.socketFactory.fallback": "false"]
+    }
+}

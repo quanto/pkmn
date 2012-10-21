@@ -12,7 +12,8 @@ class Player extends Owner{
     boolean accountExpired = false
     boolean accountLocked = false
     boolean passwordExpired = false
-    String mail
+    String email
+    String recoverPasswordSecret
     String ip
 
     int positionX = 1
@@ -35,13 +36,14 @@ class Player extends Owner{
     Integer fightNr
 
     static constraints = {
-        mail nullable: true
+        email nullable: true
         ip nullable: true
         lastLogin nullable: true
         map nullable: true
         username blank: false, unique: true
         password blank: false
         fightNr nullable :true
+        recoverPasswordSecret nullable: true
     }
 
     static mapping = {

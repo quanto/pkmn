@@ -137,7 +137,7 @@ class PlayerImport {
                 name:parts[1],
                 password:parts[2],
                 enabled:new Boolean(parts[3]),
-                mail:parts[4]!='null'?parts[4]:null,
+                email:parts[4]!='null'?parts[4]:null,
                 ip:parts[5]!='null'?parts[5]:null,
                 registerDate:new Date().parse("dd-MM-yyyy HH:mm:ss",parts[6]),
                 map: Map.findByName(parts[7]),
