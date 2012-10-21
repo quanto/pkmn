@@ -204,4 +204,9 @@ class PartyController {
         }
     }
 
+    def pokemon(){
+        Pokemon pokemon = Pokemon.get(Integer.parseInt(params.id))
+        render text: g.render(template: 'pokemon', model: [pokemon:pokemon])
+    }
+
 }

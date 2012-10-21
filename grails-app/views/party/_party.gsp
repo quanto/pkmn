@@ -39,7 +39,7 @@
                     <img src='${resource(uri:'')}/images/gender/female.png'>
                 </g:else>
             </td>
-            <td><a href='battleEngine/pokedex.php?nr=" . $row["nr"] . "'>${ownerPokemon.pokemon.name}</a></td>
+            <td><a href='${createLink(action:'pokemon',id:ownerPokemon.pokemon.id)}' onclick="return getPokemonData(this)">${ownerPokemon.pokemon.name}</a></td>
             <td>${ownerPokemon.hp}/${ownerPokemon.calculateHP()}</td>
             <td style='text-align:center;'>${ownerPokemon.level}</td>
             <td style='text-align:center;width:70px;white-space:nowrap;'>

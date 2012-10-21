@@ -550,6 +550,22 @@ function updateLocation(x, y)
 	$("#location").text("X: "+x+"Y: "+y);
 }
 
+/**
+ * Info on your party pokemon.
+ */
+function getPokemonData(obj){
+    $.ajax({
+        type: "GET",
+        url: $(obj).attr('href'),
+        data: "",
+        cache: false,
+        success: function(data){
+            $("#party").html(data);
+        }
+    });
+    return false
+}
+
 $(window).unload( function () { 
 
 //	$.ajax({
