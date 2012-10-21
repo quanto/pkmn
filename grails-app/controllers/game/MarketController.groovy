@@ -5,7 +5,6 @@ import map.View
 class MarketController {
 
     def index() {
-
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
 

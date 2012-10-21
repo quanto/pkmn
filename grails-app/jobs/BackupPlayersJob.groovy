@@ -37,7 +37,7 @@ ${player.username}
 ${player.name}
 ${player.password}
 ${player.enabled}
-${player.mail}
+${player.email}
 ${player.ip}
 ${player.registerDate.format("dd-MM-yyyy HH:mm:ss")}
 ${player.map.name}

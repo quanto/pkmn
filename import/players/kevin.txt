@@ -1,7 +1,7 @@
 <playerData>
 kevin
 Kevin Verhoef
-6baad6f126fa53233f5120dd32225d4a9eeaea26dce58789f0b3b6efcdb0dadb
+5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5
 true
 verhoef.k@gmail.com
 null
@@ -11,7 +11,7 @@ Glooming forest center
 4
 6
 5
-4
+7
 600
 ShowMap
 35

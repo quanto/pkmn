@@ -61,7 +61,7 @@ grails.hibernate.cache.queries = true
 
 grails.gorm.failOnError = true
 
-grails.serverURL = "http://localhost:8080/game"
+//grails.serverURL = "http://localhost:8080/game/"
 
 // set per-environment serverURL stem for creating absolute links
 environments {
