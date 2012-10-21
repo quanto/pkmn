@@ -21,8 +21,9 @@ class ItemImport {
                         name : parts[0],
                         effect : parts[1],
                         cost : Integer.parseInt(parts[2]),
-                        active : parts[3] == '1'
+                        implemented : parts[3] == '1'
                 )
+                println parts[3]
 
                 item.save()
 
