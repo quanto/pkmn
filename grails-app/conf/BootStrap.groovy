@@ -29,9 +29,9 @@ class BootStrap {
 
         EffectivenessImport.importEffectiveness()
 
-        MapImport.importMaps()
-
         ItemImport.importItems()
+
+        MapImport.importMaps()
 
         LearnableMovesImport.importLearnableMoves()
 

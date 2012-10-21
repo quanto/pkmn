@@ -1,10 +1,8 @@
 package data
 
 import game.Market
-import game.Npc
-import game.Owner
-import game.OwnerItem
 import game.Item
+import game.MarketItem
 
 class MarketImport {
 
@@ -26,9 +24,9 @@ class MarketImport {
 //                ownerPokemon.save()
                 parts = []
             }
-            else if (line.contains("</marketItem>")){
+            else if (line.contains("</marketItemData>")){
                 node = ""
-//                PlayerImport.createOwnerMove(ownerPokemon, parts)
+                createMarketItem(market, parts)
                 parts = []
             }
             if (node){
@@ -38,7 +36,7 @@ class MarketImport {
             if (line.contains("<market>")){
                 node = "market"
             }
-            else if (line.contains("<marketItem>")){
+            else if (line.contains("<marketItemData>")){
                 node = "marketItem"
             }
 
@@ -46,11 +44,13 @@ class MarketImport {
 
     }
 
-    public static void createMarketItem(Owner owner,def parts){
-//        new MarketItem(
-//                item: Item.findByName(parts[0]),
-//                quantity: Integer.parseInt(parts[1])
-//        ).save()
+    public static void createMarketItem(Market market,def parts){
+        println "test"
+        MarketItem marketItem = new MarketItem(
+                market: market,
+                item: Item.findByName(parts[0])
+        )
+        market.addToMarketItems(marketItem)
     }
 
 }

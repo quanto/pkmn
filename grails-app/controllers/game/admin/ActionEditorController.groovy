@@ -143,10 +143,11 @@ class ActionEditorController {
     def addItem(){
 
         Market market = Market.get(Integer.parseInt(params.market))
-        new MarketItem(
+        MarketItem marketItem = new MarketItem(
                 market: market,
                 item : Item.get(Integer.parseInt(params.item))
-        ).save()
+        )
+        market.addToMarketItems(marketItem)
         render text: "done"
     }
 

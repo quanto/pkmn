@@ -1,6 +1,7 @@
 package data
 
 import game.Market
+import game.MarketItem
 
 class MarketBackup {
 
@@ -23,8 +24,22 @@ class MarketBackup {
         String marketData = """<marketData>
 ${market.identifier}
 </marketData>
+${getMarketItemData2(market)}
 """
         return marketData
+    }
+
+    public static String getMarketItemData2(Market market){
+        String marketItemData = ""
+        market.marketItems.each{ MarketItem marketItem ->
+            marketItemData += """<marketItemData>
+${marketItem.item.name}
+</marketItemData>
+"""
+
+
+        }
+        return marketItemData
     }
 
 }
