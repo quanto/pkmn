@@ -13,6 +13,7 @@ import game.Owner
 import game.Pokemon
 import game.PokemonCreator
 import game.Npc
+import game.Market
 
 class ActionEditorController {
 
@@ -108,6 +109,8 @@ class ActionEditorController {
         }
         else if (params.actionType == 'MarketAction'){
             MarketAction marketAction = new MarketAction(params)
+            marketAction.market = new Market()
+            marketAction.market.save()
             marketAction.save()
         }
         else if (params.actionType == 'NpcAction'){

@@ -10,6 +10,7 @@ import game.MapMessage
 import game.NpcAction
 import data.OwnerBackup
 import game.MarketAction
+import data.MarketBackup
 
 class MapEditorController {
 
@@ -118,8 +119,8 @@ class MapEditorController {
                     OwnerBackup.saveNpc(action.owner)
                 }
                 else if (action in MarketAction){
-                    npcActions += "${action.positionX};${action.positionY};${action.identifier}"
-                    OwnerBackup.saveNpc(action.owner)
+                    marketActions += "${action.positionX};${action.positionY};${action.market.identifier}"
+                    MarketBackup.saveMarket(action.market)
                 }
             }
 
@@ -135,6 +136,7 @@ ${messageActions}
 ${map.worldX}
 ${map.worldY}
 ${npcActions}
+${marketActions}
 """
             out.write(data)
 

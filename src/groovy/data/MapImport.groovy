@@ -9,6 +9,8 @@ import game.RecoverAction
 import game.MapTransition
 import game.NpcAction
 import game.Npc
+import game.Market
+import game.MarketAction
 
 class MapImport {
 
@@ -22,7 +24,7 @@ class MapImport {
                 def parts = []
                 file.eachLine { line ->
                     parts.add( line )
-                    if (index%12==11){
+                    if (index%13==12){
                         Map map = new Map(
                                 name : parts[0],
                                 dataForeground : parts[2],
@@ -58,6 +60,10 @@ class MapImport {
                         def npcParts = npcActions.split(';')
                         importNpcActions(npcParts, map)
 
+                        String marketActions = parts[12]
+                        def marketParts = marketActions.split(';')
+                        importMarketActions(marketParts, map)
+
                         parts = []
 
                     }
@@ -84,6 +90,31 @@ class MapImport {
 
         }
 
+    }
+
+    public static void importMarketActions(def parts, Map map){
+        int total = Math.floor(parts.size() / 3)
+        for (int i=0; i<total;i++){
+            int s = i*3
+
+            // First create the market
+            Market market = new Market(
+                    identifier : parts[s+2]
+            )
+            market.save()
+
+            // Import it's data
+            MarketImport.importMarket(market)
+
+            // Next the action
+            MarketAction marketAction = new MarketAction(
+                    map:map,
+                    positionX:Integer.parseInt(parts[s+0]),
+                    positionY:Integer.parseInt(parts[s+1]),
+                    market: market
+            )
+            map.addToActions(marketAction)
+        }
     }
 
     public static void importNpcActions(def parts, Map map){
