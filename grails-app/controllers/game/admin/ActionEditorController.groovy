@@ -14,6 +14,8 @@ import game.Pokemon
 import game.PokemonCreator
 import game.Npc
 import game.Market
+import game.MarketItem
+import game.Item
 
 class ActionEditorController {
 
@@ -135,6 +137,16 @@ class ActionEditorController {
     def editNpc(){
         Npc owner = Npc.get(Integer.parseInt(params.owner))
         owner.properties = params
+        render text: "done"
+    }
+
+    def addItem(){
+
+        Market market = Market.get(Integer.parseInt(params.market))
+        new MarketItem(
+                market: market,
+                item : Item.get(Integer.parseInt(params.item))
+        ).save()
         render text: "done"
     }
 

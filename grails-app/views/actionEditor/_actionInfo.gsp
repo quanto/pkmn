@@ -1,4 +1,4 @@
-<%@ page import="game.Pokemon; game.OwnerPokemon; game.NpcAction; game.MapMessage" %>
+<%@ page import="game.Item; game.MarketAction; game.Pokemon; game.OwnerPokemon; game.NpcAction; game.MapMessage" %>
 <div>
     <table>
         <tr>
@@ -13,6 +13,28 @@
             <td>positionY:</td>
             <td>${action.positionY}</td>
         </tr>
+        <g:if test="${action in MarketAction}">
+            <tr>
+                <td>
+                    MarketItems:
+                </td>
+                <td>
+                    <table>
+                        <g:each var="marketItem" in="${action.market.marketItems}">
+                            <tr>
+                                <td>${marketItem.item.name}</td>
+                            </tr>
+                        </g:each>
+                    </table>
+                    <g:form action="addItem">
+                        <g:hiddenField name="market" value="${action.market.id}" />
+                        <g:select name="item" from="${Item.list()}" optionKey="id" />
+                        <g:submitButton name="add" />
+                    </g:form>
+                </td>
+            </tr>
+        </g:if>
+
         <g:if test="${action in MapMessage}">
             <tr>
                 <td>
@@ -75,7 +97,6 @@
                                 </td>
                                 <td>
                                     <g:select name="pokemon" from="${Pokemon.list()}" optionKey="id" />
-
                                 </td>
                             </tr>
                             <tr>

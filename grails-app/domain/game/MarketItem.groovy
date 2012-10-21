@@ -2,7 +2,7 @@ package game
 
 class MarketItem {
 
-    MarketAction marketAction
+    Market market
     Item item
 
     static constraints = {
