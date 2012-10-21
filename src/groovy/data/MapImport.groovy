@@ -80,7 +80,7 @@ class MapImport {
                 parts.add( line )
                 if (index%10==9){
                     Map map = Map.findByName(parts[1])
-                    String mapTransitions = parts[6]
+                    String mapTransitions = parts[5]
                     def mapTransitionParts = mapTransitions.split(';')
                     coupleMapTransitions(mapTransitionParts,map)
                     parts = []
