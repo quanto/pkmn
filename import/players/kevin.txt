@@ -11,9 +11,9 @@ Glooming forest center
 4
 6
 5
-5
-1000
-ShowMap
+4
+800
+ShowMarket
 35
 2
 9
@@ -23,7 +23,11 @@ ShowMap
 ROLE_ADMIN
 </role>
 
-
+<ownerItem>
+Poke Ball
+1
+</ownerItem>
+            
 <ownerPokemon>
 false
 7

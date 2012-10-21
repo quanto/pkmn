@@ -1,3 +1,4 @@
+<div style="text-align:left;">
 Money: ${money}
 
 <g:render template="ownerItems" model="${[ownerItems:ownerItems]}" />
@@ -5,3 +6,5 @@ Money: ${money}
 <g:render template="marketItems" model="${[marketItems:marketItems]}" />
 
 <a href='${createLink(action:'exit')}'>Exit</a>
+
+</div>
