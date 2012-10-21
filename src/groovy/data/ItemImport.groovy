@@ -23,7 +23,6 @@ class ItemImport {
                         cost : Integer.parseInt(parts[2]),
                         implemented : parts[3] == '1'
                 )
-                println parts[3]
 
                 item.save()
 

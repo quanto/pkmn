@@ -45,7 +45,6 @@ class MarketImport {
     }
 
     public static void createMarketItem(Market market,def parts){
-        println "test"
         MarketItem marketItem = new MarketItem(
                 market: market,
                 item: Item.findByName(parts[0])

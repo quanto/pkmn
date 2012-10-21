@@ -79,15 +79,19 @@ class PlayerImport {
                     node = "ownerItem"
                 }
             }
+            println player
 
         }
     }
 
     public static void createOwnerItem(Owner owner,def parts){
-        new OwnerItem(
+        OwnerItem ownerItem = new OwnerItem(
+                owner: owner,
                 item: Item.findByName(parts[0]),
                 quantity: Integer.parseInt(parts[1])
-        ).save()
+        )
+        owner.addToOwnerItems(ownerItem)
+        owner.save()
     }
 
     public static void createOwnerMove(OwnerPokemon ownerPokemon, def parts){
