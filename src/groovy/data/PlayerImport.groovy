@@ -12,6 +12,8 @@ import game.Move
 import game.PlayerRole
 import game.Role
 import game.Owner
+import game.OwnerItem
+import game.Item
 
 class PlayerImport {
 
@@ -51,6 +53,11 @@ class PlayerImport {
                     createRole(player, parts)
                     parts = []
                 }
+                else if (line.contains("</ownerItem>")){
+                    node = ""
+                    createOwnerItem(player, parts)
+                    parts = []
+                }
 
                 if (node){
                     parts.add(line)
@@ -68,9 +75,19 @@ class PlayerImport {
                 else if (line.contains("<role>")){
                     node = "role"
                 }
+                else if (line.contains("<ownerItem>")){
+                    node = "ownerItem"
+                }
             }
 
         }
+    }
+
+    public static void createOwnerItem(Owner owner,def parts){
+        new OwnerItem(
+                item: Item.findByName(parts[0]),
+                quantity: Integer.parseInt(parts[1])
+        ).save()
     }
 
     public static void createOwnerMove(OwnerPokemon ownerPokemon, def parts){

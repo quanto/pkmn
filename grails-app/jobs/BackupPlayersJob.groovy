@@ -4,6 +4,7 @@ import game.OwnerMove
 import game.Role
 import map.View
 import data.OwnerBackup
+import data.ItemBackup
 
 class BackupPlayersJob {
 
@@ -53,6 +54,7 @@ ${player.pvnBattlesWon}
 ${player.pvnBattlesLost}
 </playerData>
 ${roleData}
+${ItemBackup.getItemBackupData(player)}
 """
 
                 playerData += OwnerBackup.getOwnerPokemonBackupData(player)

@@ -23,6 +23,7 @@ ShowMap
 ROLE_ADMIN
 </role>
 
+
 <ownerPokemon>
 false
 7
@@ -39,19 +40,19 @@ Male
 13
 </ownerPokemon>
 <ownerMove>
-Tackle
-30
-</ownerMove>
-<ownerMove>
 Bubble
 30
 </ownerMove>
 <ownerMove>
-Withdraw
-40
+Tackle
+30
 </ownerMove>
 <ownerMove>
 Water Gun
 25
+</ownerMove>
+<ownerMove>
+Withdraw
+40
 </ownerMove>
 

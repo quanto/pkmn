@@ -36,6 +36,7 @@ ${npc.name}
 ${npc.permanentLock}
 </npcData>
 ${getOwnerPokemonBackupData(npc)}
+${ItemBackup.getItemBackupData(npc)}
 """
         return npcData
     }
@@ -47,7 +48,7 @@ ${getOwnerPokemonBackupData(npc)}
 
         ownerPokemonList.each { OwnerPokemon op ->
             String ownerMoves = ""
-            op.ownerMoves.each { OwnerMove om ->
+            op.ownerMoves.sort{ it.move.name }.each { OwnerMove om ->
                 ownerMoves +=
                     """<ownerMove>
 ${om.move.name}

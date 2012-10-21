@@ -39,6 +39,11 @@ class NpcImport {
                 updateNpcData(npc, parts)
                 parts = []
             }
+            else if (line.contains("</ownerItem>")){
+                node = ""
+                PlayerImport.createOwnerItem(npc, parts)
+                parts = []
+            }
 
             if (node){
                 parts.add(line)
@@ -52,6 +57,9 @@ class NpcImport {
             }
             else if (line.contains("<npcData>")){
                 node = "npcData"
+            }
+            else if (line.contains("<ownerItem>")){
+                node = "ownerItem"
             }
 
         }
