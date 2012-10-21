@@ -39,12 +39,13 @@ Male
 4
 </ownerPokemon>
 <ownerMove>
-Peck
-35
-</ownerMove>
-<ownerMove>
 Growl
 40
 </ownerMove>
+<ownerMove>
+Peck
+35
+</ownerMove>
+
 
 

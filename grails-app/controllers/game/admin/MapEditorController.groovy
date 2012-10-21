@@ -9,6 +9,7 @@ import game.RecoverAction
 import game.MapMessage
 import game.NpcAction
 import data.OwnerBackup
+import game.MarketAction
 
 class MapEditorController {
 
@@ -95,6 +96,7 @@ class MapEditorController {
             String recoverActions = ""
             String messageActions = ""
             String npcActions = ""
+            String marketActions = ""
 
             // Sort so we always have the same order in the actions
             map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
@@ -113,6 +115,10 @@ class MapEditorController {
                 }
                 else if (action in NpcAction){
                     npcActions += "${action.positionX};${action.positionY};${action.owner.identifier};${action.owner.name};"
+                    OwnerBackup.saveNpc(action.owner)
+                }
+                else if (action in MarketAction){
+                    npcActions += "${action.positionX};${action.positionY};${action.identifier}"
                     OwnerBackup.saveNpc(action.owner)
                 }
             }

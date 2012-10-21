@@ -11,6 +11,14 @@ class MarketController {
 
         MarketAction marketAction = MarketAction.findByPositionXAndPositionY(player.positionX, player.positionY)
 
+        println player.positionX
+        println player.positionY
+
+        MarketAction.list().each {
+            println it.positionX
+            println it.positionY
+        }
+
         if (player.view != View.ShowMarket || !marketAction){
             render text : "Zit niet in een PokeMarket"
         }

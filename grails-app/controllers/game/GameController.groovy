@@ -288,7 +288,7 @@ class GameController {
             render text: g.render(template: 'map', model: [mapLayout: mapLayout, player: player])
         }
         else if (player.view == View.ShowMarket){
-
+            redirect controller : "market", action: "index"
         }
         else if (player.view == View.ShowComputer){
             redirect controller : "party", action: "computer"
