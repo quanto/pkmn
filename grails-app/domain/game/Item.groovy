@@ -6,6 +6,7 @@ class Item {
     String effect
     int cost
     boolean implemented
+    String image
 
     static constraints = {
     }

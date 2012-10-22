@@ -16,9 +16,9 @@
         out << renderSelectTypeEditor("locale", domainClass, property)
     else if (property.type == Currency)
         out << renderSelectTypeEditor("currency", domainClass, property)
-    else if (property.type==([] as Byte[]).class) //TODO: Bug in groovy means i have to do this :(
+    else if (property.type==([] as Byte[]).class)
         out << renderByteArrayEditor(domainClass, property)
-    else if (property.type==([] as byte[]).class) //TODO: Bug in groovy means i have to do this :(
+    else if (property.type==([] as byte[]).class)
         out << renderByteArrayEditor(domainClass, property)
     else if (property.manyToOne || property.oneToOne)
         out << renderManyToOne(domainClass, property)

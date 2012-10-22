@@ -46,7 +46,7 @@ class PokeBall {
     public static void catchSuccess(Fight fight, Owner itemOwner, Item item, FightPlayer attackingFightPlayer, FightPlayer defendingFightPlayer, Double catchFactor){
         // http://www.dragonflycave.com/capture.aspx
 
-
+        // :TODO implement catch formula
         // Haal pokemon op voor catchRate
         int catchRate = defendingFightPlayer.ownerPokemon.pokemon.catchRate * catchFactor
         int M = defendingFightPlayer.ownerPokemon.calculateHP()

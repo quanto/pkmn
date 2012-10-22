@@ -2,155 +2,194 @@ Cherish Ball
 Normal chance of catching a Pokemon
 0
 1
+
 Dusk Ball
 x4 catch rate if Night-time or in dark areas
 1000
 0
+
 Great Ball
 x1.5 chance of catching a Pokemon than using a standard Poke Ball
 600
 1
+greatball.png
 Heal Ball
 Heals the Pokemon and removes status effects upon capture
 300
 0
+healtball.png
 Master Ball
 Captures wild Pokemon without fail
 0
 1
+masterball.gif
 Nest Ball
 The lower the Pokemon's level, the higher the chance of capture is
 1000
 0
+nest-ball.gif
 Net Ball
 Normal Chance of Catching a Pokemon unless it's a Bug or Water type in which it's a 3x normal chance
 1000
 1
+net-ball.gif
 Park Ball
 Captures Pal Park-transfered Pokemon without fail
 0
 0
+quickball.png
 Poke Ball
 Normal chance of catching a Pokemon
 200
 1
+pokeball.gif
 Premier Ball
 Normal chance of catching a Pokemon
 0
 0
+premium-ball.gif
 Quick Ball
 For every 5 turns in Battle, the capture rate decreases
 1000
 0
+quickball.png
 Repeat Ball
 A 3x chance of capturing Pokemon if you already have one of the same breed, otherwise it's a normal chance of catching a Pokemon
 1000
 0
+repeat-ball.gif
 Safari Ball
 1.5x chance of catching a Pokemon
 0
 1
+safari-ball.gif
 Timer Ball
 For every ten turns in battle, the chance of catching the Pokemon rises
 1000
 0
+timer-ball.gif
 Ultra Ball
 2x chance of catching a Pokemon than using a standard Poke Ball
 1200
 1
+ultraball.gif
 Antidote
 Cures one Pokemon of the Poison status effect
 100
 1
+antidote.gif
 Awakening
 Awakens one Pokemon with the Sleep status effect
 250
 1
+awakening.gif
 Burn Heal
 Cures one Pokemon of the Burn status effect
 250
 1
+burn-heal.gif
 Elixir
 Restores 10 PP to every move of a selected Pokemon
 0
 0
+elexir.gif
 Ether
 Restores 10 PP to one Pokemon's selected move
 0
 0
+ether.gif
 Fresh Water
 Restores 50 HP to one Pokemon
 200
 1
+fresh-water.gif
 Full Heal
 Cures one Pokemon of any status effect
 600
 1
+full-heal.gif
 Full Restore
 Restores all HP to one Pokemon and cures them of any status effects
 3000
 1
+full-restore.gif
 Hyper Potion
 Restores 200 HP to one Pokemon
 1200
 1
+hyper-potion.gif
 Ice Heal
 Defrosts one Pokemon with the Frozen status condition
 250
 1
+ice-heal.gif
 Lava Cookie
 Cures one Pokemon of any status effect
 0
 1
+lava-cookie.gif
 Lemonade
 Restores 80 HP to one Pokemon
 350
 1
+lemonade.gif
 Max Elixir
 Restores all PP to every move of a selected Pokemon
 0
 0
+max-elixer.gif
 Max Ether
 Restores all PP to one move of a selected Pokemon
 0
 0
+max-ether.gif
 Max Potion
 Restores all HP to one Pokemon
 2500
 1
+max-potion.gif
 Max Revive
 Revives a fainted Pokemon and fully restores it's HP
 0
 0
+max-revive.gif
 MooMoo Milk
 Restores 100 HP to one Pokemon
 500
 1
+moomoo-milk.gif
 Old Gateau
 Cures one Pokemon of any status effect
 0
 1
-Paralyze Heal
+old-gateau.png
+Paralyz Heal
 Cures one Pokemon of the Paralyze status effect
 200
 1
+paralyz-heal.gif
 Potion
 Restores 20 HP to one Pokemon
 300
 1
+potion.gif
 Revive
 Revives a fainted Pokemon and restores half of it's max HP
 1500
 0
+revive.gif
 Sacred Ash
 Revives all fainted Pokemon and fully restores their HP
 0
 0
+sacred-ash.gif
 Soda Pop
 Restores 60 HP to one Pokemon
 300
 1
+soda-pop.gif
 Super Potion
 Restores 500 HP to one Pokemon
 700
 1
+super-potion.gif

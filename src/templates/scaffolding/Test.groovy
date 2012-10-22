@@ -9,7 +9,6 @@ class ${className}ControllerTests {
 
     def populateValidParams(params) {
         assert params != null
-        // TODO: Populate valid properties like...
         //params["name"] = 'someValidName'
     }
 
@@ -99,7 +98,6 @@ class ${className}ControllerTests {
 
         // test invalid parameters in update
         params.id = ${propertyName}.id
-        //TODO: add invalid values to params object
 
         controller.update()
 

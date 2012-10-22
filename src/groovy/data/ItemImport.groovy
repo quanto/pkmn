@@ -15,13 +15,14 @@ class ItemImport {
 
         file.eachLine { line ->
             parts.add( line )
-            if (index%4==3){
+            if (index%5==4){
 
                 Item item = new Item(
                         name : parts[0],
                         effect : parts[1],
                         cost : Integer.parseInt(parts[2]),
-                        implemented : parts[3] == '1'
+                        implemented : parts[3] == '1',
+                        image:parts[4]
                 )
 
                 item.save()
