@@ -1,5 +1,5 @@
 Cherish Ball
-Normal chance of catching a PokÃƒÂ©mon
+Normal chance of catching a Pokemon
 0
 1
 Dusk Ball
@@ -7,35 +7,35 @@ x4 catch rate if Night-time or in dark areas
 1000
 0
 Great Ball
-x1.5 chance of catching a PokÃƒÂ©mon than using a standard PokÃƒÂ© Ball
+x1.5 chance of catching a Pokemon than using a standard Poke Ball
 600
 1
 Heal Ball
-Heals the PokÃƒÂ©mon and removes status effects upon capture
+Heals the Pokemon and removes status effects upon capture
 300
 0
 Master Ball
-Captures wild PokÃƒÂ©mon without fail
+Captures wild Pokemon without fail
 0
 1
 Nest Ball
-The lower the PokÃƒÂ©mon's level, the higher the chance of capture is
+The lower the Pokemon's level, the higher the chance of capture is
 1000
 0
 Net Ball
-Normal Chance of Catching a PokÃƒÂ©mon unless it's a Bug or Water type in which it's a 3x normal chance
+Normal Chance of Catching a Pokemon unless it's a Bug or Water type in which it's a 3x normal chance
 1000
 1
 Park Ball
-Captures Pal Park-transfered PokÃƒÂ©mon without fail
+Captures Pal Park-transfered Pokemon without fail
 0
 0
 Poke Ball
-Normal chance of catching a PokÃƒÂ©mon
+Normal chance of catching a Pokemon
 200
 1
 Premier Ball
-Normal chance of catching a PokÃƒÂ©mon
+Normal chance of catching a Pokemon
 0
 0
 Quick Ball
@@ -43,114 +43,114 @@ For every 5 turns in Battle, the capture rate decreases
 1000
 0
 Repeat Ball
-A 3x chance of capturing PokÃƒÂ©mon if you already have one of the same breed, otherwise it's a normal chance of catching a PokÃƒÂ©mon
+A 3x chance of capturing Pokemon if you already have one of the same breed, otherwise it's a normal chance of catching a Pokemon
 1000
 0
 Safari Ball
-1.5x chance of catching a PokÃƒÂ©mon
+1.5x chance of catching a Pokemon
 0
 1
 Timer Ball
-For every ten turns in battle, the chance of catching the PokÃƒÂ©mon rises
+For every ten turns in battle, the chance of catching the Pokemon rises
 1000
 0
 Ultra Ball
-2x chance of catching a PokÃƒÂ©mon than using a standard PokÃƒÂ© Ball
+2x chance of catching a Pokemon than using a standard Poke Ball
 1200
 1
 Antidote
-Cures one PokÃƒÂ©mon of the Poison status effect
+Cures one Pokemon of the Poison status effect
 100
 1
 Awakening
-Awakens one PokÃƒÂ©mon with the Sleep status effect
+Awakens one Pokemon with the Sleep status effect
 250
 1
 Burn Heal
-Cures one PokÃƒÂ©mon of the Burn status effect
+Cures one Pokemon of the Burn status effect
 250
 1
 Elixir
-Restores 10 PP to every move of a selected PokÃƒÂ©mon
+Restores 10 PP to every move of a selected Pokemon
 0
 0
 Ether
-Restores 10 PP to one PokÃƒÂ©mon's selected move
+Restores 10 PP to one Pokemon's selected move
 0
 0
 Fresh Water
-Restores 50 HP to one PokÃƒÂ©mon
+Restores 50 HP to one Pokemon
 200
 1
 Full Heal
-Cures one PokÃƒÂ©mon of any status effect
+Cures one Pokemon of any status effect
 600
 1
 Full Restore
-Restores all HP to one PokÃƒÂ©mon and cures them of any status effects
+Restores all HP to one Pokemon and cures them of any status effects
 3000
 1
 Hyper Potion
-Restores 200 HP to one PokÃƒÂ©mon
+Restores 200 HP to one Pokemon
 1200
 1
 Ice Heal
-Defrosts one PokÃƒÂ©mon with the Frozen status condition
+Defrosts one Pokemon with the Frozen status condition
 250
 1
 Lava Cookie
-Cures one PokÃƒÂ©mon of any status effect
+Cures one Pokemon of any status effect
 0
 1
 Lemonade
-Restores 80 HP to one PokÃƒÂ©mon
+Restores 80 HP to one Pokemon
 350
 1
 Max Elixir
-Restores all PP to every move of a selected PokÃƒÂ©mon
+Restores all PP to every move of a selected Pokemon
 0
 0
 Max Ether
-Restores all PP to one move of a selected PokÃƒÂ©mon
+Restores all PP to one move of a selected Pokemon
 0
 0
 Max Potion
-Restores all HP to one PokÃƒÂ©mon
+Restores all HP to one Pokemon
 2500
 1
 Max Revive
-Revives a fainted PokÃƒÂ©mon and fully restores it's HP
+Revives a fainted Pokemon and fully restores it's HP
 0
 0
 MooMoo Milk
-Restores 100 HP to one PokÃƒÂ©mon
+Restores 100 HP to one Pokemon
 500
 1
 Old Gateau
-Cures one PokÃƒÂ©mon of any status effect
+Cures one Pokemon of any status effect
 0
 1
 Paralyze Heal
-Cures one PokÃƒÂ©mon of the Paralyze status effect
+Cures one Pokemon of the Paralyze status effect
 200
 1
 Potion
-Restores 20 HP to one PokÃƒÂ©mon
+Restores 20 HP to one Pokemon
 300
 1
 Revive
-Revives a fainted PokÃƒÂ©mon and restores half of it's max HP
+Revives a fainted Pokemon and restores half of it's max HP
 1500
 0
 Sacred Ash
-Revives all fainted PokÃƒÂ©mon and fully restores their HP
+Revives all fainted Pokemon and fully restores their HP
 0
 0
 Soda Pop
-Restores 60 HP to one PokÃƒÂ©mon
+Restores 60 HP to one Pokemon
 300
 1
 Super Potion
-Restores 500 HP to one PokÃƒÂ©mon
+Restores 500 HP to one Pokemon
 700
 1

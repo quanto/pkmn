@@ -136,58 +136,7 @@ class BattleController {
         }
         // continue normal flow and show the menu
 
-        // wil move leren
-//			if (fight.{"player" . $mp . "learnMoves"} != "" && isset($_GET["forgetMove"]) && $_GET["forgetMove"] == "yes")
-//			{
-//				forgetMoveList();
-//			}
-//			// leer moves
-//			else if (fight.{"player" . $mp . "learnMoves"} != "")
-//			{
-//				chooseLearnMove();
-//			}
-//			else if (fight.battleOver == 1)
-//			{
-//				//displayBattle();
-//				/*
-//				$quests = new quests();
-//				$quests->qd1 = fight.player2PokemonId;
-//				$quests->playerid = fight.player1Id;
-//
-//				$quests->checkQuest();
-//				*/
-//                 exitMenu();
-//            }
-//            else if (fight.{"player" . $mp . "Hp"} == 0 && fight.{"player" . $op . "Hp"} != 0)
-//            {
-//                pokemonList(true);
-//            }
-//            else if (isset($_GET["item"]) && fight.battleOver == 0)
-//            {
-//                //displayBattle();
-//                itemList();
-//            }
-//            else if (isset($_GET["fight"]) && fight.battleOver == 0)
-//            {
-//                beforeChosingMove($mp);
-//                moveList();
-//            }
-//            // Switch pokemon list
-//            else if (isset($_GET["action"]) && $_GET["action"] == "pkmn" && fight.battleOver == 0)
-//            {
-//                pokemonList(false);
-//            }
-//            else
-//            {
-//                actionList();
-//            }
-//            exit();
-        // wil move leren
-//        if (fight.fightPlayer1.learnMoves != "" && isset($_GET["forgetMove"]) && $_GET["forgetMove"] == "yes")
-//        {
-//            forgetMoveList();
-//        }
-//        else
+
         // Replace old move
         if (fight.fightPlayer1.learnMoves && params.replaceMove != null)
         {
@@ -294,7 +243,12 @@ class BattleController {
 
         Fight fight = fightFactoryService.getFight(player.fightNr)
 
-        println "1"
+        OwnerItem ownerItem = player.ownerItems.find() { it.id == Integer.parseInt(params.id) }
+
+        if (ownerItem){
+            UseItem.useItem(fight, fight.fightPlayer1.owner, ownerItem.item, fight.fightPlayer1, fight.fightPlayer2)
+        }
+
         render text :"use item"
     }
 

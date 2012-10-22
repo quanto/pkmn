@@ -79,7 +79,7 @@ class MapImport {
             file.eachLine { line ->
                 parts.add( line )
                 if (index%10==9){
-                    Map map = Map.findByName(parts[1])
+                    Map map = Map.findByName(parts[0])
                     String mapTransitions = parts[5]
                     def mapTransitionParts = mapTransitions.split(';')
                     coupleMapTransitions(mapTransitionParts,map)
@@ -151,10 +151,22 @@ class MapImport {
             MapTransition mapTransition = MapTransition.findByMapAndPositionXAndPositionY(map,Integer.parseInt(parts[s+0]),Integer.parseInt(parts[s+1]))
             Map mapTo = Map.findByName(parts[s+2])
 
-            MapTransition mapTransitionTo = MapTransition.findByMapAndPositionXAndPositionY(mapTo,Integer.parseInt(parts[s+3]),Integer.parseInt(parts[s+4]))
+            if (mapTransition){
 
-            mapTransition.jumpTo = mapTransitionTo
-            mapTransition.save()
+                MapTransition mapTransitionTo = MapTransition.findByMapAndPositionXAndPositionY(mapTo,Integer.parseInt(parts[s+3]),Integer.parseInt(parts[s+4]))
+
+                if (mapTransitionTo){
+                    mapTransition.jumpTo = mapTransitionTo
+                    mapTransition.save()
+                }
+                else {
+                    println "missing map transition to for mapTransition ${mapTransition.map} ${mapTransition.positionX} ${mapTransition.positionY}"
+                }
+
+            }
+            else {
+                println "missing map transition to for mapTransition ${map} ${parts[s+0]} ${parts[s+1]}"
+            }
         }
     }
 

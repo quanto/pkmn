@@ -6,12 +6,12 @@ true
 verhoef.k@gmail.com
 null
 20-10-2012 18:27:30
-Glooming forest market
+Glooming forest -2x1
 Glooming forest center
 4
 6
-5
-7
+16
+10
 600
 ShowMap
 35
@@ -59,4 +59,20 @@ Water Gun
 Withdraw
 40
 </ownerMove>
+
+<ownerPokemon>
+false
+16
+11
+31
+21
+20
+26
+5
+13
+Female
+2
+0
+2
+</ownerPokemon>
 

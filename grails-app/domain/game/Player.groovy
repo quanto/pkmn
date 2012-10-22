@@ -60,6 +60,8 @@ class Player extends Owner{
 
     def beforeUpdate() {
         if (isDirty('password')) {
+            println "encode"
+            println password
             encodePassword()
         }
     }
