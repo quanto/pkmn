@@ -1,7 +1,7 @@
 <npcData>
 cePS20cZXHM9M7p
 Bella
-false
+true
 
 </npcData>
 <ownerPokemon>

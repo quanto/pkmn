@@ -1,7 +1,7 @@
 <npcData>
 Hsb4uOE4qimDRvt
 Gym leader Nadia
-false
+true
 defeatAllOtherNpcOnCurrentMap
 </npcData>
 <ownerPokemon>

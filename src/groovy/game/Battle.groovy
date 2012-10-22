@@ -317,7 +317,7 @@ class Battle {
             }
 
             // bereken accuracy
-            int accuracy = Accuraccy.getAccuracy(attackMove.accuracy,attackFightPlayer.accuracyStage);
+            double accuracy = Accuraccy.getAccuracy(attackMove.accuracy,attackFightPlayer.accuracyStage);
 
             // evade over accuracy
             int chanceOnHitting = Evasion.getEvasion(accuracy,defendingFightPlayer.evasionStage);

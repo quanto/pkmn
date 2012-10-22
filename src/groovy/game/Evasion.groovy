@@ -25,9 +25,9 @@ class Evasion {
         }
     }
 
-    public static int getEvasion(int evasion, int stage)
+    public static double getEvasion(double evasion, int stage)
     {
-        int p = 0
+        double p = 0
         if (stage == -6)
         {
             p = 3;

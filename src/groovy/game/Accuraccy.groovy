@@ -27,9 +27,9 @@ class Accuraccy {
         }
     }
 
-    public static int getAccuracy(int accuraccy, int stage)
+    public static double getAccuracy(int accuraccy, int stage)
     {
-        int p = 0
+        double p = 0
         if (stage == -6)
         {
             p = 0.33;

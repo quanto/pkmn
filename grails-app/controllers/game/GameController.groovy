@@ -27,7 +27,6 @@ class GameController {
                 player.positionX = mapTransition.jumpTo.positionX
                 player.positionY = mapTransition.jumpTo.positionY
                 player.setMap mapTransition.jumpTo.map
-                player.save(flush:true)
                 render text: "refreshMap"
             }
             else if (action in MapMessage){

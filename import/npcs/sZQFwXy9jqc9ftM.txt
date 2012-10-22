@@ -1,7 +1,7 @@
 <npcData>
 sZQFwXy9jqc9ftM
 Katrina
-false
+true
 
 </npcData>
 <ownerPokemon>
