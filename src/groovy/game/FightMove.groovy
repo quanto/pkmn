@@ -483,42 +483,42 @@ class FightMove {
         // May cause freezing.
         else if (move.name == "Blizzard" || move.name == "Ice Beam" || move.name == "Ice Punch" || move.name == "Powder Snow") //
         {
-            moveInfo.effectAction = true;
-            moveInfo.freezeAction = true;
+            moveInfo.effectAction = true
+            moveInfo.freezeAction = true
         }
         // 196 Ice Fang physical move May cause freezing and flinching.
         else if (move.name == "Ice Fang")
         {
-            moveInfo.effectAction = true;
-            moveInfo.freezeAction = true;
-            moveInfo.flinchAction = true;
+            moveInfo.effectAction = true
+            moveInfo.freezeAction = true
+            moveInfo.flinchAction = true
         }
         // 433 Tri Attack special move May cause paralysis, freezing, or a burn
         else if (move.name == "Tri Attack")
         {
-            moveInfo.effectAction = true;
+            moveInfo.effectAction = true
 
             int r = random.nextInt(3)
             if (r == 1)
-                moveInfo.freezeAction = true;
+                moveInfo.freezeAction = true
             else if (r == 2)
-                moveInfo.burnAction = true;
+                moveInfo.burnAction = true
             else
-                moveInfo.paralysisAction = true;
+                moveInfo.paralysisAction = true
         }
         // Cannot miss, regardless of Accuracy and Evasiveness.
         else if (move.name == "Shadow Punch" || move.name == "Faint Attack" || move.name == "Magical Leaf" || move.name == "Magnet Bomb" || move.name == "Aerial Ace") //
         {
-            moveInfo.cantMiss = true;
+            moveInfo.cantMiss = true
         }
         else if (move.name == "Struggle")
         {
-            moveInfo.recoil = 50;
+            moveInfo.recoil = 50
         }
         else if (move.name == "Rapid Spin")
         {
-            attackingFightPlayer.continueMove = 0;
-            attackingFightPlayer.holdMove = 0;
+            attackingFightPlayer.continueMove = 0
+            attackingFightPlayer.holdMove = 0
             //attackingFightPlayer.continueTurns = 0; :TODO whats this?
         }
         else if (move.name == "Solarbeam")
