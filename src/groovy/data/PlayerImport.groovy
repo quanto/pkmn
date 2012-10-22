@@ -14,6 +14,8 @@ import game.Role
 import game.Owner
 import game.OwnerItem
 import game.Item
+import game.NpcLock
+import game.Npc
 
 class PlayerImport {
 
@@ -58,6 +60,11 @@ class PlayerImport {
                     createOwnerItem(player, parts)
                     parts = []
                 }
+                else if (line.contains("</npcLock>")){
+                    node = ""
+                    createNpcLock(player, parts)
+                    parts = []
+                }
 
                 if (node){
                     parts.add(line)
@@ -78,10 +85,21 @@ class PlayerImport {
                 else if (line.contains("<ownerItem>")){
                     node = "ownerItem"
                 }
+                else if (line.contains("<npcLock>")){
+                    node = "npcLock"
+                }
             }
-            println player
 
         }
+    }
+
+    public static void createNpcLock(Player player,def parts){
+        new NpcLock(
+                player: player,
+                npc: Npc.findByIdentifier(parts[0]),
+                dateCreated: new Date().parse("dd-MM-yyyy HH:mm:ss",parts[1]),
+                permanent: new Boolean(parts[2])
+        ).save()
     }
 
     public static void createOwnerItem(Owner owner,def parts){

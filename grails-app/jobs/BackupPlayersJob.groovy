@@ -5,6 +5,7 @@ import game.Role
 import map.View
 import data.OwnerBackup
 import data.ItemBackup
+import data.NpcLockBackup
 
 class BackupPlayersJob {
 
@@ -55,6 +56,7 @@ ${player.pvnBattlesLost}
 </playerData>
 ${roleData}
 ${ItemBackup.getItemBackupData(player)}
+${NpcLockBackup.getNpcLockData(player)}
 """
 
                 playerData += OwnerBackup.getOwnerPokemonBackupData(player)
