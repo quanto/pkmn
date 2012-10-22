@@ -125,7 +125,7 @@ class MapImport {
             // First create the NPC
             Npc npc = new Npc(
                     identifier : parts[s+2],
-                    name: parts[s+3]
+                    name: parts[s+3],
             )
             npc.save()
 
@@ -139,6 +139,8 @@ class MapImport {
                     positionY:Integer.parseInt(parts[s+1]),
                     owner: npc
             )
+            npc.npcAction = npcAction
+            npcAction.save()
             map.addToActions(npcAction)
         }
     }

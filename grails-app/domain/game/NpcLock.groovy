@@ -12,7 +12,7 @@ package game
 class NpcLock {
 
     Player player
-    Owner npc
+    Npc npc
     Date dateCreated
 
     // Permanent locks are never released. Gym leaders for example.

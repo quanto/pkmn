@@ -117,7 +117,7 @@ class ActionEditorController {
         }
         else if (params.actionType == 'NpcAction'){
             NpcAction npcAction = new NpcAction(params)
-            npcAction.owner = new Npc()
+            npcAction.owner = new Npc(npcAction:npcAction)
             npcAction.owner.name = params.name
             npcAction.owner.save()
             npcAction.save()

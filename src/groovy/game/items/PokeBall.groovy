@@ -5,6 +5,7 @@ import game.Owner
 import game.Item
 import game.FightPlayer
 import game.Party
+import game.Moves
 
 class PokeBall {
 
@@ -64,6 +65,8 @@ class PokeBall {
             defendingFightPlayer.ownerPokemon.partyPosition = Party.getOpenPartyPosition(attackingFightPlayer.owner)
             defendingFightPlayer.ownerPokemon.save()
 
+            // Add moves
+            Moves.setBaseMoves(defendingFightPlayer.ownerPokemon)
         }
         else
         {

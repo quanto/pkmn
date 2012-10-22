@@ -70,6 +70,7 @@ class NpcImport {
     public static void updateNpcData(Npc npc, def parts){
         npc.name = parts[1]
         npc.permanentLock = new Boolean(parts[2])
+        npc.condition = parts[3]?:null
     }
 
 }

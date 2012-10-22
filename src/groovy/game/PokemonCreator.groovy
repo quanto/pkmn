@@ -15,7 +15,6 @@ class PokemonCreator {
         ownerPokemon.owner = owner
 
         ownerPokemon.partyPosition = Party.getOpenPartyPosition(owner)
-        ownerPokemon.xp = EXP.getExp(ownerPokemon.level,pokemon.levelRate)
 
         Moves.setBaseMoves(ownerPokemon)
 
@@ -43,7 +42,7 @@ class PokemonCreator {
                 speedIV:random.nextInt(32),
                 hp:40,
                 partyPosition: 0,
-                xp:0,
+                xp:EXP.getExp(level,pokemon.levelRate),
                 level:level
         )
         ownerPokemon.hp = ownerPokemon.calculateHP();

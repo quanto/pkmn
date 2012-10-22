@@ -55,8 +55,24 @@ class GameController {
 
                 NpcAction npcAction = action
 
-                if (NpcLock.findByPlayerAndNpc(player,npcAction.owner)){
-                    render text : "You already defeated ${npcAction.owner.name} today. Come back later."
+                // Check special conditions
+                if (npcAction.owner.condition){
+                    if (!Condition.conditionEval(player,npcAction.owner.condition)){
+                        render text : "Condition not met!" // :TODO Set text for npc
+                        return
+                    }
+                }
+
+                // Check locks
+                NpcLock npcLock = NpcLock.findByPlayerAndNpc(player,npcAction.owner)
+
+                if (npcLock){
+                    if (npcLock.permanent){
+                        render text : "You already defeated ${npcAction.owner.name}."
+                    }
+                    else {
+                        render text : "You already defeated ${npcAction.owner.name} today. ${npcAction.owner.name} is still recovering, come back later."
+                    }
                 }
                 else {
                     Fight fight = fightFactoryService.startFight(BattleType.PVN,player,npcAction.owner,null,null)

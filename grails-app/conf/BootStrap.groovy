@@ -323,8 +323,9 @@ class BootStrap {
                 player: Player.findByUsername("kevin")
         ).save()
 
-        Player.findByUsername("kevin").password = "12345"
-
+        Player p = Player.findByUsername("kevin")
+        p.password = "12345"
+        println Condition.conditionEval(p, "defeatAllOtherNpcOnCurrentMap")
     }
 
     def destroy = {
