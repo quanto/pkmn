@@ -130,17 +130,7 @@
 <table id="layout" cellspacing="0" rowspacing="0">
     <tr>
         <td colspan="2" id="top">
-            <sec:ifLoggedIn>
-                Ingelogd als: <sec:loggedInUserInfo field="username"/>
-                | <a href="${createLink(controller: 'logout')}">Uitloggen</a>
-                | <a href="${createLink(controller: 'game')}">Game</a>
-            </sec:ifLoggedIn>
-            <sec:ifAnyGranted roles="ROLE_ADMIN">
-                | <a href="${createLink(controller: 'mapEditor')}">Map editor</a>
-                | <a href="${createLink(controller: 'mapEditor', action:'worldMap')}">World map</a>
-                | <a href="${createLink(controller: 'admin')}">Admin panel</a>
-                | <a href="${createLink(controller: 'battleTest')}">Battle test</a>
-            </sec:ifAnyGranted>
+            <g:render template="/layouts/menu" />
         </td>
     </tr>
     <tr>

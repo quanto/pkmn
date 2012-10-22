@@ -19,20 +19,7 @@
 	</head>
 	<body>
 		<div id="grailsLogo" role="banner">
-            <a href="http://kevinverhoef.nl"></a>
-            <a href="http://fabianwouters.nl"></a>
-            <sec:ifLoggedIn>
-                Ingelogd als: <sec:loggedInUserInfo field="username"/>
-                | <a href="${createLink(controller: 'logout')}">Uitloggen</a>
-            	| <a href="${createLink(controller: 'game')}">Game</a>
-            </sec:ifLoggedIn>
-            <sec:ifAnyGranted roles="ROLE_ADMIN">
-                | <a href="${createLink(controller: 'mapEditor')}">Map editor</a>
-                | <a href="${createLink(controller: 'mapEditor', action:'worldMap')}">World map</a>
-
-                | <a href="${createLink(controller: 'admin')}">Admin panel</a>
-                | <a href="${createLink(controller: 'battleTest')}">Battle test</a>
-            </sec:ifAnyGranted>
+            <g:render template="/layouts/menu" />
         </div>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo">
