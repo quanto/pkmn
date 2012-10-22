@@ -7,7 +7,7 @@ class NPCHelper {
 
     public static Move choseNpcMove(OwnerPokemon ownerPokemon)
     {
-        List<Move> moves = ownerPokemon.ownerMoves.collect { it.move }   // :TODO ?
+        List<Move> moves = ownerPokemon.ownerMoves.collect { it.move }
 
         if (moves){
             Collections.shuffle(moves)
