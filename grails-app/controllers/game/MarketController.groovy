@@ -83,14 +83,7 @@ class MarketController {
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
 
-        MarketAction marketAction = MarketAction.findByPositionXAndPositionY(player.positionX, player.positionY)
-
-        if (player.view != View.ShowMarket || !marketAction){
-            render text : "Zit niet in een PokeMarket"
-        }
-        else {
-            render text: g.render(template: 'ownerItems', model: [ownerItems:player.ownerItems])
-        }
+        render text: g.render(template: 'ownerItems', model: [ownerItems:player.ownerItems])
     }
 
 }
