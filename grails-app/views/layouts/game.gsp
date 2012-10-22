@@ -164,6 +164,10 @@
                 <div id="stats">
 
                 </div>
+                <h1>Items</h1>
+                <div id="items">
+
+                </div>
             </div>
         </td>
 

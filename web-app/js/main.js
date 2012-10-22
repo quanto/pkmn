@@ -31,6 +31,7 @@ $(document).ready( function () {
 	getView();
 	updateChat();
     updateStats();
+    updateItems();
 	updateWhoisList();
     loadNewsItems();
 	disconnect();
@@ -428,6 +429,19 @@ function updateStats(){
         }
     });
 }
+
+function updateItems(){
+    $.ajax({
+        type: "GET",
+        url: "/game/market/getItems",
+        data: "",
+        cache: false,
+        success: function(data){
+            $("#items").html(data);
+        }
+    });
+}
+
 
 function getPlayerLocation()
 {

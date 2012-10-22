@@ -14,7 +14,7 @@ class MarketController {
             render text : "Zit niet in een PokeMarket"
         }
         else {
-            render text: g.render(template: 'market', model: [money:player.money,ownerItems:player.ownerItems,marketItems:marketAction.market.marketItems])
+            render text: g.render(template: 'market', model: [money:player.money,marketItems:marketAction.market.marketItems])
         }
     }
 
@@ -79,52 +79,18 @@ class MarketController {
         redirect controller: 'game', action:'index'
     }
 
-    /**
-     * function buy($itemId)
-     {
-     global $marktId, $owner;
+    def getItems(){
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
 
-     $item = new items();
-     $item->id = $itemId;
-     $item->get();
+        MarketAction marketAction = MarketAction.findByPositionXAndPositionY(player.positionX, player.positionY)
 
-     $sql = "select id from marktitems where itemId = '$itemId' AND marktId = '$marktId'";
-     if (mysql_num_rows(DatabaseQuery::Execute($sql)) != 1)
-     {
-     die ("Item bestaat niet in shop");
-     }
-
-     if ($owner->money - $item->cost >= 0)
-     {
-     $owner->money -= $item->cost;
-
-     $sql = "select quantity from owneritem where itemId = '$itemId' AND ownerId = '" . $owner->id . "'";
-     $result = DatabaseQuery::Execute($sql);
-     if (mysql_num_rows($result) > 0)
-     {
-     $row = mysql_fetch_row($result);
-
-     $sql = "update owneritem set quantity = '" . ($row[0] + 1) . "' where itemId = '$itemId' AND ownerId = '" . $owner->id . "'";
-     DatabaseQuery::Execute($sql);
-     }
-     else
-     {
-     $ownerItem = new ownerItem();
-     $ownerItem->ownerId = $owner->id;
-     $ownerItem->itemId = $itemId;
-     $ownerItem->quantity = 1;
-     $ownerItem->insert();
-     }
-
-     $owner->update();
-     }
-     else
-     {
-     die("Not enough money");
-     }
-
-     header("Location: markt.php");
-     }
-     */
+        if (player.view != View.ShowMarket || !marketAction){
+            render text : "Zit niet in een PokeMarket"
+        }
+        else {
+            render text: g.render(template: 'ownerItems', model: [ownerItems:player.ownerItems])
+        }
+    }
 
 }
