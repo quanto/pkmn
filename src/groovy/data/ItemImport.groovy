@@ -1,6 +1,7 @@
 package data
 
-import game.Item
+import game.UsableItem
+import game.Badge
 
 class ItemImport {
 
@@ -8,6 +9,12 @@ class ItemImport {
     public static void importItems(){
         println "Import item lines"
 
+        importUsableItems()
+
+        importBadges()
+    }
+
+    public static void importUsableItems(){
         def file = new File('import/items.txt')
 
         int index = 0
@@ -17,7 +24,7 @@ class ItemImport {
             parts.add( line )
             if (index%5==4){
 
-                Item item = new Item(
+                UsableItem item = new UsableItem(
                         name : parts[0],
                         effect : parts[1],
                         cost : Integer.parseInt(parts[2]),
@@ -26,6 +33,31 @@ class ItemImport {
                 )
 
                 item.save()
+
+                parts = []
+
+            }
+            index++
+        }
+    }
+
+    public static void importBadges(){
+        //http://bulbapedia.bulbagarden.net/wiki/Badge#Boulder_Badge
+        def file = new File('import/badges.txt')
+
+        int index = 0
+        def parts = []
+
+        file.eachLine { line ->
+            parts.add( line )
+            if (index%2==1){
+
+                Badge badge = new Badge(
+                        name : parts[0],
+                        image:parts[1]
+                )
+
+                badge.save()
 
                 parts = []
 

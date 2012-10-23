@@ -1,4 +1,4 @@
-<%@ page import="game.MapTransition; game.Item; game.MarketAction; game.Pokemon; game.OwnerPokemon; game.NpcAction; game.MapMessage" %>
+<%@ page import="game.UsableItem; game.MapTransition; game.Item; game.MarketAction; game.Pokemon; game.OwnerPokemon; game.NpcAction; game.MapMessage" %>
 <div>
     <g:link action="deleteAction" id="${action.id}">Delete Action</g:link>
 
@@ -38,7 +38,7 @@
                     </table>
                     <g:form action="addItem">
                         <g:hiddenField name="market" value="${action.market.id}" />
-                        <g:select name="item" from="${Item.list()}" optionKey="id" />
+                        <g:select name="item" from="${UsableItem.list()}" optionKey="id" />
                         <g:submitButton name="add" />
                     </g:form>
                 </td>

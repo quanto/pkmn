@@ -3,9 +3,6 @@ package game
 class Item {
 
     String name
-    String effect
-    int cost
-    boolean implemented
     String image
 
     static constraints = {
