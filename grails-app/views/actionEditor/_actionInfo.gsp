@@ -1,5 +1,7 @@
 <%@ page import="game.MapTransition; game.Item; game.MarketAction; game.Pokemon; game.OwnerPokemon; game.NpcAction; game.MapMessage" %>
 <div>
+    <g:link action="deleteAction" id="${action.id}">Delete Action</g:link>
+
     <g:if test="${action in MapTransition}">
         <g:form action="updateMapTransition">
             <table>

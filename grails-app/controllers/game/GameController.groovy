@@ -24,10 +24,22 @@ class GameController {
 
             if (action in MapTransition){
                 MapTransition mapTransition = (MapTransition)action
-                player.positionX = mapTransition.jumpTo.positionX
-                player.positionY = mapTransition.jumpTo.positionY
-                player.setMap mapTransition.jumpTo.map
-                render text: "refreshMap"
+
+                if (mapTransition.condition && !Condition.conditionEval(player,mapTransition.condition)){
+                    if (mapTransition.conditionNotMetMessage){
+                        render text: mapTransition.conditionNotMetMessage
+                    }
+                    else {
+                        render text: "Condition not met for condition: ${mapTransition.condition}!"
+                    }
+                }
+                else {
+                    // Action is allowed
+                    player.positionX = mapTransition.jumpTo.positionX
+                    player.positionY = mapTransition.jumpTo.positionY
+                    player.setMap mapTransition.jumpTo.map
+                    render text: "refreshMap"
+                }
             }
             else if (action in MapMessage){
                 MapMessage mapMessage = (MapMessage)action

@@ -158,4 +158,23 @@ class ActionEditorController {
         render text: "done"
     }
 
+    def deleteAction(){
+        Action action = Action.get(Integer.parseInt(params.id))
+
+        // Remove childs
+        if (action in NpcAction){
+            action.owner.delete()
+        }
+        else if (action in MarketAction){
+            action.market.delete()
+        }
+        else if (action in MapTransition){
+            action.jumpTo.delete()
+        }
+
+        action.delete()
+
+        render text: "done"
+    }
+
 }
