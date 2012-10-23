@@ -3,27 +3,11 @@
     <g:link action="deleteAction" id="${action.id}">Delete Action</g:link>
 
     <g:if test="${action in MapTransition}">
-        <g:form action="updateMapTransition">
+        <g:form action="updateAction">
             <table>
 
                 <g:render template="basicActionInfo" />
 
-                <tr>
-                    <td>
-                        Condition:
-                    </td>
-                    <td>
-                        <g:textField name="condition" value="${action.condition}" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        ConditionNotMetMessage:
-                    </td>
-                    <td>
-                        <g:textField name="conditionNotMetMessage" value="${action.conditionNotMetMessage}" />
-                    </td>
-                </tr>
                 <tr>
                     <td>
 
@@ -64,43 +48,43 @@
     </g:elseif>
 
     <g:elseif test="${action in MapMessage}">
+        <g:form action="updateAction">
+            <table>
 
-        <table>
+                <g:render template="basicActionInfo" />
+                <tr>
+                    <td>
+                        Message:
+                    </td>
+                    <td>
+                        <g:textField name="message" value="${action.message}" />
+                    </td>
+                </tr>
 
-            <g:render template="basicActionInfo" />
-            <tr>
-                <td>
-                    Message:
-                </td>
-                <td>
-                    ${action.message}
-                </td>
-            </tr>
+                <tr>
+                    <td>
 
-        </table>
+                    </td>
+                    <td>
+                        <g:submitButton name="save" />
+                    </td>
+                </tr>
 
+            </table>
+        </g:form>
     </g:elseif>
     <g:elseif test="${action in NpcAction}">
-        <g:form action="editNpc">
-            <g:hiddenField name="owner" value="${action.owner.id}" />
+        <g:form action="updateAction">
 
             <table>
 
                 <g:render template="basicActionInfo" />
                 <tr>
-                     <td>
+                    <td>
                         NPC Name:
-                     </td>
-                     <td>
-                        ${action.owner.name}
-                     </td>
-                </tr>
-                <tr>
-                    <td>
-                        Permanent Lock:
                     </td>
                     <td>
-                        <g:checkBox name="permanentLock" value="${action.owner.permanentLock}" />
+                        <g:checkBox name="owner.name" value="${action.owner.name}" />
                     </td>
                 </tr>
                 <tr>
@@ -108,10 +92,11 @@
                         Permanent Lock:
                     </td>
                     <td>
-                        <g:checkBox name="permanentLock" value="${action.owner.permanentLock}" />
+                        <g:checkBox name="owner.permanentLock" value="${action.owner.permanentLock}" />
                     </td>
                 </tr>
                 <tr>
+                    <td></td>
                     <td>
                         <g:submitButton name="save" />
                     </td>

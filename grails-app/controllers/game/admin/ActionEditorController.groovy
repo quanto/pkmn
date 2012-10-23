@@ -134,12 +134,6 @@ class ActionEditorController {
         render text: "done"
     }
 
-    def editNpc(){
-        Npc owner = Npc.get(Integer.parseInt(params.owner))
-        owner.properties = params
-        render text: "done"
-    }
-
     def addItem(){
 
         Market market = Market.get(Integer.parseInt(params.market))
@@ -151,15 +145,11 @@ class ActionEditorController {
         render text: "done"
     }
 
-    def updateMapTransition(){
-        int actionId = Integer.parseInt(params.actionId)
-        MapTransition mapTransition = MapTransition.get(actionId)
-        mapTransition.properties = params
-        render text: "done"
-    }
-
     def updateAction(){
-
+        int actionId = Integer.parseInt(params.actionId)
+        Action action = Action.get(actionId)
+        action.properties = params
+        render text: "done"
     }
 
     def deleteAction(){
