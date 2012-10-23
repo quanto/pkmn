@@ -3,6 +3,7 @@ package game
 class Condition {
 
     public static boolean conditionEval(Player player, String condition){
+        // Npc conditions
         if ("defeatAllOtherNpcOnCurrentMap"){
 
             def c = NpcLock.createCriteria()
@@ -19,6 +20,14 @@ class Condition {
                 return true
             }
         }
+
+        // Map transition action
+        else if ("isAdmin"){
+            if (player.getAuthorities().find{ Role role -> role.authority == "ROLE_ADMIN" }){
+                return true
+            }
+        }
+
         return false
     }
 

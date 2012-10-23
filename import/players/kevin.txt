@@ -6,12 +6,12 @@ true
 verhoef.k@gmail.com
 null
 20-10-2012 18:27:30
-Glooming forest Gym
+Glooming forest -2x1
 Glooming forest center
 4
 6
-10
-9
+15
+13
 600
 ShowMap
 38
@@ -30,7 +30,7 @@ Poke Ball
             
 <npcLock>
 cePS20cZXHM9M7p
-22-10-2012 19:16:13
+23-10-2012 10:22:35
 true
 </npcLock>
             
@@ -43,7 +43,7 @@ false
 22
 10
 21
-9
+5
 Male
 1
 3348
@@ -63,7 +63,7 @@ Water Gun
 </ownerMove>
 <ownerMove>
 Withdraw
-40
+39
 </ownerMove>
 
 <ownerPokemon>
@@ -75,7 +75,7 @@ false
 15
 5
 5
-14
+2
 Female
 2
 47
@@ -83,6 +83,6 @@ Female
 </ownerPokemon>
 <ownerMove>
 Tackle
-35
+33
 </ownerMove>
 

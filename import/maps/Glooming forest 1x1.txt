@@ -13,12 +13,6 @@ false
 5
 </pokemon>
 <pokemon>
-13
-20
-5
-5
-</pokemon>
-<pokemon>
 19
 20
 3
@@ -29,6 +23,12 @@ false
 60
 5
 7
+</pokemon>
+<pokemon>
+13
+20
+5
+5
 </pokemon>
 <pokemon>
 25

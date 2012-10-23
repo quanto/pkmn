@@ -151,4 +151,11 @@ class ActionEditorController {
         render text: "done"
     }
 
+    def updateMapTransition(){
+        int actionId = Integer.parseInt(params.actionId)
+        MapTransition mapTransition = MapTransition.get(actionId)
+        mapTransition.properties = params
+        render text: "done"
+    }
+
 }

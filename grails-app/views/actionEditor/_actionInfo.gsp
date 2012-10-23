@@ -1,19 +1,43 @@
-<%@ page import="game.Item; game.MarketAction; game.Pokemon; game.OwnerPokemon; game.NpcAction; game.MapMessage" %>
+<%@ page import="game.MapTransition; game.Item; game.MarketAction; game.Pokemon; game.OwnerPokemon; game.NpcAction; game.MapMessage" %>
 <div>
-    <table>
-        <tr>
-            <td>class:</td>
-            <td>${action.class}</td>
-        </tr>
-        <tr>
-            <td>positionX:</td>
-            <td>${action.positionX}</td>
-        </tr>
-        <tr>
-            <td>positionY:</td>
-            <td>${action.positionY}</td>
-        </tr>
-        <g:if test="${action in MarketAction}">
+    <g:if test="${action in MapTransition}">
+        <g:form action="updateMapTransition">
+            <table>
+
+                <g:render template="basicActionInfo" />
+
+                <tr>
+                    <td>
+                        Condition:
+                    </td>
+                    <td>
+                        <g:textField name="condition" value="${action.condition}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ConditionNotMetMessage:
+                    </td>
+                    <td>
+                        <g:textField name="conditionNotMetMessage" value="${action.conditionNotMetMessage}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <g:submitButton name="save" />
+                    </td>
+                </tr>
+            </table>
+        </g:form>
+    </g:if>
+
+    <g:elseif test="${action in MarketAction}">
+        <table>
+
+            <g:render template="basicActionInfo" />
             <tr>
                 <td>
                     MarketItems:
@@ -33,9 +57,15 @@
                     </g:form>
                 </td>
             </tr>
-        </g:if>
 
-        <g:if test="${action in MapMessage}">
+        </table>
+    </g:elseif>
+
+    <g:elseif test="${action in MapMessage}">
+
+        <table>
+
+            <g:render template="basicActionInfo" />
             <tr>
                 <td>
                     Message:
@@ -44,16 +74,23 @@
                     ${action.message}
                 </td>
             </tr>
-        </g:if>
-        <g:elseif test="${action in NpcAction}">
-             <tr>
+
+        </table>
+
+    </g:elseif>
+    <g:elseif test="${action in NpcAction}">
+
+        <table>
+
+            <g:render template="basicActionInfo" />
+            <tr>
                  <td>
                     NPC Name:
                  </td>
                  <td>
                     ${action.owner.name}
                  </td>
-             </tr>
+            </tr>
             <tr>
                 <td>
                     Permanent Lock:
@@ -115,6 +152,13 @@
                     </g:form>
                 </td>
             </tr>
-        </g:elseif>
-    </table>
+        </table>
+
+    </g:elseif>
+    <g:else>
+        <table>
+            <g:render template="basicActionInfo" />
+        </table>
+    </g:else>
+
 </div>

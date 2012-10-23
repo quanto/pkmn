@@ -215,11 +215,12 @@ class MapImport {
     }
 
     public static void importMapTransition(def parts, Map map){
-
         MapTransition mapTransition = new MapTransition(
                 map:map,
                 positionX:Integer.parseInt(parts[0]),
                 positionY:Integer.parseInt(parts[1]),
+                condition:parts[5]?:null,
+                conditionNotMetMessage:parts[6]?:null
         )
         map.addToActions(mapTransition)
     }

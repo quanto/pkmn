@@ -7,6 +7,12 @@ false
 1
 </mapData>
 <pokemon>
+21
+2
+3
+5
+</pokemon>
+<pokemon>
 19
 10
 3
@@ -18,12 +24,6 @@ false
 3
 4
 </pokemon>
-<pokemon>
-21
-2
-3
-5
-</pokemon>
 
 <mapTransition>
 11
@@ -31,6 +31,8 @@ false
 Glooming forest Gym
 7
 14
+
+
 </mapTransition>
 
 

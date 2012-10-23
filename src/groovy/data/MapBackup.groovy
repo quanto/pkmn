@@ -137,6 +137,8 @@ ${action.positionY}
 ${action.jumpTo?.map?.name}
 ${action.jumpTo?.positionX}
 ${action.jumpTo?.positionY}
+${action.condition?:''}
+${action.conditionNotMetMessage?:''}
 </mapTransition>
 """
                 }

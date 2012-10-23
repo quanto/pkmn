@@ -13,6 +13,8 @@ false
 Glooming forest center
 4
 9
+
+
 </mapTransition>
 <mapTransition>
 6
@@ -20,6 +22,8 @@ Glooming forest center
 Glooming forest market
 5
 9
+
+
 </mapTransition>
 
 
