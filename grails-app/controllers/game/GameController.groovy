@@ -21,25 +21,23 @@ class GameController {
         Action action = Action.findByMapAndPositionXAndPositionY(player.map,player.positionX,player.positionY)
 
         if (action){
-
-            if (action in MapTransition){
-                MapTransition mapTransition = (MapTransition)action
-
-                if (mapTransition.condition && !Condition.conditionEval(player,mapTransition.condition)){
-                    if (mapTransition.conditionNotMetMessage){
-                        render text: mapTransition.conditionNotMetMessage
-                    }
-                    else {
-                        render text: "Condition not met for condition: ${mapTransition.condition}!"
-                    }
+            // Support condition on actions
+            if (action.condition && !Condition.conditionEval(player,action.condition)){
+                if (action.conditionNotMetMessage){
+                    render text: action.conditionNotMetMessage
                 }
                 else {
-                    // Action is allowed
-                    player.positionX = mapTransition.jumpTo.positionX
-                    player.positionY = mapTransition.jumpTo.positionY
-                    player.setMap mapTransition.jumpTo.map
-                    render text: "refreshMap"
+                    render text: "Condition not met for condition: ${action.condition}!"
                 }
+            }
+            else if (action in MapTransition){
+                MapTransition mapTransition = (MapTransition)action
+
+                // Action is allowed
+                player.positionX = mapTransition.jumpTo.positionX
+                player.positionY = mapTransition.jumpTo.positionY
+                player.setMap mapTransition.jumpTo.map
+                render text: "refreshMap"
             }
             else if (action in MapMessage){
                 MapMessage mapMessage = (MapMessage)action
@@ -65,14 +63,6 @@ class GameController {
             else if (action in NpcAction){
 
                 NpcAction npcAction = action
-
-                // Check special conditions
-                if (npcAction.owner.condition){
-                    if (!Condition.conditionEval(player,npcAction.owner.condition)){
-                        render text : "Condition not met!" // :TODO Set text for npc
-                        return
-                    }
-                }
 
                 // Check locks
                 NpcLock npcLock = NpcLock.findByPlayerAndNpc(player,npcAction.owner)

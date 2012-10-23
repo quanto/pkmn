@@ -10,11 +10,11 @@ null
 <mapTransition>
 7
 14
+
+
 Glooming forest -3x1
 11
 11
-
-
 </mapTransition>
 
 
@@ -23,16 +23,22 @@ Glooming forest -3x1
 <npcAction>
 10
 8
+
+
 cePS20cZXHM9M7p
 </npcAction>
 <npcAction>
 4
 8
+
+
 sZQFwXy9jqc9ftM
 </npcAction>
 <npcAction>
 7
 6
+
+
 Hsb4uOE4qimDRvt
 </npcAction>
 

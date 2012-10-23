@@ -6,12 +6,12 @@ true
 verhoef.k@gmail.com
 null
 20-10-2012 18:27:30
-Glooming forest -2x1
+Glooming forest -2x0
 Glooming forest center
 4
 6
-15
-13
+11
+19
 600
 ShowMap
 38
@@ -30,7 +30,7 @@ Poke Ball
             
 <npcLock>
 cePS20cZXHM9M7p
-23-10-2012 10:22:35
+23-10-2012 16:45:16
 true
 </npcLock>
             

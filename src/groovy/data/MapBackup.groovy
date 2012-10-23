@@ -59,6 +59,8 @@ ${getMarketActions(map)}
                 data += """<marketAction>
 ${action.positionX}
 ${action.positionY}
+${action.condition?:''}
+${action.conditionNotMetMessage?:''}
 ${action.market.identifier}
 </marketAction>
 """
@@ -74,6 +76,8 @@ ${action.market.identifier}
                 data += """<npcAction>
 ${action.positionX}
 ${action.positionY}
+${action.condition?:''}
+${action.conditionNotMetMessage?:''}
 ${action.owner.identifier}
 </npcAction>
 """
@@ -90,6 +94,8 @@ ${action.owner.identifier}
                 data += """<mapMessage>
 ${action.positionX}
 ${action.positionY}
+${action.condition?:''}
+${action.conditionNotMetMessage?:''}
 ${action.message}
 </mapMessage>
 """
@@ -105,6 +111,8 @@ ${action.message}
                 data += """<recoverAction>
 ${action.positionX}
 ${action.positionY}
+${action.condition?:''}
+${action.conditionNotMetMessage?:''}
 </recoverAction>
 """
             }
@@ -119,6 +127,8 @@ ${action.positionY}
                 data += """<computerAction>
 ${action.positionX}
 ${action.positionY}
+${action.condition?:''}
+${action.conditionNotMetMessage?:''}
 </computerAction>
 """
             }
@@ -134,11 +144,11 @@ ${action.positionY}
                     data += """<mapTransition>
 ${action.positionX}
 ${action.positionY}
+${action.condition?:''}
+${action.conditionNotMetMessage?:''}
 ${action.jumpTo?.map?.name}
 ${action.jumpTo?.positionX}
 ${action.jumpTo?.positionY}
-${action.condition?:''}
-${action.conditionNotMetMessage?:''}
 </mapTransition>
 """
                 }

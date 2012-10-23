@@ -81,30 +81,46 @@
 
     </g:elseif>
     <g:elseif test="${action in NpcAction}">
+        <g:form action="editNpc">
+            <g:hiddenField name="owner" value="${action.owner.id}" />
+
+            <table>
+
+                <g:render template="basicActionInfo" />
+                <tr>
+                     <td>
+                        NPC Name:
+                     </td>
+                     <td>
+                        ${action.owner.name}
+                     </td>
+                </tr>
+                <tr>
+                    <td>
+                        Permanent Lock:
+                    </td>
+                    <td>
+                        <g:checkBox name="permanentLock" value="${action.owner.permanentLock}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Permanent Lock:
+                    </td>
+                    <td>
+                        <g:checkBox name="permanentLock" value="${action.owner.permanentLock}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <g:submitButton name="save" />
+                    </td>
+                </tr>
+
+            </table>
+        </g:form>
 
         <table>
-
-            <g:render template="basicActionInfo" />
-            <tr>
-                 <td>
-                    NPC Name:
-                 </td>
-                 <td>
-                    ${action.owner.name}
-                 </td>
-            </tr>
-            <tr>
-                <td>
-                    Permanent Lock:
-                </td>
-                <td>
-                    <g:form action="editNpc">
-                        <g:hiddenField name="owner" value="${action.owner.id}" />
-                        <g:checkBox name="permanentLock" value="${action.owner.permanentLock}" />
-                        <g:submitButton name="save" />
-                    </g:form>
-                </td>
-            </tr>
             <tr>
                 <td>
                     Pokemon:

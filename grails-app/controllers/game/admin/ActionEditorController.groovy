@@ -158,6 +158,10 @@ class ActionEditorController {
         render text: "done"
     }
 
+    def updateAction(){
+
+    }
+
     def deleteAction(){
         Action action = Action.get(Integer.parseInt(params.id))
 

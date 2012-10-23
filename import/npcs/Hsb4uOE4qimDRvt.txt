@@ -2,7 +2,6 @@
 Hsb4uOE4qimDRvt
 Gym leader Nadia
 true
-defeatAllOtherNpcOnCurrentMap
 </npcData>
 <ownerPokemon>
 false

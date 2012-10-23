@@ -10,21 +10,25 @@ null
 <mapTransition>
 4
 9
+
+
 Glooming forest -2x0
 15
 11
-
-
 </mapTransition>
 
 <computerAction>
 8
 5
+
+
 </computerAction>
 
 <recoverAction>
 4
 6
+
+
 </recoverAction>
 
 

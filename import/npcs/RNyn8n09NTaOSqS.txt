@@ -2,7 +2,6 @@
 RNyn8n09NTaOSqS
 Bird watcher
 false
-
 </npcData>
 <ownerPokemon>
 false

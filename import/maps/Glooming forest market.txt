@@ -10,11 +10,11 @@ null
 <mapTransition>
 5
 9
+
+
 Glooming forest -2x0
 6
 12
-
-
 </mapTransition>
 
 
@@ -24,6 +24,8 @@ Glooming forest -2x0
 <marketAction>
 5
 4
+
+
 ymhGUEZtjlHvZ7V
 </marketAction>
 

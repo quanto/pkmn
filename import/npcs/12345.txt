@@ -2,7 +2,6 @@
 12345
 Bird watcher
 false
-
 </npcData>
 <ownerPokemon>
 false
