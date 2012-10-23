@@ -190,6 +190,7 @@ class BattleController {
         OwnerPokemon ownerPokemon = OwnerPokemon.findByOwnerAndPartyPositionAndHpGreaterThan(player,params.id,0)
         if (ownerPokemon){
             fight.log = ""
+            Stats.saveStats(fight.fightPlayer1, false);
             fight.fightPlayer1 = Stats.setBaseStats(fight,ownerPokemon, PlayerType.user, 1)
             Moves.setMove(fight,fight.fightPlayer1, null, false)
         }
@@ -246,10 +247,10 @@ class BattleController {
         OwnerItem ownerItem = player.ownerItems.find() { it.id == Integer.parseInt(params.id) }
 
         if (ownerItem){
-            UseItem.useItem(fight, fight.fightPlayer1.owner, ownerItem.item, fight.fightPlayer1, fight.fightPlayer2)
+            UseItem.useItem(fight, fight.fightPlayer1.owner, ownerItem, fight.fightPlayer1, fight.fightPlayer2)
         }
 
-        render text :"use item"
+        render template: "log", model : [fight:fight]
     }
 
 }
