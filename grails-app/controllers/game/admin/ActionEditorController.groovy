@@ -16,6 +16,7 @@ import game.Npc
 import game.Market
 import game.MarketItem
 import game.Item
+import game.OwnerItem
 
 class ActionEditorController {
 
@@ -168,6 +169,17 @@ class ActionEditorController {
 
         action.delete()
 
+        render text: "done"
+    }
+
+    def addRewardItemToNpc(){
+        Npc npc = Npc.get(Integer.parseInt(params.owner))
+        OwnerItem ownerItem = new OwnerItem(
+                quantity: Integer.parseInt(params.quantity),
+                item:Item.get(Integer.parseInt(params.item))
+        )
+        ownerItem.owner = npc
+        npc.addToRewardItems(ownerItem)
         render text: "done"
     }
 

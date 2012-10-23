@@ -105,57 +105,94 @@
             </table>
         </g:form>
 
+        <h3>Pokemon</h3>
+        <table>
+            <%
+                List<OwnerPokemon> ownerPokemonList = OwnerPokemon.findAllByOwner(action.owner)
+            %>
+            <tr>
+                <td>Pokemon</td>
+                <td>Level</td>
+            </tr>
+            <g:each in="${ownerPokemonList}" var="ownerPokemon">
+                <tr>
+                    <td>${ownerPokemon.pokemon}</td>
+                    <td>${ownerPokemon.level}</td>
+                </tr>
+            </g:each>
+
+        </table>
+
+        <g:form action="addPokemonToNpc">
+            <g:hiddenField name="owner" value="${action.owner.id}" />
+            <table>
+                <tr>
+                    <td>
+                        Pokemon:
+                    </td>
+                    <td>
+                        <g:select name="pokemon" from="${Pokemon.list()}" optionKey="id" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Level:
+                    </td>
+                    <td>
+                        <g:textField name="level" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><g:submitButton name="add" /></td>
+                </tr>
+            </table>
+        </g:form>
+
+        <h3>Reward Items</h3>
         <table>
             <tr>
-                <td>
-                    Pokemon:
-                </td>
-                <td>
-                    <table>
-                        <%
-                            List<OwnerPokemon> ownerPokemonList = OwnerPokemon.findAllByOwner(action.owner)
-                        %>
-                        <tr>
-                            <td>Pokemon</td>
-                            <td>Level</td>
-                        </tr>
-                        <g:each in="${ownerPokemonList}" var="ownerPokemon">
-                            <tr>
-                                <td>${ownerPokemon.pokemon}</td>
-                                <td>${ownerPokemon.level}</td>
-                            </tr>
-                        </g:each>
-
-                    </table>
-
-                    <g:form action="addPokemonToNpc">
-                        <g:hiddenField name="owner" value="${action.owner.id}" />
-                        <table>
-                            <tr>
-                                <td>
-                                    Pokemon:
-                                </td>
-                                <td>
-                                    <g:select name="pokemon" from="${Pokemon.list()}" optionKey="id" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Level:
-                                </td>
-                                <td>
-                                    <g:textField name="level" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td><g:submitButton name="add" /></td>
-                            </tr>
-                        </table>
-                    </g:form>
-                </td>
+                <td>Item</td>
+                <td>Quantity</td>
             </tr>
+            <g:each in="${action.owner.rewardItems}" var="ownerItem">
+                <tr>
+                    <td>
+                        ${ownerItem.item.name}
+                    </td>
+                    <td>
+                        ${ownerItem.quantity}
+                    </td>
+                </tr>
+
+            </g:each>
         </table>
+
+        <g:form action="addRewardItemToNpc">
+            <g:hiddenField name="owner" value="${action.owner.id}" />
+            <table>
+                <tr>
+                    <td>
+                        Item
+                    </td>
+                    <td>
+                        <g:select name="item" optionValue="${ { it.name } }" from="${Item.list()}" optionKey="id" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Quantity
+                    </td>
+                    <td>
+                        <g:textField name="quantity" value="1" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><g:submitButton name="add" /></td>
+                </tr>
+            </table>
+        </g:form>
 
     </g:elseif>
     <g:else>

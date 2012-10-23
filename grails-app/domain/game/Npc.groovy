@@ -8,6 +8,8 @@ class Npc extends Owner {
     boolean permanentLock = false
     NpcAction npcAction
 
+    static hasMany = [rewardItems: OwnerItem, ownerItems: OwnerItem]
+
     static constraints = {
         npcAction nullable: true
     }
