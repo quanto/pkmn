@@ -2,17 +2,11 @@ package game
 
 import game.items.PokeBall
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 21-10-12
- * Time: 17:14
- * To change this template use File | Settings | File Templates.
- */
 class UseItem {
 
-    public static void useItem(Fight fight, Owner itemOwner, Item item, FightPlayer attackingFightPlayer, FightPlayer defendingFightPlayer){
+    public static void useItem(Fight fight, Owner itemOwner, OwnerItem ownerItem, FightPlayer attackingFightPlayer, FightPlayer defendingFightPlayer){
 
+        Item item = ownerItem.item
         if (!item.implemented){
             fight.log = "m:You can not use item ${item.name} in battle.;";
         }
@@ -30,6 +24,15 @@ class UseItem {
 
             // Set an empty move so round can be done
             Moves.setMove(fight,attackingFightPlayer,null,false);
+
+            if (ownerItem.quantity <= 1){
+                itemOwner.removeFromOwnerItems(ownerItem)
+                ownerItem.delete()
+            }
+            else {
+                ownerItem.quantity -= 1
+                ownerItem.save()
+            }
         }
             /*
         // Potion
