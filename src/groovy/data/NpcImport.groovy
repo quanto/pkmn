@@ -9,11 +9,15 @@ class NpcImport {
      * NPC's are imported in the mapImport.
      * @param npc
      */
-    public static void importNpc(Npc npc){
+    public static Npc importNpc(String identifier){
 
-        println "Import npc ${npc.identifier}"
+        println "Import npc ${identifier}"
 
-        File file = new File('import/npcs/' + npc.identifier + '.txt')
+        Npc npc = new Npc(
+                identifier: identifier
+        )
+
+        File file = new File('import/npcs/' + identifier + '.txt')
 
         String node = ""
 
@@ -64,13 +68,15 @@ class NpcImport {
 
         }
 
-
+        return npc
     }
 
     public static void updateNpcData(Npc npc, def parts){
         npc.name = parts[1]
         npc.permanentLock = new Boolean(parts[2])
         npc.condition = parts[3]?:null
+
+        npc.save()
     }
 
 }

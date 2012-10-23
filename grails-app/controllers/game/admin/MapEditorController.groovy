@@ -11,6 +11,7 @@ import game.NpcAction
 import data.OwnerBackup
 import game.MarketAction
 import data.MarketBackup
+import data.MapBackup
 
 class MapEditorController {
 
@@ -67,85 +68,16 @@ class MapEditorController {
         Map map
         if (params.id){
             map = Map.get(params.id)
-            render text: exportMap(map).replace('\n','<br />')
+            render text: MapBackup.exportMap(map).replace('\n','<br />')
         }
 
     }
 
     def exportMaps(){
         Map.list().each { Map map ->
-            exportMap(map)
+            MapBackup.exportMap(map)
         }
         render text : "Done"
     }
 
-    public static String exportMap(Map map){
-
-        String data = ""
-
-        try{
-            File file = new File("import/maps/" + map.name + ".txt")
-            //println file.getAbsolutePath()
-            FileWriter fstream = new FileWriter(file);
-            BufferedWriter out = new BufferedWriter(fstream);
-
-            String mapPokemonData = ""
-            map.mapPokemonList.each { mapPokemonData += it.pokemon.id + ";" + it.chance + ";" + it.fromLevel + ";" + it.toLevel + ";" }
-
-            String mapTransitions = ""
-            String computerActions = ""
-            String recoverActions = ""
-            String messageActions = ""
-            String npcActions = ""
-            String marketActions = ""
-
-            // Sort so we always have the same order in the actions
-            map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
-                if(action in MapTransition){
-                    if (action.jumpTo)
-                        mapTransitions += "${action.positionX};${action.positionY};${action.jumpTo?.map?.name};${action.jumpTo?.positionX};${action.jumpTo?.positionY};"
-                }
-                else if (action in ComputerAction){
-                    computerActions += "${action.positionX};${action.positionY};"
-                }
-                else if (action in RecoverAction){
-                    recoverActions += "${action.positionX};${action.positionY};"
-                }
-                else if (action in MapMessage){
-                    messageActions += "${action.positionX};${action.positionY};${action.message};"
-                }
-                else if (action in NpcAction){
-                    npcActions += "${action.positionX};${action.positionY};${action.owner.identifier};${action.owner.name};"
-                    OwnerBackup.saveNpc(action.owner)
-                }
-                else if (action in MarketAction){
-                    marketActions += "${action.positionX};${action.positionY};${action.market.identifier}"
-                    MarketBackup.saveMarket(action.market)
-                }
-            }
-
-data = """${map.name}
-${map.dataBackground}
-${map.dataForeground}
-${map.active}
-${mapPokemonData}
-${mapTransitions}
-${computerActions}
-${recoverActions}
-${messageActions}
-${map.worldX}
-${map.worldY}
-${npcActions}
-${marketActions}
-"""
-            out.write(data)
-
-            out.close();
-        }catch (Exception e){
-            System.err.println("Error: " + e.getMessage());
-        }
-
-
-        return data
-    }
 }
