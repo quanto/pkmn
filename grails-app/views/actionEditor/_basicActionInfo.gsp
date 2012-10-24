@@ -26,7 +26,7 @@
         ConditionMetMessage:
     </td>
     <td>
-        <g:textField name="conditionNotMetMessage" value="${action.conditionNotMetMessage}" />
+        <g:textField name="conditionMetMessage" value="${action.conditionMetMessage}" />
     </td>
 </tr>
 <tr>
@@ -35,5 +35,29 @@
     </td>
     <td>
         <g:textField name="conditionNotMetMessage" value="${action.conditionNotMetMessage}" />
+    </td>
+</tr>
+<tr>
+    <td>
+        TriggerOnActionButton:
+    </td>
+    <td>
+        <g:checkBox name="triggerOnActionButton" value="${action.triggerOnActionButton}" /> Trigger the action on an action call
+    </td>
+</tr>
+<tr>
+    <td>
+        TriggerBeforeStep:
+    </td>
+    <td>
+        <g:checkBox name="triggerBeforeStep" value="${action.triggerBeforeStep}" /> Trigger the action before a step is done
+    </td>
+</tr>
+<tr>
+    <td>
+        ConditionalStep:
+    </td>
+    <td>
+        <g:checkBox name="conditionalStep" value="${action.conditionalStep}" /> This option only make sense when u use the TriggerBeforeStep. If the condition is not met, the step is not allowed.
     </td>
 </tr>

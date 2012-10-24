@@ -1,6 +1,9 @@
 package game
 
 import map.View
+import map.ActionResult
+import map.ActionFlow
+import map.ActionTrigger
 
 class GameController {
 
@@ -18,93 +21,12 @@ class GameController {
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
 
-        Action action = Action.findByMapAndPositionXAndPositionY(player.map,player.positionX,player.positionY)
-
-        if (action){
-
-            // Support condition on actions
-            boolean conditionEval = true
-            if (action.condition){
-                conditionEval = Condition.conditionEval(player,action.condition)
-                if (action.conditionMetMessage){
-                    render text: "setMessage('${action.conditionMetMessage?.encodeAsHTML()}');"
-                }
-            }
-
-            if (action.condition && !conditionEval){
-                if (action.conditionNotMetMessage){
-                    render text: "setMessage('${action.conditionNotMetMessage?.encodeAsHTML()}');"
-                }
-                else {
-                    render text: "setMessage('Condition not met for condition: ${action.condition?.encodeAsHTML()}!');"
-                }
-            }
-            else if (action in MapTransition){
-                MapTransition mapTransition = (MapTransition)action
-
-                // Action is allowed
-                player.positionX = mapTransition.jumpTo.positionX
-                player.positionY = mapTransition.jumpTo.positionY
-                player.setMap mapTransition.jumpTo.map
-                render text: "getView();"
-            }
-            else if (action in MapMessage){
-                MapMessage mapMessage = (MapMessage)action
-                render text: "setMessage('${mapMessage.message?.encodeAsHTML()}');"
-            }
-            else if (action in RecoverAction){
-                Recover.recoverParty(player)
-                // Set last recover position
-                player.lastRecoverAction = (RecoverAction)action
-
-                render text: "setMessage('Your pokemon have been recovered!');"
-            }
-            else if (action in ComputerAction){
-                player.view = View.ShowComputer
-                player.save(flush:true)
-                render text : "getView();"
-            }
-            else if (action in MarketAction){
-                player.view = View.ShowMarket
-                player.save(flush:true)
-                render text : "getView();"
-            }
-            else if (action in NpcAction){
-
-                NpcAction npcAction = action
-
-                // Check locks
-                NpcLock npcLock = NpcLock.findByPlayerAndNpc(player,npcAction.owner)
-
-                if (npcLock){
-                    if (npcAction.owner.npcLockedMessage){
-                        render text: "setMessage('${npcAction.owner.npcLockedMessage?.encodeAsHTML()}');"
-                    }
-                    else if (npcLock.permanent){
-                        render text: "setMessage('You already defeated ${npcAction.owner.name?.encodeAsHTML()}.');"
-                    }
-                    else {
-                        render text: "setMessage('You already defeated ${npcAction.owner.name?.encodeAsHTML()} today. ${npcAction.owner.name?.encodeAsHTML()} is still recovering, come back later.');"
-                    }
-                }
-                else {
-                    Fight fight = fightFactoryService.startFight(BattleType.PVN,player,npcAction.owner,null,null)
-
-                    // koppel gevecht aan speler
-                    player.fightNr = fight.nr
-                    player.view = View.Battle
-
-                    player.save(flush:true)
-                    render text : "getView();"
-                }
-            }
-            else {
-                // Should not be reachable
-                assert false
-            }
+        // Check actions
+        ActionResult actionResult = ActionFlow.decideAction(player,ActionTrigger.ActionBtn,fightFactoryService)
+        if (actionResult){
+            render text: actionResult.evalMessage
             return
         }
-
 
         // Auto Map Transitions
         if (player.map.worldX != null && player.map.worldY != null){
@@ -219,7 +141,7 @@ class GameController {
             String currentForegroundTile = getCurrentTile(mapLayout,player,false)
             if (currentForegroundTile != "0"){
                 player.discard()
-                render text : "0"
+                render text : ""
                 return
             }
 
@@ -227,6 +149,7 @@ class GameController {
 
             if (currentBackgroundTile){
 
+                // check pokemon
                 if (checkForWildPokemon(currentBackgroundTile)){
                     MapPokemon mapPokemon = getRandomPokemon(player)
                     if (mapPokemon){
@@ -238,19 +161,33 @@ class GameController {
                     }
                 }
 
-                player.save(flush: true)
-                render text : "1"
+                // Check actions
+                ActionResult actionResult = ActionFlow.decideAction(player,ActionTrigger.Move,fightFactoryService)
+                if (actionResult){
+                    if (!actionResult.allowStep){
+                        // The step is disallowed
+                        player.discard()
+                        render text: actionResult.evalMessage + "allowMove = false;";
+                    }
+                    else {
+                        player.save(flush: true)
+                        render text: actionResult.evalMessage
+                    }
+                    return
+                }
+
+                render text:"allowMove = true;"
                 return
             }
             else {
                 player.discard()
-                render text : "0"
+                render text : "allowMove = false;"
                 return
             }
 
         }
 
-        render text: "0"
+        render text: "allowMove = false;"
 
     }
 

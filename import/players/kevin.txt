@@ -10,8 +10,8 @@ Glooming forest -2x0
 Glooming forest center
 4
 6
-7
-18
+12
+16
 600
 ShowMap
 38
@@ -30,7 +30,7 @@ Poke Ball
             
 <npcLock>
 cePS20cZXHM9M7p
-24-10-2012 14:01:04
+24-10-2012 16:56:06
 true
 </npcLock>
             

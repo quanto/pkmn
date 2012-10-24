@@ -464,9 +464,15 @@ function checkMove(direction, x, y)
 		data: "direction="+direction,
 		cache: false,
 		success: function(msg){
-			if(msg == "1")
+            // An empty message means walking against the wall for now
+			if(msg != "")
 			{
 				$("#player").remove();
+
+                var allowMove = true
+                alert(msg)
+                eval(msg);
+
 				switch (direction)
 				{
 					case 0:
@@ -486,9 +492,12 @@ function checkMove(direction, x, y)
 					break;
 				}
 
-				setPlayer(x, y);
-				updateLocation(x, y);
-				checkBattle();
+                // Move can be disallowed
+                if (allowMove){
+                    setPlayer(x, y);
+                    updateLocation(x, y);
+                    checkBattle();
+                }
 			}
 			else
 			{

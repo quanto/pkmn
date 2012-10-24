@@ -1,6 +1,5 @@
 package game
 
-//test
 class Action {
 
     Map map
@@ -12,6 +11,10 @@ class Action {
     String condition
     String conditionMetMessage
     String conditionNotMetMessage
+
+    boolean triggerOnActionButton = true
+    boolean triggerBeforeStep = false
+    boolean conditionalStep = false
 
     static constraints = {
         condition nullable: true
