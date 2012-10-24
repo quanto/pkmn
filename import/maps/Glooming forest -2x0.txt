@@ -12,6 +12,7 @@ false
 11
 
 
+
 Glooming forest center
 4
 9
@@ -19,6 +20,7 @@ Glooming forest center
 <mapTransition>
 6
 12
+
 
 
 Glooming forest market
@@ -31,6 +33,7 @@ Glooming forest market
 <mapMessage>
 7
 18
+
 
 
 This is the house of my good friend Kanji. He's not home right now.

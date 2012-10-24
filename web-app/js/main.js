@@ -386,37 +386,17 @@ function actionA()
 		data: "",
 		cache: false,
 		success: function(msg){
-
-			msg = $.trim(msg);
-			if(msg == "refreshMap")
-			{
-				getView();
-			}
-			else if(msg == "showMarket")
-			{
-				getView();
-			}
-			else if(msg == "showComputer")
-			{
-				getView();
-			}
-			else if(msg != "")
-			{
-				$("#textBox").text(msg);
-				freeze = false;
-			}
-			else
-			{
-				freeze = false;
-			}
-//
-//			getMenu();
-
-			//freeze = false;
+            eval(msg);
+            freeze = false;
 		}
 	});
     freeze = false;
 };
+
+function setMessage(msg){
+    msg = $.trim(msg);
+    $("#textBox").html(msg);
+}
 
 function updateStats(){
     $.ajax({

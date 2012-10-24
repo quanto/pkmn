@@ -155,7 +155,7 @@ class MapImport {
 
         // First create the market
         Market market = new Market(
-                identifier : parts[4]
+                identifier : parts[5] // :TODO backup position should be 0
         )
         market.save()
 
@@ -168,7 +168,8 @@ class MapImport {
                 positionX:Integer.parseInt(parts[0]),
                 positionY:Integer.parseInt(parts[1]),
                 condition: parts[2]?:null,
-                conditionNotMetMessage: parts[3]?:null,
+                conditionMetMessage: parts[3]?:null,
+                conditionNotMetMessage: parts[4]?:null,
                 market: market
         )
         map.addToActions(marketAction)
@@ -177,7 +178,7 @@ class MapImport {
     public static void importNpcAction(def parts, Map map){
 
         // First create the Npc
-        Npc npc = NpcImport.importNpc(parts[4])
+        Npc npc = NpcImport.importNpc(parts[5])
 
         // Next the action
         NpcAction npcAction = new NpcAction(
@@ -185,7 +186,8 @@ class MapImport {
                 positionX:Integer.parseInt(parts[0]),
                 positionY:Integer.parseInt(parts[1]),
                 condition: parts[2]?:null,
-                conditionNotMetMessage: parts[3]?:null,
+                conditionMetMessage: parts[3]?:null,
+                conditionNotMetMessage: parts[4]?:null,
                 owner: npc
         )
         npc.npcAction = npcAction
@@ -196,11 +198,11 @@ class MapImport {
     public static void coupleMapTransitions(def parts, Map map){
 
         MapTransition mapTransition = MapTransition.findByMapAndPositionXAndPositionY(map,Integer.parseInt(parts[0]),Integer.parseInt(parts[1]))
-        Map mapTo = Map.findByName(parts[4])
+        Map mapTo = Map.findByName(parts[5])
 
         if (mapTransition){
 
-            MapTransition mapTransitionTo = MapTransition.findByMapAndPositionXAndPositionY(mapTo,Integer.parseInt(parts[5]),Integer.parseInt(parts[6]))
+            MapTransition mapTransitionTo = MapTransition.findByMapAndPositionXAndPositionY(mapTo,Integer.parseInt(parts[6]),Integer.parseInt(parts[7]))
 
             if (mapTransitionTo){
                 mapTransition.jumpTo = mapTransitionTo
@@ -222,7 +224,8 @@ class MapImport {
                 positionX:Integer.parseInt(parts[0]),
                 positionY:Integer.parseInt(parts[1]),
                 condition: parts[2]?:null,
-                conditionNotMetMessage: parts[3]?:null,
+                conditionMetMessage: parts[3]?:null,
+                conditionNotMetMessage: parts[4]?:null,
         )
         map.addToActions(mapTransition)
     }
@@ -234,7 +237,8 @@ class MapImport {
                 positionX:Integer.parseInt(parts[0]),
                 positionY:Integer.parseInt(parts[1]),
                 condition: parts[2]?:null,
-                conditionNotMetMessage: parts[3]?:null,
+                conditionMetMessage: parts[3]?:null,
+                conditionNotMetMessage: parts[4]?:null,
         )
         map.addToActions(recoverAction)
 
@@ -247,7 +251,8 @@ class MapImport {
                     positionX:Integer.parseInt(parts[0]),
                     positionY:Integer.parseInt(parts[1]),
                     condition: parts[2]?:null,
-                    conditionNotMetMessage: parts[3]?:null,
+                    conditionMetMessage: parts[3]?:null,
+                    conditionNotMetMessage: parts[4]?:null,
             )
             map.addToActions(computerAction)
     }
@@ -271,8 +276,9 @@ class MapImport {
                     positionX:Integer.parseInt(messageParts[0]),
                     positionY:Integer.parseInt(messageParts[1]),
                     condition: messageParts[2]?:null,
-                    conditionNotMetMessage: messageParts[3]?:null,
-                    message: messageParts[4]
+                    conditionMetMessage: messageParts[3]?:null,
+                    conditionNotMetMessage: messageParts[4]?:null,
+                    message: messageParts[5]
             )
             map.addToActions(mapMessage)
     }

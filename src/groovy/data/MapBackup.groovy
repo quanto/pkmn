@@ -60,6 +60,7 @@ ${getMarketActions(map)}
 ${action.positionX}
 ${action.positionY}
 ${action.condition?:''}
+${action.conditionMetMessage?:''}
 ${action.conditionNotMetMessage?:''}
 ${action.market.identifier}
 </marketAction>
@@ -77,6 +78,7 @@ ${action.market.identifier}
 ${action.positionX}
 ${action.positionY}
 ${action.condition?:''}
+${action.conditionMetMessage?:''}
 ${action.conditionNotMetMessage?:''}
 ${action.owner.identifier}
 </npcAction>
@@ -95,6 +97,7 @@ ${action.owner.identifier}
 ${action.positionX}
 ${action.positionY}
 ${action.condition?:''}
+${action.conditionMetMessage?:''}
 ${action.conditionNotMetMessage?:''}
 ${action.message}
 </mapMessage>
@@ -112,6 +115,7 @@ ${action.message}
 ${action.positionX}
 ${action.positionY}
 ${action.condition?:''}
+${action.conditionMetMessage?:''}
 ${action.conditionNotMetMessage?:''}
 </recoverAction>
 """
@@ -128,6 +132,7 @@ ${action.conditionNotMetMessage?:''}
 ${action.positionX}
 ${action.positionY}
 ${action.condition?:''}
+${action.conditionMetMessage?:''}
 ${action.conditionNotMetMessage?:''}
 </computerAction>
 """
@@ -145,6 +150,7 @@ ${action.conditionNotMetMessage?:''}
 ${action.positionX}
 ${action.positionY}
 ${action.condition?:''}
+${action.conditionMetMessage?:''}
 ${action.conditionNotMetMessage?:''}
 ${action.jumpTo?.map?.name}
 ${action.jumpTo?.positionX}

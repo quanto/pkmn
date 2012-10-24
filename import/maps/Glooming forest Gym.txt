@@ -12,6 +12,7 @@ null
 14
 
 
+
 Glooming forest -3x1
 11
 11
@@ -25,6 +26,7 @@ Glooming forest -3x1
 8
 
 
+
 cePS20cZXHM9M7p
 </npcAction>
 <npcAction>
@@ -32,11 +34,13 @@ cePS20cZXHM9M7p
 8
 
 
+
 sZQFwXy9jqc9ftM
 </npcAction>
 <npcAction>
 7
 6
+
 
 
 Hsb4uOE4qimDRvt

@@ -12,6 +12,7 @@ null
 9
 
 
+
 Glooming forest -2x0
 15
 11
@@ -22,11 +23,13 @@ Glooming forest -2x0
 5
 
 
+
 </computerAction>
 
 <recoverAction>
 4
 6
+
 
 
 </recoverAction>

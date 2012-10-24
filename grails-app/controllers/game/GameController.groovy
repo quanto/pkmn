@@ -21,13 +21,22 @@ class GameController {
         Action action = Action.findByMapAndPositionXAndPositionY(player.map,player.positionX,player.positionY)
 
         if (action){
+
             // Support condition on actions
-            if (action.condition && !Condition.conditionEval(player,action.condition)){
+            boolean conditionEval = true
+            if (action.condition){
+                conditionEval = Condition.conditionEval(player,action.condition)
+                if (action.conditionMetMessage){
+                    render text: "setMessage('${action.conditionMetMessage?.encodeAsHTML()}');"
+                }
+            }
+
+            if (action.condition && !conditionEval){
                 if (action.conditionNotMetMessage){
-                    render text: action.conditionNotMetMessage
+                    render text: "setMessage('${action.conditionNotMetMessage?.encodeAsHTML()}');"
                 }
                 else {
-                    render text: "Condition not met for condition: ${action.condition}!"
+                    render text: "setMessage('Condition not met for condition: ${action.condition?.encodeAsHTML()}!');"
                 }
             }
             else if (action in MapTransition){
@@ -37,28 +46,28 @@ class GameController {
                 player.positionX = mapTransition.jumpTo.positionX
                 player.positionY = mapTransition.jumpTo.positionY
                 player.setMap mapTransition.jumpTo.map
-                render text: "refreshMap"
+                render text: "getView();"
             }
             else if (action in MapMessage){
                 MapMessage mapMessage = (MapMessage)action
-                render text: mapMessage.message
+                render text: "setMessage('${mapMessage.message?.encodeAsHTML()}');"
             }
             else if (action in RecoverAction){
                 Recover.recoverParty(player)
                 // Set last recover position
                 player.lastRecoverAction = (RecoverAction)action
 
-                render text: "Your pokemon have been recovered!"
+                render text: "setMessage('Your pokemon have been recovered!');"
             }
             else if (action in ComputerAction){
                 player.view = View.ShowComputer
                 player.save(flush:true)
-                render text : "showComputer"
+                render text : "getView();"
             }
             else if (action in MarketAction){
                 player.view = View.ShowMarket
                 player.save(flush:true)
-                render text : "showMarket"
+                render text : "getView();"
             }
             else if (action in NpcAction){
 
@@ -83,7 +92,7 @@ class GameController {
                     player.view = View.Battle
 
                     player.save(flush:true)
-                    render text : "refreshMap"
+                    render text : "getView();"
                 }
             }
             else {
@@ -106,7 +115,7 @@ class GameController {
                         player.positionY = 0
                         player.setMap toMap
                         player.save(flush:true)
-                        render text: "refreshMap"
+                        render text: "getView();"
                     }
                 }
             }
@@ -119,7 +128,7 @@ class GameController {
                         player.positionY = mapToLayout.rows-1
                         player.setMap toMap
                         player.save(flush:true)
-                        render text: "refreshMap"
+                        render text: "getView();"
                     }
                 }
             }
@@ -132,7 +141,7 @@ class GameController {
                         player.positionX = mapToLayout.columns-1
                         player.setMap toMap
                         player.save(flush:true)
-                        render text: "refreshMap"
+                        render text: "getView();"
                     }
                 }
             }
@@ -145,7 +154,7 @@ class GameController {
                         player.positionX = 0
                         player.setMap toMap
                         player.save(flush:true)
-                        render text: "refreshMap"
+                        render text: "getView();"
                     }
                 }
             }
