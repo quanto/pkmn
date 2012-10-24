@@ -254,6 +254,15 @@ class Battle {
                 Items.addOwnerItem(fightPlayer1.owner,ownerItem.item,false)
             }
 
+            // Show defeated message
+            if (npc.npcDefeatedMessage){
+                npc.npcDefeatedMessage.split(';').each{
+                    if (it){
+                        fight.log += "m:${it};"
+                    }
+                }
+            }
+
             // Create an NPC lock
             new NpcLock(
                     player: fightPlayer1.owner,

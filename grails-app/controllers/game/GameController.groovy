@@ -77,11 +77,14 @@ class GameController {
                 NpcLock npcLock = NpcLock.findByPlayerAndNpc(player,npcAction.owner)
 
                 if (npcLock){
-                    if (npcLock.permanent){
-                        render text : "You already defeated ${npcAction.owner.name}."
+                    if (npcAction.owner.npcLockedMessage){
+                        render text: "setMessage('${npcAction.owner.npcLockedMessage?.encodeAsHTML()}');"
+                    }
+                    else if (npcLock.permanent){
+                        render text: "setMessage('You already defeated ${npcAction.owner.name?.encodeAsHTML()}.');"
                     }
                     else {
-                        render text : "You already defeated ${npcAction.owner.name} today. ${npcAction.owner.name} is still recovering, come back later."
+                        render text: "setMessage('You already defeated ${npcAction.owner.name?.encodeAsHTML()} today. ${npcAction.owner.name?.encodeAsHTML()} is still recovering, come back later.');"
                     }
                 }
                 else {

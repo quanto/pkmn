@@ -108,7 +108,7 @@
                         Defeated Message:
                     </td>
                     <td>
-                        <g:textField name="owner.npcDefeatedMessage" value="${action.owner.npcDefeatedMessage}" /> In battle message. You should seperate lines end the last line with a ';' karakter.
+                        <g:textField name="owner.npcDefeatedMessage" value="${action.owner.npcDefeatedMessage}" /> In battle message. You should seperate lines with a ';' karakter.
                     </td>
                 </tr>
                 <tr>
