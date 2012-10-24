@@ -233,6 +233,7 @@ class Battle {
     {
 
         FightPlayer fightPlayer1 = fight.fightPlayer1
+        Npc npc = fight.fightPlayer2.owner
 
         // geef xp voor verslaan
         EXP.giveEXP(fight,fightPlayer1,fight.fightPlayer2,false);
@@ -247,6 +248,11 @@ class Battle {
 
             fight.log += "m:Defeated NPC!.;";
             win(fight, true)
+
+            // Turn out Npc reward items
+            npc.rewardItems.each { OwnerItem ownerItem ->
+                Items.addOwnerItem(fightPlayer1.owner,ownerItem.item,false)
+            }
 
             // Create an NPC lock
             new NpcLock(

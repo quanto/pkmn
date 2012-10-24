@@ -51,28 +51,7 @@ class MarketController {
             Item item = marketItem?.item
 
             if (item){
-
-                if (player.money - item.cost >= 0)
-                {
-                    OwnerItem ownerItem = OwnerItem.findByOwnerAndItem(player,item)
-
-                    Player.withTransaction {
-
-                        player.money -= item.cost
-                        if (!ownerItem){
-                            ownerItem = new OwnerItem(
-                                    owner: player,
-                                    item :item,
-                                    quantity:1
-                            )
-                        }
-                        else {
-                            ownerItem.quantity += 1
-                        }
-                        player.save()
-                        ownerItem.save()
-                    }
-                }
+                Items.addOwnerItem(player,item,true)
             }
         }
 
