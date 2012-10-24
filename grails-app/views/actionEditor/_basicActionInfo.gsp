@@ -7,11 +7,15 @@
 </tr>
 <tr>
     <td>positionX:</td>
-    <td>${action.positionX}</td>
+    <td>
+        <g:textField name="positionX" value="${action.positionX}" />
+    </td>
 </tr>
 <tr>
     <td>positionY:</td>
-    <td>${action.positionY}</td>
+    <td>
+        <g:textField name="positionY" value="${action.positionY}" />
+    </td>
 </tr>
 <tr>
     <td>

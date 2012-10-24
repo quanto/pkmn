@@ -3,7 +3,7 @@
 Little girl
 true
 Did you find out what the key is for?
-I found this key near that three overthere;Maybe you can take it and find out to who it belonged to;
+I found this key near that three overthere;Maybe you can take it and find out to who it belonged to
 </npcData>
 <ownerPokemon>
 false
@@ -30,4 +30,8 @@ Tackle
 </ownerMove>
 
 
-
+<ownerItem>
+Old factory key
+1
+</ownerItem>
+            

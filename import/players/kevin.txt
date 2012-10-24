@@ -10,8 +10,8 @@ Glooming forest -2x0
 Glooming forest center
 4
 6
+9
 11
-14
 600
 ShowMap
 38
