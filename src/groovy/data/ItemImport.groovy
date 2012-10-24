@@ -2,6 +2,7 @@ package data
 
 import game.UsableItem
 import game.Badge
+import game.KeyItem
 
 class ItemImport {
 
@@ -58,6 +59,30 @@ class ItemImport {
                 )
 
                 badge.save()
+
+                parts = []
+
+            }
+            index++
+        }
+    }
+
+    public static void importKeyItems(){
+        def file = new File('import/keyitems.txt')
+
+        int index = 0
+        def parts = []
+
+        file.eachLine { line ->
+            parts.add( line )
+            if (index%2==1){
+
+                KeyItem keyItem = new KeyItem(
+                        name : parts[0],
+                        image:parts[1]
+                )
+
+                keyItem.save()
 
                 parts = []
 

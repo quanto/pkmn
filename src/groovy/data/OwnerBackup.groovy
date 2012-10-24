@@ -34,6 +34,8 @@ class OwnerBackup {
 ${npc.identifier}
 ${npc.name}
 ${npc.permanentLock}
+${npc.npcLockedMessage?:''}
+${npc.npcDefeatedMessage?:''}
 </npcData>
 ${getOwnerPokemonBackupData(npc)}
 ${ItemBackup.getItemBackupData(npc)}

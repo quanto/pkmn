@@ -2,6 +2,8 @@
 cePS20cZXHM9M7p
 Bella
 true
+
+
 </npcData>
 <ownerPokemon>
 false

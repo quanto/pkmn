@@ -13,16 +13,16 @@ false
 5
 </pokemon>
 <pokemon>
-10
-50
-4
-5
-</pokemon>
-<pokemon>
 16
 100
 3
 4
+</pokemon>
+<pokemon>
+10
+50
+4
+5
 </pokemon>
 
 

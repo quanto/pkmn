@@ -2,6 +2,8 @@
 Hsb4uOE4qimDRvt
 Gym leader Nadia
 true
+
+
 </npcData>
 <ownerPokemon>
 false

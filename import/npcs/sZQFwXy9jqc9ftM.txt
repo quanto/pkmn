@@ -2,6 +2,8 @@
 sZQFwXy9jqc9ftM
 Katrina
 true
+
+
 </npcData>
 <ownerPokemon>
 false

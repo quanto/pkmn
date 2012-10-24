@@ -84,7 +84,7 @@
                         NPC Name:
                     </td>
                     <td>
-                        <g:checkBox name="owner.name" value="${action.owner.name}" />
+                        <g:textField name="owner.name" value="${action.owner.name}" />
                     </td>
                 </tr>
                 <tr>
@@ -92,7 +92,23 @@
                         Permanent Lock:
                     </td>
                     <td>
-                        <g:checkBox name="owner.permanentLock" value="${action.owner.permanentLock}" />
+                        <g:checkBox name="owner.npcLockedMessage" value="${action.owner.npcLockedMessage}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Locked Message:
+                    </td>
+                    <td>
+                        <g:textField name="owner.name" value="${action.owner.name}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Defeated Message:
+                    </td>
+                    <td>
+                        <g:textField name="owner.npcDefeatedMessage" value="${action.owner.npcDefeatedMessage}" />
                     </td>
                 </tr>
                 <tr>
