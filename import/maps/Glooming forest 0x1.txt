@@ -7,9 +7,9 @@ false
 1
 </mapData>
 <pokemon>
-19
+10
 50
-3
+4
 5
 </pokemon>
 <pokemon>
@@ -19,9 +19,9 @@ false
 4
 </pokemon>
 <pokemon>
-10
+19
 50
-4
+3
 5
 </pokemon>
 

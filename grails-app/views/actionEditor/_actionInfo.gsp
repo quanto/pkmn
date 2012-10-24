@@ -92,7 +92,7 @@
                         Permanent Lock:
                     </td>
                     <td>
-                        <g:checkBox name="owner.npcLockedMessage" value="${action.owner.npcLockedMessage}" />
+                        <g:checkBox name="owner.permanentLock" value="${action.owner.permanentLock}" />
                     </td>
                 </tr>
                 <tr>
@@ -100,7 +100,7 @@
                         Locked Message:
                     </td>
                     <td>
-                        <g:textField name="owner.name" value="${action.owner.name}" />
+                        <g:textField name="owner.npcLockedMessage" value="${action.owner.npcLockedMessage}" />
                     </td>
                 </tr>
                 <tr>

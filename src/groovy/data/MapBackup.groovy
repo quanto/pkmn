@@ -159,7 +159,7 @@ ${action.jumpTo?.positionY}
 
     public static String getPokemonData(Map map){
         String pokemonData = ""
-        map.mapPokemonList.each { MapPokemon mapPokemon ->
+        map.mapPokemonList.sort{ it.pokemon.nr + "-" + it.fromLevel + "-" + it.toLevel }.each { MapPokemon mapPokemon ->
             pokemonData += """<pokemon>
 ${mapPokemon.pokemon.id}
 ${mapPokemon.chance}

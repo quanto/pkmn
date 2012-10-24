@@ -1,9 +1,9 @@
 <npcData>
 12345
-Bird watcher
-false
-
-
+Little girl
+true
+Did you find out what the key is for?
+I found this key near that three overthere;Maybe you can take it and find out to who it belonged to;
 </npcData>
 <ownerPokemon>
 false
