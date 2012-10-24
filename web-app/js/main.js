@@ -467,10 +467,7 @@ function checkMove(direction, x, y)
             // An empty message means walking against the wall for now
 			if(msg != "")
 			{
-				$("#player").remove();
-
                 var allowMove = true
-                alert(msg)
                 eval(msg);
 
 				switch (direction)
@@ -494,6 +491,7 @@ function checkMove(direction, x, y)
 
                 // Move can be disallowed
                 if (allowMove){
+                    $("#player").remove();
                     setPlayer(x, y);
                     updateLocation(x, y);
                     checkBattle();

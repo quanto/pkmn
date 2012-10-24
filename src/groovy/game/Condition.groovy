@@ -4,7 +4,7 @@ class Condition {
 
     public static boolean conditionEval(Player player, String condition){
         // Npc conditions
-        if ("defeatAllOtherNpcOnCurrentMap"){
+        if (condition == "defeatAllOtherNpcOnCurrentMap"){
 
             def c = NpcLock.createCriteria()
             int lockCount = c.count() {
@@ -21,13 +21,25 @@ class Condition {
             }
         }
 
-        // Map transition action
-        else if ("isAdmin"){
-            if (player.getAuthorities().find{ Role role -> role.authority == "ROLE_ADMIN" }){
+        else if (condition == "haveBeginnerBadge"){
+            Item item = Item.findByName("Beginner Badge")
+            if (OwnerItem.findByOwnerAndItem(player,item)){
+                return true
+            }
+        }
+        else if (condition == "haveOldFactoryKey"){
+            Item item = Item.findByName("Old factory key")
+            if (OwnerItem.findByOwnerAndItem(player,item)){
                 return true
             }
         }
 
+        // Map transition action
+        else if (condition == "isAdmin"){
+            if (player.getAuthorities().find{ Role role -> role.authority == "ROLE_ADMIN" }){
+                return true
+            }
+        }
         return false
     }
 

@@ -34,6 +34,7 @@ class ActionFlow {
             // Support condition on actions
             boolean conditionEval = true
             if (action.condition){
+
                 conditionEval = Condition.conditionEval(player,action.condition)
                 if (conditionEval && action.conditionMetMessage){
                     actionResult.evalMessage += "setMessage('${action.conditionMetMessage?.encodeAsHTML()}');"
