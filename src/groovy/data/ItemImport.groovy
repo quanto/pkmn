@@ -13,6 +13,8 @@ class ItemImport {
         importUsableItems()
 
         importBadges()
+
+        importKeyItems()
     }
 
     public static void importUsableItems(){
