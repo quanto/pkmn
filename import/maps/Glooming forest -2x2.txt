@@ -18,6 +18,9 @@ false
 
 
 RNyn8n09NTaOSqS
+true
+false
+false
 </npcAction>
 
 

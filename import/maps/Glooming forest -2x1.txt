@@ -30,6 +30,9 @@ false
 
 
 12345
+true
+false
+false
 </npcAction>
 
 

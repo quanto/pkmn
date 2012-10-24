@@ -30,7 +30,7 @@ Poke Ball
             
 <npcLock>
 cePS20cZXHM9M7p
-24-10-2012 18:35:08
+24-10-2012 18:46:21
 true
 </npcLock>
             

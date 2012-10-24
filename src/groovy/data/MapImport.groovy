@@ -170,6 +170,9 @@ class MapImport {
                 condition: parts[2]?:null,
                 conditionMetMessage: parts[3]?:null,
                 conditionNotMetMessage: parts[4]?:null,
+                triggerOnActionButton: new Boolean(parts[6]),
+                triggerBeforeStep: new Boolean(parts[7]),
+                conditionalStep: new Boolean(parts[8]),
                 market: market
         )
         map.addToActions(marketAction)
@@ -188,6 +191,9 @@ class MapImport {
                 condition: parts[2]?:null,
                 conditionMetMessage: parts[3]?:null,
                 conditionNotMetMessage: parts[4]?:null,
+                triggerOnActionButton: new Boolean(parts[6]),
+                triggerBeforeStep: new Boolean(parts[7]),
+                conditionalStep: new Boolean(parts[8]),
                 owner: npc
         )
         npc.npcAction = npcAction
@@ -226,6 +232,9 @@ class MapImport {
                 condition: parts[2]?:null,
                 conditionMetMessage: parts[3]?:null,
                 conditionNotMetMessage: parts[4]?:null,
+                triggerOnActionButton: new Boolean(parts[8]),
+                triggerBeforeStep: new Boolean(parts[9]),
+                conditionalStep: new Boolean(parts[10]),
         )
         map.addToActions(mapTransition)
     }
@@ -239,6 +248,9 @@ class MapImport {
                 condition: parts[2]?:null,
                 conditionMetMessage: parts[3]?:null,
                 conditionNotMetMessage: parts[4]?:null,
+                triggerOnActionButton: new Boolean(parts[5]),
+                triggerBeforeStep: new Boolean(parts[6]),
+                conditionalStep: new Boolean(parts[7]),
         )
         map.addToActions(recoverAction)
 
@@ -253,6 +265,9 @@ class MapImport {
                     condition: parts[2]?:null,
                     conditionMetMessage: parts[3]?:null,
                     conditionNotMetMessage: parts[4]?:null,
+                    triggerOnActionButton: new Boolean(parts[5]),
+                    triggerBeforeStep: new Boolean(parts[6]),
+                    conditionalStep: new Boolean(parts[7]),
             )
             map.addToActions(computerAction)
     }
@@ -269,16 +284,19 @@ class MapImport {
         map.addToMapPokemonList(mapPokemon)
     }
 
-    public static void importMessage(def messageParts, Map map){
+    public static void importMessage(def parts, Map map){
 
             MapMessage mapMessage = new MapMessage(
                     map:map,
-                    positionX:Integer.parseInt(messageParts[0]),
-                    positionY:Integer.parseInt(messageParts[1]),
-                    condition: messageParts[2]?:null,
-                    conditionMetMessage: messageParts[3]?:null,
-                    conditionNotMetMessage: messageParts[4]?:null,
-                    message: messageParts[5]
+                    positionX:Integer.parseInt(parts[0]),
+                    positionY:Integer.parseInt(parts[1]),
+                    condition: parts[2]?:null,
+                    conditionMetMessage: parts[3]?:null,
+                    conditionNotMetMessage: parts[4]?:null,
+                    message: parts[5],
+                    triggerOnActionButton: new Boolean(parts[6]),
+                    triggerBeforeStep: new Boolean(parts[7]),
+                    conditionalStep: new Boolean(parts[8]),
             )
             map.addToActions(mapMessage)
     }

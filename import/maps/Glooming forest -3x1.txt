@@ -34,6 +34,9 @@ false
 Glooming forest Gym
 7
 14
+true
+false
+false
 </mapTransition>
 
 

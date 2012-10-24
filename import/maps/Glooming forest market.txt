@@ -16,6 +16,9 @@ null
 Glooming forest -2x0
 6
 12
+true
+false
+false
 </mapTransition>
 
 
@@ -29,5 +32,8 @@ Glooming forest -2x0
 
 
 ymhGUEZtjlHvZ7V
+true
+false
+false
 </marketAction>
 

@@ -36,6 +36,9 @@ false
 
 
 BngAfU7JWoAGt0P
+true
+false
+false
 </npcAction>
 
 

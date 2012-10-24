@@ -17,6 +17,9 @@ null
 
 
 Hello there :)
+true
+false
+false
 </mapMessage>
 
 

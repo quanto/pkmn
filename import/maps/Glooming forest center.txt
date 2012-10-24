@@ -16,6 +16,9 @@ null
 Glooming forest -2x0
 15
 11
+true
+false
+false
 </mapTransition>
 
 <computerAction>
@@ -24,6 +27,9 @@ Glooming forest -2x0
 
 
 
+true
+false
+false
 </computerAction>
 
 <recoverAction>
@@ -32,6 +38,9 @@ Glooming forest -2x0
 
 
 
+true
+false
+false
 </recoverAction>
 
 

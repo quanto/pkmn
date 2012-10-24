@@ -63,6 +63,9 @@ ${action.condition?:''}
 ${action.conditionMetMessage?:''}
 ${action.conditionNotMetMessage?:''}
 ${action.market.identifier}
+${action.triggerOnActionButton}
+${action.triggerBeforeStep}
+${action.conditionalStep}
 </marketAction>
 """
             }
@@ -81,6 +84,9 @@ ${action.condition?:''}
 ${action.conditionMetMessage?:''}
 ${action.conditionNotMetMessage?:''}
 ${action.owner.identifier}
+${action.triggerOnActionButton}
+${action.triggerBeforeStep}
+${action.conditionalStep}
 </npcAction>
 """
                 OwnerBackup.saveNpc(action.owner)
@@ -100,6 +106,9 @@ ${action.condition?:''}
 ${action.conditionMetMessage?:''}
 ${action.conditionNotMetMessage?:''}
 ${action.message}
+${action.triggerOnActionButton}
+${action.triggerBeforeStep}
+${action.conditionalStep}
 </mapMessage>
 """
             }
@@ -117,6 +126,9 @@ ${action.positionY}
 ${action.condition?:''}
 ${action.conditionMetMessage?:''}
 ${action.conditionNotMetMessage?:''}
+${action.triggerOnActionButton}
+${action.triggerBeforeStep}
+${action.conditionalStep}
 </recoverAction>
 """
             }
@@ -134,6 +146,9 @@ ${action.positionY}
 ${action.condition?:''}
 ${action.conditionMetMessage?:''}
 ${action.conditionNotMetMessage?:''}
+${action.triggerOnActionButton}
+${action.triggerBeforeStep}
+${action.conditionalStep}
 </computerAction>
 """
             }
@@ -155,6 +170,9 @@ ${action.conditionNotMetMessage?:''}
 ${action.jumpTo?.map?.name}
 ${action.jumpTo?.positionX}
 ${action.jumpTo?.positionY}
+${action.triggerOnActionButton}
+${action.triggerBeforeStep}
+${action.conditionalStep}
 </mapTransition>
 """
                 }
