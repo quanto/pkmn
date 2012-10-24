@@ -11,8 +11,8 @@ class EXP {
 
     public static void giveEXP(Fight fight, FightPlayer ownfightPlayer, FightPlayer opponentfightPlayer, boolean isWild)
     {
-
-        //Money.giveMoney(fight, ownfightPlayer, ownfightPlayer.ownerPokemon.pokemon.baseEXP,ownfightPlayer.ownerPokemon.level,isWild);
+        // :TODO Money should not be given on every npc switch
+        Money.giveMoney(fight, ownfightPlayer, ownfightPlayer.ownerPokemon.pokemon.baseEXP,ownfightPlayer.ownerPokemon.level,isWild);
 
         int exp = calcXP(opponentfightPlayer.ownerPokemon.pokemon.baseEXP,opponentfightPlayer.level,isWild)
         fight.log += "m:" + ownfightPlayer.ownerPokemon.pokemon.name + " gains ${exp} exp.;"

@@ -38,7 +38,7 @@ false
 15
 14
 haveBeginnerBadge
-Hey you! No rookies past this point!
+Hey you! No rookies past this!
 
 
 false

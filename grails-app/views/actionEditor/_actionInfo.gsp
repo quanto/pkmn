@@ -21,30 +21,37 @@
     </g:if>
 
     <g:elseif test="${action in MarketAction}">
-        <table>
+        <g:form action="updateAction">
+            <table>
+                <g:render template="basicActionInfo" />
+            </table>
+        </g:form>
 
-            <g:render template="basicActionInfo" />
+        <h3>Market Items</h3>
+
+        <table>
             <tr>
                 <td>
-                    MarketItems:
+                    Item
                 </td>
                 <td>
-                    <table>
-                        <g:each var="marketItem" in="${action.market.marketItems}">
-                            <tr>
-                                <td>${marketItem.item.name}</td>
-                            </tr>
-                        </g:each>
-                    </table>
-                    <g:form action="addItem">
-                        <g:hiddenField name="market" value="${action.market.id}" />
-                        <g:select name="item" from="${UsableItem.list()}" optionKey="id" />
-                        <g:submitButton name="add" />
-                    </g:form>
+                    Cost
                 </td>
             </tr>
-
+            <g:each var="marketItem" in="${action.market.marketItems}">
+                <tr>
+                    <td>${marketItem.item.name}</td>
+                    <td>${marketItem.item.cost}</td>
+                    <td><g:link action="removeMarketItem" id="${marketItem.id}">Delete</g:link></td>
+                </tr>
+            </g:each>
         </table>
+        <g:form action="addItem">
+            <g:hiddenField name="market" value="${action.market.id}" />
+            <g:select name="item" from="${UsableItem.list()}" optionKey="id" />
+            <g:submitButton name="add" />
+        </g:form>
+
     </g:elseif>
 
     <g:elseif test="${action in MapMessage}">

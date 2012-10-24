@@ -19,7 +19,7 @@ class Money {
 
         if (money > 0)
         {
-            fight.log += "m:You gained money money.;"
+            fight.log += "m:You gained ${money} money.;"
             Player player = fightPlayer.owner
             player.money += money
         }

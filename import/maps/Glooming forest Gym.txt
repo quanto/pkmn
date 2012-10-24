@@ -49,9 +49,9 @@ false
 <npcAction>
 7
 6
+defeatAllOtherNpcOnCurrentMap
 
-
-
+I'm not batteling you! You can't even defeat the others.
 Hsb4uOE4qimDRvt
 true
 false

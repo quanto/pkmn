@@ -5,30 +5,6 @@ true
 Did you find out what the key is for?
 I found this key near that three overthere;Maybe you can take it and find out to who it belonged to
 </npcData>
-<ownerPokemon>
-false
-10
-0
-31
-16
-13
-16
-7
-13
-Female
-1
-8
-2
-</ownerPokemon>
-<ownerMove>
-String Shot
-40
-</ownerMove>
-<ownerMove>
-Tackle
-35
-</ownerMove>
-
 
 <ownerItem>
 Old factory key

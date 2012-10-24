@@ -27,8 +27,6 @@ class AdminController {
 	def saveNewsItem() {
 		PlayerData playerData = session.playerData
 		Player player = playerData.getPlayer()
-
-		println params
 		
 		new NewsItem(
 				message: params.newsItem,

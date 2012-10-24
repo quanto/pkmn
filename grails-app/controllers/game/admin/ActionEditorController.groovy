@@ -183,4 +183,12 @@ class ActionEditorController {
         render text: "done"
     }
 
+    def removeMarketItem(){
+        MarketItem marketItem = MarketItem.get(Integer.parseInt(params.id))
+        Market market = marketItem.market
+        market.removeFromMarketItems(marketItem)
+        marketItem.delete()
+        render text: "done"
+    }
+
 }

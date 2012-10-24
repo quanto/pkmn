@@ -2,8 +2,8 @@
 Hsb4uOE4qimDRvt
 Gym leader Nadia
 true
-
-
+Good job you earned the beginner badge fair and square.
+You've earned it.; Here's the beginner badge
 </npcData>
 <ownerPokemon>
 false
@@ -90,4 +90,8 @@ Vine Whip
 </ownerMove>
 
 
-
+<ownerItem>
+Beginner Badge
+1
+</ownerItem>
+            
