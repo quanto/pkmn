@@ -25,6 +25,19 @@ false
 5
 </pokemon>
 
+<mapTransition>
+18
+14
+
+
+
+House of Kevin
+5
+9
+true
+false
+false
+</mapTransition>
 
 
 

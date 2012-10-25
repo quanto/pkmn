@@ -1,18 +1,9 @@
 package game
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 02-10-12
- * Time: 09:05
- * To change this template use File | Settings | File Templates.
- */
 class EXP {
 
     public static void giveEXP(Fight fight, FightPlayer ownfightPlayer, FightPlayer opponentfightPlayer, boolean isWild)
     {
-        // :TODO Money should not be given on every npc switch
-        Money.giveMoney(fight, ownfightPlayer, ownfightPlayer.ownerPokemon.pokemon.baseEXP,ownfightPlayer.ownerPokemon.level,isWild);
 
         int exp = calcXP(opponentfightPlayer.ownerPokemon.pokemon.baseEXP,opponentfightPlayer.level,isWild)
         fight.log += "m:" + ownfightPlayer.ownerPokemon.pokemon.name + " gains ${exp} exp.;"

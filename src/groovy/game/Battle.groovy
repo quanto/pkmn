@@ -143,6 +143,18 @@ class Battle {
 
         if(giveEXP){
             EXP.giveEXP(fight,fight.fightPlayer1,fight.fightPlayer2,true);
+
+            if (fight.battleType == BattleType.PVE){
+                int money = Money.calculateMoney(fight,fight.fightPlayer2.ownerPokemon)
+                Money.giveMoney(fight,money)
+            }
+            else if (fight.battleType == BattleType.PVN){
+                int money = 0
+                OwnerPokemon.findAllByOwner(fight.fightPlayer2.owner).each {
+                    money += Money.calculateMoney(fight,it)
+                }
+                Money.giveMoney(fight,money)
+            }
         }
 
         Stats.saveStats(fight.fightPlayer1, true);
@@ -247,7 +259,9 @@ class Battle {
             fightPlayer1.owner.pvnBattlesWon += 1;
 
             fight.log += "m:Defeated NPC!.;";
-            win(fight, true)
+
+            // Don't give exp. It was already given.
+            win(fight, false)
 
             // Turn out Npc reward items
             npc.rewardItems.each { OwnerItem ownerItem ->

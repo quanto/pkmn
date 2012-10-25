@@ -7,6 +7,19 @@ null
 null
 </mapData>
 
+<mapTransition>
+5
+9
+
+
+
+Glooming forest 0x1
+18
+14
+true
+false
+false
+</mapTransition>
 
 
 
