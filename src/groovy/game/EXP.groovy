@@ -2,7 +2,7 @@ package game
 
 class EXP {
 
-    public static void giveEXP(Fight fight, FightPlayer ownfightPlayer, FightPlayer opponentfightPlayer, boolean isWild, int exp)
+    public static void giveEXP(Fight fight, FightPlayer ownfightPlayer, FightPlayer opponentfightPlayer, boolean isWild, int exp, boolean isCurrentOwnerPokemon)
     {
 
         ownfightPlayer.ownerPokemon.xp += exp
@@ -18,18 +18,21 @@ class EXP {
                 int newLevelLoop = ownfightPlayer.ownerPokemon.level + i + 1
                 fight.log += "m:" + ownfightPlayer.ownerPokemon.pokemon.name + " grew to level ${newLevelLoop}!;";
 
+                if (isCurrentOwnerPokemon){
+                    fight.log += "l:${ownfightPlayer.playerNr}:" + newLevelLoop + ";";
+                }
 
                 Evolution evolution = Evolution.findByFromPokemonAndLevel(ownfightPlayer.ownerPokemon.pokemon,newLevelLoop)
                 // kijk of pokemon evalueert
 
                 if (evolution)
                 {
-
                     fight.log += "m:" + ownfightPlayer.ownerPokemon.pokemon.name + " evolved into " + evolution.toPokemon.name + ".;";
 
-                    fight.log += "n:${ownfightPlayer.playerNr}:" + evolution.toPokemon.name + ";";
-                    fight.log += "s:${ownfightPlayer.playerNr}:${evolution.toPokemon.threeValueNumber()}.gif;";
-
+                    if (isCurrentOwnerPokemon){
+                        fight.log += "n:${ownfightPlayer.playerNr}:" + evolution.toPokemon.name + ";";
+                        fight.log += "s:${ownfightPlayer.playerNr}:${evolution.toPokemon.threeValueNumber()}.gif;";
+                    }
                     ownfightPlayer.ownerPokemon.pokemon = evolution.toPokemon
                 }
 
@@ -58,7 +61,8 @@ class EXP {
         fight.usedPokemon.each { OwnerPokemon ownerPokemon ->
             int expShare = Math.floor(exp / fight.usedPokemon.size())
             fight.log += "m:" + ownerPokemon.pokemon.name + " gains ${expShare} exp.;"
-            giveEXP(fight, ownfightPlayer, opponentfightPlayer, isWild, exp)
+            boolean isCurrentOwnerPokemon = ownerPokemon.id == fight.fightPlayer1.ownerPokemon.id
+            giveEXP(fight, ownfightPlayer, opponentfightPlayer, isWild, exp, isCurrentOwnerPokemon)
         }
         // Leave only the current ownerPokemon in the used list
         fight.usedPokemon = [fight.usedPokemon.find{ it.id == fight.fightPlayer1.ownerPokemon.id}]

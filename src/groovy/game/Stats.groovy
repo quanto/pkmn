@@ -74,6 +74,8 @@ class Stats {
         )
 
         fight.log += "s:${playerNr}:" + ownerPokemon.pokemon.threeValueNumber() + ".gif;";
+        fight.log += "n:${playerNr}:" + ownerPokemon.pokemon.name + ";";
+        fight.log += "l:${playerNr}:" + ownerPokemon.level + ";";
 
         return fightPlayer
     }

@@ -44,8 +44,8 @@
         var player1health = ${fight.fightPlayer1.hp}; // Health after actions
         var player2maxHealth = ${fight.fightPlayer2.maxHp};
         var player2health = ${fight.fightPlayer2.hp};
-        var player1pokemonName = "${fight.fightPlayer1.ownerPokemon.pokemon.name}";
-        var player2pokemonName = "${fight.fightPlayer2.ownerPokemon.pokemon.name}";
+        var player1pokemonName = "" // "${fight.fightPlayer1.ownerPokemon.pokemon.name}";
+        var player2pokemonName = "" // ${fight.fightPlayer2.ownerPokemon.pokemon.name}";
         var player1pokemonLevel = ${fight.fightPlayer1.level};
         var player2pokemonLevel = ${fight.fightPlayer2.level};
 
@@ -126,14 +126,14 @@
                     currentAction += 1;
                     break;
                 }
-                else if (action == "s:")
+                else if (action == "s:") // set pkmn image
                 {
                     var player = value.substring(0,1);
                     var imageLink = value.substring(2,value.length);
                     switchPokemon(player,imageLink);
                     currentAction += 1;
                 }
-                else if (action == "n:")
+                else if (action == "n:") // set name
                 {
                     var player = value.substring(0,1);
                     var pokemonname = value.substring(2,value.length);
@@ -142,6 +142,20 @@
                         player1pokemonName = pokemonname;
                     else
                         player2pokemonName = pokemonname;
+
+                    // updateUI(); // Ui update after level
+
+                    currentAction += 1;
+                }
+                else if (action == "l:") // set level
+                {
+                    var player = value.substring(0,1);
+                    var level = value.substring(2,value.length);
+
+                    if (player == 1)
+                        player1pokemonLevel = level;
+                    else
+                        player2pokemonLevel = level;
 
                     updateUI();
 
@@ -171,8 +185,8 @@
         function updateUI()
         {
             // set the pokemon
-            $("player1pokemonName").html(player1pokemonName + "<br>lv. " + player1pokemonLevel);
-            $("player2pokemonName").html(player2pokemonName + "<br>lv. " + player2pokemonLevel);
+            $("#player1pokemonName").html(player1pokemonName + "<br>lv. " + player1pokemonLevel);
+            $("#player2pokemonName").html(player2pokemonName + "<br>lv. " + player2pokemonLevel);
         }
 
         function prepareActions()
@@ -286,21 +300,29 @@
     <table>
         <tr>
             <td>
-                <img id="player1image" src='${resource(uri:'')}/images/pkmn/back${fight.fightPlayer1.ownerPokemon.pokemon.threeValueNumber()}.gif'>   ${fight.fightPlayer1.hp}
+                <img id="player1image" src='${resource(uri:'')}/images/pkmn/back${fight.fightPlayer1.ownerPokemon.pokemon.threeValueNumber()}.gif'>
             </td>
             <td>
-                <img id="player2image" src='${resource(uri:'')}/images/pkmn/front${fight.fightPlayer2.ownerPokemon.pokemon.threeValueNumber()}.gif'>  ${fight.fightPlayer2.hp}
+                <img id="player2image" src='${resource(uri:'')}/images/pkmn/front${fight.fightPlayer2.ownerPokemon.pokemon.threeValueNumber()}.gif'>
             </td>
         </tr>
         <tr>
+             <td>
+                 <div id="player1pokemonName"></div>
+             </td>
+             <td>
+                 <div id="player2pokemonName"></div>
+             </td>
+        </tr>
+        <tr>
             <td>
-                <div id="player1pokemonName"></div>
+
                 <div style="width:100px;border:1px solid #444444;height:5px;">
                     <div id="player1health" style="width:100px;background-color:white;height:5px;"></div>
                 </div>
             </td>
             <td>
-                <div id="player2pokemonName"></div>
+
                 <div style="width:100px;border:1px solid #444444;height:5px;">
                     <div id="player2health" style="width:100px;background-color:white;height:5px;"></div>
                 </div>
