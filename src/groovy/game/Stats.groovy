@@ -22,6 +22,19 @@ class Stats {
             fight.log += "m:A wild ${ownerPokemon.pokemon.name} appears;"
         }
 
+        // We should only track the used pokemon for users
+        if (playerType == PlayerType.user && fight.battleType != BattleType.PVP){
+            // Remove fainted pokemon
+            if (fight.fightPlayer1?.ownerPokemon && fight.fightPlayer1.ownerPokemon.hp <= 0){
+                OwnerPokemon currentOwnerPokemon = fight.usedPokemon.find{ it.id == fight.fightPlayer1.ownerPokemon.id}
+                fight.usedPokemon.remove(currentOwnerPokemon)
+            }
+            // Add the added pokemon
+            if (!fight.usedPokemon.find{ it.id == ownerPokemon.id}){
+                fight.usedPokemon.add(ownerPokemon)
+            }
+        }
+
         FightPlayer fightPlayer = new FightPlayer(
                 fight: fight,
                 ownerPokemon:ownerPokemon,

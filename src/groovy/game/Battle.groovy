@@ -142,7 +142,7 @@ class Battle {
         fight.log += "m:" + fight.fightPlayer1.owner.name + " wins.;";
 
         if(giveEXP){
-            EXP.giveEXP(fight,fight.fightPlayer1,fight.fightPlayer2,true);
+            EXP.distributeExp(fight,fight.fightPlayer1,fight.fightPlayer2,true);
 
             if (fight.battleType == BattleType.PVE){
                 int money = Money.calculateMoney(fight,fight.fightPlayer2.ownerPokemon)
@@ -248,7 +248,7 @@ class Battle {
         Npc npc = fight.fightPlayer2.owner
 
         // geef xp voor verslaan
-        EXP.giveEXP(fight,fightPlayer1,fight.fightPlayer2,false);
+        EXP.distributeExp(fight,fightPlayer1,fight.fightPlayer2,false);
 
         // haal volgende op als deze bestaat
         OwnerPokemon nextOwnerPokemon = OwnerPokemon.findByOwnerAndPartyPosition(fight.fightPlayer2.owner,fight.fightPlayer2.ownerPokemon.partyPosition + 1)

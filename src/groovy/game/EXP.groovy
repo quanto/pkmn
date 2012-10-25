@@ -2,11 +2,8 @@ package game
 
 class EXP {
 
-    public static void giveEXP(Fight fight, FightPlayer ownfightPlayer, FightPlayer opponentfightPlayer, boolean isWild)
+    public static void giveEXP(Fight fight, FightPlayer ownfightPlayer, FightPlayer opponentfightPlayer, boolean isWild, int exp)
     {
-
-        int exp = calcXP(opponentfightPlayer.ownerPokemon.pokemon.baseEXP,opponentfightPlayer.level,isWild)
-        fight.log += "m:" + ownfightPlayer.ownerPokemon.pokemon.name + " gains ${exp} exp.;"
 
         ownfightPlayer.ownerPokemon.xp += exp
 
@@ -52,6 +49,19 @@ class EXP {
 
         }
         ownfightPlayer.ownerPokemon.save(flush: true)
+    }
+
+    public static void distributeExp(Fight fight, FightPlayer ownfightPlayer, FightPlayer opponentfightPlayer, boolean isWild){
+
+        int exp = calcXP(opponentfightPlayer.ownerPokemon.pokemon.baseEXP,opponentfightPlayer.level,isWild)
+
+        fight.usedPokemon.each { OwnerPokemon ownerPokemon ->
+            int expShare = Math.floor(exp / fight.usedPokemon.size())
+            fight.log += "m:" + ownerPokemon.pokemon.name + " gains ${expShare} exp.;"
+            giveEXP(fight, ownfightPlayer, opponentfightPlayer, isWild, exp)
+        }
+        // Leave only the current ownerPokemon in the used list
+        fight.usedPokemon = [fight.usedPokemon.find{ it.id == fight.fightPlayer1.ownerPokemon.id}]
     }
 
     public static int calcXP(int baseXp, int level, boolean isWild)
