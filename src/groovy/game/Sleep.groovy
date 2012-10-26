@@ -1,5 +1,7 @@
 package game
 
+import game.fight.MessageAction
+
 /**
  * Created with IntelliJ IDEA.
  * User: kevinverhoef
@@ -17,12 +19,14 @@ class Sleep {
             // Geef bericht
             if (fightPlayer.sleep == 1)
             {
-                fight.log += "m:${fightPlayer.ownerPokemon.pokemon.name} wakes up.;"
+                fight.roundResult.battleActions.add(new MessageAction("${fightPlayer.ownerPokemon.pokemon.name} wakes up."))
+
+                fight.log += "m:;"
                 fightPlayer.sleep = 0
             }
             else
             {
-                fight.log += "m:${fightPlayer.ownerPokemon.pokemon.name} is a sleep.;"
+                fight.roundResult.battleActions.add(new MessageAction("${fightPlayer.ownerPokemon.pokemon.name} is a sleep."))
 
                 // verlaag slaap beurten
                 fightPlayer.sleep -= 1
@@ -40,14 +44,16 @@ class Sleep {
             // kijk of de tegenstander al niet slaapt
             if (defendingFightPlayer.sleep > 0)
             {
-                fight.log += "m:" + defendingFightPlayer.ownerPokemon.pokemon.name + " is already asleep.;";
+                fight.roundResult.battleActions.add(new MessageAction("${defendingFightPlayer.ownerPokemon.pokemon.name} is already asleep."))
+
             }
             // laat de tegenstander slapen
             else
             {
                 Recover.removeAllStatusAfflictions(defendingFightPlayer);
                 defendingFightPlayer.sleep = random.nextInt(6)+2
-                fight.log += "m:" + defendingFightPlayer.ownerPokemon.pokemon.name + " fell asleep.;";
+                fight.roundResult.battleActions.add(new MessageAction("${defendingFightPlayer.ownerPokemon.pokemon.name} fell asleep."))
+
                 moveInfo.sleepActionSucces = true;
             }
         }

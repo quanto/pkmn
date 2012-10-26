@@ -1,6 +1,7 @@
 package game
 
 import game.fight.NPCHelper
+import game.fight.MessageAction
 
 class Moves {
 
@@ -12,7 +13,7 @@ class Moves {
 
         // reset log
         if (clearLog){
-            fight.log = "";
+            // fight.log = ""; :TODO remove
         }
 
         if (move){
@@ -71,7 +72,8 @@ class Moves {
             fightPlayer.ownerPokemon.addToOwnerMoves(ownerMove)
             fightPlayer.ownerPokemon.save()
 
-            fight.log += "m:" + fightPlayer.ownerPokemon.pokemon.name + "learned " + move.name + ".;";
+            fight.roundResult.battleActions.add(new MessageAction(fightPlayer.ownerPokemon.pokemon.name + "learned " + move.name + "."))
+
         }
         else
         {

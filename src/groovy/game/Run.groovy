@@ -1,5 +1,7 @@
 package game
 
+import game.fight.MessageAction
+
 /**
  * Created with IntelliJ IDEA.
  * User: kevinverhoef
@@ -26,20 +28,20 @@ class Run {
             if (x > 255 || random.nextInt(255) <= x || b == 0)
             {
                 Stats.saveStats(fight.fightPlayer1)
-                fight.log = "m:You run away safely.;"
+                fight.roundResult.battleActions.add(new MessageAction("You run away safely."))
                 fight.battleOver = 1
             }
             else
             {
                 fight.escapeAttempts += 1
-                fight.log = "m:You fail to run away.;"
+                fight.roundResult.battleActions.add(new MessageAction("You fail to run away."))
                 Moves.setMove(fight,fight.fightPlayer1,null,false)
             }
 
         }
         else
         {
-            fight.log = "m:You can not run away from this battle.;"
+            fight.roundResult.personalActions.add(new MessageAction("You can not run away from this battle."))
         }
     }
 

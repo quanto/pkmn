@@ -1,5 +1,7 @@
 package game
 
+import game.fight.MessageAction
+
 class Evasion {
 
     public static void addToEvasionStage(int addToStage, FightPlayer attackingFightPlayer, FightPlayer defendingFightPlayer)
@@ -11,7 +13,7 @@ class Evasion {
             if (attackingFightPlayer.evasionStage != 6)
             {
                 attackingFightPlayer.evasionStage += addToStage;
-                attackingFightPlayer.fight.log += "m:${attackingFightPlayer.ownerPokemon.pokemon.name}`s evasiveness raises.;";
+                attackingFightPlayer.fight.roundResult.battleActions.add(new MessageAction("${attackingFightPlayer.ownerPokemon.pokemon.name}`s evasiveness raises."))
             }
         }
         else
@@ -20,7 +22,8 @@ class Evasion {
             if (defendingFightPlayer.evasionStage != -6)
             {
                 defendingFightPlayer.evasionStage += addToStage;
-                attackingFightPlayer.fight.log += "m:${defendingFightPlayer.ownerPokemon.pokemon.name}`s evasiveness lowers.;";
+
+                attackingFightPlayer.fight.roundResult.battleActions.add(new MessageAction("${defendingFightPlayer.ownerPokemon.pokemon.name}`s evasiveness lowers."))
             }
         }
     }

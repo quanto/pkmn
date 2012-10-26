@@ -1,5 +1,7 @@
 package game
 
+import game.fight.MessageAction
+
 class Accuraccy {
 
     /**
@@ -13,7 +15,7 @@ class Accuraccy {
             if (attackingFightPlayer.accuracyStage < 6)
             {
                 attackingFightPlayer.accuracyStage += addToStage
-                fight.log += "m:${attackingFightPlayer.ownerPokemon.pokemon.name}`s accuracy raises.;"
+                fight.roundResult.battleActions.add(new MessageAction("${attackingFightPlayer.ownerPokemon.pokemon.name}`s accuracy raises"))
             }
         }
         else
@@ -22,7 +24,7 @@ class Accuraccy {
             if (defendingFightPlayer.accuracyStage> -6)
             {
                 defendingFightPlayer.accuracyStage += addToStage
-                fight.log += "m:${defendingFightPlayer.ownerPokemon.pokemon.name}`s accuracy lowers.;";
+                fight.roundResult.battleActions.add(new MessageAction("${defendingFightPlayer.ownerPokemon.pokemon.name}`s accuracy lowers."))
             }
         }
     }

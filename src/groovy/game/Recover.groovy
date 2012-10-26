@@ -1,5 +1,8 @@
 package game
 
+import game.fight.MessageAction
+import game.fight.MoveAction
+
 /**
  * Created with IntelliJ IDEA.
  * User: kevinverhoef
@@ -13,7 +16,7 @@ class Recover {
     {
         // Voeg hp toe
 
-        if (attackFightPlayer.hp + recover > attackFightPlayer.maxHp)
+        if (attackFightPlayer.hp + recover > attackFightPlayer.maxHp)   // TODO is this working ? * -1 below
         {
             recover = attackFightPlayer.maxHp - attackFightPlayer.hp;
         }
@@ -22,7 +25,8 @@ class Recover {
         // turn negative
         healthSlideLogAction(fight, attackFightPlayer,recover * -1);
         // log
-        fight.log += "m:" + attackFightPlayer.ownerPokemon.pokemon.name + " recovers ${recover} hp.;";
+        fight.roundResult.battleActions.add(new MessageAction(attackFightPlayer.ownerPokemon.pokemon.name + " recovers ${recover} hp."))
+
     }
 
     public static void healthSlideLogAction(Fight fight, FightPlayer fightPlayer, int damage)
@@ -36,7 +40,8 @@ class Recover {
           else if (fightPlayer.Hp"} - $damage > fightPlayer.MaxHp"})
               $damage = fightPlayer.Hp"} - fightPlayer.MaxHp"};
           */
-        fightPlayer.fight.log += "a:${fightPlayer.playerNr}:${damage};";
+        fight.roundResult.battleActions.add(new MoveAction(damage, fightPlayer.playerNr))
+
     }
 
     /**

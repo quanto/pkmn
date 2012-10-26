@@ -1,5 +1,7 @@
 package game
 
+import game.fight.MessageAction
+
 /**
  * Created with IntelliJ IDEA.
  * User: kevinverhoef
@@ -18,7 +20,8 @@ class Paralyses {
             // Kijk of effected door paralysis
             if (r.nextInt(4)+1 == 2)
             {
-                fight.log += "m:${fightPlayer.ownerPokemon.pokemon.name} is paralyzed. It can`t move.;";
+                fight.roundResult.battleActions.add(new MessageAction("${fightPlayer.ownerPokemon.pokemon.name} is paralyzed. It can`t move."))
+
                 // geen move
                 Moves.setMove(fight,fightPlayer,null)
             }
@@ -33,13 +36,14 @@ class Paralyses {
             {
                 Recover.removeAllStatusAfflictions(defendingFightPlayer);
                 defendingFightPlayer.paralysis = 1;
-                fight.log += "m:" + defendingFightPlayer.ownerPokemon.pokemon.name + " is paralyzed.;";
+                fight.roundResult.battleActions.add(new MessageAction(defendingFightPlayer.ownerPokemon.pokemon.name + " is paralyzed."))
+
                 moveInfo.paralysisActionSucces = true;
             }
             else
             {
                 if (moveInfo.attackMoveeffectProb == 0 || moveInfo.attackMoveeffectProb == 100)
-                    fight.log += "m:" + defendingFightPlayer.ownerPokemon.pokemon.name + " is already paralyzed.;";
+                    fight.roundResult.battleActions.add(new MessageAction(defendingFightPlayer.ownerPokemon.pokemon.name + " is already paralyzed."))
             }
         }
     }

@@ -1,6 +1,7 @@
 package game
 
 import game.items.PokeBall
+import game.fight.MessageAction
 
 class UseItem {
 
@@ -8,11 +9,11 @@ class UseItem {
 
         Item item = ownerItem.item
         if (!item.implemented){
-            fight.log = "m:You can not use item ${item.name} in battle.;";
+            fight.roundResult.personalActions.add(new MessageAction("You can not use item ${item.name} in battle."))
         }
         else {
 
-            fight.log = "m:${itemOwner.name} uses ${item.name}.;";
+            fight.roundResult.battleActions.add(new MessageAction("${itemOwner.name} uses ${item.name}."))
 
             // Try a PokeBall
             Double catchFactor = PokeBall.throwBall(fight, itemOwner, item, attackingFightPlayer, defendingFightPlayer)

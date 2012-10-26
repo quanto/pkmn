@@ -1,12 +1,15 @@
 package game
 
+import game.fight.MessageAction
+
 class Money {
 
     public static void giveMoney(Fight fight, int money)
     {
         if (money > 0)
         {
-            fight.log += "m:You gained ${money} money.;"
+            fight.roundResult.battleActions.add(new MessageAction("You gained ${money} money."))
+
             Player player = fight.fightPlayer1.owner
             player.money += money
         }

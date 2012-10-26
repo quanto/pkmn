@@ -1,6 +1,7 @@
 package game
 
 import map.View
+import game.fight.MessageAction
 
 class BattleController {
 
@@ -92,7 +93,7 @@ class BattleController {
 //                    {
 
                 if (ownerMove.ppLeft <= 0){
-                    fight.log = "m:No pp left for move ${ownerMove.move.name}.;" // :TODO real message
+                    fight.roundResult.personalActions.add(new MessageAction("No pp left for move ${ownerMove.move.name}."))
                 }
                 else {
                     ownerMove.ppLeft -= 1
@@ -161,7 +162,7 @@ class BattleController {
             render text: g.render(template: 'pokemonList',model: [mustChoose:true,ownerPokemonList:ownerPokemonList,fightPlayer:fightPlayer])
         }
         else if (params.items != null){
-            render template: "itemList", model : [fight:fight,ownerItems:player.ownerItems]
+            render template: "itemList", model : [fight:fight,ownerItems:player.ownerItems.findAll{ it in UsableItem }]
         }
         else if (params.fight != null && !fight.battleOver)
         {
@@ -189,7 +190,6 @@ class BattleController {
 
         OwnerPokemon ownerPokemon = OwnerPokemon.findByOwnerAndPartyPositionAndHpGreaterThan(player,params.id,0)
         if (ownerPokemon){
-            fight.log = ""
             Stats.saveStats(fight.fightPlayer1, false);
             fight.fightPlayer1 = Stats.setBaseStats(fight,ownerPokemon, PlayerType.user, 1)
             Moves.setMove(fight,fight.fightPlayer1, null, false)

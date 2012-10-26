@@ -1,5 +1,7 @@
 package game
 
+import game.fight.MessageAction
+
 class StatusMove {
 
     public static void getMoveInfo(MoveInfo moveInfo, Move move, Fight fight, FightPlayer attackingFightPlayer, FightPlayer defendingFightPlayer){
@@ -240,9 +242,11 @@ class StatusMove {
             moveInfo.effectAction = true;
             moveInfo.stageAction = true;
             moveInfo.addToAttackStage = 6;
-            fight.{"player" . ap . "Hp"} = round(fight.{"player" . ap . "Hp"} - (fight.{"player" . ap . "MaxHp"} / 2));
 
-            fight.log += {"pokemonip"}.name . " cut its own hp and maximized attack.;";
+            attackingFightPlayer.hp = Math.round(attackingFightPlayer.hp - (attackingFightPlayer.maxHp / 2))
+
+            fight.roundResult.battleActions.add(new MessageAction("${attackingFightPlayer.ownerPokemon.pokemon.name} cut its own hp and maximized attack."))
+
         }
         // Increases the user's Attack by one stage. 
         else if (move.name == "Sharpen")
@@ -292,12 +296,13 @@ class StatusMove {
         else if (move.name == "Focus Energy")
         {
             Critical.addCriticalStage(1,attackingFightPlayer)
-            fight.log += "${attackingFightPlayer.ownerPokemon.pokemon.name} takes a deep breath and focuses to raise the critical-hit ratio of its attacks.;";
+            fight.roundResult.battleActions.add(new MessageAction("${attackingFightPlayer.ownerPokemon.pokemon.name} takes a deep breath and focuses to raise the critical-hit ratio of its attacks."))
+
         }
         // Doesn't do ANYTHING. 
         else if (move.name == "Splash")
         {
-            fight.log += "${attackingFightPlayer.ownerPokemon.pokemon.name} splashes.;";
+            fight.roundResult.battleActions.add(new MessageAction("${attackingFightPlayer.ownerPokemon.pokemon.name} splashes."))
         }
         // Decreases opponent's Accuracy by one stage, if it hits.
         else if (move.name == "Flash" || move.name == "Kinesis" || move.name == "Sand-attack" || move.name == "Smokescreen")
@@ -389,8 +394,7 @@ class StatusMove {
                 ownerPokemon.poison = 0
                 ownerPokemon.save()
             }
-
-            fight.log += "All status problems in ${attackingFightPlayer.owner.name}`s party have been cured.;";
+            fight.roundResult.battleActions.add(new MessageAction("All status problems in ${attackingFightPlayer.owner.name}`s party have been cured."))
         }
         
     }

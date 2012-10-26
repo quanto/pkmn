@@ -5,6 +5,7 @@ import game.MoveInfo
 import game.FightPlayer
 import game.OwnerPokemon
 import game.Recover
+import game.fight.MessageAction
 
 class Burn {
 
@@ -18,20 +19,21 @@ class Burn {
             {
                 if (defendingOwnerPokemon.pokemon.type1 == "fire" || defendingOwnerPokemon.pokemon.type2 == "fire")
                 {
-                    fight.log += "m:" + defendingOwnerPokemon.pokemon.name  + " is immune to fire.;";
+                    fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " is immune to fire."))
                 }
                 else
                 {
                     Recover.removeAllStatusAfflictions(defendingFightPlayer);
                     defendingFightPlayer.burn = 1;
-                    fight.log += "m:" + defendingOwnerPokemon.pokemon.name  + " is burning.;";
+
+                    fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " is burning."))
                     moveInfo.burnActionSucces = true;
                 }
             }
             else
             {
                 if (moveInfo.attackMoveeffectProb == 0 || moveInfo.attackMoveeffectProb == 100)
-                    fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is already burning.;";
+                    fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " is already burning."))
             }
         }
     }

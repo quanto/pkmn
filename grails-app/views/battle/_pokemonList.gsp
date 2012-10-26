@@ -16,6 +16,6 @@
     </g:each>
 </table>
 
-<g:if test="${mustChoose}">
+<g:if test="${!mustChoose}">
     <a href='' onclick="return getMenu('')">Back</a>
 </g:if>

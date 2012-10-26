@@ -2,6 +2,8 @@ package game
 
 import game.fight.status.Poison
 import game.fight.status.Burn
+import game.fight.RoundResult
+import game.fight.MessageAction
 
 class Battle {
 
@@ -14,9 +16,9 @@ class Battle {
         boolean player1first = BattleOrder.player1First(fight)
         FightPlayer fightPlayer1 = fight.fightPlayer1
         FightPlayer fightPlayer2 = fight.fightPlayer2
-        Random random = new Random()
 
-
+        // New round, start with a new object
+        fight.roundResult = new RoundResult()
 
         if (player1first)
         {
@@ -93,7 +95,8 @@ class Battle {
             // 1/8ste schade
             int burnDamage = Math.floor(attackFightPlayer.maxHp / 8);
             attackFightPlayer.hp = attackFightPlayer.hp - burnDamage;
-            fight.log += "m:" + attackFightPlayer.ownerPokemon.pokemon.name + " is hurt by its burn burnDamage.;"
+            fight.roundResult.battleActions.add(new MessageAction(attackFightPlayer.ownerPokemon.pokemon.name + " is hurt by its burn burnDamage."))
+
             Recover.healthSlideLogAction(fight, attackFightPlayer,burnDamage);
         }
 
@@ -103,7 +106,7 @@ class Battle {
             // 1/8ste schade
             int poisonDamage = Math.floor(attackFightPlayer.maxHp / 8);
             attackFightPlayer.hp = attackFightPlayer.hp - poisonDamage;
-            fight.log += "m:" + attackFightPlayer.ownerPokemon.pokemon.name + " hurts from poison poisonDamage.;";
+            fight.roundResult.battleActions.add(new MessageAction(attackFightPlayer.ownerPokemon.pokemon.name + " hurts from poison poisonDamage."))
             Recover.healthSlideLogAction(fight, attackFightPlayer,poisonDamage);
         }
 
@@ -113,7 +116,8 @@ class Battle {
             // steeds verhoogt met 1/16
             int badlyPoisonDamage = Math.floor(attackFightPlayer.maxHp / 16 * attackFightPlayer.badlypoisond);
             attackFightPlayer.hp = attackFightPlayer.hp - badlyPoisonDamage;
-            fight.log += "m:" + attackFightPlayer.ownerPokemon.pokemon.name + " hurts from badly poison badlyPoisonDamage.;";
+
+            fight.roundResult.battleActions.add(new MessageAction(attackFightPlayer.ownerPokemon.pokemon.name + " hurts from badly poison badlyPoisonDamage."))
             Recover.healthSlideLogAction(fight, attackFightPlayer,badlyPoisonDamage);
             // verhoog status
             attackFightPlayer.badlypoisond = attackFightPlayer.badlypoisond + 1;
@@ -126,7 +130,8 @@ class Battle {
         if (fightPlayer.hp <= 0)
         {
             fightPlayer.hp = 0;
-            fight.log += "m:" + fightPlayer.ownerPokemon.pokemon.name + " fainted.;";
+
+            fight.roundResult.battleActions.add(new MessageAction(fightPlayer.ownerPokemon.pokemon.name + " fainted."))
             // stop attacks
             fight.fightPlayer1.move = null;
             fight.fightPlayer2.move = null;
@@ -139,7 +144,8 @@ class Battle {
     static void win(Fight fight, boolean giveEXP = true)
     {
         // battle is over speler 1 wint
-        fight.log += "m:" + fight.fightPlayer1.owner.name + " wins.;";
+
+        fight.roundResult.battleActions.add(new MessageAction(fight.fightPlayer1.owner.name + " wins."))
 
         if(giveEXP){
             EXP.distributeExp(fight,fight.fightPlayer1,fight.fightPlayer2,true);
@@ -232,7 +238,8 @@ class Battle {
                 player.positionY = recoverAction.positionY
                 player.save()
 
-                fight.log += "m:You lose, your pokemon have been recovered in town.;";
+
+                fight.roundResult.battleActions.add(new MessageAction("You lose, your pokemon have been recovered in town."))
                 Recover.recoverParty(fight.fightPlayer1.owner)
                 fight.battleOver = true
 
@@ -258,7 +265,7 @@ class Battle {
             // Gevechts telling
             fightPlayer1.owner.pvnBattlesWon += 1;
 
-            fight.log += "m:Defeated NPC!.;";
+            fight.roundResult.battleActions.add(new MessageAction("Defeated NPC!"))
 
             // Don't give exp. It was already given.
             win(fight, false)
@@ -272,7 +279,7 @@ class Battle {
             if (npc.npcDefeatedMessage){
                 npc.npcDefeatedMessage.split(';').each{
                     if (it){
-                        fight.log += "m:${it};"
+                        fight.roundResult.battleActions.add(new MessageAction(it))
                     }
                 }
             }
@@ -289,7 +296,7 @@ class Battle {
         else
         {
             // Log de switch
-            fight.log += "m:NPC brings out " + nextOwnerPokemon.pokemon.name + ".;";
+            fight.roundResult.battleActions.add(new MessageAction("NPC brings out " + nextOwnerPokemon.pokemon.name + "."))
 
             fight.fightPlayer2 = Stats.setBaseStats(fight,nextOwnerPokemon, PlayerType.npc, 2);
 
@@ -318,7 +325,8 @@ class Battle {
 
             moveInfo.criticalHitStage += attackFightPlayer.criticalStage;
 
-            fight.log += "m:" + attackFightPlayer.ownerPokemon.pokemon.name + " uses " + attackMove.name + ".;";
+
+            fight.roundResult.battleActions.add(new MessageAction(attackFightPlayer.ownerPokemon.pokemon.name + " uses " + attackMove.name + "."))
 
             if (attackMove.category == "physical move" || attackMove.category == "special move")
             {
@@ -416,8 +424,9 @@ class Battle {
                         }
                         else if (moveInfo.oneHitKO)
                         {
-                            defendingFightPlayer.hp = 0;
-                            fight.log += "m:It\'s a one hit KO!.;";
+                            defendingFightPlayer.hp = 0
+
+                            fight.roundResult.battleActions.add(new MessageAction("It's a one hit KO!"))
                         }
 
                         if (!moveInfo.oneHitKO)
@@ -426,7 +435,7 @@ class Battle {
                             if (CriticalHit.tryCriticalHit(moveInfo.criticalHitStage))
                             {
                                 moveInfo.damage = moveInfo.damage * 2;
-                                fight.log += "m:" + "Critical hit!.;";
+                                fight.roundResult.battleActions.add(new MessageAction("Critical hit!"))
                             }
 
                             moveInfo.damage = Math.floor(moveInfo.damage);
@@ -451,14 +460,15 @@ class Battle {
                             {
                                 // bericht effectiveness
                                 if (moveInfo.effectiveness == 0)
-                                    fight.log += "m:" + "It has no effect.;";
+                                    fight.roundResult.battleActions.add(new MessageAction("It has no effect."))
                                 else if (moveInfo.effectiveness == 0.25 || moveInfo.effectiveness == 0.5)
-                                    fight.log += "m:" + "It`s not very effective.;";
+                                    fight.roundResult.battleActions.add(new MessageAction("It`s not very effective."))
                                 else if (moveInfo.effectiveness == 2 || moveInfo.effectiveness == 4)
-                                    fight.log += "m:" + "It`s super effective.;";
+                                    fight.roundResult.battleActions.add(new MessageAction("It`s super effective."))
                             }
 
-                            fight.log += "m:" + attackOwnerPokemon.pokemon.name + " hits " + defendingOwnerPokemon.pokemon.name + " with " + attackMove.name + " ${moveInfo.damage} dmg.;";
+
+                            fight.roundResult.battleActions.add(new MessageAction(attackOwnerPokemon.pokemon.name + " hits " + defendingOwnerPokemon.pokemon.name + " with " + attackMove.name + " ${moveInfo.damage} dmg."))
                             Recover.healthSlideLogAction(fight, defendingFightPlayer,moveInfo.damage);
                             // Doe schade
                             defendingFightPlayer.hp = defendingFightPlayer.hp - moveInfo.damage;
@@ -467,15 +477,16 @@ class Battle {
                             {
                                 moveInfo.damage = Math.floor(moveInfo.damage / 100 * moveInfo.recoil);
                                 attackFightPlayer.hp = Math.round(attackFightPlayer.hp - moveInfo.damage);
-                                fight.log += "m:" + attackOwnerPokemon.pokemon.name + " hurts from recoil damage. ${moveInfo.damage} dmg.;";
+
+                                fight.roundResult.battleActions.add(new MessageAction(attackOwnerPokemon.pokemon.name + " hurts from recoil damage. ${moveInfo.damage} dmg."))
                                 Recover.healthSlideLogAction(fight, attackFightPlayer,moveInfo.damage);
-                                fight.log += "m:Recoil did ${moveInfo.damage} dmg.;";
+                                fight.roundResult.battleActions.add(new MessageAction("Recoil did ${moveInfo.damage} dmg."))
                             }
 
                             // Bericht bij loop
                             if (moveInfo.loop > 1 && moveInfo.loop == (i + 1))
                             {
-                                fight.log += "m:" + "Hits " + (i + 1) + " times;";
+                                fight.roundResult.battleActions.add(new MessageAction("Hits " + (i + 1) + " times"))
                             }
 
                         }
@@ -487,7 +498,7 @@ class Battle {
                     else
                     {
                         // Gemist
-                        fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " avoided the attack.;";
+                        fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " avoided the attack."))
                     }
 
                 }
@@ -497,8 +508,8 @@ class Battle {
             // Kijk of een aanval een status opheft
             if (attackMovetype == "fire" && defendingFightPlayer.freeze == 1)
             {
-                defendingFightPlayer.freeze == 0;
-                fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is no longer frozen.;";
+                defendingFightPlayer.freeze == 0
+                fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " is no longer frozen."))
             }
 
             // set hold move
@@ -579,7 +590,7 @@ class Battle {
                     else
                     {
                         if (moveInfo.attackMoveeffectProb == 0 || moveInfo.attackMoveeffectProb == 100)
-                            fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " fails to recover.;";
+                            fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " fails to recover."))
                     }
                 }
 
@@ -603,14 +614,15 @@ class Battle {
             // bericht bij falen van effect
             else if (moveInfo.effectAction && !moveSucces)
             {
-                fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " fails to perform move.;";
+                fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " fails to perform move."))
             }
 
             // Flinch
             if (moveInfo.flinch && firstMove)
             {
                 defendingFightPlayer.move = null
-                fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " flinched!.;";
+
+                fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " flinched!"))
             }
         }
 
@@ -620,7 +632,8 @@ class Battle {
             // holding
             if (attackFightPlayer.holdMove != 0)
             {
-                fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is being traped by " + attackMove.name + ".;";
+
+                fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " is being traped by " + attackMove.name + "."))
                 defendingFightPlayer.move = null;
             }
 
@@ -629,7 +642,8 @@ class Battle {
             {
                 if (random.nextInt(4) == 1)
                 {
-                    fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is paralyzed. It cant move.;";
+
+                    fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " is paralyzed. It cant move."))
                     defendingFightPlayer.move = null;
                 }
             }
@@ -637,18 +651,19 @@ class Battle {
             {
                 if (random.nextInt(2) == 1)
                 {
-                    fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is confused.;";
+
+                    fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " is confused."))
                     defendingFightPlayer.move = null;
                 }
             }
             if (moveInfo.sleepActionSucces)
             {
-                fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is a sleep.;";
+                fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " is a sleep."))
                 defendingFightPlayer.move = null;
             }
             if (moveInfo.freezeActionSucces)
             {
-                fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is frozen solid!;";
+                fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " is frozen solid!"))
                 defendingFightPlayer.move= null;
             }
         }

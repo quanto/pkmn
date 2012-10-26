@@ -1,5 +1,7 @@
 package game
 
+import game.fight.MessageAction
+
 class Freeze {
 
     public static void checkFreeze(Fight fight, FightPlayer fightPlayer)
@@ -11,12 +13,15 @@ class Freeze {
             // Kijk of freeze ophoud
             if (r.nextInt(10)+1 == 1)
             {
-                fightPlayer.fight.log += "m:${fightPlayer.ownerPokemon.pokemon.name} is no longer frozen.;";
+                fight.roundResult.battleActions.add(new MessageAction("${fightPlayer.ownerPokemon.pokemon.name} is no longer frozen."))
+
                 fightPlayer.freeze = 0;
             }
             else
             {
-                fightPlayer.fight.log += "m:${fightPlayer.ownerPokemon.pokemon.name} is frozen solid!;";
+
+                fight.roundResult.battleActions.add(new MessageAction("${fightPlayer.ownerPokemon.pokemon.name} is frozen solid!"))
+
                 Moves.setMove(fight,fightPlayer,null)
             }
         }
@@ -33,20 +38,22 @@ class Freeze {
             {
                 if (defendingOwnerPokemon.pokemon.type1 == "ice" || defendingOwnerPokemon.pokemon.type2 == "ice")
                 {
-                    fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is immune to freeze.;";
+                    fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " is immune to freeze."))
+
                 }
                 else
                 {
                     Recover.removeAllStatusAfflictions(defendingFightPlayer);
                     defendingFightPlayer.freeze = 1;
-                    fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is frozen.;";
+                    fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " is frozen."))
+
                     moveInfo.freezeActionSucces = true
                 }
             }
             else
             {
                 if (moveInfo.attackMoveeffectProb == 0 || moveInfo.attackMoveeffectProb == 100)
-                    fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is already frozen.;";
+                    fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " is already frozen."))
             }
         }
     }

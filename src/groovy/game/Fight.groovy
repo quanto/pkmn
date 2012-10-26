@@ -1,12 +1,7 @@
 package game
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 03-10-12
- * Time: 13:36
- * To change this template use File | Settings | File Templates.
- */
+import game.fight.RoundResult
+
 class Fight {
 
     int nr
@@ -16,6 +11,8 @@ class Fight {
     List<OwnerPokemon> usedPokemon = [] // The used pokemon in a round to who we should give Exp to
 
     String log = ""
+    RoundResult roundResult = new RoundResult()
+
     String logHistory = ""
 
     BattleType battleType

@@ -1,5 +1,7 @@
 package game
 
+import game.fight.MessageAction
+
 class FightMove {
     
     public static void getMoveInfo(MoveInfo moveInfo, Move move, Fight fight, FightPlayer attackingFightPlayer, FightPlayer defendingFightPlayer){
@@ -66,7 +68,7 @@ class FightMove {
             else if (rand == 10)
                 moveInfo.attackPower = 150
 
-            fight.log += "Magnitude level rand.;";
+            fight.roundResult.battleActions.add(new MessageAction("Magnitude level ${rand}."))
         }
         // May cause poison.
         else if (move.name == "Gunk Shot" || move.name == "Poison Jab" || move.name == "Poison Sting" || move.name == "Sludge" || move.name == "Sludge Bomb" || move.name == "Smog")
@@ -429,7 +431,7 @@ class FightMove {
         {
             if (defendingFightPlayer.sleep == 0)
             {
-                fight.log += "Dream Eater can only be used at an sleeping target.;";
+                fight.roundResult.battleActions.add(new MessageAction("Dream Eater can only be used at an sleeping target."))
                 moveInfo.canNotUseAction = true;
             }
         }
@@ -441,13 +443,13 @@ class FightMove {
                 moveInfo.defaultAttackPower = false;
                 moveInfo.attackPower = move.power * 2;
                 defendingFightPlayer.sleep = 0;
-                fight.log = "${defendingFightPlayer.ownerPokemon.pokemon.name} wakes up.;";
+                fight.roundResult.battleActions.add(new MessageAction("${defendingFightPlayer.ownerPokemon.pokemon.name} wakes up."))
             }
         }
         // Trump Card special move The lower the PP, the higher the power.
         else if (move.name == "Trump Card")
         {
-            def ownerMoves = OwnerMove.findAllByOwnerAndPartyPositionGreaterThen(attackingFightPlayer.owner,0)
+            def ownerMoves = OwnerMove.findAllByOwnerAndPartyPositionGreaterThen(attackingFightPlayer.owner,0)      // :TODO fix
             int ppLeft = ownerMoves.sum { it.move.name == "Trump Card"?it.ppLeft:0 }
 
             moveInfo.defaultAttackPower = false
@@ -525,7 +527,7 @@ class FightMove {
         {
             if (attackingFightPlayer.lastMove?.name != "Solarbeam")
             {
-                fight.log += "${attackingFightPlayer.ownerPokemon.pokemon.name} gathers light.;";
+                fight.roundResult.battleActions.add(new MessageAction("${attackingFightPlayer.ownerPokemon.pokemon.name} gathers light.;"))
                 moveInfo.damageAction = false // do nothing
             }
             else

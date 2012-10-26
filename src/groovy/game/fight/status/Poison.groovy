@@ -5,6 +5,7 @@ import game.MoveInfo
 import game.Fight
 import game.FightPlayer
 import game.OwnerPokemon
+import game.fight.MessageAction
 
 class Poison {
 
@@ -19,13 +20,13 @@ class Poison {
             {
                 if (defendingOwnerPokemon.pokemon.type1 == "poison" || defendingOwnerPokemon.pokemon.type2== "poison" || defendingOwnerPokemon.pokemon.type1 == "steel" || defendingOwnerPokemon.pokemon.type2 == "steel")
                 {
-                    fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is immune to poison.;";
+                    fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " is immune to poison."))
                 }
                 else
                 {
                     Recover.removeAllStatusAfflictions(defendingFightPlayer);
                     defendingFightPlayer.poison = 1
-                    fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is poisoned.;";
+                    fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " is poisoned."))
                     moveInfo.poisonActionSucces = true;
                 }
             }
@@ -33,7 +34,7 @@ class Poison {
             {
                 // Bericht bij move die bedoelt is om te poisenen
                 if (moveInfo.attackMoveeffectProb == 0 || moveInfo.attackMoveeffectProb == 100)
-                    fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is already poisoned.;";
+                fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " is already poisoned."))
             }
         }
     }
@@ -49,14 +50,14 @@ class Poison {
             {
                 if (defendingOwnerPokemon.pokemon.type1 == "poison" || defendingOwnerPokemon.pokemon.type2 == "poison" || defendingOwnerPokemon.pokemon.type1 == "steel" || defendingOwnerPokemon.pokemon.type2 == "steel")
                 {
-                    fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is immune to poison.;";
+                    fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " is immune to poison."))
                 }
                 else
                 {
                     Recover.removeAllStatusAfflictions(defendingFightPlayer);
                     // Zet de status
                     defendingFightPlayer.badlypoisond = 1;
-                    fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is badly poisoned.;";
+                    fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " badly poisoned."))
                     moveInfo.badlypoisondActionSucces = true;
                 }
             }
@@ -64,7 +65,7 @@ class Poison {
             {
                 // Bericht bij move die bedoelt is om te poisenen
                 if (moveInfo.attackMoveeffectProb == 0 || moveInfo.attackMoveeffectProb == 100)
-                    fight.log += "m:" + defendingOwnerPokemon.pokemon.name + " is already poisoned.;";
+                    fight.roundResult.battleActions.add(new MessageAction(defendingOwnerPokemon.pokemon.name + " is already poisoned."))
             }
         }
     }

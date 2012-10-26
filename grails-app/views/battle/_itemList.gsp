@@ -13,4 +13,4 @@
 
 <p>
 
-<a href='index.php'>Back</a>
+<a href='' onclick="return getMenu('');">Back</a>

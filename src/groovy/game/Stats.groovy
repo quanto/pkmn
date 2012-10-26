@@ -1,5 +1,8 @@
 package game
 
+import game.fight.MessageAction
+import game.fight.SwitchAction
+
 /**
  * Created with IntelliJ IDEA.
  * User: kevinverhoef
@@ -16,10 +19,10 @@ class Stats {
     {
 
         if (ownerPokemon.owner){
-            fight.log += "m:${ownerPokemon.owner.name} brings out ${ownerPokemon.pokemon.name};"
+            fight.roundResult.battleActions.add(new MessageAction("${ownerPokemon.owner.name} brings out ${ownerPokemon.pokemon.name}"))
         }
         else {
-            fight.log += "m:A wild ${ownerPokemon.pokemon.name} appears;"
+            fight.roundResult.battleActions.add(new MessageAction("A wild ${ownerPokemon.pokemon.name} appears"))
         }
 
         // We should only track the used pokemon for users
@@ -73,9 +76,7 @@ class Stats {
                 playerNr: playerNr
         )
 
-        fight.log += "s:${playerNr}:" + ownerPokemon.pokemon.threeValueNumber() + ".gif;";
-        fight.log += "n:${playerNr}:" + ownerPokemon.pokemon.name + ";";
-        fight.log += "l:${playerNr}:" + ownerPokemon.level + ";";
+        fight.roundResult.battleActions.add(new SwitchAction(ownerPokemon, playerNr))
 
         return fightPlayer
     }

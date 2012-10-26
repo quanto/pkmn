@@ -1,5 +1,9 @@
 package game
 
+import game.fight.MessageAction
+import game.fight.DingAction
+import game.fight.EvolveAction
+
 class EXP {
 
     public static void giveEXP(Fight fight, FightPlayer ownfightPlayer, FightPlayer opponentfightPlayer, boolean isWild, int exp, boolean isCurrentOwnerPokemon)
@@ -16,10 +20,11 @@ class EXP {
             for (int i=0;i<lvlDiff;i++)
             {
                 int newLevelLoop = ownfightPlayer.ownerPokemon.level + i + 1
-                fight.log += "m:" + ownfightPlayer.ownerPokemon.pokemon.name + " grew to level ${newLevelLoop}!;";
+
+                fight.roundResult.battleActions.add(new MessageAction("${ownfightPlayer.ownerPokemon.pokemon.name} grew to level ${newLevelLoop}!"))
 
                 if (isCurrentOwnerPokemon){
-                    fight.log += "l:${ownfightPlayer.playerNr}:" + newLevelLoop + ";";
+                    fight.roundResult.battleActions.add(new DingAction(newLevelLoop,ownfightPlayer.playerNr))
                 }
 
                 Evolution evolution = Evolution.findByFromPokemonAndLevel(ownfightPlayer.ownerPokemon.pokemon,newLevelLoop)
@@ -27,11 +32,12 @@ class EXP {
 
                 if (evolution)
                 {
-                    fight.log += "m:" + ownfightPlayer.ownerPokemon.pokemon.name + " evolved into " + evolution.toPokemon.name + ".;";
+
+                    fight.roundResult.battleActions.add(new MessageAction(ownfightPlayer.ownerPokemon.pokemon.name + " evolved into " + evolution.toPokemon.name + "."))
 
                     if (isCurrentOwnerPokemon){
-                        fight.log += "n:${ownfightPlayer.playerNr}:" + evolution.toPokemon.name + ";";
-                        fight.log += "s:${ownfightPlayer.playerNr}:${evolution.toPokemon.threeValueNumber()}.gif;";
+                        fight.roundResult.battleActions.add(new EvolveAction(ownfightPlayer.ownerPokemon.pokemon, evolution.toPokemon.name))
+
                     }
                     ownfightPlayer.ownerPokemon.pokemon = evolution.toPokemon
                 }
@@ -60,7 +66,8 @@ class EXP {
 
         fight.usedPokemon.each { OwnerPokemon ownerPokemon ->
             int expShare = Math.floor(exp / fight.usedPokemon.size())
-            fight.log += "m:" + ownerPokemon.pokemon.name + " gains ${expShare} exp.;"
+            fight.roundResult.battleActions.add(new MessageAction(ownerPokemon.pokemon.name + " gains ${expShare} exp."))
+
             boolean isCurrentOwnerPokemon = ownerPokemon.id == fight.fightPlayer1.ownerPokemon.id
             giveEXP(fight, ownfightPlayer, opponentfightPlayer, isWild, exp, isCurrentOwnerPokemon)
         }

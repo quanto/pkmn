@@ -1,5 +1,7 @@
 package game
 
+import game.fight.MessageAction
+
 /**
  * Created with IntelliJ IDEA.
  * User: kevinverhoef
@@ -17,7 +19,7 @@ class Confusion {
             // Geef bericht
             if (fightPlayer.confusion == 1)
             {
-                fight.log += "m:${fightPlayer.ownerPokemon.pokemon.name} is no longer confused.;";
+                fight.roundResult.battleActions.add(new MessageAction("${fightPlayer.ownerPokemon.pokemon.name} is no longer confused."))
                 fightPlayer.confusion = 0
 //                if (player != 2 || fight.battleType != "pve")
 //                {
@@ -32,7 +34,7 @@ class Confusion {
                 // 50 % kans dat geen aanval gedaan kan worden
                 if (r.nextInt(2) == 1)
                 {
-                    fight.log += "m:${fightPlayer.ownerPokemon.pokemon.name} is confused.;";
+                    fight.roundResult.battleActions.add(new MessageAction("${fightPlayer.ownerPokemon.pokemon.name} is confused."))
 
                     // verlaag beurten
                     fightPlayer.confusion -= 1;
@@ -51,20 +53,21 @@ class Confusion {
             // kijk of de tegenstander confusion is
             if (defendingFightPlayer.confusion > 0)
             {
-                fight.log += "m:" + defendingFightPlayer.ownerPokemon.pokemon.name  + " is already confused.;";
+                fight.roundResult.battleActions.add(new MessageAction("${defendingFightPlayer.ownerPokemon.pokemon.name} is already confused."))
             }
             // confusion
             else
             {
                 Recover.removeAllStatusAfflictions(defendingFightPlayer);
                 defendingFightPlayer.confusion = random.nextInt(3)+2;
-                fight.log += "m:" + defendingFightPlayer.ownerPokemon.pokemon.name  + " became confused.;";
+                fight.roundResult.battleActions.add(new MessageAction(defendingFightPlayer.ownerPokemon.pokemon.name  + " became confused."))
+
                 moveInfo.confusionActionSucces = true
                 if (moveInfo.effectActionOnBoth)
                 {
                     Recover.removeAllStatusAfflictions(attackFightPlayer);
                     attackFightPlayer.confusion = random.nextInt(3)+2;
-                    fight.log += "m:" + defendingFightPlayer.ownerPokemon.pokemon.name + " became confused.;";
+                    fight.roundResult.battleActions.add(new MessageAction(defendingFightPlayer.ownerPokemon.pokemon.name  + " became confused."))
                 }
             }
         }

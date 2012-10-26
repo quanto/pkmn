@@ -1,5 +1,7 @@
 package game
 
+import game.fight.MessageAction
+
 class Stage {
 
     public static void modifyStage(Fight fight, String statName, int addToStage, boolean selfStageAction, boolean openentStageAction, boolean effectSucces, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer)
@@ -15,7 +17,8 @@ class Stage {
                 {
                     attackFightPlayer["${statName}Stage"]  = 6;
                     if (!selfStageAction)
-                        fight.log += "m:${attackFightPlayer.ownerPokemon.pokemon.name}`s ${statName} went up.;";
+                        fight.roundResult.battleActions.add(new MessageAction("${attackFightPlayer.ownerPokemon.pokemon.name}`s ${statName} went up."))
+
                 }
                 else if ((attackFightPlayer["${statName}Stage"]  + addToStage) == -6)
                 {
@@ -24,7 +27,7 @@ class Stage {
                 else
                 {
                     if (!selfStageAction)
-                        fight.log += "m:${attackFightPlayer.ownerPokemon.pokemon.name}`s ${statName} can`t go up anymore.;";
+                        fight.roundResult.battleActions.add(new MessageAction("${attackFightPlayer.ownerPokemon.pokemon.name}`s ${statName} can`t go up anymore."))
                 }
             }
             else
@@ -32,7 +35,8 @@ class Stage {
                 attackFightPlayer["${statName}Stage"]  = attackFightPlayer["${statName}Stage"]  + addToStage;
 
                 if (!selfStageAction)
-                    fight.log += "m:${attackFightPlayer.ownerPokemon.pokemon.name}`s ${statName} went up.;";
+                    fight.roundResult.battleActions.add(new MessageAction("${attackFightPlayer.ownerPokemon.pokemon.name}`s ${statName} went up."))
+
             }
         }
         else if ((addToStage < 0 || openentStageAction) && effectSucces)
@@ -46,7 +50,9 @@ class Stage {
                     if ((defendingFightPlayer["${statName}Stage"] + addToStage) <= 6)
                     {
                         defendingFightPlayer["${statName}Stage"] += addToStage;
-                        fight.log += "m:${attackFightPlayer.ownerPokemon.pokemon.name}`s ${statName} went up.;";
+
+                        fight.roundResult.battleActions.add(new MessageAction("${defendingFightPlayer.ownerPokemon.pokemon.name}`s ${statName} went up."))
+
                     }
                     else
                     {
@@ -56,17 +62,20 @@ class Stage {
                 else if ((defendingFightPlayer["${statName}Stage"] + addToStage) == -6)
                 {
                     defendingFightPlayer["${statName}Stage"] = -6;
-                    fight.log += "m:${defendingFightPlayer.ownerPokemon.pokemon.name}`s ${statName} lowers.;";
+                    fight.roundResult.battleActions.add(new MessageAction("${defendingFightPlayer.ownerPokemon.pokemon.name}`s ${statName} lowers."))
+
                 }
                 else
                 {
-                    fight.log += "m:${defendingFightPlayer.ownerPokemon.pokemon.name}`s ${statName} can`t lower anymore.;";
+                    fight.roundResult.battleActions.add(new MessageAction("${defendingFightPlayer.ownerPokemon.pokemon.name}`s ${statName} can`t lower anymore."))
+
                 }
             }
             else
             {
                 defendingFightPlayer["${statName}Stage"] = defendingFightPlayer["${statName}Stage"] + addToStage;
-                fight.log += "m:${defendingFightPlayer.ownerPokemon.pokemon.name}`s ${statName} lowers.;";
+                fight.roundResult.battleActions.add(new MessageAction("${defendingFightPlayer.ownerPokemon.pokemon.name}`s ${statName} lowers."))
+
             }
         }
     }

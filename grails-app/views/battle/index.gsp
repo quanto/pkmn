@@ -300,10 +300,10 @@
     <table>
         <tr>
             <td>
-                <img id="player1image" src='${resource(uri:'')}/images/pkmn/back${fight.fightPlayer1.ownerPokemon.pokemon.threeValueNumber()}.gif'>
+                <img id="player1image" height="160" src='${resource(uri:'')}/images/pkmn/back${fight.fightPlayer1.ownerPokemon.pokemon.threeValueNumber()}.gif'>
             </td>
             <td>
-                <img id="player2image" src='${resource(uri:'')}/images/pkmn/front${fight.fightPlayer2.ownerPokemon.pokemon.threeValueNumber()}.gif'>
+                <img id="player2image" height="160" src='${resource(uri:'')}/images/pkmn/front${fight.fightPlayer2.ownerPokemon.pokemon.threeValueNumber()}.gif'>
             </td>
         </tr>
         <tr>

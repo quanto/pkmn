@@ -10,9 +10,9 @@ class FightFactoryService {
 
     void endFight(Fight fight){
         fights.remove(fight)
-        FightData fightData = new FightData(
-                fightLog :fight.logHistory + fight.log
-        )
+//        FightData fightData = new FightData(
+//                fightLog :fight.logHistory + fight.log
+//        )   :TODO fix
         fightData.save()
     }
 
