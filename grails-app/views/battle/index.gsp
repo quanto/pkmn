@@ -305,12 +305,14 @@
     </head>
 <body>
 
-    <table>
+    <table style="background-image: url('${resource(uri:'')}/images/backgrounds/bg2.png');background-repeat: no-repeat;">
         <tr>
             <td colspan="2">
+                <div style="height:69px;"></div>
                 <img id="player1image" height="160" src='${resource(uri:'')}/images/pkmn/back${fight.fightPlayer1.ownerPokemon.pokemon.threeValueNumber()}.gif'>
             </td>
-            <td colspan="2">
+            <td colspan="2" valign="top">
+                <div style="height:15px;"></div>
                 <img id="player2image" height="160" src='${resource(uri:'')}/images/pkmn/front${fight.fightPlayer2.ownerPokemon.pokemon.threeValueNumber()}.gif'>
             </td>
         </tr>
