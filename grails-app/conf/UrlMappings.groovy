@@ -26,7 +26,7 @@ class UrlMappings {
 			}
 		}
 
-		"/"(controller:'battleTest')
+		"/"(controller:'game')
 		"500"(view:'/error')
 	}
 }
