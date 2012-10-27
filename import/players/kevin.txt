@@ -12,9 +12,9 @@ Glooming forest center
 6
 6
 20
-627
+628
 ShowMap
-52
+53
 2
 14
 3
@@ -55,7 +55,7 @@ false
 19
 Male
 1
-3809
+3818
 18
 </ownerPokemon>
 <ownerMove>
@@ -64,7 +64,7 @@ Bubble
 </ownerMove>
 <ownerMove>
 Tackle
-16
+15
 </ownerMove>
 <ownerMove>
 Water Gun

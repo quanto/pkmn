@@ -17,12 +17,12 @@
         body
         {
             font-family:verdana;
-            font-size:14px;
+            font-size:16px;
         }
 
         table
         {
-            font-size:14px;
+            font-size:16px;
         }
 
         table td
@@ -40,14 +40,10 @@
     <script type="text/javascript">
 
         // Player variables
-        var player1maxHealth = ${fight.fightPlayer1.maxHp};
-        var player1health = ${fight.fightPlayer1.hp}; // Health after actions
-        var player2maxHealth = ${fight.fightPlayer2.maxHp};
-        var player2health = ${fight.fightPlayer2.hp};
-        var player1pokemonName = "" // "${fight.fightPlayer1.ownerPokemon.pokemon.name}";
-        var player2pokemonName = "" // ${fight.fightPlayer2.ownerPokemon.pokemon.name}";
-        var player1pokemonLevel = ${fight.fightPlayer1.level};
-        var player2pokemonLevel = ${fight.fightPlayer2.level};
+        var pokemon = new Array()
+        <g:each in="${[fight.fightPlayer1,fight.fightPlayer2]}" var="fightPlayer">
+            pokemon[${fightPlayer.playerNr}] ={playerNr:${fightPlayer.playerNr},name:"${fightPlayer.ownerPokemon.pokemon.name}",level:${fightPlayer.level},maxHealth:${fightPlayer.maxHp},health:${fightPlayer.hp}};
+        </g:each>
 
         //a:1:10;m:Doing 10dmg again;a:1:10;m:bla fainted;
         var string = "";
@@ -184,9 +180,12 @@
 
         function updateUI()
         {
+            for (var playerNr=1;playerNr<=2;playerNr++){
+                $("#player" + playerNr + "pokemonName").html(pokemon[playerNr].name + "<br>lv. " + pokemon[playerNr].level);
+                $("#player" + playerNr + "maxhp").text(pokemon[playerNr].maxHealth)
+                $("#player" + playerNr + "hp").text(pokemon[playerNr].health)
+            }
             // set the pokemon
-            $("#player1pokemonName").html(player1pokemonName + "<br>lv. " + player1pokemonLevel);
-            $("#player2pokemonName").html(player2pokemonName + "<br>lv. " + player2pokemonLevel);
         }
 
         function prepareActions()
@@ -198,7 +197,7 @@
 
             currentAction = 0;
 
-            updateUI();
+
 
             for (var i=0;i<combatValues.length - 1;i++)
             {
@@ -210,16 +209,20 @@
                     var player = value.substring(0,1);
                     var hpValue = value.substring(2,value.length);
 
-                    eval("player" + player + "health += parseInt(hpValue);");
+
+                    eval("pokemon[" + player + "].health += parseInt(hpValue);");
                 }
             }
 
-            if (player2health > player2maxHealth)
-                player2health = player2maxHealth;
-            if (player1health > player1maxHealth)
-                player1health = player1maxHealth;
+
+
+//            if (health[1] > maxHealth[1])
+//                health[1] = maxHealth[1];
+//            if (health[2] > maxHealth[2])
+//                health[2] = maxHealth[2];
 
             // set hp before fight
+            updateUI();
             setHP();
         }
 
@@ -234,31 +237,24 @@
             }
         }
 
-        function slideHP(HPvalue,player)
+        function slideHP(HPvalue,playerNr)
         {
-            if (player == 1)
-            {
-                player1health = parseInt(player1health) - parseInt(HPvalue);
 
-                var barLength = calcBarLength(player1maxHealth, player1health);
+            pokemon[playerNr].health = parseInt(pokemon[playerNr].health) - parseInt(HPvalue);
 
-                $('#player1health').animate({
-                    width: barLength + 'px'
-                });
-
-            }
-            else
-            {
-                player2health = parseInt(player2health) - parseInt(HPvalue);
-
-                var barLength = calcBarLength(player2maxHealth, player2health);
+            var barLength = calcBarLength(pokemon[playerNr].maxHealth, pokemon[playerNr].health);
 
 
-                $('#player2health').animate({
-                    width: barLength + 'px'
-                });
+            $('#player' + playerNr + 'healthbar').animate({
+                width: barLength + 'px'
+            },{
+                duration: 1000,
+                step: function( currentLeft ){
+                    $("#player" + playerNr + "hp").text(calcHpFromBar(pokemon[playerNr].maxHealth,currentLeft))
+                    $('#player' + playerNr + 'healthbar').css("background-color",getColor(currentLeft));
 
-            }
+                }
+            });
         }
 
         function getColor(healthScale)
@@ -266,17 +262,19 @@
             var color = "green";
             if (healthScale <= 50)
                 color = "yellow";
+            if (healthScale <= 15)
+                color = "red";
             return color;
         }
 
         function setHP()
         {
-            var player1scale = calcBarLength(player1maxHealth, player1health);
-            var player2scale = calcBarLength(player2maxHealth, player2health);
-            $('#player1health').css("width",player1scale + 'px');
-            $('#player1health').css("background-color",getColor(player1scale));
-            $('#player2health').css("width",player2scale + 'px');
-            $('#player2health').css("background-color",getColor(player2scale));
+            for (var playerNr=1;playerNr<=2;playerNr++){
+                var playerScale = calcBarLength(pokemon[playerNr].maxHealth, pokemon[playerNr].health);
+
+                $('#player' + playerNr + 'healthbar').css("width",playerScale + 'px');
+                $('#player' + playerNr + 'healthbar').css("background-color",getColor(playerScale));
+            }
         }
 
         function calcBarLength(maxvalue, value)
@@ -286,6 +284,16 @@
                 return 0;
             else
                 return l;
+        }
+
+        function calcHpFromBar(maxvalue, value)
+        {
+            var l = maxvalue / 100 * parseInt(parseInt(value));
+
+            if (l < 0)
+                return 0;
+            else
+                return Math.round(l);
         }
 
         function displayMessage(message)
@@ -299,18 +307,19 @@
 
     <table>
         <tr>
-            <td>
+            <td colspan="2">
                 <img id="player1image" height="160" src='${resource(uri:'')}/images/pkmn/back${fight.fightPlayer1.ownerPokemon.pokemon.threeValueNumber()}.gif'>
             </td>
-            <td>
+            <td colspan="2">
                 <img id="player2image" height="160" src='${resource(uri:'')}/images/pkmn/front${fight.fightPlayer2.ownerPokemon.pokemon.threeValueNumber()}.gif'>
             </td>
         </tr>
         <tr>
-             <td>
+             <td colspan="2">
                  <div id="player1pokemonName"></div>
              </td>
-             <td>
+            <td colspan="2">
+
                  <div id="player2pokemonName"></div>
              </td>
         </tr>
@@ -318,14 +327,21 @@
             <td>
 
                 <div style="width:100px;border:1px solid #444444;height:5px;">
-                    <div id="player1health" style="width:100px;background-color:white;height:5px;"></div>
+                    <div id="player1healthbar" style="width:100px;background-color:white;height:5px;"></div>
                 </div>
+            </td>
+            <td>
+                <span id="player1hp"></span> / <span id="player1maxhp" />
             </td>
             <td>
 
                 <div style="width:100px;border:1px solid #444444;height:5px;">
-                    <div id="player2health" style="width:100px;background-color:white;height:5px;"></div>
+                    <div id="player2healthbar" style="width:100px;background-color:white;height:5px;"></div>
                 </div>
+
+            </td>
+            <td>
+                <span id="player2hp"></span> / <span id="player2maxhp" />
             </td>
         </tr>
 
