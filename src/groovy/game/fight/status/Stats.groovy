@@ -82,6 +82,14 @@ class Stats {
                 playerNr: playerNr
         )
 
+        // Set them back on the fight
+        if (playerNr == 1){
+            fight.fightPlayer1 = fightPlayer
+        }
+        else {
+            fight.fightPlayer2 = fightPlayer
+        }
+
         fight.roundResult.battleActions.add(new SwitchLog(ownerPokemon, playerNr))
 
         return fightPlayer
@@ -105,6 +113,8 @@ class Stats {
     public static void saveStats(FightPlayer fightPlayer, boolean endBattle = false)
     {
         OwnerPokemon ownerPokemon = fightPlayer.ownerPokemon
+
+        println fightPlayer.hp
 
         ownerPokemon.hp = fightPlayer.hp
         ownerPokemon.level = fightPlayer.level

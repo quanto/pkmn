@@ -39,9 +39,12 @@ class RoundResult {
                 actionString += "l:${battleAction.playerNr}:${battleAction.level};"
             }
             else if (battleAction in SwitchLog){
+                actionString += "h:${battleAction.playerNr}:" + battleAction.ownerPokemon.hp + ";";
+                actionString += "x:${battleAction.playerNr}:" + battleAction.ownerPokemon.calculateHP() + ";";
                 actionString += "s:${battleAction.playerNr}:" + battleAction.ownerPokemon.pokemon.threeValueNumber() + ".gif;";
                 actionString += "n:${battleAction.playerNr}:" + battleAction.ownerPokemon.pokemon.name + ";";
                 actionString += "l:${battleAction.playerNr}:" + battleAction.ownerPokemon.level + ";";
+
             }
             else if (battleAction in MoveLog){
                 actionString += "a:${battleAction.playerNr}:${battleAction.damage};";

@@ -13,6 +13,7 @@ import game.fight.UseItem
 import game.fight.Run
 import game.fight.action.MoveAction
 import game.fight.action.SwitchAction
+import game.fight.RoundResult
 
 class BattleController {
 
@@ -209,8 +210,10 @@ class BattleController {
                 Moves.setMove(fight,fight.fightPlayer1, new SwitchAction( ownerPokemon: ownerPokemon ), false)
             }
             else {
-                // :TODO
-                Stats.saveStats(fight.fightPlayer1, false);
+                // We set a new round result, so we don't see the old messages
+                fight.roundResult = new RoundResult()
+
+                Stats.saveStats(fight.fightPlayer1, false)
                 fight.fightPlayer1 = Stats.setBaseStats(fight,ownerPokemon, PlayerType.user, 1)
             }
         }

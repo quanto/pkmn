@@ -69,19 +69,19 @@ class Battle {
             secondFightPlayer = fightPlayer1
         }
 
-        decideAction(fight, firstFightPlayer, secondFightPlayer, true)
+        firstFightPlayer = decideAction(fight, firstFightPlayer, secondFightPlayer, true)
 
         checkPokemonFainted(fight)
 
         if (!fight.battleOver){
-            decideAction(fight, secondFightPlayer, firstFightPlayer, false)
+            secondFightPlayer = decideAction(fight, secondFightPlayer, firstFightPlayer, false)
 
             checkPokemonFainted(fight)
         }
 
         if (!fight.battleOver){
-            afterBattle(fight,fightPlayer1,fightPlayer2)
-            afterBattle(fight,fightPlayer2,fightPlayer1)
+            afterBattle(fight,firstFightPlayer,secondFightPlayer)
+            afterBattle(fight,secondFightPlayer,firstFightPlayer)
 
             // Check again after the affterBattle effects
             checkPokemonFainted(fight)
@@ -91,17 +91,16 @@ class Battle {
 
     }
 
-    public static void decideAction(Fight fight, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer, boolean firstMove){
+    public static FightPlayer decideAction(Fight fight, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer, boolean firstMove){
 
         if (attackFightPlayer.battleAction in MoveAction){
             attack(fight,attackFightPlayer, defendingFightPlayer, firstMove)
         }
         else if (attackFightPlayer.battleAction in SwitchAction){
             // Save the old pokemon
-            Stats.saveStats(fight.fightPlayer1, false)
+            Stats.saveStats(attackFightPlayer, false)
             // Bring out the new
-            fight.fightPlayer1 = Stats.setBaseStats(fight,attackFightPlayer.battleAction.ownerPokemon, attackFightPlayer.playerType, attackFightPlayer.playerNr)
-
+            attackFightPlayer = Stats.setBaseStats(fight,attackFightPlayer.battleAction.ownerPokemon, attackFightPlayer.playerType, attackFightPlayer.playerNr)
         }
         else if (attackFightPlayer.battleAction in NoAction){
             // We do nothing at all
@@ -110,7 +109,7 @@ class Battle {
 
             assert false
         }
-
+        return attackFightPlayer
     }
 
     /**

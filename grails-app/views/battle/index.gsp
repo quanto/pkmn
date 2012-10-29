@@ -107,6 +107,7 @@
 
                 var action = combatValues[i].substring(0,2);
                 var value = combatValues[i].substring(2,combatValues[i].length);
+
                 if (action == "a:")
                 {
                     var player = value.substring(0,1);
@@ -127,6 +128,26 @@
                     var player = value.substring(0,1);
                     var imageLink = value.substring(2,value.length);
                     switchPokemon(player,imageLink);
+                    currentAction += 1;
+                }
+                else if (action == "h:") // set hp
+                {
+                    var player = value.substring(0,1);
+                    var hp = parseInt(value.substring(2,value.length));
+                    pokemon[player].health = hp
+
+                    // updateUI(); // Ui update after level
+
+                    currentAction += 1;
+                }
+                else if (action == "x:") // set max hp
+                {
+                    var player = value.substring(0,1);
+                    var hp = parseInt(value.substring(2,value.length));
+                    pokemon[player].maxHealth = hp
+
+                    // updateUI(); // Ui update after level
+
                     currentAction += 1;
                 }
                 else if (action == "n:") // set name
@@ -153,6 +174,7 @@
                     else
                         player2pokemonLevel = level;
 
+                    setHP();
                     updateUI();
 
                     currentAction += 1;
