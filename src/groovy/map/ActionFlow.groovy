@@ -5,13 +5,13 @@ import game.Condition
 import game.MapTransition
 import game.MapMessage
 import game.RecoverAction
-import game.Recover
+import game.fight.status.Recover
 import game.ComputerAction
 import game.MarketAction
 import game.NpcAction
 import game.NpcLock
-import game.Fight
-import game.BattleType
+import game.context.Fight
+import game.context.BattleType
 import game.Player
 import game.FightFactoryService
 

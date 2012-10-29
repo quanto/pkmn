@@ -1,5 +1,7 @@
 package game
 
+import game.context.PlayerData
+
 class OnlineController {
 
     def sessionRegistry

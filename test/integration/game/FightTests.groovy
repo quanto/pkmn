@@ -1,5 +1,8 @@
 package game
 
+import game.context.BattleType
+import game.context.Fight
+
 class FightTests extends GroovyTestCase {
 
     FightFactoryService fightFactoryService

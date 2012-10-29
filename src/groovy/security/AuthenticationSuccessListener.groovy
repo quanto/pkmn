@@ -1,9 +1,10 @@
 package security
 
 import org.springframework.context.ApplicationListener;
+
+
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent
-import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent
-import game.PlayerData
+import game.context.PlayerData
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.security.core.context.SecurityContextHolder
 import game.Player

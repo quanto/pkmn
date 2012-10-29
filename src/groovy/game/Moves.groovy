@@ -1,7 +1,14 @@
 package game
 
 import game.fight.NPCHelper
-import game.fight.MessageAction
+
+import game.fight.log.MessageLog
+import game.context.FightPlayer
+import game.context.PlayerType
+import game.context.BattleType
+import game.context.Fight
+import game.fight.Battle
+import game.fight.WildMove
 
 class Moves {
 
@@ -72,7 +79,7 @@ class Moves {
             fightPlayer.ownerPokemon.addToOwnerMoves(ownerMove)
             fightPlayer.ownerPokemon.save()
 
-            fight.roundResult.battleActions.add(new MessageAction(fightPlayer.ownerPokemon.pokemon.name + "learned " + move.name + "."))
+            fight.roundResult.battleActions.add(new MessageLog(fightPlayer.ownerPokemon.pokemon.name + "learned " + move.name + "."))
 
         }
         else

@@ -1,4 +1,4 @@
-<%@ page import="game.EXP" %>
+<%@ page import="game.fight.reward.EXP" %>
 <%
     int percentage = EXP.getExpPercentage(level, levelRate, xp);
 %>

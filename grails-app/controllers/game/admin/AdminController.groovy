@@ -1,7 +1,7 @@
 package game.admin
 
 import game.ChatMessage
-import game.PlayerData
+import game.context.PlayerData
 import game.Player
 import game.NewsItem
 

@@ -4,6 +4,9 @@ import map.View
 import map.ActionResult
 import map.ActionFlow
 import map.ActionTrigger
+import game.context.PlayerData
+import game.context.BattleType
+import game.context.Fight
 
 class GameController {
 

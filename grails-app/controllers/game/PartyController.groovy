@@ -1,6 +1,7 @@
 package game
 
 import map.View
+import game.context.PlayerData
 
 class PartyController {
 

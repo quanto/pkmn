@@ -1,4 +1,4 @@
-<%@ page import="game.Gender" %>
+<%@ page import="game.context.Gender" %>
 <div  style='height:246px;overflow:auto;'>
     <table class='computerList'>
         <tr>

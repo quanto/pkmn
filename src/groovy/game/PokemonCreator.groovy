@@ -1,5 +1,8 @@
 package game
 
+import game.fight.reward.EXP
+import game.context.Gender
+
 class PokemonCreator {
 
     /**

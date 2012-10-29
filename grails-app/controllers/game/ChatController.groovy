@@ -1,5 +1,7 @@
 package game
 
+import game.context.PlayerData
+
 class ChatController {
 
     def index() {

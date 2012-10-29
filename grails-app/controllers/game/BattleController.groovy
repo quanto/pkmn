@@ -1,7 +1,16 @@
 package game
 
 import map.View
-import game.fight.MessageAction
+
+import game.fight.log.MessageLog
+import game.fight.status.Stats
+import game.context.FightPlayer
+import game.context.PlayerType
+import game.context.PlayerData
+import game.context.Fight
+import game.fight.Battle
+import game.fight.UseItem
+import game.fight.Run
 
 class BattleController {
 
@@ -93,7 +102,7 @@ class BattleController {
 //                    {
 
                 if (ownerMove.ppLeft <= 0){
-                    fight.roundResult.personalActions.add(new MessageAction("No pp left for move ${ownerMove.move.name}."))
+                    fight.roundResult.personalActions.add(new MessageLog("No pp left for move ${ownerMove.move.name}."))
                 }
                 else {
                     ownerMove.ppLeft -= 1

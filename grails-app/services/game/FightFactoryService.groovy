@@ -1,5 +1,11 @@
 package game
 
+import game.fight.status.Stats
+import game.context.FightPlayer
+import game.context.PlayerType
+import game.context.BattleType
+import game.context.Fight
+
 class FightFactoryService {
 
     static transactional = false

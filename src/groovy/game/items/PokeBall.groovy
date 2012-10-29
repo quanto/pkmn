@@ -1,12 +1,13 @@
 package game.items
 
-import game.Fight
+import game.context.Fight
 import game.Owner
 import game.Item
-import game.FightPlayer
+import game.context.FightPlayer
 import game.Party
 import game.Moves
-import game.fight.MessageAction
+
+import game.fight.log.MessageLog
 
 class PokeBall {
 
@@ -59,7 +60,7 @@ class PokeBall {
         if (1==1)//if (throwPokeball(catchRate))
         {
 
-            fight.roundResult.battleActions.add(new MessageAction("You catcht ${defendingFightPlayer.ownerPokemon.pokemon.name}!"))
+            fight.roundResult.battleActions.add(new MessageLog("You catcht ${defendingFightPlayer.ownerPokemon.pokemon.name}!"))
             fight.battleOver = true
 
             // Add the caught pokemon
@@ -72,7 +73,7 @@ class PokeBall {
         }
         else
         {
-            fight.roundResult.battleActions.add(new MessageAction("You fail to catch ${defendingFightPlayer.ownerPokemon.pokemon.name}"))
+            fight.roundResult.battleActions.add(new MessageLog("You fail to catch ${defendingFightPlayer.ownerPokemon.pokemon.name}"))
         }
     }
 

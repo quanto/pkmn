@@ -1,4 +1,4 @@
-<%@ page import="game.Fight" %>
+<%@ page import="game.context.Fight" %>
 <%
     Fight fight = fight
 %>

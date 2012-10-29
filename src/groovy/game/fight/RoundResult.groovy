@@ -1,13 +1,19 @@
 package game.fight
 
+import game.fight.log.BattleLog
+import game.fight.log.DingLog
+import game.fight.log.MessageLog
+import game.fight.log.MoveLog
+import game.fight.log.SwitchLog
+
 /**
  * Adapter between UI and battle engine
  */
 class RoundResult {
 
-    List<BattleAction> battleActions = []
+    List<BattleLog> battleActions = []
 
-    List<BattleAction> personalActions = []
+    List<BattleLog> personalActions = []
 
     public String toBattleString(){
         if (personalActions){
@@ -21,23 +27,23 @@ class RoundResult {
         }
     }
 
-    private String convertBattleString(List<BattleAction> actions){
+    private String convertBattleString(List<BattleLog> actions){
         String actionString = ""
 
-        actions.each{ BattleAction battleAction ->
+        actions.each{ BattleLog battleAction ->
 
-            if (battleAction in MessageAction){
+            if (battleAction in MessageLog){
                 actionString += "m:${battleAction.message};"
             }
-            else if (battleAction in DingAction){
+            else if (battleAction in DingLog){
                 actionString += "l:${battleAction.playerNr}:${battleAction.level};"
             }
-            else if (battleAction in SwitchAction){
+            else if (battleAction in SwitchLog){
                 actionString += "s:${battleAction.playerNr}:" + battleAction.ownerPokemon.pokemon.threeValueNumber() + ".gif;";
                 actionString += "n:${battleAction.playerNr}:" + battleAction.ownerPokemon.pokemon.name + ";";
                 actionString += "l:${battleAction.playerNr}:" + battleAction.ownerPokemon.level + ";";
             }
-            else if (battleAction in MoveAction){
+            else if (battleAction in MoveLog){
                 actionString += "a:${battleAction.playerNr}:${battleAction.damage};";
             }
 

@@ -1,4 +1,4 @@
-<%@ page import="game.Gender" %>
+<%@ page import="game.context.Gender" %>
 <table class='computerList'>
     <tr>
         <td style='width:16px;text-align:center;'>#</td>

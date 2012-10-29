@@ -1,5 +1,5 @@
 import game.FightFactoryService
-import game.Fight
+import game.context.Fight
 
 /**
  * Fights older then x amount of time should be destroyed so the

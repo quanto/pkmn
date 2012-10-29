@@ -2,11 +2,11 @@ package game.admin
 
 import map.View
 import game.FightFactoryService
-import game.PlayerData
+import game.context.PlayerData
 import game.Player
 import game.Pokemon
-import game.Fight
-import game.BattleType
+import game.context.Fight
+import game.context.BattleType
 
 class BattleTestController {
 

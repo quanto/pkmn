@@ -6,7 +6,7 @@ import game.RecoverAction
 import map.View
 import game.OwnerPokemon
 import game.Pokemon
-import game.Gender
+import game.context.Gender
 import game.OwnerMove
 import game.Move
 import game.PlayerRole
