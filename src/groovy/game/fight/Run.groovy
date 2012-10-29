@@ -5,6 +5,7 @@ import game.fight.status.Stats
 import game.context.BattleType
 import game.context.Fight
 import game.Moves
+import game.fight.action.NoAction
 
 /**
  * Created with IntelliJ IDEA.
@@ -39,7 +40,7 @@ class Run {
             {
                 fight.escapeAttempts += 1
                 fight.roundResult.battleActions.add(new MessageLog("You fail to run away."))
-                Moves.setMove(fight,fight.fightPlayer1,null,false)
+                Moves.setMove(fight,fight.fightPlayer1,new NoAction(),false)
             }
 
         }

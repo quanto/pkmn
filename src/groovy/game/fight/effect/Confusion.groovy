@@ -6,6 +6,7 @@ import game.context.Fight
 import game.context.FightPlayer
 import game.Moves
 import game.context.MoveInfo
+import game.fight.action.NoAction
 
 /**
  * Created with IntelliJ IDEA.
@@ -44,7 +45,7 @@ class Confusion {
                     // verlaag beurten
                     fightPlayer.confusion -= 1;
                     // geen move
-                    Moves.setMove(fight,fightPlayer,null)
+                    Moves.setMove(fight,fightPlayer,new NoAction())
                 }
             }
         }

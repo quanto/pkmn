@@ -46,7 +46,7 @@ class RoundResult {
             else if (battleAction in MoveLog){
                 actionString += "a:${battleAction.playerNr}:${battleAction.damage};";
             }
-
+            // :TODO evolve
         }
         return actionString
     }

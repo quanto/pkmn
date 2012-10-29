@@ -2,6 +2,7 @@ package game.fight.calculation
 
 import game.fight.status.Speed
 import game.context.Fight
+import game.fight.action.SwitchAction
 
 class BattleOrder {
 
@@ -10,6 +11,14 @@ class BattleOrder {
         Random random = new Random()
 
         boolean player1first
+
+        // Switching has priority
+        if (fight.fightPlayer1.battleAction in SwitchAction){
+            return true
+        }
+        else if (fight.fightPlayer2.battleAction in SwitchAction){
+            return false
+        }
 
         // Bepaal wie begint
         if (Speed.isSpeedMove(fight.fightPlayer1))

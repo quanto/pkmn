@@ -4,6 +4,7 @@ import game.Owner
 
 import game.OwnerPokemon
 import game.Move
+import game.fight.action.BattleAction
 
 /**
  * Created with IntelliJ IDEA.
@@ -43,13 +44,13 @@ class FightPlayer {
     int accuracyStage
     int criticalStage
     int evasionStage
-    Move move
+    BattleAction battleAction
     boolean doNoMove = false
     List<Move> learnMoves = []
     int holdMove
     int holdTurns
     Move continueMove
-    Move lastMove
+    BattleAction lastBattleAction
 
     FightPlayer opponentFightPlayer(){
 

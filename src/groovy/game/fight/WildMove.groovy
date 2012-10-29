@@ -3,18 +3,20 @@ package game.fight
 import game.context.FightPlayer
 import game.Move
 import game.LearnableMove
+import game.fight.action.MoveAction
+import game.fight.action.BattleAction
 
 class WildMove {
 
-    public static Move choseWildMove(FightPlayer fightPlayer)
+    public static BattleAction choseWildMove(FightPlayer fightPlayer)
     {
         List<LearnableMove> learnableMoveList = LearnableMove.findAllByPokemonAndLearnLevelLessThanEquals(fightPlayer.ownerPokemon.pokemon,fightPlayer.level).findAll{ it.move.implemented }
         if (learnableMoveList){
             Collections.shuffle(learnableMoveList)
-            return learnableMoveList.last().move
+            return new MoveAction(move: learnableMoveList.last().move)
         }
         else {
-            return Move.get(394) // Geen move, struggle
+            return new MoveAction(move: Move.findByName("Struggle"))
         }
     }
 

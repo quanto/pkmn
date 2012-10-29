@@ -11,6 +11,8 @@ import game.context.Fight
 import game.fight.Battle
 import game.fight.UseItem
 import game.fight.Run
+import game.fight.action.MoveAction
+import game.fight.action.SwitchAction
 
 class BattleController {
 
@@ -75,7 +77,7 @@ class BattleController {
         if (move == null || move.name == "Struggle") // Struggle || geen move
         {
             // Dit is geen eigen move, pp hoeft er niet af
-            Moves.setMove(fight,fight.fightPlayer1, ownerMove.move)
+            Moves.setMove(fight,fight.fightPlayer1, new MoveAction(move:ownerMove.move))
         }
         else
         {
@@ -107,7 +109,7 @@ class BattleController {
                 else {
                     ownerMove.ppLeft -= 1
                     ownerMove.save()
-                    Moves.setMove(fight,fight.fightPlayer1,ownerMove.move)
+                    Moves.setMove(fight,fight.fightPlayer1, new MoveAction(move:ownerMove.move))
                 }
 
 //                }
@@ -199,9 +201,18 @@ class BattleController {
 
         OwnerPokemon ownerPokemon = OwnerPokemon.findByOwnerAndPartyPositionAndHpGreaterThan(player,params.id,0)
         if (ownerPokemon){
-            Stats.saveStats(fight.fightPlayer1, false);
-            fight.fightPlayer1 = Stats.setBaseStats(fight,ownerPokemon, PlayerType.user, 1)
-            Moves.setMove(fight,fight.fightPlayer1, null, false)
+
+            boolean mustSwitch = fight.fightPlayer1.hp <= 0
+
+            // We must switch. This should not trigger a new round
+            if(!mustSwitch){
+                Moves.setMove(fight,fight.fightPlayer1, new SwitchAction( ownerPokemon: ownerPokemon ), false)
+            }
+            else {
+                // :TODO
+                Stats.saveStats(fight.fightPlayer1, false);
+                fight.fightPlayer1 = Stats.setBaseStats(fight,ownerPokemon, PlayerType.user, 1)
+            }
         }
 
         render template: "log", model : [fight:fight]

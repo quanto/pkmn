@@ -320,8 +320,19 @@ class BootStrap {
                 Some new feature are the iPad move support, a new layout and an improved map editor
                 that allowes us to rapidly draw maps.
                 """,
-                player: Player.findByUsername("kevin")
+                player: Player.findByUsername("kevin"),
+                date: new Date().parse("dd-MM-yyyy HH:mm:ss","14-10-2012 12:00:00")
         ).save()
+
+        new NewsItem(
+                message: """
+                    I'm refactoring the battle system at the moment. This may introduce
+                    some new issues but eventualy it should all result in an better
+                    battle system.
+                """,
+                player: Player.findByUsername("kevin"),
+                date: new Date().parse("dd-MM-yyyy HH:mm:ss","29-10-2012 12:00:00")
+        )
 
         Player p = Player.findByUsername("kevin")
         p.password = "12345"

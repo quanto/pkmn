@@ -531,21 +531,21 @@ class FightMove {
         }
         else if (move.name == "Solarbeam")
         {
-            if (attackingFightPlayer.lastMove?.name != "Solarbeam")
-            {
+            if (attackingFightPlayer.lastBattleAction in MoveAction && attackingFightPlayer.lastBattleAction.move.name != "Solarbeam"){
+
                 fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.ownerPokemon.pokemon.name} gathers light.;"))
                 moveInfo.damageAction = false // do nothing
             }
             else
             {
-                attackingFightPlayer.move = null // zet op 0 zodat deze niet wordt herhaalt
+                attackingFightPlayer.battleAction = null // zet op 0 zodat deze niet wordt herhaalt
             }
         }
         // Increases user's Defense one stage in the 1st turn, attacks in the 2nd turn.
         else if (move.name == "Skull Bash")
         {
-            if (attackingFightPlayer.lastMove?.name != "Skull Bash")
-            {
+
+            if (attackingFightPlayer.lastBattleAction in MoveAction && attackingFightPlayer.lastBattleAction.move.name != "Skull Bash"){
                 moveInfo.effectAction = true
                 moveInfo.stageAction = true
                 moveInfo.addToDefenseStage = 1
@@ -553,7 +553,7 @@ class FightMove {
             }
             else
             {
-                attackingFightPlayer.move = null; // zet op 0 zodat deze niet wordt herhaalt
+                attackingFightPlayer.battleAction = null; // zet op 0 zodat deze niet wordt herhaalt
             }
         }
 

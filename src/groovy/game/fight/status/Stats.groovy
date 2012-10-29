@@ -77,7 +77,7 @@ class Stats {
                 holdMove : 0,
                 holdTurns : 0,
                 continueMove : null, //
-                lastMove: null,
+                lastBattleAction: null,
                 playerType:playerType,
                 playerNr: playerNr
         )

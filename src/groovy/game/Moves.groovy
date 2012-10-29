@@ -9,25 +9,21 @@ import game.context.BattleType
 import game.context.Fight
 import game.fight.Battle
 import game.fight.WildMove
+import game.fight.action.BattleAction
 
 class Moves {
 
     /**
      * Player sets a move
      */
-    public static void setMove(Fight fight, FightPlayer fightPlayer, Move move, boolean clearLog = true)
+    public static void setMove(Fight fight, FightPlayer fightPlayer, BattleAction battleAction, boolean clearLog = true)
     {
 
-        // reset log
-        if (clearLog){
-            // fight.log = ""; :TODO remove
-        }
-
-        if (move){
-            fightPlayer.move = move
+        if (battleAction){
+            fightPlayer.battleAction = battleAction
         }
         else {
-            fightPlayer.doNoMove = true
+            fightPlayer.doNoMove = true // :TODO Get rid of this. Should use NoAction if needed
         }
 
         // Kijk of tegen de computer wordt gespeelt, dan wordt er een move gekozen
@@ -40,22 +36,22 @@ class Moves {
                 if (fight.battleType == BattleType.PVE)
                 {
                     // reset escape attempts
-                    if (move){
+                    if (battleAction){
                         fightPlayer.fight.escapeAttempts = 0
                     }
                     // kies random wild move
-                    fightPlayer.opponentFightPlayer().move = WildMove.choseWildMove(fightPlayer.opponentFightPlayer())
+                    fightPlayer.opponentFightPlayer().battleAction = WildMove.choseWildMove(fightPlayer.opponentFightPlayer())
                 }
                 else
                 {
                     // kies random move van npc
-                    fightPlayer.opponentFightPlayer().move = NPCHelper.choseNpcMove(fightPlayer.opponentFightPlayer().ownerPokemon);
+                    fightPlayer.opponentFightPlayer().battleAction = NPCHelper.choseNpcMove(fightPlayer.opponentFightPlayer().ownerPokemon);
                 }
             }
         }
 
         // Kijk of ronde gedaan kan worden
-        if ((fight.fightPlayer1.move != null || fight.fightPlayer1.doNoMove) && (fight.fightPlayer2.move != null  || fight.fightPlayer1.doNoMove))
+        if ((fight.fightPlayer1.battleAction != null || fight.fightPlayer1.doNoMove) && (fight.fightPlayer2.battleAction != null  || fight.fightPlayer1.doNoMove))
         {
             Battle.battle(fight)
         }

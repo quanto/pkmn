@@ -9,6 +9,7 @@ import game.OwnerItem
 import game.Item
 import game.Moves
 import game.items.RecoverItem
+import game.fight.action.NoAction
 
 class UseItem {
 
@@ -37,7 +38,7 @@ class UseItem {
             if (throwBall || recoverItemUsed){
 
                 // Set an empty move so round can be done
-                Moves.setMove(fight,attackingFightPlayer,null,false);
+                Moves.setMove(fight,attackingFightPlayer,new NoAction(),false);
 
                 if (ownerItem.quantity <= 1){
                     itemOwner.removeFromOwnerItems(ownerItem)
