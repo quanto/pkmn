@@ -2,7 +2,7 @@
 <table>
     <g:each in="${ownerItems}" var="ownerItem">
         <tr>
-            <td>img</td>
+            <td><img src='${resource(uri:'')}/images/items/${ownerItem.item.image}'></td>
             <td>${ownerItem.item.name}</td>
             <td>${ownerItem.quantity}</td>
             <td><a href="" onclick="return doAction('${createLink(action:'useItem',id:ownerItem.id)}');">use</a></td>

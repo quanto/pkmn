@@ -10,7 +10,8 @@ class NpcLockBackup {
 
         List<NpcLock> locks = NpcLock.findAllByPlayer(player)
         locks.each { NpcLock npcLock ->
-            npcLockData += """<npcLock>
+            npcLockData += """
+<npcLock>
 ${npcLock.npc.identifier}
 ${npcLock.dateCreated.format("dd-MM-yyyy HH:mm:ss")}
 ${npcLock.permanent}

@@ -3,6 +3,7 @@ package game.fight.calculation
 import game.fight.status.Speed
 import game.context.Fight
 import game.fight.action.SwitchAction
+import game.fight.action.NoAction
 
 class BattleOrder {
 
@@ -17,6 +18,14 @@ class BattleOrder {
             return true
         }
         else if (fight.fightPlayer2.battleAction in SwitchAction){
+            return false
+        }
+
+        // NoAction also has priority
+        if (fight.fightPlayer1.battleAction in NoAction){
+            return true
+        }
+        else if (fight.fightPlayer2.battleAction in NoAction){
             return false
         }
 

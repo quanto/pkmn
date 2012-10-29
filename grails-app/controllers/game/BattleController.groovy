@@ -174,7 +174,8 @@ class BattleController {
             render text: g.render(template: 'pokemonList',model: [mustChoose:true,ownerPokemonList:ownerPokemonList,fightPlayer:fightPlayer])
         }
         else if (params.items != null){
-            render template: "itemList", model : [fight:fight,ownerItems:player.ownerItems.findAll{ it in UsableItem }]
+
+            render template: "itemList", model : [fight:fight,ownerItems:player.ownerItems.findAll{ it.item in UsableItem }]
         }
         else if (params.fight != null && !fight.battleOver)
         {

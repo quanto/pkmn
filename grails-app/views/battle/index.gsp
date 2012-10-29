@@ -1,13 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kevinverhoef
-  Date: 29-09-12
-  Time: 12:55
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page import="game.context.Fight; game.fight.Fight; game.Fight;" contentType="text/html;charset=UTF-8" %>
+<%@ page import="game.context.Fight" %>
 <%
-    game.context.Fight fight = fight
+    Fight fight = fight
 %>
 <html>
     <head>
