@@ -327,12 +327,11 @@ class BootStrap {
         new NewsItem(
                 message: """
                     I'm refactoring the battle system at the moment. This may introduce
-                    some new issues but eventualy it should all result in an better
-                    battle system.
+                    some new issues but eventualy it should resolve battle flow issues.
                 """,
                 player: Player.findByUsername("kevin"),
                 date: new Date().parse("dd-MM-yyyy HH:mm:ss","29-10-2012 12:00:00")
-        )
+        ).save()
 
         Player p = Player.findByUsername("kevin")
         p.password = "12345"
