@@ -40,13 +40,13 @@ class Recover {
 
         if (fightPlayer.hp - damage < 0)
         {
-            damage = fightPlayer.hp
+            fightPlayer.hp = 0
         }
         /*
           else if (fightPlayer.Hp"} - $damage > fightPlayer.MaxHp"})
               $damage = fightPlayer.Hp"} - fightPlayer.MaxHp"};
           */
-        fight.roundResult.battleActions.add(new MoveLog(damage, fightPlayer.playerNr))
+        fight.roundResult.battleActions.add(new MoveLog(fightPlayer.hp, fightPlayer.playerNr))
 
     }
 

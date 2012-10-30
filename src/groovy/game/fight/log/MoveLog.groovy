@@ -1,15 +1,16 @@
 package game.fight.log
 
-import game.fight.log.BattleLog
-
+/**
+ * Used for the health slide
+ */
 class MoveLog extends BattleLog {
 
-    int damage
+    int hp
     int playerNr
 
 
-    public MoveLog(int damage, int playerNr){
-        this.damage = damage
+    public MoveLog(int hp, int playerNr){
+        this.hp = hp
         this.playerNr = playerNr
     }
 

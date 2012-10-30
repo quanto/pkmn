@@ -5,6 +5,7 @@ import game.fight.log.DingLog
 import game.fight.log.MessageLog
 import game.fight.log.MoveLog
 import game.fight.log.SwitchLog
+import game.fight.log.InitialHpLog
 
 /**
  * Adapter between UI and battle engine
@@ -47,8 +48,12 @@ class RoundResult {
 
             }
             else if (battleAction in MoveLog){
-                actionString += "a:${battleAction.playerNr}:${battleAction.damage};";
+                actionString += "a:${battleAction.playerNr}:${battleAction.hp};";
             }
+            else if (battleAction in InitialHpLog){
+                actionString += "h:${battleAction.playerNr}:" + battleAction.hp + ";";
+            }
+
             // :TODO evolve
         }
         return actionString

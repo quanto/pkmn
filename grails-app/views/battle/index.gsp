@@ -213,7 +213,7 @@
             currentAction = 0;
 
 
-
+            /*
             for (var i=0;i<combatValues.length - 1;i++)
             {
 
@@ -228,7 +228,7 @@
                     eval("pokemon[" + player + "].health += parseInt(hpValue);");
                 }
             }
-
+            */
 
 
 //            if (health[1] > maxHealth[1])
@@ -255,7 +255,7 @@
         function slideHP(HPvalue,playerNr)
         {
 
-            pokemon[playerNr].health = parseInt(pokemon[playerNr].health) - parseInt(HPvalue);
+            pokemon[playerNr].health = parseInt(HPvalue);
 
             var barLength = calcBarLength(pokemon[playerNr].maxHealth, pokemon[playerNr].health);
 

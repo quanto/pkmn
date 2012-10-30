@@ -39,6 +39,7 @@ import game.Owner
 import game.fight.action.MoveAction
 import game.fight.action.SwitchAction
 import game.fight.action.NoAction
+import game.fight.log.InitialHpLog
 
 class Battle {
 
@@ -54,6 +55,10 @@ class Battle {
 
         // New round, start with a new object
         fight.roundResult = new RoundResult()
+
+        // Log initial hp
+        fight.roundResult.battleActions.add(new InitialHpLog(fightPlayer1.ownerPokemon.hp,1))
+        fight.roundResult.battleActions.add(new InitialHpLog(fightPlayer2.ownerPokemon.hp,2))
 
         FightPlayer firstFightPlayer
         FightPlayer secondFightPlayer
