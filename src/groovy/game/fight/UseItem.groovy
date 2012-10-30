@@ -10,53 +10,59 @@ import game.Item
 import game.Moves
 import game.items.RecoverItem
 import game.fight.action.NoAction
+import game.fight.action.ItemAction
+import game.UsableItem
 
 class UseItem {
 
-    public static void useItem(Fight fight, Owner itemOwner, OwnerItem ownerItem, FightPlayer attackingFightPlayer, FightPlayer defendingFightPlayer){
+    public static void setItemAction(Fight fight, FightPlayer attackingFightPlayer, OwnerItem ownerItem){
 
         Item item = ownerItem.item
+
+        assert item in UsableItem
+
         if (!item.implemented){
             fight.roundResult.personalActions.add(new MessageLog("You can not use item ${item.name} in battle."))
         }
         else {
+            // Set the item action
+            Moves.setMove(fight,attackingFightPlayer,new ItemAction(ownerItem: ownerItem),false)
+        }
+    }
 
-            fight.roundResult.battleActions.add(new MessageLog("${itemOwner.name} uses ${item.name}."))
+    public static void useItem(Fight fight, OwnerItem ownerItem, FightPlayer attackingFightPlayer, FightPlayer defendingFightPlayer){
 
-            // Try a PokeBall
-            Double catchFactor = PokeBall.throwBall(fight, itemOwner, item, attackingFightPlayer, defendingFightPlayer)
-            boolean throwBall = catchFactor > 0
+        Item item = ownerItem.item
+        Owner itemOwner = attackingFightPlayer.owner
 
-            if (throwBall){
-                PokeBall.catchSuccess(fight, itemOwner, item, attackingFightPlayer, defendingFightPlayer, catchFactor)
-            }
+        fight.roundResult.battleActions.add(new MessageLog("${itemOwner.name} uses ${item.name}."))
 
-            // Try a potion
-            boolean recoverItemUsed = RecoverItem.useRecoverItem(fight, item, attackingFightPlayer, defendingFightPlayer)
+        // Try a PokeBall
+        Double catchFactor = PokeBall.throwBall(fight, itemOwner, item, attackingFightPlayer, defendingFightPlayer)
+        boolean throwBall = catchFactor > 0
 
+        if (throwBall){
+            PokeBall.catchSuccess(fight, itemOwner, item, attackingFightPlayer, defendingFightPlayer, catchFactor)
+        }
 
-            if (throwBall || recoverItemUsed){
+        // Try a potion
+        boolean recoverItemUsed = RecoverItem.useRecoverItem(fight, item, attackingFightPlayer, defendingFightPlayer)
 
-                // Set an empty move so round can be done
-                Moves.setMove(fight,attackingFightPlayer,new NoAction(),false);
+        if (throwBall || recoverItemUsed){
 
-                if (ownerItem.quantity <= 1){
-                    itemOwner.removeFromOwnerItems(ownerItem)
-                    ownerItem.delete()
-                }
-                else {
-                    ownerItem.quantity -= 1
-                    ownerItem.save()
-                }
-
+            if (ownerItem.quantity <= 1){
+                itemOwner.removeFromOwnerItems(ownerItem)
+                ownerItem.delete()
             }
             else {
-                println "ERROR: ${item.name} not supported"
+                ownerItem.quantity -= 1
+                ownerItem.save()
             }
 
         }
-
-
+        else {
+            println "ERROR: ${item.name} not supported"
+        }
     }
 
 }

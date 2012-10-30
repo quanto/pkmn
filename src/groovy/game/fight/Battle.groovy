@@ -40,6 +40,7 @@ import game.fight.action.MoveAction
 import game.fight.action.SwitchAction
 import game.fight.action.NoAction
 import game.fight.log.InitialHpLog
+import game.fight.action.ItemAction
 
 class Battle {
 
@@ -109,6 +110,9 @@ class Battle {
         }
         else if (attackFightPlayer.battleAction in NoAction){
             // We do nothing at all
+        }
+        else if (attackFightPlayer.battleAction in ItemAction){
+            UseItem.useItem(fight, attackFightPlayer.battleAction.ownerItem, attackFightPlayer, defendingFightPlayer)
         }
         else {
 

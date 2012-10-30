@@ -271,7 +271,7 @@ class BattleController {
         OwnerItem ownerItem = player.ownerItems.find() { it.id == Integer.parseInt(params.id) }
 
         if (ownerItem){
-            UseItem.useItem(fight, fight.fightPlayer1.owner, ownerItem, fight.fightPlayer1, fight.fightPlayer2)
+            UseItem.setItemAction(fight, fight.fightPlayer1, ownerItem)
         }
 
         render template: "log", model : [fight:fight]

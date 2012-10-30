@@ -4,6 +4,7 @@ import game.fight.status.Speed
 import game.context.Fight
 import game.fight.action.SwitchAction
 import game.fight.action.NoAction
+import game.fight.action.ItemAction
 
 class BattleOrder {
 
@@ -26,6 +27,14 @@ class BattleOrder {
             return true
         }
         else if (fight.fightPlayer2.battleAction in NoAction){
+            return false
+        }
+
+        // Item action priority
+        if (fight.fightPlayer1.battleAction in ItemAction){
+            return true
+        }
+        else if (fight.fightPlayer2.battleAction in ItemAction){
             return false
         }
 
