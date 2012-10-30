@@ -46,6 +46,7 @@
         var totalActions = 0;
 
         var currentAction = 0;
+        var myPlayerNr = ${myPlayerNr}
 
         $(document).ready(function() {
 
@@ -56,6 +57,18 @@
             //combatActions();
             <g:render template="log" model="[fight:fight]" />
         });
+
+        function switchMyPlayer(playerNr){
+            if (myPlayerNr == 2 && playerNr == 1){
+                return 2
+            }
+            else if (myPlayerNr == 2 && playerNr == 2){
+                return 1
+            }
+            else {
+                return playerNr
+            }
+        }
 
         function doAction(url)
         {
@@ -120,7 +133,7 @@
                 {
                     var player = value.substring(0,1);
                     var imageLink = value.substring(2,value.length);
-                    switchPokemon(player,imageLink);
+                    switchPokemon(switchMyPlayer(player),imageLink);
                     currentAction += 1;
                 }
                 else if (action == "h:") // set hp
@@ -196,9 +209,9 @@
         function updateUI()
         {
             for (var playerNr=1;playerNr<=2;playerNr++){
-                $("#player" + playerNr + "pokemonName").html(pokemon[playerNr].name + "<br>lv. " + pokemon[playerNr].level);
-                $("#player" + playerNr + "maxhp").text(pokemon[playerNr].maxHealth)
-                $("#player" + playerNr + "hp").text(pokemon[playerNr].health)
+                $("#player" + switchMyPlayer(playerNr) + "pokemonName").html(pokemon[playerNr].name + "<br>lv. " + pokemon[playerNr].level);
+                $("#player" + switchMyPlayer(playerNr) + "maxhp").text(pokemon[playerNr].maxHealth)
+                $("#player" + switchMyPlayer(playerNr) + "hp").text(pokemon[playerNr].health)
             }
             // set the pokemon
         }
@@ -260,13 +273,13 @@
             var barLength = calcBarLength(pokemon[playerNr].maxHealth, pokemon[playerNr].health);
 
 
-            $('#player' + playerNr + 'healthbar').animate({
+            $('#player' + switchMyPlayer(playerNr) + 'healthbar').animate({
                 width: barLength + 'px'
             },{
                 duration: 1000,
                 step: function( currentLeft ){
-                    $("#player" + playerNr + "hp").text(calcHpFromBar(pokemon[playerNr].maxHealth,currentLeft))
-                    $('#player' + playerNr + 'healthbar').css("background-color",getColor(currentLeft));
+                    $("#player" + switchMyPlayer(playerNr) + "hp").text(calcHpFromBar(pokemon[playerNr].maxHealth,currentLeft))
+                    $('#player' + switchMyPlayer(playerNr) + 'healthbar').css("background-color",getColor(currentLeft));
 
                 }
             });
@@ -285,10 +298,10 @@
         function setHP()
         {
             for (var playerNr=1;playerNr<=2;playerNr++){
-                var playerScale = calcBarLength(pokemon[playerNr].maxHealth, pokemon[playerNr].health);
+                var playerScale = calcBarLength(pokemon[switchMyPlayer(playerNr)].maxHealth, pokemon[switchMyPlayer(playerNr)].health);
 
-                $('#player' + playerNr + 'healthbar').css("width",playerScale + 'px');
-                $('#player' + playerNr + 'healthbar').css("background-color",getColor(playerScale));
+                $('#player' + switchMyPlayer(playerNr) + 'healthbar').css("width",playerScale + 'px');
+                $('#player' + switchMyPlayer(playerNr) + 'healthbar').css("background-color",getColor(playerScale));
             }
         }
 
@@ -324,11 +337,11 @@
         <tr>
             <td colspan="2">
                 <div style="height:69px;"></div>
-                <img id="player1image" height="160" src='${resource(uri:'')}/images/pkmn/back${fight.fightPlayer1.ownerPokemon.pokemon.threeValueNumber()}.gif'>
+                <img id="player1image" height="160" src=''>
             </td>
             <td colspan="2" valign="top">
                 <div style="height:15px;"></div>
-                <img id="player2image" height="160" src='${resource(uri:'')}/images/pkmn/front${fight.fightPlayer2.ownerPokemon.pokemon.threeValueNumber()}.gif'>
+                <img id="player2image" height="160" src=''>
             </td>
         </tr>
         <tr>

@@ -45,8 +45,8 @@ class BattleController {
         }
 
         if (player && fight){
-
-            render view: 'index', model: [fight:fight]
+            FightPlayer myFightPlayer = fight.myPlayer(player)
+            render view: 'index', model: [fight:fight, myPlayerNr: myFightPlayer.playerNr]
         }
         else {
             render text:"No fight"
