@@ -9,6 +9,7 @@ import game.Evolution
 import game.LearnableMove
 import game.Moves
 import game.OwnerPokemon
+import game.fight.log.SwitchLog
 
 class EXP {
 
@@ -41,11 +42,11 @@ class EXP {
 
                     fight.roundResult.battleActions.add(new MessageLog(ownfightPlayer.ownerPokemon.pokemon.name + " evolved into " + evolution.toPokemon.name + "."))
 
-                    if (isCurrentOwnerPokemon){
-                        fight.roundResult.battleActions.add(new EvolveLog(ownfightPlayer.ownerPokemon.pokemon, evolution.toPokemon.name))
-
-                    }
                     ownfightPlayer.ownerPokemon.pokemon = evolution.toPokemon
+
+                    if (isCurrentOwnerPokemon){
+                        fight.roundResult.battleActions.add(new SwitchLog(ownfightPlayer.ownerPokemon, ownfightPlayer.playerNr))
+                    }
                 }
 
                 // Kijk of er move geleerd kan worden

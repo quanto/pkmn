@@ -6,6 +6,7 @@ import game.fight.log.MessageLog
 import game.fight.log.MoveLog
 import game.fight.log.SwitchLog
 import game.fight.log.InitialHpLog
+import game.fight.log.EvolveLog
 
 /**
  * Adapter between UI and battle engine
@@ -45,7 +46,6 @@ class RoundResult {
                 actionString += "s:${battleAction.playerNr}:" + battleAction.ownerPokemon.pokemon.threeValueNumber() + ".gif;";
                 actionString += "n:${battleAction.playerNr}:" + battleAction.ownerPokemon.pokemon.name + ";";
                 actionString += "l:${battleAction.playerNr}:" + battleAction.ownerPokemon.level + ";";
-
             }
             else if (battleAction in MoveLog){
                 actionString += "a:${battleAction.playerNr}:${battleAction.hp};";
@@ -54,7 +54,6 @@ class RoundResult {
                 actionString += "h:${battleAction.playerNr}:" + battleAction.hp + ";";
             }
 
-            // :TODO evolve
         }
         return actionString
     }

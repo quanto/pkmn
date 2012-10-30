@@ -6,5 +6,5 @@ class MessageLog extends BattleLog {
     MessageLog(String message){
         this.message = message
     }
-    //fight.log = "m:You fail to run away.;"
+
 }
