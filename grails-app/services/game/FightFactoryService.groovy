@@ -5,21 +5,23 @@ import game.context.FightPlayer
 import game.context.PlayerType
 import game.context.BattleType
 import game.context.Fight
+import game.context.FightInvite
 
 class FightFactoryService {
 
     static transactional = false
 
     private static List<Fight> fights = new ArrayList<Fight>();
-    int fightCount = 0
+
+    static int fightCount = 0
 
 
     void endFight(Fight fight){
         fights.remove(fight)
 //        FightData fightData = new FightData(
 //                fightLog :fight.logHistory + fight.log
-//        )   :TODO fix
-        fightData.save()
+//        )   :TODO fix should be done on player exit or expiration
+//        fightData.save()
     }
 
     public Fight getFight(int nr){

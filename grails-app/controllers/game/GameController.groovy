@@ -265,6 +265,9 @@ class GameController {
         else if (player.view == View.ChoosePokemon){
             redirect controller : "choosePokemon", action: "index"
         }
+        else if (player.view == View.ShowPvpSelect){
+            redirect controller : "pvpSelect", action: "index"
+        }
         else if (player.view == View.Battle){
             render text : "<iframe src='/game/battle' frameborder='0' width='500' height='500'></iframe>"
         }

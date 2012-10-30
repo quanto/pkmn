@@ -14,6 +14,7 @@ import game.context.Fight
 import game.context.BattleType
 import game.Player
 import game.FightFactoryService
+import game.PvpSelectAction
 
 class ActionFlow {
 
@@ -83,6 +84,11 @@ class ActionFlow {
             }
             else if (action in ComputerAction){
                 player.view = View.ShowComputer
+                player.save(flush:true)
+                actionResult.evalMessage += "getView()"
+            }
+            else if (action in PvpSelectAction){
+                player.view = View.ShowPvpSelect
                 player.save(flush:true)
                 actionResult.evalMessage += "getView()"
             }

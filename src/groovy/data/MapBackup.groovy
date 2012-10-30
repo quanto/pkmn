@@ -9,6 +9,7 @@ import game.MapMessage
 import game.NpcAction
 import game.MarketAction
 import game.MapPokemon
+import game.PvpSelectAction
 
 class MapBackup {
 
@@ -49,6 +50,7 @@ ${getRecoverActions(map)}
 ${getMessageActions(map)}
 ${getNpcActions(map)}
 ${getMarketActions(map)}
+${getPvpSelectActions(map)}
 """
     }
 
@@ -110,6 +112,26 @@ ${action.triggerOnActionButton}
 ${action.triggerBeforeStep}
 ${action.conditionalStep}
 </mapMessage>
+"""
+            }
+        }
+        return data
+    }
+
+    public static String getPvpSelectActions(Map map){
+        String data = ""
+        map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
+            if(action in PvpSelectAction){
+                data += """<pvpSelectAction>
+${action.positionX}
+${action.positionY}
+${action.condition?:''}
+${action.conditionMetMessage?:''}
+${action.conditionNotMetMessage?:''}
+${action.triggerOnActionButton}
+${action.triggerBeforeStep}
+${action.conditionalStep}
+</pvpSelectAction>
 """
             }
         }

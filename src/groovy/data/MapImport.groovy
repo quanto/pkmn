@@ -11,6 +11,7 @@ import game.NpcAction
 import game.Npc
 import game.Market
 import game.MarketAction
+import game.PvpSelectAction
 
 class MapImport {
 
@@ -53,6 +54,11 @@ class MapImport {
                         importRecoverAction(parts,map)
                         parts = []
                     }
+                    else if (line.contains("</pvpSelectAction>")){
+                        node = ""
+                        importPvpSelectAction(parts,map)
+                        parts = []
+                    }
                     else if (line.contains("</computerAction>")){
                         node = ""
                         importComputerAction(parts,map)
@@ -87,6 +93,9 @@ class MapImport {
                     }
                     else if (line.contains("<recoverAction>")){
                         node = "recoverAction"
+                    }
+                    else if (line.contains("<pvpSelectAction>")){
+                        node = "pvpSelectAction"
                     }
                     else if (line.contains("<computerAction>")){
                         node = "computerAction"
@@ -254,6 +263,22 @@ class MapImport {
         )
         map.addToActions(recoverAction)
 
+    }
+
+    public static void importPvpSelectAction(def parts, Map map){
+        PvpSelectAction pvpSelectAction = new PvpSelectAction(
+
+                map:map,
+                positionX:Integer.parseInt(parts[0]),
+                positionY:Integer.parseInt(parts[1]),
+                condition: parts[2]?:null,
+                conditionMetMessage: parts[3]?:null,
+                conditionNotMetMessage: parts[4]?:null,
+                triggerOnActionButton: new Boolean(parts[5]),
+                triggerBeforeStep: new Boolean(parts[6]),
+                conditionalStep: new Boolean(parts[7]),
+        )
+        map.addToActions(pvpSelectAction)
     }
 
     public static void importComputerAction(def parts, Map map){

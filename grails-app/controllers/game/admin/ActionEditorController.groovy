@@ -17,6 +17,7 @@ import game.Market
 import game.MarketItem
 import game.Item
 import game.OwnerItem
+import game.PvpSelectAction
 
 class ActionEditorController {
 
@@ -105,6 +106,10 @@ class ActionEditorController {
         else if (params.actionType == 'ComputerAction'){
             ComputerAction computerAction = new ComputerAction(params)
             computerAction.save()
+        }
+        else if (params.actionType == 'PvpSelectAction'){
+            PvpSelectAction pvpSelectAction = new PvpSelectAction(params)
+            pvpSelectAction.save()
         }
         else if (params.actionType == 'MapMessage'){
             MapMessage mapMessage = new MapMessage(params)
