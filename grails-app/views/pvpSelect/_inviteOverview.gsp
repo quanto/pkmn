@@ -3,14 +3,31 @@
     <g:each in="${invites}" var="invite">
         <tr>
             <td>
+                ${invite.inviteNr}
+            </td>
+            <td>
                 ${invite.player.username}
             </td>
             <td>
                 ${invite.dateCreated}
             </td>
             <td>
-                Accept
+                <g:link action="acceptInvite" id="${invite.inviteNr}">
+                    Accept
+                </g:link>
             </td>
         </tr>
     </g:each>
+</table>
+
+    <g:form action="createInvite" method="post">
+        <table>
+            <tr>
+                <td></td>
+                <td><g:submitButton name="createInvite" value="Create Invite" /></td>
+            </tr>
+
+        </table>
+    </g:form>
+
 </table>
