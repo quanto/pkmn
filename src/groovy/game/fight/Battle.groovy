@@ -50,7 +50,7 @@ class Battle {
      */
     public static void battle(Fight fight)
     {
-        boolean player1first = BattleOrder.player1First(fight)
+        fight.player1first = BattleOrder.player1First(fight)
         FightPlayer fightPlayer1 = fight.fightPlayer1
         FightPlayer fightPlayer2 = fight.fightPlayer2
 
@@ -58,36 +58,23 @@ class Battle {
         fight.roundResult = new RoundResult()
 
         // Log initial hp
-        fight.roundResult.battleActions.add(new InitialHpLog(fightPlayer1.ownerPokemon,1))
-        fight.roundResult.battleActions.add(new InitialHpLog(fightPlayer2.ownerPokemon,2))
+        println "Begin: " + fightPlayer2.hp
+        fight.roundResult.battleActions.add(new InitialHpLog(fightPlayer1.hp, fightPlayer1.ownerPokemon,1))
+        fight.roundResult.battleActions.add(new InitialHpLog(fightPlayer2.hp, fightPlayer2.ownerPokemon,2))
 
-        FightPlayer firstFightPlayer
-        FightPlayer secondFightPlayer
-
-        if (player1first)
-        {
-            firstFightPlayer = fightPlayer1
-            secondFightPlayer = fightPlayer2
-        }
-        else
-        {
-            firstFightPlayer = fightPlayer2
-            secondFightPlayer = fightPlayer1
-        }
-
-        firstFightPlayer = decideAction(fight, firstFightPlayer, secondFightPlayer, true)
+        decideAction(fight, fight.getFirstFightPlayer(), fight.getSecondFightPlayer(), true)
 
         checkPokemonFainted(fight)
 
         if (!fight.battleOver){
-            secondFightPlayer = decideAction(fight, secondFightPlayer, firstFightPlayer, false)
+            decideAction(fight, fight.getSecondFightPlayer(), fight.getFirstFightPlayer(), false)
 
             checkPokemonFainted(fight)
         }
 
         if (!fight.battleOver){
-            afterBattle(fight,firstFightPlayer,secondFightPlayer)
-            afterBattle(fight,secondFightPlayer,firstFightPlayer)
+            afterBattle(fight,fight.getFirstFightPlayer(),fight.getSecondFightPlayer())
+            afterBattle(fight,fight.getSecondFightPlayer(),fight.getFirstFightPlayer())
 
             // Check again after the affterBattle effects
             checkPokemonFainted(fight)
@@ -106,7 +93,7 @@ class Battle {
             // Save the old pokemon
             Stats.saveStats(attackFightPlayer, false)
             // Bring out the new
-            attackFightPlayer = Stats.setBaseStats(fight,attackFightPlayer.battleAction.ownerPokemon, attackFightPlayer.playerType, attackFightPlayer.playerNr)
+            Stats.setBaseStats(fight,attackFightPlayer.battleAction.ownerPokemon, attackFightPlayer.playerType, attackFightPlayer.playerNr)
         }
         else if (attackFightPlayer.battleAction in NoAction){
             // We do nothing at all
@@ -626,11 +613,11 @@ class Battle {
                                 fight.roundResult.battleActions.add(new MessageLog("It`s super effective."))
                         }
 
+                        // Doe schade
+                        defendingFightPlayer.hp = defendingFightPlayer.hp - moveInfo.damage;
 
                         fight.roundResult.battleActions.add(new MessageLog(attackOwnerPokemon.pokemon.name + " hits " + defendingOwnerPokemon.pokemon.name + " with " + attackMove.name + " ${moveInfo.damage} dmg."))
                         Recover.healthSlideLogAction(fight, defendingFightPlayer,moveInfo.damage);
-                        // Doe schade
-                        defendingFightPlayer.hp = defendingFightPlayer.hp - moveInfo.damage;
 
                         if (moveInfo.recoil)
                         {

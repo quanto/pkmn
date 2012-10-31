@@ -21,6 +21,7 @@ class Fight {
 
     BattleType battleType
     boolean battleOver
+    boolean player1first
 
     Date createDate = new Date()
 
@@ -51,6 +52,14 @@ class Fight {
                 return fightPlayer2
             }
         }
+    }
+
+    public FightPlayer getFirstFightPlayer(){
+        player1first?fightPlayer1:fightPlayer2
+    }
+
+    public FightPlayer getSecondFightPlayer(){
+        !player1first?fightPlayer1:fightPlayer2
     }
 
 }

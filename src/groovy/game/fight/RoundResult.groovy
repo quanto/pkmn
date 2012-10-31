@@ -12,6 +12,8 @@ import game.fight.log.InitialHpLog
  */
 class RoundResult {
 
+    List<BattleLog> initialActions = []
+
     List<BattleLog> battleActions = []
 
     List<BattleLog> personalActions = []

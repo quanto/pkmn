@@ -14,8 +14,8 @@ class InitialHpLog extends BattleLog {
     String name
     int level
 
-    public InitialHpLog(OwnerPokemon ownerPokemon, int playerNr){
-        this.hp = ownerPokemon.hp
+    public InitialHpLog(int hp, OwnerPokemon ownerPokemon, int playerNr){
+        this.hp = hp
         this.playerNr = playerNr
         this.maxHp = ownerPokemon.calculateHP()
         this.image = ownerPokemon.pokemon.threeValueNumber() + ".gif"

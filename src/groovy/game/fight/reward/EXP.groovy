@@ -1,7 +1,6 @@
 package game.fight.reward
 
 import game.fight.log.DingLog
-import game.fight.log.EvolveLog
 import game.fight.log.MessageLog
 import game.context.FightPlayer
 import game.context.Fight
