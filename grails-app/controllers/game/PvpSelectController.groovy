@@ -15,7 +15,7 @@ class PvpSelectController {
             render text : "Fout"
         }
         else {
-            render text: g.render(template: 'inviteOverview', model: [invites:fightInviteService.getInvites()])
+            render text: g.render(template: 'inviteOverview', model: [invites:fightInviteService.getInvites(), player:player])
         }
     }
 
