@@ -8,6 +8,7 @@ import game.context.FightPlayer
 import game.Owner
 import game.OwnerPokemon
 import game.OwnerMove
+import game.fight.Hp
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,13 +21,7 @@ class Recover {
 
     public static void recover(Fight fight, int recover, FightPlayer attackFightPlayer)
     {
-        // Voeg hp toe
-
-        if (attackFightPlayer.hp + recover > attackFightPlayer.maxHp)   // TODO is this working ? * -1 below
-        {
-            recover = attackFightPlayer.maxHp - attackFightPlayer.hp;
-        }
-        attackFightPlayer.hp = attackFightPlayer.hp + recover;
+        Hp.doRecover(attackFightPlayer,recover)
 
         // turn negative
         healthSlideLogAction(fight, attackFightPlayer,recover * -1);

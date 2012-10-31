@@ -164,7 +164,6 @@ class Battle {
 
     static void afterTurn(Fight fight)
     {
-
         // hp kan niet lager dan 0
         if (fight.fightPlayer1.hp < 0)
             fight.fightPlayer1.hp = 0;
@@ -175,15 +174,8 @@ class Battle {
         fight.fightPlayer1.lastBattleAction = fight.fightPlayer1.battleAction
         fight.fightPlayer2.lastBattleAction = fight.fightPlayer2.battleAction
 
-        // zet moves weer op 0
-        fight.fightPlayer1.battleAction = null
-        fight.fightPlayer2.battleAction = null
-
-        fight.fightPlayer1.doNoMove = false
-        fight.fightPlayer2.doNoMove = false
-
-        fight.fightPlayer1.waitOnOpponentMove = false
-        fight.fightPlayer2.waitOnOpponentMove = false
+        fight.fightPlayer1.restAfterRound()
+        fight.fightPlayer2.restAfterRound()
     }
 
     static void afterBattle(Fight fight, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer)
@@ -197,8 +189,9 @@ class Battle {
                 seedDamage = 1
             }
 
-            defendingFightPlayer.hp = defendingFightPlayer.hp - seedDamage
-            attackFightPlayer.hp = attackFightPlayer.hp + seedDamage
+            seedDamage = Hp.doStatusDamage(defendingFightPlayer,seedDamage)
+            Hp.doRecover(attackFightPlayer, seedDamage)
+
             fight.roundResult.battleActions.add(new MessageLog("Leech Seed saps " + defendingFightPlayer.ownerPokemon.pokemon.name + ""))
 
             Recover.healthSlideLogAction(fight, attackFightPlayer,seedDamage* -1);
@@ -218,7 +211,9 @@ class Battle {
         {
             // 1/8ste schade
             int burnDamage = Math.floor(attackFightPlayer.maxHp / 8);
-            attackFightPlayer.hp = attackFightPlayer.hp - burnDamage;
+
+            Hp.doStatusDamage(attackFightPlayer,burnDamage)
+
             fight.roundResult.battleActions.add(new MessageLog(attackFightPlayer.ownerPokemon.pokemon.name + " is hurt by its burn burnDamage."))
 
             Recover.healthSlideLogAction(fight, attackFightPlayer,burnDamage);
@@ -229,7 +224,7 @@ class Battle {
         {
             // 1/8ste schade
             int poisonDamage = Math.floor(attackFightPlayer.maxHp / 8);
-            attackFightPlayer.hp = attackFightPlayer.hp - poisonDamage;
+            Hp.doStatusDamage(attackFightPlayer,poisonDamage)
             fight.roundResult.battleActions.add(new MessageLog(attackFightPlayer.ownerPokemon.pokemon.name + " hurts from poison poisonDamage."))
             Recover.healthSlideLogAction(fight, attackFightPlayer,poisonDamage);
         }
@@ -239,8 +234,8 @@ class Battle {
         {
             // steeds verhoogt met 1/16
             int badlyPoisonDamage = Math.floor(attackFightPlayer.maxHp / 16 * attackFightPlayer.badlypoisond);
-            attackFightPlayer.hp = attackFightPlayer.hp - badlyPoisonDamage;
 
+            Hp.doStatusDamage(attackFightPlayer,badlyPoisonDamage)
             fight.roundResult.battleActions.add(new MessageLog(attackFightPlayer.ownerPokemon.pokemon.name + " hurts from badly poison badlyPoisonDamage."))
             Recover.healthSlideLogAction(fight, attackFightPlayer,badlyPoisonDamage);
             // verhoog status
@@ -628,15 +623,15 @@ class Battle {
                         }
 
                         // Doe schade
-                        defendingFightPlayer.hp = defendingFightPlayer.hp - moveInfo.damage;
+                        Hp.doDamage(defendingFightPlayer,moveInfo.damage)
 
                         fight.roundResult.battleActions.add(new MessageLog(attackOwnerPokemon.pokemon.name + " hits " + defendingOwnerPokemon.pokemon.name + " with " + attackMove.name + " ${moveInfo.damage} dmg."))
                         Recover.healthSlideLogAction(fight, defendingFightPlayer,moveInfo.damage);
 
                         if (moveInfo.recoil)
                         {
-                            moveInfo.damage = Math.floor(moveInfo.damage / 100 * moveInfo.recoil);
-                            attackFightPlayer.hp = Math.round(attackFightPlayer.hp - moveInfo.damage);
+                            int recoilDamage = Math.floor(moveInfo.damage / 100 * moveInfo.recoil)
+                            Hp.doStatusDamage(attackFightPlayer,recoilDamage)
 
                             fight.roundResult.battleActions.add(new MessageLog(attackOwnerPokemon.pokemon.name + " hurts from recoil damage. ${moveInfo.damage} dmg."))
                             Recover.healthSlideLogAction(fight, attackFightPlayer,moveInfo.damage);

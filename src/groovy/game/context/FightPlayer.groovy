@@ -52,7 +52,18 @@ class FightPlayer {
     Move continueMove
     BattleAction lastBattleAction
     boolean waitOnOpponentMove = false
-    boolean leechSeed = false // For leech seed
+    boolean leechSeed = false
+    boolean endure = false
+
+    /**
+     * Properties to reset after a battle
+     */
+    public void restAfterRound(){
+        endure = false
+        waitOnOpponentMove = false
+        battleAction = null
+        doNoMove = false
+    }
 
     FightPlayer opponentFightPlayer(){
 

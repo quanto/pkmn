@@ -51,11 +51,11 @@ class BattleTestController {
         Player player = playerData.getPlayer()
 
         // Remove the pkmn at the first position
-        OwnerPokemon.findByOwnerAndPartyPosition(player,1).delete(flush: true)
+        OwnerPokemon.findByOwnerAndPartyPosition(player,1)?.delete(flush: true)
         // Add the pkmn to the new pos
         PokemonCreator.addOwnerPokemonToOwner(pokemon, level, player)
 
-        redirect action : 'game'
+        redirect action : 'index'
     }
 
 

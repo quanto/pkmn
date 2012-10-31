@@ -475,7 +475,7 @@ class FightMove {
         // Explosion status move User faints.
         else if (move.name == "Explosion" || move.name == "Selfdestruct")
         {
-            attackingFightPlayer.hp = 0;
+            attackingFightPlayer.hp = 0
         }
         //400 Super Fang physical move Always takes off half of the opponent's HP.
         else if (move.name == "Super Fang")

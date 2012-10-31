@@ -252,7 +252,7 @@ class StatusMove {
             moveInfo.stageAction = true;
             moveInfo.addToAttackStage = 6;
 
-            attackingFightPlayer.hp = Math.round(attackingFightPlayer.hp - (attackingFightPlayer.maxHp / 2))
+            Hp.doStatusDamage(attackingFightPlayer,Math.floor(attackingFightPlayer.maxHp / 2))
 
             fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.ownerPokemon.pokemon.name} cut its own hp and maximized attack."))
 
@@ -404,6 +404,11 @@ class StatusMove {
                 ownerPokemon.save()
             }
             fight.roundResult.battleActions.add(new MessageLog("All status problems in ${attackingFightPlayer.owner.name}`s party have been cured."))
+        }
+        else if (move.name == "Endure")
+        {
+            attackingFightPlayer.endure = true
+            fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.ownerPokemon.pokemon.name} braced itself."))
         }
     }
 

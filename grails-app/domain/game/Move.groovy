@@ -12,6 +12,7 @@ class Move {
     String effect
     String effectProb
     int implemented
+    int priority
 
     static constraints = {
         tmHm nullable :true

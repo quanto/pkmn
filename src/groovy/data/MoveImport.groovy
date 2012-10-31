@@ -20,7 +20,7 @@ class MoveImport {
         def parts = []
         file.eachLine { line ->
             parts.add( line )
-            if (index%10==9){
+            if (index%11==10){
 
                 Move move = new Move(
                         id: Integer.parseInt(parts[0]),
@@ -32,7 +32,8 @@ class MoveImport {
                         pp : Integer.parseInt(parts[6]),
                         effect : parts[7],
                         effectProb : Integer.parseInt(parts[8]),
-                        implemented : Integer.parseInt(parts[9])
+                        implemented : Integer.parseInt(parts[9]),
+                        priority: Integer.parseInt(parts[10])
                 )
                 move.save()
 
