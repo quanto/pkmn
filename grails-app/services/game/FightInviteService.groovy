@@ -4,6 +4,7 @@ import game.context.FightInvite
 import game.context.BattleType
 import game.context.Fight
 import map.View
+import game.fight.status.Recover
 
 class FightInviteService {
 
@@ -27,6 +28,10 @@ class FightInviteService {
 
             // Remove the invite from our list
             fightInvites.remove(fightInvite)
+
+            // Recover before pvp begins
+            Recover.recoverParty(player1)
+            Recover.recoverParty(player2)
 
             // Start the fight
             Fight fight = fightFactoryService.startFight(BattleType.PVP, player1, player2, null, null)

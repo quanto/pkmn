@@ -6,7 +6,6 @@ import game.fight.log.MessageLog
 import game.fight.log.MoveLog
 import game.fight.log.SwitchLog
 import game.fight.log.InitialHpLog
-import game.fight.log.EvolveLog
 
 /**
  * Adapter between UI and battle engine
@@ -52,6 +51,10 @@ class RoundResult {
             }
             else if (battleAction in InitialHpLog){
                 actionString += "h:${battleAction.playerNr}:" + battleAction.hp + ";";
+                actionString += "x:${battleAction.playerNr}:" + battleAction.maxHp + ";";
+                actionString += "s:${battleAction.playerNr}:" + battleAction.image + ";"
+                actionString += "n:${battleAction.playerNr}:" + battleAction.name + ";";
+                actionString += "l:${battleAction.playerNr}:" + battleAction.level + ";";
             }
 
         }

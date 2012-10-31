@@ -58,8 +58,8 @@ class Battle {
         fight.roundResult = new RoundResult()
 
         // Log initial hp
-        fight.roundResult.battleActions.add(new InitialHpLog(fightPlayer1.ownerPokemon.hp,1))
-        fight.roundResult.battleActions.add(new InitialHpLog(fightPlayer2.ownerPokemon.hp,2))
+        fight.roundResult.battleActions.add(new InitialHpLog(fightPlayer1.ownerPokemon,1))
+        fight.roundResult.battleActions.add(new InitialHpLog(fightPlayer2.ownerPokemon,2))
 
         FightPlayer firstFightPlayer
         FightPlayer secondFightPlayer
@@ -287,11 +287,56 @@ class Battle {
         fight.battleOver = true
     }
 
+
+    static void handlePvPFainted(Fight fight){
+        boolean player1fainted = checkFainted(fight,fight.fightPlayer1)
+        boolean player2fainted = checkFainted(fight,fight.fightPlayer2)
+
+        // draw if the other has no alive pokemon
+        boolean player1Alive = player1fainted?hasAlivePokemon(fight.fightPlayer1):true
+        boolean player2Alive = player2fainted?hasAlivePokemon(fight.fightPlayer2):true
+
+        // Is the battle over
+        if (!player1Alive || !player2Alive){
+            // whats the result
+            if (!player1Alive && !player2Alive){
+                // draw
+            }
+            else if (!player1Alive){
+                // :TODO implement
+            }
+            else {
+
+            }
+
+            // Recover and end
+            Recover.recoverParty(fight.fightPlayer1.owner)
+            Recover.recoverParty(fight.fightPlayer2.owner)
+
+            fight.battleOver = true
+        }
+    }
+
+    static boolean hasAlivePokemon(FightPlayer fightPlayer){
+        // update pokemon hp
+        fightPlayer.ownerPokemon.hp = 0
+        fightPlayer.ownerPokemon.save(flush: true)
+
+        // kijk of er nog levende pokemon zijn
+        def list = OwnerPokemon.findAllByOwnerAndPartyPositionGreaterThanAndHpGreaterThan(fightPlayer.owner,0,0)
+
+        return list.size() > 0
+    }
+
     static void checkPokemonFainted(Fight fight)
     {
+        if (fight.battleType == BattleType.PVP){
+            handlePvPFainted(fight)
+            return
+        }
 
-        boolean player1fainted = checkFainted(fight,fight.fightPlayer1);
-        boolean player2fainted = checkFainted(fight,fight.fightPlayer2);
+        boolean player1fainted = checkFainted(fight,fight.fightPlayer1)
+        boolean player2fainted = checkFainted(fight,fight.fightPlayer2)
 
         if (fight.battleType == BattleType.PVE && player2fainted && !player1fainted)
         {
@@ -307,16 +352,8 @@ class Battle {
         else if (player1fainted) //  && !$player2fainted
         {
 
-            // update pokemon hp
-            fight.fightPlayer1.ownerPokemon.hp = 0
-            fight.fightPlayer1.ownerPokemon.save(flush: true)
 
-            // kijk of er nog levende pokemon zijn
-            def list = OwnerPokemon.findAllByOwnerAndPartyPositionGreaterThanAndHpGreaterThan(fight.fightPlayer1.owner,0,0)
-
-            int alivePokemonNr = list.size()
-
-            if (alivePokemonNr > 0)
+            if (hasAlivePokemon(fight.fightPlayer1))
             {
                 // speler heeft nog levende pokemon
 

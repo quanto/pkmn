@@ -55,6 +55,12 @@ class Moves {
         {
             Battle.battle(fight)
         }
+        else if (fight.battleType == BattleType.PVP){
+            // We should wait on the other
+        }
+        else {
+            assert false
+        }
     }
 
     public static void learnMove(Fight fight, FightPlayer fightPlayer, Move move)
