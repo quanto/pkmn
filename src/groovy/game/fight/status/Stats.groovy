@@ -114,8 +114,6 @@ class Stats {
     {
         OwnerPokemon ownerPokemon = fightPlayer.ownerPokemon
 
-        println fightPlayer.hp
-
         ownerPokemon.hp = fightPlayer.hp
         ownerPokemon.level = fightPlayer.level
         ownerPokemon.burn = fightPlayer.burn

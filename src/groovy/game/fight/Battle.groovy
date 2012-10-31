@@ -58,9 +58,8 @@ class Battle {
         fight.roundResult = new RoundResult()
 
         // Log initial hp
-        println "Begin: " + fightPlayer2.hp
-        fight.roundResult.battleActions.add(new InitialHpLog(fightPlayer1.hp, fightPlayer1.ownerPokemon,1))
-        fight.roundResult.battleActions.add(new InitialHpLog(fightPlayer2.hp, fightPlayer2.ownerPokemon,2))
+        fight.roundResult.initialActions.add(new InitialHpLog(fightPlayer1.hp, fightPlayer1.ownerPokemon,1))
+        fight.roundResult.initialActions.add(new InitialHpLog(fightPlayer2.hp, fightPlayer2.ownerPokemon,2))
 
         decideAction(fight, fight.getFirstFightPlayer(), fight.getSecondFightPlayer(), true)
 
@@ -78,10 +77,9 @@ class Battle {
 
             // Check again after the affterBattle effects
             checkPokemonFainted(fight)
-
-            afterTurn(fight)
         }
 
+        afterTurn(fight)
     }
 
     public static FightPlayer decideAction(Fight fight, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer, boolean firstMove){
@@ -93,7 +91,7 @@ class Battle {
             // Save the old pokemon
             Stats.saveStats(attackFightPlayer, false)
             // Bring out the new
-            Stats.setBaseStats(fight,attackFightPlayer.battleAction.ownerPokemon, attackFightPlayer.playerType, attackFightPlayer.playerNr)
+            Stats.setBaseStats(fight,attackFightPlayer.battleAction.ownerPokemon.refresh(), attackFightPlayer.playerType, attackFightPlayer.playerNr)
         }
         else if (attackFightPlayer.battleAction in NoAction){
             // We do nothing at all
