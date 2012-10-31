@@ -7,6 +7,9 @@ import game.Player
 import game.Pokemon
 import game.context.Fight
 import game.context.BattleType
+import game.PokemonCreator
+import game.OwnerPokemon
+import game.fight.status.Recover
 
 class BattleTestController {
 
@@ -29,6 +32,30 @@ class BattleTestController {
         }
 
         render view : "index"
+    }
+
+    def recover(){
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
+        Recover.recoverParty(player)
+
+        redirect action : 'index'
+    }
+
+    def setPkmn(){
+        Pokemon pokemon = Pokemon.get(params.pokemon)
+        int level = Integer.parseInt(params.level)
+
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
+        // Remove the pkmn at the first position
+        OwnerPokemon.findByOwnerAndPartyPosition(player,1).delete(flush: true)
+        // Add the pkmn to the new pos
+        PokemonCreator.addOwnerPokemonToOwner(pokemon, level, player)
+
+        redirect action : 'game'
     }
 
 

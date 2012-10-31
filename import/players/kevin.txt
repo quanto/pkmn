@@ -12,9 +12,9 @@ Glooming forest center
 6
 16
 11
-49
+73
 ShowMap
-65
+71
 2
 15
 3
@@ -39,19 +39,19 @@ Old factory key
 
 <npcLock>
 cePS20cZXHM9M7p
-30-10-2012 17:59:38
+31-10-2012 14:59:51
 true
 </npcLock>
             
 <npcLock>
 12345
-30-10-2012 17:59:38
+31-10-2012 14:59:51
 true
 </npcLock>
             
 <npcLock>
 RNyn8n09NTaOSqS
-30-10-2012 17:59:38
+31-10-2012 14:59:51
 false
 </npcLock>
             
@@ -64,10 +64,10 @@ false
 22
 10
 21
-41
+53
 Male
-2
-4230
+3
+4530
 18
 </ownerPokemon>
 <ownerMove>
@@ -76,7 +76,7 @@ Bubble
 </ownerMove>
 <ownerMove>
 Tackle
-29
+35
 </ownerMove>
 <ownerMove>
 Water Gun
@@ -89,21 +89,33 @@ Withdraw
 
 <ownerPokemon>
 false
-16
-28
-13
-16
-15
-5
-5
-0
-Female
 1
-47
+25
+11
+24
+4
+8
+0
+31
+Male
 2
+569
+10
 </ownerPokemon>
 <ownerMove>
+Growl
+37
+</ownerMove>
+<ownerMove>
+Leech Seed
+4
+</ownerMove>
+<ownerMove>
 Tackle
-33
+35
+</ownerMove>
+<ownerMove>
+Vine Whip
+15
 </ownerMove>
 

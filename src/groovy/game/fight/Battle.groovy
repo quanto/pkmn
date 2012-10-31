@@ -189,6 +189,22 @@ class Battle {
     static void afterBattle(Fight fight, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer)
     {
 
+        if (defendingFightPlayer.leechSeed){
+            // 1/8ste schade
+            int seedDamage = Math.floor(defendingFightPlayer.maxHp / 8);
+            // Less than 16 hp means 1 damage
+            if (defendingFightPlayer.hp < 16){
+                seedDamage = 1
+            }
+
+            defendingFightPlayer.hp = defendingFightPlayer.hp - seedDamage
+            attackFightPlayer.hp = attackFightPlayer.hp + seedDamage
+            fight.roundResult.battleActions.add(new MessageLog("Leech Seed saps " + defendingFightPlayer.ownerPokemon.pokemon.name + ""))
+
+            Recover.healthSlideLogAction(fight, attackFightPlayer,seedDamage* -1);
+            Recover.healthSlideLogAction(fight, defendingFightPlayer,seedDamage);
+        }
+
         // continues effects
         if (attackFightPlayer.continueMove != 0)
         {
@@ -527,7 +543,7 @@ class Battle {
                         }
 
                         // 277 Payback physical move Power doubles if the user was attacked first.
-                        if (attackMove.id == 277 && !firstMove)
+                        if (attackMove.name == "Payback" && !firstMove)
                         {
                             moveInfo.attackPower = moveInfo.attackPower * 2
                         }
@@ -647,6 +663,19 @@ class Battle {
 
             }
 
+        }
+
+        if (attackMove.name == "Leech Seed"){
+            if (defendingOwnerPokemon.pokemon.type1 == "grass" || defendingOwnerPokemon.pokemon.type2 == "grass"){
+                fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " cannot be seeded."))
+            }
+            else if (defendingFightPlayer.leechSeed){
+                fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is already seeded."))
+            }
+            else {
+                defendingFightPlayer.leechSeed = true
+                fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " was seeded."))
+            }
         }
 
         // Kijk of een aanval een status opheft

@@ -52,6 +52,7 @@ class FightPlayer {
     Move continueMove
     BattleAction lastBattleAction
     boolean waitOnOpponentMove = false
+    boolean leechSeed = false // For leech seed
 
     FightPlayer opponentFightPlayer(){
 

@@ -405,7 +405,6 @@ class StatusMove {
             }
             fight.roundResult.battleActions.add(new MessageLog("All status problems in ${attackingFightPlayer.owner.name}`s party have been cured."))
         }
-        
     }
 
 }

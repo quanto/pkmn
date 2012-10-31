@@ -2157,7 +2157,7 @@ status move
 10
 User steals HP from opponent each turn.
 0
-0
+1
 217
 Leer
 normal
