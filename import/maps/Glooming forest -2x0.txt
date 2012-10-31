@@ -50,4 +50,14 @@ false
 
 
 
+<pvpSelectAction>
+16
+11
+
+
+
+true
+false
+false
+</pvpSelectAction>
 

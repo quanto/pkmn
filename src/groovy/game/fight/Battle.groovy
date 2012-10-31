@@ -115,7 +115,7 @@ class Battle {
             UseItem.useItem(fight, attackFightPlayer.battleAction.ownerItem, attackFightPlayer, defendingFightPlayer)
         }
         else {
-
+            println attackFightPlayer.battleAction
             assert false
         }
         return attackFightPlayer
@@ -196,6 +196,9 @@ class Battle {
 
         fight.fightPlayer1.doNoMove = false
         fight.fightPlayer2.doNoMove = false
+
+        fight.fightPlayer1.waitOnOpponentMove = false
+        fight.fightPlayer2.waitOnOpponentMove = false
     }
 
     static void afterBattle(Fight fight, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer)

@@ -2,8 +2,16 @@
 <%
     Fight fight = fight
 %>
-$("#menu").html("");
-string = "${fight.roundResult.toBattleString()}";
+<g:if test="${myFightPlayer.waitOnOpponentMove}">
 
-prepareActions();
-combatActions();
+    $("#menu").html("");
+    setTimeout(function(){ doAction("${createLink(action:'logRequest')}"); },2000)
+
+</g:if>
+<g:else>
+    $("#menu").html("");
+    string = "${fight.roundResult.toBattleString()}";
+    alert(string)
+    prepareActions();
+    combatActions();
+</g:else>

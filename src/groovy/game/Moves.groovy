@@ -57,6 +57,7 @@ class Moves {
         }
         else if (fight.battleType == BattleType.PVP){
             // We should wait on the other
+            fightPlayer.waitOnOpponentMove = true
         }
         else {
             assert false

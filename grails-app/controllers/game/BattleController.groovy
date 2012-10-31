@@ -46,7 +46,7 @@ class BattleController {
 
         if (player && fight){
             FightPlayer myFightPlayer = fight.myPlayer(player)
-            render view: 'index', model: [fight:fight, myPlayerNr: myFightPlayer.playerNr]
+            render view: 'index', model: [fight:fight, myFightPlayer:myFightPlayer]
         }
         else {
             render text:"No fight"
@@ -60,7 +60,9 @@ class BattleController {
         //owner = owner.merge()
         Fight fight = fightFactoryService.getFight(player.fightNr)
 
-        render text: g.render(template: 'log',model: [fight:fight])
+        FightPlayer myFightPlayer = fight.myPlayer(player)
+
+        render text: g.render(template: 'log',model: [fight:fight,myFightPlayer:myFightPlayer])
     }
 
     def doMove = {
@@ -126,7 +128,7 @@ class BattleController {
 //                    fightFactoryService.endFight(fight)
 //                }
 
-                render template: "log", model : [fight:fight]
+                render template: "log", model : [fight:fight,myFightPlayer:myFightPlayer]
 
 //            }
         }
@@ -167,6 +169,9 @@ class BattleController {
         // moveList
         else if (fight.battleOver){
             render text: g.render(template: 'exit')
+        }
+        else if (myFightPlayer.waitOnOpponentMove){
+            render text: g.render(template: 'waitOnOpponentMove')
         }
         else if (myFightPlayer.hp <= 0 && myFightPlayer.hp > 0)
         {
@@ -221,7 +226,7 @@ class BattleController {
             }
         }
 
-        render template: "log", model : [fight:fight]
+        render template: "log", model : [fight:fight,myFightPlayer:myFightPlayer]
     }
 
     public static void removeLearnMove(FightPlayer fightPlayer)
@@ -261,7 +266,7 @@ class BattleController {
 
         Run.run(fight)
 
-        render template: "log", model : [fight:fight]
+        render template: "log", model : [fight:fight,myFightPlayer:myFightPlayer]
     }
 
     def useItem = {
@@ -277,7 +282,7 @@ class BattleController {
             UseItem.setItemAction(fight, myFightPlayer, ownerItem)
         }
 
-        render template: "log", model : [fight:fight]
+        render template: "log", model : [fight:fight,myFightPlayer:myFightPlayer]
     }
 
 }

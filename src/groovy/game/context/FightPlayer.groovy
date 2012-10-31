@@ -51,6 +51,7 @@ class FightPlayer {
     int holdTurns
     Move continueMove
     BattleAction lastBattleAction
+    boolean waitOnOpponentMove = false
 
     FightPlayer opponentFightPlayer(){
 

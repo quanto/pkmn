@@ -46,7 +46,7 @@
         var totalActions = 0;
 
         var currentAction = 0;
-        var myPlayerNr = ${myPlayerNr}
+        var myPlayerNr = ${myFightPlayer.playerNr}
 
         $(document).ready(function() {
 
@@ -55,7 +55,7 @@
             //getLog();
             //prepareActions();
             //combatActions();
-            <g:render template="log" model="[fight:fight]" />
+            <g:render template="log" model="[fight:fight,myFightPlayer:myFightPlayer]" />
         });
 
         function switchMyPlayer(playerNr){
@@ -224,24 +224,6 @@
             totalActions = combatValues.length;
 
             currentAction = 0;
-
-
-            /*
-            for (var i=0;i<combatValues.length - 1;i++)
-            {
-
-                var action = combatValues[i].substring(0,2);
-                var value = combatValues[i].substring(2,combatValues[i].length);
-                if (action == "a:")
-                {
-                    var player = value.substring(0,1);
-                    var hpValue = value.substring(2,value.length);
-
-
-                    eval("pokemon[" + player + "].health += parseInt(hpValue);");
-                }
-            }
-            */
 
 
 //            if (health[1] > maxHealth[1])
