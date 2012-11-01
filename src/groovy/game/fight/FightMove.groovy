@@ -12,7 +12,10 @@ import game.fight.action.NoAction
 
 class FightMove {
     
-    public static void getMoveInfo(MoveInfo moveInfo, Move move, Fight fight, FightPlayer attackingFightPlayer, FightPlayer defendingFightPlayer){
+    public static void getMoveInfo(MoveInfo moveInfo, Move move, Fight fight, FightPlayer attackingFightPlayer, FightPlayer defendingFightPlayer, boolean firstMove){
+
+        // Where attempting to do physical damage
+        moveInfo.doPhysicalDamage = true
 
         Random random = new Random()
 
@@ -60,7 +63,6 @@ class FightMove {
         else if (move.name == "Magnitude")
         {
             int rand = random.nextInt(7) + 4
-            moveInfo.defaultAttackPower = false
             if (rand == 4)
                 moveInfo.attackPower = 10
             else if (rand == 5)
@@ -407,7 +409,6 @@ class FightMove {
         {
             if (defendingFightPlayer.hp < (defendingFightPlayer.maxHp / 2))
             {
-                moveInfo.defaultAttackPower = false;
                 moveInfo.attackPower = move.power * 2;
             }
         }
@@ -448,7 +449,6 @@ class FightMove {
         {
             if (defendingFightPlayer.sleep != 0)
             {
-                moveInfo.defaultAttackPower = false;
                 moveInfo.attackPower = move.power * 2;
                 defendingFightPlayer.sleep = 0;
                 fight.roundResult.battleActions.add(new MessageLog("${defendingFightPlayer.ownerPokemon.pokemon.name} wakes up."))
@@ -460,7 +460,6 @@ class FightMove {
             def ownerMoves = OwnerMove.findAllByOwnerAndPartyPositionGreaterThen(attackingFightPlayer.owner,0)      // :TODO fix
             int ppLeft = ownerMoves.sum { it.move.name == "Trump Card"?it.ppLeft:0 }
 
-            moveInfo.defaultAttackPower = false
             if (ppLeft > 4)
                 moveInfo.attackPower = 40;
             else if (ppLeft == 4)
@@ -487,7 +486,6 @@ class FightMove {
         // 463 Wring Out special move The higher the opponent's HP, the higher the damage.
         else if (move.name == "Wring Out" || move.name == "Crush Grip")
         {
-            moveInfo.defaultAttackPower = false;
             moveInfo.attackPower = Math.round(110 * attackingFightPlayer.hp / attackingFightPlayer.maxHp);
         }
         // May cause freezing.
@@ -536,7 +534,7 @@ class FightMove {
             if (attackingFightPlayer.lastBattleAction in MoveAction && attackingFightPlayer.lastBattleAction.move.name != "Solarbeam"){
 
                 fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.ownerPokemon.pokemon.name} gathers light.;"))
-                moveInfo.damageAction = false // do nothing
+                moveInfo.doPhysicalDamage = false // do nothing
             }
             else
             {
@@ -551,7 +549,7 @@ class FightMove {
                 moveInfo.effectAction = true
                 moveInfo.stageAction = true
                 moveInfo.addToDefenseStage = 1
-                moveInfo.damageAction = false // do nothing
+                moveInfo.doPhysicalDamage = false // do nothing
             }
             else
             {
@@ -563,7 +561,11 @@ class FightMove {
         {
             moveInfo.holdMove = true;
         }
-
+        // 277 Payback physical move Power doubles if the user was attacked first.
+        else if (move.name == "Payback" && !firstMove)
+        {
+            moveInfo.attackPower = moveInfo.attackPower * 2
+        }
 
     }
     

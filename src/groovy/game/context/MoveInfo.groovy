@@ -45,7 +45,7 @@ class MoveInfo {
     boolean stageAction = false
     boolean holdMove = false
     boolean continueMove = false
-    boolean damageAction = true
+    boolean doPhysicalDamage = false
     boolean recoverAction = false
     boolean badlypoisondActionSucces = false
     boolean poisonActionSucces = false
