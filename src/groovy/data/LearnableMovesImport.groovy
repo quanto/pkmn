@@ -16,15 +16,19 @@ class LearnableMovesImport {
             parts.add( line )
             if (index%3==2){
                 if (Integer.parseInt(parts[0]) <= 150){
+                    Move move = Move.findByNr(Integer.parseInt(parts[2]))
+                    if (move){
+                        LearnableMove learnableMove = new LearnableMove(
+                                pokemon : Pokemon.get(Integer.parseInt(parts[0])),
+                                learnLevel : Integer.parseInt(parts[1]),
+                                move : move
+                        )
 
-                    LearnableMove learnableMove = new LearnableMove(
-                            pokemon : Pokemon.get(Integer.parseInt(parts[0])),
-                            learnLevel : Integer.parseInt(parts[1]),
-                            move : Move.get(Integer.parseInt(parts[2]))
-                    )
-
-                    learnableMove.save()
-
+                        learnableMove.save()
+                    }
+                    else {
+                        println "Skipping learnable move moveNr: ${parts[2]}"
+                    }
                     parts = []
                 }
             }

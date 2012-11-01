@@ -2,6 +2,7 @@ package game
 
 class Move {
 
+    int nr
     String name
     String type
     String category

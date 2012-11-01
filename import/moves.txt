@@ -1989,17 +1989,6 @@ May cause a burn.
 10
 1
 0
-182
-Helping Hand
-normal
-status move
-0
-0
-20
-In Double Battles, boosts the power of the partner's move.
-0
-0
-5
 183
 Hi Jump Kick
 fighting
@@ -2372,7 +2361,7 @@ status move
 10
 User steals HP from opponent each turn.
 0
-0
+1
 0
 217
 Leer

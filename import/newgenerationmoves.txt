@@ -1,0 +1,11 @@
+182
+Helping Hand
+normal
+status move
+0
+0
+20
+In Double Battles, boosts the power of the partner's move.
+0
+0
+5

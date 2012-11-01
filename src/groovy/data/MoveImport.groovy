@@ -23,7 +23,7 @@ class MoveImport {
             if (index%11==10){
 
                 Move move = new Move(
-                        id: Integer.parseInt(parts[0]),
+                        nr: Integer.parseInt(parts[0]),
                         name: parts[1],
                         type: parts[2],
                         category : parts[3],
