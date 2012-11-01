@@ -8,6 +8,7 @@ import game.context.Fight
 import game.Move
 import game.OwnerMove
 import game.fight.action.MoveAction
+import game.fight.action.NoAction
 
 class FightMove {
     

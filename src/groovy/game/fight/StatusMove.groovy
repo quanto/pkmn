@@ -410,6 +410,13 @@ class StatusMove {
             attackingFightPlayer.endure = true
             fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.ownerPokemon.pokemon.name} braced itself."))
         }
+        else if (move.name == "Protect")
+        {
+            attackingFightPlayer.protect = true
+            moveInfo.accuracy = attackingFightPlayer.protectAccuracy
+            attackingFightPlayer.protectAccuracy = Math.round(attackingFightPlayer.protectAccuracy / 2)
+
+        }
     }
 
 }

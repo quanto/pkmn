@@ -54,6 +54,8 @@ class FightPlayer {
     boolean waitOnOpponentMove = false
     boolean leechSeed = false
     boolean endure = false
+    boolean protect = false
+    int protectAccuracy = 100
 
     /**
      * Properties to reset after a battle
@@ -63,6 +65,7 @@ class FightPlayer {
         waitOnOpponentMove = false
         battleAction = null
         doNoMove = false
+        protect = false
     }
 
     FightPlayer opponentFightPlayer(){

@@ -6,6 +6,7 @@ import game.context.FightPlayer
 import game.Moves
 import game.context.MoveInfo
 import game.fight.status.Recover
+import game.Move
 
 /**
  * Created with IntelliJ IDEA.
@@ -33,7 +34,7 @@ class Paralyses {
         }
     }
 
-    public static void paralysisAction(Fight fight, MoveInfo moveInfo, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer){
+    public static void paralysisAction(Fight fight, MoveInfo moveInfo, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer, Move attackMove){
         // paralysis
         if (moveInfo.paralysisAction && moveInfo.effectSucces)
         {
@@ -47,7 +48,7 @@ class Paralyses {
             }
             else
             {
-                if (moveInfo.attackMoveeffectProb == 0 || moveInfo.attackMoveeffectProb == 100)
+                if (attackMove.category == "status move")
                     fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.ownerPokemon.pokemon.name + " is already paralyzed."))
             }
         }

@@ -47,10 +47,10 @@ class MoveInfo {
     boolean continueMove = false
     boolean damageAction = true
     boolean recoverAction = false
-    int attackMoveeffectProb = 0
     boolean badlypoisondActionSucces = false
     boolean poisonActionSucces = false
     boolean burnActionSucces = false
     boolean effectActionOnBoth = false
     int recover = 0
+    int accuracy
 }

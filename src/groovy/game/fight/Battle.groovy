@@ -466,17 +466,15 @@ class Battle {
         assert attackFightPlayer.battleAction in MoveAction
         assert attackFightPlayer.battleAction.move
 
-        MoveInfo moveInfo = new MoveInfo()
-
         Move attackMove = attackFightPlayer.battleAction.move
+
+        MoveInfo moveInfo = new MoveInfo()
+        moveInfo.accuracy = attackMove.accuracy
+
         OwnerPokemon attackOwnerPokemon = attackFightPlayer.ownerPokemon
         OwnerPokemon defendingOwnerPokemon = defendingFightPlayer.ownerPokemon
 
         Random random = new Random()
-
-        String attackMovetype
-        String attackMovecategory
-
 
         moveInfo.criticalHitStage += attackFightPlayer.criticalStage;
 
@@ -509,7 +507,7 @@ class Battle {
         }
 
         // bereken accuracy
-        double accuracy = Accuraccy.getAccuracy(attackMove.accuracy,attackFightPlayer.accuracyStage);
+        double accuracy = Accuraccy.getAccuracy(moveInfo.accuracy,attackFightPlayer.accuracyStage);
 
         // evade over accuracy
         int chanceOnHitting = Evasion.getEvasion(accuracy,defendingFightPlayer.evasionStage);
@@ -623,10 +621,13 @@ class Battle {
                         }
 
                         // Doe schade
-                        Hp.doDamage(defendingFightPlayer,moveInfo.damage)
+                        moveInfo.damage = Hp.doDamage(defendingFightPlayer,moveInfo.damage)
 
-                        fight.roundResult.battleActions.add(new MessageLog(attackOwnerPokemon.pokemon.name + " hits " + defendingOwnerPokemon.pokemon.name + " with " + attackMove.name + " ${moveInfo.damage} dmg."))
-                        Recover.healthSlideLogAction(fight, defendingFightPlayer,moveInfo.damage);
+                        // If there's no damage the user protected itself
+                        if (moveInfo.damage > 0){
+                            fight.roundResult.battleActions.add(new MessageLog(attackOwnerPokemon.pokemon.name + " hits " + defendingOwnerPokemon.pokemon.name + " with " + attackMove.name + " ${moveInfo.damage} dmg."))
+                            Recover.healthSlideLogAction(fight, defendingFightPlayer,moveInfo.damage);
+                        }
 
                         if (moveInfo.recoil)
                         {
@@ -674,7 +675,7 @@ class Battle {
         }
 
         // Kijk of een aanval een status opheft
-        if (attackMovetype == "fire" && defendingFightPlayer.freeze == 1)
+        if (attackMove.type == "fire" && defendingFightPlayer.freeze == 1)
         {
             defendingFightPlayer.freeze == 0
             fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is no longer frozen."))
@@ -701,12 +702,18 @@ class Battle {
 
         // Kijk of het effect slaagt
         moveInfo.effectSucces = false
-        if (moveInfo.attackMoveeffectProb == 0 || random.nextInt(100)+1 <= moveInfo.attackMoveeffectProb)
+        if (attackMove.effectProb == 0 || random.nextInt(100)+1 <= attackMove.effectProb)
         {
-            if (moveInfo.effectAction && attackMovecategory == "status move")
+            if (moveInfo.effectAction && attackMove.category == "status move")
             {
-                moveSucces = true
-                moveInfo.effectSucces = true
+                // Protect cancels the effect
+                if (moveInfo.effectSucces){
+                    fight.roundResult.battleActions.add(new MessageLog("${attackFightPlayer.ownerPokemon.pokemon.name} protected itself."))
+                }
+                else {
+                    moveSucces = true
+                    moveInfo.effectSucces = true
+                }
             }
             else if (moveSucces)
             {
@@ -714,6 +721,9 @@ class Battle {
             }
         }
 
+
+
+        // Apply effect
         if ((moveInfo.effectAction && moveSucces))
         {
             // continues move
@@ -739,15 +749,15 @@ class Battle {
 
             Confusion.confusionAction(fight, moveInfo, attackFightPlayer, defendingFightPlayer)
 
-            Paralyses.paralysisAction(fight, moveInfo, attackFightPlayer, defendingFightPlayer)
+            Paralyses.paralysisAction(fight, moveInfo, attackFightPlayer, defendingFightPlayer, attackMove)
 
-            Burn.burnAction(fight, moveInfo, defendingFightPlayer)
+            Burn.burnAction(fight, moveInfo, defendingFightPlayer, attackMove)
 
-            Freeze.freezeAction(fight, moveInfo, defendingFightPlayer)
+            Freeze.freezeAction(fight, moveInfo, defendingFightPlayer, attackMove)
 
-            Poison.poisonAction(fight, moveInfo, defendingFightPlayer)
+            Poison.poisonAction(fight, moveInfo, defendingFightPlayer, attackMove)
 
-            Poison.badlyPoisondAction(fight, moveInfo, defendingFightPlayer)
+            Poison.badlyPoisondAction(fight, moveInfo, defendingFightPlayer, attackMove)
 
             if (moveInfo.recoverAction)
             {
@@ -757,7 +767,7 @@ class Battle {
                 }
                 else
                 {
-                    if (moveInfo.attackMoveeffectProb == 0 || moveInfo.attackMoveeffectProb == 100)
+                    if (attackMove.effectProb == 0 || attackMove.effectProb == 100)
                         fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " fails to recover."))
                 }
             }

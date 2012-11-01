@@ -12,9 +12,9 @@ Glooming forest center
 6
 16
 11
-73
+74
 ShowMap
-71
+72
 2
 15
 3
@@ -24,12 +24,12 @@ ROLE_ADMIN
 </role>
 
 <ownerItem>
-Potion
-19
-</ownerItem>
-            <ownerItem>
 Poke Ball
 2
+</ownerItem>
+            <ownerItem>
+Potion
+19
 </ownerItem>
             <ownerItem>
 Old factory key
@@ -39,19 +39,19 @@ Old factory key
 
 <npcLock>
 cePS20cZXHM9M7p
-31-10-2012 14:59:51
+01-11-2012 09:33:36
 true
 </npcLock>
             
 <npcLock>
 12345
-31-10-2012 14:59:51
+01-11-2012 09:33:36
 true
 </npcLock>
             
 <npcLock>
 RNyn8n09NTaOSqS
-31-10-2012 14:59:51
+01-11-2012 09:33:36
 false
 </npcLock>
             
@@ -117,5 +117,37 @@ Tackle
 <ownerMove>
 Vine Whip
 15
+</ownerMove>
+
+<ownerPokemon>
+false
+115
+14
+20
+7
+14
+2
+2
+0
+Female
+1
+64009
+40
+</ownerPokemon>
+<ownerMove>
+Endure
+6
+</ownerMove>
+<ownerMove>
+Leer
+30
+</ownerMove>
+<ownerMove>
+Mega Punch
+20
+</ownerMove>
+<ownerMove>
+Tail Whip
+30
 </ownerMove>
 

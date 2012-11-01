@@ -9,6 +9,11 @@ class Hp {
      * Return the real amount of damage done
      */
     static int doDamage(FightPlayer fightPlayer, int damage){
+        if (fightPlayer.protect){
+            damage = 0
+            fightPlayer.fight.roundResult.battleActions.add(new MessageLog("${fightPlayer.ownerPokemon.pokemon.name} protected itself."))
+        }
+
         damage = doStatusDamage(fightPlayer, damage)
 
         // Endure leaves the user with 1 hp

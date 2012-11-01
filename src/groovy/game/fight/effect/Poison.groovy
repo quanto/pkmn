@@ -6,10 +6,11 @@ import game.context.Fight
 import game.context.FightPlayer
 import game.OwnerPokemon
 import game.fight.log.MessageLog
+import game.Move
 
 class Poison {
 
-    public static void poisonAction(Fight fight, MoveInfo moveInfo, FightPlayer defendingFightPlayer){
+    public static void poisonAction(Fight fight, MoveInfo moveInfo, FightPlayer defendingFightPlayer, Move attackMove){
         // Poison
         if (moveInfo.poisonAction)
         {
@@ -33,13 +34,13 @@ class Poison {
             else
             {
                 // Bericht bij move die bedoelt is om te poisenen
-                if (moveInfo.attackMoveeffectProb == 0 || moveInfo.attackMoveeffectProb == 100)
+                if (attackMove.category == "status move")
                 fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is already poisoned."))
             }
         }
     }
 
-    public static void badlyPoisondAction(Fight fight, MoveInfo moveInfo, FightPlayer defendingFightPlayer){
+    public static void badlyPoisondAction(Fight fight, MoveInfo moveInfo, FightPlayer defendingFightPlayer, Move attackMove){
         //badlypoisend wordt meer met iedere beurt
         if (moveInfo.badlypoisondAction)
         {
@@ -64,7 +65,7 @@ class Poison {
             else
             {
                 // Bericht bij move die bedoelt is om te poisenen
-                if (moveInfo.attackMoveeffectProb == 0 || moveInfo.attackMoveeffectProb == 100)
+                if (attackMove.category == "status move")
                     fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is already poisoned."))
             }
         }

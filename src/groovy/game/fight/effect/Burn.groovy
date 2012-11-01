@@ -6,10 +6,11 @@ import game.context.FightPlayer
 import game.OwnerPokemon
 import game.fight.status.Recover
 import game.fight.log.MessageLog
+import game.Move
 
 class Burn {
 
-    public static void burnAction(Fight fight, MoveInfo moveInfo, FightPlayer defendingFightPlayer){
+    public static void burnAction(Fight fight, MoveInfo moveInfo, FightPlayer defendingFightPlayer, Move attackMove){
         OwnerPokemon defendingOwnerPokemon = defendingFightPlayer.ownerPokemon
 
         // burn
@@ -32,7 +33,7 @@ class Burn {
             }
             else
             {
-                if (moveInfo.attackMoveeffectProb == 0 || moveInfo.attackMoveeffectProb == 100)
+                if (attackMove.category == "status move")
                     fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is already burning."))
             }
         }

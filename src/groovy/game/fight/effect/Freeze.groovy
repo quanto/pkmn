@@ -7,6 +7,7 @@ import game.Moves
 import game.context.MoveInfo
 import game.OwnerPokemon
 import game.fight.status.Recover
+import game.Move
 
 class Freeze {
 
@@ -33,7 +34,7 @@ class Freeze {
         }
     }
 
-    public static void freezeAction(Fight fight, MoveInfo moveInfo, FightPlayer defendingFightPlayer){
+    public static void freezeAction(Fight fight, MoveInfo moveInfo, FightPlayer defendingFightPlayer, Move attackMove){
 
         OwnerPokemon defendingOwnerPokemon = defendingFightPlayer.ownerPokemon
 
@@ -58,7 +59,7 @@ class Freeze {
             }
             else
             {
-                if (moveInfo.attackMoveeffectProb == 0 || moveInfo.attackMoveeffectProb == 100)
+                if (attackMove.category == "status move")
                     fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is already frozen."))
             }
         }

@@ -11,7 +11,7 @@ class Move {
     int pp
     Integer tmHm = null
     String effect
-    String effectProb
+    int effectProb
     int implemented
     int priority
 
