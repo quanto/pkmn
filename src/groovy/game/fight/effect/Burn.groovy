@@ -19,7 +19,7 @@ class Burn {
         {
             if (defendingFightPlayer.burn == 0)
             {
-                if (defendingOwnerPokemon.pokemon.type1 == "fire" || defendingOwnerPokemon.pokemon.type2 == "fire")
+                if (defendingOwnerPokemon.pokemon.hasType("fire"))
                 {
                     fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is immune to fire."))
                 }

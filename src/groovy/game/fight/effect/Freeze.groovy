@@ -44,7 +44,7 @@ class Freeze {
         {
             if (defendingFightPlayer.freeze == 0)
             {
-                if (defendingOwnerPokemon.pokemon.type1 == "ice" || defendingOwnerPokemon.pokemon.type2 == "ice")
+                if (defendingOwnerPokemon.pokemon.hasType("ice"))
                 {
                     fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is immune to freeze."))
 

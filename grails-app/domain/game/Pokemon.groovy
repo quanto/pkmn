@@ -30,4 +30,8 @@ class Pokemon {
         return "#${nr} ${name}"
     }
 
+    boolean hasType(String type){
+        return type1 == type || type2 == type
+    }
+
 }

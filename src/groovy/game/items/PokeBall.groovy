@@ -25,7 +25,7 @@ class PokeBall {
         }
         else if (item.name == "Net Ball")
         {
-            if (defendingFightPlayer.ownerPokemon.pokemon.type1 == "bug" || defendingFightPlayer.ownerPokemon.pokemon.type1 == "water" || defendingFightPlayer.ownerPokemon.pokemon.type2 == "bug" || defendingFightPlayer.ownerPokemon.pokemon.type2 == "water")
+            if (defendingFightPlayer.ownerPokemon.pokemon.hasType("bug") || defendingFightPlayer.ownerPokemon.pokemon.hasType("water"))
             {
                 catchFactor = 3
             }

@@ -605,7 +605,7 @@ class Battle {
                             }
                         }
                         // 2x damage against an opponent using Fly.
-                        if (attackMove.name == "Twister" && (defendingOwnerPokemon.pokemon.type1 == "flying" || defendingOwnerPokemon.pokemon.type2 == "flying"))
+                        if (attackMove.name == "Twister" && defendingOwnerPokemon.pokemon.hasType("flying"))
                         {
                             moveInfo.damage = moveInfo.damage * 2;
                         }
@@ -663,7 +663,7 @@ class Battle {
         }
 
         if (attackMove.name == "Leech Seed"){
-            if (defendingOwnerPokemon.pokemon.type1 == "grass" || defendingOwnerPokemon.pokemon.type2 == "grass"){
+            if (defendingOwnerPokemon.pokemon.hasType("grass")){
                 fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " cannot be seeded."))
             }
             else if (defendingFightPlayer.leechSeed){

@@ -20,7 +20,7 @@ class Poison {
             // controlleer of de status al staat
             if (defendingFightPlayer.poison == 0 && defendingFightPlayer.badlypoisond == 0 && moveInfo.effectSucces)
             {
-                if (defendingOwnerPokemon.pokemon.type1 == "poison" || defendingOwnerPokemon.pokemon.type2== "poison" || defendingOwnerPokemon.pokemon.type1 == "steel" || defendingOwnerPokemon.pokemon.type2 == "steel")
+                if (defendingOwnerPokemon.pokemon.hasType("poison") || defendingOwnerPokemon.pokemon.hasType("steel"))
                 {
                     fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is immune to poison."))
                 }
@@ -50,7 +50,7 @@ class Poison {
             // kijk of niet al poisond
             if (defendingFightPlayer.poison == 0 && defendingFightPlayer.badlypoisond == 0 && moveInfo.effectSucces)
             {
-                if (defendingOwnerPokemon.pokemon.type1 == "poison" || defendingOwnerPokemon.pokemon.type2 == "poison" || defendingOwnerPokemon.pokemon.type1 == "steel" || defendingOwnerPokemon.pokemon.type2 == "steel")
+                if (defendingOwnerPokemon.pokemon.hasType("poison") || defendingOwnerPokemon.pokemon.hasType("steel"))
                 {
                     fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is immune to poison."))
                 }
