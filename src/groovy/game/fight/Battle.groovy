@@ -41,6 +41,7 @@ import game.fight.action.SwitchAction
 import game.fight.action.NoAction
 import game.fight.log.InitialHpLog
 import game.fight.action.ItemAction
+import game.context.MoveCategory
 
 class Battle {
 
@@ -481,7 +482,7 @@ class Battle {
 
         fight.roundResult.battleActions.add(new MessageLog(attackFightPlayer.ownerPokemon.pokemon.name + " uses " + attackMove.name + "."))
 
-        if (attackMove.category == "physical move" || attackMove.category == "special move")
+        if (attackMove.category == MoveCategory.PhysicalMove || attackMove.category == MoveCategory.SpecialMove)
         {
 
             moveInfo.effectAction = false
@@ -492,7 +493,7 @@ class Battle {
 
             FightMove.getMoveInfo(moveInfo, attackMove, fight, attackFightPlayer, defendingFightPlayer)
         }
-        else if (attackMove.category == "status move")
+        else if (attackMove.category == MoveCategory.StatusMove)
         {
             moveInfo.damageAction = false
             moveInfo.recoverAction = false
@@ -704,7 +705,7 @@ class Battle {
         moveInfo.effectSucces = false
         if (attackMove.effectProb == 0 || random.nextInt(100)+1 <= attackMove.effectProb)
         {
-            if (moveInfo.effectAction && attackMove.category == "status move")
+            if (moveInfo.effectAction && attackMove.category == MoveCategory.StatusMove)
             {
                 // Protect cancels the effect
                 if (moveInfo.effectSucces){

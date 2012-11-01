@@ -8,6 +8,7 @@ import game.context.MoveInfo
 import game.OwnerPokemon
 import game.fight.status.Recover
 import game.Move
+import game.context.MoveCategory
 
 class Freeze {
 
@@ -59,7 +60,7 @@ class Freeze {
             }
             else
             {
-                if (attackMove.category == "status move")
+                if (attackMove.category == MoveCategory.StatusMove)
                     fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is already frozen."))
             }
         }

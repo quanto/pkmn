@@ -1,6 +1,7 @@
 package data
 
 import game.Move
+import game.context.MoveCategory
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,7 +27,6 @@ class MoveImport {
                         nr: Integer.parseInt(parts[0]),
                         name: parts[1],
                         type: parts[2],
-                        category : parts[3],
                         power : Integer.parseInt(parts[4]),
                         accuracy : Integer.parseInt(parts[5]),
                         pp : Integer.parseInt(parts[6]),
@@ -35,6 +35,19 @@ class MoveImport {
                         implemented : Integer.parseInt(parts[9]),
                         priority: Integer.parseInt(parts[10])
                 )
+                if (parts[3] == "special move"){
+                    move.category = MoveCategory.SpecialMove
+                }
+                else if (parts[3] == "physical move"){
+                    move.category = MoveCategory.PhysicalMove
+                }
+                else if (parts[3] == "status move"){
+                    move.category = MoveCategory.StatusMove
+                }
+                else {
+                    assert false
+                }
+
                 move.save()
 
                 parts = []

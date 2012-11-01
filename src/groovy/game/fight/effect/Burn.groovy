@@ -7,6 +7,7 @@ import game.OwnerPokemon
 import game.fight.status.Recover
 import game.fight.log.MessageLog
 import game.Move
+import game.context.MoveCategory
 
 class Burn {
 
@@ -33,7 +34,7 @@ class Burn {
             }
             else
             {
-                if (attackMove.category == "status move")
+                if (attackMove.category == MoveCategory.StatusMove)
                     fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is already burning."))
             }
         }

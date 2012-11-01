@@ -7,6 +7,7 @@ import game.context.FightPlayer
 import game.OwnerPokemon
 import game.fight.log.MessageLog
 import game.Move
+import game.context.MoveCategory
 
 class Poison {
 
@@ -34,7 +35,7 @@ class Poison {
             else
             {
                 // Bericht bij move die bedoelt is om te poisenen
-                if (attackMove.category == "status move")
+                if (attackMove.category == MoveCategory.StatusMove)
                 fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is already poisoned."))
             }
         }
@@ -65,7 +66,7 @@ class Poison {
             else
             {
                 // Bericht bij move die bedoelt is om te poisenen
-                if (attackMove.category == "status move")
+                if (attackMove.category == MoveCategory.StatusMove)
                     fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is already poisoned."))
             }
         }

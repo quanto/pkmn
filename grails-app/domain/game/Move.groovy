@@ -1,11 +1,13 @@
 package game
 
+import game.context.MoveCategory
+
 class Move {
 
     int nr
     String name
     String type
-    String category
+    MoveCategory category
     int power
     int accuracy
     int pp

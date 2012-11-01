@@ -7,6 +7,7 @@ import game.Moves
 import game.context.MoveInfo
 import game.fight.status.Recover
 import game.Move
+import game.context.MoveCategory
 
 /**
  * Created with IntelliJ IDEA.
@@ -48,7 +49,7 @@ class Paralyses {
             }
             else
             {
-                if (attackMove.category == "status move")
+                if (attackMove.category == MoveCategory.StatusMove)
                     fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.ownerPokemon.pokemon.name + " is already paralyzed."))
             }
         }
