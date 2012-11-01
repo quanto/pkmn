@@ -21,7 +21,7 @@ class FightInviteService {
     }
 
     void acceptInvite(int inviteNr, Player player2){
-        FightInvite fightInvite = fightInvites.find{ it.inviteNr }
+        FightInvite fightInvite = fightInvites.find{ it.inviteNr == inviteNr }
         if (fightInvite && fightInvite.player.id != player2.id){
             Player player1 = fightInvite.player
 
@@ -53,7 +53,18 @@ class FightInviteService {
         }
     }
 
-    def List getInvites(){
+    void cancelInvite(Player player){
+        FightInvite fightInvite = fightInvites.find{ it.player.id == player.id }
+        if (fightInvite){
+            fightInvites.remove(fightInvite)
+        }
+    }
+
+    FightInvite getInvite(Player player){
+        return fightInvites.find{ it.player.id == player.id }
+    }
+
+    List getInvites(){
         return fightInvites
     }
 }

@@ -278,6 +278,7 @@ function disconnect()
 
 function checkBattle()
 {
+    var hasBattle = false;
 	$.ajax({
         async:false,
 		type: "GET",
@@ -287,10 +288,12 @@ function checkBattle()
 		success: function(battleFrame){
 			if(battleFrame != "")
 			{
+                hasBattle = true;
 				$("#theMap").html(battleFrame);
 			}
 		}
 	});
+    return hasBattle;
 };
 
 function continueBattle()

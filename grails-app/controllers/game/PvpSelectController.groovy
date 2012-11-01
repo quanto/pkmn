@@ -15,8 +15,30 @@ class PvpSelectController {
             render text : "Fout"
         }
         else {
-            render text: g.render(template: 'inviteOverview', model: [invites:fightInviteService.getInvites(), player:player])
+            boolean haveInvite = fightInviteService.getInvite(player)
+
+            if (haveInvite){
+                render text: g.render(template: 'waiting')
+            }
+            else {
+                render text: g.render(template: 'inviteOverview', model: [invites:fightInviteService.getInvites(), player:player])
+            }
         }
+    }
+
+    def cancelInvite(){
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
+        fightInviteService.cancelInvite(player)
+        redirect controller: 'game'
+    }
+
+    def inviteAccepted(){
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
+        render text: player.view == View.Battle
     }
 
     def createInvite(){
