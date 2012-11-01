@@ -502,7 +502,7 @@ class Battle {
         }
 
         // openent moves die ervoor zogen dat er niet gemist kan worden
-        if (attackMove?.name == "Solarbeam")
+        if (defendingFightPlayer.battleAction in MoveAction && defendingFightPlayer.battleAction.move.name == "Solarbeam")
         {
             moveInfo.cantMiss = true
         }
