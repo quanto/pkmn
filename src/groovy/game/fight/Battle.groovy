@@ -252,8 +252,8 @@ class Battle {
 
             fight.roundResult.battleActions.add(new MessageLog(fightPlayer.ownerPokemon.pokemon.name + " fainted."))
             // stop attacks
-            fight.fightPlayer1.battleAction = null
-            fight.fightPlayer2.battleAction = null
+            fight.fightPlayer1.battleAction = new NoAction()
+            fight.fightPlayer2.battleAction = new NoAction()
 
             return true;
         }

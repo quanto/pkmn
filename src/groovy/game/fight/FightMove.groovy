@@ -539,7 +539,7 @@ class FightMove {
             }
             else
             {
-                attackingFightPlayer.battleAction = null // zet op 0 zodat deze niet wordt herhaalt
+                attackingFightPlayer.battleAction = new NoAction() // zet op 0 zodat deze niet wordt herhaalt
             }
         }
         // Increases user's Defense one stage in the 1st turn, attacks in the 2nd turn.
@@ -554,7 +554,7 @@ class FightMove {
             }
             else
             {
-                attackingFightPlayer.battleAction = null; // zet op 0 zodat deze niet wordt herhaalt
+                attackingFightPlayer.battleAction = new NoAction() // zet op 0 zodat deze niet wordt herhaalt
             }
         }
 
