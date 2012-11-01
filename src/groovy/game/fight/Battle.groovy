@@ -545,7 +545,7 @@ class Battle {
                         // effectieviteit
                         moveInfo.effectiveness = Effective.effectiveness(attackMove.type,attackOwnerPokemon.pokemon.type1,attackOwnerPokemon.pokemon.type2)
 
-                        if (attackMove.type == "special move")
+                        if (attackMove.category == MoveCategory.SpecialMove)
                         {
                             // bereken nieuwe stats
                             int attackStat = Stat.getStat(attackFightPlayer.spAttack, attackFightPlayer.spAttackStage);
@@ -555,11 +555,9 @@ class Battle {
                         }
                         else
                         {
-
                             // bereken nieuwe stats
                             int attackStat = Stat.getStat(attackFightPlayer.attack, attackFightPlayer.attackStage);
                             int defenseStat = Stat.getStat(defendingFightPlayer.defense, defendingFightPlayer.defenseStage);
-
                             // bereken schade
                             moveInfo.damage = Damage.calcDmg(attackFightPlayer.level,attackStat,moveInfo.attackPower,defenseStat,moveInfo.effectiveness);
                         }
@@ -662,19 +660,6 @@ class Battle {
 
         }
 
-        if (attackMove.name == "Leech Seed"){
-            if (defendingOwnerPokemon.pokemon.hasType("grass")){
-                fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " cannot be seeded."))
-            }
-            else if (defendingFightPlayer.leechSeed){
-                fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is already seeded."))
-            }
-            else {
-                defendingFightPlayer.leechSeed = true
-                fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " was seeded."))
-            }
-        }
-
         // Kijk of een aanval een status opheft
         if (attackMove.type == "fire" && defendingFightPlayer.freeze == 1)
         {
@@ -727,6 +712,20 @@ class Battle {
         // Apply effect
         if ((moveInfo.effectAction && moveSucces))
         {
+            // Leech seed
+            if (attackMove.name == "Leech Seed"){
+                if (defendingOwnerPokemon.pokemon.hasType("grass")){
+                    fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " cannot be seeded."))
+                }
+                else if (defendingFightPlayer.leechSeed){
+                    fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is already seeded."))
+                }
+                else {
+                    defendingFightPlayer.leechSeed = true
+                    fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " was seeded."))
+                }
+            }
+
             // continues move
             if (moveInfo.continueMove && moveInfo.effectSucces)
             {
