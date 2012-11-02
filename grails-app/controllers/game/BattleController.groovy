@@ -14,6 +14,8 @@ import game.fight.Run
 import game.fight.action.MoveAction
 import game.fight.action.SwitchAction
 import game.fight.RoundResult
+import game.context.BattleType
+import game.fight.action.NoAction
 
 class BattleController {
 
@@ -73,62 +75,65 @@ class BattleController {
         Fight fight = fightFactoryService.getFight(player.fightNr)
         FightPlayer myFightPlayer = fight.myPlayer(player)
 
-        int ownerPokemonMoveId = Integer.parseInt(params.id)
+        if (!fight.switchRound){
 
-        OwnerMove ownerMove = OwnerMove.findByIdAndOwnerPokemon(ownerPokemonMoveId,myFightPlayer.ownerPokemon)
-        Move move = ownerMove.move
+            int ownerPokemonMoveId = Integer.parseInt(params.id)
 
-        if (move == null || move.name == "Struggle") // Struggle || geen move
-        {
-            // Dit is geen eigen move, pp hoeft er niet af
-            Moves.setMove(fight,myFightPlayer, new MoveAction(move:ownerMove.move))
-        }
-        else
-        {
+            OwnerMove ownerMove = OwnerMove.findByIdAndOwnerPokemon(ownerPokemonMoveId,myFightPlayer.ownerPokemon)
+            Move move = ownerMove.move
 
-//            // Controlleer of de user klopt
-//            if (ownerMove.ownerPokemon.owner != owner)
-//            {
-//                println "4"
-//                render text:"Move bestaat niet voor pokemon"
-//                return
-//            }
-//            else
-//            {
-                // :TODO implement
-//                // controlleer pp
-//                if (ownerPokemonMove->ppLeft != 0)
-//                {
-//                    if (isset(_SESSION["takePP"]) && _SESSION["takePP"] == false)
-//                    {
-//
-//                        _SESSION["takePP"] = true;
-//                    }
-//                    else
-//                    {
+            if (move == null || move.name == "Struggle") // Struggle || geen move
+            {
+                // Dit is geen eigen move, pp hoeft er niet af
+                Moves.setMove(fight,myFightPlayer, new MoveAction(move:ownerMove.move))
+            }
+            else
+            {
 
-                if (ownerMove.ppLeft <= 0){
-                    fight.roundResult.personalActions.add(new MessageLog("No pp left for move ${ownerMove.move.name}."))
-                }
-                else {
-                    ownerMove.ppLeft -= 1
-                    ownerMove.save()
-                    Moves.setMove(fight,myFightPlayer, new MoveAction(move:ownerMove.move))
-                }
+    //            // Controlleer of de user klopt
+    //            if (ownerMove.ownerPokemon.owner != owner)
+    //            {
+    //                println "4"
+    //                render text:"Move bestaat niet voor pokemon"
+    //                return
+    //            }
+    //            else
+    //            {
+                    // :TODO implement
+    //                // controlleer pp
+    //                if (ownerPokemonMove->ppLeft != 0)
+    //                {
+    //                    if (isset(_SESSION["takePP"]) && _SESSION["takePP"] == false)
+    //                    {
+    //
+    //                        _SESSION["takePP"] = true;
+    //                    }
+    //                    else
+    //                    {
 
-//                }
-//                else
-//                {
-//                    exit();
-//                    //header("Location: index.php?action=fight");
-//                }
+                    if (ownerMove.ppLeft <= 0){
+                        fight.roundResult.personalActions.add(new MessageLog("No pp left for move ${ownerMove.move.name}."))
+                    }
+                    else {
+                        ownerMove.ppLeft -= 1
+                        ownerMove.save()
+                        Moves.setMove(fight,myFightPlayer, new MoveAction(move:ownerMove.move))
+                    }
 
-                // After displaying last message we can destroy the fight
-//                if (fight.battleOver){
-//                    fightFactoryService.endFight(fight)
-//                }
+    //                }
+    //                else
+    //                {
+    //                    exit();
+    //                    //header("Location: index.php?action=fight");
+    //                }
 
-                render template: "log", model : [fight:fight,myFightPlayer:myFightPlayer]
+                    // After displaying last message we can destroy the fight
+    //                if (fight.battleOver){
+    //                    fightFactoryService.endFight(fight)
+    //                }
+            }
+
+            render template: "log", model : [fight:fight,myFightPlayer:myFightPlayer]
 
 //            }
         }
@@ -173,11 +178,23 @@ class BattleController {
         else if (myFightPlayer.waitOnOpponentMove){
             render text: g.render(template: 'waitOnOpponentMove')
         }
-        else if (myFightPlayer.hp <= 0 && myFightPlayer.hp > 0)
+        else if (fight.switchRound && myFightPlayer.hp <= 0)
         {
             List<OwnerPokemon> ownerPokemonList = OwnerPokemon.findAllByOwnerAndPartyPositionGreaterThan(player,0)
             FightPlayer fightPlayer = myFightPlayer
             render text: g.render(template: 'pokemonList',model: [mustChoose:true,ownerPokemonList:ownerPokemonList,fightPlayer:fightPlayer])
+        }
+        // Ask to switch
+        else if (fight.switchRound && params.pkmn == null)
+        {
+            render text: g.render(template: 'chooseSwitchPokemon')
+        }
+        // Switch pokemon list
+        else if (params.pkmn != null && !fight.battleOver)
+        {
+            List<OwnerPokemon> ownerPokemonList = OwnerPokemon.findAllByOwnerAndPartyPositionGreaterThan(player,0)
+            FightPlayer fightPlayer = myFightPlayer
+            render text: g.render(template: 'pokemonList',model: [mustChoose:false,ownerPokemonList:ownerPokemonList,fightPlayer:fightPlayer])
         }
         else if (params.items != null){
 
@@ -189,16 +206,25 @@ class BattleController {
 
             render text: g.render(template: 'moveList', model: [ownerMoveList:myFightPlayer.ownerPokemon.ownerMoves])
         }
-        // Switch pokemon list
-        else if (params.pkmn != null && !fight.battleOver)
-        {
-            List<OwnerPokemon> ownerPokemonList = OwnerPokemon.findAllByOwnerAndPartyPositionGreaterThan(player,0)
-            FightPlayer fightPlayer = myFightPlayer
-            render text: g.render(template: 'pokemonList',model: [mustChoose:false,ownerPokemonList:ownerPokemonList,fightPlayer:fightPlayer])
-        }
+
         else {
             render text: g.render(template: 'actionList')
         }
+    }
+
+
+    def noSwitch = {
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
+        Fight fight = fightFactoryService.getFight(player.fightNr)
+        FightPlayer myFightPlayer = fight.myPlayer(player)
+
+        if (fight.switchRound && myFightPlayer.hp > 0){
+            Moves.setMove(fight,myFightPlayer, new NoAction(), false)
+        }
+
+        render template: "log", model : [fight:fight,myFightPlayer:myFightPlayer]
     }
 
     def switchPokemon = {
@@ -214,16 +240,16 @@ class BattleController {
             boolean mustSwitch = myFightPlayer.hp <= 0
 
             // We must switch. This should not trigger a new round
-            if(!mustSwitch){
+//            if(!mustSwitch){
                 Moves.setMove(fight,myFightPlayer, new SwitchAction( ownerPokemon: ownerPokemon ), false)
-            }
-            else {
-                // We set a new round result, so we don't see the old messages
-                fight.roundResult = new RoundResult()
-
-                Stats.saveStats(myFightPlayer, false)
-                Stats.setBaseStats(fight,ownerPokemon, PlayerType.user, myFightPlayer.playerNr)
-            }
+//            }
+//            else {
+//                // We set a new round result, so we don't see the old messages
+//                fight.roundResult = new RoundResult()
+//
+//                Stats.saveStats(myFightPlayer, false)
+//                Stats.setBaseStats(fight,ownerPokemon, PlayerType.user, myFightPlayer.playerNr)
+//            }
         }
 
         render template: "log", model : [fight:fight,myFightPlayer:myFightPlayer]
@@ -263,8 +289,9 @@ class BattleController {
         Player player = playerData.getPlayer()
 
         Fight fight = fightFactoryService.getFight(player.fightNr)
-
-        Run.run(fight)
+        if (!fight.switchRound){
+            Run.run(fight)
+        }
 
         render template: "log", model : [fight:fight,myFightPlayer:myFightPlayer]
     }
@@ -276,12 +303,15 @@ class BattleController {
         Fight fight = fightFactoryService.getFight(player.fightNr)
         FightPlayer myFightPlayer = fight.myPlayer(player)
 
-        OwnerItem ownerItem = player.ownerItems.find() { it.id == Integer.parseInt(params.id) }
+        if (!fight.switchRound){
 
-        if (ownerItem){
-            UseItem.setItemAction(fight, myFightPlayer, ownerItem)
+            OwnerItem ownerItem = player.ownerItems.find() { it.id == Integer.parseInt(params.id) }
+
+            if (ownerItem){
+                UseItem.setItemAction(fight, myFightPlayer, ownerItem)
+            }
+
         }
-
         render template: "log", model : [fight:fight,myFightPlayer:myFightPlayer]
     }
 

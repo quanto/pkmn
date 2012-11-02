@@ -57,6 +57,8 @@ class Battle {
 
         // New round, start with a new object
         fight.roundResult = new RoundResult()
+        // Reset the switch round
+        fight.switchRound = false
 
         // Log initial hp
         fight.roundResult.initialActions.add(new InitialHpLog(fightPlayer1.hp, fightPlayer1.ownerPokemon,1))
@@ -314,6 +316,12 @@ class Battle {
             Recover.recoverParty(fight.fightPlayer2.owner)
 
             fight.battleOver = true
+        }
+        else {
+            // Should we do a switch round
+            if (player1fainted || player2fainted){
+                fight.switchRound = true
+            }
         }
     }
 

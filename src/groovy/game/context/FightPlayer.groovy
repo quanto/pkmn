@@ -62,6 +62,7 @@ class FightPlayer {
      */
     public void restAfterRound(){
         endure = false
+        // Don't clear the status if the opponent must choose
         waitOnOpponentMove = false
         battleAction = null
         doNoMove = false

@@ -22,6 +22,8 @@ class Fight {
     BattleType battleType
     boolean battleOver
     boolean player1first
+    // Round where one or both users must switch
+    boolean switchRound = false
 
     Date createDate = new Date()
 

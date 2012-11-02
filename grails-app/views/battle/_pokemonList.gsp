@@ -9,7 +9,7 @@
             <td>${ownerPokemon.hp}/${ownerPokemon.calculateHP()}</td>
             <td>${ownerPokemon.level}</td>
             <td>${ownerPokemon.gender}</td>
-            <g:if test="${ownerPokemon.hp > 0 && fightPlayer.ownerPokemon.pokemon.id != ownerPokemon.pokemon.id}">
+            <g:if test="${ownerPokemon.hp > 0 && fightPlayer.ownerPokemon.id != ownerPokemon.id}">
                 <td><a href='' onclick="return doAction('${createLink(action:'switchPokemon',id:ownerPokemon.partyPosition)}');">switch</a></td>
             </g:if>
         </tr>
