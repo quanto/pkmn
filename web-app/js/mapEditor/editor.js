@@ -583,11 +583,11 @@
                 
                 if (field[1][h][w] != "")
                 {
-                     html += "<img style='position:absolute;top:-8;left:0;' src='/game/images/tiles/sheet1/" + field[1][h][w] + ".png'>";
+                     html += "<img src='/game/images/tiles/sheet1/" + field[1][h][w] + ".png'>";
                 }
                 else
                 {
-                    html += "<img style='position:absolute;top:-8;left:0;' src='/game/images/mapEditor/empty.gif'>";
+                    html += "<img src='/game/images/mapEditor/empty.gif'>";
                     
                 }
                 html += "</a>";

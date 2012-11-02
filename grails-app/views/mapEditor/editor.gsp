@@ -1,7 +1,7 @@
 <%@ page import="game.MapLayout" %>
 <html>
 <head>
-    <script type="text/javascript" src="${resource(uri:'')}/js/jquery-1.7.min.js"></script>
+    <meta name='layout' content='game'/>
     <script type="text/javascript" src="${resource(uri:'')}/js/mapEditor/sets.js"></script>
     <script type="text/javascript" src="${resource(uri:'')}/js/mapEditor/editor.js"></script>
     <script type="text/javascript" src="${resource(uri:'')}/js/mapEditor/tabs.js"></script>
@@ -87,7 +87,9 @@
     table#fieldWrapper td
     {
         border:1px solid white;
-        font-size:8px;
+        font-size:0px;
+        position:relative;
+        top:-9px;
     }
 
     a:link, a:visited

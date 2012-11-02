@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
     <head>
-        <title>Main</title>
+        <meta name="layout" content="game">
         <style>
             ul {
                 list-style-position: inside;
@@ -13,7 +13,7 @@
         </style>
     </head>
     <body>
-        <div id="status" role="complementary">
+        <div id="status" role="complementary" style="float:left;">
             <h1>Application Status</h1>
             <ul>
                 <li>App version: <g:meta name="app.version"/></li>
@@ -33,7 +33,7 @@
                 </g:each>
             </ul>
         </div>
-        <div id="page-body" role="main">
+        <div id="page-body" role="main" style="float:left;">
 
             <div id="controller-list" role="navigation">
                 <h1>Available Controllers:</h1>

@@ -9,4 +9,10 @@ class OwnerItem {
 
     static constraints = {
     }
+
+    @Override
+    public String toString(){
+        return "Item: ${item.name}, Quantity: ${quantity}"
+    }
+
 }
