@@ -11,6 +11,9 @@ class Map {
     Integer worldX
     Integer worldY
 
+    static scaffoldList           = ['name','worldX','worldY']
+    static scaffoldSearch         = ['name','worldX','worldY']
+
     static hasMany = [mapPokemonList: MapPokemon, actions:Action]
 
     static mapping = {

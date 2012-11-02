@@ -20,4 +20,7 @@ class Npc extends Owner {
         npcDefeatedMessage nullable: true
     }
 
+    static scaffoldList           = ['name','permanentLock']
+    static scaffoldSearch         = ['name','permanentLock']
+
 }

@@ -20,4 +20,7 @@ class Move {
     static constraints = {
         tmHm nullable :true
     }
+
+    static scaffoldList           = ['nr','name','type','category','implemented']
+    static scaffoldSearch         = ['nr','name','type','category','implemented']
 }
