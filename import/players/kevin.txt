@@ -12,9 +12,9 @@ Glooming forest center
 6
 16
 11
-74
+81
 ShowMap
-72
+73
 2
 15
 3
@@ -24,34 +24,34 @@ ROLE_ADMIN
 </role>
 
 <ownerItem>
-Poke Ball
-2
+Old factory key
+1
 </ownerItem>
             <ownerItem>
 Potion
 19
 </ownerItem>
             <ownerItem>
-Old factory key
-1
+Poke Ball
+2
 </ownerItem>
             
 
 <npcLock>
 cePS20cZXHM9M7p
-01-11-2012 09:33:36
+02-11-2012 10:00:41
 true
 </npcLock>
             
 <npcLock>
 12345
-01-11-2012 09:33:36
+02-11-2012 10:00:41
 true
 </npcLock>
             
 <npcLock>
 RNyn8n09NTaOSqS
-01-11-2012 09:33:36
+02-11-2012 10:00:41
 false
 </npcLock>
             
@@ -64,12 +64,16 @@ false
 22
 10
 21
-53
+55
 Male
 3
-4530
-18
+4712
+19
 </ownerPokemon>
+<ownerMove>
+Bite
+25
+</ownerMove>
 <ownerMove>
 Bubble
 30
@@ -81,10 +85,6 @@ Tackle
 <ownerMove>
 Water Gun
 25
-</ownerMove>
-<ownerMove>
-Withdraw
-40
 </ownerMove>
 
 <ownerPokemon>
@@ -104,11 +104,11 @@ Male
 </ownerPokemon>
 <ownerMove>
 Growl
-37
+40
 </ownerMove>
 <ownerMove>
 Leech Seed
-4
+10
 </ownerMove>
 <ownerMove>
 Tackle
@@ -128,7 +128,7 @@ false
 14
 2
 2
-0
+139
 Female
 1
 64009
@@ -136,7 +136,7 @@ Female
 </ownerPokemon>
 <ownerMove>
 Endure
-6
+10
 </ownerMove>
 <ownerMove>
 Leer

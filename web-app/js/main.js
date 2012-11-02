@@ -324,7 +324,7 @@ function loadNewsItems()
 {
 	$.ajax({
 		type: "GET",
-		url: "/game/admin/showNewsItems",
+		url: "/game/chat/showNewsItems",
 		data: "",
 		cache: false,
 		success: function(newsItems){

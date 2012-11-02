@@ -28,4 +28,18 @@ class ChatController {
         render text: ""
     }
 
+    def showNewsItems()
+    {
+        List<NewsItem> newsItems = NewsItem.list(max:20)
+
+        String string = "";
+
+        newsItems.each { NewsItem newsItem ->
+
+            string += "<p><strong>${newsItem.player.username}:</strong><em class='chatTime'>(${newsItem.date.format("dd/MM-mm:ss")})</em> ${newsItem.message.encodeAsHTML()}</p>"
+        }
+
+        render text: string
+    }
+
 }
