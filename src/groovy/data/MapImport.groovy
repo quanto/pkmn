@@ -12,6 +12,7 @@ import game.Npc
 import game.Market
 import game.MarketAction
 import game.PvpSelectAction
+import game.Player
 
 class MapImport {
 
@@ -154,7 +155,8 @@ class MapImport {
                 dataForeground : parts[2],
                 active : parts[3] == '1',
                 worldX: parts[4]=='null'?null:parts[4],
-                worldY: parts[5]=='null'?null:parts[5]
+                worldY: parts[5]=='null'?null:parts[5],
+                owner: parts[6]==''?null:Player.get(Integer.parseInt(parts[6]))
         )
         map.save()
         return map

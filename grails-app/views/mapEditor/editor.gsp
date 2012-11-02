@@ -216,10 +216,16 @@
                             <textarea style="width:300px;height:200px;" id="foreground" name="map.dataForeground"></textarea>
                             <textarea style="width:300px;height:200px;" id="background" name="map.dataBackground"></textarea>
                         </div>
+                        <br />
                         Name: <g:textField name="map.name" value="${map?.name}" /> <br />
-                        Active: <g:checkBox name="map.active" value="${map?.active}" /><br />
-                        WorldX: <g:textField name="map.worldX" value="${map?.worldX}" /><br />
-                        WorldY: <g:textField name="map.worldY" value="${map?.worldY}" /><br />
+                        <sec:ifAnyGranted roles="ROLE_ADMIN">
+
+
+                            Active: <g:checkBox name="map.active" value="${map?.active}" /><br />
+                            WorldX: <g:textField name="map.worldX" value="${map?.worldX}" /><br />
+                            WorldY: <g:textField name="map.worldY" value="${map?.worldY}" /><br />
+                        </sec:ifAnyGranted>
+
                         <g:actionSubmit value="saveMap" onclick="createMapData();">Save</g:actionSubmit>
 
                     </div>

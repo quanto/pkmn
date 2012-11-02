@@ -2,21 +2,28 @@ package game.admin
 
 import game.Map
 import game.MapLayout
-import game.MapTransition
-import game.Action
-import game.ComputerAction
-import game.RecoverAction
-import game.MapMessage
-import game.NpcAction
-import data.OwnerBackup
-import game.MarketAction
-import data.MarketBackup
 import data.MapBackup
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import game.context.PlayerData
+import game.Player
 
 class MapEditorController {
 
     def index() {
-        render view: "index", model: [maps:Map.list()]
+
+        def maps = []
+
+        if (SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')){
+            maps = Map.list()
+        }
+        else {
+            PlayerData playerData = session.playerData
+            Player player = playerData.getPlayer()
+
+            maps = Map.findAllByOwner(player)
+        }
+
+        render view: "index", model: [maps:maps]
     }
 
 
@@ -57,6 +64,12 @@ class MapEditorController {
         }
         else {
             map = new Map(params.map)
+        }
+
+        if (!SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')){
+            PlayerData playerData = session.playerData
+            Player player = playerData.getPlayer()
+            map.owner = player
         }
 
         map.save()

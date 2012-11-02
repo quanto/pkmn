@@ -13,8 +13,8 @@ class Map {
 
     Player owner
 
-    static scaffoldList           = ['name','worldX','worldY']
-    static scaffoldSearch         = ['name','worldX','worldY']
+    static scaffoldList           = ['name','worldX','worldY','owner.username']
+    static scaffoldSearch         = ['name','worldX','worldY','owner.username']
 
     static hasMany = [mapPokemonList: MapPokemon, actions:Action]
 
