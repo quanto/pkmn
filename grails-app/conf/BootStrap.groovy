@@ -20,6 +20,11 @@ class BootStrap {
                 authority:"ROLE_ADMIN"
         )
         adminRole.save()
+        Role editorRole = new Role(
+                authority:"ROLE_MAP_EDITOR"
+        )
+        editorRole.save()
+
 
         PokemonImport.importPokemon()
 

@@ -5,6 +5,7 @@ Blossom_town
 false
 null
 null
+
 </mapData>
 <pokemon>
 1

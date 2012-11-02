@@ -5,6 +5,7 @@ Glooming forest market
 false
 null
 null
+8
 </mapData>
 
 <mapTransition>

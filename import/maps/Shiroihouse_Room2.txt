@@ -5,6 +5,7 @@ Shiroihouse_Room2
 false
 null
 null
+
 </mapData>
 
 

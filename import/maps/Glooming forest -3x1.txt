@@ -5,6 +5,7 @@ Glooming forest -3x1
 false
 -3
 1
+
 </mapData>
 <pokemon>
 16

@@ -5,6 +5,7 @@ City of Light 6x0
 false
 6
 0
+
 </mapData>
 
 

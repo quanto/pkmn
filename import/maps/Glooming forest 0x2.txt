@@ -5,6 +5,7 @@ Glooming forest 0x2
 false
 0
 2
+
 </mapData>
 <pokemon>
 10

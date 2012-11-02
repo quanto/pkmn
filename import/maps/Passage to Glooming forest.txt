@@ -5,6 +5,7 @@ Passage to Glooming forest
 false
 1
 2
+
 </mapData>
 <pokemon>
 10

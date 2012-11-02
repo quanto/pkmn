@@ -5,6 +5,7 @@ Glooming forest center
 false
 null
 null
+
 </mapData>
 
 <mapTransition>

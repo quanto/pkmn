@@ -11,6 +11,8 @@ class Map {
     Integer worldX
     Integer worldY
 
+    Player owner
+
     static scaffoldList           = ['name','worldX','worldY']
     static scaffoldSearch         = ['name','worldX','worldY']
 
@@ -29,6 +31,7 @@ class Map {
         active display:true
         worldX nullable: true
         worldY nullable: true
+        owner nullable: true
     }
 
     static transients = ['foregroundImage','backgroundImage']

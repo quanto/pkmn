@@ -5,6 +5,7 @@ Blossom_town2
 false
 null
 null
+
 </mapData>
 
 

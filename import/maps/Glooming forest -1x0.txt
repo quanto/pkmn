@@ -5,6 +5,7 @@ Glooming forest -1x0
 false
 -1
 0
+
 </mapData>
 
 

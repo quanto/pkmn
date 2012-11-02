@@ -24,12 +24,12 @@ ROLE_ADMIN
 </role>
 
 <ownerItem>
-Old factory key
-1
-</ownerItem>
-            <ownerItem>
 Potion
 19
+</ownerItem>
+            <ownerItem>
+Old factory key
+1
 </ownerItem>
             <ownerItem>
 Poke Ball
@@ -39,19 +39,19 @@ Poke Ball
 
 <npcLock>
 cePS20cZXHM9M7p
-02-11-2012 10:00:41
+02-11-2012 14:10:43
 true
 </npcLock>
             
 <npcLock>
 12345
-02-11-2012 10:00:41
+02-11-2012 14:10:43
 true
 </npcLock>
             
 <npcLock>
 RNyn8n09NTaOSqS
-02-11-2012 10:00:41
+02-11-2012 14:10:43
 false
 </npcLock>
             

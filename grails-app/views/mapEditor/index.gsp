@@ -5,7 +5,7 @@
 </head>
 <body>
 
-    <g:link action="editor">New Map</g:link> | <g:link action="worldMap">World Map</g:link>
+    <g:link action="editor">New Map</g:link> | <g:link action="worldMap">World Map</g:link> | <g:link action="exportMaps">Export Maps</g:link>
     <br/>
     <table>
 
