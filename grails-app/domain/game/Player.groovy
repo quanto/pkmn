@@ -19,15 +19,12 @@ class Player extends Owner{
     int positionX = 1
     int positionY = 1
     Map map
-    boolean online
-    int adminlvl
     Date registerDate = new Date()
     Date lastLogin
     int money = 100
     View view = View.ChoosePokemon
     // Stored to send the player back to the last recover location when he loses
     RecoverAction lastRecoverAction
-    // view
 
     int pveBattlesWon = 0
     int pveBattlesLost = 0
@@ -69,5 +66,8 @@ class Player extends Owner{
     protected void encodePassword() {
         password = springSecurityService.encodePassword(password)
     }
+
+    static scaffoldList           = ['username','email','view']
+    static scaffoldSearch         = ['username','email','view']
 
 }

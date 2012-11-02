@@ -1,4 +1,8 @@
-<%=packageName ? "package ${packageName}\n\n" : ''%>import org.springframework.dao.DataIntegrityViolationException
+<%=packageName ? "package ${packageName}\n\n" : ''%>
+
+import org.springframework.dao.DataIntegrityViolationException
+import scaffolding.ScaffoldSearch
+import org.codehaus.groovy.grails.commons.DefaultGrailsDomainClass
 
 class ${className}Controller {
 
@@ -10,7 +14,26 @@ class ${className}Controller {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [${propertyName}List: ${className}.list(params), ${propertyName}Total: ${className}.count()]
+
+        def ${className}Class = new DefaultGrailsDomainClass(${className}.class)
+
+        def scaffoldSearch = []
+        try {
+            scaffoldSearch = ${className}?.scaffoldSearch
+        }
+        catch (Exception e){}
+
+        def searchProperties = scaffoldSearch.plus( ${className}Class.getProperties().collect{it.name} ).unique()
+
+        // customCriteriaFilter not implemented
+        Closure customCriteriaFilter = { def builder -> }
+
+        def searchResults = ScaffoldSearch.searchByParams(params,${className},searchProperties,customCriteriaFilter)
+        int totalRows = ScaffoldSearch.searchByParams(params,${className},searchProperties,customCriteriaFilter,true)
+
+        [${propertyName}List: searchResults, ${propertyName}Total: totalRows]
+
+//        [${propertyName}List: ${className}.list(params), ${propertyName}Total: ${className}.count()]
     }
 
     def create() {
