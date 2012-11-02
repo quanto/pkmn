@@ -333,6 +333,14 @@ class BootStrap {
                 date: new Date().parse("dd-MM-yyyy HH:mm:ss","29-10-2012 12:00:00")
         ).save()
 
+        new NewsItem(
+                message: """
+                    Yeah, pvp is finaly working correct!
+                """,
+                player: Player.findByUsername("kevin"),
+                date: new Date().parse("dd-MM-yyyy HH:mm:ss","02-11-2012 12:00:00")
+        ).save()
+
         Player p = Player.findByUsername("kevin")
         p.password = "12345"
     }
