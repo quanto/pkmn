@@ -9,24 +9,9 @@
     <script type="text/javascript" src="${resource(uri:'')}/js/jquery_json.js"></script>
     <script type="text/javascript" src="${resource(uri:'')}/js/jquery-ui-1.9.0.custom.min.js"></script>
 
-    <script type="text/javascript">
-    $(function(){
-
-        // Dialog Link
-        $('#dialog_link').click(function(){
-            $('#dialog').dialog('open');
-            return false;
-        });
-
-        // Dialog
-        $('#dialog').dialog({
-            autoOpen: false
-        });
-
-    });
-    </script>
-
     <link type="text/css" href="${resource(uri:'')}/css/jqueryui.css" rel="stylesheet">
+    <parameter name="showRightContent" value="${true}" />
+    <parameter name="showBottomContent" value="${true}" />
 
 </head>
 
@@ -37,6 +22,26 @@
     <div id="theMap"></div>
 
     <div id="textBox"></div>
+
+    <div id="tableNavigation" style="position:absolute;bottom:-5px;right:0px;">
+        <table style="width:0;" cellpadding="0" cellspacing="0">
+            <tr>
+                <td></td>
+                <td><img id="moveUp" src="${resource(uri:'')}/images/move/button.png" style="position: relative;top:30px;" onclick="" /></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><img id="moveLeft" src="${resource(uri:'')}/images/move/button.png" style="position: relative;left:30px;" /></td>
+                <td></td>
+                <td><img id="moveRight" src="${resource(uri:'')}/images/move/button.png" style="position: relative;right:30px;" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><img id="moveDown" src="${resource(uri:'')}/images/move/button.png" style="position: relative;bottom:30px;" /></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
         
 </body>
 </html>

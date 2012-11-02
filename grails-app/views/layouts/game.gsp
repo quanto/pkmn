@@ -140,69 +140,51 @@
                 <g:layoutBody/>
             </center>
         </td>
-        <td valign="top" id="right" rowspan="2">
+        <g:if test="${pageProperty(name: 'page.showRightContent')}">
+            <td valign="top" id="right" rowspan="2">
 
-            <div id="accordion">
-                <h1>Map</h1>
-                <div class="userData">
-                    <div id="mapName"></div>
-                    <div id="location"></div>
+                <div id="accordion">
+                    <h1>Map</h1>
+                    <div class="userData">
+                        <div id="mapName"></div>
+                        <div id="location"></div>
+                    </div>
+                    <h1>Online</h1>
+                    <div id="online">
+
+                    </div>
+                    <h1>Party</h1>
+                    <div id="party">
+
+                    </div>
+                    <h1>News</h1>
+                    <div id="news">
+
+                    </div>
+                    <h1>Stats</h1>
+                    <div id="stats">
+
+                    </div>
+                    <h1>Items</h1>
+                    <div id="items">
+
+                    </div>
                 </div>
-                <h1>Online</h1>
-                <div id="online">
-
-                </div>
-                <h1>Party</h1>
-                <div id="party">
-
-                </div>
-                <h1>News</h1>
-                <div id="news">
-
-                </div>
-                <h1>Stats</h1>
-                <div id="stats">
-
-                </div>
-                <h1>Items</h1>
-                <div id="items">
-
-                </div>
-            </div>
-        </td>
-
+            </td>
+        </g:if>
     </tr>
-    <tr>
-        <td id="bottom" valign="bottom">
-            <div class="chatBox" id="chatBox">
-            </div>
-            <div>
-                <input type="text" id="chatMessage" />
-            </div>
-        </td>
-    </tr>
-
+    <g:if test="${pageProperty(name: 'page.showBottomContent')}">
+        <tr>
+            <td id="bottom" valign="bottom">
+                <div class="chatBox" id="chatBox">
+                </div>
+                <div>
+                    <input type="text" id="chatMessage" />
+                </div>
+            </td>
+        </tr>
+    </g:if>
 </table>
-
-<div id="tableNavigation" style="position:absolute;bottom:-5px;right:0px;">
-    <table style="width:0;" cellpadding="0" cellspacing="0">
-        <tr>
-            <td></td>
-            <td><img id="moveUp" src="${resource(uri:'')}/images/move/button.png" style="position: relative;top:30px;" onclick="" /></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><img id="moveLeft" src="${resource(uri:'')}/images/move/button.png" style="position: relative;left:30px;" /></td>
-            <td></td>
-            <td><img id="moveRight" src="${resource(uri:'')}/images/move/button.png" style="position: relative;right:30px;" /></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><img id="moveDown" src="${resource(uri:'')}/images/move/button.png" style="position: relative;bottom:30px;" /></td>
-            <td></td>
-        </tr>
-    </table>
-</div>
 
 <g:javascript library="application"/>
 <r:layoutResources />
