@@ -25,6 +25,7 @@
                     %>
                     <td>
                         <center>
+                            <div style="z-index:9999;position:relative;background-color:white;">
                             (${x})-(${y})
                             <g:if test="${map}">
                                 <g:link action="editor" id="${map.id}">${mapLayout.map?.name}</g:link>
@@ -37,9 +38,10 @@
                             <g:else>
                                 <g:link action="editor" params="${[worldX:x,worldY:y]}">New</g:link>
                             </g:else>
+                            </div>
                             <g:if test="${mapLayout}">
 
-                                <g:render template="/game/map" model="${[mapLayout:mapLayout]}" />
+                                <g:render template="/game/layerMap" model="${[mapLayout:mapLayout,map:map]}" />
                             </g:if>
                         </center>
                     </td>

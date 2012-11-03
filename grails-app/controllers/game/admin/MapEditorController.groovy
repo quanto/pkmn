@@ -74,6 +74,10 @@ class MapEditorController {
 
         map.save()
 
+        // Update images
+        map.getForegroundImage(true)
+        map.getBackgroundImage(true)
+
         redirect action:"index"
     }
 
