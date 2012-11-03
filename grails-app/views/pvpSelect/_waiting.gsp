@@ -9,3 +9,7 @@
         }
     },2000)
 </script>
+
+<p>
+    <a href='${createLink(action:'exit')}'>Exit</a>
+</p>

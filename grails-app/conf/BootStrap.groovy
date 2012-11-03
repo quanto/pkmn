@@ -348,6 +348,10 @@ class BootStrap {
 
         Player p = Player.findByUsername("kevin")
         p.password = "12345"
+
+        Player p2 = Player.findByUsername("Lieke")
+        p2.password = "lieke"
+        p2.save()
     }
 
     def destroy = {

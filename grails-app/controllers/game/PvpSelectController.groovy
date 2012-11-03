@@ -59,4 +59,21 @@ class PvpSelectController {
 
         redirect controller: "game"
     }
+
+    def exit = {
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
+        if (player.view != View.ShowPvpSelect){
+            render text : "Fout"
+        }
+        else {
+            fightInviteService.cancelInvite(player)
+
+            player.view = View.ShowMap
+            player.save()
+            redirect controller: 'game', action:'index'
+        }
+    }
+
 }

@@ -25,7 +25,7 @@
     <g:form action="createInvite" method="post">
         <table>
             <tr>
-                <td></td>
+                <td><input type="button" value="refresh" onclick="document.location.reload()" /></td>
                 <td><g:submitButton name="createInvite" value="Create Invite" /></td>
             </tr>
 
@@ -33,3 +33,7 @@
     </g:form>
 
 </table>
+
+<p>
+    <a href='${createLink(action:'exit')}'>Exit</a>
+</p>

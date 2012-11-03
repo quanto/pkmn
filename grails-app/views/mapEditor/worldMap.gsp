@@ -34,6 +34,9 @@
                                     println MapPokemon.countByMap(map)
                                 %>
                             </g:if>
+                            <g:else>
+                                <g:link action="editor" params="${[worldX:x,worldY:y]}">New</g:link>
+                            </g:else>
                             <g:if test="${mapLayout}">
 
                                 <g:render template="/game/map" model="${[mapLayout:mapLayout]}" />

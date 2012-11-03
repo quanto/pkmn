@@ -255,6 +255,7 @@ class GameController {
             MapLayout mapLayout = MapLayout.createMapArray(player.map);
 
             render text: g.render(template: 'map', model: [mapLayout: mapLayout, player: player])
+            //render text: g.render(template: 'layerMap', model: [map:player.map,mapLayout: mapLayout, player: player])
         }
         else if (player.view == View.ShowMarket){
             redirect controller : "market", action: "index"

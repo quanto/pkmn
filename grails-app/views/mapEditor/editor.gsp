@@ -222,8 +222,8 @@
 
 
                             Active: <g:checkBox name="map.active" value="${map?.active}" /><br />
-                            WorldX: <g:textField name="map.worldX" value="${map?.worldX}" /><br />
-                            WorldY: <g:textField name="map.worldY" value="${map?.worldY}" /><br />
+                            WorldX: <g:textField name="map.worldX" value="${map?.worldX?:params.worldX}" /><br />
+                            WorldY: <g:textField name="map.worldY" value="${map?.worldY?:params.worldY}" /><br />
                         </sec:ifAnyGranted>
 
                         <g:actionSubmit value="saveMap" onclick="createMapData();">Save</g:actionSubmit>

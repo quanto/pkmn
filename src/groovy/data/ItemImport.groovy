@@ -3,6 +3,7 @@ package data
 import game.UsableItem
 import game.Badge
 import game.KeyItem
+import game.PokeBallItem
 
 class ItemImport {
 
@@ -27,14 +28,26 @@ class ItemImport {
             parts.add( line )
             if (index%5==4){
 
-                UsableItem item = new UsableItem(
-                        name : parts[0],
-                        effect : parts[1],
-                        cost : Integer.parseInt(parts[2]),
-                        implemented : parts[3] == '1',
-                        image:parts[4]
-                )
+                UsableItem item
 
+                if (parts[0].toString().toLowerCase().contains("ball")){
+                    item = new PokeBallItem(
+                            name : parts[0],
+                            effect : parts[1],
+                            cost : Integer.parseInt(parts[2]),
+                            implemented : parts[3] == '1',
+                            image:parts[4]
+                    )
+                }
+                else{
+                    item = new UsableItem(
+                            name : parts[0],
+                            effect : parts[1],
+                            cost : Integer.parseInt(parts[2]),
+                            implemented : parts[3] == '1',
+                            image:parts[4]
+                    )
+                }
                 item.save()
 
                 parts = []

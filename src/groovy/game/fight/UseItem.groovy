@@ -12,6 +12,8 @@ import game.items.RecoverItem
 import game.fight.action.NoAction
 import game.fight.action.ItemAction
 import game.UsableItem
+import game.PokeBallItem
+import game.context.BattleType
 
 class UseItem {
 
@@ -23,6 +25,9 @@ class UseItem {
 
         if (!item.implemented){
             fight.roundResult.personalActions.add(new MessageLog("You can not use item ${item.name} in battle."))
+        }
+        else if (item in PokeBallItem && fight.battleType != BattleType.PVE){
+            fight.roundResult.personalActions.add(new MessageLog("PokeBalls can only be used in wild battles."))
         }
         else {
             // Set the item action
