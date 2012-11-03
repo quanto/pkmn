@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
     <script type="text/javascript">
 
+        var dontBreakoutVar = true
+
         $(document).ready(function() {
             $('#right').attr('height',($(window).height() - $("#top").height()) + "px");
         });

@@ -14,7 +14,7 @@ class ChatController {
             string += "<strong>${chatMessage.player.name}:</strong><em class='chatTime'>(${chatMessage.date.format("dd/MM-mm:ss")})</em> ${chatMessage.message.encodeAsHTML()}<br />"
         }
 
-        render text: string
+        render text: g.render(template: '/game/breakout') + string
     }
 
     def send(){
@@ -39,7 +39,7 @@ class ChatController {
             string += "<p><strong>${newsItem.player.username}:</strong><em class='chatTime'>(${newsItem.date.format("dd/MM-mm:ss")})</em> ${newsItem.message.encodeAsHTML()}</p>"
         }
 
-        render text: string
+        render text: g.render(template: '/game/breakout') + string
     }
 
 }
