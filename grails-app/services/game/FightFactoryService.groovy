@@ -76,11 +76,6 @@ class FightFactoryService {
         assert owner1Pokemon
         assert owner2Pokemon
 
-        FightPlayer fightPlayer1 = Stats.setBaseStats(fight,owner1Pokemon, PlayerType.user, 1);
-
-        fight.fightPlayer1 = fightPlayer1
-        fight.fightPlayer1.owner = player1
-
         FightPlayer fightPlayer2 = Stats.setBaseStats(fight,owner2Pokemon, PlayerType.wildPokemon, 2);
 
         if (battleType == battleType.PVE){
@@ -91,6 +86,11 @@ class FightFactoryService {
         }
 
         fight.fightPlayer2 = fightPlayer2
+
+        FightPlayer fightPlayer1 = Stats.setBaseStats(fight,owner1Pokemon, PlayerType.user, 1);
+
+        fight.fightPlayer1 = fightPlayer1
+        fight.fightPlayer1.owner = player1
 
 
         // Weird have to set it again to set the right fightPlayer. For some reason player 2 is set
