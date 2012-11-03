@@ -1,6 +1,7 @@
 package game
 
 import javax.imageio.ImageIO
+import scaffolding.ScaffoldLink
 
 class Map {
 
@@ -13,7 +14,7 @@ class Map {
 
     Player owner
 
-    static scaffoldList           = ['name','worldX','worldY','owner.username']
+    static scaffoldList           = ['name','worldX','worldY','owner.username','mapEditor']
     static scaffoldSearch         = ['name','worldX','worldY','owner.username']
 
     static hasMany = [mapPokemonList: MapPokemon, actions:Action]
@@ -34,7 +35,11 @@ class Map {
         owner nullable: true
     }
 
-    static transients = ['foregroundImage','backgroundImage']
+    static transients = ['foregroundImage','backgroundImage','mapEditor']
+
+    public getMapEditor(){
+        new ScaffoldLink(link:"", tekst: "Edit")
+    }
 
     @Override
     public String toString(){

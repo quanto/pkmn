@@ -13,6 +13,12 @@
         </style>
     </head>
     <body>
+        <div class="nav" role="navigation">
+            <ul>
+                <g:render template="/scaffold/menu" />
+            </ul>
+        </div>
+
         <div id="status" role="complementary" style="float:left;">
             <h1>Application Status</h1>
             <ul>

@@ -1,5 +1,6 @@
 <% import grails.persistence.Event %>
 <% import scaffolding.ScaffoldTool %>
+<% import scaffolding.ScaffoldLink %>
 <%=packageName%>
 <!DOCTYPE html>
 <html>
@@ -45,38 +46,43 @@
                                 <tr>
                                     <%
                                     scaffoldList.eachWithIndex { p, i ->
-                                        def clazz = ScaffoldTool.getDownLevelClass(domainClass.getClazz(), p)
+                                        if (!scaffoldSearch.contains(p)){
+                                            %><td></td><%
+                                        }
+                                        else {
+                                            def clazz = ScaffoldTool.getDownLevelClass(domainClass.getClazz(), p)
 
-                                        if (clazz in Enum) {
-                                            def enumValues = [:]
-                                            clazz?.values().each{ enumValues.put(it.name(),"'" + it.toString() + "'") }
-                                            %>
-                                            <td><g:select name="${p}" optionKey="key" optionValue="value" from="\${${enumValues}}" value="\${params.'${p}'}" noSelection="['':'']" /></td>
-                                        <%
+                                            if (clazz in Enum) {
+                                                def enumValues = [:]
+                                                clazz?.values().each{ enumValues.put(it.name(),"'" + it.toString() + "'") }
+                                                %>
+                                                <td><g:select name="${p}" optionKey="key" optionValue="value" from="\${${enumValues}}" value="\${params.'${p}'}" noSelection="['':'']" /></td>
+                                            <%
+                                            }
+                                            else if (clazz in Boolean || clazz in boolean.class) { %>
+                                                <td><g:select name="${p}" from="\${['Ja', 'Nee']}" value="\${params.'${p}'}" noSelection="['':'']" /></td>
+                                            <%
+                                            }
+                                            else if (clazz in Date) { %>
+                                                <td>
+                                                    <g:hiddenField name="${p}" value="java.util.Date" class="datepicker" />
+                                                    <div class="datepickerContainer">
+                                                        <g:textField name="${p}_from" value="\${params.'${p}_from'}" title="Van" class="datepicker" />
+                                                        <g:textField name="${p}_to" value="\${params.'${p}_to'}" title="Tot" class="datepicker" />
+                                                    </div>
+                                                </td>
+                                            <%
+                                            }
+                                            else { %>
+                                                <td><g:textField name="${p}" value="\${params.'${p}'}"/></td>
+                                            <%
+                                            }
                                         }
-                                        else if (clazz in Boolean || clazz in boolean.class) { %>
-                                            <td><g:select name="${p}" from="\${['Ja', 'Nee']}" value="\${params.'${p}'}" noSelection="['':'']" /></td>
-                                        <%
-                                        }
-                                        else if (clazz in Date) { %>
-                                            <td>
-                                                <g:hiddenField name="${p}" value="java.util.Date" class="datepicker" />
-                                                <div class="datepickerContainer">
-                                                    <g:textField name="${p}_from" value="\${params.'${p}_from'}" title="Van" class="datepicker" />
-                                                    <g:textField name="${p}_to" value="\${params.'${p}_to'}" title="Tot" class="datepicker" />
-                                                </div>
-                                            </td>
-                                        <%
-                                        }
-                                        else { %>
-                                            <td><g:textField name="${p}" value="\${params.'${p}'}"/></td>
-                                        <%
-                                        }
-                                        %>
-
-                                        <%
                                     }
                                 %>
+                                    <td>
+                                        <g:submitButton name="list" value="search" />
+                                    </td>
                                 </tr>
                                 <%
                             }
@@ -91,9 +97,16 @@
                                     if (clazz in List) { %>
                                         <th><g:message code="${domainClass.propertyName}.${p}.label" default="${p}" /></th>
                                     <%
-                                    } else { %>
+                                    }
+                                    else if (!p.contains('.')) {
+                                        %>
                                         <g:sortableColumn property="${p}" title="\${message(code: '${domainClass.propertyName}.${p}.label', default: '${p}')}" />
-                                    <%
+                                        <%
+                                    }
+                                    else {
+                                        %>
+                                        <th>${p}</th>
+                                        <%
                                     }
                             } %>
                         </tr>
@@ -111,7 +124,12 @@
                                         <td><g:formatBoolean boolean="\${${propertyName}.${p}}" /></td>
                         <%          } else if (clazz in Date || clazz in java.sql.Date || clazz in java.sql.Time || clazz in Calendar) { %>
                                         <td><g:formatDate date="\${${propertyName}.${p}}" /></td>
-                        <%          } else { %>
+                        <%          }
+                                    else if (clazz in ScaffoldLink) { %>
+                                        <td><a href='\${fieldValue(bean: ${propertyName}, field: "${p.name}.link")}' onclick='\${fieldValue(bean: ${propertyName}, field: "${p.name}.onClick")}' target='\${fieldValue(bean: ${propertyName}, field: "${p.name}.target")}'>\${fieldValue(bean: ${propertyName}, field: "${p.name}.tekst")}</a></td>
+                                        <%
+                                    }
+                                    else { %>
                                         <td>\${fieldValue(bean: ${propertyName}, field: "${p}")}</td>
                         <%  }   }   } %>
                         </tr>

@@ -195,6 +195,35 @@ img {
 	background-image: url(../images/skin/database_table.png);
 }
 
+.nav a.players {
+    background-image: url(../images/player/down.png);
+    background-position: 0.7em center;
+    background-repeat: no-repeat;
+    text-indent: 25px;
+}
+
+.nav a.pkmn {
+    background-image: url(../images/pikachudoll2.png);
+    background-position: 0.7em center;
+    background-repeat: no-repeat;
+    text-indent: 25px;
+}
+
+.nav a.maps {
+    background-image: url(../images/tiles/sheet1/00.png);
+    background-position: 0.7em center;
+    background-repeat: no-repeat;
+    text-indent: 25px;
+}
+
+.nav a.items {
+    background-image: url(../images/pokeball-1.png);
+    background-position: 0.7em center;
+    background-repeat: no-repeat;
+    text-indent: 25px;
+}
+
+
 .nav a.create {
 	background-image: url(../images/skin/database_add.png);
 }

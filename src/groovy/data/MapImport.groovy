@@ -156,7 +156,7 @@ class MapImport {
                 active : parts[3] == '1',
                 worldX: parts[4]=='null'?null:parts[4],
                 worldY: parts[5]=='null'?null:parts[5],
-                owner: parts[6]==''?null:Player.get(Integer.parseInt(parts[6]))
+                owner: parts[6]==''?Player.findByName('kevin'):Player.get(Integer.parseInt(parts[6]))
         )
         map.save()
         return map
