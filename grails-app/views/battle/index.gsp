@@ -122,6 +122,7 @@
                     slideHP(hpValue,player);
 
                     currentAction += 1;
+                    break;
                 }
                 else if (action == "m:")
                 {
@@ -263,6 +264,9 @@
                     $("#player" + switchMyPlayer(playerNr) + "hp").text(calcHpFromBar(pokemon[playerNr].maxHealth,currentLeft))
                     $('#player' + switchMyPlayer(playerNr) + 'healthbar').css("background-color",getColor(currentLeft));
 
+                },
+                complete: function() {
+                    combatActions();
                 }
             });
         }
