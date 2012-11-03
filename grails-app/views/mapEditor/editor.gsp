@@ -107,6 +107,21 @@
     {
         color:black;
     }
+
+    .alpha {
+        filter: alpha(opacity=30);
+        -moz-opacity: 0.3;
+        -khtml-opacity: 0.3;
+        opacity: 0.3;
+    }
+
+    .background {
+        width: 16px;
+        height: 16px;
+        float: left;
+        position:absolute;
+    }
+
     </style>
 </head>
 <body>

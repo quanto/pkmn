@@ -383,7 +383,7 @@
                 if (w < width && h < height)
                 {
                     // Get the layer for tile
-                    var layer = pattern[patternYCount][(patternXCount * 2) + 1];
+                    var layer = selectedLayer//pattern[patternYCount][(patternXCount * 2) + 1];
                     field[layer][h][w] = pattern[patternYCount][(patternXCount * 2)];
                     patternXCount++;
                     if (patternXCount >= (pattern[0].length / 2))
@@ -577,20 +577,25 @@
             html += "<tr>";
             for (var w=0;w<width;w++)
             {
-                html += "<td  style=\"background-image:url('/game/images/tiles/sheet1/" + field[0][h][w] + ".png');height:18px;width:16px;\" onmouseover=\"mouseOverEvent(" + h + "," + w + ")\" id='" + h + "-" + w + "'>";
-                html += "<div title=\"" + w + "-" + h + "\" style='position:relative;'>";
-                html += "<a onclick=\"return fieldClick(" + h + "," + w + ");\">";
-                
+                html += "<td  style=\"height:18px;width:16px;\" onclick=\"return fieldClick(" + h + "," + w + ");\" onmouseover=\"mouseOverEvent(" + h + "," + w + ")\" id='" + h + "-" + w + "'>";
+
+
+
+                html += "<div title=\"" + w + "-" + h + " fg: " + field[0][h][w] + ", bg: " + field[1][h][w] + "\" style='position:relative;'>";
+                html += "<div class='" + (selectedLayer == 1?'alpha background':'background') + "' ><img src='/game/images/tiles/sheet1/" + field[0][h][w] + ".png'></div>";
+
+                //html += "<a onclick=\"return fieldClick(" + h + "," + w + ");\">";
+
                 if (field[1][h][w] != "")
                 {
-                     html += "<img src='/game/images/tiles/sheet1/" + field[1][h][w] + ".png'>";
+                     html += "<img  class='" + (selectedLayer == 0?'alpha':'') + "' src='/game/images/tiles/sheet1/" + field[1][h][w] + ".png'>";
                 }
                 else
                 {
-                    html += "<img src='/game/images/mapEditor/empty.gif'>";
+                    html += "<img  class='" + (selectedLayer == 0?'alpha':'') + "' src='/game/images/mapEditor/empty.gif'>";
                     
                 }
-                html += "</a>";
+                //html += "</a>";
                 html += "</div>";
                 
                 
@@ -718,6 +723,8 @@
             selectedLayer = 0;
             obj.value = "background";
         }
+
+        drawField();
     }
     
     function toggleSelection(obj)
