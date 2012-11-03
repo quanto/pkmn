@@ -10,6 +10,7 @@ import game.context.Fight
 import game.fight.Battle
 import game.fight.WildMove
 import game.fight.action.BattleAction
+import game.fight.action.SwitchAction
 
 class Moves {
 
@@ -31,21 +32,29 @@ class Moves {
         {
             if (!fightPlayer.doNoMove || fightPlayer.playerType == PlayerType.user){
 
-                Battle.beforeChosingMove(fight, fightPlayer.opponentFightPlayer(), fightPlayer.opponentFightPlayer().owner)
+                if (fight.switchRound){
+                    // Bring out the next pvn pokemon
+                    OwnerPokemon nextOwnerPokemon = OwnerPokemon.findByOwnerAndPartyPosition(fight.fightPlayer2.owner,fight.fightPlayer2.ownerPokemon.partyPosition + 1)
 
-                if (fight.battleType == BattleType.PVE)
-                {
-                    // reset escape attempts
-                    if (battleAction){
-                        fightPlayer.fight.escapeAttempts = 0
-                    }
-                    // kies random wild move
-                    fightPlayer.opponentFightPlayer().battleAction = WildMove.choseWildMove(fightPlayer.opponentFightPlayer())
+                    fightPlayer.opponentFightPlayer().battleAction = new SwitchAction(ownerPokemon:nextOwnerPokemon)
                 }
-                else
-                {
-                    // kies random move van npc
-                    fightPlayer.opponentFightPlayer().battleAction = NPCHelper.choseNpcMove(fightPlayer.opponentFightPlayer().ownerPokemon);
+                else {
+                    Battle.beforeChosingMove(fight, fightPlayer.opponentFightPlayer(), fightPlayer.opponentFightPlayer().owner)
+
+                    if (fight.battleType == BattleType.PVE)
+                    {
+                        // reset escape attempts
+                        if (battleAction){
+                            fightPlayer.fight.escapeAttempts = 0
+                        }
+                        // kies random wild move
+                        fightPlayer.opponentFightPlayer().battleAction = WildMove.choseWildMove(fightPlayer.opponentFightPlayer())
+                    }
+                    else
+                    {
+                        // kies random move van npc
+                        fightPlayer.opponentFightPlayer().battleAction = NPCHelper.choseNpcMove(fightPlayer.opponentFightPlayer().ownerPokemon);
+                    }
                 }
             }
         }

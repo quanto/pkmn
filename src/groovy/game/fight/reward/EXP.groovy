@@ -70,6 +70,15 @@ class EXP {
 
         int exp = calcXP(opponentfightPlayer.ownerPokemon.pokemon.baseEXP,opponentfightPlayer.level,isWild)
 
+        // Used pokemon might be fainted at the last turn. Let's check
+        if (ownfightPlayer?.ownerPokemon && ownfightPlayer.ownerPokemon.hp <= 0){
+            OwnerPokemon currentOwnerPokemon = fight.usedPokemon.find{ it.id == fight.fightPlayer1.ownerPokemon.id}
+            if (currentOwnerPokemon){
+                fight.usedPokemon.remove(currentOwnerPokemon)
+            }
+        }
+
+        // Distribute the EXP
         fight.usedPokemon.each { OwnerPokemon ownerPokemon ->
             int expShare = Math.floor(exp / fight.usedPokemon.size())
             fight.roundResult.battleActions.add(new MessageLog(ownerPokemon.pokemon.name + " gains ${expShare} exp."))

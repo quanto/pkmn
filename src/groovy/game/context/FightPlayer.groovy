@@ -46,6 +46,7 @@ class FightPlayer {
     int evasionStage
     BattleAction battleAction
     boolean doNoMove = false
+    boolean faintMessageShown = false
     List<Move> learnMoves = []
     int holdMove
     int holdTurns
@@ -67,6 +68,7 @@ class FightPlayer {
         battleAction = null
         doNoMove = false
         protect = false
+        faintMessageShown = false
     }
 
     FightPlayer opponentFightPlayer(){

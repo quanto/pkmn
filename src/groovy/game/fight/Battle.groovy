@@ -66,21 +66,19 @@ class Battle {
 
         decideAction(fight, fight.getFirstFightPlayer(), fight.getSecondFightPlayer(), true)
 
-        checkPokemonFainted(fight)
+        boolean fainted = Faint.oneOfBothFainted(fight)
 
-        if (!fight.battleOver){
+        if (!fainted){
             decideAction(fight, fight.getSecondFightPlayer(), fight.getFirstFightPlayer(), false)
 
-            checkPokemonFainted(fight)
+            Faint.oneOfBothFainted(fight)
         }
 
-        if (!fight.battleOver){
-            afterBattle(fight,fight.getFirstFightPlayer(),fight.getSecondFightPlayer())
-            afterBattle(fight,fight.getSecondFightPlayer(),fight.getFirstFightPlayer())
+        afterBattle(fight,fight.getFirstFightPlayer(),fight.getSecondFightPlayer())
+        afterBattle(fight,fight.getSecondFightPlayer(),fight.getFirstFightPlayer())
 
-            // Check again after the affterBattle effects
-            checkPokemonFainted(fight)
-        }
+        // Check again after the affterBattle effects
+        Faint.checkEndRoundFainted(fight)
 
         afterTurn(fight)
     }
@@ -139,7 +137,6 @@ class Battle {
         {
             if (random.nextInt(4) == 1)
             {
-
                 fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is paralyzed. It cant move."))
                 defendingFightPlayer.battleAction = new NoAction()
             }
@@ -148,7 +145,6 @@ class Battle {
         {
             if (random.nextInt(2) == 1)
             {
-
                 fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is confused."))
                 defendingFightPlayer.battleAction = new NoAction()
             }
@@ -247,229 +243,6 @@ class Battle {
         }
     }
 
-    static boolean checkFainted(Fight fight, FightPlayer fightPlayer)
-    {
-        if (fightPlayer.hp <= 0)
-        {
-            fightPlayer.hp = 0;
-
-            fight.roundResult.battleActions.add(new MessageLog(fightPlayer.ownerPokemon.pokemon.name + " fainted."))
-            // stop attacks
-            fight.fightPlayer1.battleAction = new NoAction()
-            fight.fightPlayer2.battleAction = new NoAction()
-
-            return true;
-        }
-        return false;
-    }
-
-    static void win(Fight fight, boolean giveEXP = true)
-    {
-        // battle is over speler 1 wint
-
-        fight.roundResult.battleActions.add(new MessageLog(fight.fightPlayer1.owner.name + " wins."))
-
-        if(giveEXP){
-            EXP.distributeExp(fight,fight.fightPlayer1,fight.fightPlayer2,true);
-
-            if (fight.battleType == BattleType.PVE){
-                int money = Money.calculateMoney(fight,fight.fightPlayer2.ownerPokemon)
-                Money.giveMoney(fight,money)
-            }
-            else if (fight.battleType == BattleType.PVN){
-                int money = 0
-                OwnerPokemon.findAllByOwner(fight.fightPlayer2.owner).each {
-                    money += Money.calculateMoney(fight,it)
-                }
-                Money.giveMoney(fight,money)
-            }
-        }
-
-        Stats.saveStats(fight.fightPlayer1, true);
-        fight.battleOver = true
-    }
-
-
-    static void handlePvPFainted(Fight fight){
-        boolean player1fainted = checkFainted(fight,fight.fightPlayer1)
-        boolean player2fainted = checkFainted(fight,fight.fightPlayer2)
-
-        // draw if the other has no alive pokemon
-        boolean player1Alive = player1fainted?hasAlivePokemon(fight.fightPlayer1):true
-        boolean player2Alive = player2fainted?hasAlivePokemon(fight.fightPlayer2):true
-
-        // Is the battle over
-        if (!player1Alive || !player2Alive){
-            // whats the result
-            if (!player1Alive && !player2Alive){
-                // draw
-            }
-            else if (!player1Alive){
-                fight.fightPlayer2.owner.pvpBattlesWon += 1
-                fight.fightPlayer1.owner.pvpBattlesLost += 1
-            }
-            else {
-                fight.fightPlayer1.owner.pvpBattlesWon += 1
-                fight.fightPlayer2.owner.pvpBattlesLost += 1
-            }
-
-            // Recover and end
-            Recover.recoverParty(fight.fightPlayer1.owner)
-            Recover.recoverParty(fight.fightPlayer2.owner)
-
-            fight.battleOver = true
-        }
-        else {
-            // Should we do a switch round
-            if (player1fainted || player2fainted){
-                fight.switchRound = true
-            }
-        }
-    }
-
-    static boolean hasAlivePokemon(FightPlayer fightPlayer){
-        // update pokemon hp
-        fightPlayer.ownerPokemon.hp = 0
-        fightPlayer.ownerPokemon.save(flush: true)
-
-        // kijk of er nog levende pokemon zijn
-        def list = OwnerPokemon.findAllByOwnerAndPartyPositionGreaterThanAndHpGreaterThan(fightPlayer.owner,0,0)
-
-        return list.size() > 0
-    }
-
-    static void checkPokemonFainted(Fight fight)
-    {
-        if (fight.battleType == BattleType.PVP){
-            handlePvPFainted(fight)
-            return
-        }
-
-        boolean player1fainted = checkFainted(fight,fight.fightPlayer1)
-        boolean player2fainted = checkFainted(fight,fight.fightPlayer2)
-
-        if (fight.battleType == BattleType.PVE && player2fainted && !player1fainted)
-        {
-            // normal win pve
-            fight.fightPlayer1.owner.pveBattlesWon += 1;
-            win(fight,true);
-            fight.battleOver = true
-        }
-        else if (fight.battleType == BattleType.PVN && player2fainted && !player1fainted)
-        {
-            fight.battleOver = checkNpcLoses(fight)
-        }
-        else if (player1fainted) //  && !$player2fainted
-        {
-
-
-            if (hasAlivePokemon(fight.fightPlayer1))
-            {
-                // speler heeft nog levende pokemon
-
-                // Gevecht voorbij na faint van wild
-                if (fight.battleType == BattleType.PVE && player2fainted)
-                {
-                    // telling gewonnen gevechten
-                    fight.fightPlayer1.owner.pveBattlesWon += 1
-
-                    win(fight,false)
-                    fight.battleOver = true
-                }
-                else if (fight.battleType == BattleType.PVN && player2fainted)
-                {
-                    fight.battleOver = checkNpcLoses(fight)
-                }
-                else
-                {
-
-                }
-            }
-            else //Speler gaat dood
-            {
-                if (fight.battleType == BattleType.PVE)
-                {
-                    fight.fightPlayer1.owner.pveBattlesLost += 1
-                }
-                if (fight.battleType == BattleType.PVN)
-                {
-                    fight.fightPlayer1.owner.pvnBattlesLost += 1
-                }
-
-                // Stuur speler terug naar laatste recover punt
-                Player player = (Player)fight.fightPlayer1.owner
-                RecoverAction recoverAction = player.lastRecoverAction
-
-                player.map = recoverAction.map
-                player.positionX = recoverAction.positionX
-                player.positionY = recoverAction.positionY
-                player.save()
-
-
-                fight.roundResult.battleActions.add(new MessageLog("You lose, your pokemon have been recovered in town."))
-                Recover.recoverParty(fight.fightPlayer1.owner)
-                fight.battleOver = true
-
-            }
-        }
-
-    }
-
-    static public boolean checkNpcLoses(Fight fight)
-    {
-
-        FightPlayer fightPlayer1 = fight.fightPlayer1
-        Npc npc = fight.fightPlayer2.owner
-
-        // geef xp voor verslaan
-        EXP.distributeExp(fight,fightPlayer1,fight.fightPlayer2,false);
-
-        // haal volgende op als deze bestaat
-        OwnerPokemon nextOwnerPokemon = OwnerPokemon.findByOwnerAndPartyPosition(fight.fightPlayer2.owner,fight.fightPlayer2.ownerPokemon.partyPosition + 1)
-
-        if (!nextOwnerPokemon)
-        {
-            // Gevechts telling
-            fightPlayer1.owner.pvnBattlesWon += 1;
-
-            fight.roundResult.battleActions.add(new MessageLog("Defeated NPC!"))
-
-            // Don't give exp. It was already given.
-            win(fight, false)
-
-            // Turn out Npc reward items
-            npc.rewardItems.each { OwnerItem ownerItem ->
-                Items.addOwnerItem(fightPlayer1.owner,ownerItem.item,false)
-            }
-
-            // Show defeated message
-            if (npc.npcDefeatedMessage){
-                npc.npcDefeatedMessage.split(';').each{
-                    if (it){
-                        fight.roundResult.battleActions.add(new MessageLog(it))
-                    }
-                }
-            }
-
-            // Create an NPC lock
-            new NpcLock(
-                    player: fightPlayer1.owner,
-                    npc : fight.fightPlayer2.owner,
-                    permanent: fight.fightPlayer2.owner.permanentLock
-            ).save()
-
-            return true
-        }
-        else
-        {
-            // Log de switch
-            fight.roundResult.battleActions.add(new MessageLog("NPC brings out " + nextOwnerPokemon.pokemon.name + "."))
-
-            fight.fightPlayer2 = Stats.setBaseStats(fight,nextOwnerPokemon, PlayerType.npc, 2);
-
-            return false
-        }
-    }
 
     public static void attack(Fight fight, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer, boolean firstMove)
     {

@@ -18,7 +18,7 @@ class MoveInfo {
     boolean canNotUseAction = false
     boolean oneHitKO = false
     boolean cantMiss = false
-    boolean recoil = false
+    double recoil = 0
     boolean flinch = false
     boolean paralysisActionSucces = false
     boolean confusionActionSucces = false
