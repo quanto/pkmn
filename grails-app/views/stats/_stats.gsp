@@ -26,4 +26,15 @@
             ${player.pvnBattlesLost}
         </td>
     </tr>
+    <tr>
+        <td>
+            PVP battles
+        </td>
+        <td>
+            ${player.pvpBattlesWon}
+        </td>
+        <td>
+            ${player.pvpBattlesLost}
+        </td>
+    </tr>
 </table>

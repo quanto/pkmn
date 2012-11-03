@@ -30,6 +30,8 @@ class Player extends Owner{
     int pveBattlesLost = 0
     int pvnBattlesWon = 0
     int pvnBattlesLost = 0
+    int pvpBattlesWon = 0
+    int pvpBattlesLost = 0
     Integer fightNr
 
     static constraints = {

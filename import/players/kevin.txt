@@ -6,52 +6,54 @@ true
 verhoef.k@gmail.com
 null
 20-10-2012 18:27:30
-Glooming forest -2x0
+Glooming forest 0x1
 Glooming forest center
 4
 6
-16
-11
+3
+3
 81
 ShowMap
 73
 2
 15
 3
+3
+0
 </playerData>
 <role>
 ROLE_ADMIN
 </role>
 
 <ownerItem>
-Potion
-19
+Poke Ball
+2
 </ownerItem>
             <ownerItem>
 Old factory key
 1
 </ownerItem>
             <ownerItem>
-Poke Ball
-2
+Potion
+19
 </ownerItem>
             
 
 <npcLock>
 cePS20cZXHM9M7p
-02-11-2012 14:10:43
+03-11-2012 11:40:36
 true
 </npcLock>
             
 <npcLock>
 12345
-02-11-2012 14:10:43
+03-11-2012 11:40:36
 true
 </npcLock>
             
 <npcLock>
 RNyn8n09NTaOSqS
-02-11-2012 14:10:43
+03-11-2012 11:40:36
 false
 </npcLock>
             
@@ -85,38 +87,6 @@ Tackle
 <ownerMove>
 Water Gun
 25
-</ownerMove>
-
-<ownerPokemon>
-false
-1
-25
-11
-24
-4
-8
-0
-31
-Male
-2
-569
-10
-</ownerPokemon>
-<ownerMove>
-Growl
-40
-</ownerMove>
-<ownerMove>
-Leech Seed
-10
-</ownerMove>
-<ownerMove>
-Tackle
-35
-</ownerMove>
-<ownerMove>
-Vine Whip
-15
 </ownerMove>
 
 <ownerPokemon>

@@ -167,10 +167,12 @@ class PlayerImport {
                 pveBattlesWon: Integer.parseInt(parts[15]),
                 pveBattlesLost: Integer.parseInt(parts[16]),
                 pvnBattlesWon: Integer.parseInt(parts[17]),
-                pvnBattlesLost: Integer.parseInt(parts[18])
+                pvnBattlesLost: Integer.parseInt(parts[18]),
+                pvpBattlesWon: Integer.parseInt(parts[18]),
+                pvpBattlesLost: Integer.parseInt(parts[20])
         )
         player.save()
-        Player.executeUpdate("update Player set password = :password where id = :id",[id:player.id,password: parts[2]])
+        Player.executeUpdate("update Player set password = :password where username = :username",[username:parts[0],password: parts[2]])
         return player
     }
 }

@@ -305,10 +305,12 @@ class Battle {
                 // draw
             }
             else if (!player1Alive){
-                // :TODO implement
+                fight.fightPlayer2.owner.pvpBattlesWon += 1
+                fight.fightPlayer1.owner.pvpBattlesLost += 1
             }
             else {
-
+                fight.fightPlayer1.owner.pvpBattlesWon += 1
+                fight.fightPlayer2.owner.pvpBattlesLost += 1
             }
 
             // Recover and end
