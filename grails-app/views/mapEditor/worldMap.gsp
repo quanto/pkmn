@@ -13,9 +13,9 @@
 </head>
 <body>
     <table>
-        <g:each in="${(lowestY..highestY)}" var="y">
+        <g:each in="${(lowestY-1..highestY+1)}" var="y">
             <tr>
-                <g:each in="${(lowestX..highestX)}" var="x">
+                <g:each in="${(lowestX-1..highestX+1)}" var="x">
                     <%
                         def map = worldMaps.find{ it.worldX == x && it.worldY == y }
                         MapLayout mapLayout

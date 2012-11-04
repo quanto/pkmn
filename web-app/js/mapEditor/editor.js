@@ -129,51 +129,51 @@
 				// right
 				if ((top || steps[i][0] == 0) && (bottom || steps[i][0] == height - 1) && left && (!right && steps[i][1] != width - 1))
 				{
-					field[0][steps[i][0]][steps[i][1]] = pathPattern[1][2];
+					field[selectedLayer][steps[i][0]][steps[i][1]] = pathPattern[1][2];
 				}
                 // left
 				else if ((top || steps[i][0] == 0) && (bottom || steps[i][0] == height - 1) && (!left && steps[i][1] != 0) && right)
 				{
-					field[0][steps[i][0]][steps[i][1]] = pathPattern[1][0];
+					field[selectedLayer][steps[i][0]][steps[i][1]] = pathPattern[1][0];
 				}
                 // top
 				else if ((!top && steps[i][0] != 0) && bottom && (left || steps[i][1] == 0) && (right || steps[i][1] == width - 1))
 				{
-					field[0][steps[i][0]][steps[i][1]] = pathPattern[0][1];
+					field[selectedLayer][steps[i][0]][steps[i][1]] = pathPattern[0][1];
 				}
                 // bottom
 				else if (top && (!bottom && steps[i][0] != height - 1) && (left || steps[i][1] == 0) && (right || steps[i][1] == width - 1))
 				{
-					field[0][steps[i][0]][steps[i][1]] = pathPattern[2][1];
+					field[selectedLayer][steps[i][0]][steps[i][1]] = pathPattern[2][1];
 				}
 				
 				// bottom right
 				else if (top && !bottom && left && (!right && steps[i][1] != width - 1))
 				{
-					field[0][steps[i][0]][steps[i][1]] = pathPattern[2][2];
+					field[selectedLayer][steps[i][0]][steps[i][1]] = pathPattern[2][2];
 				}
 				
 				// left bottom
 				else if (top && !bottom && (!left && steps[i][1] != 0) && right)
 				{
-					field[0][steps[i][0]][steps[i][1]] = pathPattern[2][0];
+					field[selectedLayer][steps[i][0]][steps[i][1]] = pathPattern[2][0];
 				}
 				
 				// top right
 				else if (!top && bottom && left && (!right && steps[i][1] != width - 1))
 				{
-					field[0][steps[i][0]][steps[i][1]] = pathPattern[0][2];
+					field[selectedLayer][steps[i][0]][steps[i][1]] = pathPattern[0][2];
 				}
 				// top left
                 //(!left && steps[i][1] != 0)
                 else if (!top && bottom && (!left && steps[i][1] != 0) && right)
 				{
-					field[0][steps[i][0]][steps[i][1]] = pathPattern[0][0];
+					field[selectedLayer][steps[i][0]][steps[i][1]] = pathPattern[0][0];
 				}
 				// middle
 				else
 				{
-					field[0][steps[i][0]][steps[i][1]] = pathPattern[1][1];
+					field[selectedLayer][steps[i][0]][steps[i][1]] = pathPattern[1][1];
 				}
 			}
         }
@@ -578,8 +578,6 @@
             for (var w=0;w<width;w++)
             {
                 html += "<td  style=\"height:18px;width:16px;\" onclick=\"return fieldClick(" + h + "," + w + ");\" onmouseover=\"mouseOverEvent(" + h + "," + w + ")\" id='" + h + "-" + w + "'>";
-
-
 
                 html += "<div title=\"" + w + "-" + h + " fg: " + field[0][h][w] + ", bg: " + field[1][h][w] + "\" style='position:relative;'>";
                 html += "<div class='" + (selectedLayer == 1?'alpha background':'background') + "' ><img src='/game/images/tiles/sheet1/" + field[0][h][w] + ".png'></div>";

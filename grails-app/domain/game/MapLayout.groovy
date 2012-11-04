@@ -79,8 +79,8 @@ class MapLayout {
     }
 
     public RenderedImage writeTiles(def data) {
-        int width = 24*16//getRows()*16;
-        int height = 407*16//getColumns()*16;
+        int width = getRows()*16;
+        int height = getColumns()*16;
 
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
