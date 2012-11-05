@@ -953,7 +953,7 @@ physical move
 10
 Digs down first turn, attacks in the 2nd. Acts like an Escape Rope on the field.
 0
-0
+1
 0
 88
 Disable

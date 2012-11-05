@@ -43,6 +43,7 @@ import game.fight.log.InitialHpLog
 import game.fight.action.ItemAction
 import game.context.MoveCategory
 import game.fight.action.FailAction
+import game.OwnerMove
 
 class Battle {
 
@@ -75,19 +76,30 @@ class Battle {
             Faint.oneOfBothFainted(fight)
         }
 
-        afterBattle(fight,fight.getFirstFightPlayer(),fight.getSecondFightPlayer())
-        afterBattle(fight,fight.getSecondFightPlayer(),fight.getFirstFightPlayer())
-
+        if (fight.getFirstFightPlayer().hp > 0){
+            afterBattle(fight,fight.getFirstFightPlayer(),fight.getSecondFightPlayer())
+        }
+        if (fight.getSecondFightPlayer().hp > 0){
+            afterBattle(fight,fight.getSecondFightPlayer(),fight.getFirstFightPlayer())
+        }
         // Check again after the affterBattle effects
         Faint.checkEndRoundFainted(fight)
 
         afterTurn(fight)
     }
 
+    public static void takePP(OwnerMove ownerMove){
+        if (ownerMove){
+            ownerMove.ppLeft -= 1
+            ownerMove.save()
+        }
+    }
+
     public static FightPlayer decideAction(Fight fight, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer, boolean firstMove){
 
         if (attackFightPlayer.battleAction in MoveAction){
             attack(fight,attackFightPlayer, defendingFightPlayer, firstMove)
+            takePP(attackFightPlayer.battleAction.ownerMoveForPP)
         }
         else if (attackFightPlayer.battleAction in SwitchAction){
             // Save the old pokemon
@@ -465,6 +477,8 @@ class Battle {
         Confusion.checkConfusion(fight,fightPlayer);
         // sleep
         Sleep.checkSleep(fight,fightPlayer);
+
+
 
         // continue last move
 //        if (fightPlayer.lastMove?.id == 376 || fightPlayer.lastMove?.id == 360)

@@ -33,7 +33,7 @@ class Moves {
         // Mirror Move
         if (battleAction in MoveAction && battleAction.move.name == "Mirror Move"){
             if (fightPlayer.opponentFightPlayer().lastBattleAction in MoveAction && fightPlayer.opponentFightPlayer().lastBattleAction.move.name != "Mirror Move"){
-                fightPlayer.battleAction = new MoveAction( move: fightPlayer.opponentFightPlayer().lastBattleAction.move )
+                fightPlayer.battleAction = new MoveAction( move: fightPlayer.opponentFightPlayer().lastBattleAction.move,ownerMoveForPP: battleAction.ownerMoveForPP)
             }
             else {
                 fightPlayer.battleAction = new FailAction()

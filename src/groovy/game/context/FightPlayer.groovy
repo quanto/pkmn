@@ -57,6 +57,7 @@ class FightPlayer {
     boolean endure = false
     boolean protect = false
     int protectAccuracy = 100
+    Move prepareMove = null // Should bet rest manually
 
     /**
      * Properties to reset after a battle

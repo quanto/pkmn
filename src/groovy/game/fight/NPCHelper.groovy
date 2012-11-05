@@ -13,10 +13,10 @@ class NPCHelper {
 
         if (moves){
             Collections.shuffle(moves)
-            return new MoveAction(move: moves.last())
+            return new MoveAction(move: moves.last(),ownerMoveForPP:null)
         }
         else {
-            return new MoveAction(move: Move.findByName("Struggle"))
+            return new MoveAction(move: Move.findByName("Struggle"),ownerMoveForPP:null)
         }
 
     }

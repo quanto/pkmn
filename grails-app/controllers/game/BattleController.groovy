@@ -85,7 +85,7 @@ class BattleController {
             if (move == null || move.name == "Struggle") // Struggle || geen move
             {
                 // Dit is geen eigen move, pp hoeft er niet af
-                Moves.setMove(fight,myFightPlayer, new MoveAction(move:ownerMove.move))
+                Moves.setMove(fight,myFightPlayer, new MoveAction(move:ownerMove.move,ownerMoveForPP:null))
             }
             else
             {
@@ -115,9 +115,7 @@ class BattleController {
                         fight.roundResult.personalActions.add(new MessageLog("No pp left for move ${ownerMove.move.name}."))
                     }
                     else {
-                        ownerMove.ppLeft -= 1
-                        ownerMove.save()
-                        Moves.setMove(fight,myFightPlayer, new MoveAction(move:ownerMove.move))
+                        Moves.setMove(fight,myFightPlayer, new MoveAction(move:ownerMove.move,ownerMoveForPP:ownerMove))
                     }
 
     //                }

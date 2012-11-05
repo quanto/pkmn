@@ -531,14 +531,17 @@ class FightMove {
         }
         else if (move.name == "Solarbeam")
         {
-            if (attackingFightPlayer.lastBattleAction in MoveAction && attackingFightPlayer.lastBattleAction.move.name != "Solarbeam"){
+            if (attackingFightPlayer.prepareMove.name != "Solarbeam"){
 
                 fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.ownerPokemon.pokemon.name} gathers light.;"))
                 moveInfo.doPhysicalDamage = false // do nothing
+                attackingFightPlayer.battleAction = new NoAction() // Set action to no action so it can not be repeated
+                attackingFightPlayer.prepareMove = move
             }
             else
             {
-                attackingFightPlayer.battleAction = new NoAction() // zet op 0 zodat deze niet wordt herhaalt
+                attackingFightPlayer.prepareMove = null
+                 // zet op 0 zodat deze niet wordt herhaalt
             }
         }
         // Increases user's Defense one stage in the 1st turn, attacks in the 2nd turn.
@@ -566,6 +569,8 @@ class FightMove {
         {
             moveInfo.attackPower = moveInfo.attackPower * 2
         }
+
+
 
     }
     
