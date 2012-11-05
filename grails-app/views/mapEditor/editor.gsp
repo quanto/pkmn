@@ -128,7 +128,7 @@
 
     <g:form action="saveMap" controller="mapEditor">
 
-        <g:hiddenField name="id" value="${map?.id}" />
+
 
         <table>
             <tr>
@@ -234,7 +234,7 @@
                         <br />
                         Name: <g:textField name="map.name" value="${map?.name}" /> <br />
                         <sec:ifAnyGranted roles="ROLE_ADMIN">
-
+                            ID: <g:textField name="id" value="${map?.id}" />
 
                             Active: <g:checkBox name="map.active" value="${map?.active}" /><br />
                             WorldX: <g:textField name="map.worldX" value="${map?.worldX != null?map?.worldX:params.worldX}" /><br />
