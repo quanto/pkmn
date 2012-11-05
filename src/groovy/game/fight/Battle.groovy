@@ -70,16 +70,16 @@ class Battle {
 
         boolean fainted = Faint.oneOfBothFainted(fight)
 
-        if (!fainted){
+        if (!fainted && !fight.battleOver){
             decideAction(fight, fight.getSecondFightPlayer(), fight.getFirstFightPlayer(), false)
 
             Faint.oneOfBothFainted(fight)
         }
 
-        if (fight.getFirstFightPlayer().hp > 0){
+        if (fight.getFirstFightPlayer().hp > 0 && !fight.battleOver){
             afterBattle(fight,fight.getFirstFightPlayer(),fight.getSecondFightPlayer())
         }
-        if (fight.getSecondFightPlayer().hp > 0){
+        if (fight.getSecondFightPlayer().hp > 0 && !fight.battleOver){
             afterBattle(fight,fight.getSecondFightPlayer(),fight.getFirstFightPlayer())
         }
         // Check again after the affterBattle effects

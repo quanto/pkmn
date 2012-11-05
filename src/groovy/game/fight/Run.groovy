@@ -34,7 +34,7 @@ class Run {
             {
                 Stats.saveStats(fight.fightPlayer1)
                 fight.roundResult.battleActions.add(new MessageLog("You run away safely."))
-                fight.battleOver = 1
+                fight.battleOver = true
             }
             else
             {

@@ -12,9 +12,9 @@ Glooming forest center
 6
 23
 3
-128
+131
 ShowMap
-91
+94
 2
 16
 3
@@ -26,12 +26,12 @@ ROLE_ADMIN
 </role>
 
 <ownerItem>
-Poke Ball
-2
-</ownerItem>
-            <ownerItem>
 Old factory key
 1
+</ownerItem>
+            <ownerItem>
+Poke Ball
+2
 </ownerItem>
             <ownerItem>
 Potion
@@ -41,25 +41,25 @@ Potion
 
 <npcLock>
 cePS20cZXHM9M7p
-05-11-2012 12:04:48
+05-11-2012 13:07:15
 true
 </npcLock>
             
 <npcLock>
 12345
-05-11-2012 12:04:48
+05-11-2012 13:07:15
 true
 </npcLock>
             
 <npcLock>
 RNyn8n09NTaOSqS
-05-11-2012 12:04:48
+05-11-2012 13:07:15
 false
 </npcLock>
             
 <npcLock>
 BngAfU7JWoAGt0P
-05-11-2012 12:04:48
+05-11-2012 13:07:15
 false
 </npcLock>
             
@@ -104,23 +104,23 @@ false
 10
 19
 2
-90
+88
 Male
 1
-117459
+117486
 50
 </ownerPokemon>
 <ownerMove>
+Dig
+19
+</ownerMove>
+<ownerMove>
+Fly
+27
+</ownerMove>
+<ownerMove>
 Razor Leaf
 25
-</ownerMove>
-<ownerMove>
-Solarbeam
-29
-</ownerMove>
-<ownerMove>
-Sweet Scent
-20
 </ownerMove>
 <ownerMove>
 Vine Whip
