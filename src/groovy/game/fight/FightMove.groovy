@@ -535,7 +535,7 @@ class FightMove {
         {
             if (attackingFightPlayer.prepareMoveAction?.move?.name != "Solarbeam"){
 
-                fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.ownerPokemon.pokemon.name} gathers light.;"))
+                fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.ownerPokemon.pokemon.name} gathers light."))
                 moveInfo.doPhysicalDamage = false // do nothing
                 attackingFightPlayer.prepareMoveAction = new MoveAction(move: moveAction.move, ownerMoveForPP: moveAction.ownerMoveForPP)
                 attackingFightPlayer.takePP = false
@@ -544,6 +544,36 @@ class FightMove {
             {
                 attackingFightPlayer.prepareMoveAction = null
                  // zet op 0 zodat deze niet wordt herhaalt
+            }
+        }
+        else if (move.name == "Dig")
+        {
+            if (attackingFightPlayer.prepareMoveAction?.move?.name != "Dig"){
+
+                fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.ownerPokemon.pokemon.name} dug a hole."))
+                moveInfo.doPhysicalDamage = false // do nothing
+                attackingFightPlayer.prepareMoveAction = new MoveAction(move: moveAction.move, ownerMoveForPP: moveAction.ownerMoveForPP)
+                attackingFightPlayer.takePP = false
+            }
+            else
+            {
+                attackingFightPlayer.prepareMoveAction = null
+                // zet op 0 zodat deze niet wordt herhaalt
+            }
+        }
+        else if (move.name == "Fly")
+        {
+            if (attackingFightPlayer.prepareMoveAction?.move?.name != "Fly"){
+
+                fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.ownerPokemon.pokemon.name} flew up high."))
+                moveInfo.doPhysicalDamage = false // do nothing
+                attackingFightPlayer.prepareMoveAction = new MoveAction(move: moveAction.move, ownerMoveForPP: moveAction.ownerMoveForPP)
+                attackingFightPlayer.takePP = false
+            }
+            else
+            {
+                attackingFightPlayer.prepareMoveAction = null
+                // zet op 0 zodat deze niet wordt herhaalt
             }
         }
         // Increases user's Defense one stage in the 1st turn, attacks in the 2nd turn.

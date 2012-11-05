@@ -1558,7 +1558,7 @@ physical move
 15
 Flies up on the first turn, attacks on the second turn.
 0
-0
+1
 0
 143
 Focus Blast

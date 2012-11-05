@@ -1,4 +1,5 @@
 <script type="text/javascript">
-    doAction("${createLink(action:'logRequest')}");
+    document.location.reload(true)
+    //doAction("${createLink(action:'logRequest')}");
 
 </script>

@@ -315,6 +315,11 @@ class Battle {
             moveSucces = true;
         }
 
+        if (defendingFightPlayer.prepareMoveAction && (defendingFightPlayer.prepareMoveAction.move.name == "Fly" || defendingFightPlayer.prepareMoveAction.move.name == "Dig")){
+            // You can not hit on fly or dig
+            moveSucces = false
+        }
+
         if (moveInfo.doPhysicalDamage)
         {
             if (moveSucces){
