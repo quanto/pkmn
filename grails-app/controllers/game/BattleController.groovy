@@ -16,6 +16,7 @@ import game.fight.action.SwitchAction
 import game.fight.RoundResult
 import game.context.BattleType
 import game.fight.action.NoAction
+import game.fight.ContinueMove
 
 class BattleController {
 
@@ -156,6 +157,8 @@ class BattleController {
         // continue normal flow and show the menu
 
 
+
+
         // Replace old move
         if (myFightPlayer.learnMoves && params.replaceMove != null)
         {
@@ -206,7 +209,13 @@ class BattleController {
         }
 
         else {
-            render text: g.render(template: 'actionList')
+            if (ContinueMove.continueMove(fight,myFightPlayer)){
+                println "1"
+                render template: "refreshLog"
+            }
+            else {
+                render text: g.render(template: 'actionList')
+            }
         }
     }
 
@@ -234,20 +243,7 @@ class BattleController {
 
         OwnerPokemon ownerPokemon = OwnerPokemon.findByOwnerAndPartyPositionAndHpGreaterThan(player,params.id,0)
         if (ownerPokemon){
-
-            boolean mustSwitch = myFightPlayer.hp <= 0
-
-            // We must switch. This should not trigger a new round
-//            if(!mustSwitch){
-                Moves.setMove(fight,myFightPlayer, new SwitchAction( ownerPokemon: ownerPokemon ), false)
-//            }
-//            else {
-//                // We set a new round result, so we don't see the old messages
-//                fight.roundResult = new RoundResult()
-//
-//                Stats.saveStats(myFightPlayer, false)
-//                Stats.setBaseStats(fight,ownerPokemon, PlayerType.user, myFightPlayer.playerNr)
-//            }
+            Moves.setMove(fight,myFightPlayer, new SwitchAction( ownerPokemon: ownerPokemon ), false)
         }
 
         render template: "log", model : [fight:fight,myFightPlayer:myFightPlayer]

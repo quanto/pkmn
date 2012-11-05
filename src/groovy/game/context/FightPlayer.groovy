@@ -5,6 +5,8 @@ import game.Owner
 import game.OwnerPokemon
 import game.Move
 import game.fight.action.BattleAction
+import game.OwnerMove
+import game.fight.action.MoveAction
 
 /**
  * Created with IntelliJ IDEA.
@@ -57,7 +59,8 @@ class FightPlayer {
     boolean endure = false
     boolean protect = false
     int protectAccuracy = 100
-    Move prepareMove = null // Should bet rest manually
+    MoveAction prepareMoveAction = null // Should bet rest manually
+    boolean takePP = true
 
     /**
      * Properties to reset after a battle
@@ -70,6 +73,7 @@ class FightPlayer {
         doNoMove = false
         protect = false
         faintMessageShown = false
+        takePP = true
     }
 
     FightPlayer opponentFightPlayer(){

@@ -12,7 +12,9 @@ import game.fight.action.NoAction
 
 class FightMove {
     
-    public static void getMoveInfo(MoveInfo moveInfo, Move move, Fight fight, FightPlayer attackingFightPlayer, FightPlayer defendingFightPlayer, boolean firstMove){
+    public static void getMoveInfo(MoveInfo moveInfo, MoveAction moveAction, Fight fight, FightPlayer attackingFightPlayer, FightPlayer defendingFightPlayer, boolean firstMove){
+
+        Move move = moveAction.move
 
         // Where attempting to do physical damage
         moveInfo.doPhysicalDamage = true
@@ -531,16 +533,16 @@ class FightMove {
         }
         else if (move.name == "Solarbeam")
         {
-            if (attackingFightPlayer.prepareMove.name != "Solarbeam"){
+            if (attackingFightPlayer.prepareMoveAction?.move?.name != "Solarbeam"){
 
                 fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.ownerPokemon.pokemon.name} gathers light.;"))
                 moveInfo.doPhysicalDamage = false // do nothing
-                attackingFightPlayer.battleAction = new NoAction() // Set action to no action so it can not be repeated
-                attackingFightPlayer.prepareMove = move
+                attackingFightPlayer.prepareMoveAction = new MoveAction(move: moveAction.move, ownerMoveForPP: moveAction.ownerMoveForPP)
+                attackingFightPlayer.takePP = false
             }
             else
             {
-                attackingFightPlayer.prepareMove = null
+                attackingFightPlayer.prepareMoveAction = null
                  // zet op 0 zodat deze niet wordt herhaalt
             }
         }

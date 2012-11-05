@@ -89,6 +89,7 @@ class Battle {
     }
 
     public static void takePP(OwnerMove ownerMove){
+        // No ownerMove means there's no move to take pp from
         if (ownerMove){
             ownerMove.ppLeft -= 1
             ownerMove.save()
@@ -99,7 +100,10 @@ class Battle {
 
         if (attackFightPlayer.battleAction in MoveAction){
             attack(fight,attackFightPlayer, defendingFightPlayer, firstMove)
-            takePP(attackFightPlayer.battleAction.ownerMoveForPP)
+
+            if(attackFightPlayer.takePP){
+                takePP(attackFightPlayer.battleAction.ownerMoveForPP)
+            }
         }
         else if (attackFightPlayer.battleAction in SwitchAction){
             // Save the old pokemon
@@ -286,7 +290,7 @@ class Battle {
 
         if (attackMove.category == MoveCategory.PhysicalMove || attackMove.category == MoveCategory.SpecialMove)
         {
-            FightMove.getMoveInfo(moveInfo, attackMove, fight, attackFightPlayer, defendingFightPlayer, firstMove)
+            FightMove.getMoveInfo(moveInfo, attackFightPlayer.battleAction, fight, attackFightPlayer, defendingFightPlayer, firstMove)
         }
         else if (attackMove.category == MoveCategory.StatusMove)
         {
