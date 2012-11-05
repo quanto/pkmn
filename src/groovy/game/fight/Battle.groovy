@@ -42,6 +42,7 @@ import game.fight.action.NoAction
 import game.fight.log.InitialHpLog
 import game.fight.action.ItemAction
 import game.context.MoveCategory
+import game.fight.action.FailAction
 
 class Battle {
 
@@ -99,6 +100,9 @@ class Battle {
         }
         else if (attackFightPlayer.battleAction in ItemAction){
             UseItem.useItem(fight, attackFightPlayer.battleAction.ownerItem, attackFightPlayer, defendingFightPlayer)
+        }
+        else if (attackFightPlayer.battleAction in FailAction){
+            fight.roundResult.battleActions.add(new MessageLog(attackFightPlayer.ownerPokemon.pokemon.name + " fails to perform move."))
         }
         else {
             println attackFightPlayer.battleAction
@@ -441,7 +445,7 @@ class Battle {
         // bericht bij falen van effect
         else if (moveInfo.effectAction && !moveSucces)
         {
-            fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " fails to perform move."))
+            fight.roundResult.battleActions.add(new MessageLog(attackOwnerPokemon.pokemon.name + " fails to perform move."))
         }
 
         if (firstMove){

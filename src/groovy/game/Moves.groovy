@@ -11,6 +11,9 @@ import game.fight.Battle
 import game.fight.WildMove
 import game.fight.action.BattleAction
 import game.fight.action.SwitchAction
+import game.fight.action.MoveAction
+import game.fight.action.NoAction
+import game.fight.action.FailAction
 
 class Moves {
 
@@ -25,6 +28,16 @@ class Moves {
         }
         else {
             fightPlayer.doNoMove = true // :TODO Get rid of this. Should use NoAction if needed
+        }
+
+        // Mirror Move
+        if (battleAction in MoveAction && battleAction.move.name == "Mirror Move"){
+            if (fightPlayer.opponentFightPlayer().lastBattleAction in MoveAction && fightPlayer.opponentFightPlayer().lastBattleAction.move.name != "Mirror Move"){
+                fightPlayer.battleAction = new MoveAction( move: fightPlayer.opponentFightPlayer().lastBattleAction.move )
+            }
+            else {
+                fightPlayer.battleAction = new FailAction()
+            }
         }
 
         // Kijk of tegen de computer wordt gespeelt, dan wordt er een move gekozen

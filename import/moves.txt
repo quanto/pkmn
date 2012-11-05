@@ -942,7 +942,7 @@ status move
 5
 Opponent's attack doesn't affect you, but may fail if used often.
 0
-0
+1
 3
 87
 Dig
@@ -2757,7 +2757,7 @@ status move
 20
 User performs the opponent's last move.
 0
-0
+1
 0
 253
 Mirror Shot
