@@ -8,7 +8,7 @@ $(document).ready(function(){
 
         if (singleSelection){
 
-            var points = getTilePoints(e)
+            var points = getTilePoints(e, "tileset")
 
             setTile(translatePos(points))
 
@@ -19,14 +19,14 @@ $(document).ready(function(){
         }
         else {
             $("#tilesetSelection").css('display','block')
-            tileSetClick(e)
+            tileSetClick(e,"tileset","")
         }
     });
 
     $("#tilesetSelection").click(function(e){
         if (singleSelection){
 
-            var points = getTilePoints(e)
+            var points = getTilePoints(e, "tileset")
 
             setTile(translatePos(points))
 
@@ -37,15 +37,15 @@ $(document).ready(function(){
         }
         else {
             $("#tilesetSelection").css('display','block')
-            tileSetClick(e)
+            tileSetClick(e,"tileset","")
         }
 
     });
 
     $("#tileset").mousemove(function(e){
         if (tileStartPointX != -1){
-            var points = getTilePoints(e)
-            showTileSelection(tileStartPointY,tileStartPointX,points[1],points[0])
+            var points = getTilePoints(e, "tileset")
+            showTileSelection(tileStartPointY,tileStartPointX,points[1],points[0], "tilesetSelection","tileset2")
         }
     });
 
@@ -55,10 +55,57 @@ $(document).ready(function(){
 //            showTileSelection(tileStartPointX,tileStartPointY,points[0],points[1])
 //        }
 //    });
+
+
+    $("#tileset2").click(function(e){
+
+        if (singleSelection){
+
+            var points = getTilePoints(e, "tileset2")
+
+            setTile("a" + translatePos2(points))
+
+            tileStartPointX = -1
+            tileStartPointY = -1
+
+            $("#tilesetSelection2").css('display','none')
+        }
+        else {
+            $("#tilesetSelection2").css('display','block')
+            tileSetClick(e,"tileset2","a")
+        }
+    });
+
+    $("#tilesetSelection2").click(function(e){
+        if (singleSelection){
+
+            var points = getTilePoints(e, "tileset2")
+
+            setTile(translatePos(points))
+
+            tileStartPointX = -1
+            tileStartPointY = -1
+
+            $("#tilesetSelection2").css('display','none')
+        }
+        else {
+            $("#tilesetSelection2").css('display','block')
+            tileSetClick(e,"tileset2","a")
+        }
+
+    });
+
+    $("#tileset2").mousemove(function(e){
+        if (tileStartPointX != -1){
+            var points = getTilePoints(e, "tileset2")
+            showTileSelection(tileStartPointY,tileStartPointX,points[1],points[0],"tilesetSelection2", "tileset2")
+        }
+    });
+
 })
 
-function tileSetClick(e){
-    var points = getTilePoints(e)
+function tileSetClick(e, tilesetId, prefix){
+    var points = getTilePoints(e, tilesetId)
 
     if (tileStartPointX == -1){
         tileStartPointX = points[0]
@@ -78,7 +125,7 @@ function tileSetClick(e){
                 var tilePoints = new Array()
                 tilePoints[0] = w
                 tilePoints[1] = h
-                newPattern[h-tileStartPointY][(w-tileStartPointX)*2] = translatePos(tilePoints)
+                newPattern[h-tileStartPointY][(w-tileStartPointX)*2] = prefix + "" + translatePos(tilePoints)
                 newPattern[h-tileStartPointY][((w-tileStartPointX)*2)+1] = selectedLayer
             }
         }
@@ -104,8 +151,15 @@ function translatePos(points){
     return x + "" + y
 }
 
-function getTilePoints(e){
-    var pos = $("#tileset").position();
+function translatePos2(points){
+    var x = parseInt(points[0])
+    var y = parseInt(points[1]) * 8
+
+    return x + y
+}
+
+function getTilePoints(e, tilesetId){
+    var pos = $("#" + tilesetId).position();
 
     var x = e.pageX - parseInt(pos.left);
     var y = e.pageY - parseInt(pos.top);
@@ -113,11 +167,6 @@ function getTilePoints(e){
     x = Math.floor(x / 16)
     y = Math.floor(y / 16)
 
-    //setTile(x + "" + y)
-//    if (tileStartPointX == -1){
-//        tileStartPointX = x
-//        tileStartPointY = y
-//    }
     var points = new Array()
     points[0] = x
     points[1] = y
@@ -127,44 +176,12 @@ function getTilePoints(e){
 /*
  Shows current selection by applying black borders
  */
-function showTileSelection(startPointY,startPointX,y,x)
+function showTileSelection(startPointY,startPointX,y,x, selectionId, tilesetId)
 {
-    // Draw white borders
+    var pos = $("#" + tilesetId).position();
 
-    //$("#fieldWrapper td").css("border","1px solid white");
-
-    // switch if nessecery
-//    if (startPointX > x)
-//    {
-//        var temp = x;
-//        x = startPointX;
-//        startPointX = temp;
-//    }
-//
-//    if (startPointY > y)
-//    {
-//        var temp = y;
-//        y = startPointY;
-//        startPointY = temp;
-//    }
-    var pos = $("#tileset").position();
-
-    $("#tilesetSelection").css('left',parseInt(pos.left) + (startPointX * 16))
-    $("#tilesetSelection").css('top',parseInt(pos.top) + (startPointY * 16))
-    $("#tilesetSelection").css('width',(((x + 1) - startPointX) * 16) + 'px');
-    $("#tilesetSelection").css('height',(((y + 1) - startPointY) * 16) + 'px');
-    /*
-    // Draw the border
-    for (var h=startPointY;h<=y;h++)
-    {
-        for (var w=startPointX;w<=x;w++)
-        {
-            if (w < width && h < height)
-            {
-                //$(h + "-" + w).css("border","1px solid black");
-                document.getElementById(h + "-" + w).style.border = "1px solid black";
-            }
-        }
-    }
-    */
+    $("#" + selectionId).css('left',parseInt(pos.left) + (startPointX * 16))
+    $("#" + selectionId).css('top',parseInt(pos.top) + (startPointY * 16))
+    $("#" + selectionId).css('width',(((x + 1) - startPointX) * 16) + 'px');
+    $("#" + selectionId).css('height',(((y + 1) - startPointY) * 16) + 'px');
 }
