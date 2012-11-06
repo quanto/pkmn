@@ -19,7 +19,7 @@ $(document).ready(function(){
         }
         else {
             $("#tilesetSelection").css('display','block')
-            tileSetClick(e,"tileset","")
+            tileSetClick(e,"tileset","","translatePos(tilePoints)")
         }
     });
 
@@ -37,7 +37,7 @@ $(document).ready(function(){
         }
         else {
             $("#tilesetSelection").css('display','block')
-            tileSetClick(e,"tileset","")
+            tileSetClick(e,"tileset","","translatePos(tilePoints)")
         }
 
     });
@@ -45,7 +45,7 @@ $(document).ready(function(){
     $("#tileset").mousemove(function(e){
         if (tileStartPointX != -1){
             var points = getTilePoints(e, "tileset")
-            showTileSelection(tileStartPointY,tileStartPointX,points[1],points[0], "tilesetSelection","tileset2")
+            showTileSelection(tileStartPointY,tileStartPointX,points[1],points[0], "tilesetSelection","tileset")
         }
     });
 
@@ -72,7 +72,7 @@ $(document).ready(function(){
         }
         else {
             $("#tilesetSelection2").css('display','block')
-            tileSetClick(e,"tileset2","a")
+            tileSetClick(e,"tileset2","a","translatePos2(tilePoints)")
         }
     });
 
@@ -90,7 +90,7 @@ $(document).ready(function(){
         }
         else {
             $("#tilesetSelection2").css('display','block')
-            tileSetClick(e,"tileset2","a")
+            tileSetClick(e,"tileset2","a","translatePos2(tilePoints)")
         }
 
     });
@@ -104,7 +104,7 @@ $(document).ready(function(){
 
 })
 
-function tileSetClick(e, tilesetId, prefix){
+function tileSetClick(e, tilesetId, prefix, translatePosEval){
     var points = getTilePoints(e, tilesetId)
 
     if (tileStartPointX == -1){
@@ -125,7 +125,7 @@ function tileSetClick(e, tilesetId, prefix){
                 var tilePoints = new Array()
                 tilePoints[0] = w
                 tilePoints[1] = h
-                newPattern[h-tileStartPointY][(w-tileStartPointX)*2] = prefix + "" + translatePos(tilePoints)
+                newPattern[h-tileStartPointY][(w-tileStartPointX)*2] = prefix + "" + eval(translatePosEval)//translatePos(tilePoints)
                 newPattern[h-tileStartPointY][((w-tileStartPointX)*2)+1] = selectedLayer
             }
         }
@@ -152,7 +152,7 @@ function translatePos(points){
 }
 
 function translatePos2(points){
-    var x = parseInt(points[0])
+    var x = parseInt(points[0]) + 1
     var y = parseInt(points[1]) * 8
 
     return x + y
