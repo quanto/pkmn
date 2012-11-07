@@ -5,8 +5,20 @@ Glooming forest -1x0
 false
 -1
 0
-8
+10
 </mapData>
+<pokemon>
+16
+80
+2
+4
+</pokemon>
+<pokemon>
+19
+20
+3
+3
+</pokemon>
 
 
 

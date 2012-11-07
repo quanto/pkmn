@@ -7,6 +7,24 @@ false
 0
 
 </mapData>
+<pokemon>
+16
+48
+3
+6
+</pokemon>
+<pokemon>
+19
+50
+2
+6
+</pokemon>
+<pokemon>
+23
+2
+3
+5
+</pokemon>
 
 
 

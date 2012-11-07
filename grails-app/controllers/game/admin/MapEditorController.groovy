@@ -26,6 +26,26 @@ class MapEditorController {
         render view: "index", model: [maps:maps]
     }
 
+    def showMap(){
+
+        Map map
+
+        MapLayout mapLayout
+
+        if (params.id){
+            map = Map.get(params.id)
+
+            if (map){
+                mapLayout = MapLayout.createMapArray(map)
+            }
+
+            render text: g.render(template: "/game/layerMap", model: [map: map, mapLayout:mapLayout])
+
+        }
+
+
+    }
+
 
     def editor(){
 

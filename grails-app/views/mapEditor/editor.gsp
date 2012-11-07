@@ -167,7 +167,18 @@
                             <img src="${resource(uri:'')}/images/tiles/tileset.png" id="tileset" />
                             <div id="tilesetSelection" style="border:1px solid black;position:absolute;top:0;left:0;"></div>
                         </div>
+                    </div>
 
+                    <div id="tab9" title="Tiles">
+                        <br />Selection<br />
+                        <input type="button" value="multiple" onclick="toggleSelection(this)" />
+
+                        <br /><br />
+
+                        <div style="height:300px;overflow:scroll;">
+                            <img src="${resource(uri:'')}/images/tiles/tileset2.png" id="tileset2" />
+                            <div id="tilesetSelection2" style="border:1px solid black;position:absolute;top:0;left:0;"></div>
+                        </div>
                     </div>
 
                     <div id="tab4" title="Mapsize">

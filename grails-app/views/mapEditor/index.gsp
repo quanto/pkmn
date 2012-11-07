@@ -38,6 +38,10 @@
                     <td>
                         <g:link action="export" id="${map.id}">Export</g:link>
                     </td>
+                    <td>
+                        <g:link action="showMap" id="${map.id}">ShowMap</g:link>
+                    </td>
+
                 </sec:ifAnyGranted>
             </tr>
         </g:each>
