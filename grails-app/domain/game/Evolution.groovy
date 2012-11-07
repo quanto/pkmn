@@ -1,12 +1,5 @@
 package game
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 29-09-12
- * Time: 08:22
- * To change this template use File | Settings | File Templates.
- */
 class Evolution {
 
     Pokemon fromPokemon
@@ -14,5 +7,8 @@ class Evolution {
     int level
     String condition
 
+    static mapping = {
+        condition column: "`condition`" // Condition is a reserved keyword in mysql
+    }
 
 }

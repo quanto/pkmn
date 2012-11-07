@@ -59,14 +59,14 @@ class Player extends Owner{
 
     def beforeUpdate() {
         if (isDirty('password')) {
-            println "encode"
-            println password
             encodePassword()
         }
     }
 
     protected void encodePassword() {
-        password = springSecurityService.encodePassword(password)
+        if (password.length() != 64){ // I'm having troubles that the password gets double encoded. This is a workaround.
+            password = springSecurityService.encodePassword(password)
+        }
     }
 
     static scaffoldList           = ['username','email','view']

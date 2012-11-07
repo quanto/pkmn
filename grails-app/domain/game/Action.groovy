@@ -16,6 +16,10 @@ class Action {
     boolean triggerBeforeStep = false
     boolean conditionalStep = false
 
+    static mapping = {
+        condition column: "`condition`" // Condition is a reserved keyword in mysql
+    }
+
     static constraints = {
         condition nullable: true
         conditionNotMetMessage nullable: true
