@@ -13,7 +13,7 @@ class ${className}Controller {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 25, 100)
 
         def ${className}Class = new DefaultGrailsDomainClass(${className}.class)
 

@@ -3,3 +3,4 @@
 <li><a class="maps" href="${createLink(controller: 'map')}">Maps</a></li>
 <li><a class="pkmn" href="${createLink(controller: 'pokemon')}">PKMN</a></li>
 <li><a class="items" href="${createLink(controller: 'item')}">Items</a></li>
+<li><a class="list" href="${createLink(controller: 'newsItem')}">News</a></li>

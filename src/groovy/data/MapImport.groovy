@@ -148,6 +148,34 @@ class MapImport {
 
     }
 
+    public static void setMapOwners(){
+        new File('import/maps/').listFiles().each { File file ->
+
+            def parts = []
+            Map map
+            String node
+            file.eachLine { line ->
+
+                if (line.contains("</mapData>")){
+                    node = ""
+                    map = Map.findByName(parts[0])
+                    map.owner = parts[6]==''?Player.findByUsername('kevin'):Player.findByUsername(parts[6])
+                    println map.owner
+                    map.save()
+                    parts = []
+                }
+                if (node){
+                    parts.add(line)
+                }
+                if (line.contains("<mapData>")){
+                    node = "mapData"
+                }
+
+            }
+
+        }
+    }
+
     public static Map createMap(def parts){
         Map map = new Map(
                 name : parts[0],
@@ -155,8 +183,7 @@ class MapImport {
                 dataForeground : parts[2],
                 active : parts[3] == '1',
                 worldX: parts[4]=='null'?null:parts[4],
-                worldY: parts[5]=='null'?null:parts[5],
-                owner: parts[6]==''?Player.findByName('kevin'):Player.get(Integer.parseInt(parts[6]))
+                worldY: parts[5]=='null'?null:parts[5]
         )
         map.save()
         return map

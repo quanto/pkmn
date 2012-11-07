@@ -42,6 +42,8 @@ class BootStrap {
 
         PlayerImport.importPlayers()
 
+        MapImport.setMapOwners()
+
         /*
         Pokemon pokemon = Pokemon.get(1)
 

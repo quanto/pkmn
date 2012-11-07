@@ -37,8 +37,8 @@ class Map {
 
     static transients = ['foregroundImage','backgroundImage','mapEditor']
 
-    public getMapEditor(){
-        new ScaffoldLink(link:"", tekst: "Edit")
+    public ScaffoldLink getMapEditor(){
+        new ScaffoldLink(link:"../../mapEditor/editor/" + this.id , tekst: "Edit")
     }
 
     @Override

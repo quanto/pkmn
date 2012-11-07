@@ -31,11 +31,9 @@ class ScaffoldSearch {
                 }
                 // Loop through all enabled search properties, and process the ones that are passed as param
                 searchProperties?.each { attr ->
-
-                    String attrValue = params[attr]
+                    String attrValue = params[attr.replace('.','-')]
 
                     if (attr && attrValue) {
-
                         attrValue = attrValue.trim()
 
                         // The better way: check on type i.s.o. name.
@@ -65,6 +63,8 @@ class ScaffoldSearch {
                 }
             }
         }
+
+
 
         def criteria = clazz.createCriteria()
         try {

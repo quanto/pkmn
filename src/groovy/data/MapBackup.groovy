@@ -42,7 +42,7 @@ ${map.dataForeground}
 ${map.active}
 ${map.worldX}
 ${map.worldY}
-${map.owner?.id?:''}
+${map.owner?.username?:'kevin'}
 </mapData>
 ${getPokemonData(map)}
 ${getMaptransitions(map)}

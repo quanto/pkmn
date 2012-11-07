@@ -52,29 +52,31 @@
                                         else {
                                             def clazz = ScaffoldTool.getDownLevelClass(domainClass.getClazz(), p)
 
+                                            String replacedProp = p.replace('.','-')
+
                                             if (clazz in Enum) {
                                                 def enumValues = [:]
                                                 clazz?.values().each{ enumValues.put(it.name(),"'" + it.toString() + "'") }
                                                 %>
-                                                <td><g:select name="${p}" optionKey="key" optionValue="value" from="\${${enumValues}}" value="\${params.'${p}'}" noSelection="['':'']" /></td>
+                                                <td><g:select name="${replacedProp}" optionKey="key" optionValue="value" from="\${${enumValues}}" value="\${params.'${replacedProp}'}" noSelection="['':'']" /></td>
                                             <%
                                             }
                                             else if (clazz in Boolean || clazz in boolean.class) { %>
-                                                <td><g:select name="${p}" from="\${['Ja', 'Nee']}" value="\${params.'${p}'}" noSelection="['':'']" /></td>
+                                                <td><g:select name="${replacedProp}" from="\${['Ja', 'Nee']}" value="\${params.'${replacedProp}'}" noSelection="['':'']" /></td>
                                             <%
                                             }
                                             else if (clazz in Date) { %>
                                                 <td>
-                                                    <g:hiddenField name="${p}" value="java.util.Date" class="datepicker" />
+                                                    <g:hiddenField name="${replacedProp}" value="java.util.Date" class="datepicker" />
                                                     <div class="datepickerContainer">
-                                                        <g:textField name="${p}_from" value="\${params.'${p}_from'}" title="Van" class="datepicker" />
-                                                        <g:textField name="${p}_to" value="\${params.'${p}_to'}" title="Tot" class="datepicker" />
+                                                        <g:textField name="${replacedProp}_from" value="\${params.'${replacedProp}_from'}" title="Van" class="datepicker" />
+                                                        <g:textField name="${replacedProp}_to" value="\${params.'${replacedProp}_to'}" title="Tot" class="datepicker" />
                                                     </div>
                                                 </td>
                                             <%
                                             }
                                             else { %>
-                                                <td><g:textField name="${p}" value="\${params.'${p}'}"/></td>
+                                                <td><g:textField name="${replacedProp}" value="\${params.'${replacedProp}'}"/></td>
                                             <%
                                             }
                                         }
@@ -115,7 +117,7 @@
                     <g:each in="\${${propertyName}List}" status="i" var="${propertyName}">
                         <tr class="\${(i % 2) == 0 ? 'even' : 'odd'}">
                         <%  scaffoldList.eachWithIndex { p, i ->
-                            def clazz = ScaffoldTool.getDownLevelClass(domainClass.getClazz(), p)
+                                def clazz = ScaffoldTool.getDownLevelClass(domainClass.getClazz(), p)
 
                                 if (i == 0) { %>
                                     <td><g:link action="show" id="\${${propertyName}.id}">\${fieldValue(bean: ${propertyName}, field: "${p}")}</g:link></td>
@@ -126,7 +128,7 @@
                                         <td><g:formatDate date="\${${propertyName}.${p}}" /></td>
                         <%          }
                                     else if (clazz in ScaffoldLink) { %>
-                                        <td><a href='\${fieldValue(bean: ${propertyName}, field: "${p.name}.link")}' onclick='\${fieldValue(bean: ${propertyName}, field: "${p.name}.onClick")}' target='\${fieldValue(bean: ${propertyName}, field: "${p.name}.target")}'>\${fieldValue(bean: ${propertyName}, field: "${p.name}.tekst")}</a></td>
+                                        <td><a href='\${fieldValue(bean: ${propertyName}, field: "${p}.link")}' onclick='\${fieldValue(bean: ${propertyName}, field: "${p}.onClick")}' target='\${fieldValue(bean: ${propertyName}, field: "${p}.target")}'>\${fieldValue(bean: ${propertyName}, field: "${p}.tekst")}</a></td>
                                         <%
                                     }
                                     else { %>
