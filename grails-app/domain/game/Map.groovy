@@ -14,7 +14,7 @@ class Map {
 
     Player owner
 
-    static scaffoldList           = ['name','worldX','worldY','owner.username','mapEditor']
+    static scaffoldList           = ['name','worldX','worldY','owner.username','mapEditor','pokemon','showMap']
     static scaffoldSearch         = ['name','worldX','worldY','owner.username']
 
     static hasMany = [mapPokemonList: MapPokemon, actions:Action]
@@ -35,10 +35,18 @@ class Map {
         owner nullable: true
     }
 
-    static transients = ['foregroundImage','backgroundImage','mapEditor']
+    static transients = ['foregroundImage','backgroundImage','mapEditor','pokemon','showMap']
 
     public ScaffoldLink getMapEditor(){
         new ScaffoldLink(link:"../../mapEditor/editor/" + this.id , tekst: "Edit")
+    }
+
+    public ScaffoldLink getPokemon(){
+        new ScaffoldLink(link:"../../pokemonEditor/edit/" + this.id , tekst: "PKMN(${mapPokemonList?.size()})")
+    }
+
+    public ScaffoldLink getShowMap(){
+        new ScaffoldLink(link:"../../mapEditor/showMap/" + this.id , tekst: "Show")
     }
 
     @Override
