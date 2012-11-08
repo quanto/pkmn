@@ -6,6 +6,7 @@ import data.MapBackup
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import game.context.PlayerData
 import game.Player
+import game.MapTransition
 
 class MapEditorController {
 
@@ -26,6 +27,18 @@ class MapEditorController {
         render view: "index", model: [maps:maps]
     }
 
+    def transitions(){
+        Map map
+
+        if (params.id){
+            map = Map.get(params.id)
+
+            def maps = MapTransition.findAllByMap(map).collect() { it?.jumpTo?.map }?.unique()
+
+            render view: "transitions", model: [maps:maps]
+        }
+    }
+
     def showMap(){
 
         Map map
@@ -42,8 +55,6 @@ class MapEditorController {
             render text: g.render(template: "/game/layerMap", model: [map: map, mapLayout:mapLayout])
 
         }
-
-
     }
 
 
