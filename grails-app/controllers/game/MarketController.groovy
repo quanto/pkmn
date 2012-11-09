@@ -59,11 +59,4 @@ class MarketController {
         redirect controller: 'game', action:'index'
     }
 
-    def getItems(){
-        PlayerData playerData = session.playerData
-        Player player = playerData.getPlayer()
-
-        render text: g.render(template: 'ownerItems', model: [ownerItems:player.ownerItems])
-    }
-
 }

@@ -413,10 +413,12 @@ function updateStats(){
     });
 }
 
+var itemTab = "usableItems"
+
 function updateItems(){
     $.ajax({
         type: "GET",
-        url: "/game/market/getItems",
+        url: "/game/bag/getItems?itemTab=" + itemTab,
         data: "",
         cache: false,
         success: function(data){
@@ -424,7 +426,6 @@ function updateItems(){
         }
     });
 }
-
 
 function getPlayerLocation()
 {
