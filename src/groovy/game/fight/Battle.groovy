@@ -54,30 +54,38 @@ class Battle {
         // New round, start with a new object
         fight.roundResult = new RoundResult()
         // Reset the switch round
-        fight.switchRound = false
+
 
         // Log initial hp
         fight.roundResult.initialActions.add(new InitialHpLog(fightPlayer1.fightPokemon,1))
         fight.roundResult.initialActions.add(new InitialHpLog(fightPlayer2.fightPokemon,2))
 
-        decideAction(fight, fight.getFirstFightPlayer(), fight.getSecondFightPlayer(), true)
-
-        boolean fainted = Faint.oneOfBothFainted(fight)
-
-        if (!fainted && !fight.battleOver){
+        if (fight.switchRound){
+            decideAction(fight, fight.getFirstFightPlayer(), fight.getSecondFightPlayer(), true)
             decideAction(fight, fight.getSecondFightPlayer(), fight.getFirstFightPlayer(), false)
+            fight.switchRound = false
+        }
+        else {
 
-            Faint.oneOfBothFainted(fight)
-        }
+            decideAction(fight, fight.getFirstFightPlayer(), fight.getSecondFightPlayer(), true)
 
-        if (fight.getFirstFightPlayer().fightPokemon.hp > 0 && !fight.battleOver){
-            afterBattle(fight,fight.getFirstFightPlayer(),fight.getSecondFightPlayer())
+            boolean fainted = Faint.oneOfBothFainted(fight)
+
+            if (!fainted && !fight.battleOver){
+                decideAction(fight, fight.getSecondFightPlayer(), fight.getFirstFightPlayer(), false)
+
+                Faint.oneOfBothFainted(fight)
+            }
+
+            if (fight.getFirstFightPlayer().fightPokemon.hp > 0 && !fight.battleOver){
+                afterBattle(fight,fight.getFirstFightPlayer(),fight.getSecondFightPlayer())
+            }
+            if (fight.getSecondFightPlayer().fightPokemon.hp > 0 && !fight.battleOver){
+                afterBattle(fight,fight.getSecondFightPlayer(),fight.getFirstFightPlayer())
+            }
+            // Check again after the after battle effects
+            Faint.checkEndRoundFainted(fight)
         }
-        if (fight.getSecondFightPlayer().fightPokemon.hp > 0 && !fight.battleOver){
-            afterBattle(fight,fight.getSecondFightPlayer(),fight.getFirstFightPlayer())
-        }
-        // Check again after the after battle effects
-        Faint.checkEndRoundFainted(fight)
 
         afterTurn(fight)
 
