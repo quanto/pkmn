@@ -160,7 +160,6 @@ class MapImport {
                     node = ""
                     map = Map.findByName(parts[0])
                     map.owner = parts[6]==''?Player.findByUsername('kevin'):Player.findByUsername(parts[6])
-                    println map.owner
                     map.save()
                     parts = []
                 }

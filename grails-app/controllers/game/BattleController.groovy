@@ -209,7 +209,6 @@ class BattleController {
 
         else {
             if (ContinueMove.continueMove(fight,myFightPlayer)){
-                println "1"
                 render template: "refreshLog"
             }
             else {
