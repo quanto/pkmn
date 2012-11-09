@@ -90,7 +90,7 @@ class MapEditorController {
     def saveMap(){
         Map map
         if (params.id){
-            map = Map.get(params.id)
+            map = Map.get(Integer.parseInt(params.id))
             map.properties = params.map
         }
         else {

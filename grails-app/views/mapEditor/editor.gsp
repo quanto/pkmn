@@ -200,6 +200,8 @@
                         <input type="button" value="stones path 1" onclick="setPath(stonepath1)" />
                         <input type="button" value="stones path 2" onclick="setPath(stonepath2)" />
 
+                        <input type="button" value="rock" onclick='setPath(new Array(new Array("329","429","529"),new Array("330","430","530"),new Array("331","431","531"),new Array("429","429","429","429")))' />
+                        <input type="button" value="closed rock" onclick='setPath(new Array(new Array("029","129","229"),new Array("330","430","530"),new Array("331","431","531"),new Array("429","429","429","429")))' />
                     </div>
 
                     <div id="tab2" title="Objects">
