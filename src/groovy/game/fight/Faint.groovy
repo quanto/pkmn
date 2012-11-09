@@ -109,8 +109,8 @@ class Faint {
         boolean player2Alive = !player2fainted
 
         if (!player2Alive){
-            // Try to find the next by party position
-            player2Alive = OwnerPokemon.findByOwnerAndPartyPosition(fight.fightPlayer2.owner,fight.fightPlayer2.ownerPokemon.partyPosition + 1)?true:false
+            // Try to find the next alive pokemon
+            player2Alive = fight.fightPlayer2.party.find { it.hp > 0 }?true:false
         }
 
         // Is the battle over
@@ -136,7 +136,7 @@ class Faint {
 
                 // Turn out Npc reward items
                 npc.rewardItems.each { OwnerItem ownerItem ->
-                    Items.addOwnerItem(fightPlayer1.owner,ownerItem.item,false)
+                    Items.addOwnerItem(fight.fightPlayer1.owner,ownerItem.item,false)
                 }
 
                 // Show defeated message
@@ -190,11 +190,12 @@ class Faint {
 
     static boolean hasAlivePokemon(FightPlayer fightPlayer){
         // update pokemon hp
-        fightPlayer.ownerPokemon.hp = 0
-        fightPlayer.ownerPokemon.save(flush: true)
+        fightPlayer.fightPokemon.ownerPokemon.hp = 0
+        fightPlayer.fightPokemon.hp = 0
+        fightPlayer.fightPokemon.ownerPokemon.save(flush: true)
 
         // kijk of er nog levende pokemon zijn
-        def list = OwnerPokemon.findAllByOwnerAndPartyPositionGreaterThanAndHpGreaterThan(fightPlayer.owner,0,0)
+        def list = fightPlayer.party.findAll{ it.hp > 0 }
 
         return list.size() > 0
     }
@@ -214,12 +215,12 @@ class Faint {
 
     static boolean checkFainted(Fight fight, FightPlayer fightPlayer)
     {
-        if (fightPlayer.hp <= 0)
+        if (fightPlayer.fightPokemon.hp <= 0)
         {
-            fightPlayer.hp = 0;
+            fightPlayer.fightPokemon.hp = 0
 
             if (!fightPlayer.faintMessageShown){
-                fight.roundResult.battleActions.add(new MessageLog(fightPlayer.ownerPokemon.pokemon.name + " fainted."))
+                fight.roundResult.battleActions.add(new MessageLog(fightPlayer.fightPokemon.name + " fainted."))
             }
 
             // stop attacks
@@ -240,7 +241,7 @@ class Faint {
         EXP.distributeExp(fight,fight.fightPlayer1,fight.fightPlayer2,true);
 
         if (fight.battleType == BattleType.PVE){
-            int money = Money.calculateMoney(fight,fight.fightPlayer2.ownerPokemon)
+            int money = Money.calculateMoney(fight,fight.fightPlayer2.fightPokemon.ownerPokemon)
             Money.giveMoney(fight,money)
         }
         else if (fight.battleType == BattleType.PVN){
@@ -251,7 +252,6 @@ class Faint {
             Money.giveMoney(fight,money)
         }
 
-        Stats.saveStats(fight.fightPlayer1, true);
         fight.battleOver = true
     }
 

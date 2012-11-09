@@ -21,7 +21,7 @@ class StatusMove {
         {
             moveInfo.effectAction = true;
             moveInfo.recoverAction = true;
-            moveInfo.recover = Math.round(attackingFightPlayer.maxHp /2)
+            moveInfo.recover = Math.round(attackingFightPlayer.fightPokemon.maxHp /2)
         }
         // Poisons the opponent, if it hits.
         else if (move.name == "Poison Gas" || move.name == "Poisonpowder")
@@ -252,9 +252,9 @@ class StatusMove {
             moveInfo.stageAction = true;
             moveInfo.addToAttackStage = 6;
 
-            Hp.doStatusDamage(attackingFightPlayer,Math.floor(attackingFightPlayer.maxHp / 2))
+            Hp.doStatusDamage(attackingFightPlayer,Math.floor(attackingFightPlayer.fightPokemon.maxHp / 2))
 
-            fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.ownerPokemon.pokemon.name} cut its own hp and maximized attack."))
+            fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.fightPokemon.name} cut its own hp and maximized attack."))
 
         }
         // Increases the user's Attack by one stage. 
@@ -305,13 +305,13 @@ class StatusMove {
         else if (move.name == "Focus Energy")
         {
             Critical.addCriticalStage(1,attackingFightPlayer)
-            fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.ownerPokemon.pokemon.name} takes a deep breath and focuses to raise the critical-hit ratio of its attacks."))
+            fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.fightPokemon.name} takes a deep breath and focuses to raise the critical-hit ratio of its attacks."))
 
         }
         // Doesn't do ANYTHING. 
         else if (move.name == "Splash")
         {
-            fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.ownerPokemon.pokemon.name} splashes."))
+            fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.fightPokemon.name} splashes."))
         }
         // Decreases opponent's Accuracy by one stage, if it hits.
         else if (move.name == "Flash" || move.name == "Kinesis" || move.name == "Sand-attack" || move.name == "Smokescreen")
@@ -408,7 +408,7 @@ class StatusMove {
         else if (move.name == "Endure")
         {
             attackingFightPlayer.endure = true
-            fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.ownerPokemon.pokemon.name} braced itself."))
+            fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.fightPokemon.name} braced itself."))
         }
         else if (move.name == "Protect" || move.name == "Detect")
         {

@@ -10,6 +10,7 @@ import game.context.BattleType
 import game.PokemonCreator
 import game.OwnerPokemon
 import game.fight.status.Recover
+import game.Npc
 
 class BattleTestController {
 
@@ -32,6 +33,25 @@ class BattleTestController {
         }
 
         render view : "index"
+    }
+
+    def npcFight(){
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
+        Fight fight = fightFactoryService.startFight(BattleType.PVN,player,Npc.get(Integer.parseInt(params.npc)),null,null)
+
+        player.fightNr = fight.nr
+        player.view = View.Battle
+        redirect controller : 'game'
+    }
+
+    def pvpFight(){
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
+        player.view = View.ShowPvpSelect
+        redirect controller : 'game'
     }
 
     def recover(){

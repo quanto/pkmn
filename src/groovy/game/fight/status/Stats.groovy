@@ -2,85 +2,72 @@ package game.fight.status
 
 import game.fight.log.MessageLog
 
-import game.fight.log.SwitchLog
 import game.context.Fight
 import game.OwnerPokemon
 import game.context.PlayerType
 import game.context.BattleType
 import game.context.FightPlayer
+import game.context.FightPokemon
+import game.Owner
+import game.fight.log.InitialHpLog
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 02-10-12
- * Time: 20:09
- * To change this template use File | Settings | File Templates.
- */
 class Stats {
+
+    public static void bringOutPokemon(Fight fight, FightPlayer fightPlayer, FightPokemon fightPokemon){
+        if (fightPlayer.ownerId){
+            fight.roundResult.battleActions.add(new MessageLog("${fightPlayer.name} brings out ${fightPokemon.name}"))
+        }
+        else {
+            fight.roundResult.battleActions.add(new MessageLog("A wild ${fightPokemon.name} appears"))
+        }
+
+        // We should only track the used pokemon for users
+        if (fightPlayer.playerType == PlayerType.user && fight.battleType != BattleType.PVP){
+            // Remove fainted pokemon
+            if (fight.fightPlayer1?.fightPokemon && fight.fightPlayer1.fightPokemon.hp <= 0){
+                fight.usedFightPokemon.remove(fight.fightPlayer1?.fightPokemon)
+            }
+            // Add the added pokemon
+            if (!fight.usedFightPokemon.find{ it.ownerPokemonId == fightPokemon.ownerPokemonId}){
+                fight.usedFightPokemon.add(fightPokemon)
+            }
+        }
+
+        fightPlayer.fightPokemon = fightPokemon
+
+        fight.roundResult.initialActions.add(new InitialHpLog(fightPokemon,fightPlayer.playerNr))
+
+    }
+
 
     /**
      * Neemt stats van pokemon over naar fight
      */
     public static setBaseStats(Fight fight, OwnerPokemon ownerPokemon, PlayerType playerType, int playerNr)
     {
-
-        if (ownerPokemon.owner){
-            fight.roundResult.battleActions.add(new MessageLog("${ownerPokemon.owner.name} brings out ${ownerPokemon.pokemon.name}"))
-        }
-        else {
-            fight.roundResult.battleActions.add(new MessageLog("A wild ${ownerPokemon.pokemon.name} appears"))
-        }
-
-        // We should only track the used pokemon for users
-        if (playerType == PlayerType.user && fight.battleType != BattleType.PVP){
-            // Remove fainted pokemon
-            if (fight.fightPlayer1?.ownerPokemon && fight.fightPlayer1.ownerPokemon.hp <= 0){
-                OwnerPokemon currentOwnerPokemon = fight.usedPokemon.find{ it.id == fight.fightPlayer1.ownerPokemon.id}
-                fight.usedPokemon.remove(currentOwnerPokemon)
-            }
-            // Add the added pokemon
-            if (!fight.usedPokemon.find{ it.id == ownerPokemon.id}){
-                fight.usedPokemon.add(ownerPokemon)
-            }
-        }
-
         FightPlayer fightPlayer = new FightPlayer(
                 fight: fight,
-                ownerPokemon:ownerPokemon,
-                owner: ownerPokemon.owner,
-                attack:calcStat(ownerPokemon,ownerPokemon.attackIV,ownerPokemon.pokemon.baseAttack),
-                defense: calcStat(ownerPokemon,ownerPokemon.defenseIV,ownerPokemon.pokemon.baseDefense),
-                spAttack: calcStat(ownerPokemon,ownerPokemon.spAttackIV,ownerPokemon.pokemon.baseSpAttack),
-                spDefense : calcStat(ownerPokemon,ownerPokemon.spDefenseIV,ownerPokemon.pokemon.baseSpDefense),
-                speed : calcStat(ownerPokemon,ownerPokemon.speedIV,ownerPokemon.pokemon.baseSpeed),
-                maxHp : ownerPokemon.calculateHP(),
-                hp : ownerPokemon.hp,
-                level : ownerPokemon.level,
-                burn : ownerPokemon.burn,
-                freeze : ownerPokemon.freeze,
-                paralysis : ownerPokemon.paralysis,
-                poison : ownerPokemon.poison,
-                badlypoisond : ownerPokemon.badlyPoisond,
-                sleep : ownerPokemon.sleep,
-                confusion : ownerPokemon.confusion,
-                curse :ownerPokemon.curse,
-                attackStage :ownerPokemon.attackStage,
-                defenseStage : ownerPokemon.defenseStage,
-                spAttackStage : ownerPokemon.spAttackStage,
-                spDefenseStage : ownerPokemon.spDefenseStage,
-                speedStage : ownerPokemon.speedStage,
-                accuracyStage : ownerPokemon.accuracyStage,
-                criticalStage : ownerPokemon.criticalStage,
-                evasionStage : ownerPokemon.evasionStage,
+                ownerId: ownerPokemon.owner?.id,
+                name: ownerPokemon.owner?.name,
                 //   move
                 //   learnMoves
                 holdMove : 0,
                 holdTurns : 0,
-                continueMove : null, //
+                continueMove : null,
                 lastBattleAction: null,
                 playerType:playerType,
                 playerNr: playerNr
         )
+
+        if (playerType != PlayerType.wildPokemon){
+            fightPlayer.party = createParty(ownerPokemon.owner)
+            // Set the active pokemon
+            bringOutPokemon(fight, fightPlayer, fightPlayer.party.find { it.ownerPokemonId == ownerPokemon.id })
+        }
+        else {
+            fightPlayer.party = [createFightPokemon(ownerPokemon)]
+            bringOutPokemon(fight, fightPlayer,fightPlayer.party.last())
+        }
 
         // Set them back on the fight
         if (playerNr == 1){
@@ -90,9 +77,54 @@ class Stats {
             fight.fightPlayer2 = fightPlayer
         }
 
-        fight.roundResult.battleActions.add(new SwitchLog(ownerPokemon, playerNr))
 
         return fightPlayer
+    }
+
+    public static List<FightPokemon> createParty(Owner owner){
+        def party = []
+        OwnerPokemon.findAllByPartyPositionGreaterThanAndOwner(0,owner).each{ OwnerPokemon ownerPokemon ->
+            party.add(createFightPokemon(ownerPokemon))
+        }
+        println owner
+        println party
+        return party
+    }
+
+    public static FightPokemon createFightPokemon(OwnerPokemon ownerPokemon){
+        return new FightPokemon(
+                name: ownerPokemon.pokemon.name,
+                hp: ownerPokemon.hp,
+                ownerPokemonId: ownerPokemon.id,
+                attack:calcStat(ownerPokemon,ownerPokemon.attackIV,ownerPokemon.pokemon.baseAttack),
+                defense: calcStat(ownerPokemon,ownerPokemon.defenseIV,ownerPokemon.pokemon.baseDefense),
+                spAttack: calcStat(ownerPokemon,ownerPokemon.spAttackIV,ownerPokemon.pokemon.baseSpAttack),
+                spDefense : calcStat(ownerPokemon,ownerPokemon.spDefenseIV,ownerPokemon.pokemon.baseSpDefense),
+                speed : calcStat(ownerPokemon,ownerPokemon.speedIV,ownerPokemon.pokemon.baseSpeed),
+                maxHp : ownerPokemon.calculateHP(),
+                level : ownerPokemon.level,
+                burn : ownerPokemon.burn,
+                freeze : ownerPokemon.freeze,
+                paralysis : ownerPokemon.paralysis,
+                poison : ownerPokemon.poison,
+                badlypoisond : ownerPokemon.badlyPoisond,
+                sleep : ownerPokemon.sleep,
+                confusion : ownerPokemon.confusion,
+                curse :ownerPokemon.curse,
+                attackStage : 0,
+                defenseStage : 0,
+                spAttackStage : 0,
+                spDefenseStage : 0,
+                speedStage : 0,
+                accuracyStage : 0,
+                criticalStage : 0,
+                evasionStage : 0,
+                type1: ownerPokemon.pokemon.type1,
+                type2: ownerPokemon.pokemon.type2,
+                pokemonNr: ownerPokemon.pokemon.nr,
+                gender: ownerPokemon.gender,
+                partyPosition: ownerPokemon.partyPosition
+        )
     }
 
     // Bereken huidige stats behlve hp
@@ -107,47 +139,27 @@ class Stats {
     }
 
     /**
-     * Uitgevoerd bij het switchen van pokemon
-     * En na het gevecht, na het gevecht stage weer op 0
+     * Save stats after the battle
      */
     public static void saveStats(FightPlayer fightPlayer, boolean endBattle = false)
     {
-        OwnerPokemon ownerPokemon = fightPlayer.ownerPokemon
+        fightPlayer.party.each { FightPokemon fightPokemon ->
 
-        ownerPokemon.hp = fightPlayer.hp
-        ownerPokemon.level = fightPlayer.level
-        ownerPokemon.burn = fightPlayer.burn
-        ownerPokemon.freeze = fightPlayer.freeze
-        ownerPokemon.paralysis = fightPlayer.paralysis
-        ownerPokemon.badlyPoisond = fightPlayer.badlypoisond
-        ownerPokemon.poison = fightPlayer.poison
-        ownerPokemon.sleep = fightPlayer.sleep
-        ownerPokemon.confusion = fightPlayer.confusion
-        ownerPokemon.curse = fightPlayer.curse
+            OwnerPokemon ownerPokemon = fightPokemon.ownerPokemon
 
-        if (!endBattle)
-        {
-            ownerPokemon.attackStage = fightPlayer.attackStage
-            ownerPokemon.defenseStage = fightPlayer.defenseStage
-            ownerPokemon.spAttackStage = fightPlayer.spAttackStage
-            ownerPokemon.spDefenseStage = fightPlayer.spDefenseStage
-            ownerPokemon.speedStage = fightPlayer.speedStage
-            ownerPokemon.accuracyStage = fightPlayer.accuracyStage
-            ownerPokemon.criticalStage = fightPlayer.criticalStage
-            ownerPokemon.evasionStage = fightPlayer.evasionStage
+            ownerPokemon.hp = fightPokemon.hp
+            ownerPokemon.level = fightPokemon.level
+            ownerPokemon.burn = fightPokemon.burn
+            ownerPokemon.freeze = fightPokemon.freeze
+            ownerPokemon.paralysis = fightPokemon.paralysis
+            ownerPokemon.badlyPoisond = fightPokemon.badlypoisond
+            ownerPokemon.poison = fightPokemon.poison
+            ownerPokemon.sleep = fightPokemon.sleep
+            ownerPokemon.confusion = fightPokemon.confusion
+            ownerPokemon.curse = fightPokemon.curse
+
+            ownerPokemon.save()
         }
-        else
-        {
-            ownerPokemon.attackStage = 0
-            ownerPokemon.defenseStage = 0
-            ownerPokemon.spAttackStage = 0
-            ownerPokemon.spDefenseStage = 0
-            ownerPokemon.speedStage = 0
-            ownerPokemon.accuracyStage = 0
-            ownerPokemon.criticalStage = 0
-            ownerPokemon.evasionStage = 0
-        }
-        ownerPokemon.save()
     }
 
 }

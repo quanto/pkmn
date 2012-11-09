@@ -48,10 +48,10 @@ class BattleOrder {
             }
         }
 
-        if (fight.fightPlayer1.speed > fight.fightPlayer2.speed){
+        if (fight.fightPlayer1.fightPokemon.speed > fight.fightPlayer2.fightPokemon.speed){
             player1first = true
         }
-        else if (fight.fightPlayer1.speed == fight.fightPlayer1.speed)
+        else if (fight.fightPlayer1.fightPokemon.speed == fight.fightPlayer1.fightPokemon.speed)
         {
             if (random.nextInt(2) == 1)
                 player1first = true

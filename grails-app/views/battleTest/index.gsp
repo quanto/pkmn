@@ -1,4 +1,4 @@
-<%@ page import="game.Pokemon" contentType="text/html;charset=UTF-8" %>
+<%@ page import="game.Npc; game.Pokemon" contentType="text/html;charset=UTF-8" %>
 <html>
     <head>
         <meta name="layout" content="game">
@@ -14,6 +14,16 @@
             <g:submitButton name="start" value="start" />
         </g:form>
 
+        <h1>Start NPC Fight</h1>
+        <g:form action="npcFight">
+            Npc: <g:select name="npc" from="${Npc.list()}" optionKey="id" />
+            <g:submitButton name="start" value="start" />
+        </g:form>
+
+        <h1>PVP Fight</h1>
+        <g:form action="pvpFight">
+            <g:submitButton name="start" value="start" />
+        </g:form>
 
         <h1>Set PKMN</h1>
         <g:form action="setPkmn">

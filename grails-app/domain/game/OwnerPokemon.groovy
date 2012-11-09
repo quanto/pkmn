@@ -35,14 +35,6 @@ class OwnerPokemon {
     int sleep = 0
     int confusion = 0
     int curse = 0
-    int attackStage = 0
-    int defenseStage = 0
-    int spDefenseStage = 0
-    int spAttackStage = 0
-    int speedStage = 0
-    int accuracyStage = 0
-    int criticalStage = 0
-    int evasionStage = 0
 
     static constraints = {
         owner nullable:true

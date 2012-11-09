@@ -6,6 +6,7 @@ import game.context.PlayerType
 import game.context.BattleType
 import game.context.Fight
 import game.context.FightInvite
+import game.context.FightPokemon
 
 class FightFactoryService {
 
@@ -76,21 +77,26 @@ class FightFactoryService {
         assert owner1Pokemon
         assert owner2Pokemon
 
-        FightPlayer fightPlayer2 = Stats.setBaseStats(fight,owner2Pokemon, PlayerType.wildPokemon, 2);
-
+        PlayerType player2PlayerType
         if (battleType == battleType.PVE){
-            fightPlayer2.playerType = PlayerType.wildPokemon
+            player2PlayerType = PlayerType.wildPokemon
+        }
+        else if (battleType == battleType.PVN){
+            player2PlayerType = PlayerType.npc
         }
         else if (battleType == battleType.PVP){
-            fightPlayer2.playerType = PlayerType.user
+            player2PlayerType = PlayerType.user
         }
+
+        FightPlayer fightPlayer2 = Stats.setBaseStats(fight,owner2Pokemon, player2PlayerType, 2);
+
 
         fight.fightPlayer2 = fightPlayer2
 
         FightPlayer fightPlayer1 = Stats.setBaseStats(fight,owner1Pokemon, PlayerType.user, 1);
 
         fight.fightPlayer1 = fightPlayer1
-        fight.fightPlayer1.owner = player1
+        fight.fightPlayer1.ownerId = player1.id
 
 
         // Weird have to set it again to set the right fightPlayer. For some reason player 2 is set

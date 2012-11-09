@@ -11,20 +11,20 @@ class Evasion {
         if (addToStage > 0)
         {
             // Max 6
-            if (attackingFightPlayer.evasionStage != 6)
+            if (attackingFightPlayer.fightPokemon.evasionStage != 6)
             {
-                attackingFightPlayer.evasionStage += addToStage;
-                attackingFightPlayer.fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.ownerPokemon.pokemon.name}`s evasiveness raises."))
+                attackingFightPlayer.fightPokemon.evasionStage += addToStage;
+                attackingFightPlayer.fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.fightPokemon.name}`s evasiveness raises."))
             }
         }
         else
         {
             // min -6
-            if (defendingFightPlayer.evasionStage != -6)
+            if (defendingFightPlayer.fightPokemon.evasionStage != -6)
             {
-                defendingFightPlayer.evasionStage += addToStage;
+                defendingFightPlayer.fightPokemon.evasionStage += addToStage;
 
-                attackingFightPlayer.fight.roundResult.battleActions.add(new MessageLog("${defendingFightPlayer.ownerPokemon.pokemon.name}`s evasiveness lowers."))
+                attackingFightPlayer.fight.roundResult.battleActions.add(new MessageLog("${defendingFightPlayer.fightPokemon.name}`s evasiveness lowers."))
             }
         }
     }

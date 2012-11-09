@@ -12,8 +12,8 @@ import game.fight.WildMove
 import game.fight.action.BattleAction
 import game.fight.action.SwitchAction
 import game.fight.action.MoveAction
-import game.fight.action.NoAction
 import game.fight.action.FailAction
+import game.context.FightPokemon
 
 class Moves {
 
@@ -47,9 +47,9 @@ class Moves {
 
                 if (fight.switchRound){
                     // Bring out the next pvn pokemon
-                    OwnerPokemon nextOwnerPokemon = OwnerPokemon.findByOwnerAndPartyPosition(fight.fightPlayer2.owner,fight.fightPlayer2.ownerPokemon.partyPosition + 1)
+                    FightPokemon fightPokemon = fightPlayer.opponentFightPlayer().party.find{ it.hp > 0 }
 
-                    fightPlayer.opponentFightPlayer().battleAction = new SwitchAction(ownerPokemon:nextOwnerPokemon)
+                    fightPlayer.opponentFightPlayer().battleAction = new SwitchAction(fightPokemon:fightPokemon)
                 }
                 else {
                     Battle.beforeChosingMove(fight, fightPlayer.opponentFightPlayer(), fightPlayer.opponentFightPlayer().owner)
@@ -66,7 +66,7 @@ class Moves {
                     else
                     {
                         // kies random move van npc
-                        fightPlayer.opponentFightPlayer().battleAction = NPCHelper.choseNpcMove(fightPlayer.opponentFightPlayer().ownerPokemon);
+                        fightPlayer.opponentFightPlayer().battleAction = NPCHelper.choseNpcMove(fightPlayer.opponentFightPlayer().fightPokemon.ownerPokemon);
                     }
                 }
             }
@@ -91,20 +91,20 @@ class Moves {
         // kijk of er nog een move geleerd kan worden
         // Criteria
 
-        int totalMoves = fightPlayer.ownerPokemon.ownerMoves.size()
+        int totalMoves = fightPlayer.fightPokemon.ownerPokemon.ownerMoves.size()
 
         if (totalMoves < 4)
         {
 
             OwnerMove ownerMove = new OwnerMove(
-                    ownerPokemon : fightPlayer.ownerPokemon,
+                    ownerPokemon : fightPlayer.fightPokemon.ownerPokemon,
                     move : move,
                     ppLeft : move.pp
             )
-            fightPlayer.ownerPokemon.addToOwnerMoves(ownerMove)
-            fightPlayer.ownerPokemon.save()
+            fightPlayer.fightPokemon.ownerPokemon.addToOwnerMoves(ownerMove)
+            fightPlayer.fightPokemon.ownerPokemon.save()
 
-            fight.roundResult.battleActions.add(new MessageLog(fightPlayer.ownerPokemon.pokemon.name + "learned " + move.name + "."))
+            fight.roundResult.battleActions.add(new MessageLog(fightPlayer.fightPokemon.name + "learned " + move.name + "."))
 
         }
         else

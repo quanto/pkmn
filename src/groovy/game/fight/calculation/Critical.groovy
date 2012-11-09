@@ -13,10 +13,10 @@ class Critical {
     public static void addCriticalStage(int addToStage, FightPlayer fightPlayer)
     {
 
-        if (fightPlayer.criticalStage + addToStage < 4)
-            fightPlayer.criticalStage += addToStage
+        if (fightPlayer.fightPokemon.criticalStage + addToStage < 4)
+            fightPlayer.fightPokemon.criticalStage += addToStage
         else
-        fightPlayer.criticalStage = 4
+        fightPlayer.fightPokemon.criticalStage = 4
     }
 
 }

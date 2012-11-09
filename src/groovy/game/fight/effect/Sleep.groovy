@@ -7,34 +7,27 @@ import game.context.FightPlayer
 import game.Moves
 import game.context.MoveInfo
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 03-10-12
- * Time: 09:04
- * To change this template use File | Settings | File Templates.
- */
 class Sleep {
 
     public static void checkSleep(Fight fight, FightPlayer fightPlayer)
     {
 
-        if (fightPlayer.sleep > 0)
+        if (fightPlayer.fightPokemon.sleep > 0)
         {
             // Geef bericht
-            if (fightPlayer.sleep == 1)
+            if (fightPlayer.fightPokemon.sleep == 1)
             {
-                fight.roundResult.battleActions.add(new MessageLog("${fightPlayer.ownerPokemon.pokemon.name} wakes up."))
+                fight.roundResult.battleActions.add(new MessageLog("${fightPlayer.fightPokemon.name} wakes up."))
 
                 fight.log += "m:;"
-                fightPlayer.sleep = 0
+                fightPlayer.fightPokemon.sleep = 0
             }
             else
             {
-                fight.roundResult.battleActions.add(new MessageLog("${fightPlayer.ownerPokemon.pokemon.name} is a sleep."))
+                fight.roundResult.battleActions.add(new MessageLog("${fightPlayer.fightPokemon.name} is a sleep."))
 
                 // verlaag slaap beurten
-                fightPlayer.sleep -= 1
+                fightPlayer.fightPokemon.sleep -= 1
 
                 // geen move
                 Moves.setMove(fight,fightPlayer,null)
@@ -47,17 +40,17 @@ class Sleep {
         if (moveInfo.sleepAction && moveInfo.effectSucces)
         {
             // kijk of de tegenstander al niet slaapt
-            if (defendingFightPlayer.sleep > 0)
+            if (defendingFightPlayer.fightPokemon.sleep > 0)
             {
-                fight.roundResult.battleActions.add(new MessageLog("${defendingFightPlayer.ownerPokemon.pokemon.name} is already asleep."))
+                fight.roundResult.battleActions.add(new MessageLog("${defendingFightPlayer.fightPokemon.name} is already asleep."))
 
             }
             // laat de tegenstander slapen
             else
             {
                 Recover.removeAllStatusAfflictions(defendingFightPlayer);
-                defendingFightPlayer.sleep = random.nextInt(6)+2
-                fight.roundResult.battleActions.add(new MessageLog("${defendingFightPlayer.ownerPokemon.pokemon.name} fell asleep."))
+                defendingFightPlayer.fightPokemon.sleep = random.nextInt(6)+2
+                fight.roundResult.battleActions.add(new MessageLog("${defendingFightPlayer.fightPokemon.name} fell asleep."))
 
                 moveInfo.sleepActionSucces = true;
             }

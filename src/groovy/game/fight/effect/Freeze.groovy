@@ -15,20 +15,20 @@ class Freeze {
     public static void checkFreeze(Fight fight, FightPlayer fightPlayer)
     {
 
-        if (fightPlayer.freeze == 1)
+        if (fightPlayer.fightPokemon.freeze == 1)
         {
             Random r = new Random();
             // Kijk of freeze ophoud
             if (r.nextInt(10)+1 == 1)
             {
-                fight.roundResult.battleActions.add(new MessageLog("${fightPlayer.ownerPokemon.pokemon.name} is no longer frozen."))
+                fight.roundResult.battleActions.add(new MessageLog("${fightPlayer.fightPokemon.name} is no longer frozen."))
 
-                fightPlayer.freeze = 0;
+                fightPlayer.fightPokemon.freeze = 0;
             }
             else
             {
 
-                fight.roundResult.battleActions.add(new MessageLog("${fightPlayer.ownerPokemon.pokemon.name} is frozen solid!"))
+                fight.roundResult.battleActions.add(new MessageLog("${fightPlayer.fightPokemon.name} is frozen solid!"))
 
                 Moves.setMove(fight,fightPlayer,null)
             }
@@ -37,23 +37,22 @@ class Freeze {
 
     public static void freezeAction(Fight fight, MoveInfo moveInfo, FightPlayer defendingFightPlayer, Move attackMove){
 
-        OwnerPokemon defendingOwnerPokemon = defendingFightPlayer.ownerPokemon
 
         // freeze
         if (moveInfo.freezeAction && moveInfo.effectSucces)
         {
-            if (defendingFightPlayer.freeze == 0)
+            if (defendingFightPlayer.fightPokemon.freeze == 0)
             {
-                if (defendingOwnerPokemon.pokemon.hasType("ice"))
+                if (defendingFightPlayer.fightPokemon.hasType("ice"))
                 {
-                    fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is immune to freeze."))
+                    fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.fightPokemon.name + " is immune to freeze."))
 
                 }
                 else
                 {
                     Recover.removeAllStatusAfflictions(defendingFightPlayer);
-                    defendingFightPlayer.freeze = 1;
-                    fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is frozen."))
+                    defendingFightPlayer.fightPokemon.freeze = 1;
+                    fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.fightPokemon.name + " is frozen."))
 
                     moveInfo.freezeActionSucces = true
                 }
@@ -61,7 +60,7 @@ class Freeze {
             else
             {
                 if (attackMove.category == MoveCategory.StatusMove)
-                    fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is already frozen."))
+                    fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.fightPokemon.name + " is already frozen."))
             }
         }
     }

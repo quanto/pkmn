@@ -12,30 +12,29 @@ import game.context.MoveCategory
 class Burn {
 
     public static void burnAction(Fight fight, MoveInfo moveInfo, FightPlayer defendingFightPlayer, Move attackMove){
-        OwnerPokemon defendingOwnerPokemon = defendingFightPlayer.ownerPokemon
 
         // burn
         if (moveInfo.burnAction && moveInfo.effectSucces)
         {
-            if (defendingFightPlayer.burn == 0)
+            if (defendingFightPlayer.fightPokemon.burn == 0)
             {
-                if (defendingOwnerPokemon.pokemon.hasType("fire"))
+                if (defendingFightPlayer.fightPokemon.hasType("fire"))
                 {
-                    fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is immune to fire."))
+                    fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.fightPokemon.name + " is immune to fire."))
                 }
                 else
                 {
                     Recover.removeAllStatusAfflictions(defendingFightPlayer);
-                    defendingFightPlayer.burn = 1;
+                    defendingFightPlayer.fightPokemon.burn = 1;
 
-                    fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is burning."))
+                    fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.fightPokemon.name + " is burning."))
                     moveInfo.burnActionSucces = true;
                 }
             }
             else
             {
                 if (attackMove.category == MoveCategory.StatusMove)
-                    fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is already burning."))
+                    fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.fightPokemon.name + " is already burning."))
             }
         }
     }

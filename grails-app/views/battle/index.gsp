@@ -4,29 +4,28 @@
 %>
 <html>
     <head>
-        <title>Battle</title>
         <style>
 
-        body
-        {
-            font-family:verdana;
-            font-size:16px;
-        }
+            body
+            {
+                font-family:verdana;
+                font-size:16px;
+            }
 
-        table
-        {
-            font-size:16px;
-        }
+            table
+            {
+                font-size:16px;
+            }
 
-        table td
-        {
-            width:100px;
-        }
+            table td
+            {
+                width:100px;
+            }
 
-        a:link, a:visited
-        {
-            color:black;
-        }
+            a:link, a:visited
+            {
+                color:black;
+            }
 
         </style>
         <script language="javascript" type="text/javascript" src="${resource(uri:'')}/js/jquery-1.7.min.js"></script>
@@ -35,7 +34,7 @@
         // Player variables
         var pokemon = new Array()
         <g:each in="${[fight.fightPlayer1,fight.fightPlayer2]}" var="fightPlayer">
-            pokemon[${fightPlayer.playerNr}] ={playerNr:${fightPlayer.playerNr},name:"${fightPlayer.ownerPokemon.pokemon.name}",level:${fightPlayer.level},maxHealth:${fightPlayer.maxHp},health:${fightPlayer.hp}};
+            pokemon[${fightPlayer.playerNr}] ={playerNr:${fightPlayer.playerNr},name:"${fightPlayer.fightPokemon.name}",level:${fightPlayer.fightPokemon.level},maxHealth:${fightPlayer.fightPokemon.maxHp},health:${fightPlayer.fightPokemon.hp}};
         </g:each>
 
         //a:1:10;m:Doing 10dmg again;a:1:10;m:bla fainted;
@@ -162,10 +161,8 @@
                     var player = value.substring(0,1);
                     var pokemonname = value.substring(2,value.length);
 
-                    if (player == 1)
-                        player1pokemonName = pokemonname;
-                    else
-                        player2pokemonName = pokemonname;
+                    pokemon[player].name = pokemonname;
+
 
                     // updateUI(); // Ui update after level
 
@@ -176,10 +173,7 @@
                     var player = value.substring(0,1);
                     var level = value.substring(2,value.length);
 
-                    if (player == 1)
-                        player1pokemonLevel = level;
-                    else
-                        player2pokemonLevel = level;
+                    pokemon[player].level = level;
 
                     setHP();
                     updateUI();

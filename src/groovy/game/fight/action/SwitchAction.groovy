@@ -1,9 +1,9 @@
 package game.fight.action
 
-import game.OwnerPokemon
+import game.context.FightPokemon
 
 class SwitchAction extends BattleAction {
 
-    OwnerPokemon ownerPokemon
+    FightPokemon fightPokemon
 
 }

@@ -15,20 +15,19 @@ class Poison {
         // Poison
         if (moveInfo.poisonAction)
         {
-            OwnerPokemon defendingOwnerPokemon = defendingFightPlayer.ownerPokemon
 
             // controlleer of de status al staat
-            if (defendingFightPlayer.poison == 0 && defendingFightPlayer.badlypoisond == 0 && moveInfo.effectSucces)
+            if (defendingFightPlayer.fightPokemon.poison == 0 && defendingFightPlayer.fightPokemon.badlypoisond == 0 && moveInfo.effectSucces)
             {
-                if (defendingOwnerPokemon.pokemon.hasType("poison") || defendingOwnerPokemon.pokemon.hasType("steel"))
+                if (defendingFightPlayer.fightPokemon.hasType("poison") || defendingFightPlayer.fightPokemon.hasType("steel"))
                 {
-                    fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is immune to poison."))
+                    fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.fightPokemon.name + " is immune to poison."))
                 }
                 else
                 {
                     Recover.removeAllStatusAfflictions(defendingFightPlayer);
-                    defendingFightPlayer.poison = 1
-                    fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is poisoned."))
+                    defendingFightPlayer.fightPokemon.poison = 1
+                    fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.fightPokemon.name + " is poisoned."))
                     moveInfo.poisonActionSucces = true;
                 }
             }
@@ -36,7 +35,7 @@ class Poison {
             {
                 // Bericht bij move die bedoelt is om te poisenen
                 if (attackMove.category == MoveCategory.StatusMove)
-                fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is already poisoned."))
+                fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.fightPokemon.name + " is already poisoned."))
             }
         }
     }
@@ -45,21 +44,20 @@ class Poison {
         //badlypoisend wordt meer met iedere beurt
         if (moveInfo.badlypoisondAction)
         {
-            OwnerPokemon defendingOwnerPokemon = defendingFightPlayer.ownerPokemon
 
             // kijk of niet al poisond
-            if (defendingFightPlayer.poison == 0 && defendingFightPlayer.badlypoisond == 0 && moveInfo.effectSucces)
+            if (defendingFightPlayer.fightPokemon.poison == 0 && defendingFightPlayer.fightPokemon.badlypoisond == 0 && moveInfo.effectSucces)
             {
-                if (defendingOwnerPokemon.pokemon.hasType("poison") || defendingOwnerPokemon.pokemon.hasType("steel"))
+                if (defendingFightPlayer.fightPokemon.hasType("poison") || defendingFightPlayer.fightPokemon.hasType("steel"))
                 {
-                    fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is immune to poison."))
+                    fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.fightPokemon.name + " is immune to poison."))
                 }
                 else
                 {
                     Recover.removeAllStatusAfflictions(defendingFightPlayer);
                     // Zet de status
-                    defendingFightPlayer.badlypoisond = 1;
-                    fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " badly poisoned."))
+                    defendingFightPlayer.fightPokemon.badlypoisond = 1;
+                    fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.fightPokemon.name + " badly poisoned."))
                     moveInfo.badlypoisondActionSucces = true;
                 }
             }
@@ -67,7 +65,7 @@ class Poison {
             {
                 // Bericht bij move die bedoelt is om te poisenen
                 if (attackMove.category == MoveCategory.StatusMove)
-                    fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is already poisoned."))
+                    fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.fightPokemon.name + " is already poisoned."))
             }
         }
     }

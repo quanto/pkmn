@@ -17,9 +17,6 @@ class PhysicalDamage {
 
     public static void doDamage(Fight fight, MoveInfo moveInfo, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer, Move attackMove){
 
-        OwnerPokemon attackOwnerPokemon = attackFightPlayer.ownerPokemon
-        OwnerPokemon defendingOwnerPokemon = defendingFightPlayer.ownerPokemon
-
         for (int i=0;i<moveInfo.loop;i++)
         {
 
@@ -27,23 +24,23 @@ class PhysicalDamage {
             {
 
                 // effectieviteit
-                moveInfo.effectiveness = Effective.effectiveness(attackMove.type,attackOwnerPokemon.pokemon.type1,attackOwnerPokemon.pokemon.type2)
+                moveInfo.effectiveness = Effective.effectiveness(attackMove.type,attackFightPlayer.fightPokemon.type1,attackFightPlayer.fightPokemon.type2)
 
                 if (attackMove.category == MoveCategory.SpecialMove)
                 {
                     // bereken nieuwe stats
-                    int attackStat = Stat.getStat(attackFightPlayer.spAttack, attackFightPlayer.spAttackStage);
-                    int defenseStat = Stat.getStat(defendingFightPlayer.spDefense, defendingFightPlayer.spDefenseStage);
+                    int attackStat = Stat.getStat(attackFightPlayer.fightPokemon.spAttack, attackFightPlayer.fightPokemon.spAttackStage);
+                    int defenseStat = Stat.getStat(attackFightPlayer.fightPokemon.spDefense, attackFightPlayer.fightPokemon.spDefenseStage);
                     // bereken schade
-                    moveInfo.damage = Damage.calcDmg(attackFightPlayer.level,attackStat,moveInfo.attackPower,defenseStat,moveInfo.effectiveness);
+                    moveInfo.damage = Damage.calcDmg(attackFightPlayer.fightPokemon.level,attackStat,moveInfo.attackPower,defenseStat,moveInfo.effectiveness);
                 }
                 else
                 {
                     // bereken nieuwe stats
-                    int attackStat = Stat.getStat(attackFightPlayer.attack, attackFightPlayer.attackStage);
-                    int defenseStat = Stat.getStat(defendingFightPlayer.defense, defendingFightPlayer.defenseStage);
+                    int attackStat = Stat.getStat(attackFightPlayer.fightPokemon.attack, attackFightPlayer.fightPokemon.attackStage);
+                    int defenseStat = Stat.getStat(attackFightPlayer.fightPokemon.defense, attackFightPlayer.fightPokemon.defenseStage);
                     // bereken schade
-                    moveInfo.damage = Damage.calcDmg(attackFightPlayer.level,attackStat,moveInfo.attackPower,defenseStat,moveInfo.effectiveness);
+                    moveInfo.damage = Damage.calcDmg(attackFightPlayer.fightPokemon.level,attackStat,moveInfo.attackPower,defenseStat,moveInfo.effectiveness);
                 }
 
 
@@ -60,7 +57,7 @@ class PhysicalDamage {
             }
             else if (moveInfo.oneHitKO)
             {
-                defendingFightPlayer.hp = 0
+                defendingFightPlayer.fightPokemon.hp = 0
 
                 fight.roundResult.battleActions.add(new MessageLog("It's a one hit KO!"))
             }
@@ -81,13 +78,13 @@ class PhysicalDamage {
                 // Always leaves opponent with at least 1 HP.
                 if (attackMove.name == "False Swipe")
                 {
-                    if (defendingFightPlayer.hp - moveInfo.damage < 0)
+                    if (defendingFightPlayer.fightPokemon.hp - moveInfo.damage < 0)
                     {
-                        moveInfo.damage = defendingFightPlayer.hp - 1;
+                        moveInfo.damage = defendingFightPlayer.fightPokemon.hp - 1;
                     }
                 }
                 // 2x damage against an opponent using Fly.
-                if (attackMove.name == "Twister" && defendingOwnerPokemon.pokemon.hasType("flying"))
+                if (attackMove.name == "Twister" && defendingFightPlayer.fightPokemon.hasType("flying"))
                 {
                     moveInfo.damage = moveInfo.damage * 2;
                 }
@@ -108,7 +105,7 @@ class PhysicalDamage {
 
                 // If there's no damage the user protected itself
                 if (moveInfo.damage > 0){
-                    fight.roundResult.battleActions.add(new MessageLog(attackOwnerPokemon.pokemon.name + " hits " + defendingOwnerPokemon.pokemon.name + " with " + attackMove.name + " ${moveInfo.damage} dmg."))
+                    fight.roundResult.battleActions.add(new MessageLog(attackFightPlayer.fightPokemon.name + " hits " + defendingFightPlayer.fightPokemon.name + " with " + attackMove.name + " ${moveInfo.damage} dmg."))
                     Recover.healthSlideLogAction(fight, defendingFightPlayer,moveInfo.damage);
                 }
 
@@ -117,7 +114,7 @@ class PhysicalDamage {
                     int recoilDamage = Math.floor(moveInfo.damage / 100 * moveInfo.recoil)
                     Hp.doStatusDamage(attackFightPlayer,recoilDamage)
 
-                    fight.roundResult.battleActions.add(new MessageLog(attackOwnerPokemon.pokemon.name + " hurts from recoil damage. ${moveInfo.damage} dmg."))
+                    fight.roundResult.battleActions.add(new MessageLog(attackFightPlayer.fightPokemon.name + " hurts from recoil damage. ${moveInfo.damage} dmg."))
                     Recover.healthSlideLogAction(fight, attackFightPlayer,moveInfo.damage);
                     fight.roundResult.battleActions.add(new MessageLog("Recoil did ${moveInfo.damage} dmg."))
                 }

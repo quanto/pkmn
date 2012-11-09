@@ -8,48 +8,52 @@ import game.Evolution
 import game.LearnableMove
 import game.Moves
 import game.OwnerPokemon
-import game.fight.log.SwitchLog
+import game.context.FightPokemon
+import game.fight.log.InitialHpLog
 
 class EXP {
 
-    public static void giveEXP(Fight fight, FightPlayer ownfightPlayer, FightPlayer opponentfightPlayer, boolean isWild, int exp, boolean isCurrentOwnerPokemon)
+    public static void giveEXP(Fight fight, FightPokemon fightPokemon, FightPlayer ownfightPlayer, FightPlayer opponentfightPlayer, boolean isWild, int exp, boolean isCurrentOwnerPokemon)
     {
 
-        ownfightPlayer.ownerPokemon.xp += exp
+        OwnerPokemon ownerPokemon = fightPokemon.getOwnerPokemon()
+
+        ownerPokemon.xp += exp
 
         // Kijk voor lvl up
-        int newLevel = getLevel(ownfightPlayer.ownerPokemon.xp, ownfightPlayer.ownerPokemon.pokemon.levelRate)
-        if (newLevel > ownfightPlayer.ownerPokemon.level)
+        int newLevel = getLevel(ownerPokemon.xp, ownerPokemon.pokemon.levelRate)
+        if (newLevel > ownerPokemon.level)
         {
 
-            int lvlDiff = newLevel - ownfightPlayer.ownerPokemon.level;
+            int lvlDiff = newLevel - ownerPokemon.level;
             for (int i=0;i<lvlDiff;i++)
             {
-                int newLevelLoop = ownfightPlayer.ownerPokemon.level + i + 1
+                int newLevelLoop = ownerPokemon.level + i + 1
 
-                fight.roundResult.battleActions.add(new MessageLog("${ownfightPlayer.ownerPokemon.pokemon.name} grew to level ${newLevelLoop}!"))
+                fight.roundResult.battleActions.add(new MessageLog("${ownerPokemon.pokemon.name} grew to level ${newLevelLoop}!"))
 
                 if (isCurrentOwnerPokemon){
                     fight.roundResult.battleActions.add(new DingLog(newLevelLoop,ownfightPlayer.playerNr))
                 }
 
-                Evolution evolution = Evolution.findByFromPokemonAndLevel(ownfightPlayer.ownerPokemon.pokemon,newLevelLoop)
+                Evolution evolution = Evolution.findByFromPokemonAndLevel(ownerPokemon.pokemon,newLevelLoop)
                 // kijk of pokemon evalueert
 
                 if (evolution)
                 {
 
-                    fight.roundResult.battleActions.add(new MessageLog(ownfightPlayer.ownerPokemon.pokemon.name + " evolved into " + evolution.toPokemon.name + "."))
+                    fight.roundResult.battleActions.add(new MessageLog(ownerPokemon.pokemon.name + " evolved into " + evolution.toPokemon.name + "."))
 
-                    ownfightPlayer.ownerPokemon.pokemon = evolution.toPokemon
+                    ownerPokemon.pokemon = evolution.toPokemon
 
                     if (isCurrentOwnerPokemon){
-                        fight.roundResult.battleActions.add(new SwitchLog(ownfightPlayer.ownerPokemon, ownfightPlayer.playerNr))
+                        updateFightPokemon(fightPokemon,ownerPokemon)
+                        fight.roundResult.initialActions.add(new InitialHpLog(fightPokemon,ownfightPlayer.playerNr))
                     }
                 }
 
                 // Kijk of er move geleerd kan worden
-                List<LearnableMove> learnableMoveList = LearnableMove.findAllByPokemonAndLearnLevel(ownfightPlayer.ownerPokemon.pokemon,newLevelLoop)
+                List<LearnableMove> learnableMoveList = LearnableMove.findAllByPokemonAndLearnLevel(ownerPokemon.pokemon,newLevelLoop)
 
                 learnableMoveList.each { LearnableMove learnableMove ->
                     if (learnableMove.move.implemented){
@@ -59,35 +63,49 @@ class EXP {
 
             }
             // zet nieuwe level
-            ownfightPlayer.ownerPokemon.level = newLevel
-            ownfightPlayer.level = newLevel
+            ownerPokemon.level = newLevel
+
+            // Update fightPokemon with new attributes
+            updateFightPokemon(fightPokemon,ownerPokemon)
+
+            if (isCurrentOwnerPokemon){
+                fight.roundResult.initialActions.add(new InitialHpLog(fightPokemon,ownfightPlayer.playerNr))
+            }
 
         }
-        ownfightPlayer.ownerPokemon.save(flush: true)
+        ownerPokemon.save(flush: true)
     }
+
+    static void updateFightPokemon(FightPokemon fightPokemon, OwnerPokemon ownerPokemon){
+        fightPokemon.level = ownerPokemon.level
+        fightPokemon.name = ownerPokemon.pokemon.name
+        fightPokemon.maxHp = ownerPokemon.calculateHP()
+        fightPokemon.pokemonNr = ownerPokemon.pokemon.nr
+    }
+
 
     public static void distributeExp(Fight fight, FightPlayer ownfightPlayer, FightPlayer opponentfightPlayer, boolean isWild){
 
-        int exp = calcXP(opponentfightPlayer.ownerPokemon.pokemon.baseEXP,opponentfightPlayer.level,isWild)
+        int exp = calcXP(opponentfightPlayer.fightPokemon.getOwnerPokemon().pokemon.baseEXP,opponentfightPlayer.fightPokemon.level,isWild)
 
         // Used pokemon might be fainted at the last turn. Let's check
-        if (ownfightPlayer?.ownerPokemon && ownfightPlayer.ownerPokemon.hp <= 0){
-            OwnerPokemon currentOwnerPokemon = fight.usedPokemon.find{ it.id == fight.fightPlayer1.ownerPokemon.id}
-            if (currentOwnerPokemon){
-                fight.usedPokemon.remove(currentOwnerPokemon)
+        if (ownfightPlayer?.fightPokemon && ownfightPlayer.fightPokemon.hp <= 0){
+            FightPokemon currentFightPokemon = fight.usedFightPokemon.find{ it.ownerPokemonId == fight.fightPlayer1.fightPokemon.ownerPokemonId}
+            if (currentFightPokemon){
+                fight.usedFightPokemon.remove(currentFightPokemon)
             }
         }
 
         // Distribute the EXP
-        fight.usedPokemon.each { OwnerPokemon ownerPokemon ->
-            int expShare = Math.floor(exp / fight.usedPokemon.size())
-            fight.roundResult.battleActions.add(new MessageLog(ownerPokemon.pokemon.name + " gains ${expShare} exp."))
+        fight.usedFightPokemon.each { FightPokemon fightPokemon ->
+            int expShare = Math.floor(exp / fight.usedFightPokemon.size())
+            fight.roundResult.battleActions.add(new MessageLog(fightPokemon.name + " gains ${expShare} exp."))
 
-            boolean isCurrentOwnerPokemon = ownerPokemon.id == fight.fightPlayer1.ownerPokemon.id
-            giveEXP(fight, ownfightPlayer, opponentfightPlayer, isWild, exp, isCurrentOwnerPokemon)
+            boolean isCurrentOwnerPokemon = fightPokemon.ownerPokemonId == fight.fightPlayer1.fightPokemon.ownerPokemonId
+            giveEXP(fight, fightPokemon, ownfightPlayer, opponentfightPlayer, isWild, exp, isCurrentOwnerPokemon)
         }
         // Leave only the current ownerPokemon in the used list
-        fight.usedPokemon = [fight.usedPokemon.find{ it.id == fight.fightPlayer1.ownerPokemon.id}]
+        fight.usedFightPokemon = [ownfightPlayer.fightPokemon]
     }
 
     public static int calcXP(int baseXp, int level, boolean isWild)

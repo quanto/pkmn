@@ -49,7 +49,7 @@ class FightMove {
         else if (move.name == "Night Shade" || move.name == "Seismic Toss")
         {
             moveInfo.calculateDamage = false
-            moveInfo.damage = attackingFightPlayer.level
+            moveInfo.damage = attackingFightPlayer.fightPokemon.level
         }
 
         // Damage = 1x to 1.5x user's level.
@@ -57,7 +57,7 @@ class FightMove {
         {
             moveInfo.calculateDamage = false
             double multiplyer = (random.nextInt(6) / 10) + 1
-            moveInfo.damage = Math.round(attackingFightPlayer.level * multiplyer)
+            moveInfo.damage = Math.round(attackingFightPlayer.fightPokemon.level * multiplyer)
         }
 
 
@@ -409,7 +409,7 @@ class FightMove {
         // Power doubles if opponent's HP is less than 50%.
         else if (move.name == "Brine")
         {
-            if (defendingFightPlayer.hp < (defendingFightPlayer.maxHp / 2))
+            if (defendingFightPlayer.fightPokemon.hp < (defendingFightPlayer.fightPokemon.maxHp / 2))
             {
                 moveInfo.attackPower = move.power * 2;
             }
@@ -440,7 +440,7 @@ class FightMove {
         // 106 Dream Eater special move Can only be used on a sleeping target. User recovers half of the damage inflicted on opponent.
         else if (move.name == "Dream Eater")
         {
-            if (defendingFightPlayer.sleep == 0)
+            if (defendingFightPlayer.fightPokemon.sleep == 0)
             {
                 fight.roundResult.battleActions.add(new MessageLog("Dream Eater can only be used at an sleeping target."))
                 moveInfo.canNotUseAction = true;
@@ -449,11 +449,11 @@ class FightMove {
         // 447 Wake-up Slap physical move Power doubles if used on a sleeping opponent, but wakes it up.
         else if (move.name == "Wake-up Slap")
         {
-            if (defendingFightPlayer.sleep != 0)
+            if (defendingFightPlayer.fightPokemon.sleep != 0)
             {
                 moveInfo.attackPower = move.power * 2;
-                defendingFightPlayer.sleep = 0;
-                fight.roundResult.battleActions.add(new MessageLog("${defendingFightPlayer.ownerPokemon.pokemon.name} wakes up."))
+                defendingFightPlayer.fightPokemon.sleep = 0;
+                fight.roundResult.battleActions.add(new MessageLog("${defendingFightPlayer.fightPokemon.name} wakes up."))
             }
         }
         // Trump Card special move The lower the PP, the higher the power.
@@ -477,18 +477,18 @@ class FightMove {
         // Explosion status move User faints.
         else if (move.name == "Explosion" || move.name == "Selfdestruct")
         {
-            attackingFightPlayer.hp = 0
+            attackingFightPlayer.fightPokemon.hp = 0
         }
         //400 Super Fang physical move Always takes off half of the opponent's HP.
         else if (move.name == "Super Fang")
         {
             moveInfo.calculateDamage = false;
-            moveInfo.damage = Math.round(defendingFightPlayer.hp / 2);
+            moveInfo.damage = Math.round(defendingFightPlayer.fightPokemon.hp / 2);
         }
         // 463 Wring Out special move The higher the opponent's HP, the higher the damage.
         else if (move.name == "Wring Out" || move.name == "Crush Grip")
         {
-            moveInfo.attackPower = Math.round(110 * attackingFightPlayer.hp / attackingFightPlayer.maxHp);
+            moveInfo.attackPower = Math.round(110 * attackingFightPlayer.fightPokemon.hp / attackingFightPlayer.fightPokemon.maxHp);
         }
         // May cause freezing.
         else if (move.name == "Blizzard" || move.name == "Ice Beam" || move.name == "Ice Punch" || move.name == "Powder Snow") //
@@ -535,7 +535,7 @@ class FightMove {
         {
             if (attackingFightPlayer.prepareMoveAction?.move?.name != "Solarbeam"){
 
-                fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.ownerPokemon.pokemon.name} gathers light."))
+                fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.fightPokemon.name} gathers light."))
                 moveInfo.doPhysicalDamage = false // do nothing
                 attackingFightPlayer.prepareMoveAction = new MoveAction(move: moveAction.move, ownerMoveForPP: moveAction.ownerMoveForPP)
                 attackingFightPlayer.takePP = false
@@ -550,7 +550,7 @@ class FightMove {
         {
             if (attackingFightPlayer.prepareMoveAction?.move?.name != "Dig"){
 
-                fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.ownerPokemon.pokemon.name} dug a hole."))
+                fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.fightPokemon.name} dug a hole."))
                 moveInfo.doPhysicalDamage = false // do nothing
                 attackingFightPlayer.prepareMoveAction = new MoveAction(move: moveAction.move, ownerMoveForPP: moveAction.ownerMoveForPP)
                 attackingFightPlayer.takePP = false
@@ -565,7 +565,7 @@ class FightMove {
         {
             if (attackingFightPlayer.prepareMoveAction?.move?.name != "Fly"){
 
-                fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.ownerPokemon.pokemon.name} flew up high."))
+                fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.fightPokemon.name} flew up high."))
                 moveInfo.doPhysicalDamage = false // do nothing
                 attackingFightPlayer.prepareMoveAction = new MoveAction(move: moveAction.move, ownerMoveForPP: moveAction.ownerMoveForPP)
                 attackingFightPlayer.takePP = false

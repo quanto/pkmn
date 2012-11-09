@@ -26,13 +26,6 @@ import game.fight.reward.Money
 import game.fight.calculation.BattleOrder
 import game.context.BattleType
 import game.context.Fight
-import game.OwnerPokemon
-import game.Player
-import game.RecoverAction
-import game.Npc
-import game.OwnerItem
-import game.Items
-import game.NpcLock
 import game.Move
 
 import game.Owner
@@ -44,6 +37,7 @@ import game.fight.action.ItemAction
 import game.context.MoveCategory
 import game.fight.action.FailAction
 import game.OwnerMove
+import game.context.FightPokemon
 
 class Battle {
 
@@ -63,8 +57,8 @@ class Battle {
         fight.switchRound = false
 
         // Log initial hp
-        fight.roundResult.initialActions.add(new InitialHpLog(fightPlayer1.hp, fightPlayer1.ownerPokemon,1))
-        fight.roundResult.initialActions.add(new InitialHpLog(fightPlayer2.hp, fightPlayer2.ownerPokemon,2))
+        fight.roundResult.initialActions.add(new InitialHpLog(fightPlayer1.fightPokemon,1))
+        fight.roundResult.initialActions.add(new InitialHpLog(fightPlayer2.fightPokemon,2))
 
         decideAction(fight, fight.getFirstFightPlayer(), fight.getSecondFightPlayer(), true)
 
@@ -76,16 +70,22 @@ class Battle {
             Faint.oneOfBothFainted(fight)
         }
 
-        if (fight.getFirstFightPlayer().hp > 0 && !fight.battleOver){
+        if (fight.getFirstFightPlayer().fightPokemon.hp > 0 && !fight.battleOver){
             afterBattle(fight,fight.getFirstFightPlayer(),fight.getSecondFightPlayer())
         }
-        if (fight.getSecondFightPlayer().hp > 0 && !fight.battleOver){
+        if (fight.getSecondFightPlayer().fightPokemon.hp > 0 && !fight.battleOver){
             afterBattle(fight,fight.getSecondFightPlayer(),fight.getFirstFightPlayer())
         }
-        // Check again after the affterBattle effects
+        // Check again after the after battle effects
         Faint.checkEndRoundFainted(fight)
 
         afterTurn(fight)
+
+        if (fight.battleOver){
+            if (fight.battleType != BattleType.PVP){
+                Stats.saveStats(fight.fightPlayer1, true);
+            }
+        }
     }
 
     public static void takePP(OwnerMove ownerMove){
@@ -106,10 +106,9 @@ class Battle {
             }
         }
         else if (attackFightPlayer.battleAction in SwitchAction){
-            // Save the old pokemon
-            Stats.saveStats(attackFightPlayer, false)
-            // Bring out the new
-            Stats.setBaseStats(fight,attackFightPlayer.battleAction.ownerPokemon.refresh(), attackFightPlayer.playerType, attackFightPlayer.playerNr)
+
+            Stats.bringOutPokemon(fight, attackFightPlayer, attackFightPlayer.battleAction.fightPokemon)
+
         }
         else if (attackFightPlayer.battleAction in NoAction){
             // We do nothing at all
@@ -118,7 +117,7 @@ class Battle {
             UseItem.useItem(fight, attackFightPlayer.battleAction.ownerItem, attackFightPlayer, defendingFightPlayer)
         }
         else if (attackFightPlayer.battleAction in FailAction){
-            fight.roundResult.battleActions.add(new MessageLog(attackFightPlayer.ownerPokemon.pokemon.name + " fails to perform move."))
+            fight.roundResult.battleActions.add(new MessageLog(attackFightPlayer.fightPokemon.name + " fails to perform move."))
         }
         else {
             println attackFightPlayer.battleAction
@@ -136,19 +135,19 @@ class Battle {
     public static void afterFirstMove(Fight fight, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer, MoveInfo moveInfo, Move attackMove){
         Random random = new Random()
 
-        OwnerPokemon defendingOwnerPokemon = defendingFightPlayer.ownerPokemon
+        FightPokemon defendingFightPokemon = defendingFightPlayer.fightPokemon
 
         // Flinch
         if (moveInfo.flinch)
         {
             defendingFightPlayer.battleAction = new NoAction()
-            fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " flinched!"))
+            fight.roundResult.battleActions.add(new MessageLog(defendingFightPokemon.name + " flinched!"))
         }
 
         // holding
         if (attackFightPlayer.holdMove != 0)
         {
-            fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is being traped by " + attackMove.name + "."))
+            fight.roundResult.battleActions.add(new MessageLog(defendingFightPokemon.name + " is being traped by " + attackMove.name + "."))
             defendingFightPlayer.battleAction = new NoAction()
         }
 
@@ -157,7 +156,7 @@ class Battle {
         {
             if (random.nextInt(4) == 1)
             {
-                fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is paralyzed. It cant move."))
+                fight.roundResult.battleActions.add(new MessageLog(defendingFightPokemon.name + " is paralyzed. It cant move."))
                 defendingFightPlayer.battleAction = new NoAction()
             }
         }
@@ -165,18 +164,18 @@ class Battle {
         {
             if (random.nextInt(2) == 1)
             {
-                fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is confused."))
+                fight.roundResult.battleActions.add(new MessageLog(defendingFightPokemon.name + " is confused."))
                 defendingFightPlayer.battleAction = new NoAction()
             }
         }
         if (moveInfo.sleepActionSucces)
         {
-            fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is a sleep."))
+            fight.roundResult.battleActions.add(new MessageLog(defendingFightPokemon.name + " is a sleep."))
             defendingFightPlayer.battleAction = new NoAction()
         }
         if (moveInfo.freezeActionSucces)
         {
-            fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is frozen solid!"))
+            fight.roundResult.battleActions.add(new MessageLog(defendingFightPokemon.name + " is frozen solid!"))
             defendingFightPlayer.battleAction = new NoAction()
         }
     }
@@ -184,10 +183,10 @@ class Battle {
     static void afterTurn(Fight fight)
     {
         // hp kan niet lager dan 0
-        if (fight.fightPlayer1.hp < 0)
-            fight.fightPlayer1.hp = 0;
-        if (fight.fightPlayer2.hp < 0)
-            fight.fightPlayer2.hp = 0;
+        if (fight.fightPlayer1.fightPokemon.hp < 0)
+            fight.fightPlayer1.fightPokemon.hp = 0;
+        if (fight.fightPlayer2.fightPokemon.hp < 0)
+            fight.fightPlayer2.fightPokemon.hp = 0;
 
         // last moves
         fight.fightPlayer1.lastBattleAction = fight.fightPlayer1.battleAction
@@ -200,18 +199,21 @@ class Battle {
     static void afterBattle(Fight fight, FightPlayer attackFightPlayer, FightPlayer defendingFightPlayer)
     {
 
+        FightPokemon defendingFightPokemon = defendingFightPlayer.fightPokemon
+        FightPokemon attackingFightPokemon = attackFightPlayer.fightPokemon
+
         if (defendingFightPlayer.leechSeed){
             // 1/8ste schade
-            int seedDamage = Math.floor(defendingFightPlayer.maxHp / 8);
+            int seedDamage = Math.floor(defendingFightPlayer.fightPokemon.maxHp / 8);
             // Less than 16 hp means 1 damage
-            if (defendingFightPlayer.hp < 16){
+            if (defendingFightPlayer.fightPokemon.hp < 16){
                 seedDamage = 1
             }
 
             seedDamage = Hp.doStatusDamage(defendingFightPlayer,seedDamage)
             Hp.doRecover(attackFightPlayer, seedDamage)
 
-            fight.roundResult.battleActions.add(new MessageLog("Leech Seed saps " + defendingFightPlayer.ownerPokemon.pokemon.name + ""))
+            fight.roundResult.battleActions.add(new MessageLog("Leech Seed saps " + defendingFightPokemon.name + ""))
 
             Recover.healthSlideLogAction(fight, attackFightPlayer,seedDamage* -1);
             Recover.healthSlideLogAction(fight, defendingFightPlayer,seedDamage);
@@ -226,39 +228,39 @@ class Battle {
         }
 
         // burn
-        if (attackFightPlayer.burn == 1)
+        if (attackingFightPokemon.burn == 1)
         {
             // 1/8ste schade
-            int burnDamage = Math.floor(attackFightPlayer.maxHp / 8);
+            int burnDamage = Math.floor(attackFightPlayer.fightPokemon.maxHp / 8);
 
             Hp.doStatusDamage(attackFightPlayer,burnDamage)
 
-            fight.roundResult.battleActions.add(new MessageLog(attackFightPlayer.ownerPokemon.pokemon.name + " is hurt by its burn burnDamage."))
+            fight.roundResult.battleActions.add(new MessageLog(attackingFightPokemon.name + " is hurt by its burn burnDamage."))
 
             Recover.healthSlideLogAction(fight, attackFightPlayer,burnDamage);
         }
 
         // poison wanneer dit niet is gezet
-        if (attackFightPlayer.poison == 1)
+        if (attackingFightPokemon.poison == 1)
         {
             // 1/8ste schade
-            int poisonDamage = Math.floor(attackFightPlayer.maxHp / 8);
+            int poisonDamage = Math.floor(attackFightPlayer.fightPokemon.maxHp / 8);
             Hp.doStatusDamage(attackFightPlayer,poisonDamage)
-            fight.roundResult.battleActions.add(new MessageLog(attackFightPlayer.ownerPokemon.pokemon.name + " hurts from poison poisonDamage."))
+            fight.roundResult.battleActions.add(new MessageLog(attackingFightPokemon.name + " hurts from poison poisonDamage."))
             Recover.healthSlideLogAction(fight, attackFightPlayer,poisonDamage);
         }
 
         // badly poisond
-        if (attackFightPlayer.badlypoisond > 0)
+        if (attackingFightPokemon.badlypoisond > 0)
         {
             // steeds verhoogt met 1/16
-            int badlyPoisonDamage = Math.floor(attackFightPlayer.maxHp / 16 * attackFightPlayer.badlypoisond);
+            int badlyPoisonDamage = Math.floor(attackingFightPokemon.maxHp / 16 * attackingFightPokemon.badlypoisond);
 
             Hp.doStatusDamage(attackFightPlayer,badlyPoisonDamage)
-            fight.roundResult.battleActions.add(new MessageLog(attackFightPlayer.ownerPokemon.pokemon.name + " hurts from badly poison badlyPoisonDamage."))
+            fight.roundResult.battleActions.add(new MessageLog(attackingFightPokemon.name + " hurts from badly poison badlyPoisonDamage."))
             Recover.healthSlideLogAction(fight, attackFightPlayer,badlyPoisonDamage);
             // verhoog status
-            attackFightPlayer.badlypoisond = attackFightPlayer.badlypoisond + 1;
+            attackingFightPokemon.badlypoisond = attackingFightPokemon.badlypoisond + 1;
 
         }
     }
@@ -278,15 +280,12 @@ class Battle {
         moveInfo.accuracy = attackMove.accuracy
         moveInfo.attackPower = attackMove.power
 
-        OwnerPokemon attackOwnerPokemon = attackFightPlayer.ownerPokemon
-        OwnerPokemon defendingOwnerPokemon = defendingFightPlayer.ownerPokemon
-
         Random random = new Random()
 
-        moveInfo.criticalHitStage += attackFightPlayer.criticalStage;
+        moveInfo.criticalHitStage += attackFightPlayer.fightPokemon.criticalStage;
 
 
-        fight.roundResult.battleActions.add(new MessageLog(attackFightPlayer.ownerPokemon.pokemon.name + " uses " + attackMove.name + "."))
+        fight.roundResult.battleActions.add(new MessageLog(attackFightPlayer.fightPokemon.name + " uses " + attackMove.name + "."))
 
         if (attackMove.category == MoveCategory.PhysicalMove || attackMove.category == MoveCategory.SpecialMove)
         {
@@ -304,10 +303,10 @@ class Battle {
         }
 
         // bereken accuracy
-        double accuracy = Accuraccy.getAccuracy(moveInfo.accuracy,attackFightPlayer.accuracyStage);
+        double accuracy = Accuraccy.getAccuracy(moveInfo.accuracy,attackFightPlayer.fightPokemon.accuracyStage);
 
         // evade over accuracy
-        int chanceOnHitting = Evasion.getEvasion(accuracy,defendingFightPlayer.evasionStage);
+        int chanceOnHitting = Evasion.getEvasion(accuracy,defendingFightPlayer.fightPokemon.evasionStage);
 
         boolean moveSucces = false;
         if (random.nextInt(100)+1 <= chanceOnHitting || moveInfo.cantMiss)
@@ -329,16 +328,16 @@ class Battle {
                 // No message if we can not use the action. message was set elsewhere
                 if (!moveInfo.canNotUseAction)
                 {
-                    fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " avoided the attack."))
+                    fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.fightPokemon.name + " avoided the attack."))
                 }
             }
         }
 
         // Kijk of een aanval een status opheft
-        if (attackMove.type == "fire" && defendingFightPlayer.freeze == 1)
+        if (attackMove.type == "fire" && defendingFightPlayer.fightPokemon.freeze == 1)
         {
             defendingFightPlayer.freeze == 0
-            fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is no longer frozen."))
+            fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.fightPokemon.name + " is no longer frozen."))
         }
 
         // set hold move
@@ -368,7 +367,7 @@ class Battle {
             {
                 // Protect cancels the effect
                 if (moveInfo.effectSucces){
-                    fight.roundResult.battleActions.add(new MessageLog("${attackFightPlayer.ownerPokemon.pokemon.name} protected itself."))
+                    fight.roundResult.battleActions.add(new MessageLog("${attackFightPlayer.fightPokemon.name} protected itself."))
                 }
                 else {
                     moveSucces = true
@@ -388,15 +387,15 @@ class Battle {
         {
             // Leech seed
             if (attackMove.name == "Leech Seed"){
-                if (defendingOwnerPokemon.pokemon.hasType("grass")){
-                    fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " cannot be seeded."))
+                if (defendingFightPlayer.fightPokemon.hasType("grass")){
+                    fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.fightPokemon.name + " cannot be seeded."))
                 }
                 else if (defendingFightPlayer.leechSeed){
-                    fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " is already seeded."))
+                    fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.fightPokemon.name + " is already seeded."))
                 }
                 else {
                     defendingFightPlayer.leechSeed = true
-                    fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " was seeded."))
+                    fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.fightPokemon.name + " was seeded."))
                 }
             }
 
@@ -442,7 +441,7 @@ class Battle {
                 else
                 {
                     if (attackMove.effectProb == 0 || attackMove.effectProb == 100)
-                        fight.roundResult.battleActions.add(new MessageLog(defendingOwnerPokemon.pokemon.name + " fails to recover."))
+                        fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.fightPokemon.name + " fails to recover."))
                 }
             }
 
@@ -466,7 +465,7 @@ class Battle {
         // bericht bij falen van effect
         else if (moveInfo.effectAction && !moveSucces)
         {
-            fight.roundResult.battleActions.add(new MessageLog(attackOwnerPokemon.pokemon.name + " fails to perform move."))
+            fight.roundResult.battleActions.add(new MessageLog(attackFightPlayer.fightPokemon.name + " fails to perform move."))
         }
 
         if (firstMove){

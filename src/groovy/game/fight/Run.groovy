@@ -32,7 +32,6 @@ class Run {
 
             if (x > 255 || random.nextInt(255) <= x || b == 0)
             {
-                Stats.saveStats(fight.fightPlayer1)
                 fight.roundResult.battleActions.add(new MessageLog("You run away safely."))
                 fight.battleOver = true
             }

@@ -12,7 +12,7 @@ class Fight {
     FightPlayer fightPlayer1
     FightPlayer fightPlayer2
     int escapeAttempts = 0
-    List<OwnerPokemon> usedPokemon = [] // The used pokemon in a round to who we should give Exp to
+    List<FightPokemon> usedFightPokemon = [] // The used pokemon in a round to who we should give Exp to
 
     String log = ""
     RoundResult roundResult = new RoundResult()

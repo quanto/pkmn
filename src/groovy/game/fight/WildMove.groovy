@@ -10,7 +10,7 @@ class WildMove {
 
     public static BattleAction choseWildMove(FightPlayer fightPlayer)
     {
-        List<LearnableMove> learnableMoveList = LearnableMove.findAllByPokemonAndLearnLevelLessThanEquals(fightPlayer.ownerPokemon.pokemon,fightPlayer.level).findAll{ it.move.implemented }
+        List<LearnableMove> learnableMoveList = LearnableMove.findAllByPokemonAndLearnLevelLessThanEquals(fightPlayer.fightPokemon.ownerPokemon.pokemon,fightPlayer.fightPokemon.level).findAll{ it.move.implemented }
         if (learnableMoveList){
             Collections.shuffle(learnableMoveList)
             return new MoveAction(move: learnableMoveList.last().move, ownerMoveForPP:null)

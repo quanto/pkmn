@@ -2,58 +2,32 @@ package game.context
 
 import game.Owner
 
-import game.OwnerPokemon
+
 import game.Move
 import game.fight.action.BattleAction
-import game.OwnerMove
 import game.fight.action.MoveAction
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 03-10-12
- * Time: 13:37
- * To change this template use File | Settings | File Templates.
- */
 class FightPlayer {
 
+    String name
     Fight fight
-    int playerNr
-    Owner owner
+    Integer playerNr
+    Integer ownerId
     PlayerType playerType
-    OwnerPokemon ownerPokemon
-    int attack
-    int defense
-    int spAttack
-    int spDefense
-    int speed
-    int maxHp
-    int hp
-    int level
-    int burn
-    int freeze
-    int paralysis
-    int poison
-    int badlypoisond
-    int sleep
-    int confusion
-    int curse
-    int attackStage
-    int defenseStage
-    int spAttackStage
-    int spDefenseStage
-    int speedStage
-    int accuracyStage
-    int criticalStage
-    int evasionStage
+
+    FightPokemon fightPokemon
+
+    List<FightPokemon> party = []
+
+
     BattleAction battleAction
     boolean doNoMove = false
     boolean faintMessageShown = false
     List<Move> learnMoves = []
     int holdMove
     int holdTurns
-    Move continueMove
-    BattleAction lastBattleAction
+    Move continueMove = null
+    BattleAction lastBattleAction = null
     boolean waitOnOpponentMove = false
     boolean leechSeed = false
     boolean endure = false
@@ -94,17 +68,12 @@ class FightPlayer {
      * @return
      */
     public Owner getOwner(){
-        return getOwnerPokemon()?.owner
+        if (!ownerId)
+            return null
+
+        return Owner.get(ownerId)
     }
 
-    /**
-     * When making use of this object
-     * we merge to attatch the object
-     * to the session again.
-     * @return
-     */
-    public OwnerPokemon getOwnerPokemon(){
-        return OwnerPokemon.get(ownerPokemon.id)
-    }
+
 
 }

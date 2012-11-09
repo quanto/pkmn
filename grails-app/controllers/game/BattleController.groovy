@@ -17,6 +17,7 @@ import game.fight.RoundResult
 import game.context.BattleType
 import game.fight.action.NoAction
 import game.fight.ContinueMove
+import game.context.FightPokemon
 
 class BattleController {
 
@@ -80,7 +81,7 @@ class BattleController {
 
             int ownerPokemonMoveId = Integer.parseInt(params.id)
 
-            OwnerMove ownerMove = OwnerMove.findByIdAndOwnerPokemon(ownerPokemonMoveId,myFightPlayer.ownerPokemon)
+            OwnerMove ownerMove = OwnerMove.findByIdAndOwnerPokemon(ownerPokemonMoveId,myFightPlayer.fightPokemon.ownerPokemon)
             Move move = ownerMove.move
 
             if (move == null || move.name == "Struggle") // Struggle || geen move
@@ -162,7 +163,7 @@ class BattleController {
         // Replace old move
         if (myFightPlayer.learnMoves && params.replaceMove != null)
         {
-            render text: g.render(template: 'replaceMoveList', model: [ownerMoves:myFightPlayer.ownerPokemon.ownerMoves])
+            render text: g.render(template: 'replaceMoveList', model: [ownerMoves:myFightPlayer.fightPokemon.ownerPokemon.ownerMoves])
         }
         // leer moves
         else if (myFightPlayer.learnMoves)
@@ -170,7 +171,7 @@ class BattleController {
             // haal move op
             Move move = myFightPlayer.learnMoves[0]
 
-            render text: g.render(template: 'chooseLearnMove', model: [move:move,ownerPokemon: myFightPlayer.ownerPokemon])
+            render text: g.render(template: 'chooseLearnMove', model: [move:move,fightPokemon: myFightPlayer.fightPokemon])
         }
         // moveList
         else if (fight.battleOver){
@@ -179,11 +180,10 @@ class BattleController {
         else if (myFightPlayer.waitOnOpponentMove){
             render text: g.render(template: 'waitOnOpponentMove')
         }
-        else if (fight.switchRound && myFightPlayer.hp <= 0)
+        else if (fight.switchRound && myFightPlayer.fightPokemon.hp <= 0)
         {
-            List<OwnerPokemon> ownerPokemonList = OwnerPokemon.findAllByOwnerAndPartyPositionGreaterThan(player,0)
             FightPlayer fightPlayer = myFightPlayer
-            render text: g.render(template: 'pokemonList',model: [mustChoose:true,ownerPokemonList:ownerPokemonList,fightPlayer:fightPlayer])
+            render text: g.render(template: 'pokemonList',model: [mustChoose:true,fightPokemonList:myFightPlayer.party,fightPlayer:fightPlayer])
         }
         // Ask to switch
         else if (fight.switchRound && params.pkmn == null)
@@ -193,9 +193,8 @@ class BattleController {
         // Switch pokemon list
         else if (params.pkmn != null && !fight.battleOver)
         {
-            List<OwnerPokemon> ownerPokemonList = OwnerPokemon.findAllByOwnerAndPartyPositionGreaterThan(player,0)
             FightPlayer fightPlayer = myFightPlayer
-            render text: g.render(template: 'pokemonList',model: [mustChoose:false,ownerPokemonList:ownerPokemonList,fightPlayer:fightPlayer])
+            render text: g.render(template: 'pokemonList',model: [mustChoose:false,fightPokemonList:myFightPlayer.party,fightPlayer:fightPlayer])
         }
         else if (params.items != null){
 
@@ -205,7 +204,7 @@ class BattleController {
         {
             Battle.beforeChosingMove(fight, myFightPlayer, player);
 
-            render text: g.render(template: 'moveList', model: [ownerMoveList:myFightPlayer.ownerPokemon.ownerMoves])
+            render text: g.render(template: 'moveList', model: [ownerMoveList:myFightPlayer.fightPokemon.ownerPokemon.ownerMoves])
         }
 
         else {
@@ -227,7 +226,7 @@ class BattleController {
         Fight fight = fightFactoryService.getFight(player.fightNr)
         FightPlayer myFightPlayer = fight.myPlayer(player)
 
-        if (fight.switchRound && myFightPlayer.hp > 0){
+        if (fight.switchRound && myFightPlayer.fightPokemon.hp > 0){
             Moves.setMove(fight,myFightPlayer, new NoAction(), false)
         }
 
@@ -241,9 +240,11 @@ class BattleController {
         Fight fight = fightFactoryService.getFight(player.fightNr)
         FightPlayer myFightPlayer = fight.myPlayer(player)
 
-        OwnerPokemon ownerPokemon = OwnerPokemon.findByOwnerAndPartyPositionAndHpGreaterThan(player,params.id,0)
-        if (ownerPokemon){
-            Moves.setMove(fight,myFightPlayer, new SwitchAction( ownerPokemon: ownerPokemon ), false)
+        int partyPosition = Integer.parseInt(params.id)
+        FightPokemon fightPokemon = myFightPlayer.party.find() { it.hp > 0 && it.partyPosition == partyPosition}
+
+        if (fightPokemon){
+            Moves.setMove(fight,myFightPlayer, new SwitchAction( fightPokemon: fightPokemon ), false)
         }
 
         render template: "log", model : [fight:fight,myFightPlayer:myFightPlayer]
@@ -256,23 +257,23 @@ class BattleController {
 
     public static void replaceMove(FightPlayer fightPlayer, int forgetMoveId)
     {
-        OwnerMove oldOwnerMove = fightPlayer.ownerPokemon.ownerMoves.find { it.id == forgetMoveId }
+        OwnerMove oldOwnerMove = fightPlayer.fightPokemon.ownerPokemon.ownerMoves.find { it.id == forgetMoveId }
 
         if (oldOwnerMove){
             Move learnMove = fightPlayer.learnMoves[0]
             if (learnMove){
-                fightPlayer.ownerPokemon.removeFromOwnerMoves(oldOwnerMove)
+                fightPlayer.fightPokemon.ownerPokemon.removeFromOwnerMoves(oldOwnerMove)
                 oldOwnerMove.delete()
                 OwnerMove newOwnerMove = new OwnerMove(
-                        ownerPokemon:fightPlayer.ownerPokemon,
+                        ownerPokemon:fightPlayer.fightPokemon.ownerPokemon,
                         move: learnMove,
                         ppLeft: learnMove.pp
                 )
 
-                fightPlayer.ownerPokemon.addToOwnerMoves(
+                fightPlayer.fightPokemon.ownerPokemon.addToOwnerMoves(
                         newOwnerMove
                 )
-                fightPlayer.ownerPokemon.save()
+                fightPlayer.fightPokemon.ownerPokemon.save()
                 removeLearnMove(fightPlayer)
             }
         }
@@ -282,10 +283,12 @@ class BattleController {
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
 
+
         Fight fight = fightFactoryService.getFight(player.fightNr)
         if (!fight.switchRound){
             Run.run(fight)
         }
+        FightPlayer myFightPlayer = fight.myPlayer(player)
 
         render template: "log", model : [fight:fight,myFightPlayer:myFightPlayer]
     }

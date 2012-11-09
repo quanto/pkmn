@@ -10,13 +10,6 @@ import game.OwnerPokemon
 import game.OwnerMove
 import game.fight.Hp
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 02-10-12
- * Time: 19:43
- * To change this template use File | Settings | File Templates.
- */
 class Recover {
 
     public static void recover(Fight fight, int recover, FightPlayer attackFightPlayer)
@@ -26,22 +19,19 @@ class Recover {
         // turn negative
         healthSlideLogAction(fight, attackFightPlayer,recover * -1);
         // log
-        fight.roundResult.battleActions.add(new MessageLog(attackFightPlayer.ownerPokemon.pokemon.name + " recovers ${recover} hp."))
+        fight.roundResult.battleActions.add(new MessageLog(attackFightPlayer.fightPokemon.name + " recovers ${recover} hp."))
 
     }
 
     public static void healthSlideLogAction(Fight fight, FightPlayer fightPlayer, int damage)
     {
 
-        if (fightPlayer.hp - damage < 0)
+        if (fightPlayer.fightPokemon.hp - damage < 0)
         {
-            fightPlayer.hp = 0
+            fightPlayer.fightPokemon.hp = 0
         }
-        /*
-          else if (fightPlayer.Hp"} - $damage > fightPlayer.MaxHp"})
-              $damage = fightPlayer.Hp"} - fightPlayer.MaxHp"};
-          */
-        fight.roundResult.battleActions.add(new MoveLog(fightPlayer.hp, fightPlayer.playerNr))
+
+        fight.roundResult.battleActions.add(new MoveLog(fightPlayer.fightPokemon.hp, fightPlayer.playerNr))
 
     }
 
@@ -62,14 +52,7 @@ class Recover {
             ownerPokemon.sleep = 0
             ownerPokemon.confusion = 0
             ownerPokemon.curse = 0
-            ownerPokemon.attackStage = 0
-            ownerPokemon.defenseStage = 0
-            ownerPokemon.spDefenseStage = 0
-            ownerPokemon.spAttackStage = 0
-            ownerPokemon.speedStage = 0
-            ownerPokemon.accuracyStage = 0
-            ownerPokemon.criticalStage = 0
-            ownerPokemon.evasionStage = 0
+
             ownerPokemon.save()
 
             /**
@@ -84,16 +67,14 @@ class Recover {
 
     public static void removeAllStatusAfflictions(FightPlayer fightPlayer)
     {
-        fightPlayer.burn = 0;
-        fightPlayer.freeze = 0;
-        fightPlayer.paralysis = 0;
-        fightPlayer.poison = 0;
-        fightPlayer.badlypoisond = 0;
-        fightPlayer.sleep = 0;
-        fightPlayer.confusion = 0;
-        fightPlayer.curse = 0;
-        // :TODO uknown
-        // fightPlayer.attract = 0;
+        fightPlayer.fightPokemon.burn = 0
+        fightPlayer.fightPokemon.freeze = 0
+        fightPlayer.fightPokemon.paralysis = 0
+        fightPlayer.fightPokemon.poison = 0
+        fightPlayer.fightPokemon.badlypoisond = 0
+        fightPlayer.fightPokemon.sleep = 0
+        fightPlayer.fightPokemon.confusion = 0
+        fightPlayer.fightPokemon.curse = 0
     }
     
 }

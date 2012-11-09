@@ -14,19 +14,19 @@ class Accuraccy {
         if (addToStage > 0)
         {
             // Max 6
-            if (attackingFightPlayer.accuracyStage < 6)
+            if (attackingFightPlayer.fightPokemon.accuracyStage < 6)
             {
-                attackingFightPlayer.accuracyStage += addToStage
-                fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.ownerPokemon.pokemon.name}`s accuracy raises"))
+                attackingFightPlayer.fightPokemon.accuracyStage += addToStage
+                fight.roundResult.battleActions.add(new MessageLog("${attackingFightPlayer.fightPokemon.name}`s accuracy raises"))
             }
         }
         else
         {
             // min -6
-            if (defendingFightPlayer.accuracyStage> -6)
+            if (defendingFightPlayer.fightPokemon.accuracyStage> -6)
             {
-                defendingFightPlayer.accuracyStage += addToStage
-                fight.roundResult.battleActions.add(new MessageLog("${defendingFightPlayer.ownerPokemon.pokemon.name}`s accuracy lowers."))
+                defendingFightPlayer.fightPokemon.accuracyStage += addToStage
+                fight.roundResult.battleActions.add(new MessageLog("${defendingFightPlayer.fightPokemon.name}`s accuracy lowers."))
             }
         }
     }

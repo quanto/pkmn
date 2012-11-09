@@ -9,25 +9,18 @@ import game.fight.status.Recover
 import game.Move
 import game.context.MoveCategory
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 03-10-12
- * Time: 08:43
- * To change this template use File | Settings | File Templates.
- */
 class Paralyses {
 
     public static void checkParalyses(Fight fight, FightPlayer fightPlayer)
     {
 
-        if (fightPlayer.paralysis == 1)
+        if (fightPlayer.fightPokemon.paralysis == 1)
         {
             Random r = new Random();
             // Kijk of effected door paralysis
             if (r.nextInt(4)+1 == 2)
             {
-                fight.roundResult.battleActions.add(new MessageLog("${fightPlayer.ownerPokemon.pokemon.name} is paralyzed. It can`t move."))
+                fight.roundResult.battleActions.add(new MessageLog("${fightPlayer.fightPokemon.name} is paralyzed. It can`t move."))
 
                 // geen move
                 Moves.setMove(fight,fightPlayer,null)
@@ -39,18 +32,18 @@ class Paralyses {
         // paralysis
         if (moveInfo.paralysisAction && moveInfo.effectSucces)
         {
-            if (defendingFightPlayer.paralysis == 0)
+            if (defendingFightPlayer.fightPokemon.paralysis == 0)
             {
                 Recover.removeAllStatusAfflictions(defendingFightPlayer);
-                defendingFightPlayer.paralysis = 1;
-                fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.ownerPokemon.pokemon.name + " is paralyzed."))
+                defendingFightPlayer.fightPokemon.paralysis = 1;
+                fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.fightPokemon.name + " is paralyzed."))
 
                 moveInfo.paralysisActionSucces = true;
             }
             else
             {
                 if (attackMove.category == MoveCategory.StatusMove)
-                    fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.ownerPokemon.pokemon.name + " is already paralyzed."))
+                    fight.roundResult.battleActions.add(new MessageLog(defendingFightPlayer.fightPokemon.name + " is already paralyzed."))
             }
         }
     }
