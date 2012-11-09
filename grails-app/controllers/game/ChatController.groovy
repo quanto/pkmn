@@ -5,7 +5,7 @@ import game.context.PlayerData
 class ChatController {
 
     def index() {
-        List<ChatMessage> chatMessageList = ChatMessage.list(max:50)
+        List<ChatMessage> chatMessageList = ChatMessage.list(max:50,sort: 'id', order:'desc').reverse()
 
         String string = "";
 

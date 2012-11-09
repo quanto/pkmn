@@ -9,4 +9,8 @@ class ChatMessage {
     static constraints = {
     }
 
+    static mapping = {
+        order "desc"
+    }
+
 }
