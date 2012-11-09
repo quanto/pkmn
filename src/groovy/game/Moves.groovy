@@ -46,10 +46,7 @@ class Moves {
             if (!fightPlayer.doNoMove || fightPlayer.playerType == PlayerType.user){
 
                 if (fight.switchRound){
-                    // Bring out the next pvn pokemon
-                    FightPokemon fightPokemon = fightPlayer.opponentFightPlayer().party.find{ it.hp > 0 }
 
-                    fightPlayer.opponentFightPlayer().battleAction = new SwitchAction(fightPokemon:fightPokemon)
                 }
                 else {
                     Battle.beforeChosingMove(fight, fightPlayer.opponentFightPlayer(), fightPlayer.opponentFightPlayer().owner)

@@ -157,6 +157,11 @@ class BattleController {
         }
         // continue normal flow and show the menu
 
+        // We should set the switch action of the computer before setting our own action
+        if (fight.switchRound && fight.battleType != BattleType.PVP){
+            FightPokemon fightPokemon = myFightPlayer.opponentFightPlayer().party.find{ it.hp > 0 }
+            myFightPlayer.opponentFightPlayer().battleAction = new SwitchAction(fightPokemon:fightPokemon)
+        }
 
 
 
@@ -180,15 +185,20 @@ class BattleController {
         else if (myFightPlayer.waitOnOpponentMove){
             render text: g.render(template: 'waitOnOpponentMove')
         }
-        else if (fight.switchRound && myFightPlayer.fightPokemon.hp <= 0)
+        else if (fight.switchRound && myFightPlayer.mustSwitch)
         {
             FightPlayer fightPlayer = myFightPlayer
             render text: g.render(template: 'pokemonList',model: [mustChoose:true,fightPokemonList:myFightPlayer.party,fightPlayer:fightPlayer])
         }
+        // We should wait until the other switches
+        else if ((fight.switchRound && !myFightPlayer.opponentFightPlayer().battleAction && params.pkmn == null))
+        {
+            render text: g.render(template: 'waitOnOpponentSwitch')
+        }
         // Ask to switch
         else if (fight.switchRound && params.pkmn == null)
         {
-            render text: g.render(template: 'chooseSwitchPokemon')
+            render text: g.render(template: 'chooseSwitchPokemon',model:[playerName:myFightPlayer.opponentFightPlayer().name,pokemonName:myFightPlayer.opponentFightPlayer().battleAction.fightPokemon.name])
         }
         // Switch pokemon list
         else if (params.pkmn != null && !fight.battleOver)
@@ -206,7 +216,6 @@ class BattleController {
 
             render text: g.render(template: 'moveList', model: [ownerMoveList:myFightPlayer.fightPokemon.ownerPokemon.ownerMoves])
         }
-
         else {
             if (ContinueMove.continueMove(fight,myFightPlayer)){
                 render template: "refreshLog"

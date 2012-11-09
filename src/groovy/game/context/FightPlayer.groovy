@@ -35,13 +35,13 @@ class FightPlayer {
     int protectAccuracy = 100
     MoveAction prepareMoveAction = null // Should bet rest manually
     boolean takePP = true
+    boolean mustSwitch = false
 
     /**
      * Properties to reset after a battle
      */
     public void restAfterRound(){
         endure = false
-        // Don't clear the status if the opponent must choose
         waitOnOpponentMove = false
         battleAction = null
         doNoMove = false

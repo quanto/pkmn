@@ -86,8 +86,6 @@ class Stats {
         OwnerPokemon.findAllByPartyPositionGreaterThanAndOwner(0,owner).each{ OwnerPokemon ownerPokemon ->
             party.add(createFightPokemon(ownerPokemon))
         }
-        println owner
-        println party
         return party
     }
 
