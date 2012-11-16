@@ -28,10 +28,10 @@ $(document).ready( function () {
 	//Initial load
 	//getMap(); staat in de game samen met startbattle();
 	getView();
-//	updateChat();
-//    updateStats();
+	updateChat();
+    updateStats();
     updateItems();
-//	updateWhoisList();
+	updateWhoisList();
 //    loadNewsItems();
 //	disconnect();
 //	serverMessage();
@@ -324,21 +324,18 @@ function sendChatMessage()
 
 function actionA(direction)
 {
-
     var currentPos = getObjectPosition("player");
 
-    //if (positionObjectExists(triggerOnActionButtonObjects,currentPos)){
-        $.ajax({
-            async : false,
-            type: "GET",
-            url: "/game/game/action?direction=" + direction + "&x=" + parseInt(currentPos.x) + "&y=" + parseInt(currentPos.y),
-            data: "",
-            cache: false,
-            success: function(msg){
-                eval(msg);
-            }
-        });
-   // }
+    $.ajax({
+        async : false,
+        type: "GET",
+        url: "/game/game/action?direction=" + direction + "&x=" + parseInt(currentPos.x) + "&y=" + parseInt(currentPos.y),
+        data: "",
+        cache: false,
+        success: function(msg){
+            eval(msg);
+        }
+    });
 };
 
 function setMessage(msg){
@@ -372,76 +369,9 @@ function updateItems(){
     });
 }
 
-function movePlayer(direction)
-{
-    pos = $("#player").attr("alt");
-
-    coords = pos.split("-");
-
-    x = coords[0];
-    y = coords[1];
-
-    checkMove(direction, x, y);
-};
-
-function checkMove(direction, x, y)
-{
-	$.ajax({
-        async:false,
-		type: "POST",
-		url: "/game/game/checkMove",
-		data: "direction="+direction,
-		cache: false,
-		success: function(msg){
-            // An empty message means walking against the wall for now
-			if(msg != "")
-			{
-                var allowMove = true
-                eval(msg);
-
-				switch (direction)
-				{
-					case "up":
-					y--;
-					break;
-
-					case "right":
-					x++;
-					break;
-
-					case "down":
-					y++;
-					break;
-
-					case "left":
-					x--;
-					break;
-				}
-
-                // Move can be disallowed
-                if (allowMove){
-                    $("#player").remove();
-                    setPlayer(x, y);
-                    updateLocation(x, y);
-                    checkBattle();
-                }
-			}
-			else
-			{
-				actionA(direction);
-			}
-
-		}
-	});
-};
-
-function setOtherPlayer(x, y, name)
-{
-	$("#"+x+"-"+y).append("<img id='other' src='images/ash.gif' onmouseover='Tip(\""+name+"\")' onmouseout='UnTip()' />");
-}
-
 function updateLocation(x, y)
 {
+    $("#mapName").text(mapName);
 	$("#location").text("X: "+x+"Y: "+y);
 }
 
@@ -553,40 +483,55 @@ function move(objectId, direction)
     // get new position
     pos = getNewPosition(currentPos,direction)
 
-    // Before move event
-    if (objectId == "player" && positionObjectExists(triggerBeforeStepObjects,pos)){
 
-        var allowMove = true
+    var updateViewAfterAnimation = false
 
-        $.ajax({
-            async:false,
-            type: "POST",
-            url: "/game/game/checkMove?direction=" + direction + "&x=" + parseInt(pos.x) + "&y=" + parseInt(pos.y),
-            data: "direction="+direction,
-            cache: false,
-            success: function(msg){
-                // An empty message means walking against the wall for now
-                if(msg != "")
-                {
+    // Before move event or pokemon event
+    if (objectId == "player"){
 
-                    eval(msg);
-                    // Move can be disallowed
+        var checkMove = false
+
+        if (positionObjectExists(triggerBeforeStepObjects,pos)){
+            checkMove = true
+        }
+        else if (positionObjectExists(pokemonObjects,pos)){
+            if (Math.floor((Math.random()*6)) == 1){
+                checkMove = true
+            }
+        }
+
+        if (checkMove){
+
+            var allowMove = true
+
+            $.ajax({
+                async:false,
+                type: "POST",
+                url: "/game/game/checkMove?direction=" + direction + "&x=" + parseInt(pos.x) + "&y=" + parseInt(pos.y),
+                data: "direction="+direction,
+                cache: false,
+                success: function(msg){
+                    // An empty message means walking against the wall for now
+                    if(msg != "")
+                    {
+                        eval(msg);
+                    }
 
                 }
-
+            });
+            // Move can be disallowed
+            if (!allowMove){
+                return false
             }
-        });
-        if (!allowMove){
-            return false
         }
     }
-
 
     // check inside field
     if (positionInBoundary(pos,objectId, direction,currentPos))
     {
         if (checkPosition(pos,direction))
         {
+
             var y = pos.y * 16
             y -= $("#" + objectId).height() - 16
             $("#" + objectId).animate({
@@ -598,6 +543,9 @@ function move(objectId, direction)
                     if (objectId == "player"){
                         updateLocation(pos.x, pos.y);
                         var src = $("#player").attr("src");
+                        if (updateViewAfterAnimation){
+                            getView();
+                        }
                     }
                 }
             });
@@ -776,6 +724,10 @@ function loadmap()
                 obj.spStop(true);
             }
         }).spStop(true);
+
+    updateLocation(playerPosition.x, playerPosition.y);
+
+
 }
 
 $(document).ready(function(){

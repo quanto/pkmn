@@ -2,15 +2,21 @@
 <%
     // MapLayout mapLayout
     def blockObjects = []
+    def pokemonObjects = []
     mapLayout.foreground.eachWithIndex { def row, def y ->
         row.eachWithIndex { def tileNr, def x ->
             if (tileNr && tileNr != "0"){
                 blockObjects.add([y,x])
             }
+            else if (tileNr == "0" && mapLayout.background[y][x] == "01"){
+                pokemonObjects.add([y,x])
+            }
         }
     }
 %>
 <script type="text/javascript">
+
+    var mapName = "${map.name}";
 
     var height = ${mapLayout.getRows()};
     var width = ${mapLayout.getColumns()};
@@ -18,6 +24,11 @@
     var playerPosition = new position(${player.positionY},${player.positionX});
 
     var actionObjects = new Array();
+
+    var pokemonObjects = new Array(
+        <g:each in="${pokemonObjects}" var="po" status="i">new position(${po[0]},${po[1]})<g:if test="${po != pokemonObjects.last()}">,</g:if>
+        </g:each>
+    );
 
     var triggerBeforeStepObjects = new Array(
         <% def triggerBeforeStepActions = map.actions.findAll{ it.triggerBeforeStep } %>

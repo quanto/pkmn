@@ -15,7 +15,7 @@ class BootStrap {
 
     def init = { servletContext ->
 
-        boolean doImport = !Player.list().size()
+        boolean doImport = !Player.list().size() // Simple check to see if there's anything at all in the database.
 
         if (doImport){
 

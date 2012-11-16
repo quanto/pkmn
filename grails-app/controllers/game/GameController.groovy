@@ -161,6 +161,7 @@ class GameController {
                         // koppel gevecht aan speler
                         player.fightNr = fight.nr
                         player.view = View.Battle
+                        render text: "updateViewAfterAnimation = true;"
                     }
                 }
 
@@ -206,10 +207,10 @@ class GameController {
     {
         Random random = new Random()
 
-        int encouterPkmnNr = random.nextInt(100)+1
-
-        if(encouterPkmnNr <= 10)
-        {
+//        int encouterPkmnNr = random.nextInt(100)+1
+//
+//        if(encouterPkmnNr <= 10)
+//        {
             def mapPokemonList = player.map.merge().mapPokemonList
 
             if (mapPokemonList){
@@ -228,7 +229,7 @@ class GameController {
                     }
                 }
             }
-        }
+//        }
         return null
     }
 
@@ -251,9 +252,7 @@ class GameController {
         Player player = playerData.getPlayer()
 
         if (player.view == View.ShowMap){
-
             MapLayout mapLayout = MapLayout.createMapArray(player.map);
-            println g.render(template: 'mapNew', model: [mapLayout: mapLayout, map : player.map, player: player])
             render text: g.render(template: 'mapNew', model: [mapLayout: mapLayout, map : player.map, player: player])
         }
         else if (player.view == View.ShowMarket){

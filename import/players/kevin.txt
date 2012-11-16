@@ -6,15 +6,15 @@ true
 verhoef.k@gmail.com
 null
 20-10-2012 00:00:00
-Glooming forest 0x2
+Glooming forest -1x2
 Glooming forest center
 4
 6
-0
-12
-603
+24
+13
+620
 ShowMap
-102
+108
 2
 23
 3
@@ -30,16 +30,16 @@ Poke Ball
 2
 </ownerItem>
             <ownerItem>
+Old factory key
+1
+</ownerItem>
+            <ownerItem>
 Potion
 19
 </ownerItem>
             <ownerItem>
 Beginner Badge
 5
-</ownerItem>
-            <ownerItem>
-Old factory key
-1
 </ownerItem>
             
 
@@ -135,7 +135,7 @@ false
 110
 Male
 1
-119865
+120089
 50
 </ownerPokemon>
 <ownerMove>
@@ -144,7 +144,7 @@ Dig
 </ownerMove>
 <ownerMove>
 Fly
-14
+12
 </ownerMove>
 <ownerMove>
 Razor Leaf
@@ -152,6 +152,6 @@ Razor Leaf
 </ownerMove>
 <ownerMove>
 Vine Whip
-15
+11
 </ownerMove>
 
