@@ -161,7 +161,7 @@ function choose()
 	{
 		$.ajax({
 			type: "GET",
-			url: "/game/choosePokemon/choose",
+			url: serverUrl + "/choosePokemon/choose",
 			data: "pkmn="+pkmn,
 			cache: false,
 			success: function(msg){
@@ -210,7 +210,7 @@ function getView()
 
 	$.ajax({
 		type: "GET",
-		url: "/game/game/view",
+		url: serverUrl + "/game/view",
 		data: "",
 		cache: false,
 		success: function(view){
@@ -225,7 +225,7 @@ function getParty()
 {
 	$.ajax({
 		type: "GET",
-		url: "/game/party/index",
+		url: serverUrl + "/party/index",
 		cache: false,
 		success: function(party){
             $("#party").html(party)
@@ -239,7 +239,7 @@ function checkBattle()
 	$.ajax({
         async:false,
 		type: "GET",
-		url: "/game/game/checkBattle",
+		url: serverUrl + "/game/checkBattle",
 		data: "",
 		cache: false,
 		success: function(battleFrame){
@@ -268,7 +268,7 @@ function loadNewsItems()
 {
 	$.ajax({
 		type: "GET",
-		url: "/game/chat/showNewsItems",
+		url: serverUrl + "/chat/showNewsItems",
 		data: "",
 		cache: false,
 		success: function(newsItems){
@@ -281,7 +281,7 @@ function updateWhoisList()
 {
 	$.ajax({
 		type: "GET",
-		url: "/game/online/index",
+		url: serverUrl + "/online/index",
 		data: "",
 		cache: false,
 		success: function(whoisList){
@@ -294,7 +294,7 @@ function updateChat()
 {
 	$.ajax({
 		type: "GET",
-		url: "/game/chat/index",
+		url: serverUrl + "/chat/index",
 		data: "",
 		cache: false,
 		success: function(chatMessages){
@@ -313,7 +313,7 @@ function sendChatMessage()
 		$("#chatMessage").attr({value: ""});
 		$.ajax({
 			type: "POST",
-			url: "/game/chat/send",
+			url: serverUrl + "/chat/send",
 			data: "chatMessage="+message,
 			success: function(chatMessages){
 				updateChat();
@@ -329,7 +329,7 @@ function actionA(direction)
     $.ajax({
         async : false,
         type: "GET",
-        url: "/game/game/action?direction=" + direction + "&x=" + parseInt(currentPos.x) + "&y=" + parseInt(currentPos.y),
+        url: serverUrl + "/game/action?direction=" + direction + "&x=" + parseInt(currentPos.x) + "&y=" + parseInt(currentPos.y),
         data: "",
         cache: false,
         success: function(msg){
@@ -346,7 +346,7 @@ function setMessage(msg){
 function updateStats(){
     $.ajax({
         type: "GET",
-        url: "/game/stats/index",
+        url: serverUrl + "/stats/index",
         data: "",
         cache: false,
         success: function(data){
@@ -360,7 +360,7 @@ var itemTab = "usableItems"
 function updateItems(){
     $.ajax({
         type: "GET",
-        url: "/game/bag/getItems?itemTab=" + itemTab,
+        url: serverUrl + "/bag/getItems?itemTab=" + itemTab,
         data: "",
         cache: false,
         success: function(data){
@@ -403,22 +403,6 @@ $(window).unload( function () {
 //	});
 
 });
-
-function mapTransition(direction, currentPos)
-{
-    $.ajax({
-        async : false,
-        type: "GET",
-        url: "/game/game/mapTransition?direction=" + direction + "&x=" + parseInt(currentPos.x) + "&y=" + parseInt(currentPos.y),
-        data: "",
-        cache: false,
-        success: function(msg){
-            eval(msg);
-        }
-    });
-
-};
-
 
 /*
  Object holding a position
@@ -507,7 +491,7 @@ function move(objectId, direction)
             $.ajax({
                 async:false,
                 type: "POST",
-                url: "/game/game/checkMove?direction=" + direction + "&x=" + parseInt(pos.x) + "&y=" + parseInt(pos.y),
+                url: serverUrl + "/game/checkMove?direction=" + direction + "&x=" + parseInt(pos.x) + "&y=" + parseInt(pos.y),
                 data: "direction="+direction,
                 cache: false,
                 success: function(msg){
@@ -624,7 +608,6 @@ function positionInBoundary(pos, objectId, direction, currentPos)
     if (pos.y < 0 || pos.y >= height || pos.x < 0 || pos.x >= width)
     {
         if (objectId == "player"){
-            //mapTransition(direction, currentPos)
             actionA(direction);
         }
         return false;
