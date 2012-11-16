@@ -1,6 +1,7 @@
 package game
 
 import map.View
+import map.CharacterImage
 
 class Player extends Owner{
 
@@ -15,6 +16,7 @@ class Player extends Owner{
     String email
     String recoverPasswordSecret
     String ip
+    CharacterImage characterImage = CharacterImage.player
 
     int positionX = 1
     int positionY = 1

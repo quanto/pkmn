@@ -16,6 +16,7 @@ import game.OwnerItem
 import game.Item
 import game.NpcLock
 import game.Npc
+import map.CharacterImage
 
 class PlayerImport {
 
@@ -169,7 +170,8 @@ class PlayerImport {
                 pvnBattlesWon: Integer.parseInt(parts[17]),
                 pvnBattlesLost: Integer.parseInt(parts[18]),
                 pvpBattlesWon: Integer.parseInt(parts[18]),
-                pvpBattlesLost: Integer.parseInt(parts[20])
+                pvpBattlesLost: Integer.parseInt(parts[20]),
+                characterImage: CharacterImage.values().find { it.toString() == parts[21] }
         )
         player.save()
         Player.executeUpdate("update Player set password = :password where username = :username",[username:parts[0],password: parts[2]])

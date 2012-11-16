@@ -36,11 +36,11 @@ kevin
 
 
 <mapMessage>
-15
+16
 14
 haveBeginnerBadge
-Hey you! No rookies past this!
 
+Hey you! No rookies past this point!
 
 false
 true

@@ -1,5 +1,4 @@
 var freeze = false;
-var chat = false;
 var view = "pokemon";
 
 $(document).ready( function () {
@@ -29,31 +28,31 @@ $(document).ready( function () {
 	//Initial load
 	//getMap(); staat in de game samen met startbattle();
 	getView();
-	updateChat();
-    updateStats();
+//	updateChat();
+//    updateStats();
     updateItems();
-	updateWhoisList();
-    loadNewsItems();
-	disconnect();
-	serverMessage();
-	//getParty();
-	getMenu();
+//	updateWhoisList();
+//    loadNewsItems();
+//	disconnect();
+//	serverMessage();
+	getParty();
+//	getMenu();
 	
 //	setInterval ("setOtherPlayers()", 2000); // Update andere spelers elke 2 sec
 	setInterval ("mediumWait()", 8000); //Update chat elke 8 sec
 //	setInterval ("longWait()", 60000); //Kijk of server down is en serverbericht 60 Seconden
 //
-	$("#chatMessage").focus(function () {
-         freeze = true;
-		 chat = true;
-    });
-
-	$("#chatMessage").blur(function () {
-         freeze = false;
-		 chat = false;
-    });
+//	$("#chatMessage").focus(function () {
+//         freeze = true;
+//		 chat = true;
+//    });
 //
-	$(document).keypress(function(e){
+//	$("#chatMessage").blur(function () {
+//         freeze = false;
+//		 chat = false;
+//    });
+////
+//	$(document).keypress(function(e){
 //		if(chat == false)
 //		{
 //			switch (e.which)
@@ -76,41 +75,41 @@ $(document).ready( function () {
 //			}
 //		}
 //
-		if(freeze == false)
-			{
-			switch (e.which){
-				case 97:
-				//links
-				movePlayer(3);
-				break;
-
-				case 119:
-				//boven
-				movePlayer(0);
-				break;
-
-				case 100:
-				//rechts
-				movePlayer(1);
-				break;
-
-				case 115:
-				//onder
-				movePlayer(2);
-				break;
-
-				case 32:
-				//spatie
-				actionA();
-				break;
-			}
-		};
+//		if(freeze == false)
+//			{
+//			switch (e.which){
+//				case 97:
+//				//links
+//				movePlayer(3);
+//				break;
 //
-		if(e.which == 13)
-		{
-			sendChatMessage();
-		}
-	});
+//				case 119:
+//				//boven
+//				movePlayer(0);
+//				break;
+//
+//				case 100:
+//				//rechts
+//				movePlayer(1);
+//				break;
+//
+//				case 115:
+//				//onder
+//				movePlayer(2);
+//				break;
+//
+//				case 32:
+//				//spatie
+//				actionA();
+//				break;
+//			}
+//		};
+////
+//		if(e.which == 13)
+//		{
+//			sendChatMessage();
+//		}
+//	});
 });
 
 function getMenu()
@@ -201,24 +200,14 @@ function createDialog(name, content)
 	$('#'+name+'Dialog').dialog('open');
 }
 
-function getQuests()
-{
-//	$.ajax({
-//		type: "GET",
-//		url: "Gajax.php",
-//		data: "ajax=getQuests",
-//		cache: false,
-//		success: function(quests){
-//			//$("#whois").html(quests);
-//			createDialog("Quests", quests);
-//		}
-//	});
-}
-
 function getView()
 {
-	freeze = true;
+
+    if ($('#player').length>0){
+        $('#player').destroy();
+    }
 	$("#textBox").text("");
+
 	$.ajax({
 		type: "GET",
 		url: "/game/game/view",
@@ -226,9 +215,8 @@ function getView()
 		cache: false,
 		success: function(view){
 			$("#theMap").html(view);
-			getPlayerLocation();
+			//getPlayerLocation();
 			getMenu();
-			freeze = false;
 		}
 	});		
 }
@@ -244,37 +232,6 @@ function getParty()
 		}
 	});
 }
-
-function serverMessage()
-{
-//	$.ajax({
-//		type: "GET",
-//		url: "Gajax.php",
-//		data: "ajax=servermessage",
-//		cache: false,
-//		success: function(message){
-//			$("#serverMessage").html(message);
-//		}
-//	});
-};
-
-function disconnect()
-{
-//	$.ajax({
-//		type: "GET",
-//		url: "Gajax.php",
-//		data: "ajax=disconnect",
-//		cache: false,
-//		success: function(msg){
-//			if(msg == 1)
-//			{
-//				alert("You have been disconnected from the server");
-//				window.location="index.php";
-//			}
-//		}
-//	});
-};
-
 
 function checkBattle()
 {
@@ -295,19 +252,6 @@ function checkBattle()
 	});
     return hasBattle;
 };
-
-function continueBattle()
-{
-//	$.ajax({
-//		type: "GET",
-//		url: "Gajax.php",
-//		data: "ajax=continueBattle",
-//		cache: false,
-//		success: function(battleFrame){
-//			$("#theMap").html(battleFrame);
-//		}
-//	});
-}
 
 function mediumWait()
 {
@@ -342,7 +286,6 @@ function updateWhoisList()
 		cache: false,
 		success: function(whoisList){
 			$("#online").html(whoisList);
-			//createDialog("Online", whoisList);
 		}
 	});
 };
@@ -379,21 +322,23 @@ function sendChatMessage()
 	}
 };
 
-function actionA()
+function actionA(direction)
 {
-	freeze = true;
-	$.ajax({
-        async : true,
-		type: "GET",
-		url: "/game/game/action",
-		data: "",
-		cache: false,
-		success: function(msg){
-            eval(msg);
-            freeze = false;
-		}
-	});
-    freeze = false;
+
+    var currentPos = getObjectPosition("player");
+
+    //if (positionObjectExists(triggerOnActionButtonObjects,currentPos)){
+        $.ajax({
+            async : false,
+            type: "GET",
+            url: "/game/game/action?direction=" + direction + "&x=" + parseInt(currentPos.x) + "&y=" + parseInt(currentPos.y),
+            data: "",
+            cache: false,
+            success: function(msg){
+                eval(msg);
+            }
+        });
+   // }
 };
 
 function setMessage(msg){
@@ -427,40 +372,20 @@ function updateItems(){
     });
 }
 
-function getPlayerLocation()
-{
-	$.ajax({
-		type: "GET",
-		url: "/game/game/playerLocation",
-		data: "",
-		cache: false,
-		success: function(json){
-			var playerData = $.evalJSON(json);
-			$("#mapName").text(playerData.player[0].map);
-			setPlayer(playerData.player[0].x, playerData.player[0].y, playerData.player[0].name);
-			$("#location").text("X: "+playerData.player[0].x+" Y: "+playerData.player[0].y);
-		}
-	});
-};
-
 function movePlayer(direction)
 {
-    if (!freeze){
-        pos = $("#player").attr("alt");
+    pos = $("#player").attr("alt");
 
-        coords = pos.split("-");
+    coords = pos.split("-");
 
-        x = coords[0];
-        y = coords[1];
+    x = coords[0];
+    y = coords[1];
 
-        checkMove(direction, x, y);
-    }
-
+    checkMove(direction, x, y);
 };
 
 function checkMove(direction, x, y)
-{	
-	freeze = true;
+{
 	$.ajax({
         async:false,
 		type: "POST",
@@ -476,19 +401,19 @@ function checkMove(direction, x, y)
 
 				switch (direction)
 				{
-					case 0:
+					case "up":
 					y--;
 					break;
 
-					case 1:
+					case "right":
 					x++;
 					break;
 
-					case 2:
+					case "down":
 					y++;
 					break;
 
-					case 3:
+					case "left":
 					x--;
 					break;
 				}
@@ -503,46 +428,11 @@ function checkMove(direction, x, y)
 			}
 			else
 			{
-				actionA();
+				actionA(direction);
 			}
 
 		}
 	});
-    freeze = false
-};
-
-function setOtherPlayers()
-{	
-//	$.ajax({
-//		type: "GET",
-//		url: "Gajax.php",
-//		data: "ajax=5",
-//		cache: false,
-//		success: function(msg){
-//			if(msg != 0)
-//			{
-//				var players = $.evalJSON(msg);
-//
-//				for(i=0;i<players.player.length;i++)
-//				{
-//					$("#other").remove();
-//				}
-//
-//				for(i=0;i<players.player.length;i++)
-//				{
-//					setOtherPlayer(players.player[i].x,players.player[i].y, players.player[i].name);
-//				}
-//			}
-//			else
-//			{
-//				$("#other").remove();
-//			}
-//		}
-//	});
-};
-function setPlayer(x, y, name)
-{
-	$("#"+x+"-"+y).append("<img id='player' class='"+name+"' src='/game/images/player/down.png' alt='"+x+"-"+y+"' />");
 };
 
 function setOtherPlayer(x, y, name)
@@ -581,5 +471,313 @@ $(window).unload( function () {
 //		success: function(msg){
 //		}
 //	});
+
+});
+
+function mapTransition(direction, currentPos)
+{
+    $.ajax({
+        async : false,
+        type: "GET",
+        url: "/game/game/mapTransition?direction=" + direction + "&x=" + parseInt(currentPos.x) + "&y=" + parseInt(currentPos.y),
+        data: "",
+        cache: false,
+        success: function(msg){
+            eval(msg);
+        }
+    });
+
+};
+
+
+/*
+ Object holding a position
+ */
+function position(y,x)
+{
+    this.y = y;
+    this.x = x;
+}
+
+/*
+ Get the position from a object by its id
+ */
+function getObjectPosition(objectId)
+{
+    // position
+    var leftPos = parseInt($("#" + objectId).css("left"));
+    var topPos = parseInt($("#" + objectId).css("top"));
+
+    topPos += $("#" + objectId).height() - 16
+
+    // tile position
+    var left = leftPos / 16;
+    var top = topPos / 16;
+
+    return new position(top,left);
+}
+
+/*
+ Get the a new position in a direction
+ */
+function getNewPosition(pos,direction)
+{
+    var newPos = new position(pos.y,pos.x);
+    if (direction == "up")
+    {
+        newPos.y--;
+    }
+    else if (direction == "down")
+    {
+        newPos.y++;
+    }
+    else if (direction == "left")
+    {
+        newPos.x--;
+    }
+    else if (direction == "right")
+    {
+        newPos.x++;
+    }
+    return newPos;
+}
+
+/*
+ Move an object in a direction
+ up | down | left | right
+ */
+function move(objectId, direction)
+{
+    var currentPos = getObjectPosition(objectId);
+
+    // get new position
+    pos = getNewPosition(currentPos,direction)
+
+    // Before move event
+    if (objectId == "player" && positionObjectExists(triggerBeforeStepObjects,pos)){
+
+        var allowMove = true
+
+        $.ajax({
+            async:false,
+            type: "POST",
+            url: "/game/game/checkMove?direction=" + direction + "&x=" + parseInt(pos.x) + "&y=" + parseInt(pos.y),
+            data: "direction="+direction,
+            cache: false,
+            success: function(msg){
+                // An empty message means walking against the wall for now
+                if(msg != "")
+                {
+
+                    eval(msg);
+                    // Move can be disallowed
+
+                }
+
+            }
+        });
+        if (!allowMove){
+            return false
+        }
+    }
+
+
+    // check inside field
+    if (positionInBoundary(pos,objectId, direction,currentPos))
+    {
+        if (checkPosition(pos,direction))
+        {
+            var y = pos.y * 16
+            y -= $("#" + objectId).height() - 16
+            $("#" + objectId).animate({
+                left: pos.x * 16 + "px",
+                top: y + "px"
+            },{
+                duration: 250,
+                complete: function() {
+                    if (objectId == "player"){
+                        updateLocation(pos.x, pos.y);
+                        var src = $("#player").attr("src");
+                    }
+                }
+            });
+
+            if (objectId == "player"){
+                $("#" + objectId).spStart();
+            }
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/*
+ Check a position on action objects
+ Evals a action if it exists
+ */
+function checkPosition(pos,direction)
+{
+    var actionObject = getActionObject(pos);
+
+    if (actionObject != null)
+    {
+        // perform the action of the object
+        return eval(actionObject[1] + "(pos,direction,actionObject);");
+    }
+    return true;
+}
+
+/*
+ Remove a action object from the map
+ */
+function removeActionObject(actionObject)
+{
+    for (var i=0;i<actionObjects.length;i++)
+    {
+        if (actionObjects[i] == actionObject)
+        {
+            actionObjects.splice(i,1);
+            $("#" + actionObject[0]).remove();
+            break;
+        }
+    }
+}
+
+/*
+ Get a object at a position
+ */
+function getActionObject(pos)
+{
+    // check if there are objects
+    for (var i=0;i<actionObjects.length;i++)
+    {
+        var object = $("#" + actionObjects[i][0]);
+        if (object != null)
+        {
+            var leftPos = parseInt(object.css("left"));
+            var topPos = parseInt(object.css("top"));
+
+            if (topPos / 16 == pos.y && leftPos / 16 == pos.x)
+            {
+                return actionObjects[i];
+            }
+        }
+    }
+    return null;
+}
+
+/*
+ Check if position falls out from the boundary
+ */
+function positionInBoundary(pos, objectId, direction, currentPos)
+{
+    // Boundary's
+    if (pos.y < 0 || pos.y >= height || pos.x < 0 || pos.x >= width)
+    {
+        if (objectId == "player"){
+            //mapTransition(direction, currentPos)
+            actionA(direction);
+        }
+        return false;
+    }
+
+    // Check if there's now wall blocking
+    if (positionObjectExists(blockObjects,pos)){
+        if (objectId == "player"){
+            actionA(direction);
+        }
+        return false
+    }
+
+    return true;
+}
+
+function positionObjectExists(objects,pos){
+    for (var i=0;i<objects.length;i++)
+    {
+        if (objects[i].x == pos.x && objects[i].y == pos.y)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+/*
+ Key actions
+ */
+$(document).keypress(function(e)
+{
+    console.log(freeze)
+    if (!freeze)
+    {
+        freeze = true
+        switch (e.which)
+        {
+            case 97:
+                $("#player").spState(3);
+                move("player","left");
+                break;
+
+            case 119:
+                $("#player").spState(2);
+                move("player","up");
+                break;
+
+            case 100:
+                $("#player").spState(4);
+                move("player","right");
+                break;
+
+            case 115:
+                //onder
+                $("#player").spState(1);
+                move("player","down");
+                break;
+            case 32:
+                //spatie
+                actionA("up");
+                break;
+        };
+
+        setTimeout(function(){ freeze = false },300)
+    }
+
+});
+
+function loadmap()
+{
+    var html = "";
+
+    $("#player").css("left",(playerPosition.x * 16) + "px");
+    $("#player").css("top",((playerPosition.y * 16) - 16) + "px");
+
+    for (var i=0;i<actionObjects.length;i++)
+    {
+        var actionObject = actionObjects[i];
+        var splitPosition = actionObject[0].split("-");
+
+        html += "<img src=\"tiles/" + actionObject[2] + "\" id=\"" + splitPosition[0] + "-" + splitPosition[1] + "\" style=\"position:absolute;top:" + (splitPosition[0] * 16) + "px;left:" + (splitPosition[1] * 16) + "px;\" />";
+
+    }
+    $("#objectContainer").html(html);
+
+    // Spritely player
+    $('#player')
+        .sprite({
+            fps: 9,
+            no_of_frames: 4,
+            on_first_frame: function(obj) {
+
+            },
+            on_last_frame: function(obj) {
+                obj.spStop(true);
+            }
+        }).spStop(true);
+}
+
+$(document).ready(function(){
 
 });

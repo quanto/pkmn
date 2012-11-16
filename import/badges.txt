@@ -1,2 +1,28 @@
 Beginner Badge
 50px-Plain_Badge.png
+Boulder Badge
+50px-Boulder_Badge.png
+Earth Badge
+50px-Earth_Badge.png
+Fog Badge
+50px-Fog_Badge.png
+Glacier Badge
+50px-Glacier_Badge.png
+Hive Badge
+50px-Hive_Badge.png
+March Badge
+50px-March_Badge.png
+Mineral Badge
+50px-Mineral_Badge.png
+Rising Badge
+50px-Rising_Badge.png
+Rainbow Badge
+50px-Rainbow_Badge.png
+Storm Badge
+50px-Storm_Badge.png
+Thunder Badge
+50px-Thunder_Badge.png
+Volcano Badge
+50px-Volcano_Badge.png
+Zephyr Badge
+50px-Zephyr_Badge.png

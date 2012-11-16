@@ -1,0 +1,79 @@
+<%@ page import="game.MapLayout" %>
+<%
+    // MapLayout mapLayout
+    def blockObjects = []
+    mapLayout.foreground.eachWithIndex { def row, def y ->
+        row.eachWithIndex { def tileNr, def x ->
+            if (tileNr && tileNr != "0"){
+                blockObjects.add([y,x])
+            }
+        }
+    }
+%>
+<script type="text/javascript">
+
+    var height = ${mapLayout.getRows()};
+    var width = ${mapLayout.getColumns()};
+
+    var playerPosition = new position(${player.positionY},${player.positionX});
+
+    var actionObjects = new Array();
+
+    var triggerBeforeStepObjects = new Array(
+        <% def triggerBeforeStepActions = map.actions.findAll{ it.triggerBeforeStep } %>
+        <g:each in="${triggerBeforeStepActions}" var="action" status="i">new position(${action.positionY},${action.positionX})<g:if test="${action != triggerBeforeStepActions.last()}">,</g:if>
+        </g:each>
+    )
+
+    var triggerOnActionButtonObjects = new Array(
+        <% def triggerOnActionButtonActions = map.actions.findAll{ it.triggerOnActionButton } %>
+        <g:each in="${triggerOnActionButtonActions}" var="action" status="i">new position(${action.positionY},${action.positionX})<g:if test="${action != triggerOnActionButtonActions.last()}">,</g:if>
+        </g:each>
+    )
+
+    var blockObjects = new Array(
+        <g:each in="${blockObjects}" var="bo" status="i">new position(${bo[0]},${bo[1]})<g:if test="${bo != blockObjects.last()}">,</g:if>
+        </g:each>
+    );
+
+</script>
+
+<style>
+
+#player {
+    background: transparent url('${resource(uri:'')}/images/chars/${player.characterImage}.png') 0 0 no-repeat;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 16px;
+    height: 32px;
+    z-index: 2000;]
+}
+
+</style>
+
+<div style="position:relative;height:${mapLayout.getRows() * 16}px;width: ${mapLayout.getColumns() * 16}px;">
+    <img style="position:absolute;top:0px;left:0px;" src="${resource(uri:'')}${map.getForegroundImage()}" />
+
+    <div id="player"></div>
+
+    <div id="objectContainer">
+
+    </div>
+    <img style="position:absolute;top:0px;left:0px;" src="${resource(uri:'')}${map.getBackgroundImage()}" />
+</div>
+
+<script type="text/javascript">
+
+    loadmap();
+    <g:if test="${flash.direction=='left'}">
+        $("#player").spState(3);
+    </g:if>
+    <g:elseif test="${flash.direction=='up'}">
+        $("#player").spState(2);
+    </g:elseif>
+    <g:elseif test="${flash.direction=='right'}">
+        $("#player").spState(4);
+    </g:elseif>
+
+</script>

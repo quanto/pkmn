@@ -1,6 +1,5 @@
 package game
 
-import javax.imageio.ImageIO
 import java.awt.image.BufferedImage
 import java.awt.Graphics2D
 import java.awt.Image
@@ -17,13 +16,6 @@ import java.awt.image.PixelGrabber
 import java.awt.image.ColorModel
 import java.awt.Transparency
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 04-10-12
- * Time: 15:12
- * To change this template use File | Settings | File Templates.
- */
 class MapLayout {
 
     Map map

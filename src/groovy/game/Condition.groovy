@@ -27,6 +27,20 @@ class Condition {
                 return true
             }
         }
+        else if (condition == "haveBoulderBadge"){
+            Item item = Item.findByName("Boulder Badge")
+            if (OwnerItem.findByOwnerAndItem(player,item)){
+                return true
+            }
+        }
+        else if (condition == "haveEarthBadge"){
+            Item item = Item.findByName("Boulder Badge")
+            if (OwnerItem.findByOwnerAndItem(player,item)){
+                return true
+            }
+        }
+
+
         else if (condition == "haveOldFactoryKey"){
             Item item = Item.findByName("Old factory key")
             if (OwnerItem.findByOwnerAndItem(player,item)){

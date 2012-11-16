@@ -13,9 +13,6 @@ class GameController {
     FightFactoryService fightFactoryService
 
     def index() {
-//        // Test data
-//        Player player = Player.findByUsername("kevin")
-//        session.playerData = new PlayerData(player.id)
 
     }
 
@@ -23,6 +20,22 @@ class GameController {
 
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
+
+        String direction = params.direction
+        player.positionX = Integer.parseInt(params.x)
+        player.positionY = Integer.parseInt(params.y)
+
+        flash.direction = direction
+
+        MapLayout mapLayout = MapLayout.createMapArray(player.map)
+
+        // Check possition
+        String currentForegroundTile = getCurrentTile(mapLayout,player,false)
+        if (!currentForegroundTile || currentForegroundTile != "0"){
+            player.discard()
+            render text : "allowMove = false;"
+            return
+        }
 
         // Check actions
         ActionResult actionResult = ActionFlow.decideAction(player,ActionTrigger.ActionBtn,fightFactoryService)
@@ -33,8 +46,7 @@ class GameController {
 
         // Auto Map Transitions
         if (player.map.worldX != null && player.map.worldY != null){
-            MapLayout mapLayout = MapLayout.createMapArray(player.map)
-            if (player.positionY == mapLayout.rows-1){ // down
+            if (player.positionY == mapLayout.rows-1 && direction == "down"){ // down
                 Map toMap = Map.findByWorldXAndWorldY(player.map.worldX,player.map.worldY+1)
                 if (toMap){
                     MapLayout mapToLayout = MapLayout.createMapArray(toMap)
@@ -47,7 +59,7 @@ class GameController {
                     }
                 }
             }
-            else if (player.positionY == 0){ // up
+            else if (player.positionY == 0 && direction == "up"){ // up
                 Map toMap = Map.findByWorldXAndWorldY(player.map.worldX,player.map.worldY-1)
                 if (toMap){
                     MapLayout mapToLayout = MapLayout.createMapArray(toMap)
@@ -60,7 +72,7 @@ class GameController {
                     }
                 }
             }
-            else if (player.positionX == 0){ // left
+            else if (player.positionX == 0 && direction == "left"){ // left
                 Map toMap = Map.findByWorldXAndWorldY(player.map.worldX-1,player.map.worldY)
                 if (toMap){
                     MapLayout mapToLayout = MapLayout.createMapArray(toMap)
@@ -73,7 +85,7 @@ class GameController {
                     }
                 }
             }
-            else if (player.positionX == mapLayout.columns-1){ // right
+            else if (player.positionX == mapLayout.columns-1 && direction == "right"){ // right
                 Map toMap = Map.findByWorldXAndWorldY(player.map.worldX+1,player.map.worldY)
                 if (toMap){
                     MapLayout mapToLayout = MapLayout.createMapArray(toMap)
@@ -87,6 +99,7 @@ class GameController {
                 }
             }
         }
+
 
         render text : ""
     }
@@ -120,31 +133,18 @@ class GameController {
 
         if (player.view == View.ShowMap){
 
-            int direction = params.direction
+            String direction = params.direction
+            player.positionX = Integer.parseInt(params.x)
+            player.positionY = Integer.parseInt(params.y)
+
+            flash.direction = direction
 
             MapLayout mapLayout = MapLayout.createMapArray(player.map)
 
-            if(direction == "3")
-            {
-                player.positionX = player.positionX - 1;
-            }
-            else if(direction == "0")
-            {
-                player.positionY = player.positionY - 1
-            }
-            else if(direction == "1")
-            {
-                player.positionX = player.positionX + 1
-            }
-            else if(direction == "2")
-            {
-                player.positionY = player.positionY + 1
-            }
-
             String currentForegroundTile = getCurrentTile(mapLayout,player,false)
-            if (currentForegroundTile != "0"){
+            if (!currentForegroundTile || currentForegroundTile != "0"){
                 player.discard()
-                render text : ""
+                render text : "allowMove = false;"
                 return
             }
 
@@ -253,9 +253,8 @@ class GameController {
         if (player.view == View.ShowMap){
 
             MapLayout mapLayout = MapLayout.createMapArray(player.map);
-
-            render text: g.render(template: 'map', model: [mapLayout: mapLayout, player: player])
-            //render text: g.render(template: 'layerMap', model: [map:player.map,mapLayout: mapLayout, player: player])
+            println g.render(template: 'mapNew', model: [mapLayout: mapLayout, map : player.map, player: player])
+            render text: g.render(template: 'mapNew', model: [mapLayout: mapLayout, map : player.map, player: player])
         }
         else if (player.view == View.ShowMarket){
             redirect controller : "market", action: "index"
