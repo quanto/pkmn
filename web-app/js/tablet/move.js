@@ -11,8 +11,13 @@ $(document).ready(function() {
 
 
         $("#moveUp").bind('touchstart click', function(){
-            movePlayer(0);
-            pressTimerUp = setInterval(function(){ movePlayer(0); }, 500);
+            $("#player").spState(2);
+            move("player","up");
+            pressTimerUp = setInterval(function(){
+                $("#player").spState(2);
+                move("player","up");
+
+            }, 500);
             return false
         });
         $("#moveUp").bind('touchend', function(){
@@ -21,8 +26,12 @@ $(document).ready(function() {
         });
 
         $("#moveDown").bind('touchstart click', function(){
-            movePlayer(2);
-            pressTimerDown = setInterval(function(){ movePlayer(2); }, 500);
+            $("#player").spState(1);
+            move("player","down");
+            pressTimerDown = setInterval(function(){
+                $("#player").spState(1);
+                move("player","down");
+            }, 500);
             return false
         });
         $("#moveDown").bind('touchend', function(){
@@ -31,8 +40,12 @@ $(document).ready(function() {
         });
 
         $("#moveLeft").bind('touchstart click', function(){
-            movePlayer(3);
-            pressTimerLeft = setInterval(function(){ movePlayer(3); }, 500);
+            $("#player").spState(3);
+            move("player","left");
+            pressTimerLeft = setInterval(function(){
+                $("#player").spState(3);
+                move("player","left");
+            }, 500);
             return false
         });
         $("#moveLeft").bind('touchend', function(){
@@ -41,8 +54,12 @@ $(document).ready(function() {
         });
 
         $("#moveRight").bind('touchstart click', function(){
-            movePlayer(1);
-            pressTimerRight = setInterval(function(){ movePlayer(1); }, 500);
+            $("#player").spState(4);
+            move("player","right");
+            pressTimerRight = setInterval(function(){
+                $("#player").spState(4);
+                move("player","right");
+            }, 500);
             return false
         });
         $("#moveRight").bind('touchend', function(){
