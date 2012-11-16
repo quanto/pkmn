@@ -53,6 +53,7 @@ ${player.pvnBattlesWon}
 ${player.pvnBattlesLost}
 ${player.pvpBattlesWon}
 ${player.pvpBattlesLost}
+${player.characterImage}
 </playerData>
 ${roleData}
 ${ItemBackup.getItemBackupData(player)}
