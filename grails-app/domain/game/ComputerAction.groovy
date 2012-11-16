@@ -1,6 +1,6 @@
  package game
 
-class ComputerAction extends Action {
+class ComputerAction extends ServerAction {
 
     static constraints = {
     }

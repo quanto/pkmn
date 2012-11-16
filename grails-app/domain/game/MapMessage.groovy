@@ -1,6 +1,6 @@
 package game
 
-class MapMessage extends Action {
+class MapMessage extends ServerAction {
 
     String message
 

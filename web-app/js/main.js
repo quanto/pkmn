@@ -709,23 +709,17 @@ function loadmap()
         }).spStop(true);
 
     updateLocation(playerPosition.x, playerPosition.y);
-
-
 }
 
-function stone(pos,direction,actionObject)
+function boulder(pos,direction,actionObject)
 {
-//    // Check if next object is not a stone
-//    var nextActionObject = getActionObject(getNewPosition(pos,direction));
-//    if (nextActionObject != null && nextActionObject[1] == "stone")
-//    {
-//        // next object is a stone, dont move it
-//        return false;
-//    }
-//    // else move the stone
+    // Check if next object is not a stone
+    var nextActionObject = getActionObject(getNewPosition(pos,direction));
+    if (nextActionObject != null) // && nextActionObject[1] == "stone")
+    {
+        // next object is a stone, dont move it
+        return false;
+    }
+    // else move the stone
     return move(actionObject[0], direction);
 }
-
-$(document).ready(function(){
-
-});

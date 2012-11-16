@@ -1,6 +1,6 @@
 package game
 
-class PvpSelectAction extends Action {
+class PvpSelectAction extends ServerAction {
 
     static constraints = {
     }

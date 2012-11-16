@@ -1,4 +1,4 @@
-<%@ page import="game.MapLayout" %>
+<%@ page import="game.ClientAction; game.ServerAction; game.MapLayout" %>
 <%
     // MapLayout mapLayout
     def blockObjects = []
@@ -24,7 +24,9 @@
     var playerPosition = new position(${player.positionY},${player.positionX});
 
     var actionObjects = new Array(
-            //new Array("10-2","stone","32.png")
+        <% def clientActions = map.actions.findAll{ it in ClientAction } %>
+        <g:each in="${clientActions}" var="clientAction" status="i">new Array("${clientAction.positionX}-${clientAction.positionY}","${clientAction.actionFunction}","32.png")<g:if test="${clientAction != clientActions.last()}">,</g:if>
+        </g:each>
     );
 
     var pokemonObjects = new Array(
@@ -33,13 +35,13 @@
     );
 
     var triggerBeforeStepObjects = new Array(
-        <% def triggerBeforeStepActions = map.actions.findAll{ it.triggerBeforeStep } %>
+        <% def triggerBeforeStepActions = map.actions.findAll{ it in ServerAction && it.triggerBeforeStep } %>
         <g:each in="${triggerBeforeStepActions}" var="action" status="i">new position(${action.positionY},${action.positionX})<g:if test="${action != triggerBeforeStepActions.last()}">,</g:if>
         </g:each>
     )
 
     var triggerOnActionButtonObjects = new Array(
-        <% def triggerOnActionButtonActions = map.actions.findAll{ it.triggerOnActionButton } %>
+        <% def triggerOnActionButtonActions = map.actions.findAll{ it in ServerAction && it.triggerOnActionButton } %>
         <g:each in="${triggerOnActionButtonActions}" var="action" status="i">new position(${action.positionY},${action.positionX})<g:if test="${action != triggerOnActionButtonActions.last()}">,</g:if>
         </g:each>
     )

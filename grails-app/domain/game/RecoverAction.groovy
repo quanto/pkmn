@@ -1,6 +1,6 @@
 package game
 
-class RecoverAction extends Action {
+class RecoverAction extends ServerAction {
 
     static constraints = {
     }

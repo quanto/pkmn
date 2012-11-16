@@ -1,6 +1,6 @@
 package game
 
-class MarketAction extends Action {
+class MarketAction extends ServerAction {
 
     Market market
 

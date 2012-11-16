@@ -18,6 +18,7 @@ import game.MarketItem
 import game.Item
 import game.OwnerItem
 import game.PvpSelectAction
+import game.BoulderAction
 
 class ActionEditorController {
 
@@ -127,6 +128,11 @@ class ActionEditorController {
             npcAction.owner.name = params.name
             npcAction.owner.save()
             npcAction.save()
+        }
+
+        else if (params.actionType == 'BoulderAction'){
+            BoulderAction action = new BoulderAction(params)
+            action.save()
         }
 
         redirect action:'actions', id: params.map.id

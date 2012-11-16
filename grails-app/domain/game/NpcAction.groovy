@@ -1,6 +1,6 @@
 package game
 
-class NpcAction extends Action {
+class NpcAction extends ServerAction {
     Npc owner
 
 }
