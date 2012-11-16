@@ -23,7 +23,9 @@
 
     var playerPosition = new position(${player.positionY},${player.positionX});
 
-    var actionObjects = new Array();
+    var actionObjects = new Array(
+            //new Array("10-2","stone","32.png")
+    );
 
     var pokemonObjects = new Array(
         <g:each in="${pokemonObjects}" var="po" status="i">new position(${po[0]},${po[1]})<g:if test="${po != pokemonObjects.last()}">,</g:if>

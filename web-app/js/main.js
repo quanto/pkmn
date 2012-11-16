@@ -481,7 +481,7 @@ function move(objectId, direction)
     var currentPos = getObjectPosition(objectId);
 
     // get new position
-    pos = getNewPosition(currentPos,direction)
+    var pos = getNewPosition(currentPos,direction)
 
 
     var updateViewAfterAnimation = false
@@ -531,7 +531,6 @@ function move(objectId, direction)
     {
         if (checkPosition(pos,direction))
         {
-
             var y = pos.y * 16
             y -= $("#" + objectId).height() - 16
             $("#" + objectId).animate({
@@ -707,9 +706,10 @@ function loadmap()
         var actionObject = actionObjects[i];
         var splitPosition = actionObject[0].split("-");
 
-        html += "<img src=\"tiles/" + actionObject[2] + "\" id=\"" + splitPosition[0] + "-" + splitPosition[1] + "\" style=\"position:absolute;top:" + (splitPosition[0] * 16) + "px;left:" + (splitPosition[1] * 16) + "px;\" />";
+        html += "<img src=\"" + serverUrl + "/images/tiles/sheet1/" + actionObject[2] + "\" id=\"" + splitPosition[0] + "-" + splitPosition[1] + "\" style=\"position:absolute;top:" + (splitPosition[0] * 16) + "px;left:" + (splitPosition[1] * 16) + "px;\" />";
 
     }
+
     $("#objectContainer").html(html);
 
     // Spritely player
@@ -728,6 +728,19 @@ function loadmap()
     updateLocation(playerPosition.x, playerPosition.y);
 
 
+}
+
+function stone(pos,direction,actionObject)
+{
+//    // Check if next object is not a stone
+//    var nextActionObject = getActionObject(getNewPosition(pos,direction));
+//    if (nextActionObject != null && nextActionObject[1] == "stone")
+//    {
+//        // next object is a stone, dont move it
+//        return false;
+//    }
+//    // else move the stone
+    return move(actionObject[0], direction);
 }
 
 $(document).ready(function(){
