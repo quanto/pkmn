@@ -352,6 +352,15 @@ class BootStrap {
                     date: new Date().parse("dd-MM-yyyy HH:mm:ss","02-11-2012 12:00:00")
             ).save()
 
+            new NewsItem(
+                    message: """
+                        Frontend became much smarter. Animations have been added and server calls reduced.
+                    """,
+                    player: Player.findByUsername("kevin"),
+                    date: new Date().parse("dd-MM-yyyy HH:mm:ss","16-11-2012 12:00:00")
+            ).save()
+
+
         }
     }
 

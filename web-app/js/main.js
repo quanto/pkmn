@@ -32,7 +32,7 @@ $(document).ready( function () {
     updateStats();
     updateItems();
 	updateWhoisList();
-//    loadNewsItems();
+    loadNewsItems();
 //	disconnect();
 //	serverMessage();
 	getParty();
