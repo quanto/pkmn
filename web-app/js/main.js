@@ -723,3 +723,11 @@ function boulder(pos,direction,actionObject)
     // else move the stone
     return move(actionObject[0], direction);
 }
+
+function bush(pos,direction,actionObject)
+{
+    removeActionObject(actionObject)
+    // Dont move
+    return false;
+}
+

@@ -19,6 +19,7 @@ import game.Item
 import game.OwnerItem
 import game.PvpSelectAction
 import game.BoulderAction
+import game.BushAction
 
 class ActionEditorController {
 
@@ -129,9 +130,12 @@ class ActionEditorController {
             npcAction.owner.save()
             npcAction.save()
         }
-
         else if (params.actionType == 'BoulderAction'){
             BoulderAction action = new BoulderAction(params)
+            action.save()
+        }
+        else if (params.actionType == 'BushAction'){
+            BushAction action = new BushAction(params)
             action.save()
         }
 
