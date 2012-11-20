@@ -11,6 +11,7 @@ kevin
 <mapTransition>
 7
 14
+HUCb58hJNWEbYcw
 
 
 
@@ -28,6 +29,7 @@ false
 <npcAction>
 10
 8
+Ajhc7kpu9hz6BEi
 
 
 
@@ -39,6 +41,7 @@ false
 <npcAction>
 4
 8
+GGKzUZAx5V8cIfD
 
 
 
@@ -50,6 +53,7 @@ false
 <npcAction>
 7
 6
+ffiWx7GbZRlHNij
 defeatAllOtherNpcOnCurrentMap
 
 I'm not batteling you! You can't even defeat the others.

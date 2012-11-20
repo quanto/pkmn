@@ -192,7 +192,7 @@ class MapImport {
 
         // First create the market
         Market market = new Market(
-                identifier : parts[5] // :TODO backup position should be 0
+                identifier : parts[6] // :TODO backup position should be 0
         )
         market.save()
 
@@ -204,12 +204,13 @@ class MapImport {
                 map:map,
                 positionX:Integer.parseInt(parts[0]),
                 positionY:Integer.parseInt(parts[1]),
-                condition: parts[2]?:null,
-                conditionMetMessage: parts[3]?:null,
-                conditionNotMetMessage: parts[4]?:null,
-                triggerOnActionButton: new Boolean(parts[6]),
-                triggerBeforeStep: new Boolean(parts[7]),
-                conditionalStep: new Boolean(parts[8]),
+                identifier: parts[2],
+                condition: parts[3]?:null,
+                conditionMetMessage: parts[4]?:null,
+                conditionNotMetMessage: parts[5]?:null,
+                triggerOnActionButton: new Boolean(parts[7]),
+                triggerBeforeStep: new Boolean(parts[8]),
+                conditionalStep: new Boolean(parts[9]),
                 market: market
         )
         map.addToActions(marketAction)
@@ -218,19 +219,20 @@ class MapImport {
     public static void importNpcAction(def parts, Map map){
 
         // First create the Npc
-        Npc npc = NpcImport.importNpc(parts[5])
+        Npc npc = NpcImport.importNpc(parts[6])
 
         // Next the action
         NpcAction npcAction = new NpcAction(
                 map:map,
                 positionX:Integer.parseInt(parts[0]),
                 positionY:Integer.parseInt(parts[1]),
-                condition: parts[2]?:null,
-                conditionMetMessage: parts[3]?:null,
-                conditionNotMetMessage: parts[4]?:null,
-                triggerOnActionButton: new Boolean(parts[6]),
-                triggerBeforeStep: new Boolean(parts[7]),
-                conditionalStep: new Boolean(parts[8]),
+                identifier: parts[2],
+                condition: parts[3]?:null,
+                conditionMetMessage: parts[4]?:null,
+                conditionNotMetMessage: parts[5]?:null,
+                triggerOnActionButton: new Boolean(parts[7]),
+                triggerBeforeStep: new Boolean(parts[8]),
+                conditionalStep: new Boolean(parts[9]),
                 owner: npc
         )
         npc.npcAction = npcAction
@@ -241,11 +243,11 @@ class MapImport {
     public static void coupleMapTransitions(def parts, Map map){
 
         MapTransition mapTransition = MapTransition.findByMapAndPositionXAndPositionY(map,Integer.parseInt(parts[0]),Integer.parseInt(parts[1]))
-        Map mapTo = Map.findByName(parts[5])
+        Map mapTo = Map.findByName(parts[6])
 
         if (mapTransition){
 
-            MapTransition mapTransitionTo = MapTransition.findByMapAndPositionXAndPositionY(mapTo,Integer.parseInt(parts[6]),Integer.parseInt(parts[7]))
+            MapTransition mapTransitionTo = MapTransition.findByMapAndPositionXAndPositionY(mapTo,Integer.parseInt(parts[7]),Integer.parseInt(parts[8]))
 
             if (mapTransitionTo){
                 mapTransition.jumpTo = mapTransitionTo
@@ -266,12 +268,13 @@ class MapImport {
                 map:map,
                 positionX:Integer.parseInt(parts[0]),
                 positionY:Integer.parseInt(parts[1]),
-                condition: parts[2]?:null,
-                conditionMetMessage: parts[3]?:null,
-                conditionNotMetMessage: parts[4]?:null,
-                triggerOnActionButton: new Boolean(parts[8]),
-                triggerBeforeStep: new Boolean(parts[9]),
-                conditionalStep: new Boolean(parts[10]),
+                identifier: parts[2],
+                condition: parts[3]?:null,
+                conditionMetMessage: parts[4]?:null,
+                conditionNotMetMessage: parts[5]?:null,
+                triggerOnActionButton: new Boolean(parts[9]),
+                triggerBeforeStep: new Boolean(parts[10]),
+                conditionalStep: new Boolean(parts[11]),
         )
         map.addToActions(mapTransition)
     }
@@ -282,12 +285,13 @@ class MapImport {
                 map:map,
                 positionX:Integer.parseInt(parts[0]),
                 positionY:Integer.parseInt(parts[1]),
-                condition: parts[2]?:null,
-                conditionMetMessage: parts[3]?:null,
-                conditionNotMetMessage: parts[4]?:null,
-                triggerOnActionButton: new Boolean(parts[5]),
-                triggerBeforeStep: new Boolean(parts[6]),
-                conditionalStep: new Boolean(parts[7]),
+                identifier: parts[2],
+                condition: parts[3]?:null,
+                conditionMetMessage: parts[4]?:null,
+                conditionNotMetMessage: parts[5]?:null,
+                triggerOnActionButton: new Boolean(parts[6]),
+                triggerBeforeStep: new Boolean(parts[7]),
+                conditionalStep: new Boolean(parts[8]),
         )
         map.addToActions(recoverAction)
 
@@ -299,12 +303,13 @@ class MapImport {
                 map:map,
                 positionX:Integer.parseInt(parts[0]),
                 positionY:Integer.parseInt(parts[1]),
-                condition: parts[2]?:null,
-                conditionMetMessage: parts[3]?:null,
-                conditionNotMetMessage: parts[4]?:null,
-                triggerOnActionButton: new Boolean(parts[5]),
-                triggerBeforeStep: new Boolean(parts[6]),
-                conditionalStep: new Boolean(parts[7]),
+                identifier: parts[2],
+                condition: parts[3]?:null,
+                conditionMetMessage: parts[4]?:null,
+                conditionNotMetMessage: parts[5]?:null,
+                triggerOnActionButton: new Boolean(parts[6]),
+                triggerBeforeStep: new Boolean(parts[7]),
+                conditionalStep: new Boolean(parts[8]),
         )
         map.addToActions(pvpSelectAction)
     }
@@ -315,12 +320,13 @@ class MapImport {
                     map:map,
                     positionX:Integer.parseInt(parts[0]),
                     positionY:Integer.parseInt(parts[1]),
-                    condition: parts[2]?:null,
-                    conditionMetMessage: parts[3]?:null,
-                    conditionNotMetMessage: parts[4]?:null,
-                    triggerOnActionButton: new Boolean(parts[5]),
-                    triggerBeforeStep: new Boolean(parts[6]),
-                    conditionalStep: new Boolean(parts[7]),
+                    identifier: parts[2],
+                    condition: parts[3]?:null,
+                    conditionMetMessage: parts[4]?:null,
+                    conditionNotMetMessage: parts[5]?:null,
+                    triggerOnActionButton: new Boolean(parts[6]),
+                    triggerBeforeStep: new Boolean(parts[7]),
+                    conditionalStep: new Boolean(parts[8]),
             )
             map.addToActions(computerAction)
     }
@@ -343,13 +349,14 @@ class MapImport {
                     map:map,
                     positionX:Integer.parseInt(parts[0]),
                     positionY:Integer.parseInt(parts[1]),
-                    condition: parts[2]?:null,
-                    conditionMetMessage: parts[3]?:null,
-                    conditionNotMetMessage: parts[4]?:null,
-                    message: parts[5],
-                    triggerOnActionButton: new Boolean(parts[6]),
-                    triggerBeforeStep: new Boolean(parts[7]),
-                    conditionalStep: new Boolean(parts[8]),
+                    identifier: parts[2],
+                    condition: parts[3]?:null,
+                    conditionMetMessage: parts[4]?:null,
+                    conditionNotMetMessage: parts[5]?:null,
+                    message: parts[6],
+                    triggerOnActionButton: new Boolean(parts[7]),
+                    triggerBeforeStep: new Boolean(parts[8]),
+                    conditionalStep: new Boolean(parts[9]),
             )
             map.addToActions(mapMessage)
     }

@@ -62,6 +62,7 @@ ${getPvpSelectActions(map)}
                 data += """<marketAction>
 ${action.positionX}
 ${action.positionY}
+${action.identifier}
 ${action.condition?:''}
 ${action.conditionMetMessage?:''}
 ${action.conditionNotMetMessage?:''}
@@ -83,6 +84,7 @@ ${action.conditionalStep}
                 data += """<npcAction>
 ${action.positionX}
 ${action.positionY}
+${action.identifier}
 ${action.condition?:''}
 ${action.conditionMetMessage?:''}
 ${action.conditionNotMetMessage?:''}
@@ -105,6 +107,7 @@ ${action.conditionalStep}
                 data += """<mapMessage>
 ${action.positionX}
 ${action.positionY}
+${action.identifier}
 ${action.condition?:''}
 ${action.conditionMetMessage?:''}
 ${action.conditionNotMetMessage?:''}
@@ -126,6 +129,7 @@ ${action.conditionalStep}
                 data += """<pvpSelectAction>
 ${action.positionX}
 ${action.positionY}
+${action.identifier}
 ${action.condition?:''}
 ${action.conditionMetMessage?:''}
 ${action.conditionNotMetMessage?:''}
@@ -146,6 +150,7 @@ ${action.conditionalStep}
                 data += """<recoverAction>
 ${action.positionX}
 ${action.positionY}
+${action.identifier}
 ${action.condition?:''}
 ${action.conditionMetMessage?:''}
 ${action.conditionNotMetMessage?:''}
@@ -166,6 +171,7 @@ ${action.conditionalStep}
                 data += """<computerAction>
 ${action.positionX}
 ${action.positionY}
+${action.identifier}
 ${action.condition?:''}
 ${action.conditionMetMessage?:''}
 ${action.conditionNotMetMessage?:''}
@@ -187,6 +193,7 @@ ${action.conditionalStep}
                     data += """<mapTransition>
 ${action.positionX}
 ${action.positionY}
+${action.identifier}
 ${action.condition?:''}
 ${action.conditionMetMessage?:''}
 ${action.conditionNotMetMessage?:''}

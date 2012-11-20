@@ -38,6 +38,7 @@ kevin
 <mapMessage>
 16
 14
+CDf2DoHjl85CHWU
 haveBeginnerBadge
 
 Hey you! No rookies past this point!

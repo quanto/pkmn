@@ -8,6 +8,7 @@ import data.MapImport
 import data.ItemImport
 import map.View
 import data.PlayerImport
+import org.apache.commons.lang.RandomStringUtils
 
 class BootStrap {
 
@@ -47,6 +48,9 @@ class BootStrap {
             PlayerImport.importPlayers()
 
             MapImport.setMapOwners()
+
+
+
 
             /*
             Pokemon pokemon = Pokemon.get(1)
@@ -362,6 +366,12 @@ class BootStrap {
 
 
         }
+
+        // Set identifiers
+//        Action.list().each{
+//            it.identifier = RandomStringUtils.random(15, true, true)
+//            it.save()
+//        }
     }
 
     def destroy = {
