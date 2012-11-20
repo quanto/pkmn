@@ -11,13 +11,11 @@ kevin
 <mapTransition>
 7
 14
-HUCb58hJNWEbYcw
+PB8TwE1i0bthXuI
 
 
 
-Glooming forest -3x1
-11
-11
+QWyaWU6s94MOEfN
 true
 false
 false
@@ -29,7 +27,7 @@ false
 <npcAction>
 10
 8
-Ajhc7kpu9hz6BEi
+gVfhEyunJlgkOMW
 
 
 
@@ -41,7 +39,7 @@ false
 <npcAction>
 4
 8
-GGKzUZAx5V8cIfD
+DoEUteSSpHvNT92
 
 
 
@@ -53,7 +51,7 @@ false
 <npcAction>
 7
 6
-ffiWx7GbZRlHNij
+hv9TG1lvfAVFIst
 defeatAllOtherNpcOnCurrentMap
 
 I'm not batteling you! You can't even defeat the others.

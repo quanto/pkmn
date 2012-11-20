@@ -127,7 +127,7 @@ class MapImport {
                 }
                 else if (line.contains("</mapTransition>")){
                     node = ""
-                    coupleMapTransitions(parts,map)
+                    coupleMapTransitions(parts)
                     parts = []
                 }
 
@@ -240,14 +240,12 @@ class MapImport {
         map.addToActions(npcAction)
     }
 
-    public static void coupleMapTransitions(def parts, Map map){
+    public static void coupleMapTransitions(def parts){
 
-        MapTransition mapTransition = MapTransition.findByMapAndPositionXAndPositionY(map,Integer.parseInt(parts[0]),Integer.parseInt(parts[1]))
-        Map mapTo = Map.findByName(parts[6])
+        MapTransition mapTransition = MapTransition.findByIdentifier(parts[2])
 
         if (mapTransition){
-
-            MapTransition mapTransitionTo = MapTransition.findByMapAndPositionXAndPositionY(mapTo,Integer.parseInt(parts[7]),Integer.parseInt(parts[8]))
+            MapTransition mapTransitionTo = MapTransition.findByIdentifier(parts[6])
 
             if (mapTransitionTo){
                 mapTransition.jumpTo = mapTransitionTo
@@ -259,7 +257,7 @@ class MapImport {
 
         }
         else {
-            println "missing map transition to for mapTransition ${map} ${parts[0]} ${parts[1]}"
+            println "missing map transition to for mapTransition ${parts[2]} ${parts[0]} ${parts[1]}"
         }
     }
 
@@ -272,9 +270,9 @@ class MapImport {
                 condition: parts[3]?:null,
                 conditionMetMessage: parts[4]?:null,
                 conditionNotMetMessage: parts[5]?:null,
-                triggerOnActionButton: new Boolean(parts[9]),
-                triggerBeforeStep: new Boolean(parts[10]),
-                conditionalStep: new Boolean(parts[11]),
+                triggerOnActionButton: new Boolean(parts[7]),
+                triggerBeforeStep: new Boolean(parts[8]),
+                conditionalStep: new Boolean(parts[9]),
         )
         map.addToActions(mapTransition)
     }

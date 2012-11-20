@@ -197,9 +197,7 @@ ${action.identifier}
 ${action.condition?:''}
 ${action.conditionMetMessage?:''}
 ${action.conditionNotMetMessage?:''}
-${action.jumpTo?.map?.name}
-${action.jumpTo?.positionX}
-${action.jumpTo?.positionY}
+${action.jumpTo?.identifier}
 ${action.triggerOnActionButton}
 ${action.triggerBeforeStep}
 ${action.conditionalStep}
