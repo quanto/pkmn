@@ -16,12 +16,16 @@ import game.Player
 import game.FightFactoryService
 import game.PvpSelectAction
 import game.context.ActionType
+import game.FindItemAction
 
 class ActionFlow {
 
     public static ActionResult decideAction(Player player, ActionTrigger actionTrigger, FightFactoryService fightFactoryService){
 
         Action action = Action.findByMapAndPositionXAndPositionY(player.map,player.positionX,player.positionY)
+
+        if (!action)
+            return null
 
         if (action && action.actionType == ActionType.Server || action.actionType == ActionType.Mixed){
 
@@ -128,6 +132,9 @@ class ActionFlow {
                     player.save(flush:true)
                     actionResult.evalMessage += "getView()"
                 }
+            }
+            else if (action in FindItemAction){
+                println "findItem"
             }
             else {
                 // Should not be reachable, unknown action

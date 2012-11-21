@@ -253,6 +253,7 @@ class GameController {
 
         if (player.view == View.ShowMap){
             MapLayout mapLayout = MapLayout.createMapArray(player.map);
+            println g.render(template: 'mapNew', model: [mapLayout: mapLayout, map : player.map, player: player])
             render text: g.render(template: 'mapNew', model: [mapLayout: mapLayout, map : player.map, player: player])
         }
         else if (player.view == View.ShowMarket){

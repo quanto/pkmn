@@ -324,7 +324,16 @@ function sendChatMessage()
 
 function actionA(direction)
 {
+
     var currentPos = getObjectPosition("player");
+    var actionObject = getActionObject(currentPos,"triggerOnActionButton");
+    if (actionObject != null)
+    {
+        // perform the action of the object
+        return eval(actionObject[1] + "(currentPos,direction,actionObject);");
+    }
+
+
 
     $.ajax({
         async : false,
@@ -550,7 +559,7 @@ function move(objectId, direction)
  */
 function checkPosition(pos,direction)
 {
-    var actionObject = getActionObject(pos);
+    var actionObject = getActionObject(pos,"triggerBeforeStep");
 
     if (actionObject != null)
     {
@@ -579,7 +588,7 @@ function removeActionObject(actionObject)
 /*
  Get a object at a position
  */
-function getActionObject(pos)
+function getActionObject(pos,triggerType)
 {
     // check if there are objects
     for (var i=0;i<actionObjects.length;i++)
@@ -592,7 +601,15 @@ function getActionObject(pos)
 
             if (topPos / 16 == pos.y && leftPos / 16 == pos.x)
             {
-                return actionObjects[i];
+                if (triggerType == "triggerBeforeStep"){
+                    if (actionObjects[i][3])
+                        return actionObjects[i];
+                }
+                else if (triggerType == "triggerOnActionButton"){
+                    if (actionObjects[i][4])
+                        return actionObjects[i];
+                }
+
             }
         }
     }
@@ -714,7 +731,7 @@ function loadmap()
 function boulder(pos,direction,actionObject)
 {
     // Check if next object is not a stone
-    var nextActionObject = getActionObject(getNewPosition(pos,direction));
+    var nextActionObject = getActionObject(getNewPosition(pos,direction),"triggerBeforeStep");
     if (nextActionObject != null) // && nextActionObject[1] == "stone")
     {
         // next object is a stone, dont move it

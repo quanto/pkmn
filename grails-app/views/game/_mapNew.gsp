@@ -24,8 +24,8 @@
     var playerPosition = new position(${player.positionY},${player.positionX});
 
     var actionObjects = new Array(
-        <% def clientActions = map.actions.findAll{ it.triggerBeforeStep && (it.actionType == ActionType.Client || it.actionType == ActionType.Mixed) } %>
-        <g:each in="${clientActions}" var="clientAction" status="i">new Array("${clientAction.positionY}-${clientAction.positionX}","${clientAction.actionFunction}","${clientAction.tileImage}.png")<g:if test="${clientAction != clientActions.last()}">,</g:if>
+        <% def clientActions = map.actions.findAll{ (it.actionType == ActionType.Client || it.actionType == ActionType.Mixed) } %>
+        <g:each in="${clientActions}" var="clientAction" status="i">new Array("${clientAction.positionY}-${clientAction.positionX}","${clientAction.actionFunction}","${clientAction.tileImage}.png",${clientAction.triggerBeforeStep},${clientAction.triggerOnActionButton})<g:if test="${clientAction != clientActions.last()}">,</g:if>
         </g:each>
     );
 
