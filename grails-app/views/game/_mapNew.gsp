@@ -25,7 +25,7 @@
 
     var actionObjects = new Array(
         <% def clientActions = map.actions.findAll{ it.triggerBeforeStep && (it.actionType == ActionType.Client || it.actionType == ActionType.Mixed) } %>
-        <g:each in="${clientActions}" var="clientAction" status="i">new Array("${clientAction.positionX}-${clientAction.positionY}","${clientAction.actionFunction}","32.png")<g:if test="${clientAction != clientActions.last()}">,</g:if>
+        <g:each in="${clientActions}" var="clientAction" status="i">new Array("${clientAction.positionY}-${clientAction.positionX}","${clientAction.actionFunction}","${clientAction.tileImage}.png")<g:if test="${clientAction != clientActions.last()}">,</g:if>
         </g:each>
     );
 
