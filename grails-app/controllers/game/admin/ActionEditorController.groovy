@@ -144,8 +144,6 @@ class ActionEditorController {
             action.save()
         }
 
-
-
         redirect action:'actions', id: params.map.id
     }
 
