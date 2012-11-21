@@ -20,6 +20,7 @@ import game.OwnerItem
 import game.PvpSelectAction
 import game.BoulderAction
 import game.BushAction
+import game.FindItemAction
 
 class ActionEditorController {
 
@@ -101,43 +102,49 @@ class ActionEditorController {
 
     def createAction(){
 
-        if (params.actionType == 'RecoverAction'){
+        if (params.actionTypeClass == 'RecoverAction'){
             RecoverAction recoverAction = new RecoverAction(params)
             recoverAction.save()
         }
-        else if (params.actionType == 'ComputerAction'){
+        else if (params.actionTypeClass == 'ComputerAction'){
             ComputerAction computerAction = new ComputerAction(params)
             computerAction.save()
         }
-        else if (params.actionType == 'PvpSelectAction'){
+        else if (params.actionTypeClass == 'PvpSelectAction'){
             PvpSelectAction pvpSelectAction = new PvpSelectAction(params)
             pvpSelectAction.save()
         }
-        else if (params.actionType == 'MapMessage'){
+        else if (params.actionTypeClass == 'MapMessage'){
             MapMessage mapMessage = new MapMessage(params)
             mapMessage.save()
         }
-        else if (params.actionType == 'MarketAction'){
+        else if (params.actionTypeClass == 'MarketAction'){
             MarketAction marketAction = new MarketAction(params)
             marketAction.market = new Market()
             marketAction.market.save()
             marketAction.save()
         }
-        else if (params.actionType == 'NpcAction'){
+        else if (params.actionTypeClass == 'NpcAction'){
             NpcAction npcAction = new NpcAction(params)
             npcAction.owner = new Npc(npcAction:npcAction)
             npcAction.owner.name = params.name
             npcAction.owner.save()
             npcAction.save()
         }
-        else if (params.actionType == 'BoulderAction'){
+        else if (params.actionTypeClass == 'BoulderAction'){
             BoulderAction action = new BoulderAction(params)
             action.save()
         }
-        else if (params.actionType == 'BushAction'){
+        else if (params.actionTypeClass == 'BushAction'){
             BushAction action = new BushAction(params)
             action.save()
         }
+        else if (params.actionTypeClass == 'FindItemAction'){
+            FindItemAction action = new FindItemAction(params)
+            action.save()
+        }
+
+
 
         redirect action:'actions', id: params.map.id
     }

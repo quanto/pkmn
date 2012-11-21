@@ -1,6 +1,10 @@
 package game
 
-class RecoverAction extends ServerAction {
+import game.context.ActionType
+
+class RecoverAction extends Action {
+
+    ActionType actionType = ActionType.Server
 
     static constraints = {
     }

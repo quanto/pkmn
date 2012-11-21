@@ -4,7 +4,7 @@ Create action
     <g:hiddenField name="map.id" value="${map.id}" />
     <g:hiddenField name="positionX" value="${positionX}" />
     <g:hiddenField name="positionY" value="${positionY}" />
-    <g:select name="actionType" onchange="actionTypeChanged(this)" noSelection="['':'-Choose Action-']" from="${['NpcAction','MapTransition', 'PvpSelectAction', 'ComputerAction', 'MapMessage', 'MarketAction', 'RecoverAction', 'BoulderAction', 'BushAction']}" />
+    <g:select name="actionTypeClass" onchange="actionTypeChanged(this)" noSelection="['':'-Choose Action-']" from="${['NpcAction','MapTransition', 'PvpSelectAction', 'ComputerAction', 'MapMessage', 'MarketAction', 'RecoverAction', 'BoulderAction', 'BushAction', 'FindItemAction']}" />
     <div id="MapMessage" style="display: none">
         <g:textField name="message" />
     </div>

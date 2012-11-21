@@ -1,6 +1,10 @@
 package game
 
-class MapMessage extends ServerAction {
+import game.context.ActionType
+
+class MapMessage extends Action {
+
+    ActionType actionType = ActionType.Server
 
     String message
 

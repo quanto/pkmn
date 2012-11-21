@@ -1,9 +1,15 @@
 package game
 
-class BoulderAction extends ClientAction {
+import game.context.ActionType
+
+class BoulderAction extends Action {
 
     String actionFunction = "boulder"
     String tileImage = "32"
+    ActionType actionType = ActionType.Client
+
+    boolean triggerOnActionButton = false
+    boolean triggerBeforeStep = true
 
     static constraints = {
     }

@@ -1,7 +1,10 @@
 package game
 
-class PvpSelectAction extends ServerAction {
+import game.context.ActionType
 
+class PvpSelectAction extends Action {
+
+    ActionType actionType = ActionType.Server
     static constraints = {
     }
 }

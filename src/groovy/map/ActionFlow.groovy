@@ -15,14 +15,16 @@ import game.context.BattleType
 import game.Player
 import game.FightFactoryService
 import game.PvpSelectAction
-import game.ServerAction
+import game.context.ActionType
 
 class ActionFlow {
 
     public static ActionResult decideAction(Player player, ActionTrigger actionTrigger, FightFactoryService fightFactoryService){
-        ServerAction action = Action.findByMapAndPositionXAndPositionY(player.map,player.positionX,player.positionY)
 
-        if (action){
+        Action action = Action.findByMapAndPositionXAndPositionY(player.map,player.positionX,player.positionY)
+
+        if (action && action.actionType == ActionType.Server || action.actionType == ActionType.Mixed){
+
             // Check if we even should trigger the action
             if (!action.triggerBeforeStep && actionTrigger == ActionTrigger.Move){
                 return null

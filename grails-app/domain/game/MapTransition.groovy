@@ -1,6 +1,10 @@
 package game
 
-class MapTransition extends ServerAction {
+import game.context.ActionType
+
+class MapTransition extends Action {
+
+    ActionType actionType = ActionType.Server
 
     // Defining no jumpTo means there's no way back
     MapTransition jumpTo

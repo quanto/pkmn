@@ -1,6 +1,10 @@
 package game
 
-class MarketAction extends ServerAction {
+import game.context.ActionType
+
+class MarketAction extends Action {
+
+    ActionType actionType = ActionType.Server
 
     Market market
 

@@ -731,3 +731,9 @@ function bush(pos,direction,actionObject)
     return false;
 }
 
+function findItem(pos,direction,actionObject)
+{
+    removeActionObject(actionObject)
+    return true;
+}
+
