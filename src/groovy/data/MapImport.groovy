@@ -13,6 +13,9 @@ import game.Market
 import game.MarketAction
 import game.PvpSelectAction
 import game.Player
+import game.BushAction
+import game.BoulderAction
+import game.FindItemAction
 
 class MapImport {
 
@@ -70,6 +73,21 @@ class MapImport {
                         importMapTransition(parts,map)
                         parts = []
                     }
+                    else if (line.contains("</boulderAction>")){
+                        node = ""
+                        importBoulderActions(parts,map)
+                        parts = []
+                    }
+                    else if (line.contains("</bushAction>")){
+                        node = ""
+                        importBushActions(parts,map)
+                        parts = []
+                    }
+                    else if (line.contains("</findItemAction>")){
+                        node = ""
+                        importFindItemActionAction(parts,map)
+                        parts = []
+                    }
                     else if (line.contains("</pokemon>")){
                         node = ""
                         importMapPokemon(parts,map)
@@ -103,6 +121,15 @@ class MapImport {
                     }
                     else if (line.contains("<mapTransition>")){
                         node = "mapTransition"
+                    }
+                    else if (line.contains("<boulderAction>")){
+                        node = "boulderAction"
+                    }
+                    else if (line.contains("<bushAction>")){
+                        node = "bushAction"
+                    }
+                    else if (line.contains("<findItemAction>")){
+                        node = "findItemAction"
                     }
                     else if (line.contains("<pokemon>")){
                         node = "pokemon"
@@ -310,6 +337,57 @@ class MapImport {
                 conditionalStep: new Boolean(parts[8]),
         )
         map.addToActions(pvpSelectAction)
+    }
+
+    public static void importFindItemActionAction(def parts, Map map){
+        FindItemAction action = new FindItemAction(
+
+                map:map,
+                positionX:Integer.parseInt(parts[0]),
+                positionY:Integer.parseInt(parts[1]),
+                identifier: parts[2],
+                condition: parts[3]?:null,
+                conditionMetMessage: parts[4]?:null,
+                conditionNotMetMessage: parts[5]?:null,
+                triggerOnActionButton: new Boolean(parts[6]),
+                triggerBeforeStep: new Boolean(parts[7]),
+                conditionalStep: new Boolean(parts[8]),
+        )
+        map.addToActions(action)
+    }
+
+    public static void importBushActions(def parts, Map map){
+        BushAction action = new BushAction(
+
+                map:map,
+                positionX:Integer.parseInt(parts[0]),
+                positionY:Integer.parseInt(parts[1]),
+                identifier: parts[2],
+                condition: parts[3]?:null,
+                conditionMetMessage: parts[4]?:null,
+                conditionNotMetMessage: parts[5]?:null,
+                triggerOnActionButton: new Boolean(parts[6]),
+                triggerBeforeStep: new Boolean(parts[7]),
+                conditionalStep: new Boolean(parts[8]),
+        )
+        map.addToActions(action)
+    }
+
+    public static void importBoulderActions(def parts, Map map){
+        BoulderAction action = new BoulderAction(
+
+                map:map,
+                positionX:Integer.parseInt(parts[0]),
+                positionY:Integer.parseInt(parts[1]),
+                identifier: parts[2],
+                condition: parts[3]?:null,
+                conditionMetMessage: parts[4]?:null,
+                conditionNotMetMessage: parts[5]?:null,
+                triggerOnActionButton: new Boolean(parts[6]),
+                triggerBeforeStep: new Boolean(parts[7]),
+                conditionalStep: new Boolean(parts[8]),
+        )
+        map.addToActions(action)
     }
 
     public static void importComputerAction(def parts, Map map){

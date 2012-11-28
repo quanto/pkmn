@@ -15,3 +15,39 @@ kevin
 
 
 
+<boulderAction>
+9
+2
+vjPmZxg45TKTEXg
+
+
+
+false
+true
+false
+</boulderAction>
+
+<bushAction>
+8
+2
+tDDY8vCscvbyp1v
+
+
+
+false
+true
+false
+</bushAction>
+
+<findItemAction>
+10
+2
+RKDNcF4D2pescZS
+
+
+
+true
+false
+false
+</findItemAction>
+

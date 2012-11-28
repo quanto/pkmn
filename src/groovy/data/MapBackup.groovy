@@ -10,6 +10,9 @@ import game.NpcAction
 import game.MarketAction
 import game.MapPokemon
 import game.PvpSelectAction
+import game.BoulderAction
+import game.BushAction
+import game.FindItemAction
 
 class MapBackup {
 
@@ -52,7 +55,73 @@ ${getMessageActions(map)}
 ${getNpcActions(map)}
 ${getMarketActions(map)}
 ${getPvpSelectActions(map)}
+${getBoulderActions(map)}
+${getBushActions(map)}
+${getFindItemActions(map)}
 """
+    }
+
+    public static String getBoulderActions(Map map){
+        String data = ""
+        map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
+            if(action in BoulderAction){
+                data += """<boulderAction>
+${action.positionX}
+${action.positionY}
+${action.identifier}
+${action.condition?:''}
+${action.conditionMetMessage?:''}
+${action.conditionNotMetMessage?:''}
+${action.triggerOnActionButton}
+${action.triggerBeforeStep}
+${action.conditionalStep}
+</boulderAction>
+"""
+            }
+        }
+        return data
+    }
+
+    public static String getFindItemActions(Map map){
+        String data = ""
+        map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
+            if(action in FindItemAction){
+                data += """<findItemAction>
+${action.positionX}
+${action.positionY}
+${action.identifier}
+${action.condition?:''}
+${action.conditionMetMessage?:''}
+${action.conditionNotMetMessage?:''}
+${action.triggerOnActionButton}
+${action.triggerBeforeStep}
+${action.conditionalStep}
+</findItemAction>
+"""
+            }
+        }
+        return data
+    }
+
+    public static String getBushActions(Map map){
+        String data = ""
+        map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
+            if(action in BushAction){
+                data += """<bushAction>
+${action.positionX}
+${action.positionY}
+${action.identifier}
+${action.condition?:''}
+${action.conditionMetMessage?:''}
+${action.conditionNotMetMessage?:''}
+${action.triggerOnActionButton}
+${action.triggerBeforeStep}
+${action.conditionalStep}
+</bushAction>
+"""
+            }
+        }
+        return data
     }
 
     public static String getMarketActions(Map map){
