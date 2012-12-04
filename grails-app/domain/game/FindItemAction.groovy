@@ -9,5 +9,5 @@ class FindItemAction extends Action {
     String actionFunction = "findItem"
     String tileImage = "53"
 
-    static hasMany = [rewardItems: OwnerItem]
+    static hasMany = [rewardItems: RewardItem]
 }

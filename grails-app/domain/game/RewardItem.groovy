@@ -1,15 +1,9 @@
 package game
 
-class OwnerItem {
+class RewardItem {
 
     Item item
     int quantity
-
-    static belongsTo = [owner: Owner]
-
-    static constraints = {
-        owner nullable: true
-    }
 
     @Override
     public String toString(){

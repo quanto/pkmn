@@ -21,6 +21,7 @@ import game.PvpSelectAction
 import game.BoulderAction
 import game.BushAction
 import game.FindItemAction
+import game.RewardItem
 
 class ActionEditorController {
 
@@ -200,6 +201,16 @@ class ActionEditorController {
         )
         ownerItem.owner = npc
         npc.addToRewardItems(ownerItem)
+        render text: "done"
+    }
+
+    def addRewardItem(){
+        FindItemAction action = FindItemAction.get(Integer.parseInt(params.actionId))
+        RewardItem rewardItem = new RewardItem(
+                quantity: Integer.parseInt(params.quantity),
+                item:Item.get(Integer.parseInt(params.item))
+        )
+        action.addToRewardItems(rewardItem)
         render text: "done"
     }
 

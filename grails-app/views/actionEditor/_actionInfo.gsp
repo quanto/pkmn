@@ -1,4 +1,4 @@
-<%@ page import="game.UsableItem; game.MapTransition; game.Item; game.MarketAction; game.Pokemon; game.OwnerPokemon; game.NpcAction; game.MapMessage" %>
+<%@ page import="game.FindItemAction; game.UsableItem; game.MapTransition; game.Item; game.MarketAction; game.Pokemon; game.OwnerPokemon; game.NpcAction; game.MapMessage" %>
 <div>
     <g:link action="deleteAction" id="${action.id}">Delete Action</g:link>
 
@@ -218,8 +218,69 @@
         </g:form>
 
     </g:elseif>
-    <g:else>
+    <g:elseif test="${action in FindItemAction}">
+        <g:form action="updateAction">
+
+            <table>
+                <g:render template="basicActionInfo" />
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <g:submitButton name="save" />
+                    </td>
+                </tr>
+            </table>
+
+        </g:form>
+        <h3>Reward Items</h3>
         <table>
+            <tr>
+                <td>Item</td>
+                <td>Quantity</td>
+            </tr>
+            <g:each in="${action.rewardItems}" var="ownerItem">
+                <tr>
+                    <td>
+                        ${ownerItem.item.name}
+                    </td>
+                    <td>
+                        ${ownerItem.quantity}
+                    </td>
+                </tr>
+
+            </g:each>
+        </table>
+
+        <g:form action="addRewardItem">
+            <g:hiddenField name="actionId" value="${action.id}" />
+            <table>
+                <tr>
+                    <td>
+                        Item
+                    </td>
+                    <td>
+                        <g:select name="item" optionValue="${ { it.name } }" from="${Item.list()}" optionKey="id" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Quantity
+                    </td>
+                    <td>
+                        <g:textField name="quantity" value="1" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><g:submitButton name="add" /></td>
+                </tr>
+            </table>
+        </g:form>
+
+    </g:elseif>
+    <g:else>
         <g:form action="updateAction">
 
             <table>
