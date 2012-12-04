@@ -17,6 +17,8 @@ import game.FightFactoryService
 import game.PvpSelectAction
 import game.context.ActionType
 import game.FindItemAction
+import game.Items
+import game.RewardItem
 
 class ActionFlow {
 
@@ -134,7 +136,13 @@ class ActionFlow {
                 }
             }
             else if (action in FindItemAction){
-                println "findItem"
+
+                FindItemAction findItemAction = action
+                findItemAction.rewardItems.each { RewardItem rewardItem ->
+                    Items.addOwnerItem(player,rewardItem.item,false)
+                    actionResult.evalMessage += "setMessage('You found an ${rewardItem.item.name?.encodeAsHTML()}.');"
+                }
+                // :TODO lock so we can;t do this twice
             }
             else {
                 // Should not be reachable, unknown action

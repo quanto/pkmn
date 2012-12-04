@@ -330,10 +330,8 @@ function actionA(direction)
     if (actionObject != null)
     {
         // perform the action of the object
-        return eval(actionObject[1] + "(currentPos,direction,actionObject);");
+        eval(actionObject[1] + "(currentPos,direction,actionObject);");
     }
-
-
 
     $.ajax({
         async : false,
