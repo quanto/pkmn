@@ -364,7 +364,13 @@ class BootStrap {
                     date: new Date().parse("dd-MM-yyyy HH:mm:ss","16-11-2012 12:00:00")
             ).save()
 
-
+            new NewsItem(
+                    message: """
+                        Started working on the game again.
+                    """,
+                    player: Player.findByUsername("kevin"),
+                    date: new Date().parse("dd-MM-yyyy HH:mm:ss","05-07-2013 12:00:00")
+            ).save()
         }
 
         // Players can not be in a battle. When stopping the instance the battles are destroyed.

@@ -1,5 +1,6 @@
-<a href="http://kevinverhoef.nl"></a>
-<a href="http://fabianwouters.nl"></a>
+
+<span style="color:red;">Version ${grailsApplication.metadata.'app.version'}</span> |
+
 <sec:ifLoggedIn>
     Ingelogd als: <sec:loggedInUserInfo field="username"/>
     | <a href="${createLink(controller: 'logout')}">Uitloggen</a>
