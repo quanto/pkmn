@@ -24,7 +24,7 @@
 
                                 </g:if>
                                 <g:else>
-                                    <g:link action="editor" params="${[worldX:x,worldY:y]}">New</g:link>
+                                    <g:link action="editor" target="_blank" params="${[worldX:x,worldY:y]}">New</g:link>
                                 </g:else>
                                 </div>
                                 <g:if test="${mapLayout}">
