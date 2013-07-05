@@ -55,23 +55,31 @@ function getObjectPosition(objectId)
 /*
  Get the a new position in a direction
  */
-function getNewPosition(pos,direction)
+function getNewPosition($moveObj, pos,direction)
 {
     var newPos = new position(pos.y,pos.x);
     if (direction == "up")
     {
+        if($moveObj.hasClass("spritely"))
+            $moveObj.spState(2);
         newPos.y--;
     }
     else if (direction == "down")
     {
+        if($moveObj.hasClass("spritely"))
+            $moveObj.spState(1);
         newPos.y++;
     }
     else if (direction == "left")
     {
+        if($moveObj.hasClass("spritely"))
+            $moveObj.spState(3);
         newPos.x--;
     }
     else if (direction == "right")
     {
+        if($moveObj.hasClass("spritely"))
+            $moveObj.spState(4);
         newPos.x++;
     }
     return newPos;
@@ -83,16 +91,19 @@ function getNewPosition(pos,direction)
  */
 function move(objectId, direction)
 {
+    var $moveObj = $("#"+objectId);
+    var isPlayer = $moveObj.hasClass('player');
+    var isSpritely = $moveObj.hasClass('spritely');
+
     var currentPos = getObjectPosition(objectId);
 
     // get new position
-    var pos = getNewPosition(currentPos,direction)
-
+    var pos = getNewPosition($moveObj, currentPos,direction)
 
     var updateViewAfterAnimation = false
 
     // Before move event or pokemon event
-    if (objectId == "player"){
+    if (isPlayer){
 
         var checkMove = false
 
@@ -137,16 +148,16 @@ function move(objectId, direction)
         if (checkPosition(pos,direction))
         {
             var y = pos.y * 16
-            y -= $("#" + objectId).height() - 16
-            $("#" + objectId).animate({
+            y -= $moveObj.height() - 16
+            $moveObj.animate({
                 left: pos.x * 16 + "px",
                 top: y + "px"
             },{
                 duration: 250,
                 complete: function() {
-                    if (objectId == "player"){
+                    if (isPlayer){
                         updateLocation(pos.x, pos.y);
-                        var src = $("#player").attr("src");
+
                         if (updateViewAfterAnimation){
                             getView();
                         }
@@ -154,8 +165,8 @@ function move(objectId, direction)
                 }
             });
 
-            if (objectId == "player"){
-                $("#" + objectId).spStart();
+            if (isSpritely){
+                $moveObj.spStart();
             }
 
             return true;
@@ -275,23 +286,18 @@ $(document).keypress(function(e)
         switch (e.which)
         {
             case 97:
-                $("#player").spState(3);
                 move("player","left");
                 break;
 
             case 119:
-                $("#player").spState(2);
                 move("player","up");
                 break;
 
             case 100:
-                $("#player").spState(4);
                 move("player","right");
                 break;
 
             case 115:
-                //onder
-                $("#player").spState(1);
                 move("player","down");
                 break;
             case 32:
@@ -324,7 +330,7 @@ function loadmap()
     $("#objectContainer").html(html);
 
     // Spritely player
-    $('#player')
+    $('.spritely')
         .sprite({
             fps: 9,
             no_of_frames: 4,
@@ -342,7 +348,7 @@ function loadmap()
 function boulder(pos,direction,actionObject)
 {
     // Check if next object is not a stone
-    var nextActionObject = getActionObject(getNewPosition(pos,direction),"triggerBeforeStep");
+    var nextActionObject = getActionObject(getNewPosition(null, pos,direction),"triggerBeforeStep");
     if (nextActionObject != null) // && nextActionObject[1] == "stone")
     {
         // next object is a stone, dont move it

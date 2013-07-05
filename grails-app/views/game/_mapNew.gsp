@@ -74,7 +74,7 @@
 <div style="position:relative;height:${mapLayout.getRows() * 16}px;width: ${mapLayout.getColumns() * 16}px;">
     <img style="position:absolute;top:0px;left:0px;" src="${resource(uri:'')}${map.getForegroundImage()}" />
 
-    <div id="player"></div>
+    <div id="player" class="player spritely"></div>
 
     <div id="objectContainer">
 
