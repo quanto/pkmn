@@ -1,4 +1,4 @@
-<%@ page import="game.Action; game.lock.OneTimeActionLock; game.FindItemAction; game.context.ActionType; game.context.ActionType; game.MapLayout;" %>
+<%@ page import="game.lock.OneTimeActionLock; game.context.ActionType; game.context.ActionType; game.MapLayout;" %>
 <%
     // MapLayout mapLayout
     def blockObjects = []

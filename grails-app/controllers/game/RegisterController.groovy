@@ -1,5 +1,6 @@
 package game
 
+import game.action.RecoverAction
 import org.apache.commons.lang.RandomStringUtils
 
 class RegisterController {

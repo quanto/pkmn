@@ -6,7 +6,7 @@ import data.MapBackup
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import game.context.PlayerData
 import game.Player
-import game.MapTransition
+import game.action.MapTransition
 
 class MapEditorController {
 

@@ -1,5 +1,6 @@
 package game
 
+import game.action.NpcAction
 import org.apache.commons.lang.RandomStringUtils
 
 class Npc extends Owner {

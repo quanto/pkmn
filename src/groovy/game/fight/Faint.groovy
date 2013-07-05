@@ -4,7 +4,7 @@ import game.context.Fight
 import game.fight.status.Recover
 import game.context.BattleType
 import game.Player
-import game.RecoverAction
+import game.action.RecoverAction
 import game.fight.log.MessageLog
 import game.context.FightPlayer
 import game.Npc

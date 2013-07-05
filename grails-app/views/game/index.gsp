@@ -3,8 +3,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name='layout' content='game'/>
-
     <script type="text/javascript" src="${resource(uri:'')}/js/main.js"></script>
+    <script type="text/javascript" src="${resource(uri:'')}/js/chat.js"></script>
+    <script type="text/javascript" src="${resource(uri:'')}/js/uiFunctions.js"></script>
+    <script type="text/javascript" src="${resource(uri:'')}/js/choosePokemon.js"></script>
     <script type="text/javascript" src="${resource(uri:'')}/js/jquery_json.js"></script>
     <script type="text/javascript" src="${resource(uri:'')}/js/jquery-ui-1.9.0.custom.min.js"></script>
 

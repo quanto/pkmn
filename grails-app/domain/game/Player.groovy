@@ -1,5 +1,6 @@
 package game
 
+import game.action.RecoverAction
 import map.View
 import map.CharacterImage
 import game.lock.Lock

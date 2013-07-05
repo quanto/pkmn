@@ -1,14 +1,11 @@
-package game
+package game.action
 
+import game.action.Action
 import game.context.ActionType
 
-class MapMessage extends Action {
+class PvpSelectAction extends Action {
 
     ActionType actionType = ActionType.Server
-
-    String message
-
     static constraints = {
-
     }
 }

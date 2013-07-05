@@ -1,5 +1,7 @@
-package game
+package game.action
 
+import game.RewardItem
+import game.action.Action
 import game.context.ActionType
 
 class FindItemAction extends Action {

@@ -1,4 +1,4 @@
-package game
+package game.action
 
 import org.apache.commons.lang.RandomStringUtils
 import game.context.ActionType
@@ -19,7 +19,7 @@ class Action {
     boolean placeOneTimeActionLock = false
 
     String identifier
-    Map map
+    game.Map map
     int positionX
     int positionY
 

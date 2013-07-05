@@ -1,6 +1,6 @@
 package scaffold
 
-import game.RecoverAction
+import game.action.RecoverAction
 
 class RecoverActionController {
 

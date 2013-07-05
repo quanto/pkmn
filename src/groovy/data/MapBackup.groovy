@@ -1,18 +1,18 @@
 package data
 
 import game.Map
-import game.Action
-import game.MapTransition
-import game.ComputerAction
-import game.RecoverAction
-import game.MapMessage
-import game.NpcAction
-import game.MarketAction
+import game.action.Action
+import game.action.MapTransition
+import game.action.ComputerAction
+import game.action.RecoverAction
+import game.action.MapMessage
+import game.action.NpcAction
+import game.action.MarketAction
 import game.MapPokemon
-import game.PvpSelectAction
-import game.BoulderAction
-import game.BushAction
-import game.FindItemAction
+import game.action.PvpSelectAction
+import game.action.BoulderAction
+import game.action.BushAction
+import game.action.FindItemAction
 
 class MapBackup {
 

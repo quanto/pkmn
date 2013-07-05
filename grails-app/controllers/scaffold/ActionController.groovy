@@ -1,6 +1,6 @@
 package scaffold
 
-import game.Action
+import game.action.Action
 
 class ActionController {
 

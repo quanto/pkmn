@@ -2,7 +2,7 @@ package data
 
 import game.Player
 import game.Map
-import game.RecoverAction
+import game.action.RecoverAction
 import map.View
 import game.OwnerPokemon
 import game.Pokemon

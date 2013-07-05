@@ -2,13 +2,13 @@ package game.admin
 
 import game.Map
 import game.MapLayout
-import game.MapTransition
-import game.Action
-import game.RecoverAction
-import game.ComputerAction
-import game.MarketAction
-import game.MapMessage
-import game.NpcAction
+import game.action.MapTransition
+import game.action.Action
+import game.action.RecoverAction
+import game.action.ComputerAction
+import game.action.MarketAction
+import game.action.MapMessage
+import game.action.NpcAction
 import game.Owner
 import game.Pokemon
 import game.PokemonCreator
@@ -17,10 +17,10 @@ import game.Market
 import game.MarketItem
 import game.Item
 import game.OwnerItem
-import game.PvpSelectAction
-import game.BoulderAction
-import game.BushAction
-import game.FindItemAction
+import game.action.PvpSelectAction
+import game.action.BoulderAction
+import game.action.BushAction
+import game.action.FindItemAction
 import game.RewardItem
 import game.lock.OneTimeActionLock
 

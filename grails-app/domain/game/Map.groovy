@@ -1,5 +1,7 @@
 package game
 
+import game.action.Action
+
 import javax.imageio.ImageIO
 import scaffolding.ScaffoldLink
 

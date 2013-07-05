@@ -1,22 +1,22 @@
 package data
 
-import game.Action
+import game.action.Action
 import game.Map
-import game.MapMessage
+import game.action.MapMessage
 import game.MapPokemon
 import game.Pokemon
-import game.ComputerAction
-import game.RecoverAction
-import game.MapTransition
-import game.NpcAction
+import game.action.ComputerAction
+import game.action.RecoverAction
+import game.action.MapTransition
+import game.action.NpcAction
 import game.Npc
 import game.Market
-import game.MarketAction
-import game.PvpSelectAction
+import game.action.MarketAction
+import game.action.PvpSelectAction
 import game.Player
-import game.BushAction
-import game.BoulderAction
-import game.FindItemAction
+import game.action.BushAction
+import game.action.BoulderAction
+import game.action.FindItemAction
 
 class MapImport {
 

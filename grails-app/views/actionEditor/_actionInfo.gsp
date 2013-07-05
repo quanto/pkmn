@@ -1,8 +1,8 @@
-<%@ page import="game.FindItemAction; game.UsableItem; game.MapTransition; game.Item; game.MarketAction; game.Pokemon; game.OwnerPokemon; game.NpcAction; game.MapMessage" %>
+<%@ page import="game.action.FindItemAction; game.action.MapTransition; game.action.MarketAction; game.action.NpcAction; game.UsableItem; game.MapTransition; game.Item; game.MarketAction; game.Pokemon; game.OwnerPokemon; game.NpcAction; game.action.MapMessage" %>
 <div>
     <g:link action="deleteAction" id="${action.id}">Delete Action</g:link>
 
-    <g:if test="${action in MapTransition}">
+    <g:if test="${action in game.action.MapTransition}">
         <g:form action="updateAction">
             <table>
 
@@ -20,7 +20,7 @@
         </g:form>
     </g:if>
 
-    <g:elseif test="${action in MarketAction}">
+    <g:elseif test="${action in game.action.MarketAction}">
         <g:form action="updateAction">
             <table>
                 <g:render template="basicActionInfo" />
@@ -80,7 +80,7 @@
             </table>
         </g:form>
     </g:elseif>
-    <g:elseif test="${action in NpcAction}">
+    <g:elseif test="${action in game.action.NpcAction}">
         <g:form action="updateAction">
 
             <table>
@@ -218,7 +218,7 @@
         </g:form>
 
     </g:elseif>
-    <g:elseif test="${action in FindItemAction}">
+    <g:elseif test="${action in game.action.FindItemAction}">
         <g:form action="updateAction">
 
             <table>

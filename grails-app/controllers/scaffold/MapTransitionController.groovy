@@ -1,6 +1,6 @@
 package scaffold
 
-import game.MapTransition
+import game.action.MapTransition
 
 class MapTransitionController {
 

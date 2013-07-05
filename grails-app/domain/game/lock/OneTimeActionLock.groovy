@@ -1,6 +1,6 @@
 package game.lock
 
-import game.Action
+import game.action.Action
 
 class OneTimeActionLock extends Lock {
 

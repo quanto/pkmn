@@ -1,5 +1,7 @@
-package game
+package game.action
 
+import game.Market
+import game.action.Action
 import game.context.ActionType
 
 class MarketAction extends Action {

@@ -1,4 +1,4 @@
-<%@ page import="game.Action; game.MapLayout; game.Map" %>
+<%@ page import="game.action.Action; game.MapLayout; game.Map" %>
 
 <script type="text/javascript" src="${resource(uri:'')}/js/jquery-1.7.min.js"></script>
 <script type="text/javascript">
@@ -106,7 +106,7 @@
             <tr>
                 <g:each in="${row}" var="tileNr" status="x">
                     <%
-                        Action action = map.actions.find { it.positionX == x && it.positionY == y }
+                        game.action.Action action = map.actions.find { it.positionX == x && it.positionY == y }
                     %>
                     <td style="${action?'border:1px solid #444;':'border:1px solid #ccc;'}">
                         <div id="current${x}-${y}" style="height:16px; width:16px; background:url('${resource(uri:'')}/images/tiles/sheet1/${tileNr}.png');" title="${x}-${y}" onclick="getAction(${x},${y})"> <%-- fromMapPosition(${x},${y}) --%>

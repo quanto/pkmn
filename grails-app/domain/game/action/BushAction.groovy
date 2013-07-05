@@ -1,5 +1,6 @@
-package game
+package game.action
 
+import game.action.Action
 import game.context.ActionType
 
 class BushAction extends Action {
