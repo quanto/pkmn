@@ -15,10 +15,11 @@ WqKDtHwbcA70B9S
 
 
 
-W2wCqtkOuL3obTN
 true
 false
 false
+false
+W2wCqtkOuL3obTN
 </mapTransition>
 <mapTransition>
 6
@@ -27,10 +28,11 @@ jRd5q5xSFZ4wS9a
 
 
 
-fkBmXKOt78HUPsn
 true
 false
 false
+false
+fkBmXKOt78HUPsn
 </mapTransition>
 
 
@@ -42,10 +44,11 @@ false
 
 
 
-This is the house of my good friend Kanji. He's not home right now.
 true
 false
 false
+false
+This is the house of my good friend Kanji. He's not home right now.
 </mapMessage>
 
 
@@ -58,6 +61,7 @@ PvjoWwWGPC9jErA
 
 
 true
+false
 false
 false
 </pvpSelectAction>

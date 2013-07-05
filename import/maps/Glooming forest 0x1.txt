@@ -33,10 +33,11 @@ trg4PyCNBfqZpdI
 
 
 
-BKt72cAqjeJXGP1
 true
 false
 false
+false
+BKt72cAqjeJXGP1
 </mapTransition>
 
 
@@ -49,10 +50,11 @@ c4Znx3G3u7Aagim
 
 
 
-BngAfU7JWoAGt0P
 true
 false
 false
+false
+BngAfU7JWoAGt0P
 </npcAction>
 
 

@@ -61,12 +61,8 @@ ${getFindItemActions(map)}
 """
     }
 
-    public static String getBoulderActions(Map map){
-        String data = ""
-        map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
-            if(action in BoulderAction){
-                data += """<boulderAction>
-${action.positionX}
+    public static String getBaseActionProperties(Action action){
+        """${action.positionX}
 ${action.positionY}
 ${action.identifier}
 ${action.condition?:''}
@@ -75,6 +71,15 @@ ${action.conditionNotMetMessage?:''}
 ${action.triggerOnActionButton}
 ${action.triggerBeforeStep}
 ${action.conditionalStep}
+${action.placeOneTimeActionLock}"""
+    }
+
+    public static String getBoulderActions(Map map){
+        String data = ""
+        map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
+            if(action in BoulderAction){
+                data += """<boulderAction>
+${getBaseActionProperties(action)}
 </boulderAction>
 """
             }
@@ -87,15 +92,7 @@ ${action.conditionalStep}
         map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
             if(action in FindItemAction){
                 data += """<findItemAction>
-${action.positionX}
-${action.positionY}
-${action.identifier}
-${action.condition?:''}
-${action.conditionMetMessage?:''}
-${action.conditionNotMetMessage?:''}
-${action.triggerOnActionButton}
-${action.triggerBeforeStep}
-${action.conditionalStep}
+${getBaseActionProperties(action)}
 </findItemAction>
 """
             }
@@ -108,15 +105,7 @@ ${action.conditionalStep}
         map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
             if(action in BushAction){
                 data += """<bushAction>
-${action.positionX}
-${action.positionY}
-${action.identifier}
-${action.condition?:''}
-${action.conditionMetMessage?:''}
-${action.conditionNotMetMessage?:''}
-${action.triggerOnActionButton}
-${action.triggerBeforeStep}
-${action.conditionalStep}
+${getBaseActionProperties(action)}
 </bushAction>
 """
             }
@@ -129,16 +118,8 @@ ${action.conditionalStep}
         map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
             if(action in MarketAction){
                 data += """<marketAction>
-${action.positionX}
-${action.positionY}
-${action.identifier}
-${action.condition?:''}
-${action.conditionMetMessage?:''}
-${action.conditionNotMetMessage?:''}
+${getBaseActionProperties(action)}
 ${action.market.identifier}
-${action.triggerOnActionButton}
-${action.triggerBeforeStep}
-${action.conditionalStep}
 </marketAction>
 """
             }
@@ -151,16 +132,8 @@ ${action.conditionalStep}
         map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
             if(action in NpcAction){
                 data += """<npcAction>
-${action.positionX}
-${action.positionY}
-${action.identifier}
-${action.condition?:''}
-${action.conditionMetMessage?:''}
-${action.conditionNotMetMessage?:''}
+${getBaseActionProperties(action)}
 ${action.owner.identifier}
-${action.triggerOnActionButton}
-${action.triggerBeforeStep}
-${action.conditionalStep}
 </npcAction>
 """
                 OwnerBackup.saveNpc(action.owner)
@@ -174,16 +147,8 @@ ${action.conditionalStep}
         map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
             if(action in MapMessage){
                 data += """<mapMessage>
-${action.positionX}
-${action.positionY}
-${action.identifier}
-${action.condition?:''}
-${action.conditionMetMessage?:''}
-${action.conditionNotMetMessage?:''}
+${getBaseActionProperties(action)}
 ${action.message}
-${action.triggerOnActionButton}
-${action.triggerBeforeStep}
-${action.conditionalStep}
 </mapMessage>
 """
             }
@@ -196,15 +161,7 @@ ${action.conditionalStep}
         map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
             if(action in PvpSelectAction){
                 data += """<pvpSelectAction>
-${action.positionX}
-${action.positionY}
-${action.identifier}
-${action.condition?:''}
-${action.conditionMetMessage?:''}
-${action.conditionNotMetMessage?:''}
-${action.triggerOnActionButton}
-${action.triggerBeforeStep}
-${action.conditionalStep}
+${getBaseActionProperties(action)}
 </pvpSelectAction>
 """
             }
@@ -217,15 +174,7 @@ ${action.conditionalStep}
         map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
             if(action in RecoverAction){
                 data += """<recoverAction>
-${action.positionX}
-${action.positionY}
-${action.identifier}
-${action.condition?:''}
-${action.conditionMetMessage?:''}
-${action.conditionNotMetMessage?:''}
-${action.triggerOnActionButton}
-${action.triggerBeforeStep}
-${action.conditionalStep}
+${getBaseActionProperties(action)}
 </recoverAction>
 """
             }
@@ -238,15 +187,7 @@ ${action.conditionalStep}
         map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
             if(action in ComputerAction){
                 data += """<computerAction>
-${action.positionX}
-${action.positionY}
-${action.identifier}
-${action.condition?:''}
-${action.conditionMetMessage?:''}
-${action.conditionNotMetMessage?:''}
-${action.triggerOnActionButton}
-${action.triggerBeforeStep}
-${action.conditionalStep}
+${getBaseActionProperties(action)}
 </computerAction>
 """
             }
@@ -260,16 +201,8 @@ ${action.conditionalStep}
             if(action in MapTransition){
                 if (action.jumpTo){
                     data += """<mapTransition>
-${action.positionX}
-${action.positionY}
-${action.identifier}
-${action.condition?:''}
-${action.conditionMetMessage?:''}
-${action.conditionNotMetMessage?:''}
+${getBaseActionProperties(action)}
 ${action.jumpTo?.identifier}
-${action.triggerOnActionButton}
-${action.triggerBeforeStep}
-${action.conditionalStep}
 </mapTransition>
 """
                 }

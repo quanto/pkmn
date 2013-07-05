@@ -25,6 +25,7 @@ vjPmZxg45TKTEXg
 false
 true
 false
+false
 </boulderAction>
 
 <bushAction>
@@ -37,6 +38,7 @@ tDDY8vCscvbyp1v
 false
 true
 false
+false
 </bushAction>
 
 <findItemAction>
@@ -47,6 +49,7 @@ RKDNcF4D2pescZS
 
 
 true
+false
 false
 false
 </findItemAction>

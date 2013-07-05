@@ -15,10 +15,11 @@ BKt72cAqjeJXGP1
 
 
 
-trg4PyCNBfqZpdI
 true
 false
 false
+false
+trg4PyCNBfqZpdI
 </mapTransition>
 
 
@@ -30,10 +31,11 @@ false
 
 
 
-Please do not disturbe. I'm working on this new Pokemon game.
 true
 false
 false
+false
+Please do not disturbe. I'm working on this new Pokemon game.
 </mapMessage>
 
 

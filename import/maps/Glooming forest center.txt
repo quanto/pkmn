@@ -15,10 +15,11 @@ W2wCqtkOuL3obTN
 
 
 
-WqKDtHwbcA70B9S
 true
 false
 false
+false
+WqKDtHwbcA70B9S
 </mapTransition>
 
 <computerAction>
@@ -31,6 +32,7 @@ Q3a08ZkjO3yRsEi
 true
 false
 false
+false
 </computerAction>
 
 <recoverAction>
@@ -41,6 +43,7 @@ j6SJcDBUTJiJyQw
 
 
 true
+false
 false
 false
 </recoverAction>

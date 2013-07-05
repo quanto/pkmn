@@ -1,5 +1,6 @@
 package data
 
+import game.Action
 import game.Map
 import game.MapMessage
 import game.MapPokemon
@@ -18,6 +19,8 @@ import game.BoulderAction
 import game.FindItemAction
 
 class MapImport {
+
+    public static int totalBaseActionProperties = 9
 
     public static void importMaps(){
         println "Import map lines"
@@ -215,11 +218,24 @@ class MapImport {
         return map
     }
 
+    public static void addBaseActionProperties(Action action, def parts){
+        action.positionX = Integer.parseInt(parts[0])
+        action.positionY = Integer.parseInt(parts[1])
+        action.identifier = parts[2]
+        action.condition = parts[3]?:null
+        action.conditionMetMessage = parts[4]?:null
+        action.conditionNotMetMessage = parts[5]?:null
+        action.triggerOnActionButton = new Boolean(parts[6])
+        action.triggerBeforeStep = new Boolean(parts[7])
+        action.conditionalStep = new Boolean(parts[8])
+        action.placeOneTimeActionLock = new Boolean(parts[9])
+    }
+
     public static void importMarketAction(def parts, Map map){
 
         // First create the market
         Market market = new Market(
-                identifier : parts[6] // :TODO backup position should be 0
+                identifier : parts[totalBaseActionProperties+1]
         )
         market.save()
 
@@ -229,39 +245,24 @@ class MapImport {
         // Next the action
         MarketAction marketAction = new MarketAction(
                 map:map,
-                positionX:Integer.parseInt(parts[0]),
-                positionY:Integer.parseInt(parts[1]),
-                identifier: parts[2],
-                condition: parts[3]?:null,
-                conditionMetMessage: parts[4]?:null,
-                conditionNotMetMessage: parts[5]?:null,
-                triggerOnActionButton: new Boolean(parts[7]),
-                triggerBeforeStep: new Boolean(parts[8]),
-                conditionalStep: new Boolean(parts[9]),
                 market: market
         )
+        addBaseActionProperties(marketAction,parts)
+
         map.addToActions(marketAction)
     }
 
     public static void importNpcAction(def parts, Map map){
 
         // First create the Npc
-        Npc npc = NpcImport.importNpc(parts[6])
+        Npc npc = NpcImport.importNpc(parts[totalBaseActionProperties+1])
 
         // Next the action
         NpcAction npcAction = new NpcAction(
                 map:map,
-                positionX:Integer.parseInt(parts[0]),
-                positionY:Integer.parseInt(parts[1]),
-                identifier: parts[2],
-                condition: parts[3]?:null,
-                conditionMetMessage: parts[4]?:null,
-                conditionNotMetMessage: parts[5]?:null,
-                triggerOnActionButton: new Boolean(parts[7]),
-                triggerBeforeStep: new Boolean(parts[8]),
-                conditionalStep: new Boolean(parts[9]),
                 owner: npc
         )
+        addBaseActionProperties(npcAction,parts)
         npc.npcAction = npcAction
         npcAction.save()
         map.addToActions(npcAction)
@@ -272,7 +273,7 @@ class MapImport {
         MapTransition mapTransition = MapTransition.findByIdentifier(parts[2])
 
         if (mapTransition){
-            MapTransition mapTransitionTo = MapTransition.findByIdentifier(parts[6])
+            MapTransition mapTransitionTo = MapTransition.findByIdentifier(parts[totalBaseActionProperties+1])
 
             if (mapTransitionTo){
                 mapTransition.jumpTo = mapTransitionTo
@@ -291,16 +292,8 @@ class MapImport {
     public static void importMapTransition(def parts, Map map){
         MapTransition mapTransition = new MapTransition(
                 map:map,
-                positionX:Integer.parseInt(parts[0]),
-                positionY:Integer.parseInt(parts[1]),
-                identifier: parts[2],
-                condition: parts[3]?:null,
-                conditionMetMessage: parts[4]?:null,
-                conditionNotMetMessage: parts[5]?:null,
-                triggerOnActionButton: new Boolean(parts[7]),
-                triggerBeforeStep: new Boolean(parts[8]),
-                conditionalStep: new Boolean(parts[9]),
         )
+        addBaseActionProperties(mapTransition,parts)
         map.addToActions(mapTransition)
     }
 
@@ -308,34 +301,18 @@ class MapImport {
 
         RecoverAction recoverAction = new RecoverAction(
                 map:map,
-                positionX:Integer.parseInt(parts[0]),
-                positionY:Integer.parseInt(parts[1]),
-                identifier: parts[2],
-                condition: parts[3]?:null,
-                conditionMetMessage: parts[4]?:null,
-                conditionNotMetMessage: parts[5]?:null,
-                triggerOnActionButton: new Boolean(parts[6]),
-                triggerBeforeStep: new Boolean(parts[7]),
-                conditionalStep: new Boolean(parts[8]),
         )
+        addBaseActionProperties(recoverAction,parts)
+
         map.addToActions(recoverAction)
 
     }
 
     public static void importPvpSelectAction(def parts, Map map){
         PvpSelectAction pvpSelectAction = new PvpSelectAction(
-
                 map:map,
-                positionX:Integer.parseInt(parts[0]),
-                positionY:Integer.parseInt(parts[1]),
-                identifier: parts[2],
-                condition: parts[3]?:null,
-                conditionMetMessage: parts[4]?:null,
-                conditionNotMetMessage: parts[5]?:null,
-                triggerOnActionButton: new Boolean(parts[6]),
-                triggerBeforeStep: new Boolean(parts[7]),
-                conditionalStep: new Boolean(parts[8]),
         )
+        addBaseActionProperties(pvpSelectAction,parts)
         map.addToActions(pvpSelectAction)
     }
 
@@ -343,16 +320,8 @@ class MapImport {
         FindItemAction action = new FindItemAction(
 
                 map:map,
-                positionX:Integer.parseInt(parts[0]),
-                positionY:Integer.parseInt(parts[1]),
-                identifier: parts[2],
-                condition: parts[3]?:null,
-                conditionMetMessage: parts[4]?:null,
-                conditionNotMetMessage: parts[5]?:null,
-                triggerOnActionButton: new Boolean(parts[6]),
-                triggerBeforeStep: new Boolean(parts[7]),
-                conditionalStep: new Boolean(parts[8]),
         )
+        addBaseActionProperties(action,parts)
         map.addToActions(action)
     }
 
@@ -360,16 +329,8 @@ class MapImport {
         BushAction action = new BushAction(
 
                 map:map,
-                positionX:Integer.parseInt(parts[0]),
-                positionY:Integer.parseInt(parts[1]),
-                identifier: parts[2],
-                condition: parts[3]?:null,
-                conditionMetMessage: parts[4]?:null,
-                conditionNotMetMessage: parts[5]?:null,
-                triggerOnActionButton: new Boolean(parts[6]),
-                triggerBeforeStep: new Boolean(parts[7]),
-                conditionalStep: new Boolean(parts[8]),
         )
+        addBaseActionProperties(action,parts)
         map.addToActions(action)
     }
 
@@ -377,16 +338,8 @@ class MapImport {
         BoulderAction action = new BoulderAction(
 
                 map:map,
-                positionX:Integer.parseInt(parts[0]),
-                positionY:Integer.parseInt(parts[1]),
-                identifier: parts[2],
-                condition: parts[3]?:null,
-                conditionMetMessage: parts[4]?:null,
-                conditionNotMetMessage: parts[5]?:null,
-                triggerOnActionButton: new Boolean(parts[6]),
-                triggerBeforeStep: new Boolean(parts[7]),
-                conditionalStep: new Boolean(parts[8]),
         )
+        addBaseActionProperties(action,parts)
         map.addToActions(action)
     }
 
@@ -394,16 +347,8 @@ class MapImport {
             ComputerAction computerAction = new ComputerAction(
 
                     map:map,
-                    positionX:Integer.parseInt(parts[0]),
-                    positionY:Integer.parseInt(parts[1]),
-                    identifier: parts[2],
-                    condition: parts[3]?:null,
-                    conditionMetMessage: parts[4]?:null,
-                    conditionNotMetMessage: parts[5]?:null,
-                    triggerOnActionButton: new Boolean(parts[6]),
-                    triggerBeforeStep: new Boolean(parts[7]),
-                    conditionalStep: new Boolean(parts[8]),
             )
+            addBaseActionProperties(computerAction,parts)
             map.addToActions(computerAction)
     }
 
@@ -423,17 +368,9 @@ class MapImport {
 
             MapMessage mapMessage = new MapMessage(
                     map:map,
-                    positionX:Integer.parseInt(parts[0]),
-                    positionY:Integer.parseInt(parts[1]),
-                    identifier: parts[2],
-                    condition: parts[3]?:null,
-                    conditionMetMessage: parts[4]?:null,
-                    conditionNotMetMessage: parts[5]?:null,
-                    message: parts[6],
-                    triggerOnActionButton: new Boolean(parts[7]),
-                    triggerBeforeStep: new Boolean(parts[8]),
-                    conditionalStep: new Boolean(parts[9]),
+                    message: parts[totalBaseActionProperties+1],
             )
+            addBaseActionProperties(mapMessage,parts)
             map.addToActions(mapMessage)
     }
 

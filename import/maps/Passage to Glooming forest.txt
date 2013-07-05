@@ -42,10 +42,11 @@ PStMjOEWSsJeJPr
 haveBeginnerBadge
 
 Hey you! No rookies past this point!
-
 false
 true
 true
+false
+
 </mapMessage>
 
 
@@ -62,17 +63,7 @@ true
 false
 true
 false
+false
 </bushAction>
 
-<findItemAction>
-21
-13
-3C6VxZDJZzTyItP
-
-
-
-true
-false
-false
-</findItemAction>
 
