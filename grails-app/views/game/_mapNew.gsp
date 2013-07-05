@@ -1,4 +1,4 @@
-<%@ page import="game.context.ActionType; game.context.ActionType; game.MapLayout;" %>
+<%@ page import="game.Action; game.lock.OneTimeActionLock; game.FindItemAction; game.context.ActionType; game.context.ActionType; game.MapLayout;" %>
 <%
     // MapLayout mapLayout
     def blockObjects = []
@@ -24,7 +24,11 @@
     var playerPosition = new position(${player.positionY},${player.positionX});
 
     var actionObjects = new Array(
-        <% def clientActions = map.actions.findAll{ (it.actionType == ActionType.Client || it.actionType == ActionType.Mixed) } %>
+        <%
+            def clientActions = map.actions.findAll{ (it.actionType == ActionType.Client || it.actionType == ActionType.Mixed) }
+            // remove one time actions
+            clientActions.removeAll { it.placeOneTimeActionLock && OneTimeActionLock.findByPlayerAndAction(player,it) }
+        %>
         <g:each in="${clientActions}" var="clientAction" status="i">new Array("${clientAction.positionY}-${clientAction.positionX}","${clientAction.actionFunction}","${clientAction.tileImage}.png",${clientAction.triggerBeforeStep},${clientAction.triggerOnActionButton})<g:if test="${clientAction != clientActions.last()}">,</g:if>
         </g:each>
     );

@@ -9,7 +9,7 @@ import game.fight.status.Recover
 import game.ComputerAction
 import game.MarketAction
 import game.NpcAction
-import game.NpcLock
+import game.lock.NpcLock
 import game.context.Fight
 import game.context.BattleType
 import game.Player
@@ -19,6 +19,7 @@ import game.context.ActionType
 import game.FindItemAction
 import game.Items
 import game.RewardItem
+import game.lock.OneTimeActionLock
 
 class ActionFlow {
 
@@ -28,6 +29,18 @@ class ActionFlow {
 
         if (!action)
             return null
+
+        // OneTimeActionLocks
+        if (action.placeOneTimeActionLock){
+            OneTimeActionLock lock = OneTimeActionLock.findByPlayerAndAction(player,action)
+
+            if (!lock){
+                new OneTimeActionLock(player: player, action: action).save()
+            }
+            else {
+                return null
+            }
+        }
 
         if (action && action.actionType == ActionType.Server || action.actionType == ActionType.Mixed){
 
@@ -142,7 +155,7 @@ class ActionFlow {
                     Items.addOwnerItem(player,rewardItem.item,false)
                     actionResult.evalMessage += "setMessage('You found an ${rewardItem.item.name?.encodeAsHTML()}.');"
                 }
-                // :TODO lock so we can;t do this twice
+
             }
             else {
                 // Should not be reachable, unknown action

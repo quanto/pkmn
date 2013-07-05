@@ -1,5 +1,7 @@
 package game
 
+import game.lock.NpcLock
+
 class Condition {
 
     public static boolean conditionEval(Player player, String condition){

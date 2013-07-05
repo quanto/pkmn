@@ -1,6 +1,6 @@
 package data
 
-import game.NpcLock
+import game.lock.NpcLock
 import game.Player
 
 class NpcLockBackup {

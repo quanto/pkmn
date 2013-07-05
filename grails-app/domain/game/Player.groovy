@@ -2,6 +2,7 @@ package game
 
 import map.View
 import map.CharacterImage
+import game.lock.Lock
 
 class Player extends Owner{
 
@@ -17,6 +18,8 @@ class Player extends Owner{
     String recoverPasswordSecret
     String ip
     CharacterImage characterImage = CharacterImage.player
+
+    static hasMany = [ownerItems: OwnerItem, locks: Lock]
 
     int positionX = 1
     int positionY = 1

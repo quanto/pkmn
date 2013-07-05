@@ -22,6 +22,7 @@ import game.BoulderAction
 import game.BushAction
 import game.FindItemAction
 import game.RewardItem
+import game.lock.OneTimeActionLock
 
 class ActionEditorController {
 
@@ -187,6 +188,8 @@ class ActionEditorController {
         else if (action in MapTransition){
             action.jumpTo.delete()
         }
+
+        OneTimeActionLock.findAllByAction(action).each { it.delete() }
 
         action.delete()
 

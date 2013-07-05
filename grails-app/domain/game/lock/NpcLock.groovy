@@ -1,4 +1,6 @@
-package game
+package game.lock
+
+import game.Npc
 
 /**
  * If you win a battle against an NPC
@@ -9,15 +11,8 @@ package game
  *  This prevents users to battle the same
  *  npc over and over.
  */
-class NpcLock {
+class NpcLock extends Lock {
 
-    Player player
     Npc npc
-    Date dateCreated
 
-    // Permanent locks are never released. Gym leaders for example.
-    boolean permanent
-
-    static constraints = {
-    }
 }

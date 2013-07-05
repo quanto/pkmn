@@ -655,7 +655,6 @@ function positionObjectExists(objects,pos){
  */
 $(document).keypress(function(e)
 {
-    console.log(freeze)
     if (!freeze)
     {
         freeze = true

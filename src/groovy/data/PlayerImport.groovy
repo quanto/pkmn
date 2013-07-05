@@ -14,7 +14,7 @@ import game.Role
 import game.Owner
 import game.OwnerItem
 import game.Item
-import game.NpcLock
+import game.lock.NpcLock
 import game.Npc
 import map.CharacterImage
 

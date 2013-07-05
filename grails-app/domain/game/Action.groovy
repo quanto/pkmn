@@ -16,6 +16,7 @@ class Action {
     String condition
     boolean triggerOnActionButton = true
     boolean triggerBeforeStep = false
+    boolean placeOneTimeActionLock = false
 
     String identifier
     Map map

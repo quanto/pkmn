@@ -6,6 +6,7 @@ class FindItemAction extends Action {
 
     ActionType actionType = ActionType.Mixed
 
+    boolean placeOneTimeActionLock = true
     String actionFunction = "findItem"
     String tileImage = "53"
 

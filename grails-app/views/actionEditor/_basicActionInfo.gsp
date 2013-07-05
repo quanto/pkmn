@@ -65,3 +65,11 @@
         <g:checkBox name="conditionalStep" value="${action.conditionalStep}" /> This option only make sense when u use the TriggerBeforeStep. If the condition is not met, the step is not allowed.
     </td>
 </tr>
+<tr>
+    <td>
+        PlaceOneTimeActionLock:
+    </td>
+    <td>
+        <g:checkBox name="placeOneTimeActionLock" value="${action.placeOneTimeActionLock}" />
+    </td>
+</tr>

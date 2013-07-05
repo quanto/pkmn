@@ -367,6 +367,12 @@ class BootStrap {
 
         }
 
+        // Players can not be in a battle. When stopping the instance the battles are destroyed.
+        Player.findAllByView(View.Battle){
+            it.view = View.ShowMap
+            it.save()
+        }
+
         // Set identifiers
 //        Action.list().each{
 //            it.identifier = RandomStringUtils.random(15, true, true)

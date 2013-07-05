@@ -12,8 +12,8 @@ import game.fight.reward.EXP
 import game.OwnerPokemon
 import game.OwnerItem
 import game.Items
-import game.NpcLock
-import game.fight.status.Stats
+import game.lock.NpcLock
+
 import game.fight.action.NoAction
 import game.fight.reward.Money
 
