@@ -109,7 +109,7 @@ class MapEditorController {
         map.getForegroundImage(true)
         map.getBackgroundImage(true)
 
-        redirect action:"index"
+        redirect action:"editor", id: map.id
     }
 
     def export(){

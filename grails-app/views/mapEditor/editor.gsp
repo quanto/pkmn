@@ -245,7 +245,7 @@
                             <textarea style="width:300px;height:200px;" id="background" name="map.dataBackground"></textarea>
                         </div>
                         <br />
-                        Name: <g:textField name="map.name" value="${map?.name}" /> <br />
+                        Name: <g:textField name="map.name" value="${map?.name?:params?.worldX+'x'+params?.worldY}" /> <br />
                         <sec:ifAnyGranted roles="ROLE_ADMIN">
                             ID: <g:textField name="id" value="${map?.id}" />
 
@@ -259,7 +259,8 @@
                     </div>
 
                     <div id="tab8" title="Other">
-                        <input type="button" value="stampData" onclick="createStampData()" />
+                        <input type="button" value="createStampData" onclick="createStampData()" />
+                        <input type="button" value="setStampData" onclick="setStampData()" />
                         <textarea style="width:300px;height:200px;" id="stampData"></textarea>
                     </div>
 

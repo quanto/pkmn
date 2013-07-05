@@ -96,7 +96,7 @@
 
     function createStampData(){
         var stampStr = "new Array("
-//        alert(pattern)
+
         for (var h=0;h<pattern.length;h++)
         {
             stampStr += "new Array("
@@ -117,4 +117,8 @@
         stampStr = stampStr.substr(0,stampStr.length - 1)
         stampStr += ");"
         $("#stampData").val(stampStr)
+    }
+
+    function setStampData(){
+        setStamp(eval($("#stampData").val()));
     }
