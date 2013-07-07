@@ -60,26 +60,30 @@ function getNewPosition($moveObj, pos,direction)
     var newPos = new position(pos.y,pos.x);
     if (direction == "up")
     {
-        if($moveObj.hasClass("spritely"))
+        if($moveObj.hasClass("spritely")){
             $moveObj.spState(2);
+        }
         newPos.y--;
     }
     else if (direction == "down")
     {
-        if($moveObj.hasClass("spritely"))
+        if($moveObj.hasClass("spritely")){
             $moveObj.spState(1);
+        }
         newPos.y++;
     }
     else if (direction == "left")
     {
-        if($moveObj.hasClass("spritely"))
+        if($moveObj.hasClass("spritely")){
             $moveObj.spState(3);
+        }
         newPos.x--;
     }
     else if (direction == "right")
     {
-        if($moveObj.hasClass("spritely"))
+        if($moveObj.hasClass("spritely")){
             $moveObj.spState(4);
+        }
         newPos.x++;
     }
     return newPos;
@@ -323,15 +327,21 @@ function loadmap()
         var actionObject = actionObjects[i];
         var splitPosition = actionObject[0].split("-");
 
-        html += "<img src=\"" + serverUrl + "/images/tiles/sheet1/" + actionObject[2] + "\" id=\"" + splitPosition[0] + "-" + splitPosition[1] + "\" style=\"position:absolute;top:" + (splitPosition[0] * 16) + "px;left:" + (splitPosition[1] * 16) + "px;\" />";
+
+
+        html += "<div class='actionObject " + actionObject[5] + "' id=\"" + splitPosition[0] + "-" + splitPosition[1] + "\" style=\"position:absolute;top:" + (splitPosition[0] * 16) + "px;left:" + (splitPosition[1] * 16) + "px;background-image: url('" + actionObject[2]+ "');\" />";
+
+        //html += "<div class='actionObject " + actionObject[5] + "' id=\"" + splitPosition[0] + "-" + splitPosition[1] + "\" style=\"position:absolute;top:" + (splitPosition[0] * 16) + "px;left:" + (splitPosition[1] * 16) + "px;background:transparant url('"+actionObject[2]+"') 0 0 no-repeat;\" />";
+
+        //html += "<img class='" + actionObject[5] + "' src=\"" + actionObject[2] + "\" id=\"" + splitPosition[0] + "-" + splitPosition[1] + "\" style=\"position:absolute;top:" + (splitPosition[0] * 16) + "px;left:" + (splitPosition[1] * 16) + "px;\" />";
 
     }
 
     $("#objectContainer").html(html);
 
-    // Spritely player
-    $('.spritely')
-        .sprite({
+    // Spritely objects
+    $.each($('.spritely'), function(index, value) {
+        $(value).sprite({
             fps: 9,
             no_of_frames: 4,
             on_first_frame: function(obj) {
@@ -341,6 +351,9 @@ function loadmap()
                 obj.spStop(true);
             }
         }).spStop(true);
+    });
+
+
 
     updateLocation(playerPosition.x, playerPosition.y);
 }
@@ -365,10 +378,8 @@ function bush(pos,direction,actionObject)
     return false;
 }
 
-function person(){
-    alert('todo:implement')
-    // Dont move
-    return false;
+function person(pos,direction,actionObject){
+    return move(actionObject[0], direction);
 }
 
 function findItem(pos,direction,actionObject)

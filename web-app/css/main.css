@@ -526,3 +526,19 @@ a.skip {
 .property-value {
     display: block;
 }
+
+/* Action objects */
+.actionObject {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 16px;
+    height: 16px;
+    z-index: 1;
+}
+
+.spritely {
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    height: 32px;
+}

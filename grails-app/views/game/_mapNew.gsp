@@ -29,9 +29,12 @@
             // remove one time actions
             clientActions.removeAll { it.placeOneTimeActionLock && OneTimeActionLock.findByPlayerAndAction(player,it) }
         %>
-        <g:each in="${clientActions}" var="clientAction" status="i">new Array("${clientAction.positionY}-${clientAction.positionX}","${clientAction.actionFunction}","${clientAction.tileImage}.png",${clientAction.triggerBeforeStep},${clientAction.triggerOnActionButton})<g:if test="${clientAction != clientActions.last()}">,</g:if>
+        <g:each in="${clientActions}" var="clientAction" status="i">new Array("${clientAction.positionY}-${clientAction.positionX}","${clientAction.actionFunction}","${createLink(uri:'')}/images/tiles/sheet1/${clientAction.tileImage}.png",${clientAction.triggerBeforeStep},${clientAction.triggerOnActionButton},"")<g:if test="${clientAction != clientActions.last()}">,</g:if>
         </g:each>
     );
+
+    //actionObjects.push(new Array("9-10","person","/game/images/chars/person1.png",true,false,"actionObject spritely"));
+    //actionObjects.push(new Array("player","person","/game/images/chars/person1.png",false, false,"player spritely actionObject"));
 
     var pokemonObjects = new Array(
         <g:each in="${pokemonObjects}" var="po" status="i">new position(${po[0]},${po[1]})<g:if test="${po != pokemonObjects.last()}">,</g:if>
@@ -59,22 +62,17 @@
 
 <style>
 
-#player {
-    background: transparent url('${resource(uri:'')}/images/chars/${player.characterImage}.png') 0 0 no-repeat;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 16px;
-    height: 32px;
-    z-index: 2000;]
-}
+    #player {
+        background: transparent url('${resource(uri:'')}/images/chars/${player.characterImage}.png') 0 0 no-repeat;
+        z-index: 2000;
+    }
 
 </style>
 
 <div style="position:relative;height:${mapLayout.getRows() * 16}px;width: ${mapLayout.getColumns() * 16}px;">
     <img style="position:absolute;top:0px;left:0px;" src="${resource(uri:'')}${map.getForegroundImage()}" />
 
-    <div id="player" class="player spritely"></div>
+    <div id="player" class="player spritely actionObject" />
 
     <div id="objectContainer">
 
