@@ -9,7 +9,7 @@ function actionA(direction)
     if (actionObject != null)
     {
         // perform the action of the object
-        eval(actionObject[1] + "(currentPos,direction,actionObject);");
+        eval(actionObject.action + "(currentPos,direction,actionObject);");
     }
 
     $.ajax({
@@ -191,7 +191,7 @@ function checkPosition(pos,direction)
     if (actionObject != null)
     {
         // perform the action of the object
-        return eval(actionObject[1] + "(pos,direction,actionObject);");
+        return eval(actionObject.action + "(pos,direction,actionObject);");
     }
     return true;
 }
@@ -206,7 +206,7 @@ function removeActionObject(actionObject)
         if (actionObjects[i] == actionObject)
         {
             actionObjects.splice(i,1);
-            $("#" + actionObject[0]).remove();
+            $("#" + actionObject.id).remove();
             break;
         }
     }
@@ -215,12 +215,12 @@ function removeActionObject(actionObject)
 /*
  Get a object at a position
  */
-function getActionObject(pos,triggerType)
+function getActionObject(pos, triggerType)
 {
     // check if there are objects
     for (var i=0;i<actionObjects.length;i++)
     {
-        var object = $("#" + actionObjects[i][0]);
+        var object = $("#" + actionObjects[i].id);
         if (object != null)
         {
             var leftPos = parseInt(object.css("left"));
@@ -229,11 +229,11 @@ function getActionObject(pos,triggerType)
             if (topPos / 16 == pos.y && leftPos / 16 == pos.x)
             {
                 if (triggerType == "triggerBeforeStep"){
-                    if (actionObjects[i][3])
+                    if (actionObjects[i].triggerBeforeStep)
                         return actionObjects[i];
                 }
                 else if (triggerType == "triggerOnActionButton"){
-                    if (actionObjects[i][4])
+                    if (actionObjects[i].triggerOnActionButton)
                         return actionObjects[i];
                 }
 
@@ -325,11 +325,8 @@ function loadmap()
     for (var i=0;i<actionObjects.length;i++)
     {
         var actionObject = actionObjects[i];
-        var splitPosition = actionObject[0].split("-");
 
-
-
-        html += "<div class='actionObject " + actionObject[5] + "' id=\"" + splitPosition[0] + "-" + splitPosition[1] + "\" style=\"position:absolute;top:" + (splitPosition[0] * 16) + "px;left:" + (splitPosition[1] * 16) + "px;background-image: url('" + actionObject[2]+ "');\" />";
+        html += "<div class='actionObject " + actionObject.cssClass + "' id=\"" + actionObject.id + "\" style=\"position:absolute;top:" + (actionObject.y * 16) + "px;left:" + (actionObject.x * 16) + "px;background-image: url('" + actionObject.backgroundImage + "');\" />";
 
         //html += "<div class='actionObject " + actionObject[5] + "' id=\"" + splitPosition[0] + "-" + splitPosition[1] + "\" style=\"position:absolute;top:" + (splitPosition[0] * 16) + "px;left:" + (splitPosition[1] * 16) + "px;background:transparant url('"+actionObject[2]+"') 0 0 no-repeat;\" />";
 
@@ -368,7 +365,7 @@ function boulder(pos,direction,actionObject)
         return false;
     }
     // else move the stone
-    return move(actionObject[0], direction);
+    return move(actionObject.id, direction);
 }
 
 function bush(pos,direction,actionObject)
@@ -379,7 +376,7 @@ function bush(pos,direction,actionObject)
 }
 
 function person(pos,direction,actionObject){
-    return move(actionObject[0], direction);
+    return move(actionObject.id, direction);
 }
 
 function findItem(pos,direction,actionObject)

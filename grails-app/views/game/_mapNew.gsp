@@ -29,7 +29,18 @@
             // remove one time actions
             clientActions.removeAll { it.placeOneTimeActionLock && OneTimeActionLock.findByPlayerAndAction(player,it) }
         %>
-        <g:each in="${clientActions}" var="clientAction" status="i">new Array("${clientAction.positionY}-${clientAction.positionX}","${clientAction.actionFunction}","${createLink(uri:'')}/images/tiles/sheet1/${clientAction.tileImage}.png",${clientAction.triggerBeforeStep},${clientAction.triggerOnActionButton},"")<g:if test="${clientAction != clientActions.last()}">,</g:if>
+        <g:each in="${clientActions}" var="clientAction" status="i">
+            {
+                id:"${clientAction.positionY}-${clientAction.positionX}",
+                y:${clientAction.positionY},
+                x:${clientAction.positionX},
+                cssClass:"",
+                backgroundImage:"${createLink(uri:'')}/images/tiles/sheet1/${clientAction.tileImage}.png",
+                triggerBeforeStep:${clientAction.triggerBeforeStep},
+                triggerOnActionButton:${clientAction.triggerOnActionButton},
+                action:"${clientAction.actionFunction}"
+            }
+            <g:if test="${clientAction != clientActions.last()}">,</g:if>
         </g:each>
     );
 
