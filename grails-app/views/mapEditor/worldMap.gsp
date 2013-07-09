@@ -1,4 +1,4 @@
-<%@ page import="game.MapTransition; game.MapPokemon; game.MapLayout" contentType="text/html;charset=UTF-8" %>
+<%@ page import="game.MapPokemon; game.MapLayout" contentType="text/html;charset=UTF-8" %>
 <html>
     <head>
         <meta name="layout" content="game">
