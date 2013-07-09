@@ -8,8 +8,10 @@ class Action {
     ActionType actionType
 
     String actionFunction // The js function to call to perform the action
-    String image // The image to show frontend
 
+    String image // The image to show frontend
+    Integer correctionLeft // Correction on the image
+    Integer correctionTop
 
     // A condition is a hard programmed condition that decides if you can battle the Npc or not
     // An example is defeat all the other Npc's in a Gym before battling the Gym Leader. See Condition.groovy.
@@ -35,6 +37,8 @@ class Action {
     static constraints = {
         identifier nullable:true
         image nullable: true
+        correctionLeft nullable:true
+        correctionTop nullable:true
         actionFunction nullable:true
         condition nullable: true
         conditionNotMetMessage nullable: true

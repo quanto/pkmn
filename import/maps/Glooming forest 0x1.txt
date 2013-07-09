@@ -38,6 +38,8 @@ false
 false
 false
 
+
+
 BKt72cAqjeJXGP1
 </mapTransition>
 
@@ -56,8 +58,11 @@ false
 false
 false
 
+
+
 BngAfU7JWoAGt0P
 </npcAction>
+
 
 
 

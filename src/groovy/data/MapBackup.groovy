@@ -1,18 +1,8 @@
 package data
 
 import game.Map
-import game.action.Action
-import game.action.MapTransition
-import game.action.ComputerAction
-import game.action.RecoverAction
-import game.action.MapMessage
-import game.action.NpcAction
-import game.action.MarketAction
+import game.action.*
 import game.MapPokemon
-import game.action.PvpSelectAction
-import game.action.BoulderAction
-import game.action.BushAction
-import game.action.FindItemAction
 
 class MapBackup {
 
@@ -58,6 +48,7 @@ ${getPvpSelectActions(map)}
 ${getBoulderActions(map)}
 ${getBushActions(map)}
 ${getFindItemActions(map)}
+${getPersonActions(map)}
 """
     }
 
@@ -72,7 +63,24 @@ ${action.triggerOnActionButton}
 ${action.triggerBeforeStep}
 ${action.conditionalStep}
 ${action.placeOneTimeActionLock}
-${action.image?:''}"""
+${action.image?:''}
+${action.correctionLeft?:''}
+${action.correctionTop?:''}"""
+    }
+
+    public static String getPersonActions(Map map){
+        String data = ""
+        map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
+            if(action in PersonAction){
+                data += """<personAction>
+${getBaseActionProperties(action)}
+${action.characterImage.name()}
+${action.macro}
+</personAction>
+"""
+            }
+        }
+        return data
     }
 
     public static String getBoulderActions(Map map){

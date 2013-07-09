@@ -1,26 +1,17 @@
 package data
 
-import game.action.Action
 import game.Map
-import game.action.MapMessage
 import game.MapPokemon
 import game.Pokemon
-import game.action.ComputerAction
-import game.action.RecoverAction
-import game.action.MapTransition
-import game.action.NpcAction
+import game.action.*
 import game.Npc
 import game.Market
-import game.action.MarketAction
-import game.action.PvpSelectAction
 import game.Player
-import game.action.BushAction
-import game.action.BoulderAction
-import game.action.FindItemAction
+import map.CharacterImage
 
 class MapImport {
 
-    public static int totalBaseActionProperties = 10
+    public static int totalBaseActionProperties = 12
 
     public static void importMaps(){
         println "Import map lines"
@@ -91,6 +82,11 @@ class MapImport {
                         importFindItemActionAction(parts,map)
                         parts = []
                     }
+                    else if (line.contains("</personAction>")){
+                        node = ""
+                        importPersonAction(parts,map)
+                        parts = []
+                    }
                     else if (line.contains("</pokemon>")){
                         node = ""
                         importMapPokemon(parts,map)
@@ -133,6 +129,9 @@ class MapImport {
                     }
                     else if (line.contains("<findItemAction>")){
                         node = "findItemAction"
+                    }
+                    else if (line.contains("<personAction>")){
+                        node = "personAction"
                     }
                     else if (line.contains("<pokemon>")){
                         node = "pokemon"
@@ -230,6 +229,8 @@ class MapImport {
         action.conditionalStep = new Boolean(parts[8])
         action.placeOneTimeActionLock = new Boolean(parts[9])
         action.image = parts[10]?:null
+        action.correctionLeft = parts[11]?Integer.parseInt(parts[11]):null
+        action.correctionTop = parts[12]?Integer.parseInt(parts[12]):null
     }
 
     public static void importMarketAction(def parts, Map map){
@@ -267,6 +268,19 @@ class MapImport {
         npc.npcAction = npcAction
         npcAction.save()
         map.addToActions(npcAction)
+    }
+
+    public static void importPersonAction(def parts, Map map){
+
+        PersonAction action = new PersonAction(
+                map:map,
+                characterImage: CharacterImage.valueOf(parts[totalBaseActionProperties+1]),
+                macro: parts[totalBaseActionProperties+2]
+        )
+        addBaseActionProperties(action,parts)
+
+        action.save()
+        map.addToActions(action)
     }
 
     public static void coupleMapTransitions(def parts){
