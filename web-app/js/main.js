@@ -305,7 +305,6 @@ function loadmap()
             $actionObject.attr('macroStep',0);
         }
 
-
         $("#objectContainer").append($actionObject);
     }
 

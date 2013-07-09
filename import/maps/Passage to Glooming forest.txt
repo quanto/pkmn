@@ -50,6 +50,7 @@ false
 
 
 
+
 </mapMessage>
 
 
@@ -70,7 +71,26 @@ false
 /images/tiles/sheet1/11.png
 
 
+
 </bushAction>
 
 
+<personAction>
+6
+9
+MxozVa1k9ViheU2
+
+
+
+false
+true
+false
+false
+/images/chars/person1.png
+
+-16
+actionObject spritely
+person1
+llrr
+</personAction>
 

@@ -40,6 +40,7 @@ false
 
 
 
+
 PB8TwE1i0bthXuI
 </mapTransition>
 
@@ -51,5 +52,21 @@ PB8TwE1i0bthXuI
 
 
 
+<findItemAction>
+8
+5
+FecoOmOFeJ4BEPK
+
+
+
+true
+false
+false
+true
+/images/tiles/sheet1/53.png
+
+
+
+</findItemAction>
 
 

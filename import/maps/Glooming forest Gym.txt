@@ -22,6 +22,7 @@ false
 
 
 
+
 QWyaWU6s94MOEfN
 </mapTransition>
 
@@ -42,6 +43,7 @@ false
 
 
 
+
 cePS20cZXHM9M7p
 </npcAction>
 <npcAction>
@@ -58,6 +60,7 @@ false
 
 
 
+
 sZQFwXy9jqc9ftM
 </npcAction>
 <npcAction>
@@ -71,6 +74,7 @@ true
 false
 false
 false
+
 
 
 

@@ -38,6 +38,7 @@ false
 
 
 
+
 12345
 </npcAction>
 
@@ -45,5 +46,21 @@ false
 
 
 
+<findItemAction>
+23
+2
+TMBExm5AUTopS8q
+
+
+
+true
+false
+false
+true
+/images/tiles/sheet1/53.png
+
+
+
+</findItemAction>
 
 
