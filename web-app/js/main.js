@@ -52,31 +52,31 @@ function getObjectPosition(objectId)
 /*
  Get the a new position in a direction
  */
-function getNewPosition($moveObj, pos,direction)
+function getNewPosition($moveObj, pos, direction)
 {
     var newPos = new position(pos.y,pos.x);
-    if (direction == "up")
+    if (direction == "up" || direction == 'u')
     {
         if($moveObj.hasClass("spritely")){
             $moveObj.spState(2);
         }
         newPos.y--;
     }
-    else if (direction == "down")
+    else if (direction == "down" || direction == 'd')
     {
         if($moveObj.hasClass("spritely")){
             $moveObj.spState(1);
         }
         newPos.y++;
     }
-    else if (direction == "left")
+    else if (direction == "left" || direction == 'l')
     {
         if($moveObj.hasClass("spritely")){
             $moveObj.spState(3);
         }
         newPos.x--;
     }
-    else if (direction == "right")
+    else if (direction == "right" || direction == 'r')
     {
         if($moveObj.hasClass("spritely")){
             $moveObj.spState(4);
@@ -150,16 +150,18 @@ function move(objectId, direction)
         {
             var y = pos.y * 16;
             y -= $moveObj.height() - 16;
+
+            // update the location
+            var $actionObject = $("#"+objectId);
+            $actionObject.attr('x',pos.x);
+            $actionObject.attr('y',pos.y);
+
             $moveObj.animate({
                 left: pos.x * 16 + "px",
                 top: y + "px"
             },{
                 duration: 250,
                 complete: function() {
-
-                    var $actionObject = $("#"+objectId);
-                    $actionObject.attr('x',pos.x);
-                    $actionObject.attr('y',pos.y);
 
                     if (isPlayer){
                         updateLocation(pos.x, pos.y);
@@ -194,6 +196,10 @@ function checkPosition(pos, direction){
     {
         // perform the action of the object
         return eval($actionObject.attr('action') + "(pos,direction,$actionObject);");
+    }
+    // Check if the player is on the location
+    else if (parseInt($('#player').attr('x')) == pos.x && parseInt($('#player').attr('y')) == pos.y){
+        return false;
     }
     return true;
 }
@@ -270,8 +276,6 @@ $(document).keypress(function(e)
 
 function loadmap()
 {
-
-
     $("#player").css("left",(playerPosition.x * 16) + "px");
     $("#player").css("top",((playerPosition.y * 16) - 16) + "px");
 
@@ -297,8 +301,15 @@ function loadmap()
             }
         }
 
+        if (actionObject.macro != undefined){
+            $actionObject.attr('macroStep',0);
+        }
+
+
         $("#objectContainer").append($actionObject);
     }
+
+    setInterval(macroTimer,1000);
 
     // Spritely objects
     $.each($('.spritely'), function(index, value) {
@@ -317,6 +328,30 @@ function loadmap()
     updateLocation(playerPosition.x, playerPosition.y);
 }
 
+function macroTimer(){
+    $actionObjects = $("#objectContainer div[clientAction='true'][macro]");
+
+    $.each($actionObjects, function(index, actionObject) {
+        var $actionObject = $(actionObject);
+        var macroStep = parseInt($actionObject.attr('macroStep'));
+        var macro = $actionObject.attr('macro');
+        var macroLength = macro.length;
+        macroStep += 1;
+        if (macroStep >= macroLength){
+            macroStep = 0;
+        }
+
+        var macroChar = macro[macroStep];
+
+        var pos = new position(parseInt($actionObject.attr('y')), parseInt($actionObject.attr('x')))
+        var success = eval($actionObject.attr('action') + "Macro(pos, macroChar, $actionObject);");
+
+        if (success){
+            $actionObject.attr('macroStep', macroStep);
+        }
+    });
+}
+
 function boulder(pos, direction, $actionObject)
 {
     // Check if next object is not a stone
@@ -324,8 +359,6 @@ function boulder(pos, direction, $actionObject)
     var newPos = getNewPosition(null, pos, direction);
     var $nextActionObject = $("#objectContainer div[clientAction='true'][triggerBeforeStep='true'][x='" + newPos.x + "'][y='" + newPos.y + "']");
 
-
-    //var nextActionObject = getActionObject(,"triggerBeforeStep");
     if ($nextActionObject != undefined) // && nextActionObject[1] == "stone")
     {
         // next object is a stone, dont move it
@@ -343,7 +376,12 @@ function bush(pos, direction, $actionObject)
 }
 
 function person(pos, direction, $actionObject){
-    return move($actionObject.attr('id'), direction);
+    return false;
+    //return move($actionObject.attr('id'), direction);
+}
+
+function personMacro(pos, macroChar, $actionObject){
+    return move($actionObject.attr('id'), macroChar);
 }
 
 function findItem(pos, direction, $actionObject)

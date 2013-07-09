@@ -45,6 +45,7 @@
                 action:"${clientAction.actionFunction}",
                 correctionLeft:0,
                 correctionTop:0
+//                macro:""
             }
             <g:if test="${clientAction != clientActions.last()}">,</g:if>
         </g:each>
@@ -64,7 +65,8 @@
 //                triggerOnActionButton:false,
 //                action:"person",
 //                correctionLeft:0,
-//                correctionTop:-16
+//                correctionTop:-16,
+//                macro:'llrr'
 //            }
 //    );
 
