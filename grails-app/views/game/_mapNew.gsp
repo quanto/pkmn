@@ -25,44 +25,53 @@
 
     var actionObjects = new Array(
         <%
-            def clientActions = map.actions.findAll{ (it.actionType == ActionType.Client || it.actionType == ActionType.Mixed) }
+            def clientActions = map.actions.collect{ it }
             // remove one time actions
-            clientActions.removeAll { it.placeOneTimeActionLock && OneTimeActionLock.findByPlayerAndAction(player,it) }
+            clientActions.removeAll { it.placeOneTimeActionLock && OneTimeActionLock.findByPlayerAndAction(player, it) }
         %>
         <g:each in="${clientActions}" var="clientAction" status="i">
             {
-                id:"${clientAction.positionY}-${clientAction.positionX}",
+                id:"actionObject${i}",
+                clientAction:${clientAction.actionType == ActionType.Client || clientAction.actionType == ActionType.Mixed},
+                serverAction:${clientAction.actionType == ActionType.Server || clientAction.actionType == ActionType.Mixed},
                 y:${clientAction.positionY},
                 x:${clientAction.positionX},
                 cssClass:"",
-                backgroundImage:"${createLink(uri:'')}/images/tiles/sheet1/${clientAction.tileImage}.png",
+                <g:if test="${clientAction.tileImage}">
+                    backgroundImage:"${createLink(uri:'')}/images/tiles/sheet1/${clientAction.tileImage}.png",
+                </g:if>
                 triggerBeforeStep:${clientAction.triggerBeforeStep},
                 triggerOnActionButton:${clientAction.triggerOnActionButton},
-                action:"${clientAction.actionFunction}"
+                action:"${clientAction.actionFunction}",
+                correctionLeft:0,
+                correctionTop:0
             }
             <g:if test="${clientAction != clientActions.last()}">,</g:if>
         </g:each>
     );
 
-    //actionObjects.push(new Array("9-10","person","/game/images/chars/person1.png",true,false,"actionObject spritely"));
-    //actionObjects.push(new Array("player","person","/game/images/chars/person1.png",false, false,"player spritely actionObject"));
+//    // Test object
+//    actionObjects.push(
+//            {
+//                id:"actionObject3",
+//                y:10,
+//                x:10,
+//                clientAction:true,
+//                serverAction:false,
+//                cssClass:"actionObject spritely",
+//                backgroundImage:"/game/images/chars/person1.png",
+//                triggerBeforeStep:true,
+//                triggerOnActionButton:false,
+//                action:"person",
+//                correctionLeft:0,
+//                correctionTop:-16
+//            }
+//    );
 
     var pokemonObjects = new Array(
         <g:each in="${pokemonObjects}" var="po" status="i">new position(${po[0]},${po[1]})<g:if test="${po != pokemonObjects.last()}">,</g:if>
         </g:each>
     );
-
-    var triggerBeforeStepObjects = new Array(
-        <% def triggerBeforeStepActions = map.actions.findAll{ it.triggerBeforeStep && (it.actionType == ActionType.Server || it.actionType == ActionType.Mixed) } %>
-        <g:each in="${triggerBeforeStepActions}" var="action" status="i">new position(${action.positionY},${action.positionX})<g:if test="${action != triggerBeforeStepActions.last()}">,</g:if>
-        </g:each>
-    )
-
-    var triggerOnActionButtonObjects = new Array(
-        <% def triggerOnActionButtonActions = map.actions.findAll{ it.triggerOnActionButton && (it.actionType == ActionType.Server || it.actionType == ActionType.Mixed) } %>
-        <g:each in="${triggerOnActionButtonActions}" var="action" status="i">new position(${action.positionY},${action.positionX})<g:if test="${action != triggerOnActionButtonActions.last()}">,</g:if>
-        </g:each>
-    )
 
     var blockObjects = new Array(
         <g:each in="${blockObjects}" var="bo" status="i">new position(${bo[0]},${bo[1]})<g:if test="${bo != blockObjects.last()}">,</g:if>

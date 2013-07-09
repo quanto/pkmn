@@ -5,11 +5,11 @@ function actionA(direction)
 {
 
     var currentPos = getObjectPosition("player");
-    var actionObject = getActionObject(currentPos,"triggerOnActionButton");
-    if (actionObject != null)
-    {
+
+    var $actionObject = $("#objectContainer div[clientAction='true'][triggerOnActionButton='true'][x='" + currentPos.x + "'][y='" + currentPos.y + "']")
+    if ($actionObject.length > 0){
         // perform the action of the object
-        eval(actionObject.action + "(currentPos,direction,actionObject);");
+        eval($actionObject.attr('action') + "(currentPos,direction,$actionObject);");
     }
 
     $.ajax({
@@ -40,14 +40,11 @@ function position(y,x)
 function getObjectPosition(objectId)
 {
     // position
-    var leftPos = parseInt($("#" + objectId).css("left"));
-    var topPos = parseInt($("#" + objectId).css("top"));
-
-    topPos += $("#" + objectId).height() - 16
+    $obj = $("#" + objectId);
 
     // tile position
-    var left = leftPos / 16;
-    var top = topPos / 16;
+    var left = parseInt($obj.attr("x"));
+    var top = parseInt($obj.attr("y"));
 
     return new position(top,left);
 }
@@ -102,7 +99,7 @@ function move(objectId, direction)
     var currentPos = getObjectPosition(objectId);
 
     // get new position
-    var pos = getNewPosition($moveObj, currentPos,direction)
+    var pos = getNewPosition($moveObj, currentPos, direction);
 
     var updateViewAfterAnimation = false
 
@@ -111,10 +108,10 @@ function move(objectId, direction)
 
         var checkMove = false
 
-        if (positionObjectExists(triggerBeforeStepObjects,pos)){
+        if ($("#objectContainer div[serverAction='true'][triggerBeforeStep='true'][x='" + pos.x + "'][y='" + pos.y + "']").length > 0){
             checkMove = true
         }
-        else if (positionObjectExists(pokemonObjects,pos)){
+        else if (_.find(pokemonObjects, function(objectPos){ return objectPos.x == pos.x && objectPos.y == pos.y; }) != undefined){
             if (Math.floor((Math.random()*6)) == 1){
                 checkMove = true
             }
@@ -122,7 +119,7 @@ function move(objectId, direction)
 
         if (checkMove){
 
-            var allowMove = true
+            var allowMove = true;
 
             $.ajax({
                 async:false,
@@ -147,18 +144,23 @@ function move(objectId, direction)
     }
 
     // check inside field
-    if (positionInBoundary(pos,objectId, direction,currentPos))
+    if (positionInBoundary(pos, objectId, direction, currentPos))
     {
         if (checkPosition(pos,direction))
         {
-            var y = pos.y * 16
-            y -= $moveObj.height() - 16
+            var y = pos.y * 16;
+            y -= $moveObj.height() - 16;
             $moveObj.animate({
                 left: pos.x * 16 + "px",
                 top: y + "px"
             },{
                 duration: 250,
                 complete: function() {
+
+                    var $actionObject = $("#"+objectId);
+                    $actionObject.attr('x',pos.x);
+                    $actionObject.attr('y',pos.y);
+
                     if (isPlayer){
                         updateLocation(pos.x, pos.y);
 
@@ -184,14 +186,14 @@ function move(objectId, direction)
  Check a position on action objects
  Evals a action if it exists
  */
-function checkPosition(pos,direction)
-{
-    var actionObject = getActionObject(pos,"triggerBeforeStep");
+function checkPosition(pos, direction){
 
-    if (actionObject != null)
+    var $actionObject = $("#objectContainer div[clientAction='true'][triggerBeforeStep='true'][x='" + pos.x + "'][y='" + pos.y + "']")
+
+    if ($actionObject.length > 0)
     {
         // perform the action of the object
-        return eval(actionObject.action + "(pos,direction,actionObject);");
+        return eval($actionObject.attr('action') + "(pos,direction,$actionObject);");
     }
     return true;
 }
@@ -199,48 +201,9 @@ function checkPosition(pos,direction)
 /*
  Remove a action object from the map
  */
-function removeActionObject(actionObject)
+function removeActionObject($actionObject)
 {
-    for (var i=0;i<actionObjects.length;i++)
-    {
-        if (actionObjects[i] == actionObject)
-        {
-            actionObjects.splice(i,1);
-            $("#" + actionObject.id).remove();
-            break;
-        }
-    }
-}
-
-/*
- Get a object at a position
- */
-function getActionObject(pos, triggerType)
-{
-    // check if there are objects
-    for (var i=0;i<actionObjects.length;i++)
-    {
-        var object = $("#" + actionObjects[i].id);
-        if (object != null)
-        {
-            var leftPos = parseInt(object.css("left"));
-            var topPos = parseInt(object.css("top"));
-
-            if (topPos / 16 == pos.y && leftPos / 16 == pos.x)
-            {
-                if (triggerType == "triggerBeforeStep"){
-                    if (actionObjects[i].triggerBeforeStep)
-                        return actionObjects[i];
-                }
-                else if (triggerType == "triggerOnActionButton"){
-                    if (actionObjects[i].triggerOnActionButton)
-                        return actionObjects[i];
-                }
-
-            }
-        }
-    }
-    return null;
+    $actionObject.remove();
 }
 
 /*
@@ -257,8 +220,9 @@ function positionInBoundary(pos, objectId, direction, currentPos)
         return false;
     }
 
-    // Check if there's now wall blocking
-    if (positionObjectExists(blockObjects,pos)){
+    // Check if there's a wall blocking
+    if (_.find(blockObjects, function(objectPos){ return objectPos.x == pos.x && objectPos.y == pos.y; }) != undefined){
+    //if (positionObjectExists(blockObjects,pos)){
         if (objectId == "player"){
             actionA(direction);
         }
@@ -266,17 +230,6 @@ function positionInBoundary(pos, objectId, direction, currentPos)
     }
 
     return true;
-}
-
-function positionObjectExists(objects,pos){
-    for (var i=0;i<objects.length;i++)
-    {
-        if (objects[i].x == pos.x && objects[i].y == pos.y)
-        {
-            return true;
-        }
-    }
-    return false;
 }
 
 /*
@@ -317,24 +270,35 @@ $(document).keypress(function(e)
 
 function loadmap()
 {
-    var html = "";
+
 
     $("#player").css("left",(playerPosition.x * 16) + "px");
     $("#player").css("top",((playerPosition.y * 16) - 16) + "px");
+
+    $("#player").attr("x", playerPosition.x);
+    $("#player").attr("y", playerPosition.y);
 
     for (var i=0;i<actionObjects.length;i++)
     {
         var actionObject = actionObjects[i];
 
-        html += "<div class='actionObject " + actionObject.cssClass + "' id=\"" + actionObject.id + "\" style=\"position:absolute;top:" + (actionObject.y * 16) + "px;left:" + (actionObject.x * 16) + "px;background-image: url('" + actionObject.backgroundImage + "');\" />";
+        var $actionObject = $("<div class='actionObject " + actionObject.cssClass + "' />");
 
-        //html += "<div class='actionObject " + actionObject[5] + "' id=\"" + splitPosition[0] + "-" + splitPosition[1] + "\" style=\"position:absolute;top:" + (splitPosition[0] * 16) + "px;left:" + (splitPosition[1] * 16) + "px;background:transparant url('"+actionObject[2]+"') 0 0 no-repeat;\" />";
+        if (actionObject.backgroundImage != undefined){
+            $actionObject.css('background-image',"url('" + actionObject.backgroundImage + "')");
+            $actionObject.css('position',"absolute");
+            $actionObject.css('top',((actionObject.y * 16) + actionObject.correctionTop) + "px");
+            $actionObject.css('left',((actionObject.x * 16)  + actionObject.correctionLeft) + "px");
+        }
 
-        //html += "<img class='" + actionObject[5] + "' src=\"" + actionObject[2] + "\" id=\"" + splitPosition[0] + "-" + splitPosition[1] + "\" style=\"position:absolute;top:" + (splitPosition[0] * 16) + "px;left:" + (splitPosition[1] * 16) + "px;\" />";
+        for (var key in actionObject) {
+            if (actionObject.hasOwnProperty(key) && key != 'cssClass' && key != 'backgroundImage' ) {
+                $actionObject.attr(key,actionObject[key])
+            }
+        }
 
+        $("#objectContainer").append($actionObject);
     }
-
-    $("#objectContainer").html(html);
 
     // Spritely objects
     $.each($('.spritely'), function(index, value) {
@@ -350,38 +314,41 @@ function loadmap()
         }).spStop(true);
     });
 
-
-
     updateLocation(playerPosition.x, playerPosition.y);
 }
 
-function boulder(pos,direction,actionObject)
+function boulder(pos, direction, $actionObject)
 {
     // Check if next object is not a stone
-    var nextActionObject = getActionObject(getNewPosition(null, pos,direction),"triggerBeforeStep");
-    if (nextActionObject != null) // && nextActionObject[1] == "stone")
+
+    var newPos = getNewPosition(null, pos, direction);
+    var $nextActionObject = $("#objectContainer div[clientAction='true'][triggerBeforeStep='true'][x='" + newPos.x + "'][y='" + newPos.y + "']");
+
+
+    //var nextActionObject = getActionObject(,"triggerBeforeStep");
+    if ($nextActionObject != undefined) // && nextActionObject[1] == "stone")
     {
         // next object is a stone, dont move it
         return false;
     }
     // else move the stone
-    return move(actionObject.id, direction);
+    return move($actionObject.attr('id'), direction);
 }
 
-function bush(pos,direction,actionObject)
+function bush(pos, direction, $actionObject)
 {
-    removeActionObject(actionObject)
+    removeActionObject($actionObject)
     // Dont move
     return false;
 }
 
-function person(pos,direction,actionObject){
-    return move(actionObject.id, direction);
+function person(pos, direction, $actionObject){
+    return move($actionObject.attr('id'), direction);
 }
 
-function findItem(pos,direction,actionObject)
+function findItem(pos, direction, $actionObject)
 {
-    removeActionObject(actionObject)
+    removeActionObject($actionObject)
     return true;
 }
 
