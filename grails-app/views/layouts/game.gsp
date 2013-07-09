@@ -12,7 +12,9 @@
     <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
     <link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
     <link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
-    <script type="text/javascript" src="${resource(uri:'')}/js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="${resource(uri:'')}/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="${resource(uri:'')}/js/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="${resource(uri:'')}/js/underscore-min.js"></script>
     <script type="text/javascript" src="${resource(uri:'')}/js/jquery.spritely-0.6.js"></script>
     <script type="text/javascript" src="${resource(uri:'')}/js/tablet/move.js"></script>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
