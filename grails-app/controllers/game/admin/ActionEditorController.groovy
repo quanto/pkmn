@@ -2,13 +2,7 @@ package game.admin
 
 import game.Map
 import game.MapLayout
-import game.action.MapTransition
-import game.action.Action
-import game.action.RecoverAction
-import game.action.ComputerAction
-import game.action.MarketAction
-import game.action.MapMessage
-import game.action.NpcAction
+import game.action.*
 import game.Owner
 import game.Pokemon
 import game.PokemonCreator
@@ -17,10 +11,6 @@ import game.Market
 import game.MarketItem
 import game.Item
 import game.OwnerItem
-import game.action.PvpSelectAction
-import game.action.BoulderAction
-import game.action.BushAction
-import game.action.FindItemAction
 import game.RewardItem
 import game.lock.OneTimeActionLock
 
@@ -143,6 +133,10 @@ class ActionEditorController {
         }
         else if (params.actionTypeClass == 'FindItemAction'){
             FindItemAction action = new FindItemAction(params)
+            action.save()
+        }
+        else if (params.actionTypeClass == 'PersonAction'){
+            PersonAction action = new PersonAction(params)
             action.save()
         }
 

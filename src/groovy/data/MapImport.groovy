@@ -11,7 +11,7 @@ import map.CharacterImage
 
 class MapImport {
 
-    public static int totalBaseActionProperties = 12
+    public static int totalBaseActionProperties = 13
 
     public static void importMaps(){
         println "Import map lines"
@@ -231,6 +231,7 @@ class MapImport {
         action.image = parts[10]?:null
         action.correctionLeft = parts[11]?Integer.parseInt(parts[11]):null
         action.correctionTop = parts[12]?Integer.parseInt(parts[12]):null
+        action.cssClass = parts[13]?:null
     }
 
     public static void importMarketAction(def parts, Map map){

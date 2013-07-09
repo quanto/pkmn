@@ -7,7 +7,10 @@ class PersonAction extends Action{
 
     ActionType actionType = ActionType.Client
     String actionFunction = "person"
-    String image = "/game/images/chars/person1.png"
+    String image = "/images/chars/person1.png"
+    String cssClass = "actionObject spritely"
+    Integer correctionLeft = 0
+    Integer correctionTop = -16
 
     CharacterImage characterImage = CharacterImage.person1
     String macro = "llrr"
@@ -17,7 +20,7 @@ class PersonAction extends Action{
             return null
         }
 
-        return "/game/images/chars/${characterImage.name()}.png"
+        return "/images/chars/${characterImage.name()}.png"
     }
 
     boolean triggerOnActionButton = false

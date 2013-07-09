@@ -115,7 +115,7 @@
                                     <img src='${resource(uri:'')}/images/tiles/sheet1/${mapLayout.foreground[y][x]}.png' />
                                 </g:if>
                                 <g:if test="${action?.image}">
-                                    <img src='${resource(uri:'')}${action.image}' />
+                                    <img src='${resource(uri:'')}${action.image}' style="height:16px;width:16px;" />
                                 </g:if>
                             </g:if>
                         </div>

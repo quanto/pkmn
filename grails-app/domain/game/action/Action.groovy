@@ -12,6 +12,7 @@ class Action {
     String image // The image to show frontend
     Integer correctionLeft // Correction on the image
     Integer correctionTop
+    String cssClass
 
     // A condition is a hard programmed condition that decides if you can battle the Npc or not
     // An example is defeat all the other Npc's in a Gym before battling the Gym Leader. See Condition.groovy.
@@ -43,6 +44,7 @@ class Action {
         condition nullable: true
         conditionNotMetMessage nullable: true
         conditionMetMessage nullable: true
+        cssClass nullable: true
     }
 
     def beforeInsert() {

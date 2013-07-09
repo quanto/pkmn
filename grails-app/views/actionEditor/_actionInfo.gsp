@@ -280,6 +280,40 @@
         </g:form>
 
     </g:elseif>
+    <g:elseif test="${action in game.action.PersonAction}">
+        <g:form action="updateAction">
+
+            <table>
+                <g:render template="basicActionInfo" />
+                <tr>
+                    <td>
+                        CharacterImage:
+                    </td>
+                    <td>
+                        <g:select name="characterImage" from="${map.CharacterImage.values()}" value="${action.characterImage}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Macro:
+                    </td>
+                    <td>
+                        <g:textField name="macro" value="${action.macro}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <g:submitButton name="save" />
+                    </td>
+                </tr>
+            </table>
+
+        </g:form>
+
+    </g:elseif>
     <g:else>
         <g:form action="updateAction">
 

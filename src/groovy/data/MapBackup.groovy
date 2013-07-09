@@ -65,7 +65,8 @@ ${action.conditionalStep}
 ${action.placeOneTimeActionLock}
 ${action.image?:''}
 ${action.correctionLeft?:''}
-${action.correctionTop?:''}"""
+${action.correctionTop?:''}
+${action.cssClass?:''}"""
     }
 
     public static String getPersonActions(Map map){

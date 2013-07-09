@@ -1,4 +1,4 @@
-<%@ page import="game.lock.OneTimeActionLock; game.context.ActionType; game.context.ActionType; game.MapLayout;" %>
+<%@ page import="game.action.*; game.lock.OneTimeActionLock; game.context.ActionType; game.context.ActionType; game.MapLayout;" %>
 <%
     // MapLayout mapLayout
     def blockObjects = []
@@ -36,16 +36,18 @@
                 serverAction:${clientAction.actionType == ActionType.Server || clientAction.actionType == ActionType.Mixed},
                 y:${clientAction.positionY},
                 x:${clientAction.positionX},
-                cssClass:"",
-
+                cssClass:"${clientAction.cssClass?:''}",
+                <g:if test="${clientAction.image}">
                     backgroundImage:"${createLink(uri:'')}${clientAction.image}",
-
+                </g:if>
                 triggerBeforeStep:${clientAction.triggerBeforeStep},
                 triggerOnActionButton:${clientAction.triggerOnActionButton},
                 action:"${clientAction.actionFunction}",
-                correctionLeft:0,
-                correctionTop:0
-//                macro:""
+                <g:if test="${clientAction in PersonAction && clientAction.macro}">
+                    macro:"${clientAction.macro}",
+                </g:if>
+                correctionLeft:${clientAction.correctionLeft?:0},
+                correctionTop:${clientAction.correctionTop?:0}
             }
             <g:if test="${clientAction != clientActions.last()}">,</g:if>
         </g:each>
