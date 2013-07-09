@@ -7,13 +7,6 @@ import game.context.Fight
 import game.Moves
 import game.fight.action.NoAction
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 02-10-12
- * Time: 20:02
- * To change this template use File | Settings | File Templates.
- */
 class Run {
 
     public static void run(Fight fight)
@@ -23,8 +16,8 @@ class Run {
         {
             Random random = new Random()
 
-            int a = fight.fightPlayer1.speed
-            int b = Math.round(fight.fightPlayer2.speed / 4) % 255
+            int a = fight.fightPlayer1.fightPokemon.speed
+            int b = Math.round(fight.fightPlayer2.fightPokemon.speed / 4) % 255
             int c = fight.escapeAttempts
             int x = (a * 32 / b) + (30 * c)
 
