@@ -1,4 +1,4 @@
-<%@ page import="game.action.FindItemAction; game.action.MapTransition; game.action.MarketAction; game.action.NpcAction; game.UsableItem; game.MapTransition; game.Item; game.MarketAction; game.Pokemon; game.OwnerPokemon; game.NpcAction; game.action.MapMessage" %>
+<%@ page import="game.action.FindItemAction; game.action.MapTransition; game.action.MarketAction; game.action.NpcAction; game.UsableItem; game.Item; game.Pokemon; game.OwnerPokemon; game.action.MapMessage" %>
 <div>
     <g:link action="deleteAction" id="${action.id}">Delete Action</g:link>
 
