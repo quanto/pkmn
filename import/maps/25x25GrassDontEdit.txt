@@ -26,6 +26,7 @@ false
 true
 false
 false
+/images/tiles/sheet1/32.png
 </boulderAction>
 
 <bushAction>
@@ -39,6 +40,7 @@ false
 true
 false
 false
+/images/tiles/sheet1/11.png
 </bushAction>
 
 <findItemAction>
@@ -52,5 +54,6 @@ true
 false
 false
 false
+/images/tiles/sheet1/53.png
 </findItemAction>
 

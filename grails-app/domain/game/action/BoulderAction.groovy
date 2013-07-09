@@ -1,12 +1,11 @@
 package game.action
 
-import game.action.Action
 import game.context.ActionType
 
 class BoulderAction extends Action {
 
     String actionFunction = "boulder"
-    String tileImage = "32"
+    String image = "/images/tiles/sheet1/32.png"
     ActionType actionType = ActionType.Client
 
     boolean triggerOnActionButton = false

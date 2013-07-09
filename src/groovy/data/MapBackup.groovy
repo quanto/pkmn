@@ -71,7 +71,8 @@ ${action.conditionNotMetMessage?:''}
 ${action.triggerOnActionButton}
 ${action.triggerBeforeStep}
 ${action.conditionalStep}
-${action.placeOneTimeActionLock}"""
+${action.placeOneTimeActionLock}
+${action.image?:''}"""
     }
 
     public static String getBoulderActions(Map map){

@@ -20,7 +20,7 @@ import game.action.FindItemAction
 
 class MapImport {
 
-    public static int totalBaseActionProperties = 9
+    public static int totalBaseActionProperties = 10
 
     public static void importMaps(){
         println "Import map lines"
@@ -229,6 +229,7 @@ class MapImport {
         action.triggerBeforeStep = new Boolean(parts[7])
         action.conditionalStep = new Boolean(parts[8])
         action.placeOneTimeActionLock = new Boolean(parts[9])
+        action.image = parts[10]?:null
     }
 
     public static void importMarketAction(def parts, Map map){

@@ -8,7 +8,7 @@ class Action {
     ActionType actionType
 
     String actionFunction // The js function to call to perform the action
-    String tileImage // Tile to show frontend
+    String image // The image to show frontend
 
 
     // A condition is a hard programmed condition that decides if you can battle the Npc or not
@@ -34,7 +34,7 @@ class Action {
 
     static constraints = {
         identifier nullable:true
-        tileImage nullable: true
+        image nullable: true
         actionFunction nullable:true
         condition nullable: true
         conditionNotMetMessage nullable: true

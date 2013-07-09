@@ -19,6 +19,7 @@ true
 false
 false
 false
+
 W2wCqtkOuL3obTN
 </mapTransition>
 <mapTransition>
@@ -32,6 +33,7 @@ true
 false
 false
 false
+
 fkBmXKOt78HUPsn
 </mapTransition>
 
@@ -48,6 +50,7 @@ true
 false
 false
 false
+
 This is the house of my good friend Kanji. He's not home right now.
 </mapMessage>
 
@@ -64,6 +67,7 @@ true
 false
 false
 false
+
 </pvpSelectAction>
 
 

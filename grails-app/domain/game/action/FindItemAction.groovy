@@ -10,7 +10,7 @@ class FindItemAction extends Action {
 
     boolean placeOneTimeActionLock = true
     String actionFunction = "findItem"
-    String tileImage = "53"
+    String image = "/images/tiles/sheet1/53.png"
 
     static hasMany = [rewardItems: RewardItem]
 }

@@ -37,6 +37,7 @@ true
 false
 false
 false
+
 BKt72cAqjeJXGP1
 </mapTransition>
 
@@ -54,6 +55,7 @@ true
 false
 false
 false
+
 BngAfU7JWoAGt0P
 </npcAction>
 

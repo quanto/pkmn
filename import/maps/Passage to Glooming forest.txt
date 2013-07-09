@@ -47,6 +47,7 @@ true
 true
 false
 
+
 </mapMessage>
 
 
@@ -64,6 +65,7 @@ false
 true
 false
 false
+/images/tiles/sheet1/11.png
 </bushAction>
 
 

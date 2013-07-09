@@ -19,6 +19,7 @@ true
 false
 false
 false
+
 trg4PyCNBfqZpdI
 </mapTransition>
 
@@ -35,6 +36,7 @@ true
 false
 false
 false
+
 Please do not disturbe. I'm working on this new Pokemon game.
 </mapMessage>
 

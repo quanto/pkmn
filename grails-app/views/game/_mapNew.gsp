@@ -31,15 +31,15 @@
         %>
         <g:each in="${clientActions}" var="clientAction" status="i">
             {
-                id:"actionObject${i}",
+                id:"actionObject${clientAction.id}",
                 clientAction:${clientAction.actionType == ActionType.Client || clientAction.actionType == ActionType.Mixed},
                 serverAction:${clientAction.actionType == ActionType.Server || clientAction.actionType == ActionType.Mixed},
                 y:${clientAction.positionY},
                 x:${clientAction.positionX},
                 cssClass:"",
-                <g:if test="${clientAction.tileImage}">
-                    backgroundImage:"${createLink(uri:'')}/images/tiles/sheet1/${clientAction.tileImage}.png",
-                </g:if>
+
+                    backgroundImage:"${createLink(uri:'')}${clientAction.image}",
+
                 triggerBeforeStep:${clientAction.triggerBeforeStep},
                 triggerOnActionButton:${clientAction.triggerOnActionButton},
                 action:"${clientAction.actionFunction}",
