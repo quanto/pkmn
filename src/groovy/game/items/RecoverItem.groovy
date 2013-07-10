@@ -1,7 +1,7 @@
 package game.items
 
 import game.context.Fight
-import game.Item
+import game.item.Item
 import game.fight.status.Recover
 import game.context.FightPlayer
 import game.fight.log.MessageLog

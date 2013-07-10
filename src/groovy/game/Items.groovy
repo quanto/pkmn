@@ -1,5 +1,8 @@
 package game
 
+import game.item.Item
+import game.item.UsableItem
+
 class Items {
 
     public static boolean addOwnerItem(Player player, Item item, boolean chargeCost){

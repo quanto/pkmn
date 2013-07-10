@@ -1,6 +1,6 @@
-package game
+package game.item
 
-class Badge extends Item {
+class KeyItem extends Item {
 
     @Override
     public String toString(){

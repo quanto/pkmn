@@ -9,7 +9,7 @@ import game.PokemonCreator
 import game.Npc
 import game.Market
 import game.MarketItem
-import game.Item
+import game.item.Item
 import game.OwnerItem
 import game.RewardItem
 import game.lock.OneTimeActionLock

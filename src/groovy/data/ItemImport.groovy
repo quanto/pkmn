@@ -1,9 +1,9 @@
 package data
 
-import game.UsableItem
-import game.Badge
-import game.KeyItem
-import game.PokeBallItem
+import game.item.UsableItem
+import game.item.Badge
+import game.item.KeyItem
+import game.item.PokeBallItem
 
 class ItemImport {
 

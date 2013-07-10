@@ -1,6 +1,7 @@
 package game
 
 import game.action.NpcAction
+import game.item.Item
 import game.lock.NpcLock
 
 class Condition {

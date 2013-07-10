@@ -1,7 +1,7 @@
 package data
 
 import game.Market
-import game.Item
+import game.item.Item
 import game.MarketItem
 
 class MarketImport {

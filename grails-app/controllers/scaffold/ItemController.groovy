@@ -1,6 +1,6 @@
 package scaffold
 
-import game.Item
+import game.item.Item
 
 class ItemController {
 

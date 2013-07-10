@@ -2,7 +2,7 @@ package game.items
 
 import game.context.Fight
 import game.Owner
-import game.Item
+import game.item.Item
 import game.context.FightPlayer
 import game.Party
 import game.Moves

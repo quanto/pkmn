@@ -1,11 +1,10 @@
 package game
 
+import game.item.UsableItem
 import map.View
 
 import game.fight.log.MessageLog
-import game.fight.status.Stats
 import game.context.FightPlayer
-import game.context.PlayerType
 import game.context.PlayerData
 import game.context.Fight
 import game.fight.Battle
@@ -13,7 +12,6 @@ import game.fight.UseItem
 import game.fight.Run
 import game.fight.action.MoveAction
 import game.fight.action.SwitchAction
-import game.fight.RoundResult
 import game.context.BattleType
 import game.fight.action.NoAction
 import game.fight.ContinueMove

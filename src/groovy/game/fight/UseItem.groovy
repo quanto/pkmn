@@ -6,13 +6,12 @@ import game.context.FightPlayer
 import game.context.Fight
 import game.Owner
 import game.OwnerItem
-import game.Item
+import game.item.Item
 import game.Moves
 import game.items.RecoverItem
-import game.fight.action.NoAction
 import game.fight.action.ItemAction
-import game.UsableItem
-import game.PokeBallItem
+import game.item.UsableItem
+import game.item.PokeBallItem
 import game.context.BattleType
 
 class UseItem {

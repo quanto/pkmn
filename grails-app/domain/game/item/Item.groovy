@@ -1,4 +1,4 @@
-package game
+package game.item
 
 class Item {
 

@@ -1,4 +1,4 @@
-<%@ page import="game.action.FindItemAction; game.action.MapTransition; game.action.MarketAction; game.action.NpcAction; game.UsableItem; game.Item; game.Pokemon; game.OwnerPokemon; game.action.MapMessage" %>
+<%@ page import="game.item.UsableItem; game.item.Item; game.item.Item; game.action.FindItemAction; game.action.MapTransition; game.action.MarketAction; game.action.NpcAction; game.Pokemon; game.OwnerPokemon; game.action.MapMessage" %>
 <div>
     <g:link action="deleteAction" id="${action.id}">Delete Action</g:link>
 
@@ -48,7 +48,7 @@
         </table>
         <g:form action="addItem">
             <g:hiddenField name="market" value="${action.market.id}" />
-            <g:select name="item" from="${UsableItem.list()}" optionKey="id" />
+            <g:select name="item" from="${game.item.UsableItem.list()}" optionKey="id" />
             <g:submitButton name="add" />
         </g:form>
 
@@ -199,7 +199,7 @@
                         Item
                     </td>
                     <td>
-                        <g:select name="item" optionValue="${ { it.name } }" from="${Item.list()}" optionKey="id" />
+                        <g:select name="item" optionValue="${ { it.name } }" from="${game.item.Item.list()}" optionKey="id" />
                     </td>
                 </tr>
                 <tr>
@@ -261,7 +261,7 @@
                         Item
                     </td>
                     <td>
-                        <g:select name="item" optionValue="${ { it.name } }" from="${Item.list()}" optionKey="id" />
+                        <g:select name="item" optionValue="${ { it.name } }" from="${game.item.Item.list()}" optionKey="id" />
                     </td>
                 </tr>
                 <tr>

@@ -1,6 +1,9 @@
 package game
 
 import game.context.PlayerData
+import game.item.Badge
+import game.item.KeyItem
+import game.item.UsableItem
 
 class BagController {
 

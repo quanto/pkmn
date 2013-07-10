@@ -1,5 +1,7 @@
 package game
 
+import game.item.Item
+
 class OwnerItem {
 
     Item item
