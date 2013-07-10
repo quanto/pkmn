@@ -16,11 +16,11 @@ environments {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:h2:mem:devDb;MVCC=TRUE"
 
-            driverClassName = "com.mysql.jdbc.Driver"
-            dialect= "org.hibernate.dialect.MySQLInnoDBDialect"
-            username = "root"
-            password = ""
-            url = "jdbc:mysql://127.0.0.1/pkmn"
+//            driverClassName = "com.mysql.jdbc.Driver"
+//            dialect= "org.hibernate.dialect.MySQLInnoDBDialect"
+//            username = "root"
+//            password = ""
+//            url = "jdbc:mysql://127.0.0.1/pkmn"
 
         }
     }
