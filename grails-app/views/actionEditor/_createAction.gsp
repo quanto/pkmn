@@ -2,6 +2,7 @@
 Create action
 <g:form action="createAction">
     <g:hiddenField name="map.id" value="${map.id}" />
+    <g:hiddenField name="altMapId" value="${altMap?.id}" />
     <g:hiddenField name="positionX" value="${positionX}" />
     <g:hiddenField name="positionY" value="${positionY}" />
     <g:select name="actionTypeClass" onchange="actionTypeChanged(this)" noSelection="['':'-Choose Action-']" from="${['NpcAction','MapTransition', 'PvpSelectAction', 'ComputerAction', 'MapMessage', 'MarketAction', 'RecoverAction', 'BoulderAction', 'BushAction', 'FindItemAction', 'PersonAction']}" />

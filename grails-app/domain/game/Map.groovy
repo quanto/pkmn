@@ -19,7 +19,7 @@ class Map {
     static scaffoldList           = ['name','worldX','worldY','owner.username','mapEditor','pokemon','showMap']
     static scaffoldSearch         = ['name','worldX','worldY','owner.username']
 
-    static hasMany = [mapPokemonList: MapPokemon, actions:Action]
+    static hasMany = [mapPokemonList: MapPokemon, actions:Action, altMaps: AltMap]
 
     static mapping = {
         dataForeground type:"text"
@@ -56,15 +56,17 @@ class Map {
         return "Map: ${id} ${name}"
     }
 
-    public String getForegroundImage(boolean forceUpdate = false){
+    public String getForegroundImage(AltMap altMap, boolean forceUpdate = false){
         File file
 
-        String filePath = "/images/generatedMaps/${name}_background.png"
+        String altMapPostFix = altMap?altMap.priority+"_":""
+
+        String filePath = "/images/generatedMaps/${name}_${altMapPostFix}background.png"
 
         try {
             file = new File("web-app" + filePath)
             if (!file.exists() || forceUpdate){
-                MapLayout mapLayout = MapLayout.createMapArray(this)
+                MapLayout mapLayout = MapLayout.createMapArray(this, altMap)
                 ImageIO.write(mapLayout.writeTiles(mapLayout.background), "png", file)
             }
 
@@ -74,15 +76,17 @@ class Map {
         return filePath
     }
 
-    public String getBackgroundImage(boolean forceUpdate = false){
+    public String getBackgroundImage(AltMap altMap, boolean forceUpdate = false){
         File file
 
-        String filePath = "/images/generatedMaps/${name}_foreground.png"
+        String altMapPostFix = altMap?altMap.priority+"_":""
+
+        String filePath = "/images/generatedMaps/${name}_${altMapPostFix}foreground.png"
 
         try {
             file = new File("web-app" + filePath)
             if (!file.exists() || forceUpdate){
-                MapLayout mapLayout = MapLayout.createMapArray(this)
+                MapLayout mapLayout = MapLayout.createMapArray(this, altMap)
                 ImageIO.write(mapLayout.writeTiles(mapLayout.foreground), "png", file)
             }
 

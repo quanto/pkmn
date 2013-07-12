@@ -12,7 +12,7 @@
                             def map = worldMaps.find{ it.worldX == x && it.worldY == y }
                             MapLayout mapLayout
                             if (map){
-                                mapLayout = MapLayout.createMapArray(map)
+                                mapLayout = MapLayout.createMapArray(map, null)
                             }
                         %>
                         <td>

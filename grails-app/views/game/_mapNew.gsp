@@ -25,7 +25,15 @@
 
     var actionObjects = new Array(
         <%
-            def clientActions = map.actions.collect{ it }
+
+            def clientActions
+            if (player.altMap){
+                clientActions = player.altMap.actions.collect{ it }
+            }
+            else {
+                clientActions = map.actions.collect{ it }
+            }
+
             // remove one time actions
             clientActions.removeAll { it.placeOneTimeActionLock && OneTimeActionLock.findByPlayerAndAction(player, it) }
         %>
@@ -94,14 +102,14 @@
 </style>
 
 <div style="position:relative;height:${mapLayout.getRows() * 16}px;width: ${mapLayout.getColumns() * 16}px;">
-    <img style="position:absolute;top:0px;left:0px;" src="${resource(uri:'')}${map.getForegroundImage()}" />
+    <img style="position:absolute;top:0px;left:0px;" src="${resource(uri:'')}${map.getForegroundImage(player.altMap)}" />
 
     <div id="player" class="player spritely actionObject" />
 
     <div id="objectContainer">
 
     </div>
-    <img style="position:absolute;top:0px;left:0px;" src="${resource(uri:'')}${map.getBackgroundImage()}" />
+    <img style="position:absolute;top:0px;left:0px;" src="${resource(uri:'')}${map.getBackgroundImage(player.altMap)}" />
 </div>
 
 <script type="text/javascript">

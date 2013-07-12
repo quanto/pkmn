@@ -24,7 +24,7 @@
         $.ajax({
             type: "GET",
             url: "${createLink(action:'getAction')}",
-            data: "id=" + $("#fromMap").val() + "&positionX=" + x + "&positionY=" + y,
+            data: "id=${map.id}&altMapId=${altMap?.id}&positionX=" + x + "&positionY=" + y,
             cache: false,
             success: function(view){
                 $("#ajax").html(view);
@@ -106,7 +106,7 @@
             <tr>
                 <g:each in="${row}" var="tileNr" status="x">
                     <%
-                        game.action.Action action = map.actions.find { it.positionX == x && it.positionY == y }
+                        game.action.Action action = actions.find { it.positionX == x && it.positionY == y }
                     %>
                     <td style="${action?'border:1px solid #444;':'border:1px solid #ccc;'}">
                         <div id="current${x}-${y}" style="height:16px; width:16px; background:url('${resource(uri:'')}/images/tiles/sheet1/${tileNr}.png');" title="${x}-${y}" onclick="getAction(${x},${y})"> <%-- fromMapPosition(${x},${y}) --%>
@@ -124,6 +124,11 @@
             </tr>
         </g:each>
     </table>
+
+    <g:if test="${altMap?.newActions == false}">
+        <br/><span style="color:red;">Actions not editable</span>
+    </g:if>
+
 </div>
 <br />
 <div id="ajax">

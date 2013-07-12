@@ -27,7 +27,7 @@ class GameController {
 
         flash.direction = direction
 
-        MapLayout mapLayout = MapLayout.createMapArray(player.map)
+        MapLayout mapLayout = MapLayout.createMapArray(player.map, player.altMap)
 
         // Check possition
         String currentForegroundTile = getCurrentTile(mapLayout,player,false)
@@ -49,7 +49,7 @@ class GameController {
             if (player.positionY == mapLayout.rows-1 && direction == "down"){ // down
                 Map toMap = Map.findByWorldXAndWorldY(player.map.worldX,player.map.worldY+1)
                 if (toMap){
-                    MapLayout mapToLayout = MapLayout.createMapArray(toMap)
+                    MapLayout mapToLayout = MapLayout.createMapArray(toMap, player.altMap)
                     String tile = mapToLayout.foreground[0][player.positionX]
                     if (tile == "" || tile == "0"){
                         player.positionY = 0
@@ -62,7 +62,7 @@ class GameController {
             else if (player.positionY == 0 && direction == "up"){ // up
                 Map toMap = Map.findByWorldXAndWorldY(player.map.worldX,player.map.worldY-1)
                 if (toMap){
-                    MapLayout mapToLayout = MapLayout.createMapArray(toMap)
+                    MapLayout mapToLayout = MapLayout.createMapArray(toMap, player.altMap)
                     String tile = mapToLayout.foreground[mapToLayout.rows-1][player.positionX]
                     if (tile == "" || tile == "0"){
                         player.positionY = mapToLayout.rows-1
@@ -75,7 +75,7 @@ class GameController {
             else if (player.positionX == 0 && direction == "left"){ // left
                 Map toMap = Map.findByWorldXAndWorldY(player.map.worldX-1,player.map.worldY)
                 if (toMap){
-                    MapLayout mapToLayout = MapLayout.createMapArray(toMap)
+                    MapLayout mapToLayout = MapLayout.createMapArray(toMap, player.altMap)
                     String tile = mapToLayout.foreground[player.positionY][mapToLayout.columns-1]
                     if (tile == "" || tile == "0"){
                         player.positionX = mapToLayout.columns-1
@@ -88,7 +88,7 @@ class GameController {
             else if (player.positionX == mapLayout.columns-1 && direction == "right"){ // right
                 Map toMap = Map.findByWorldXAndWorldY(player.map.worldX+1,player.map.worldY)
                 if (toMap){
-                    MapLayout mapToLayout = MapLayout.createMapArray(toMap)
+                    MapLayout mapToLayout = MapLayout.createMapArray(toMap, player.altMap)
                     String tile = mapToLayout.foreground[player.positionY][0]
                     if (tile == "" || tile == "0"){
                         player.positionX = 0
@@ -139,7 +139,7 @@ class GameController {
 
             flash.direction = direction
 
-            MapLayout mapLayout = MapLayout.createMapArray(player.map)
+            MapLayout mapLayout = MapLayout.createMapArray(player.map, player.altMap)
 
             String currentForegroundTile = getCurrentTile(mapLayout,player,false)
             if (!currentForegroundTile || currentForegroundTile != "0"){
@@ -252,7 +252,7 @@ class GameController {
         Player player = playerData.getPlayer()
 
         if (player.view == View.ShowMap){
-            MapLayout mapLayout = MapLayout.createMapArray(player.map);
+            MapLayout mapLayout = MapLayout.createMapArray(player.map, player.altMap);
             render text: g.render(template: 'mapNew', model: [mapLayout: mapLayout, map : player.map, player: player])
         }
         else if (player.view == View.ShowMarket){

@@ -1,5 +1,6 @@
 package game.admin
 
+import game.AltMap
 import game.Map
 import game.MapLayout
 import game.action.*
@@ -20,19 +21,26 @@ class ActionEditorController {
 
     }
 
-    def actions(){
+    def actions(long id, long altMapId){
         Map map
 
         MapLayout mapLayout
+        AltMap altMap
 
-        if (params.id){
-            map = Map.get(params.id)
+        def actions
+
+        if (id){
+            map = Map.get(id)
 
             if (map){
-                mapLayout = MapLayout.createMapArray(map)
+                altMap = params.altMap?:AltMap.get(altMapId)
+
+                actions = altMap?.newActions?altMap.actions:map.actions
+
+                mapLayout = MapLayout.createMapArray(map, altMap)
             }
         }
-        render view: "actions", model: [map: map, mapLayout:mapLayout]
+        render view: "actions", model: [map: map, mapLayout:mapLayout, actions: actions, altMap: altMap]
     }
 
     def choseMapTransition(){
@@ -44,7 +52,7 @@ class ActionEditorController {
             map = Map.get(params.id)
 
             if (map){
-                mapLayout = MapLayout.createMapArray(map)
+                mapLayout = MapLayout.createMapArray(map, null)
             }
         }
         render text: g.render(template: 'choseMapTransition', model: [mapLayout:mapLayout,map: map])
@@ -77,70 +85,72 @@ class ActionEditorController {
     }
 
 
-    def getAction(){
-        Map mapFrom = Map.get(params.id)
+    def getAction(long id, long altMapId){
+        Map mapFrom = Map.get(id)
+        AltMap altMap = AltMap.get(altMapId)
         int positionX = Integer.parseInt(params.positionX)
         int positionY = Integer.parseInt(params.positionY)
 
-        Action action = Action.findByMapAndPositionXAndPositionY(mapFrom,positionX,positionY)
+        Action action = altMap?Action.findByAltMapAndPositionXAndPositionY(altMap,positionX,positionY):Action.findByMapAndPositionXAndPositionY(mapFrom,positionX,positionY)
 
         if (action){
             render text: g.render(template: 'actionInfo', model: [action:action])
         }
         else {
-            render text : g.render(template: 'createAction', model: [positionX:positionX,positionY:positionY,map:mapFrom])
+            render text : g.render(template: 'createAction', model: [positionX: positionX, positionY: positionY, map: mapFrom, altMap: altMap])
         }
     }
 
-    def createAction(){
-
+    def createAction(Long altMapId){
+        Action action
         if (params.actionTypeClass == 'RecoverAction'){
-            RecoverAction recoverAction = new RecoverAction(params)
-            recoverAction.save()
+            action = new RecoverAction(params)
         }
         else if (params.actionTypeClass == 'ComputerAction'){
-            ComputerAction computerAction = new ComputerAction(params)
-            computerAction.save()
+            action = new ComputerAction(params)
         }
         else if (params.actionTypeClass == 'PvpSelectAction'){
-            PvpSelectAction pvpSelectAction = new PvpSelectAction(params)
-            pvpSelectAction.save()
+            action = new PvpSelectAction(params)
         }
         else if (params.actionTypeClass == 'MapMessage'){
-            MapMessage mapMessage = new MapMessage(params)
-            mapMessage.save()
+            action = new MapMessage(params)
         }
         else if (params.actionTypeClass == 'MarketAction'){
-            MarketAction marketAction = new MarketAction(params)
-            marketAction.market = new Market()
-            marketAction.market.save()
-            marketAction.save()
+            action = new MarketAction(params)
+            action.market = new Market()
+            action.market.save()
         }
         else if (params.actionTypeClass == 'NpcAction'){
-            NpcAction npcAction = new NpcAction(params)
-            npcAction.owner = new Npc(npcAction:npcAction)
-            npcAction.owner.name = params.name
-            npcAction.owner.save()
-            npcAction.save()
+            action = new NpcAction(params)
+            action.owner = new Npc(npcAction:npcAction)
+            action.owner.name = params.name
+            action.owner.save()
         }
         else if (params.actionTypeClass == 'BoulderAction'){
-            BoulderAction action = new BoulderAction(params)
-            action.save()
+            action = new BoulderAction(params)
         }
         else if (params.actionTypeClass == 'BushAction'){
-            BushAction action = new BushAction(params)
-            action.save()
+            action = new BushAction(params)
         }
         else if (params.actionTypeClass == 'FindItemAction'){
-            FindItemAction action = new FindItemAction(params)
-            action.save()
+            action = new FindItemAction(params)
         }
         else if (params.actionTypeClass == 'PersonAction'){
-            PersonAction action = new PersonAction(params)
-            action.save()
+            action = new PersonAction(params)
         }
 
-        redirect action:'actions', id: params.map.id
+        assert action
+
+        // If we got an altMap it should not belong to the map
+        if (altMapId){
+            println "altMap"
+            action.map = null
+            action.altMap = AltMap.get(altMapId)
+        }
+
+        action.save()
+
+        redirect action:'actions', id: params.map.id, params: [altMapId: action.altMap?.id]
     }
 
     def addPokemonToNpc(){
@@ -166,7 +176,10 @@ class ActionEditorController {
         int actionId = Integer.parseInt(params.actionId)
         Action action = Action.get(actionId)
         action.properties = params
-        render text: "done"
+
+        flash.message = "Action ${actionId} aangepast"
+
+        redirect action:'actions', id: action.map?.id?:action.altMap?.map?.id, params: [altMapId: action.altMap?.id]
     }
 
     def deleteAction(){

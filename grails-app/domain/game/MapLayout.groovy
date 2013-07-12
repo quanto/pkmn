@@ -19,6 +19,7 @@ import java.awt.Transparency
 class MapLayout {
 
     Map map
+    AltMap altMap
     def background = []
     def foreground = []
 
@@ -32,13 +33,15 @@ class MapLayout {
         }
     }
 
-    public static MapLayout createMapArray(Map map)
+    public static MapLayout createMapArray(Map map, AltMap altMap)
     {
 
         MapLayout mapLayout = new MapLayout()
         mapLayout.map = map
+        mapLayout.altMap = altMap
 
-        def mapRowsBackground = map.dataBackground.split('-')
+        def dataBackground = altMap?.newDataBackground?altMap?.dataBackground:map.dataBackground
+        def mapRowsBackground = dataBackground.split('-')
 
         mapLayout.background = []
         for(int y=0; y<mapRowsBackground.length; y++)
@@ -53,7 +56,8 @@ class MapLayout {
             mapLayout.background.add(row)
         }
 
-        def mapRowsForeground = map.dataForeground.split('-')
+        def dataForeground = altMap?.newDataForeground?altMap?.dataForeground:map.dataForeground
+        def mapRowsForeground = dataForeground.split('-')
         mapLayout.foreground = []
         for(int y=0; y<mapRowsForeground.length; y++)
         {

@@ -1,5 +1,6 @@
 package game.action
 
+import game.AltMap
 import org.apache.commons.lang.RandomStringUtils
 import game.context.ActionType
 
@@ -22,7 +23,9 @@ class Action {
     boolean placeOneTimeActionLock = false
 
     String identifier
-    game.Map map
+
+    game.Map map // An action can either belong to an map or an altMap
+    AltMap altMap
     int positionX
     int positionY
 
@@ -45,6 +48,8 @@ class Action {
         conditionNotMetMessage nullable: true
         conditionMetMessage nullable: true
         cssClass nullable: true
+        altMap nullable: true
+        map nullable: true
     }
 
     def beforeInsert() {

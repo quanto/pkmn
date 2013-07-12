@@ -25,6 +25,7 @@ class Player extends Owner{
     int positionX = 1
     int positionY = 1
     Map map
+    AltMap altMap
     Date registerDate = new Date()
     Date lastLogin
     int money = 100
@@ -45,6 +46,7 @@ class Player extends Owner{
         ip nullable: true
         lastLogin nullable: true
         map nullable: true
+        altMap nullable: true
         username blank: false, unique: true
         password blank: false
         fightNr nullable :true
@@ -67,6 +69,17 @@ class Player extends Owner{
         if (isDirty('password')) {
             encodePassword()
         }
+    }
+
+    public void setMap(Map map){
+        // Check if the player should go to an altMap
+        if (map.altMaps){
+            this.altMap = map.altMaps.sort{ it.priority }.find { Condition.conditionEval(this, it.condition) }
+        }
+        else {
+            this.altMap = null
+        }
+        this.map = map
     }
 
     protected void encodePassword() {

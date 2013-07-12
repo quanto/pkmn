@@ -148,6 +148,13 @@
                     <input type="button" value="foreground" onclick="toggleLayer(this)" />
                     <input type="button" value="select" onclick="setSelect()" />
 
+                    <g:if test="${altMap?.newDataBackground == false}">
+                        <br/><span style="color:red;">Background not editable</span>
+                    </g:if>
+                    <g:if test="${altMap?.newDataForeground == false}">
+                        <br/><span style="color:red;">Foreground not editable</span>
+                    </g:if>
+
                     <div id="tab5" title="Background">
                         <input type="button" value="Grass" onclick="action = 'random';" />
                     </div>
@@ -241,13 +248,14 @@
                             <br />
                             <textarea style="width:300px;height:200px;" id="mapdata" name="mapdata"></textarea>
 
-                            <textarea style="width:300px;height:200px;" id="foreground" name="map.dataForeground"></textarea>
-                            <textarea style="width:300px;height:200px;" id="background" name="map.dataBackground"></textarea>
+                            <textarea style="width:300px;height:200px;" id="foreground" name="dataForeground"></textarea>
+                            <textarea style="width:300px;height:200px;" id="background" name="dataBackground"></textarea>
                         </div>
                         <br />
                         Name: <g:textField name="map.name" value="${map?.name?:params?.worldX+'x'+params?.worldY}" /> <br />
                         <sec:ifAnyGranted roles="ROLE_ADMIN">
                             ID: <g:textField name="id" value="${map?.id}" />
+                            AltMapID: <g:textField name="altMapId" value="${altMap?.id}" />
 
                             Active: <g:checkBox name="map.active" value="${map?.active}" /><br />
                             WorldX: <g:textField name="map.worldX" value="${map?.worldX != null?map?.worldX:params.worldX}" /><br />

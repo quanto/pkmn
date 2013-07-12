@@ -25,7 +25,13 @@ class ActionFlow {
 
     public static ActionResult decideAction(Player player, ActionTrigger actionTrigger, FightFactoryService fightFactoryService){
 
-        Action action = Action.findByMapAndPositionXAndPositionY(player.map,player.positionX,player.positionY)
+        Action action
+        if (player.altMap){
+            action = Action.findByAltMapAndPositionXAndPositionY(player.altMap, player.positionX ,player.positionY)
+        }
+        else {
+            action = Action.findByMapAndPositionXAndPositionY(player.map, player.positionX, player.positionY)
+        }
 
         if (!action)
             return null
