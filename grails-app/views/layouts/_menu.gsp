@@ -1,7 +1,8 @@
 
-<span style="color:red;">Version ${grailsApplication.metadata.'app.version'}</span> |
+<span style="color:red;">Version ${grailsApplication.metadata.'app.version'}</span>
 
 <sec:ifLoggedIn>
+    |
     Ingelogd als: <sec:loggedInUserInfo field="username"/>
     | <a href="${createLink(controller: 'logout')}">Uitloggen</a>
     | <a href="${createLink(controller: 'game')}">Game</a>

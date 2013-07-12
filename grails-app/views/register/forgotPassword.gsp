@@ -2,7 +2,7 @@
 <html>
     <head>
         <title></title>
-        <meta name="layout" content="main"/>
+        <meta name="layout" content="game"/>
     </head>
     <body>
         <g:form method="post" action="forgotPassword">
