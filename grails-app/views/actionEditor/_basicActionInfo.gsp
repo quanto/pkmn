@@ -22,7 +22,7 @@
         Condition:
     </td>
     <td>
-        <g:textField name="condition" value="${action.condition}" />
+        <g:select noSelection="['':'']" from="${game.Condition.values()}" name="condition" value="${action.condition}" />
     </td>
 </tr>
 <tr>

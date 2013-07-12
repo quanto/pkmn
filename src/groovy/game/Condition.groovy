@@ -4,11 +4,18 @@ import game.action.NpcAction
 import game.item.Item
 import game.lock.NpcLock
 
-class Condition {
+enum Condition {
 
-    public static boolean conditionEval(Player player, String condition){
+    defeatAllOtherNpcOnCurrentMap,
+    haveBeginnerBadge,
+    haveBoulderBadge,
+    haveEarthBadge,
+    haveOldFactoryKey,
+    isAdmin,
+
+    public static boolean conditionEval(Player player, Condition condition){
         // Npc conditions
-        if (condition == "defeatAllOtherNpcOnCurrentMap"){
+        if (condition == condition.defeatAllOtherNpcOnCurrentMap){
 
             def c = NpcLock.createCriteria()
             int lockCount = c.count() {
@@ -25,19 +32,19 @@ class Condition {
             }
         }
 
-        else if (condition == "haveBeginnerBadge"){
+        else if (condition == condition.haveBeginnerBadge){
             Item item = Item.findByName("Beginner Badge")
             if (OwnerItem.findByOwnerAndItem(player,item)){
                 return true
             }
         }
-        else if (condition == "haveBoulderBadge"){
+        else if (condition == condition.haveBoulderBadge){
             Item item = Item.findByName("Boulder Badge")
             if (OwnerItem.findByOwnerAndItem(player,item)){
                 return true
             }
         }
-        else if (condition == "haveEarthBadge"){
+        else if (condition == condition.haveEarthBadge){
             Item item = Item.findByName("Boulder Badge")
             if (OwnerItem.findByOwnerAndItem(player,item)){
                 return true
@@ -45,7 +52,7 @@ class Condition {
         }
 
 
-        else if (condition == "haveOldFactoryKey"){
+        else if (condition == condition.haveOldFactoryKey){
             Item item = Item.findByName("Old factory key")
             if (OwnerItem.findByOwnerAndItem(player,item)){
                 return true
@@ -53,7 +60,7 @@ class Condition {
         }
 
         // Map transition action
-        else if (condition == "isAdmin"){
+        else if (condition == condition.isAdmin){
             if (player.getAuthorities().find{ Role role -> role.authority == "ROLE_ADMIN" }){
                 return true
             }

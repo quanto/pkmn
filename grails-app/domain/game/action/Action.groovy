@@ -1,6 +1,7 @@
 package game.action
 
 import game.AltMap
+import game.Condition
 import org.apache.commons.lang.RandomStringUtils
 import game.context.ActionType
 
@@ -17,7 +18,7 @@ class Action {
 
     // A condition is a hard programmed condition that decides if you can battle the Npc or not
     // An example is defeat all the other Npc's in a Gym before battling the Gym Leader. See Condition.groovy.
-    String condition
+    Condition condition
     boolean triggerOnActionButton = true
     boolean triggerBeforeStep = false
     boolean placeOneTimeActionLock = false

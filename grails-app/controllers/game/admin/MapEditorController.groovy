@@ -1,6 +1,7 @@
 package game.admin
 
 import game.AltMap
+import game.Condition
 import game.Map
 import game.MapLayout
 import data.MapBackup
@@ -173,7 +174,7 @@ class MapEditorController {
                 altMap.newActions = newActions
                 altMap.actions = altMap.newActions?[]:null
             }
-            altMap.condition = condition
+            altMap.condition = condition?Condition.valueOf(condition):null
         }
         else {
             altMap = new AltMap(params)

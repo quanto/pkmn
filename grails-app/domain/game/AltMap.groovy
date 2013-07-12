@@ -9,7 +9,7 @@ import game.action.Action
  */
 class AltMap {
 
-    String condition
+    Condition condition
     int priority // Which alt map should take priority 0 = first
 
     boolean newDataForeground

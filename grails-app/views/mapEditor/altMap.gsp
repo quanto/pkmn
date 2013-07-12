@@ -44,7 +44,7 @@
                     condition
                 </td>
                 <td>
-                    <g:textField name="condition" value="${altMap?.condition}" />
+                    <g:select noSelection="['':'']" from="${game.Condition.values()}" name="condition" value="${altMap?.condition}" />
                 </td>
             </tr>
             <tr>

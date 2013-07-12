@@ -56,7 +56,7 @@ ${getPersonActions(map)}
         """${action.positionX}
 ${action.positionY}
 ${action.identifier}
-${action.condition?:''}
+${action.condition?.name()?:''}
 ${action.conditionMetMessage?:''}
 ${action.conditionNotMetMessage?:''}
 ${action.triggerOnActionButton}

@@ -1,5 +1,6 @@
 package data
 
+import game.Condition
 import game.Map
 import game.MapPokemon
 import game.Pokemon
@@ -221,7 +222,7 @@ class MapImport {
         action.positionX = Integer.parseInt(parts[0])
         action.positionY = Integer.parseInt(parts[1])
         action.identifier = parts[2]
-        action.condition = parts[3]?:null
+        action.condition = parts[3]? Condition.valueOf(parts[3]):null
         action.conditionMetMessage = parts[4]?:null
         action.conditionNotMetMessage = parts[5]?:null
         action.triggerOnActionButton = new Boolean(parts[6])
