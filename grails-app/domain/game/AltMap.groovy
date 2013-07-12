@@ -33,4 +33,8 @@ class AltMap {
         dataForeground type:"text"
         dataBackground type:"text"
     }
+
+    static AltMap getAltMap(Map map, Player player){
+        return map.altMaps.sort{ it.priority }.find { Condition.conditionEval(player, it.condition) }
+    }
 }

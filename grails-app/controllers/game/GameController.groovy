@@ -49,7 +49,7 @@ class GameController {
             if (player.positionY == mapLayout.rows-1 && direction == "down"){ // down
                 Map toMap = Map.findByWorldXAndWorldY(player.map.worldX,player.map.worldY+1)
                 if (toMap){
-                    MapLayout mapToLayout = MapLayout.createMapArray(toMap, player.altMap)
+                    MapLayout mapToLayout = MapLayout.createMapArray(toMap, AltMap.getAltMap(toMap, player))
                     String tile = mapToLayout.foreground[0][player.positionX]
                     if (tile == "" || tile == "0"){
                         player.positionY = 0
@@ -62,7 +62,7 @@ class GameController {
             else if (player.positionY == 0 && direction == "up"){ // up
                 Map toMap = Map.findByWorldXAndWorldY(player.map.worldX,player.map.worldY-1)
                 if (toMap){
-                    MapLayout mapToLayout = MapLayout.createMapArray(toMap, player.altMap)
+                    MapLayout mapToLayout = MapLayout.createMapArray(toMap, AltMap.getAltMap(toMap, player))
                     String tile = mapToLayout.foreground[mapToLayout.rows-1][player.positionX]
                     if (tile == "" || tile == "0"){
                         player.positionY = mapToLayout.rows-1
@@ -75,7 +75,7 @@ class GameController {
             else if (player.positionX == 0 && direction == "left"){ // left
                 Map toMap = Map.findByWorldXAndWorldY(player.map.worldX-1,player.map.worldY)
                 if (toMap){
-                    MapLayout mapToLayout = MapLayout.createMapArray(toMap, player.altMap)
+                    MapLayout mapToLayout = MapLayout.createMapArray(toMap, AltMap.getAltMap(toMap, player))
                     String tile = mapToLayout.foreground[player.positionY][mapToLayout.columns-1]
                     if (tile == "" || tile == "0"){
                         player.positionX = mapToLayout.columns-1
@@ -88,7 +88,7 @@ class GameController {
             else if (player.positionX == mapLayout.columns-1 && direction == "right"){ // right
                 Map toMap = Map.findByWorldXAndWorldY(player.map.worldX+1,player.map.worldY)
                 if (toMap){
-                    MapLayout mapToLayout = MapLayout.createMapArray(toMap, player.altMap)
+                    MapLayout mapToLayout = MapLayout.createMapArray(toMap, AltMap.getAltMap(toMap, player))
                     String tile = mapToLayout.foreground[player.positionY][0]
                     if (tile == "" || tile == "0"){
                         player.positionX = 0

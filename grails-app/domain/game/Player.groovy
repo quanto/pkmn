@@ -74,7 +74,7 @@ class Player extends Owner{
     public void setMap(Map map){
         // Check if the player should go to an altMap
         if (map.altMaps){
-            this.altMap = map.altMaps.sort{ it.priority }.find { Condition.conditionEval(this, it.condition) }
+            this.altMap = AltMap.getAltMap(map, this)
         }
         else {
             this.altMap = null
