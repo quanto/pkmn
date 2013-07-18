@@ -106,6 +106,8 @@ function move(objectId, direction)
     // Before move event or pokemon event
     if (isPlayer){
 
+        closeMessage();
+
         var checkMove = false
 
         if ($("#objectContainer div[serverAction='true'][triggerBeforeStep='true'][x='" + pos.x + "'][y='" + pos.y + "']").length > 0){

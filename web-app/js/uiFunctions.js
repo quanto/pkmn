@@ -313,9 +313,24 @@ function updateWhoisList()
     });
 };
 
+var messages = {};
 function setMessage(msg){
-    msg = $.trim(msg);
-    $("#textBox").html(msg);
+    messages = $.trim(msg).split(";");
+    nextMessage();
+}
+
+function nextMessage(){
+
+    if (messages.length > 0){
+        $("#textBox").html("<a href='javascript:nextMessage()'>X</a> " + messages[0]);
+        messages = messages.splice(1,1);
+    }
+    else {
+        closeMessage();
+    }
+}
+function closeMessage(){
+    $("#textBox").html('');
 }
 
 $(window).unload( function () {
