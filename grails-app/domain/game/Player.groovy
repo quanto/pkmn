@@ -1,6 +1,7 @@
 package game
 
 import game.action.RecoverAction
+import game.social.FriendRequest
 import map.View
 import map.CharacterImage
 import game.lock.Lock
@@ -20,7 +21,7 @@ class Player extends Owner{
     String ip
     CharacterImage characterImage = CharacterImage.player
 
-    static hasMany = [ownerItems: OwnerItem, locks: Lock]
+    static hasMany = [ownerItems: OwnerItem, locks: Lock, friends: Player]
 
     int positionX = 1
     int positionY = 1
