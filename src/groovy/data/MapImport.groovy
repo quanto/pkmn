@@ -1,5 +1,6 @@
 package data
 
+import game.AltMap
 import game.Condition
 import game.Map
 import game.MapPokemon
@@ -19,8 +20,10 @@ class MapImport {
 
         Map.withTransaction {
 
-            Map map
             new File('import/maps/').listFiles().each { File file ->
+
+                Map map
+                AltMap altMap
 
                 String node = ""
 
@@ -33,59 +36,64 @@ class MapImport {
                         map = createMap(parts)
                         parts = []
                     }
+                    else if (line.contains("</altMapData>")){
+                        node = ""
+                        altMap = createAltMap(parts,map)
+                        parts = []
+                    }
                     else if (line.contains("</marketAction>")){
                         node = ""
-                        importMarketAction(parts, map)
+                        importMarketAction(parts, map, altMap)
                         parts = []
                     }
                     else if (line.contains("</npcAction>")){
                         node = ""
-                        importNpcAction(parts, map)
+                        importNpcAction(parts, map, altMap)
                         parts = []
                     }
                     else if (line.contains("</mapMessage>")){
                         node = ""
-                        importMessage(parts, map)
+                        importMessage(parts, map, altMap)
                         parts = []
                     }
                     else if (line.contains("</recoverAction>")){
                         node = ""
-                        importRecoverAction(parts,map)
+                        importRecoverAction(parts,map, altMap)
                         parts = []
                     }
                     else if (line.contains("</pvpSelectAction>")){
                         node = ""
-                        importPvpSelectAction(parts,map)
+                        importPvpSelectAction(parts,map, altMap)
                         parts = []
                     }
                     else if (line.contains("</computerAction>")){
                         node = ""
-                        importComputerAction(parts,map)
+                        importComputerAction(parts,map, altMap)
                         parts = []
                     }
                     else if (line.contains("</mapTransition>")){
                         node = ""
-                        importMapTransition(parts,map)
+                        importMapTransition(parts,map, altMap)
                         parts = []
                     }
                     else if (line.contains("</boulderAction>")){
                         node = ""
-                        importBoulderActions(parts,map)
+                        importBoulderActions(parts,map, altMap)
                         parts = []
                     }
                     else if (line.contains("</bushAction>")){
                         node = ""
-                        importBushActions(parts,map)
+                        importBushActions(parts,map, altMap)
                         parts = []
                     }
                     else if (line.contains("</findItemAction>")){
                         node = ""
-                        importFindItemActionAction(parts,map)
+                        importFindItemActionAction(parts,map, altMap)
                         parts = []
                     }
                     else if (line.contains("</personAction>")){
                         node = ""
-                        importPersonAction(parts,map)
+                        importPersonAction(parts,map, altMap)
                         parts = []
                     }
                     else if (line.contains("</pokemon>")){
@@ -100,6 +108,9 @@ class MapImport {
 
                     if (line.contains("<mapData>")){
                         node = "mapData"
+                    }
+                    else if (line.contains("<altMapData>")){
+                        node = "altMapData"
                     }
                     else if (line.contains("<marketAction>")){
                         node = "marketAction"
@@ -218,6 +229,34 @@ class MapImport {
         return map
     }
 
+    public static AltMap createAltMap(def parts, Map map){
+        AltMap altMap = new AltMap(
+                newDataBackground : new Boolean(parts[0]),
+                newDataForeground : new Boolean(parts[1]),
+                newActions : new Boolean(parts[2]),
+                dataBackground : parts[3]?:null,
+                dataForeground : parts[4]?:null,
+                condition : parts[5],
+                priority : Integer.parseInt(parts[6]),
+                map: map
+        )
+        altMap.save()
+
+        return altMap
+    }
+
+    public static void addMapOrAltMap(Action action, Map map, AltMap altMap){
+        if (altMap){
+            action.altMap = altMap
+            altMap.addToActions(action)
+        }
+        else {
+            action.map = map
+            map.addToActions(action)
+        }
+    }
+
+
     public static void addBaseActionProperties(Action action, def parts){
         action.positionX = Integer.parseInt(parts[0])
         action.positionY = Integer.parseInt(parts[1])
@@ -235,7 +274,7 @@ class MapImport {
         action.cssClass = parts[13]?:null
     }
 
-    public static void importMarketAction(def parts, Map map){
+    public static void importMarketAction(def parts, Map map, AltMap altMap){
 
         // First create the market
         Market market = new Market(
@@ -247,42 +286,38 @@ class MapImport {
         MarketImport.importMarket(market)
 
         // Next the action
-        MarketAction marketAction = new MarketAction(
-                map:map,
+        MarketAction action = new MarketAction(
                 market: market
         )
-        addBaseActionProperties(marketAction,parts)
-
-        map.addToActions(marketAction)
+        addMapOrAltMap(action, map, altMap)
+        addBaseActionProperties(action,parts)
     }
 
-    public static void importNpcAction(def parts, Map map){
+    public static void importNpcAction(def parts, Map map, AltMap altMap){
 
         // First create the Npc
         Npc npc = NpcImport.importNpc(parts[totalBaseActionProperties+1])
 
         // Next the action
-        NpcAction npcAction = new NpcAction(
-                map:map,
+        NpcAction action = new NpcAction(
                 owner: npc
         )
-        addBaseActionProperties(npcAction,parts)
-        npc.npcAction = npcAction
-        npcAction.save()
-        map.addToActions(npcAction)
+        addMapOrAltMap(action, map, altMap)
+        addBaseActionProperties(action,parts)
+        npc.npcAction = action
+        action.save()
     }
 
-    public static void importPersonAction(def parts, Map map){
+    public static void importPersonAction(def parts, Map map, AltMap altMap){
 
         PersonAction action = new PersonAction(
-                map:map,
                 characterImage: CharacterImage.valueOf(parts[totalBaseActionProperties+1]),
                 macro: parts[totalBaseActionProperties+2]
         )
+        addMapOrAltMap(action, map, altMap)
         addBaseActionProperties(action,parts)
 
         action.save()
-        map.addToActions(action)
     }
 
     public static void coupleMapTransitions(def parts){
@@ -306,7 +341,7 @@ class MapImport {
         }
     }
 
-    public static void importMapTransition(def parts, Map map){
+    public static void importMapTransition(def parts, Map map, AltMap altMap){
         MapTransition mapTransition = new MapTransition(
                 map:map,
         )
@@ -314,59 +349,54 @@ class MapImport {
         map.addToActions(mapTransition)
     }
 
-    public static void importRecoverAction(def parts, Map map){
+    public static void importRecoverAction(def parts, Map map, AltMap altMap){
 
-        RecoverAction recoverAction = new RecoverAction(
-                map:map,
+        RecoverAction action = new RecoverAction(
+
         )
-        addBaseActionProperties(recoverAction,parts)
-
-        map.addToActions(recoverAction)
+        addMapOrAltMap(action, map, altMap)
+        addBaseActionProperties(action,parts)
 
     }
 
-    public static void importPvpSelectAction(def parts, Map map){
-        PvpSelectAction pvpSelectAction = new PvpSelectAction(
-                map:map,
+    public static void importPvpSelectAction(def parts, Map map, AltMap altMap){
+        PvpSelectAction action = new PvpSelectAction(
+
         )
-        addBaseActionProperties(pvpSelectAction,parts)
-        map.addToActions(pvpSelectAction)
+        addMapOrAltMap(action, map, altMap)
+        addBaseActionProperties(action,parts)
     }
 
-    public static void importFindItemActionAction(def parts, Map map){
+    public static void importFindItemActionAction(def parts, Map map, AltMap altMap){
         FindItemAction action = new FindItemAction(
 
-                map:map,
         )
+        addMapOrAltMap(action, map, altMap)
         addBaseActionProperties(action,parts)
-        map.addToActions(action)
     }
 
-    public static void importBushActions(def parts, Map map){
+    public static void importBushActions(def parts, Map map, AltMap altMap){
         BushAction action = new BushAction(
 
-                map:map,
         )
+        addMapOrAltMap(action, map, altMap)
         addBaseActionProperties(action,parts)
-        map.addToActions(action)
     }
 
-    public static void importBoulderActions(def parts, Map map){
+    public static void importBoulderActions(def parts, Map map, AltMap altMap){
         BoulderAction action = new BoulderAction(
 
-                map:map,
         )
         addBaseActionProperties(action,parts)
-        map.addToActions(action)
+        addMapOrAltMap(action, map, altMap)
     }
 
-    public static void importComputerAction(def parts, Map map){
-            ComputerAction computerAction = new ComputerAction(
+    public static void importComputerAction(def parts, Map map, AltMap altMap){
+        ComputerAction action = new ComputerAction(
 
-                    map:map,
-            )
-            addBaseActionProperties(computerAction,parts)
-            map.addToActions(computerAction)
+        )
+        addMapOrAltMap(action, map, altMap)
+        addBaseActionProperties(action,parts)
     }
 
     public static void importMapPokemon(def parts, Map map){
@@ -381,14 +411,13 @@ class MapImport {
         map.addToMapPokemonList(mapPokemon)
     }
 
-    public static void importMessage(def parts, Map map){
+    public static void importMessage(def parts, Map map, AltMap altMap){
 
-            MapMessage mapMessage = new MapMessage(
-                    map:map,
-                    message: parts[totalBaseActionProperties+1],
-            )
-            addBaseActionProperties(mapMessage,parts)
-            map.addToActions(mapMessage)
+        MapMessage action = new MapMessage(
+                message: parts[totalBaseActionProperties+1],
+        )
+        addMapOrAltMap(action, map, altMap)
+        addBaseActionProperties(action,parts)
     }
 
 }

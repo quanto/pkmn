@@ -1,5 +1,6 @@
 package data
 
+import game.AltMap
 import game.Map
 import game.action.*
 import game.MapPokemon
@@ -38,17 +39,42 @@ ${map.worldY}
 ${map.owner?.username?:'kevin'}
 </mapData>
 ${getPokemonData(map)}
-${getMaptransitions(map)}
-${getComputerActions(map)}
-${getRecoverActions(map)}
-${getMessageActions(map)}
-${getNpcActions(map)}
-${getMarketActions(map)}
-${getPvpSelectActions(map)}
-${getBoulderActions(map)}
-${getBushActions(map)}
-${getFindItemActions(map)}
-${getPersonActions(map)}
+${getActionData(map.actions)}
+${getAltMapsData(map)}
+"""
+    }
+
+    public static getActionData(def actions){
+        """${getMaptransitions(actions)}
+${getComputerActions(actions)}
+${getRecoverActions(actions)}
+${getMessageActions(actions)}
+${getNpcActions(actions)}
+${getMarketActions(actions)}
+${getPvpSelectActions(actions)}
+${getBoulderActions(actions)}
+${getBushActions(actions)}
+${getFindItemActions(actions)}
+${getPersonActions(actions)}
+"""
+    }
+
+    public static String getAltMapsData(Map map){
+        String altMapData = map.altMaps.collect { getAltMapData(it) }.join('\n')?:''
+        return altMapData
+    }
+
+    public static String getAltMapData(AltMap altMap){
+        return """<altMapData>
+${altMap.newDataBackground}
+${altMap.newDataForeground}
+${altMap.newActions}
+${altMap.dataBackground?:''}
+${altMap.dataForeground?:''}
+${altMap.condition}
+${altMap.priority}
+</altMapData>
+${getActionData(altMap.actions)}
 """
     }
 
@@ -69,9 +95,9 @@ ${action.correctionTop?:''}
 ${action.cssClass?:''}"""
     }
 
-    public static String getPersonActions(Map map){
+    public static String getPersonActions(def actions){
         String data = ""
-        map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
+        actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
             if(action in PersonAction){
                 data += """<personAction>
 ${getBaseActionProperties(action)}
@@ -84,9 +110,9 @@ ${action.macro}
         return data
     }
 
-    public static String getBoulderActions(Map map){
+    public static String getBoulderActions(def actions){
         String data = ""
-        map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
+        actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
             if(action in BoulderAction){
                 data += """<boulderAction>
 ${getBaseActionProperties(action)}
@@ -97,9 +123,9 @@ ${getBaseActionProperties(action)}
         return data
     }
 
-    public static String getFindItemActions(Map map){
+    public static String getFindItemActions(def actions){
         String data = ""
-        map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
+        actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
             if(action in FindItemAction){
                 data += """<findItemAction>
 ${getBaseActionProperties(action)}
@@ -110,9 +136,9 @@ ${getBaseActionProperties(action)}
         return data
     }
 
-    public static String getBushActions(Map map){
+    public static String getBushActions(def actions){
         String data = ""
-        map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
+        actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
             if(action in BushAction){
                 data += """<bushAction>
 ${getBaseActionProperties(action)}
@@ -123,9 +149,9 @@ ${getBaseActionProperties(action)}
         return data
     }
 
-    public static String getMarketActions(Map map){
+    public static String getMarketActions(def actions){
         String data = ""
-        map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
+        actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
             if(action in MarketAction){
                 data += """<marketAction>
 ${getBaseActionProperties(action)}
@@ -137,9 +163,9 @@ ${action.market.identifier}
         return data
     }
 
-    public static String getNpcActions(Map map){
+    public static String getNpcActions(def actions){
         String data = ""
-        map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
+        actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
             if(action in NpcAction){
                 data += """<npcAction>
 ${getBaseActionProperties(action)}
@@ -152,9 +178,9 @@ ${action.owner.identifier}
         return data
     }
 
-    public static String getMessageActions(Map map){
+    public static String getMessageActions(def actions){
         String data = ""
-        map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
+        actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
             if(action in MapMessage){
                 data += """<mapMessage>
 ${getBaseActionProperties(action)}
@@ -166,9 +192,9 @@ ${action.message}
         return data
     }
 
-    public static String getPvpSelectActions(Map map){
+    public static String getPvpSelectActions(def actions){
         String data = ""
-        map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
+        actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
             if(action in PvpSelectAction){
                 data += """<pvpSelectAction>
 ${getBaseActionProperties(action)}
@@ -179,9 +205,9 @@ ${getBaseActionProperties(action)}
         return data
     }
 
-    public static String getRecoverActions(Map map){
+    public static String getRecoverActions(def actions){
         String data = ""
-        map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
+        actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
             if(action in RecoverAction){
                 data += """<recoverAction>
 ${getBaseActionProperties(action)}
@@ -192,9 +218,9 @@ ${getBaseActionProperties(action)}
         return data
     }
 
-    public static String getComputerActions(Map map){
+    public static String getComputerActions(def actions){
         String data = ""
-        map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
+        actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
             if(action in ComputerAction){
                 data += """<computerAction>
 ${getBaseActionProperties(action)}
@@ -205,9 +231,9 @@ ${getBaseActionProperties(action)}
         return data
     }
 
-    public static String getMaptransitions(Map map){
+    public static String getMaptransitions(def actions){
         String data = ""
-        map.actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
+        actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
             if(action in MapTransition){
                 if (action.jumpTo){
                     data += """<mapTransition>
