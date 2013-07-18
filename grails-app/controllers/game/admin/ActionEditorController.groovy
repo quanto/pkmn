@@ -138,7 +138,9 @@ class ActionEditorController {
         else if (params.actionTypeClass == 'PersonAction'){
             action = new PersonAction(params)
         }
-
+        else if (params.actionTypeClass == 'MessagePersonAction'){
+            action = new MessagePersonAction(params)
+        }
         assert action
 
         // If we got an altMap it should not belong to the map

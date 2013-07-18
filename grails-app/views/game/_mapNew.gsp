@@ -26,38 +26,41 @@
     var actionObjects = new Array(
         <%
 
-            def clientActions
+            def actions
             if (player.altMap){
-                clientActions = player.altMap.actions.collect{ it }
+                actions = player.altMap.actions.collect{ it }
             }
             else {
-                clientActions = map.actions.collect{ it }
+                actions = map.actions.collect{ it }
             }
 
             // remove one time actions
-            clientActions.removeAll { it.placeOneTimeActionLock && OneTimeActionLock.findByPlayerAndAction(player, it) }
+            actions.removeAll { it.placeOneTimeActionLock && OneTimeActionLock.findByPlayerAndAction(player, it) }
         %>
-        <g:each in="${clientActions}" var="clientAction" status="i">
+        <g:each in="${actions}" var="action" status="i">
             {
-                id:"actionObject${clientAction.id}",
-                clientAction:${clientAction.actionType == ActionType.Client || clientAction.actionType == ActionType.Mixed},
-                serverAction:${clientAction.actionType == ActionType.Server || clientAction.actionType == ActionType.Mixed},
-                y:${clientAction.positionY},
-                x:${clientAction.positionX},
-                cssClass:"${clientAction.cssClass?:''}",
-                <g:if test="${clientAction.image}">
-                    backgroundImage:"${createLink(uri:'')}${clientAction.image}",
+                id:"actionObject${action.id}",
+                clientAction:${action.actionType == ActionType.Client || action.actionType == ActionType.Mixed},
+                serverAction:${action.actionType == ActionType.Server || action.actionType == ActionType.Mixed},
+                y:${action.positionY},
+                x:${action.positionX},
+                cssClass:"${action.cssClass?:''}",
+                <g:if test="${action.image}">
+                    backgroundImage:"${createLink(uri:'')}${action.image}",
                 </g:if>
-                triggerBeforeStep:${clientAction.triggerBeforeStep},
-                triggerOnActionButton:${clientAction.triggerOnActionButton},
-                action:"${clientAction.actionFunction}",
-                <g:if test="${clientAction in PersonAction && clientAction.macro}">
-                    macro:"${clientAction.macro}",
+                triggerBeforeStep:${action.triggerBeforeStep},
+                triggerOnActionButton:${action.triggerOnActionButton},
+                action:"${action.actionFunction}",
+                <g:if test="${action in PersonAction && action.macro}">
+                    macro:"${action.macro}",
                 </g:if>
-                correctionLeft:${clientAction.correctionLeft?:0},
-                correctionTop:${clientAction.correctionTop?:0}
+                <g:if test="${action in MessagePersonAction}">
+                    message:"${action.message}",
+                </g:if>
+                correctionLeft:${action.correctionLeft?:0},
+                correctionTop:${action.correctionTop?:0}
             }
-            <g:if test="${clientAction != clientActions.last()}">,</g:if>
+            <g:if test="${action != actions.last()}">,</g:if>
         </g:each>
     );
 
@@ -67,7 +70,7 @@
 //                id:"actionObject3",
 //                y:10,
 //                x:10,
-//                clientAction:true,
+//                action:true,
 //                serverAction:false,
 //                cssClass:"actionObject spritely",
 //                backgroundImage:"/game/images/chars/person1.png",

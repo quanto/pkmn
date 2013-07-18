@@ -56,6 +56,7 @@ ${getBoulderActions(actions)}
 ${getBushActions(actions)}
 ${getFindItemActions(actions)}
 ${getPersonActions(actions)}
+${getMessagePersonActions(actions)}
 """
     }
 
@@ -95,15 +96,33 @@ ${action.correctionTop?:''}
 ${action.cssClass?:''}"""
     }
 
+    public static String getPersonActionProperties(Action action){
+        """${getBaseActionProperties(action)}
+${action.characterImage.name()}
+${action.macro}"""
+    }
+
     public static String getPersonActions(def actions){
         String data = ""
         actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
             if(action in PersonAction){
                 data += """<personAction>
-${getBaseActionProperties(action)}
-${action.characterImage.name()}
-${action.macro}
+${getPersonActionProperties(action)}
 </personAction>
+"""
+            }
+        }
+        return data
+    }
+
+    public static String getMessagePersonActions(def actions){
+        String data = ""
+        actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
+            if(action in PersonAction){
+                data += """<messagePersonAction>
+${getPersonActionProperties(action)}
+${action.message}
+</messagePersonAction>
 """
             }
         }

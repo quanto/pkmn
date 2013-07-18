@@ -301,6 +301,16 @@
                         <g:textField name="macro" value="${action.macro}" />
                     </td>
                 </tr>
+                <g:if test="${action in game.action.MessagePersonAction}">
+                    <tr>
+                        <td>
+                            Message:
+                        </td>
+                        <td>
+                            <g:textField name="message" value="${action.message}" />
+                        </td>
+                    </tr>
+                </g:if>
                 <tr>
                     <td>
 

@@ -379,13 +379,22 @@ function person(pos, direction, $actionObject){
     //return move($actionObject.attr('id'), direction);
 }
 
+function messagePerson(pos, direction, $actionObject){
+    setMessage($actionObject.attr('message'));
+    return false;
+}
+
 function personMacro(pos, macroChar, $actionObject){
+    return move($actionObject.attr('id'), macroChar);
+}
+
+function messagePersonMacro(pos, macroChar, $actionObject){
     return move($actionObject.attr('id'), macroChar);
 }
 
 function findItem(pos, direction, $actionObject)
 {
-    removeActionObject($actionObject)
+    removeActionObject($actionObject);
     return true;
 }
 

@@ -5,7 +5,7 @@ Create action
     <g:hiddenField name="altMapId" value="${altMap?.id}" />
     <g:hiddenField name="positionX" value="${positionX}" />
     <g:hiddenField name="positionY" value="${positionY}" />
-    <g:select name="actionTypeClass" onchange="actionTypeChanged(this)" noSelection="['':'-Choose Action-']" from="${['NpcAction','MapTransition', 'PvpSelectAction', 'ComputerAction', 'MapMessage', 'MarketAction', 'RecoverAction', 'BoulderAction', 'BushAction', 'FindItemAction', 'PersonAction']}" />
+    <g:select name="actionTypeClass" onchange="actionTypeChanged(this)" noSelection="['':'-Choose Action-']" from="${['NpcAction','MapTransition', 'PvpSelectAction', 'ComputerAction', 'MapMessage', 'MarketAction', 'RecoverAction', 'BoulderAction', 'BushAction', 'FindItemAction', 'PersonAction', 'MessagePersonAction']}" />
     <div id="MapMessage" style="display: none">
         <g:textField name="message" />
     </div>

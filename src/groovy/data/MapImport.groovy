@@ -96,6 +96,12 @@ class MapImport {
                         importPersonAction(parts,map, altMap)
                         parts = []
                     }
+                    else if (line.contains("</messagePersonAction>")){
+                        node = ""
+                        importMessagePersonAction(parts,map, altMap)
+                        parts = []
+                    }
+
                     else if (line.contains("</pokemon>")){
                         node = ""
                         importMapPokemon(parts,map)
@@ -144,6 +150,9 @@ class MapImport {
                     }
                     else if (line.contains("<personAction>")){
                         node = "personAction"
+                    }
+                    else if (line.contains("<messagePersonAction>")){
+                        node = "messagePersonAction"
                     }
                     else if (line.contains("<pokemon>")){
                         node = "pokemon"
@@ -305,6 +314,21 @@ class MapImport {
         addMapOrAltMap(action, map, altMap)
         addBaseActionProperties(action,parts)
         npc.npcAction = action
+        action.save()
+    }
+
+
+
+    public static void importMessagePersonAction(def parts, Map map, AltMap altMap){
+
+        MessagePersonAction action = new MessagePersonAction(
+                characterImage: CharacterImage.valueOf(parts[totalBaseActionProperties+1]),
+                macro: parts[totalBaseActionProperties+2],
+                message: parts[totalBaseActionProperties+3]
+        )
+        addMapOrAltMap(action, map, altMap)
+        addBaseActionProperties(action,parts)
+
         action.save()
     }
 
