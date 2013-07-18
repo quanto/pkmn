@@ -253,21 +253,21 @@ $(document).keypress(function(e)
             case 97:
                 move("player","left");
                 break;
-
             case 119:
                 move("player","up");
                 break;
-
             case 100:
                 move("player","right");
                 break;
-
             case 115:
                 move("player","down");
                 break;
             case 32:
                 //spatie
                 actionA("up");
+                break;
+            case 13:
+                sendChatMessage();
                 break;
         };
 
