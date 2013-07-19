@@ -1,3 +1,4 @@
+<%@ page import="org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils; game.social.ChatScope" %>
 <!doctype html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
@@ -97,7 +98,13 @@
                     <table style="width:100%;">
                         <tr>
                             <td width="20%">
-                                <g:select name="chatScope" value="${game.social.ChatScope.Map}" from="${game.social.ChatScope.values()}" onchange="\$('#chatMessage').select()" />
+                                <%
+                                    def scopes = [ChatScope.Map,ChatScope.Friends]
+                                    if (SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')){
+                                        scopes.add(ChatScope.Global)
+                                    }
+                                %>
+                                <g:select name="chatScope" value="${ChatScope.Map}" from="${scopes}" onchange="\$('#chatMessage').select()" />
                             </td>
                             <td width="80%">
                                 <input type="text" id="chatMessage" />

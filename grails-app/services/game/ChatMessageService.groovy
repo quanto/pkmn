@@ -1,6 +1,7 @@
 package game
 
 import game.social.ChatScope
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 class ChatMessageService {
 
@@ -36,18 +37,23 @@ class ChatMessageService {
 
         chatMessageList.each { ChatMessage chatMessage ->
 
-            string += "<div class='${chatMessage.chatScope.name()}'><strong>${chatMessage.player.username}@${chatMessage.chatScope.name()}:</strong><em class='chatTime'>(${chatMessage.date.format("dd/MM-mm:ss")})</em> ${chatMessage.message.encodeAsHTML()}</div>"
+            string += "<div class='${chatMessage.chatScope.name()}'><strong>${chatMessage.player.username}@${chatMessage.chatScope==ChatScope.Private?chatMessage.toPlayer.username:chatMessage.chatScope.name()}:</strong><em class='chatTime'>(${chatMessage.date.format("dd/MM-mm:ss")})</em> ${chatMessage.message.encodeAsHTML()}</div>"
         }
 
         return string
     }
 
     void send(String chatScope, String message, Player player) {
+        ChatScope scope = ChatScope.valueOf(chatScope)
+        if ((!SpringSecurityUtils.ifAllGranted('ROLE_ADMIN') && scope == ChatScope.Global) || scope == ChatScope.Private){
+            return
+        }
+
         chatCount += 1
 
         ChatMessage chatMessage = new ChatMessage(
                 id: chatCount,
-                chatScope: ChatScope.valueOf(chatScope),
+                chatScope: scope,
                 message: message,
                 player: player
         )

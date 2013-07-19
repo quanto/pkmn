@@ -10,7 +10,7 @@
     <g:each in="${friends}" var="player">
         <g:if test="${ownPlayer != player || 1==1}">
             <tr>
-                <td id='row'>${player.username}</td>
+                <td id='row'><a href="#" onclick="setPrivateMessage('${player.username}')">${player.username}</a></td>
                 <td id='row'>${player.map.name}</td>
                 <g:if test="${onlinePlayers.find{ it.username == player.username} }">
                     <td class='online'>Online</td>
