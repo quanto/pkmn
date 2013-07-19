@@ -1,13 +1,25 @@
+
+var lastChatId = '0';
+
 function updateChat()
 {
+    $chatbox = $("#chatBox");
+    var maxMessages = 100;
+
     $.ajax({
         type: "GET",
         url: serverUrl + "/chat/index",
-        data: "",
+        data: "lastChatId="+lastChatId,
         cache: false,
         success: function(chatMessages){
-            $("#chatBox").html(chatMessages);
-            el = document.getElementById("chatBox");
+            $chatbox.append(chatMessages);
+
+            var $messages = $chatbox.find('div')
+            if ($messages.length > maxMessages){
+                $messages.slice(0,$messages.length - maxMessages).remove()
+            }
+
+            var el = document.getElementById("chatBox");
             el.scrollTop = el.scrollHeight;
         }
     });
@@ -22,7 +34,7 @@ function sendChatMessage()
         $.ajax({
             type: "POST",
             url: serverUrl + "/chat/send",
-            data: "chatMessage="+message,
+            data: "chatScope=" + $("#chatScope").val() + "&mapId=" + mapId + "&message="+message,
             success: function(chatMessages){
                 updateChat();
             }

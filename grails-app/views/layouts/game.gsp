@@ -94,7 +94,18 @@
                 <div class="chatBox" id="chatBox">
                 </div>
                 <div>
-                    <input type="text" id="chatMessage" />
+                    <table style="width:100%;">
+                        <tr>
+                            <td width="20%">
+                                <g:select name="chatScope" value="${game.social.ChatScope.Map}" from="${game.social.ChatScope.values()}" onchange="\$('#chatMessage').select()" />
+                            </td>
+                            <td width="80%">
+                                <input type="text" id="chatMessage" />
+                            </td>
+                        </tr>
+                    </table>
+
+
                 </div>
             </td>
         </tr>

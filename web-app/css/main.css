@@ -49,6 +49,11 @@ body {
     font-family:"Times New Roman", Times, serif;
 }
 
+#chatScope{
+    width:100%;
+    height: 30px;
+}
+
 #chatMessage{
     height: 30px;
     border:0;
@@ -541,4 +546,21 @@ a.skip {
     background-position: 0px 0px;
     background-repeat: no-repeat;
     height: 32px;
+}
+
+/* Chat */
+#chatBox .Global {
+    color:#0000FF;
+}
+
+#chatBox .Map {
+    color:#4AA02C;
+}
+
+#chatBox .Friends {
+    color:#800080;
+}
+
+#chatBox .Private {
+    color:#FF0080;
 }
