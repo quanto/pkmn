@@ -12,6 +12,9 @@ class ChatMessageService {
 
     String getChatMessages(Long lastChatId, Player player){
 
+        // Remove old messages
+        chatMessages.removeAll{ it.date < new Date()-1 }
+
         def chatMessageList = chatMessages.findAll{ ChatMessage chatMessage ->
 
             if (chatMessage.id <= lastChatId){
