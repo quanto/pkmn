@@ -58,6 +58,7 @@ ${player.characterImage}
 ${roleData}
 ${ItemBackup.getItemBackupData(player)}
 ${NpcLockBackup.getNpcLockData(player)}
+${getFriends(player)}
 """
 
             playerData += OwnerBackup.getOwnerPokemonBackupData(player)
@@ -71,6 +72,14 @@ ${NpcLockBackup.getNpcLockData(player)}
         }catch (Exception e){
             System.err.println("Error: " + e.getMessage());
         }
+    }
+
+    private static String getFriends(Player player){
+        String friends = player.friends.collect{ it.username }.join('\n')
+
+        return """<friends>
+${friends}
+</friends>"""
     }
 
 }

@@ -92,6 +92,52 @@ class PlayerImport {
             }
 
         }
+        new File('import/players/').listFiles().each { File file ->
+
+            String node = ""
+
+            def parts = []
+
+            Player player
+
+            file.eachLine { line ->
+
+                if (line.contains("</playerData>")){
+                    node = ""
+                    player = Player.findByUsername(parts[0])
+                    parts = []
+                }
+                else if (line.contains("</friends>")){
+                    node = ""
+                    addFriends(player, parts)
+                    parts = []
+                }
+
+                if (node){
+                    parts.add(line)
+                }
+
+                if (line.contains("<playerData>")){
+                    node = "playerData"
+                }
+                else if (line.contains("<friends>")){
+                    node = "friends"
+                }
+            }
+
+        }
+    }
+
+    public static void addFriends(Player player,def parts){
+        parts.each{ String username ->
+            Player friend = Player.findByUsername(username)
+            if (friend){
+                player.addToFriends(friend)
+            }
+            else {
+                println "Can not add friend ${username} to ${player.username}"
+            }
+        }
     }
 
     public static void createNpcLock(Player player,def parts){

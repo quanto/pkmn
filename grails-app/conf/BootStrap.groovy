@@ -97,7 +97,15 @@ class BootStrap {
 
             new NewsItem(
                     message: """
-                        Made a client side refactor
+                        Made a client side refactor.
+                    """,
+                    player: Player.findByUsername("kevin"),
+                    date: new Date().parse("dd-MM-yyyy HH:mm:ss","05-07-2013 12:00:00")
+            ).save()
+
+            new NewsItem(
+                    message: """
+                        Chat has been improved. Messages are now scoped. Also a simple friend system was introduced.
                     """,
                     player: Player.findByUsername("kevin"),
                     date: new Date().parse("dd-MM-yyyy HH:mm:ss","05-07-2013 12:00:00")
