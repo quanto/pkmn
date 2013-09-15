@@ -1,0 +1,29 @@
+<npcData>
+yummN0Mg4YSGv44
+Twin1
+false
+
+I'm way stronger then my sister. Bring it on!
+</npcData>
+<ownerPokemon>
+false
+15
+15
+18
+5
+21
+4
+18
+34
+Female
+1
+1000
+10
+</ownerPokemon>
+<ownerMove>
+Fury Attack
+20
+</ownerMove>
+
+
+
