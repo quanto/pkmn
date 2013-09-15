@@ -1,25 +1,26 @@
 <playerData>
 Lieke
 Lieke
-ef5f47b75cd5b7dc3116039166423ae997913681c27026004a81442d92235c9e
+75371d8263752157609d3226aa988ac479a5572190600a9a18871f9d8ac6f22c
 true
 null
 null
-20-10-2012 18:27:31
-Glooming forest -1x0
+20-10-2012 00:00:00
+Glooming forest -2x1
 Glooming forest center
 4
 6
-12
-12
-216
-ShowMap
 6
 0
+218
+ShowMap
+7
+0
 2
 2
 2
 0
+girl2
 </playerData>
 <role>
 ROLE_MAP_EDITOR
@@ -35,12 +36,9 @@ Cherish Ball
 </ownerItem>
             
 
-<npcLock>
-12345
-16-11-2012 12:04:59
-true
-</npcLock>
-            
+<friends>
+
+</friends>
 <ownerPokemon>
 false
 1
@@ -130,15 +128,15 @@ false
 15
 6
 4
-28
+18
 Male
 1
-727
-10
+751
+11
 </ownerPokemon>
 <ownerMove>
 Ember
-25
+24
 </ownerMove>
 <ownerMove>
 Growl
@@ -146,7 +144,7 @@ Growl
 </ownerMove>
 <ownerMove>
 Scratch
-35
+33
 </ownerMove>
 
 <ownerPokemon>

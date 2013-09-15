@@ -6,28 +6,33 @@ true
 verhoef.k@gmail.com
 null
 20-10-2012 00:00:00
-Glooming forest -1x2
-Glooming forest center
+Passage to Glooming forest
+Overworld south center
 4
 6
-24
-13
-620
+8
+11
+689
 ShowMap
-108
+125
 2
 23
 3
 3
 0
+person2
 </playerData>
 <role>
 ROLE_ADMIN
 </role>
 
 <ownerItem>
-Poke Ball
-2
+Beginner Badge
+5
+</ownerItem>
+            <ownerItem>
+Antidote
+1
 </ownerItem>
             <ownerItem>
 Old factory key
@@ -38,59 +43,22 @@ Potion
 19
 </ownerItem>
             <ownerItem>
-Beginner Badge
-5
+Cherish Ball
+1
+</ownerItem>
+            <ownerItem>
+Poke Ball
+2
+</ownerItem>
+            <ownerItem>
+Timer Ball
+10
 </ownerItem>
             
 
-<npcLock>
-cePS20cZXHM9M7p
-16-11-2012 12:04:59
-true
-</npcLock>
-            
-<npcLock>
-12345
-16-11-2012 12:04:59
-true
-</npcLock>
-            
-<npcLock>
-Hsb4uOE4qimDRvt
-16-11-2012 12:04:59
-true
-</npcLock>
-            
-<npcLock>
-Hsb4uOE4qimDRvt
-16-11-2012 12:04:59
-true
-</npcLock>
-            
-<npcLock>
-Hsb4uOE4qimDRvt
-16-11-2012 12:04:59
-true
-</npcLock>
-            
-<npcLock>
-Hsb4uOE4qimDRvt
-16-11-2012 12:04:59
-true
-</npcLock>
-            
-<npcLock>
-Hsb4uOE4qimDRvt
-16-11-2012 12:04:59
-true
-</npcLock>
-            
-<npcLock>
-yummN0Mg4YSGv44
-16-11-2012 12:04:59
-false
-</npcLock>
-            
+<friends>
+test
+</friends>
 <ownerPokemon>
 false
 8
@@ -106,52 +74,36 @@ Male
 4992
 50
 </ownerPokemon>
-<ownerMove>
-Bite
-25
-</ownerMove>
-<ownerMove>
-Bite
-25
-</ownerMove>
-<ownerMove>
-Tackle
-35
-</ownerMove>
-<ownerMove>
-Water Gun
-25
-</ownerMove>
 
 <ownerPokemon>
 false
 1
-10
-9
 11
-10
 19
 2
+22
+7
+8
 110
 Male
 1
-120089
+118049
 50
 </ownerPokemon>
 <ownerMove>
-Dig
-10
+Growl
+40
 </ownerMove>
 <ownerMove>
-Fly
-12
+Sleep Powder
+14
 </ownerMove>
 <ownerMove>
-Razor Leaf
-25
+Synthesis
+5
 </ownerMove>
 <ownerMove>
 Vine Whip
-11
+10
 </ownerMove>
 
