@@ -548,6 +548,10 @@ a.skip {
     height: 32px;
 }
 
+.overworldPokemon {
+    width: 32px;
+}
+
 /* Chat */
 #chatBox .Global {
     color:#0000FF;

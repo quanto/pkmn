@@ -151,7 +151,7 @@ function move(objectId, direction)
         if (checkPosition(pos,direction))
         {
             var y = pos.y * 16;
-            y -= $moveObj.height() - 16;
+            //y -= $moveObj.height() - 16;
 
             // update the location
             var $actionObject = $("#"+objectId);
@@ -159,8 +159,8 @@ function move(objectId, direction)
             $actionObject.attr('y',pos.y);
 
             $moveObj.animate({
-                left: pos.x * 16 + "px",
-                top: y + "px"
+                left: ((pos.x * 16) + parseInt($actionObject.attr('correctionLeft'))) + "px",
+                top: (y + parseInt($actionObject.attr('correctionTop'))) + "px"
             },{
                 duration: 250,
                 complete: function() {

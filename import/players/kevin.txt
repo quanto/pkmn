@@ -11,7 +11,7 @@ Overworld south center
 4
 6
 8
-11
+8
 689
 ShowMap
 125
@@ -31,28 +31,28 @@ Beginner Badge
 5
 </ownerItem>
             <ownerItem>
-Antidote
-1
-</ownerItem>
-            <ownerItem>
 Old factory key
 1
-</ownerItem>
-            <ownerItem>
-Potion
-19
 </ownerItem>
             <ownerItem>
 Cherish Ball
 1
 </ownerItem>
             <ownerItem>
-Poke Ball
-2
+Antidote
+1
 </ownerItem>
             <ownerItem>
 Timer Ball
 10
+</ownerItem>
+            <ownerItem>
+Potion
+19
+</ownerItem>
+            <ownerItem>
+Poke Ball
+2
 </ownerItem>
             
 

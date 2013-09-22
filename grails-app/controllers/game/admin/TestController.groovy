@@ -7,11 +7,124 @@ import game.Player
 import game.OwnerPokemon
 import game.OwnerMove
 
+import javax.swing.ImageIcon
+import java.awt.AlphaComposite
+import java.awt.Graphics
+import java.awt.Graphics2D
+import java.awt.GraphicsConfiguration
+import java.awt.GraphicsDevice
+import java.awt.GraphicsEnvironment
+import java.awt.HeadlessException
+import java.awt.Image
+import java.awt.Toolkit
+import java.awt.Transparency
+import java.awt.image.BufferedImage
+import java.awt.image.ColorModel
+import java.awt.image.PixelGrabber
+
 class TestController {
 
     FightFactoryService fightFactoryService
 
     def sessionRegistry
+
+    def gen(){
+
+        Image img
+        if (new File("web-app/images/pkmn.png").exists()){
+            while (!img || img.getHeight(null) < 0 || img.getWidth(null) < 0){
+                println "load"
+                img = Toolkit.getDefaultToolkit().getImage("web-app/images/pkmn.png")
+            }
+        }
+
+        def bufferedImg = MapLayout.toBufferedImage(img)
+
+//        (25..26).each{ int count ->
+            int count = 151 + 1
+            int correctionLeft = 0
+            int countCorrection = -1
+
+            int row = Math.floor(count / 15)
+
+            int blockWidth = (65*(count % 15))
+            int blockHeight = (129*(row)) + 3
+            if (blockWidth){
+                blockWidth += 1
+            }
+
+            int width = 31
+            width = 27
+
+            int height = 31
+
+
+//            println blockWidth
+
+
+            def back1 = bufferedImg.getSubimage(blockWidth+0,blockHeight+0,width,height)
+            def back2 = bufferedImg.getSubimage(blockWidth + 0,blockHeight+32,width,height)
+            def front1 = bufferedImg.getSubimage(blockWidth + 0,blockHeight+64,width,height)
+            def front2 = bufferedImg.getSubimage(blockWidth + 0,blockHeight+96,width,height)
+
+            def left1 = bufferedImg.getSubimage(blockWidth + 32,blockHeight+0,width,height)
+            def left2 = bufferedImg.getSubimage(blockWidth + 32,blockHeight+32,width,height)
+            def right1 = bufferedImg.getSubimage(blockWidth + 32,blockHeight+64,width,height)
+            def right2 = bufferedImg.getSubimage(blockWidth + 32,blockHeight+96,width,height)
+
+            BufferedImage bufferedImage = new BufferedImage(32*4, 32*4, BufferedImage.TYPE_INT_ARGB);
+
+            Graphics2D g2d = bufferedImage.createGraphics();
+
+            g2d.setComposite(AlphaComposite.Src)
+
+            g2d.drawImage(front1, 0, 0,back1.getWidth(null),back1.getHeight(null), null);
+            g2d.drawImage(front2, 32, 0,back2.getWidth(null),back2.getHeight(null), null);
+            g2d.drawImage(front1, 32*2, 0,back1.getWidth(null),back1.getHeight(null), null);
+            g2d.drawImage(front2, 32*3, 0,back2.getWidth(null),back2.getHeight(null), null);
+
+            g2d.drawImage(back1, 0, 32,back1.getWidth(null),back1.getHeight(null), null);
+            g2d.drawImage(back2, 32, 32,back2.getWidth(null),back2.getHeight(null), null);
+            g2d.drawImage(back1, 32*2, 32,back1.getWidth(null),back1.getHeight(null), null);
+            g2d.drawImage(back2, 32*3, 32,back2.getWidth(null),back2.getHeight(null), null);
+
+            g2d.drawImage(left1, 0, 32*2,back1.getWidth(null),back1.getHeight(null), null);
+            g2d.drawImage(left2, 32, 32*2,back2.getWidth(null),back2.getHeight(null), null);
+            g2d.drawImage(left1, 32*2, 32*2,back1.getWidth(null),back1.getHeight(null), null);
+            g2d.drawImage(left2, 96, 32*2,back2.getWidth(null),back2.getHeight(null), null);
+
+            g2d.drawImage(right1, 0, 32*3,back1.getWidth(null),back1.getHeight(null), null);
+            g2d.drawImage(right2, 32, 32*3,back2.getWidth(null),back2.getHeight(null), null);
+            g2d.drawImage(right1, 32*2, 32*3,back1.getWidth(null),back1.getHeight(null), null);
+            g2d.drawImage(right2, 32*3, 32*3,back2.getWidth(null),back2.getHeight(null), null);
+
+            g2d.dispose()
+
+            ImageIO.write(bufferedImage, "png", new File("web-app/images/followers/${count+countCorrection}.png"))
+
+            render text:"<img src='/game/images/followers/${count+countCorrection}.png'/>${count+countCorrection}"
+//        }
+    }
+
+    public static boolean hasAlpha(Image image) {
+        // If buffered image, the color model is readily available
+        if (image instanceof BufferedImage) {
+            BufferedImage bimage = (BufferedImage)image;
+            return bimage.getColorModel().hasAlpha();
+        }
+
+        // Use a pixel grabber to retrieve the image's color model;
+        // grabbing a single pixel is usually sufficient
+        PixelGrabber pg = new PixelGrabber(image, 0, 0, 1, 1, false);
+        try {
+            pg.grabPixels();
+        } catch (InterruptedException e) {
+        }
+
+        // Get the image's color model
+        ColorModel cm = pg.getColorModel();
+        return cm.hasAlpha();
+    }
 
     def test2(){
         // 0, 407 rows

@@ -68,19 +68,20 @@
 //    // Test object
 //    actionObjects.push(
 //            {
-//                id:"actionObject3",
+//                id:"actionObject666",
 //                y:10,
 //                x:10,
 //                action:true,
+//                clientAction:true,
 //                serverAction:false,
-//                cssClass:"actionObject spritely",
-//                backgroundImage:"/game/images/chars/person1.png",
+//                cssClass:"actionObject spritely overworldPokemon",
+//                backgroundImage:"/game/images/followers/51.png",
 //                triggerBeforeStep:true,
 //                triggerOnActionButton:false,
 //                action:"person",
-//                correctionLeft:0,
+//                correctionLeft:-8,
 //                correctionTop:-16,
-//                macro:'llrr'
+//                macro:'lr'
 //            }
 //    );
 
@@ -108,7 +109,7 @@
 <div style="position:relative;height:${mapLayout.getRows() * 16}px;width: ${mapLayout.getColumns() * 16}px;">
     <img style="position:absolute;top:0px;left:0px;" src="${resource(uri:'')}${map.getForegroundImage(player.altMap)}" />
 
-    <div id="player" class="player spritely actionObject" />
+    <div id="player" class="player spritely actionObject" correctionTop="-16" correctionLeft="0" />
 
     <div id="objectContainer">
 
