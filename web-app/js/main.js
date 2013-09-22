@@ -324,6 +324,28 @@ function loadmap()
                 obj.spStop(true);
             }
         }).spStop(true);
+
+
+        var initialDirection = $(value).attr('initialDirection');
+        if (initialDirection == 'u')
+        {
+            $(value).spState(2);
+        }
+        else if (initialDirection == 'd')
+        {
+            $(value).spState(1);
+
+        }
+        else if (initialDirection == 'l')
+        {
+            $(value).spState(3);
+        }
+        else if (initialDirection == 'r')
+        {
+            $(value).spState(4);
+        }
+
+
     });
 
     updateLocation(playerPosition.x, playerPosition.y);

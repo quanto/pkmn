@@ -1,4 +1,4 @@
-<%@ page import="game.item.UsableItem; game.item.Item; game.item.Item; game.action.FindItemAction; game.action.MapTransition; game.action.MarketAction; game.action.NpcAction; game.Pokemon; game.OwnerPokemon; game.action.MapMessage" %>
+<%@ page import="game.action.MessagePokemonAction; game.item.UsableItem; game.item.Item; game.item.Item; game.action.FindItemAction; game.action.MapTransition; game.action.MarketAction; game.action.NpcAction; game.Pokemon; game.OwnerPokemon; game.action.MapMessage" %>
 <div>
     <g:link action="deleteAction" id="${action.id}">Delete Action</g:link>
 
@@ -294,7 +294,16 @@
                         <g:textField name="macro" value="${action.macro}" />
                     </td>
                 </tr>
-                <g:if test="${action in game.action.MessagePersonAction}">
+                <tr>
+                    <td>
+                        InitialDirection:
+                    </td>
+                    <td>
+                        <g:textField name="initialDirection" value="${action.initialDirection}" />
+                    </td>
+                </tr>
+
+                <g:if test="${action in game.action.MessagePersonAction || action in MessagePokemonAction}">
                     <tr>
                         <td>
                             Message:

@@ -11,7 +11,7 @@ class CharacterAction extends Action {
     String cssClass = "actionObject spritely"
     Integer correctionLeft = 0
     Integer correctionTop = -16
-
+    String initialDirection = "d"
     String macro = "llrr"
 
     boolean triggerOnActionButton = false

@@ -106,6 +106,11 @@ class MapImport {
                         importPokemonAction(parts,map, altMap)
                         parts = []
                     }
+                    else if (line.contains("</messagePokemonAction>")){
+                        node = ""
+                        importMessagePokemonAction(parts,map, altMap)
+                        parts = []
+                    }
                     else if (line.contains("</pokemon>")){
                         node = ""
                         importMapPokemon(parts,map)
@@ -160,6 +165,9 @@ class MapImport {
                     }
                     else if (line.contains("<pokemonAction>")){
                         node = "pokemonAction"
+                    }
+                    else if (line.contains("<messagePokemonAction>")){
+                        node = "messagePokemonAction"
                     }
                     else if (line.contains("<pokemon>")){
                         node = "pokemon"
@@ -324,14 +332,27 @@ class MapImport {
         action.save()
     }
 
+    public static void importMessagePokemonAction(def parts, Map map, AltMap altMap){
 
+        MessagePokemonAction action = new MessagePokemonAction(
+                pokemonNr: Integer.parseInt(parts[totalBaseActionProperties+1]),
+                macro: parts[totalBaseActionProperties+2],
+                initialDirection: parts[totalBaseActionProperties+3],
+                message: parts[totalBaseActionProperties+4]
+        )
+        addMapOrAltMap(action, map, altMap)
+        addBaseActionProperties(action,parts)
+
+        action.save()
+    }
 
     public static void importMessagePersonAction(def parts, Map map, AltMap altMap){
 
         MessagePersonAction action = new MessagePersonAction(
                 characterImage: CharacterImage.valueOf(parts[totalBaseActionProperties+1]),
                 macro: parts[totalBaseActionProperties+2],
-                message: parts[totalBaseActionProperties+3]
+                initialDirection: parts[totalBaseActionProperties+3],
+                message: parts[totalBaseActionProperties+4]
         )
         addMapOrAltMap(action, map, altMap)
         addBaseActionProperties(action,parts)
@@ -343,7 +364,8 @@ class MapImport {
 
         PokemonAction action = new PokemonAction(
                 pokemonNr: Integer.parseInt(parts[totalBaseActionProperties+1]),
-                macro: parts[totalBaseActionProperties+2]
+                macro: parts[totalBaseActionProperties+2],
+                initialDirection: parts[totalBaseActionProperties+3],
         )
         addMapOrAltMap(action, map, altMap)
         addBaseActionProperties(action,parts)
@@ -355,7 +377,8 @@ class MapImport {
 
         PersonAction action = new PersonAction(
                 characterImage: CharacterImage.valueOf(parts[totalBaseActionProperties+1]),
-                macro: parts[totalBaseActionProperties+2]
+                macro: parts[totalBaseActionProperties+2],
+                initialDirection: parts[totalBaseActionProperties+3],
         )
         addMapOrAltMap(action, map, altMap)
         addBaseActionProperties(action,parts)

@@ -58,6 +58,7 @@ ${getFindItemActions(actions)}
 ${getPersonActions(actions)}
 ${getMessagePersonActions(actions)}
 ${getPokemonActions(actions)}
+${getMessagePokemonActions(actions)}
 """
     }
 
@@ -100,13 +101,15 @@ ${action.cssClass?:''}"""
     public static String getPersonActionProperties(Action action){
         """${getBaseActionProperties(action)}
 ${action.characterImage.name()}
-${action.macro}"""
+${action.macro}
+$action.initialDirection"""
     }
 
     public static String getPokemonActionProperties(Action action){
         """${getBaseActionProperties(action)}
 ${action.pokemonNr}
-${action.macro}"""
+${action.macro}
+${action.initialDirection}"""
     }
 
     public static String getPokemonActions(def actions){
@@ -129,6 +132,22 @@ ${getPokemonActionProperties(action)}
                 data += """<personAction>
 ${getPersonActionProperties(action)}
 </personAction>
+"""
+            }
+        }
+        return data
+    }
+
+
+
+    public static String getMessagePokemonActions(def actions){
+        String data = ""
+        actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
+            if(action in MessagePokemonAction){
+                data += """<messagePokemonAction>
+${getPokemonActionProperties(action)}
+${action.message}
+</messagePokemonAction>
 """
             }
         }

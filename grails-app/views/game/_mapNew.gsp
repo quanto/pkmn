@@ -65,7 +65,7 @@
         </g:each>
     );
 
-//    // Test object
+    // Test object
 //    actionObjects.push(
 //            {
 //                id:"actionObject666",
@@ -81,6 +81,7 @@
 //                action:"person",
 //                correctionLeft:-8,
 //                correctionTop:-16,
+//                initialDirection:"l",
 //                macro:'lr'
 //            }
 //    );

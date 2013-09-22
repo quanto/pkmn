@@ -144,6 +144,9 @@ class ActionEditorController {
         else if (params.actionTypeClass == 'PokemonAction'){
             action = new PokemonAction(params)
         }
+        else if (params.actionTypeClass == 'MessagePokemonAction'){
+            action = new MessagePokemonAction(params)
+        }
 
         assert action
         assert action.map.id
