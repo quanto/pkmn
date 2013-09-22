@@ -10,7 +10,7 @@ Passage to Glooming forest
 Overworld south center
 4
 6
-8
+7
 8
 689
 ShowMap
@@ -27,11 +27,7 @@ ROLE_ADMIN
 </role>
 
 <ownerItem>
-Beginner Badge
-5
-</ownerItem>
-            <ownerItem>
-Old factory key
+Antidote
 1
 </ownerItem>
             <ownerItem>
@@ -39,20 +35,24 @@ Cherish Ball
 1
 </ownerItem>
             <ownerItem>
-Antidote
-1
+Potion
+19
 </ownerItem>
             <ownerItem>
 Timer Ball
 10
 </ownerItem>
             <ownerItem>
-Potion
-19
-</ownerItem>
-            <ownerItem>
 Poke Ball
 2
+</ownerItem>
+            <ownerItem>
+Beginner Badge
+5
+</ownerItem>
+            <ownerItem>
+Old factory key
+1
 </ownerItem>
             
 

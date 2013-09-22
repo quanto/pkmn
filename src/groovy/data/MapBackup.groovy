@@ -57,6 +57,7 @@ ${getBushActions(actions)}
 ${getFindItemActions(actions)}
 ${getPersonActions(actions)}
 ${getMessagePersonActions(actions)}
+${getPokemonActions(actions)}
 """
     }
 
@@ -102,6 +103,25 @@ ${action.characterImage.name()}
 ${action.macro}"""
     }
 
+    public static String getPokemonActionProperties(Action action){
+        """${getBaseActionProperties(action)}
+${action.pokemonNr}
+${action.macro}"""
+    }
+
+    public static String getPokemonActions(def actions){
+        String data = ""
+        actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
+            if(action in PokemonAction){
+                data += """<pokemonAction>
+${getPokemonActionProperties(action)}
+</pokemonAction>
+"""
+            }
+        }
+        return data
+    }
+
     public static String getPersonActions(def actions){
         String data = ""
         actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
@@ -118,7 +138,7 @@ ${getPersonActionProperties(action)}
     public static String getMessagePersonActions(def actions){
         String data = ""
         actions.sort { it.positionX + "" + it.positionY } .each { Action action ->
-            if(action in PersonAction){
+            if(action in MessagePersonAction){
                 data += """<messagePersonAction>
 ${getPersonActionProperties(action)}
 ${action.message}

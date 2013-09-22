@@ -141,7 +141,12 @@ class ActionEditorController {
         else if (params.actionTypeClass == 'MessagePersonAction'){
             action = new MessagePersonAction(params)
         }
+        else if (params.actionTypeClass == 'PokemonAction'){
+            action = new PokemonAction(params)
+        }
+
         assert action
+        assert action.map.id
 
         // If we got an altMap it should not belong to the map
         if (altMapId){

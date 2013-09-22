@@ -280,19 +280,12 @@
         </g:form>
 
     </g:elseif>
-    <g:elseif test="${action in game.action.PersonAction}">
+    <g:elseif test="${action in game.action.CharacterAction}">
         <g:form action="updateAction">
 
             <table>
                 <g:render template="basicActionInfo" />
-                <tr>
-                    <td>
-                        CharacterImage:
-                    </td>
-                    <td>
-                        <g:select name="characterImage" from="${map.CharacterImage.values()}" value="${action.characterImage}" />
-                    </td>
-                </tr>
+
                 <tr>
                     <td>
                         Macro:
@@ -308,6 +301,27 @@
                         </td>
                         <td>
                             <g:textField name="message" value="${action.message}" />
+                        </td>
+                    </tr>
+                </g:if>
+
+                <g:if test="${action in game.action.PersonAction}">
+                    <tr>
+                        <td>
+                            CharacterImage:
+                        </td>
+                        <td>
+                            <g:select name="characterImage" from="${map.CharacterImage.values()}" value="${action.characterImage}" />
+                        </td>
+                    </tr>
+                </g:if>
+                <g:if test="${action in game.action.PokemonAction}">
+                    <tr>
+                        <td>
+                            Pokemon:
+                        </td>
+                        <td>
+                            <g:select name="pokemonNr" from="${(1..150)}" value="${action.pokemonNr}" />
                         </td>
                     </tr>
                 </g:if>

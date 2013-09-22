@@ -52,7 +52,7 @@
                 triggerBeforeStep:${action.triggerBeforeStep},
                 triggerOnActionButton:${action.triggerOnActionButton},
                 action:"${action.actionFunction}",
-                <g:if test="${action in PersonAction && action.macro}">
+                <g:if test="${action in CharacterAction && action.macro}">
                     macro:"${action.macro}",
                 </g:if>
                 <g:if test="${action in MessagePersonAction}">
