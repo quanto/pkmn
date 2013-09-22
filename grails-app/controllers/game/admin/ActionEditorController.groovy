@@ -122,7 +122,7 @@ class ActionEditorController {
         }
         else if (params.actionTypeClass == 'NpcAction'){
             action = new NpcAction(params)
-            action.owner = new Npc(npcAction:npcAction)
+            action.owner = new Npc(npcAction:action)
             action.owner.name = params.name
             action.owner.save()
         }

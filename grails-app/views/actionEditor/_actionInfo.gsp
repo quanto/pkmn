@@ -119,11 +119,21 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>
+                        CharacterImage:
+                    </td>
+                    <td>
+                        <g:select name="characterImage" from="${map.CharacterImage.values()}" value="${action.characterImage}" />
+                    </td>
+                </tr>
+                <tr>
                     <td></td>
                     <td>
                         <g:submitButton name="save" />
                     </td>
                 </tr>
+
+
 
             </table>
         </g:form>
@@ -330,7 +340,7 @@
                             Pokemon:
                         </td>
                         <td>
-                            <g:select name="pokemonNr" from="${(1..150)}" value="${action.pokemonNr}" />
+                            <g:select name="pokemonNr" from="${Pokemon.list()}" optionKey="id" value="${action.pokemonNr}" />
                         </td>
                     </tr>
                 </g:if>

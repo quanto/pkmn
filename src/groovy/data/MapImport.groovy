@@ -320,11 +320,12 @@ class MapImport {
     public static void importNpcAction(def parts, Map map, AltMap altMap){
 
         // First create the Npc
-        Npc npc = NpcImport.importNpc(parts[totalBaseActionProperties+1])
+        Npc npc = NpcImport.importNpc(parts[totalBaseActionProperties+2])
 
         // Next the action
         NpcAction action = new NpcAction(
-                owner: npc
+                owner: npc,
+                characterImage: CharacterImage.valueOf(parts[totalBaseActionProperties+1])
         )
         addMapOrAltMap(action, map, altMap)
         addBaseActionProperties(action,parts)

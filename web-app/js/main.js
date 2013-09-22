@@ -186,6 +186,10 @@ function move(objectId, direction)
     return false;
 }
 
+function checkServerSideAction(){
+
+}
+
 /*
  Check a position on action objects
  Evals a action if it exists
@@ -420,5 +424,16 @@ function findItem(pos, direction, $actionObject)
 {
     removeActionObject($actionObject);
     return true;
+}
+
+function findItem(pos, direction, $actionObject)
+{
+    removeActionObject($actionObject);
+    return true;
+}
+
+function npc(pos, direction, $actionObject)
+{
+    return false;
 }
 

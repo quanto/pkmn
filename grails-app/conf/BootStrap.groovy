@@ -110,6 +110,16 @@ class BootStrap {
                     player: Player.findByUsername("kevin"),
                     date: new Date().parse("dd-MM-yyyy HH:mm:ss","05-07-2013 12:00:00")
             ).save()
+
+            new NewsItem(
+                    message: """
+                        I'm trying to get the map actions ready so i can start to create a story line in the game.
+                        The second area has now been filled with pokemon. It's now possible to show moving pokemon
+                        to the map.
+                    """,
+                    player: Player.findByUsername("kevin"),
+                    date: new Date().parse("dd-MM-yyyy HH:mm:ss","22-10-2013 12:00:00")
+            ).save()
         }
 
         // Players can not be in a battle. When stopping the instance the battles are destroyed.

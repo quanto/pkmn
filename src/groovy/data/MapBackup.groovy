@@ -227,6 +227,7 @@ ${action.market.identifier}
             if(action in NpcAction){
                 data += """<npcAction>
 ${getBaseActionProperties(action)}
+${action.characterImage.name()}
 ${action.owner.identifier}
 </npcAction>
 """
