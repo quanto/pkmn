@@ -1,5 +1,6 @@
 package game.fight.effect
 
+import game.fight.action.NoAction
 import game.fight.log.MessageLog
 import game.context.Fight
 import game.context.FightPlayer
@@ -23,7 +24,7 @@ class Paralyses {
                 fight.roundResult.battleActions.add(new MessageLog("${fightPlayer.fightPokemon.name} is paralyzed. It can`t move."))
 
                 // geen move
-                Moves.setMove(fight,fightPlayer,null)
+                Moves.setMove(fight,fightPlayer,new NoAction())
             }
         }
     }

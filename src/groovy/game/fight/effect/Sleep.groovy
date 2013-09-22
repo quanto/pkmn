@@ -1,5 +1,6 @@
 package game.fight.effect
 
+import game.fight.action.NoAction
 import game.fight.log.MessageLog
 import game.fight.status.Recover
 import game.context.Fight
@@ -30,7 +31,7 @@ class Sleep {
                 fightPlayer.fightPokemon.sleep -= 1
 
                 // geen move
-                Moves.setMove(fight,fightPlayer,null)
+                Moves.setMove(fight,fightPlayer,new NoAction())
             }
         }
     }

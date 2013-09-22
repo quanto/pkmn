@@ -1,5 +1,6 @@
 package game.fight.effect
 
+import game.fight.action.NoAction
 import game.fight.log.MessageLog
 import game.context.Fight
 import game.context.FightPlayer
@@ -30,7 +31,7 @@ class Freeze {
 
                 fight.roundResult.battleActions.add(new MessageLog("${fightPlayer.fightPokemon.name} is frozen solid!"))
 
-                Moves.setMove(fight,fightPlayer,null)
+                Moves.setMove(fight,fightPlayer,new NoAction())
             }
         }
     }
