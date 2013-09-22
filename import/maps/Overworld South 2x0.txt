@@ -7,6 +7,37 @@ false
 1
 kevin
 </mapData>
+<pokemon>
+10
+10
+12
+18
+</pokemon>
+<pokemon>
+12
+2
+20
+20
+</pokemon>
+<pokemon>
+13
+20
+12
+18
+</pokemon>
+<pokemon>
+19
+10
+10
+20
+</pokemon>
+<pokemon>
+19
+20
+15
+26
+</pokemon>
+
 
 
 

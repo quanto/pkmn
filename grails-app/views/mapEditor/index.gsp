@@ -41,7 +41,12 @@
                     <td>
                         <g:link action="showMap" id="${map.id}">ShowMap</g:link>
                     </td>
-
+                    <td>
+                        <g:link action="clone" id="${map.id}">Clone</g:link>
+                    </td>
+                    <td>
+                        <g:link action="delete" id="${map.id}">Delete</g:link>
+                    </td>
                 </sec:ifAnyGranted>
             </tr>
         </g:each>

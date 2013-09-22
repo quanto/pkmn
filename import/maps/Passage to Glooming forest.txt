@@ -92,6 +92,7 @@ false
 actionObject spritely
 person1
 llrr
+null
 </personAction>
 
 
@@ -112,7 +113,9 @@ false
 actionObject spritely overworldPokemon
 5
 llrr
+null
 </pokemonAction>
+
 
 
 

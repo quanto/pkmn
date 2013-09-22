@@ -7,6 +7,30 @@ false
 2
 kevin
 </mapData>
+<pokemon>
+10
+10
+8
+11
+</pokemon>
+<pokemon>
+11
+10
+9
+12
+</pokemon>
+<pokemon>
+14
+10
+10
+12
+</pokemon>
+<pokemon>
+21
+50
+9
+11
+</pokemon>
 
 <mapTransition>
 16
@@ -25,6 +49,7 @@ false
 
 G3159i7ibITFVPz
 </mapTransition>
+
 
 
 

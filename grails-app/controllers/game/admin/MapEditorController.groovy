@@ -17,7 +17,9 @@ class MapEditorController {
         def maps = []
 
         if (SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')){
-            maps = Map.list()
+            //maps = Map.list()
+            maps = Map.findAllByWorldXIsNull()
+
         }
         else {
             PlayerData playerData = session.playerData
@@ -110,15 +112,9 @@ class MapEditorController {
                 if (altMap.newDataForeground){
                     altMap.dataForeground = params.dataForeground
                 }
-                else {
-//                    map.dataForeground = params.dataForeground
-                }
 
                 if (altMap.newDataBackground){
                     altMap.dataBackground = params.dataBackground
-                }
-                else {
-//                    map.dataBackground = params.dataBackground
                 }
 
             }
@@ -130,6 +126,8 @@ class MapEditorController {
         }
         else {
             map = new Map(params.map)
+            map.dataForeground = params.dataForeground
+            map.dataBackground = params.dataBackground
         }
 
         if (!SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')){
@@ -145,7 +143,24 @@ class MapEditorController {
         map.getForegroundImage(altMap, true)
         map.getBackgroundImage(altMap, true)
 
-        redirect action:"editor", id: map.id, params : [altMapId: altMap.id]
+        redirect action:"editor", id: map.id, params : [altMapId: altMap?.id]
+    }
+
+    def clone(long id){
+        Map map = Map.get(id)
+
+        Map newMap = new Map()
+        newMap.dataBackground = map.dataBackground
+        newMap.dataForeground = map.dataForeground
+        newMap.name = map.name + " (clone)"
+        newMap.save(flush:true)
+        redirect action:"editor", id: newMap.id
+    }
+
+    def delete(long id){
+        Map map = Map.get(id)
+        map.delete()
+        redirect action:'index'
     }
 
     def altMap(long id, long altMapId){

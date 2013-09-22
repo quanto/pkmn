@@ -7,6 +7,25 @@ false
 3
 kevin
 </mapData>
+<pokemon>
+10
+50
+10
+15
+</pokemon>
+<pokemon>
+13
+60
+10
+15
+</pokemon>
+<pokemon>
+21
+40
+10
+15
+</pokemon>
+
 
 
 
