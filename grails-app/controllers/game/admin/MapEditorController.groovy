@@ -228,4 +228,9 @@ class MapEditorController {
         render text : "Done"
     }
 
+    def place(long mapId){
+        Map map = Map.get(mapId)
+
+    }
+
 }

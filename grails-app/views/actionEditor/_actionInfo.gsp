@@ -56,7 +56,7 @@
         </table>
         <g:form action="addItem">
             <g:hiddenField name="market" value="${action.market.id}" />
-            <g:select name="item" from="${game.item.UsableItem.list()}" optionKey="id" />
+            <g:select name="item" from="${game.item.UsableItem.list().plus(game.item.KeyItem.list().findAll{ it.cost > 0 })}" optionKey="id" />
             <g:submitButton name="add" />
         </g:form>
 

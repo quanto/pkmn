@@ -4,6 +4,7 @@
 <g:link controller="actionEditor" target="_blank"  style="color:#FF0000;" action="actions" id="${map.id}">Actions ${game.action.Action.countByMap(map)}</g:link>
 <g:link controller="mapEditor" target="_blank" action="transitions" id="${map.id}">Transitions: ${game.action.MapTransition.countByMap(map)}</g:link>
 <g:link controller="mapEditor" target="_blank" action="altMap" id="${map.id}">AltMap</g:link>
+<g:link action="place" target="_blank" id="${map.id}">Place</g:link>
 <g:each in="${map.altMaps}" var="altMap">
     <br/>
 

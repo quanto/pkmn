@@ -13,7 +13,7 @@ class NpcAction extends Action {
     Integer correctionLeft = 0
     Integer correctionTop = -16
     Npc owner
-    CharacterImage characterImage = CharacterImage.person11   // TODO export
+    CharacterImage characterImage = CharacterImage.casualguy1
     String actionFunction = "npc"
 
     public String getImage(){

@@ -7,6 +7,8 @@ import game.context.ActionType
 class MarketAction extends Action {
 
     ActionType actionType = ActionType.Server
+    boolean triggerOnActionButton = false
+    boolean triggerBeforeStep = true
 
     Market market
 

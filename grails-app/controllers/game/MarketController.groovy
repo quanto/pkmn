@@ -11,7 +11,7 @@ class MarketController {
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
 
-        MarketAction marketAction = MarketAction.findByPositionXAndPositionY(player.positionX, player.positionY)
+        MarketAction marketAction = MarketAction.findByPositionXGreaterThanEqualsAndPositionXLessThanEqualsAndPositionYGreaterThanEqualsAndPositionYLessThanEquals(player.positionX-1,player.positionX+1, player.positionY-1,player.positionY+1)
 
         if (player.view != View.ShowMarket || !marketAction){
             render text : "Zit niet in een PokeMarket"
@@ -25,9 +25,7 @@ class MarketController {
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
 
-        MarketAction marketAction = MarketAction.findByPositionXAndPositionY(player.positionX, player.positionY)
-
-        if (player.view != View.ShowMarket || !marketAction){
+        if (player.view != View.ShowMarket){
             render text : "Zit niet in een PokeMarket"
         }
         else {
@@ -41,7 +39,7 @@ class MarketController {
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
 
-        MarketAction marketAction = MarketAction.findByPositionXAndPositionY(player.positionX, player.positionY)
+        MarketAction marketAction = MarketAction.findByPositionXGreaterThanEqualsAndPositionXLessThanEqualsAndPositionYGreaterThanEqualsAndPositionYLessThanEquals(player.positionX-1,player.positionX+1, player.positionY-1,player.positionY+1)
 
         if (player.view != View.ShowMarket || !marketAction){
             render text : "Zit niet in een PokeMarket"

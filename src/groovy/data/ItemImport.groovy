@@ -94,7 +94,8 @@ class ItemImport {
 
                 KeyItem keyItem = new KeyItem(
                         name : parts[0],
-                        image:parts[1]
+                        image:parts[1],
+                        cost : Integer.parseInt(parts[2]),
                 )
 
                 keyItem.save()

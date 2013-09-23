@@ -58,9 +58,16 @@ class ActionEditorController {
         render text: g.render(template: 'choseMapTransition', model: [mapLayout:mapLayout,map: map])
     }
 
-    def saveMapTransition(){
+    def saveMapTransition(long fromAltMap){
 
         Map mapFrom = Map.get(params.fromMap)
+        def altMap
+
+        if (fromAltMap){
+            println "altMap"
+            altMap = AltMap.get(fromAltMap)
+        }
+
         Map mapTo = Map.get(params.toMap)
 
         MapTransition mapTransition1 = new MapTransition(
@@ -68,6 +75,13 @@ class ActionEditorController {
                 positionY : params.fromY,
                 map : mapFrom
         )
+
+        if (altMap){
+            mapTransition1.altMap = altMap
+            mapTransition1.map = null
+        }
+
+        // We can not jump from altMap to altMaps at this moment
         mapTransition1.save()
         MapTransition mapTransition2 = new MapTransition(
                 positionX : params.toX,
@@ -195,6 +209,10 @@ class ActionEditorController {
     def deleteAction(){
         Action action = Action.get(Integer.parseInt(params.id))
 
+        OneTimeActionLock.findAllByAction(action).each { it.delete() }
+
+        action.delete()
+
         // Remove childs
         if (action in NpcAction){
             action.owner.delete()
@@ -205,10 +223,6 @@ class ActionEditorController {
         else if (action in MapTransition){
             action.jumpTo.delete()
         }
-
-        OneTimeActionLock.findAllByAction(action).each { it.delete() }
-
-        action.delete()
 
         render text: "done"
     }

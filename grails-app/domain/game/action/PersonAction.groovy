@@ -9,7 +9,7 @@ class PersonAction extends CharacterAction{
     Integer correctionLeft = 0
     Integer correctionTop = -16
 
-    CharacterImage characterImage = CharacterImage.person1
+    CharacterImage characterImage = CharacterImage.casualguy1
 
     public String getImage(){
         if (!characterImage){

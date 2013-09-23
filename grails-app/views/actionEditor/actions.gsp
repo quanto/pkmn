@@ -97,6 +97,7 @@
 
 <g:form action="saveMapTransition" name="saveMapTransition">
     <g:hiddenField name="fromMap" value="${map.id}" />
+    <g:hiddenField name="fromAltMap" value="${altMap?.id}" />
     <g:hiddenField name="fromX" />
     <g:hiddenField name="fromY" />
     <g:hiddenField name="toMap" />

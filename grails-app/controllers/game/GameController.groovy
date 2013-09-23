@@ -141,13 +141,6 @@ class GameController {
 
             MapLayout mapLayout = MapLayout.createMapArray(player.map, player.altMap)
 
-            String currentForegroundTile = getCurrentTile(mapLayout,player,false)
-            if (!currentForegroundTile || currentForegroundTile != "0"){
-                player.discard()
-                render text : "allowMove = false;"
-                return
-            }
-
             String currentBackgroundTile = getCurrentTile(mapLayout,player,true)
 
             if (currentBackgroundTile){
@@ -183,7 +176,13 @@ class GameController {
                 render text:"allowMove = true;"
                 return
             }
-            else {
+//            else {
+//                player.discard()
+//                render text : "allowMove = false;"
+//                return
+//            }
+            String currentForegroundTile = getCurrentTile(mapLayout,player,false)
+            if (!currentForegroundTile || currentForegroundTile != "0"){
                 player.discard()
                 render text : "allowMove = false;"
                 return

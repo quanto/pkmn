@@ -1,2 +1,6 @@
 Old factory key
 powerplant-key.png
+0
+Underground passage key
+room-key.png
+100

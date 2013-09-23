@@ -323,7 +323,7 @@ function nextMessage(){
 
     if (messages.length > 0){
         $("#textBox").html("<a href='javascript:nextMessage()'>X</a> " + messages[0]);
-        messages = messages.splice(1,1);
+        messages = messages.splice(1,messages.length);
     }
     else {
         closeMessage();

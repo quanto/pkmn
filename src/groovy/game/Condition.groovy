@@ -11,6 +11,7 @@ enum Condition {
     haveBoulderBadge,
     haveEarthBadge,
     haveOldFactoryKey,
+    haveUndergroundPassageKey,
     isAdmin,
 
     public static boolean conditionEval(Player player, Condition condition){
@@ -58,6 +59,14 @@ enum Condition {
                 return true
             }
         }
+        else if (condition == condition.haveUndergroundPassageKey){
+            Item item = Item.findByName("Underground passage key")
+            if (OwnerItem.findByOwnerAndItem(player,item)){
+                return true
+            }
+        }
+
+
 
         // Map transition action
         else if (condition == condition.isAdmin){

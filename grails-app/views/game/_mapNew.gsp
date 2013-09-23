@@ -1,4 +1,4 @@
-<%@ page import="game.action.*; game.lock.OneTimeActionLock; game.context.ActionType; game.context.ActionType; game.MapLayout;" %>
+<%@ page import="map.MessageTranslator; game.action.*; game.lock.OneTimeActionLock; game.context.ActionType; game.context.ActionType; game.MapLayout;" %>
 <%
     // MapLayout mapLayout
     def blockObjects = []
@@ -52,11 +52,16 @@
                 triggerBeforeStep:${action.triggerBeforeStep},
                 triggerOnActionButton:${action.triggerOnActionButton},
                 action:"${action.actionFunction}",
-                <g:if test="${action in CharacterAction && action.macro}">
-                    macro:"${action.macro}",
+                <g:if test="${action in CharacterAction}">
+                    <g:if test="${action.macro}">
+                        macro:"${action.macro}",
+                    </g:if>
+                    <g:if test="${action.initialDirection}">
+                        initialDirection: "${action.initialDirection}",
+                    </g:if>
                 </g:if>
-                <g:if test="${action in MessagePersonAction}">
-                    message:"${action.message}",
+                <g:if test="${action in MessagePersonAction || action in MessagePokemonAction}">
+                    message:"${MessageTranslator.proces(action.message,player)}",
                 </g:if>
                 correctionLeft:${action.correctionLeft?:0},
                 correctionTop:${action.correctionTop?:0}

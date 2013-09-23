@@ -9,7 +9,7 @@ class Items {
 
         if (chargeCost){
             // Only usable items can be bought
-            assert item in UsableItem
+            assert item.cost > 0
         }
 
         if (chargeCost && player.money - item.cost < 0)
