@@ -5,6 +5,12 @@
     </head>
     <body>
 
+        <g:link controller='mapEditor' action="editor" id="${map.id}">Mapeditor</g:link>
+        -
+        <g:link controller="pokemonEditor" action="edit" id="${map.id}">Pokemon</g:link>
+        -
+        <g:link controller="actionEditor" action="actions" id="${map.id}">Actions</g:link>
+
         Map: ${map.name}
 
         <table>

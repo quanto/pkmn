@@ -89,6 +89,12 @@
 
 </script>
 
+<g:link controller='mapEditor' action="editor" id="${map.id}">Mapeditor</g:link>
+-
+<g:link controller="pokemonEditor" action="edit" id="${map.id}">Pokemon</g:link>
+-
+<g:link controller="actionEditor" action="actions" id="${map.id}">Actions</g:link>
+
 <g:form action="saveMapTransition" name="saveMapTransition">
     <g:hiddenField name="fromMap" value="${map.id}" />
     <g:hiddenField name="fromX" />

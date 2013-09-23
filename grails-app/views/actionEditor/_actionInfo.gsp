@@ -24,6 +24,14 @@
         <g:form action="updateAction">
             <table>
                 <g:render template="basicActionInfo" />
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <g:submitButton name="save" />
+                    </td>
+                </tr>
             </table>
         </g:form>
 

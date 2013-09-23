@@ -1,5 +1,26 @@
 package map
 
 enum CharacterImage {
-    player, band, girl, casualgirl2, guard, badboy1, badboy2, badgirl1, badgirl2, person2, oldman1, casualguy1, casualgirl1, rangerboy, rangergirl, person8, cook, richman, littlegirl1, littleboy1
+    player,
+    band,
+    girl,
+    guard,
+    badboy1,
+    badboy2,
+    badgirl1,
+    badgirl2,
+    labguy,
+    oldman1,
+    casualgirl1,
+    casualgirl2,
+    casualguy1,
+    casualguy2,
+    rangerboy,
+    rangergirl,
+    cook,
+    richman,
+    littlegirl1,
+    littleboy1,
+    person1, // :TODO remove
+    person11 // :TODO remove
 }
