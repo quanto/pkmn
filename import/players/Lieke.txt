@@ -27,12 +27,12 @@ ROLE_MAP_EDITOR
 </role>
 
 <ownerItem>
-Old factory key
-1
-</ownerItem>
-            <ownerItem>
 Cherish Ball
 16
+</ownerItem>
+            <ownerItem>
+Old factory key
+1
 </ownerItem>
             
 

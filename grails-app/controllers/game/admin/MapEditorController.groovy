@@ -208,6 +208,10 @@ class MapEditorController {
         redirect action: 'worldMap'
     }
 
+    def listCharacters(){
+
+    }
+
     def export(){
         Map map
         if (params.id){
