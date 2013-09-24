@@ -92,11 +92,9 @@ class Faint {
             }
             else if (!player2fainted && !player1Alive){
                 fight.fightPlayer1.owner.pveBattlesLost += 1;
-                recoverPlayerToClosestCenter(fight)
             }
             else {
                 // draw
-                recoverPlayerToClosestCenter(fight)
             }
 
             fight.battleOver = true
@@ -126,11 +124,9 @@ class Faint {
             // whats the result
             if (!player1Alive && !player2Alive){
                 // draw
-                recoverPlayerToClosestCenter(fight)
             }
             else if (!player1Alive){
                 fight.fightPlayer1.owner.pvnBattlesLost += 1
-                recoverPlayerToClosestCenter(fight)
             }
             else {
                 fight.fightPlayer1.owner.pvnBattlesWon += 1
@@ -192,9 +188,8 @@ class Faint {
         player.positionY = recoverAction.positionY
         player.save()
 
-
-        fight.roundResult.battleActions.add(new MessageLog("You lose, your pokemon have been recovered in town."))
         Recover.recoverParty(fight.fightPlayer1.owner)
+        fight.roundResult.battleActions.add(new MessageLog("You lose, your pokemon have been recovered in town."))
     }
 
     static boolean hasAlivePokemon(FightPlayer fightPlayer){

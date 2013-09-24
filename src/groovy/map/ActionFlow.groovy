@@ -108,6 +108,7 @@ class ActionFlow {
                 // Set last recover position
                 player.lastRecoverAction = (RecoverAction)action
 
+                actionResult.evalMessage += "getParty();"
                 actionResult.evalMessage += "setMessage('Your pokemon have been recovered!');"
             }
             else if (action in ComputerAction){

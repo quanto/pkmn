@@ -90,7 +90,12 @@ class Battle {
 
         if (fight.battleOver){
             if (fight.battleType != BattleType.PVP){
-                Stats.saveStats(fight.fightPlayer1, true);
+                if (!Faint.hasAlivePokemon(fight.fightPlayer1)){
+                    Faint.recoverPlayerToClosestCenter(fight)
+                }
+                else {
+                    Stats.saveStats(fight.fightPlayer1, true);
+                }
             }
         }
     }
