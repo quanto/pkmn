@@ -112,6 +112,14 @@
                 </tr>
                 <tr>
                     <td>
+                        Pre-Battle Message:
+                    </td>
+                    <td>
+                        <g:textField name="message" value="${action.message}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         Locked Message:
                     </td>
                     <td>

@@ -1,5 +1,6 @@
 package game
 
+import game.fight.log.MessageLog
 import game.fight.status.Stats
 import game.context.FightPlayer
 import game.context.PlayerType
@@ -7,6 +8,7 @@ import game.context.BattleType
 import game.context.Fight
 import game.context.FightInvite
 import game.context.FightPokemon
+import map.MessageTranslator
 
 class FightFactoryService {
 
@@ -68,6 +70,13 @@ class FightFactoryService {
             owner2Pokemon = Party.getFirstAlivePokemon(player2)
         }
         else if (battleType == battleType.PVN){
+
+            // Pre-battle message
+            String message = ((Npc)player2).npcAction.message
+            if (message){
+                fight.roundResult.battleActions.add(new MessageLog(MessageTranslator.proces(message, player1)))
+            }
+
             owner2Pokemon = Party.getFirstAlivePokemon(player2)
         }
         else if (battleType == battleType.PVP){

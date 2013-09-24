@@ -17,6 +17,7 @@ class NpcAction extends CharacterAction {
     String actionFunction = "npc"
     String initialDirection = "d"
     String macro = "" // Should not contain a macro
+    String message = "" // message pre-battle
 
     public String getImage(){
         if (!characterImage){

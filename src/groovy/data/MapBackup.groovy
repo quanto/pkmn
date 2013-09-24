@@ -229,6 +229,7 @@ ${action.market.identifier}
 ${getBaseActionProperties(action)}
 ${action.characterImage.name()}
 ${action.initialDirection}
+${action.message}
 ${action.owner.identifier}
 </npcAction>
 """
