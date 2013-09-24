@@ -314,8 +314,10 @@ function loadmap()
         $("#objectContainer").append($actionObject);
     }
 
-    setInterval(macroTimer,1000);
-
+    if (!macroTimerStarted){
+        macroTimerStarted = true;
+        setInterval(macroTimer,1000);
+    }
     // Spritely objects
     $.each($('.spritely'), function(index, value) {
         $(value).sprite({
@@ -355,6 +357,7 @@ function loadmap()
     updateLocation(playerPosition.x, playerPosition.y);
 }
 
+var macroTimerStarted = false;
 function macroTimer(){
     $actionObjects = $("#objectContainer div[clientAction='true'][macro]");
 
