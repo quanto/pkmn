@@ -251,19 +251,38 @@ $(document).keypress(function(e)
 {
     if (!freeze)
     {
+        var key = 0
+        if (e.keyCode>0){
+            key = e.keyCode
+        }
+        else if (e.which > 0){
+            key = e.which
+        }
         freeze = true
-        switch (e.which)
+        switch (key)
         {
             case 97:
+                move("player","left");
+                break;
+            case 37:
                 move("player","left");
                 break;
             case 119:
                 move("player","up");
                 break;
+            case 38:
+                move("player","up");
+                break;
             case 100:
                 move("player","right");
                 break;
+            case 39:
+                move("player","right");
+                break;
             case 115:
+                move("player","down");
+                break;
+            case 40:
                 move("player","down");
                 break;
             case 32:
