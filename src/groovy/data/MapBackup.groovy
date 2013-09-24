@@ -102,7 +102,7 @@ ${action.cssClass?:''}"""
         """${getBaseActionProperties(action)}
 ${action.characterImage.name()}
 ${action.macro}
-$action.initialDirection"""
+${action.initialDirection}"""
     }
 
     public static String getPokemonActionProperties(Action action){
@@ -228,6 +228,7 @@ ${action.market.identifier}
                 data += """<npcAction>
 ${getBaseActionProperties(action)}
 ${action.characterImage.name()}
+${action.initialDirection}
 ${action.owner.identifier}
 </npcAction>
 """

@@ -21,7 +21,6 @@ class FightPlayer {
 
 
     BattleAction battleAction
-    boolean doNoMove = false
     boolean faintMessageShown = false
     List<Move> learnMoves = []
     int holdMove
@@ -44,7 +43,6 @@ class FightPlayer {
         endure = false
         waitOnOpponentMove = false
         battleAction = null
-        doNoMove = false
         protect = false
         faintMessageShown = false
         takePP = true

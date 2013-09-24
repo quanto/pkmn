@@ -5,7 +5,7 @@ import game.action.Action
 import game.context.ActionType
 import map.CharacterImage
 
-class NpcAction extends Action {
+class NpcAction extends CharacterAction {
 
     boolean triggerBeforeStep = true
     ActionType actionType = ActionType.Mixed
@@ -15,6 +15,8 @@ class NpcAction extends Action {
     Npc owner
     CharacterImage characterImage = CharacterImage.casualguy1
     String actionFunction = "npc"
+    String initialDirection = "d"
+    String macro = "" // Should not contain a macro
 
     public String getImage(){
         if (!characterImage){

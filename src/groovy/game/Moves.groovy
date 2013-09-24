@@ -1,7 +1,7 @@
 package game
 
 import game.fight.NPCHelper
-
+import game.fight.action.NoAction
 import game.fight.log.MessageLog
 import game.context.FightPlayer
 import game.context.PlayerType
@@ -22,12 +22,9 @@ class Moves {
      */
     public static void setMove(Fight fight, FightPlayer fightPlayer, BattleAction battleAction, boolean clearLog = true)
     {
-
+        assert battleAction
         if (battleAction){
             fightPlayer.battleAction = battleAction
-        }
-        else {
-            fightPlayer.doNoMove = true // :TODO Get rid of this. Should use NoAction if needed
         }
 
         // Mirror Move
@@ -43,7 +40,7 @@ class Moves {
         // Kijk of tegen de computer wordt gespeelt, dan wordt er een move gekozen
         if (fightPlayer.playerType == PlayerType.user && (fight.battleType == BattleType.PVE || fight.battleType == BattleType.PVN))
         {
-            if (!fightPlayer.doNoMove || fightPlayer.playerType == PlayerType.user){
+            if (!(fightPlayer.battleAction in NoAction) || fightPlayer.playerType == PlayerType.user){
 
                 if (fight.switchRound){
 
@@ -70,7 +67,7 @@ class Moves {
         }
 
         // Kijk of ronde gedaan kan worden
-        if ((fight.fightPlayer1.battleAction != null || fight.fightPlayer1.doNoMove) && (fight.fightPlayer2.battleAction != null  || fight.fightPlayer1.doNoMove))
+        if (fight.fightPlayer1.battleAction != null && fight.fightPlayer2.battleAction != null)
         {
             Battle.battle(fight)
         }
@@ -79,7 +76,8 @@ class Moves {
             fightPlayer.waitOnOpponentMove = true
         }
         else {
-            assert false
+            // Computer kan hierin terecht komen door de beforeChosingMove van hierboven
+           // assert false
         }
     }
 

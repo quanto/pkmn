@@ -22,7 +22,12 @@ enum Condition {
             int lockCount = c.count() {
                 npc {
                     npcAction {
-                        eq("map",player.map)
+                        if (player.altMap){
+                            eq("altMap",player.altMap)
+                        }
+                        else {
+                            eq("map",player.map)
+                        }
                     }
                 }
             }

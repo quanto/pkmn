@@ -135,6 +135,15 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>
+                        InitialDirection:
+                    </td>
+                    <td>
+                        <g:textField name="initialDirection" value="${action.initialDirection}" />
+                        <g:hiddenField name="macro" value="" />
+                    </td>
+                </tr>
+                <tr>
                     <td></td>
                     <td>
                         <g:submitButton name="save" />
