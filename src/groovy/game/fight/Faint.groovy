@@ -171,6 +171,10 @@ class Faint {
 
             // Should we do a switch round
             if (player1fainted || player2fainted){
+
+                fight.fightPlayer1.mustSwitch = player1fainted
+                fight.fightPlayer2.mustSwitch = player2fainted
+
                 fight.switchRound = true
             }
             return true

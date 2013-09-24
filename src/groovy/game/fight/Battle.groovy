@@ -55,7 +55,6 @@ class Battle {
         fight.roundResult = new RoundResult()
         // Reset the switch round
 
-
         // Log initial hp
         fight.roundResult.initialActions.add(new InitialHpLog(fightPlayer1.fightPokemon,1))
         fight.roundResult.initialActions.add(new InitialHpLog(fightPlayer2.fightPokemon,2))
@@ -114,9 +113,7 @@ class Battle {
             }
         }
         else if (attackFightPlayer.battleAction in SwitchAction){
-
             Stats.bringOutPokemon(fight, attackFightPlayer, attackFightPlayer.battleAction.fightPokemon)
-
         }
         else if (attackFightPlayer.battleAction in NoAction){
             // We do nothing at all

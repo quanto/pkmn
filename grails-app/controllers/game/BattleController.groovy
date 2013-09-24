@@ -157,8 +157,13 @@ class BattleController {
 
         // We should set the switch action of the computer before setting our own action
         if (fight.switchRound && fight.battleType != BattleType.PVP){
-            FightPokemon fightPokemon = myFightPlayer.opponentFightPlayer().party.find{ it.hp > 0 }
-            myFightPlayer.opponentFightPlayer().battleAction = new SwitchAction(fightPokemon:fightPokemon)
+            if (fight.fightPlayer2.mustSwitch){
+                FightPokemon fightPokemon = myFightPlayer.opponentFightPlayer().party.find{ it.hp > 0 }
+                myFightPlayer.opponentFightPlayer().battleAction = new SwitchAction(fightPokemon:fightPokemon)
+            }
+            else {
+                myFightPlayer.opponentFightPlayer().battleAction = new NoAction()
+            }
         }
 
 
