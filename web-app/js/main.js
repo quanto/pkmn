@@ -285,9 +285,14 @@ $(document).keypress(function(e)
             case 40:
                 move("player","down");
                 break;
-            case 32:
-                //spatie
-                actionA("up");
+            case 32: //spatie
+
+                if ($("#textBox").html('') != ''){
+                    nextMessage();
+                }
+                else {
+                    actionA("up");
+                }
                 break;
             case 13:
                 sendChatMessage();

@@ -101,7 +101,7 @@ class ActionFlow {
             }
             else if (action in MapMessage){
                 MapMessage mapMessage = (MapMessage)action
-                actionResult.evalMessage += "setMessage(\"${MessageTranslator.proces(mapMessage.message)}\");"
+                actionResult.evalMessage += "setMessage(\"${MessageTranslator.proces(mapMessage.message,player)}\");"
             }
             else if (action in RecoverAction){
                 Recover.recoverParty(player)

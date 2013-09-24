@@ -6,6 +6,9 @@ class MapMessage extends Action {
 
     ActionType actionType = ActionType.Server
 
+    boolean triggerOnActionButton = false
+    boolean triggerBeforeStep = true
+
     String message
 
     static constraints = {
