@@ -21,6 +21,4 @@ enum CharacterImage {
     richman,
     littlegirl1,
     littleboy1,
-    person1, // :TODO remove
-    person11 // :TODO remove
 }

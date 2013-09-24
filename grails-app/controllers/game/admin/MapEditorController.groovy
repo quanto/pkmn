@@ -228,9 +228,23 @@ class MapEditorController {
         render text : "Done"
     }
 
-    def place(long mapId){
+    def place(long id){
+        Map map = Map.get(id)
+        AltMap altMap = null
+        MapLayout mapLayout = MapLayout.createMapArray(map, altMap)
+        render view : 'place', model: [map:map,altMap:altMap,mapLayout: mapLayout]
+    }
+
+    def placeMe(long mapId, int x, int y){
         Map map = Map.get(mapId)
 
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+        player.map = map
+        player.altMap = null
+        player.positionX = x
+        player.positionY = y
+        redirect controller:'game'
     }
 
 }

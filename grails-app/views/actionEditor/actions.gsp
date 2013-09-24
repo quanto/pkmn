@@ -117,7 +117,7 @@
                     %>
                     <td style="${action?'border:1px solid #444;':'border:1px solid #ccc;'}">
                         <div id="current${x}-${y}" style="height:16px; width:16px; background:url('${resource(uri:'')}/images/tiles/sheet1/${tileNr}.png');" title="${x}-${y}" onclick="getAction(${x},${y})"> <%-- fromMapPosition(${x},${y}) --%>
-                            <g:if test="${mapLayout.background[x][y]}">
+                            <g:if test="${mapLayout.background[y][x]}">
                                 <g:if test="${mapLayout.foreground[y][x] != '0'}">
                                     <img src='${resource(uri:'')}/images/tiles/sheet1/${mapLayout.foreground[y][x]}.png' />
                                 </g:if>
