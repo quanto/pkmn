@@ -1,6 +1,16 @@
 Old factory key
 powerplant-key.png
 0
+false
 Underground passage key
 room-key.png
 100
+false
+Task:Clear old factory
+
+0
+true
+Task:Complete fake underground passage
+
+0
+true

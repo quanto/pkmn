@@ -63,7 +63,7 @@ class Recover {
                 ownerMove.save()
             }
         }
-        owner.save(flush: true)
+//        owner.save()
     }
 
     public static void removeAllStatusAfflictions(FightPlayer fightPlayer)

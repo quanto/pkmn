@@ -90,12 +90,13 @@ class ItemImport {
 
         file.eachLine { line ->
             parts.add( line )
-            if (index%2==1){
+            if (index%4==1){
 
                 KeyItem keyItem = new KeyItem(
                         name : parts[0],
                         image:parts[1],
                         cost : Integer.parseInt(parts[2]),
+                        hidden: new Boolean(parts[3]),
                 )
 
                 keyItem.save()

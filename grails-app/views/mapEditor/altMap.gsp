@@ -17,6 +17,14 @@
             </tr>
             <tr>
                 <td>
+                    Priority
+                </td>
+                <td>
+                    <g:textField name="priority" value="${altMap?.priority?:0}" />
+                </td>
+            </tr>
+            <tr>
+                <td>
                     newDataBackground
                 </td>
                 <td>

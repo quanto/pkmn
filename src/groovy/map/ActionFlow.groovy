@@ -160,7 +160,10 @@ class ActionFlow {
                 FindItemAction findItemAction = action
                 findItemAction.rewardItems.each { RewardItem rewardItem ->
                     Items.addOwnerItem(player,rewardItem.item,false)
-                    actionResult.evalMessage += "setMessage('You found an ${rewardItem.item.name?.encodeAsHTML()}.');"
+                    // Hidden items are used to make all kinds of conditional decisions. As a user we don't want to note them
+                    if (!rewardItem.item.hidden){
+                        actionResult.evalMessage += "setMessage('You found an ${rewardItem.item.name?.encodeAsHTML()}.');"
+                    }
                 }
 
             }

@@ -11,7 +11,9 @@ enum Condition {
     haveBoulderBadge,
     haveEarthBadge,
     haveOldFactoryKey,
+    clearedOldFactory,
     haveUndergroundPassageKey,
+    completedFakeUndergroundPassage,
     isAdmin,
 
     public static boolean conditionEval(Player player, Condition condition){
@@ -64,8 +66,20 @@ enum Condition {
                 return true
             }
         }
+        else if (condition == condition.clearedOldFactory){
+            Item item = Item.findByName("Task:Clear old factory")
+            if (OwnerItem.findByOwnerAndItem(player,item)){
+                return true
+            }
+        }
         else if (condition == condition.haveUndergroundPassageKey){
             Item item = Item.findByName("Underground passage key")
+            if (OwnerItem.findByOwnerAndItem(player,item)){
+                return true
+            }
+        }
+        else if (condition == condition.completedFakeUndergroundPassage){
+            Item item = Item.findByName("Task:Complete fake underground passage")
             if (OwnerItem.findByOwnerAndItem(player,item)){
                 return true
             }

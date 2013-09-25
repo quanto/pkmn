@@ -1,3 +1,4 @@
+<%@ page import="org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils" %>
 <g:render template="itemCategories" />
 <table cellpadding="0" cellspacing="0" border='0'>
     <tr>
@@ -5,15 +6,21 @@
         <td>
             Name
         </td>
-        <td>
-            Quantity
-        </td>
+        <g:if test="${!(ownerItems.count{it.item in game.item.KeyItem})}">
+            <td>
+                Quantity
+            </td>
+        </g:if>
     </tr>
     <g:each in="${ownerItems}" var="ownerItem">
-        <tr>
-            <td><img src='${resource(uri:'')}/images/items/${ownerItem.item.image}'></td>
-            <td style="width:200px;">${ownerItem.item.name}</td>
-            <td>${ownerItem.quantity}</td>
-        </tr>
+        <g:if test="${!ownerItem.item.hidden || SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')}">
+            <tr>
+                <td><img src='${resource(uri:'')}/images/items/${ownerItem.item.image}'></td>
+                <td style="width:200px;">${ownerItem.item.name}</td>
+                <g:if test="${!(ownerItem.item in game.item.KeyItem)}">
+                    <td>${ownerItem.quantity}</td>
+                </g:if>
+            </tr>
+        </g:if>
     </g:each>
 </table>
