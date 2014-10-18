@@ -1,13 +1,11 @@
-import org.codehaus.groovy.grails.commons.ApplicationHolder
+import grails.ApplicationContextHolder
 
 class UrlMappings {
-
-    def grailsApplication
 
 	static mappings = {
 
         // Add scaffold controllers
-        ApplicationHolder.application.controllerClasses.sort { it.fullName }.each {
+        getGrailsApplication().controllerClasses.sort { it.fullName }.each {
             if (it.fullName.contains('scaffold')){
                 def controllerName = it.logicalPropertyName
                 "/scaffold/${controllerName}/$action?/$id?"{
@@ -20,7 +18,7 @@ class UrlMappings {
         }
 
 
-		"/$controller/$action?/$id?"{
+        "/$controller/$action?/$id?(.$format)?"{
 			constraints {
 				// apply constraints here
 			}

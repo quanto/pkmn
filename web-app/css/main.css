@@ -201,7 +201,6 @@ img {
 }
 
 .nav a.players {
-    background-image: url(../images/player/down.png);
     background-position: 0.7em center;
     background-repeat: no-repeat;
     text-indent: 25px;

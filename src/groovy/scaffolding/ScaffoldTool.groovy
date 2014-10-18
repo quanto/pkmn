@@ -1,11 +1,12 @@
 package scaffolding
 
+import grails.ApplicationContextHolder
+
 
 /**
  * Tool to resolve classes of scaffolded attributes.
  * Used by scaffolding views.
  */
-import org.codehaus.groovy.grails.commons.ApplicationHolder
 import org.codehaus.groovy.grails.commons.DomainClassArtefactHandler
 
 class ScaffoldTool {
@@ -15,7 +16,7 @@ class ScaffoldTool {
         String[] attrParts = scaffoldProperty.split("\\.")
         String firstAttr = attrParts[0]
 
-        def grailsApplication = ApplicationHolder.application
+        def grailsApplication = ApplicationContextHolder.getGrailsApplication()
 
         def domainDescriptor = grailsApplication.getArtefact(DomainClassArtefactHandler.TYPE, clazz.name)
 

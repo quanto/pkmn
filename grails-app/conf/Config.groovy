@@ -97,14 +97,14 @@ log4j = {
 }
 
 // Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'game.Player'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'game.PlayerRole'
-grails.plugins.springsecurity.authority.className = 'game.Role'
-grails.plugins.springsecurity.securityConfigType = "InterceptUrlMap"
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'game.Player'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'game.PlayerRole'
+grails.plugin.springsecurity.authority.className = 'game.Role'
+grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
 
 
 
-grails.plugins.springsecurity.interceptUrlMap = [
+grails.plugin.springsecurity.interceptUrlMap = [
         '/mapEditor/**': ['ROLE_ADMIN','ROLE_MAP_EDITOR'],
         '/scaffold/**':  ['ROLE_ADMIN'],
         '/admin/**':     ['ROLE_ADMIN'],

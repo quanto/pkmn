@@ -1,7 +1,7 @@
 package game
 
 import game.social.ChatScope
-import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import grails.plugin.springsecurity.SpringSecurityUtils
 
 class ChatMessageService {
 
