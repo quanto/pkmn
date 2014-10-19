@@ -60,6 +60,7 @@ grails.exceptionresolver.params.exclude = ['password']
 grails.hibernate.cache.queries = true
 
 grails.gorm.failOnError = true
+grails.gorm.autoFlush = true
 
 //grails.serverURL = "http://localhost:8080/game/"
 
