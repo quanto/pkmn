@@ -8,5 +8,6 @@ class Effectiveness {
     double effect
 
     static constraints = {
+        type2 nullable: true
     }
 }

@@ -18,6 +18,7 @@ class Move {
     int priority
 
     static constraints = {
+        effect nullable: true
         tmHm nullable :true
     }
 

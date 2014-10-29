@@ -43,9 +43,43 @@ false
 
 PB8TwE1i0bthXuI
 </mapTransition>
+<mapTransition>
+11
+11
+r6Qi2opOw2ZQq7S
 
 
 
+true
+false
+false
+false
+
+
+
+
+QFyiGeujxZQmflv
+</mapTransition>
+
+
+
+<mapMessage>
+13
+12
+81umohebHIyUmkB
+
+
+
+false
+true
+false
+false
+
+
+
+
+Pokemon gym: beginner.; Every trainer has to start somewhere.
+</mapMessage>
 
 
 
@@ -68,6 +102,47 @@ true
 
 
 </findItemAction>
+
+
+
+
+
+
+<altMapData>
+false
+false
+true
+
+
+clearedOldFactory
+0
+</altMapData>
+<mapTransition>
+11
+11
+r6Qi2opOw2ZQq7S
+
+
+
+true
+false
+false
+false
+
+
+
+
+QFyiGeujxZQmflv
+</mapTransition>
+
+
+
+
+
+
+
+
+
 
 
 

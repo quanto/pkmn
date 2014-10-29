@@ -14,6 +14,10 @@ class CharacterAction extends Action {
     String initialDirection = "d"
     String macro = ""
 
+    static constraints = {
+        macro nullable: true
+    }
+
     boolean triggerOnActionButton = false
     boolean triggerBeforeStep = true
 

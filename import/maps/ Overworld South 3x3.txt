@@ -7,6 +7,24 @@ false
 3
 kevin
 </mapData>
+<pokemon>
+13
+50
+10
+20
+</pokemon>
+<pokemon>
+16
+50
+10
+20
+</pokemon>
+<pokemon>
+27
+10
+10
+20
+</pokemon>
 
 
 
@@ -17,6 +35,22 @@ kevin
 
 
 
+<findItemAction>
+6
+2
+ffgeJuPdY6TA5da
+
+
+
+true
+false
+false
+true
+/images/tiles/sheet1/53.png
+
+
+
+</findItemAction>
 
 
 

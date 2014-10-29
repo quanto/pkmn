@@ -26,9 +26,43 @@ kevin
 10
 </pokemon>
 
+<mapTransition>
+14
+7
+Xd5RB8jrtFFfLd4
 
 
 
+true
+false
+false
+false
+
+
+
+
+KVMjF4ec1OsMpa0
+</mapTransition>
+
+
+
+<mapMessage>
+16
+8
+YQJyucVNxkTUdML
+
+
+
+false
+true
+false
+false
+
+
+
+
+Hey there's mail in there.; Better leave it since it not my own.
+</mapMessage>
 
 
 

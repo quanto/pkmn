@@ -30,6 +30,26 @@ kevin
 
 
 
+<npcAction>
+13
+10
+rg1N6WDkwjdwk7i
+
+
+
+false
+true
+false
+false
+/images/chars/casualguy1.png
+
+-16
+actionObject spritely
+casualguy1
+d
+Birds are pritty strong.;Let me show you.
+nwbIbKCKgFKKIzK
+</npcAction>
 
 
 

@@ -7,11 +7,37 @@ false
 0
 kevin
 </mapData>
+<pokemon>
+43
+100
+15
+20
+</pokemon>
 
 
 
 
 
+<npcAction>
+8
+14
+kv0ByjvCpDP51IR
+
+
+
+true
+true
+false
+false
+/images/chars/casualgirl2.png
+
+-16
+actionObject spritely
+casualgirl2
+d
+
+5shSaAYyuTL1GEx
+</npcAction>
 
 
 
