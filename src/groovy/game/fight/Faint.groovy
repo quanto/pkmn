@@ -148,12 +148,12 @@ class Faint {
                         }
                     }
                 }
-
+				
                 // Create an NPC lock
                 new NpcLock(
                         player: fight.fightPlayer1.owner,
-                        npc : fight.fightPlayer2.owner,
-                        permanent: fight.fightPlayer2.owner.permanentLock
+                        npc : npc,
+                        permanent: npc.permanentLock
                 ).save()
             }
 
@@ -192,13 +192,8 @@ class Faint {
         fight.roundResult.battleActions.add(new MessageLog("You lose, your pokemon have been recovered in town."))
     }
 
-    static boolean hasAlivePokemon(FightPlayer fightPlayer){
-        // update pokemon hp
-        fightPlayer.fightPokemon.ownerPokemon.hp = 0
-        fightPlayer.fightPokemon.hp = 0
-        fightPlayer.fightPokemon.ownerPokemon.save(flush: true)
-
-        // kijk of er nog levende pokemon zijn
+    static boolean hasAlivePokemon(FightPlayer fightPlayer){		
+        // kijk of er nog levende pokemon zijn		
         def list = fightPlayer.party.findAll{ it.hp > 0 }
 
         return list.size() > 0
