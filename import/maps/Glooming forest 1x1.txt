@@ -38,9 +38,43 @@ kevin
 5
 </pokemon>
 
+<mapTransition>
+14
+15
+NsRlQmaQphd82fe
 
 
 
+true
+false
+false
+false
+
+
+
+
+3oBTWB6wuDvnUDk
+</mapTransition>
+
+
+
+<mapMessage>
+12
+15
+XOMDRBnDEDeTaHM
+
+
+
+false
+true
+false
+false
+
+
+
+
+Old factory
+</mapMessage>
 
 
 

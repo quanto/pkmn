@@ -8,6 +8,23 @@ false
 kevin
 </mapData>
 
+<mapTransition>
+4
+18
+XuyblaR1eq1E3vX
+
+
+
+true
+false
+false
+false
+
+
+
+
+e5BgEOhIbbyamTS
+</mapTransition>
 
 
 

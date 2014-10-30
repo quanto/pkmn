@@ -1,4 +1,4 @@
-<%@ page import="org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils; game.social.ChatScope" %>
+<%@ page import="grails.plugin.springsecurity.SpringSecurityUtils; game.social.ChatScope" %>
 <!doctype html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
@@ -119,7 +119,7 @@
     </g:if>
 </table>
 
-<g:javascript library="application"/>
-<r:layoutResources />
+
+
 </body>
 </html>

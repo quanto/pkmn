@@ -30,9 +30,87 @@ kevin
 
 
 
+<personAction>
+6
+9
+HmbN6sB75pSSkQ5
 
 
 
+false
+true
+false
+false
+/images/chars/casualguy1.png
+
+-16
+actionObject spritely
+casualguy1
+
+
+</personAction>
+
+<messagePersonAction>
+6
+9
+HmbN6sB75pSSkQ5
+
+
+
+false
+true
+false
+false
+/images/chars/casualguy1.png
+
+-16
+actionObject spritely
+casualguy1
+
+
+
+</messagePersonAction>
+
+<pokemonAction>
+5
+17
+QjWOLr1DsjTh0y7
+
+
+
+false
+true
+false
+false
+/images/followers/18.png
+-8
+-16
+actionObject spritely overworldPokemon
+18
+llrr
+d
+</pokemonAction>
+
+<messagePokemonAction>
+5
+17
+QjWOLr1DsjTh0y7
+
+
+
+false
+true
+false
+false
+/images/followers/18.png
+-8
+-16
+actionObject spritely overworldPokemon
+18
+llrr
+d
+Tjirp
+</messagePokemonAction>
 
 
 

@@ -30,6 +30,26 @@ kevin
 
 
 
+<npcAction>
+10
+9
+U1bc787XZU7cduI
+
+
+
+false
+true
+false
+false
+/images/chars/guard.png
+
+-16
+actionObject spritely
+guard
+r
+I'm a new reqruit at the Police Task Force.; This will be easy.
+8wXirX1vRZuqK2K
+</npcAction>
 
 
 

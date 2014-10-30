@@ -12,6 +12,7 @@ enum Condition {
     haveEarthBadge,
     haveOldFactoryKey,
     clearedOldFactory,
+    completedFirstFightChris,
     haveUndergroundPassageKey,
     completedFakeUndergroundPassage,
     isAdmin,
@@ -72,6 +73,12 @@ enum Condition {
                 return true
             }
         }
+        else if (condition == condition.completedFirstFightChris){
+            Item item = Item.findByName("Task:Complete first fight Chris")
+            if (OwnerItem.findByOwnerAndItem(player,item)){
+                return true
+            }
+        }
         else if (condition == condition.haveUndergroundPassageKey){
             Item item = Item.findByName("Underground passage key")
             if (OwnerItem.findByOwnerAndItem(player,item)){
@@ -84,8 +91,6 @@ enum Condition {
                 return true
             }
         }
-
-
 
         // Map transition action
         else if (condition == condition.isAdmin){

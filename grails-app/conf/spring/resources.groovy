@@ -1,7 +1,7 @@
 import org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy
 import org.springframework.security.web.session.ConcurrentSessionFilter
 import org.springframework.security.core.session.SessionRegistryImpl
-import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy
+import grails.ApplicationContextHolder
 
 // Place your Spring DSL code here
 beans = {
@@ -18,5 +18,9 @@ beans = {
     }
 
     securityEventListener(security.AuthenticationSuccessListener)
+
+    applicationContextHolder(ApplicationContextHolder) { bean ->
+        bean.factoryMethod = 'getInstance'
+    }
 
 }

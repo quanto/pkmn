@@ -19,6 +19,10 @@ class NpcAction extends CharacterAction {
     String macro = "" // Should not contain a macro
     String message = "" // message pre-battle
 
+    static constraints = {
+        message nullable: true
+    }
+
     public String getImage(){
         if (!characterImage){
             return null

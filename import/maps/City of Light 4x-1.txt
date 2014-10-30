@@ -8,10 +8,84 @@ false
 kevin
 </mapData>
 
+<mapTransition>
+10
+14
+DmpkzKpKIgLAiuo
+
+
+
+true
+false
+false
+false
 
 
 
 
+h1lOCX8DbAw8Am7
+</mapTransition>
+
+
+
+<mapMessage>
+12
+16
+94ikZjZln4DHMhK
+
+
+
+false
+true
+false
+false
+
+
+
+
+Pokemon battle center
+</mapMessage>
+
+<npcAction>
+10
+13
+fgrssCKfEU9OBgd
+
+
+
+false
+true
+false
+false
+/images/chars/casualguy1.png
+
+-16
+actionObject spritely
+casualguy1
+d
+
+v69RRz3yPZwtuFh
+</npcAction>
+<npcAction>
+12
+15
+S4YwMRxCc2IFWnS
+
+
+
+false
+true
+false
+false
+/images/chars/casualguy1.png
+
+-16
+actionObject spritely
+casualguy1
+d
+
+G0yuOTn3aa9RE0o
+</npcAction>
 
 
 

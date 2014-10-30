@@ -1,8 +1,8 @@
 package scaffolding
 
+import grails.ApplicationContextHolder
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.codehaus.groovy.grails.commons.ApplicationHolder
 import org.codehaus.groovy.grails.commons.DomainClassArtefactHandler
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -20,7 +20,7 @@ class ScaffoldSearch {
 
     public static def searchByParams(params, Class clazz, def searchProperties, Closure customCriteriaFilter, boolean doCount = false) {
 
-        def grailsApplication = ApplicationHolder.application
+        def grailsApplication = ApplicationContextHolder.getGrailsApplication()
 
         // Define the search clause that is used in the Hibernate search criteria below
         def searchClosure = {
@@ -109,7 +109,7 @@ class ScaffoldSearch {
      */
     private static def downLevelCriteria(def builder, def attr, def attrValue, def domainDescriptor, params){
 
-        def grailsApplication = ApplicationHolder.application
+        def grailsApplication
 
         String[] attrParts = attr.split("\\.")
         String firstAttr = attrParts[0]

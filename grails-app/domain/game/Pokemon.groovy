@@ -20,6 +20,10 @@ class Pokemon {
     String height
     String weight
 
+    static constraints = {
+        type2 nullable: true
+    }
+
     String threeValueNumber()
     {
         return String.format("%3s", nr.toString()).replaceAll(' ','0')

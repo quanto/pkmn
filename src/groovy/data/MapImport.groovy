@@ -214,30 +214,30 @@ class MapImport {
     }
 
     public static void setMapOwners(){
-        new File('import/maps/').listFiles().each { File file ->
-
-            def parts = []
-            Map map
-            String node
-            file.eachLine { line ->
-
-                if (line.contains("</mapData>")){
-                    node = ""
-                    map = Map.findByName(parts[0])
-                    map.owner = parts[6]==''?Player.findByUsername('kevin'):Player.findByUsername(parts[6])
-                    map.save()
-                    parts = []
-                }
-                if (node){
-                    parts.add(line)
-                }
-                if (line.contains("<mapData>")){
-                    node = "mapData"
-                }
-
-            }
-
-        }
+//        new File('import/maps/').listFiles().each { File file ->
+//
+//            def parts = []
+//            Map map
+//            String node
+//            file.eachLine { line ->
+//
+//                if (line.contains("</mapData>")){
+//                    node = ""
+//                    map = Map.findByName(parts[0])
+//                    map.owner = Player.findByUsername('kevin')
+//                    map.save()
+//                    parts = []
+//                }
+//                if (node){
+//                    parts.add(line)
+//                }
+//                if (line.contains("<mapData>")){
+//                    node = "mapData"
+//                }
+//
+//            }
+//
+//        }
     }
 
     public static Map createMap(def parts){
@@ -326,8 +326,8 @@ class MapImport {
         NpcAction action = new NpcAction(
                 owner: npc,
                 characterImage: CharacterImage.valueOf(parts[totalBaseActionProperties+1]),
-                initialDirection: parts[totalBaseActionProperties+2],
-                message: parts[totalBaseActionProperties+3],
+                initialDirection: parts[totalBaseActionProperties+2]?:'d',
+                message: parts[totalBaseActionProperties+3]?:"",
         )
         addMapOrAltMap(action, map, altMap)
         addBaseActionProperties(action,parts)
@@ -354,7 +354,7 @@ class MapImport {
         MessagePersonAction action = new MessagePersonAction(
                 characterImage: CharacterImage.valueOf(parts[totalBaseActionProperties+1]),
                 macro: parts[totalBaseActionProperties+2],
-                initialDirection: parts[totalBaseActionProperties+3],
+                initialDirection: parts[totalBaseActionProperties+3]?:'d',
                 message: parts[totalBaseActionProperties+4]
         )
         addMapOrAltMap(action, map, altMap)
@@ -368,7 +368,7 @@ class MapImport {
         PokemonAction action = new PokemonAction(
                 pokemonNr: Integer.parseInt(parts[totalBaseActionProperties+1]),
                 macro: parts[totalBaseActionProperties+2],
-                initialDirection: parts[totalBaseActionProperties+3],
+                initialDirection: parts[totalBaseActionProperties+3]?:'d',
         )
         addMapOrAltMap(action, map, altMap)
         addBaseActionProperties(action,parts)
@@ -381,7 +381,7 @@ class MapImport {
         PersonAction action = new PersonAction(
                 characterImage: CharacterImage.valueOf(parts[totalBaseActionProperties+1]),
                 macro: parts[totalBaseActionProperties+2],
-                initialDirection: parts[totalBaseActionProperties+3],
+                initialDirection: parts[totalBaseActionProperties+3]?:'d',
         )
         addMapOrAltMap(action, map, altMap)
         addBaseActionProperties(action,parts)

@@ -211,7 +211,6 @@ class ActionEditorController {
 
         OneTimeActionLock.findAllByAction(action).each { it.delete() }
 
-        action.delete()
 
         // Remove childs
         if (action in NpcAction){
@@ -221,8 +220,11 @@ class ActionEditorController {
             action.market.delete()
         }
         else if (action in MapTransition){
+            MapTransition.findAllByJumpToOrMap()
             action.jumpTo.delete()
         }
+
+        action.delete()
 
         render text: "done"
     }

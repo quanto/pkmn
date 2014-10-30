@@ -11,4 +11,5 @@
     <g:link controller="mapEditor" target="_blank" action="altMap" id="${map.id}" params="${[altMapId:altMap.id]}">AltMap ${altMap.id}</g:link>
     <g:link action="editor" target="_blank" id="${map.id}" params="${[altMapId:altMap.id]}" style="color:#006600;">Editor</g:link>
     <g:link controller="actionEditor" action="actions" target="_blank" id="${map.id}" params="${[altMapId:altMap.id]}">Actions</g:link>
+    ${altMap.condition}
 </g:each>

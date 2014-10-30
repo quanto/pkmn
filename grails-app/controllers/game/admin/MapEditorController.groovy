@@ -5,7 +5,7 @@ import game.Condition
 import game.Map
 import game.MapLayout
 import data.MapBackup
-import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import grails.plugin.springsecurity.SpringSecurityUtils
 import game.context.PlayerData
 import game.Player
 import game.action.MapTransition

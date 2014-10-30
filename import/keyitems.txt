@@ -14,3 +14,7 @@ Task:Complete fake underground passage
 
 0
 true
+Task:Complete first fight Chris
+
+0
+true
