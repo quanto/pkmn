@@ -1,0 +1,41 @@
+<npcData>
+drC3ImVd3xMObCz
+Danh
+false
+
+
+</npcData>
+<ownerPokemon>
+false
+25
+10
+20
+2
+9
+2
+7
+46
+Female
+1
+8000
+20
+</ownerPokemon>
+<ownerMove>
+Double Team
+15
+</ownerMove>
+<ownerMove>
+Quick Attack
+30
+</ownerMove>
+<ownerMove>
+Slam
+20
+</ownerMove>
+<ownerMove>
+Tail Whip
+30
+</ownerMove>
+
+
+

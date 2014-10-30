@@ -1,0 +1,33 @@
+<npcData>
+8wXirX1vRZuqK2K
+Police Task Force reqruit
+false
+
+Boo hoo :(.; Can't even beat a kid.
+</npcData>
+<ownerPokemon>
+false
+19
+4
+12
+25
+2
+11
+3
+18
+Male
+1
+125
+5
+</ownerPokemon>
+<ownerMove>
+Tackle
+35
+</ownerMove>
+<ownerMove>
+Tail Whip
+30
+</ownerMove>
+
+
+

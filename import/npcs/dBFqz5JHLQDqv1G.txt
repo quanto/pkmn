@@ -1,0 +1,41 @@
+<npcData>
+dBFqz5JHLQDqv1G
+Badboy
+false
+
+Let's get out of here.
+</npcData>
+<ownerPokemon>
+false
+28
+5
+24
+2
+24
+8
+14
+58
+Female
+1
+6859
+19
+</ownerPokemon>
+<ownerMove>
+Poison Sting
+35
+</ownerMove>
+<ownerMove>
+Sand-attack
+15
+</ownerMove>
+<ownerMove>
+Scratch
+35
+</ownerMove>
+
+
+<ownerItem>
+Task:Complete fake underground passage
+1
+</ownerItem>
+            
