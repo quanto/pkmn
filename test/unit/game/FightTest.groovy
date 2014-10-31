@@ -11,6 +11,7 @@ import game.context.*
 import game.fight.action.BattleAction
 import game.fight.action.FailAction
 import game.fight.action.MoveAction
+import game.fight.action.NoAction
 import game.fight.action.SwitchAction
 import grails.test.GrailsUnitTestCase
 import grails.test.mixin.Mock
@@ -28,7 +29,7 @@ class FightTest {
 		testFightHelper.setUp()
 	}
 	
-	@Test
+	//@Test
 	public void pveBattle(){
 		
 		Player player = TestObjects.getPlayer()
@@ -52,7 +53,7 @@ class FightTest {
 		}
 	}
 	
-	@Test
+	//@Test
 	public void pvnBattle(){
 		
 		Player player1 = TestObjects.getPlayer()
@@ -90,7 +91,7 @@ class FightTest {
 		}
 	}
 	
-	@Test
+	//@Test
 	public void pvnBattleMultiplePlayerPokemon(){
 		
 		Player player1 = TestObjects.getPlayer()
@@ -144,6 +145,65 @@ class FightTest {
 		}
 	}
 	
-	
+	@Test
+	public void pvnBattleMultiplePokemon(){
+		
+		Player player1 = TestObjects.getPlayer()
+		NpcAction npcAction = new NpcAction(
+			message: ""
+		)
+		Pokemon playerPokemon = TestObjects.getTestPokemon()
+		OwnerPokemon playerOwnerPokemon1 = TestObjects.getOwnerPokemon(playerPokemon, player1, 1)
+		OwnerPokemon playerOwnerPokemon2 = TestObjects.getOwnerPokemon(playerPokemon, player1, 2)
+		testFightHelper.addownerPokemonLink(player1, playerOwnerPokemon1)
+		testFightHelper.addownerPokemonLink(player1, playerOwnerPokemon2)
+		
+		Npc npc = new Npc(
+			ownerId: 3,
+			npcAction: npcAction,
+			rewardItems: [],
+			permanentLock: false,
+			name: "testNpc"
+		)
+		npc.save(flush:true)
+		
+		Pokemon npcPokemon = TestObjects.getTestPokemon()
+		OwnerPokemon npcOwnerPokemon1 = TestObjects.getOwnerPokemon(npcPokemon, npc, 1)
+		OwnerPokemon npcOwnerPokemon2 = TestObjects.getOwnerPokemon(npcPokemon, npc, 2)
+		testFightHelper.addownerPokemonLink(npc, npcOwnerPokemon1)
+		testFightHelper.addownerPokemonLink(npc, npcOwnerPokemon2)
+		
+		testFightHelper.setMetaClasses()
+		
+		Fight fight = fightFactoryService.startFight(BattleType.PVN, player1, npc, null, null)
+		fight.fightPlayer1.metaClass.getOwner = { -> return player1 }
+		fight.fightPlayer2.metaClass.getOwner = { -> return npc }
+		
+		
+		while (!fight.battleOver){
+			
+			if (fight.fightPlayer1.mustSwitch){
+				FightPokemon fightPokemon = fight.fightPlayer1.party.find{ it.hp > 0 }
+				assert fightPokemon
+				assert fight.switchRound
+				SwitchAction switchAction = new SwitchAction(fightPokemon: fightPokemon)
+				Moves.setMove(fight, fight.fightPlayer1, switchAction, false)
+			}
+			else if (fight.fightPlayer2.mustSwitch){
+				FightPokemon fightPokemon = fight.fightPlayer2.party.find{ it.hp > 0 }
+				fight.fightPlayer2.battleAction = new SwitchAction(fightPokemon: fightPokemon)
+				
+				Moves.setMove(fight, fight.fightPlayer1, new NoAction(), false)
+			}
+			else {
+				Moves.setMove(fight, fight.fightPlayer1, TestObjects.getTackleBattleAction(), false)
+			}
+			
+			println "****"
+			fight.roundResult.toBattleString(fight.fightPlayer1).split(";").each{
+				println(it)
+			}
+		}
+	}
 	
 }
