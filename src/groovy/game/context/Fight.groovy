@@ -14,10 +14,7 @@ class Fight {
     int escapeAttempts = 0
     List<FightPokemon> usedFightPokemon = [] // The used pokemon in a round to who we should give Exp to
 
-    String log = ""
     RoundResult roundResult = new RoundResult()
-
-    String logHistory = ""
 
     BattleType battleType
     boolean battleOver
@@ -26,15 +23,6 @@ class Fight {
     boolean switchRound = false
 
     Date createDate = new Date()
-
-    public String setLog(String log){
-        // If where cleaning the log we take the old log and set it into the history
-        if (!log){
-            logHistory += this.log
-        }
-        this.log = log
-    }
-
 
     FightPlayer myPlayer(Owner owner){
         if(owner?.id == fightPlayer1.owner?.id){

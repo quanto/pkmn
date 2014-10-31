@@ -29,7 +29,7 @@ class FightTest {
 		testFightHelper.setUp()
 	}
 	
-	//@Test
+	@Test
 	public void pveBattle(){
 		
 		Player player = TestObjects.getPlayer()
@@ -53,7 +53,7 @@ class FightTest {
 		}
 	}
 	
-	//@Test
+	@Test
 	public void pvnBattle(){
 		
 		Player player1 = TestObjects.getPlayer()
@@ -91,7 +91,7 @@ class FightTest {
 		}
 	}
 	
-	//@Test
+	@Test
 	public void pvnBattleMultiplePlayerPokemon(){
 		
 		Player player1 = TestObjects.getPlayer()
@@ -117,7 +117,6 @@ class FightTest {
 		OwnerPokemon npcOwnerPokemon1 = TestObjects.getOwnerPokemon(npcPokemon, npc, 1)
 		OwnerPokemon npcOwnerPokemon2 = TestObjects.getOwnerPokemon(npcPokemon, npc, 2)
 		testFightHelper.addownerPokemonLink(npc, npcOwnerPokemon1)
-		//addownerPokemonLink(npc, npcOwnerPokemon2)
 		
 		testFightHelper.setMetaClasses()
 		
