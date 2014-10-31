@@ -18,7 +18,7 @@ import grails.test.mixin.Mock
 import game.action.*
 import game.lock.*
 
-@Mock([Owner, Player, OwnerPokemon, Pokemon, Action, RecoverAction, Map, NpcAction, Lock, NpcLock, Npc])
+@Mock([Owner, Player, OwnerPokemon, Pokemon, Action, RecoverAction, Map, NpcAction, Lock, NpcLock, Npc, OwnerMove])
 class FightTest {
 	
 	FightFactoryService fightFactoryService = new FightFactoryService()
@@ -45,7 +45,7 @@ class FightTest {
 		fight.fightPlayer1.metaClass.getOwner = { -> return player }
 		
 		while (!fight.battleOver){
-			Moves.setMove(fight, fight.fightPlayer1, TestObjects.getTackleBattleAction(), false)
+			Moves.setMove(fight, fight.fightPlayer1, TestObjects.getTackleBattleAction())
 			println "****"
 			fight.roundResult.toBattleString(fight.fightPlayer1).split(";").each{
 				println(it)
@@ -83,7 +83,7 @@ class FightTest {
 		fight.fightPlayer2.metaClass.getOwner = { -> return npc }
 		
 		while (!fight.battleOver){			
-			Moves.setMove(fight, fight.fightPlayer1, TestObjects.getTackleBattleAction(), false)
+			Moves.setMove(fight, fight.fightPlayer1, TestObjects.getTackleBattleAction())
 			println "****"
 			fight.roundResult.toBattleString(fight.fightPlayer1).split(";").each{
 				println(it)
@@ -127,14 +127,14 @@ class FightTest {
 		
 		while (!fight.battleOver){
 			if (fight.fightPlayer1.fightPokemon.hp > 0){
-				Moves.setMove(fight, fight.fightPlayer1, new FailAction(), false)
+				Moves.setMove(fight, fight.fightPlayer1, new FailAction())
 			}
 			else {
 				FightPokemon fightPokemon = fight.fightPlayer1.party.find{ it.hp > 0 }
 				assert fightPokemon
 				assert fight.switchRound
 				SwitchAction switchAction = new SwitchAction(fightPokemon: fightPokemon)
-				Moves.setMove(fight, fight.fightPlayer1, switchAction, false)
+				Moves.setMove(fight, fight.fightPlayer1, switchAction)
 			}
 			
 			println "****"
@@ -186,16 +186,16 @@ class FightTest {
 				assert fightPokemon
 				assert fight.switchRound
 				SwitchAction switchAction = new SwitchAction(fightPokemon: fightPokemon)
-				Moves.setMove(fight, fight.fightPlayer1, switchAction, false)
+				Moves.setMove(fight, fight.fightPlayer1, switchAction)
 			}
 			else if (fight.fightPlayer2.mustSwitch){
 				FightPokemon fightPokemon = fight.fightPlayer2.party.find{ it.hp > 0 }
 				fight.fightPlayer2.battleAction = new SwitchAction(fightPokemon: fightPokemon)
 				
-				Moves.setMove(fight, fight.fightPlayer1, new NoAction(), false)
+				Moves.setMove(fight, fight.fightPlayer1, new NoAction())
 			}
 			else {
-				Moves.setMove(fight, fight.fightPlayer1, TestObjects.getTackleBattleAction(), false)
+				Moves.setMove(fight, fight.fightPlayer1, TestObjects.getTackleBattleAction())
 			}
 			
 			println "****"

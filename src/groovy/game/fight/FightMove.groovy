@@ -11,6 +11,10 @@ import game.fight.action.MoveAction
 import game.fight.action.NoAction
 
 class FightMove {
+	
+	Move move
+	int ppLeft
+	OwnerMove ownerMove
     
     public static void getMoveInfo(MoveInfo moveInfo, MoveAction moveAction, Fight fight, FightPlayer attackingFightPlayer, FightPlayer defendingFightPlayer, boolean firstMove){
 

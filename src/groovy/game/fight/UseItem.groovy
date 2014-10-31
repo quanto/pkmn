@@ -30,7 +30,7 @@ class UseItem {
         }
         else {
             // Set the item action
-            Moves.setMove(fight,attackingFightPlayer,new ItemAction(ownerItem: ownerItem),false)
+            Moves.setMove(fight,attackingFightPlayer,new ItemAction(ownerItem: ownerItem))
         }
     }
 

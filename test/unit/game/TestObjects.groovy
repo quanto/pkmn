@@ -30,6 +30,13 @@ class TestObjects {
 			gender: Gender.Male,
 			ownerId: 1
 		)
+		ownerPokemon.ownerMoves = []
+		ownerPokemon.ownerMoves.add(new OwnerMove(
+			id: 1,
+			move: getTackleMove(),
+			ppLeft: 10
+		))
+		
 		ownerPokemon.hp = ownerPokemon.calculateHP()
 		ownerPokemon.owner = owner
 		ownerPokemon.save()

@@ -32,7 +32,7 @@ class Run {
             {
                 fight.escapeAttempts += 1
                 fight.roundResult.battleActions.add(new MessageLog("You fail to run away."))
-                Moves.setMove(fight,fight.fightPlayer1,new NoAction(),false)
+                Moves.setMove(fight,fight.fightPlayer1,new NoAction())
             }
 
         }

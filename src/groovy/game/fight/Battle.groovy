@@ -100,11 +100,10 @@ class Battle {
         }
     }
 
-    public static void takePP(OwnerMove ownerMove){
+    public static void takePP(FightMove fightMove){
         // No ownerMove means there's no move to take pp from
-        if (ownerMove){
-            ownerMove.ppLeft -= 1
-            ownerMove.save()
+        if (fightMove){
+            fightMove.ppLeft -= 1
         }
     }
 

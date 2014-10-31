@@ -18,8 +18,7 @@ class FightPlayer {
     FightPokemon fightPokemon
 
     List<FightPokemon> party = []
-
-
+	
     BattleAction battleAction
     boolean faintMessageShown = false
     List<Move> learnMoves = []

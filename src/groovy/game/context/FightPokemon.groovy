@@ -1,6 +1,7 @@
 package game.context
 
 import game.OwnerPokemon
+import game.fight.FightMove
 
 class FightPokemon {
 
@@ -35,10 +36,11 @@ class FightPokemon {
     int pokemonNr
     Gender gender
     int partyPosition
+	List<FightMove> fightMoves = []
 
     /**
      * When making use of this object
-     * we merge to attatch the object
+     * we merge to attach the object
      * to the session again.
      * @return
      */

@@ -1,8 +1,10 @@
 package game.fight.status
 
+import game.fight.FightMove
 import game.fight.log.MessageLog
 
 import game.context.Fight
+import game.OwnerMove
 import game.OwnerPokemon
 import game.context.PlayerType
 import game.context.BattleType
@@ -91,7 +93,7 @@ class Stats {
     }
 
     public static FightPokemon createFightPokemon(OwnerPokemon ownerPokemon){
-        return new FightPokemon(
+		FightPokemon fightPokemon = new FightPokemon(
                 name: ownerPokemon.pokemon.name,
                 hp: ownerPokemon.hp,
                 ownerPokemonId: ownerPokemon.id,
@@ -124,9 +126,19 @@ class Stats {
                 gender: ownerPokemon.gender,
                 partyPosition: ownerPokemon.partyPosition
         )
+		// Set fightMoves
+		ownerPokemon.ownerMoves.each { OwnerMove ownerMove ->
+			FightMove fightMove = new FightMove(
+				move: ownerMove.move,
+				ppLeft: ownerMove.ppLeft,
+				ownerMove: ownerMove
+			)
+			fightPokemon.fightMoves.add(fightMove)
+		}
+		return fightPokemon
     }
 
-    // Bereken huidige stats behlve hp
+    // Bereken huidige stats behalve hp
     public static int calcStat(OwnerPokemon ownerPokemon, int ivStat, int baseStat)
     {
         int level = ownerPokemon.level
@@ -157,6 +169,11 @@ class Stats {
             ownerPokemon.confusion = fightPokemon.confusion
             ownerPokemon.curse = fightPokemon.curse
 
+			// Set pp left
+			fightPokemon.fightMoves.each { FightMove fightMove ->
+				fightMove.ownerMove.ppLeft = fightMove.ppLeft
+				fightMove.ownerMove.save()
+			}	
             ownerPokemon.save()
         }
     }

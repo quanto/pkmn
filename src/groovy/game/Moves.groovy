@@ -8,6 +8,7 @@ import game.context.PlayerType
 import game.context.BattleType
 import game.context.Fight
 import game.fight.Battle
+import game.fight.FightMove
 import game.fight.WildMove
 import game.fight.action.BattleAction
 import game.fight.action.SwitchAction
@@ -16,11 +17,34 @@ import game.fight.action.FailAction
 import game.context.FightPokemon
 
 class Moves {
+	
+	public static void setPlayerMove(Fight fight, FightPlayer myFightPlayer, int ownerPokemonMoveId){
+		
+		FightMove fightMove = fight.fightPlayer1.fightPokemon.fightMoves.find {  FightMove fightMove ->  fightMove.ownerMove.id == ownerPokemonMoveId }
+		
+		assert fightMove
+		Move move = fightMove.move
+
+		if (move == null || move.name == "Struggle") // Struggle || geen move
+		{
+			// Dit is geen eigen move, pp hoeft er niet af
+			Moves.setMove(fight, myFightPlayer, new MoveAction(move: move,ownerMoveForPP: null))
+		}
+		else
+		{
+			if (fightMove.ppLeft <= 0){
+				fight.roundResult.personalActions.add(new MessageLog("No pp left for move ${move.name}."))
+			}
+			else {
+				Moves.setMove(fight,myFightPlayer, new MoveAction(move:move,ownerMoveForPP:fightMove))
+			}
+		}
+	}
 
     /**
      * Player sets a move
      */
-    public static void setMove(Fight fight, FightPlayer fightPlayer, BattleAction battleAction, boolean clearLog = true)
+    public static void setMove(Fight fight, FightPlayer fightPlayer, BattleAction battleAction)
     {
         assert battleAction
         if (battleAction){
