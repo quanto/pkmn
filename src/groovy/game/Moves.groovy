@@ -43,7 +43,10 @@ class Moves {
             if (!(fightPlayer.battleAction in NoAction) || fightPlayer.playerType == PlayerType.user){
 
                 if (fight.switchRound){
-
+					// Tegenstander hoeft niet te wisselen
+					if (fightPlayer.opponentFightPlayer().fightPokemon.hp > 0){
+						fightPlayer.opponentFightPlayer().battleAction = new NoAction()
+					}
                 }
                 else {
                     Battle.beforeChosingMove(fight, fightPlayer.opponentFightPlayer(), fightPlayer.opponentFightPlayer().owner)

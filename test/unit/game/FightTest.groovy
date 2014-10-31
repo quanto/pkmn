@@ -9,7 +9,9 @@ import org.junit.Test
 
 import game.context.*
 import game.fight.action.BattleAction
+import game.fight.action.FailAction
 import game.fight.action.MoveAction
+import game.fight.action.SwitchAction
 import grails.test.GrailsUnitTestCase
 import grails.test.mixin.Mock
 import game.action.*
@@ -20,15 +22,40 @@ class FightTest {
 	
 	FightFactoryService fightFactoryService = new FightFactoryService()
 	
+	//TestFightHelper testFightHelper = new TestFightHelper()
+	List<OwnerPokemonLink> ownerPokemonLinks
+	
+	@Before
+	public void setUp(){
+		ownerPokemonLinks = []
+	}
+	
+	private class OwnerPokemonLink {
+		Owner owner
+		List<OwnerPokemon> ownerPokemon = []
+	}
+	
+	private void addownerPokemonLink(Owner owner, OwnerPokemon ownerPokemon){
+		OwnerPokemonLink ownerPokemonLink = ownerPokemonLinks.find{ it.owner.name == owner.name }
+		if (!ownerPokemonLink){
+			ownerPokemonLink = new OwnerPokemonLink()
+			ownerPokemonLink.owner = owner
+			ownerPokemonLinks.add(ownerPokemonLink)
+		}
+		ownerPokemonLink.ownerPokemon.add(ownerPokemon)
+	}
+	
 	@Test
 	public void pveBattle(){
 		
 		Player player = getPlayer()
 		Pokemon playerPokemon = getTestPokemon()
-		OwnerPokemon ownerPokemon = getOwnerPokemon(playerPokemon)
+		OwnerPokemon ownerPokemon = getOwnerPokemon(playerPokemon, player, 1)
 		Pokemon wildPokemon = getTestPokemon()
 		
-		setMetaClasses(ownerPokemon)
+		addownerPokemonLink(player, ownerPokemon)
+
+		setMetaClasses()
 		
 		Fight fight = fightFactoryService.startFight(BattleType.PVE, player,null,wildPokemon,1)
 		fight.fightPlayer1.metaClass.getOwner = { -> return player }
@@ -49,7 +76,12 @@ class FightTest {
 		NpcAction npcAction = new NpcAction(
 			message: ""
 		)
+		Pokemon playerPokemon = getTestPokemon()
+		OwnerPokemon playerOwnerPokemon1 = getOwnerPokemon(playerPokemon, player1, 1)
+		addownerPokemonLink(player, playerOwnerPokemon1)
+		
 		Npc npc = new Npc(
+			ownerId: 3,
 			npcAction: npcAction,
 			rewardItems: [],
 			permanentLock: false,
@@ -57,18 +89,72 @@ class FightTest {
 		)
 		npc.save(flush:true)
 		
-		Pokemon playerPokemon = getTestPokemon()
-		OwnerPokemon ownerPokemon = getOwnerPokemon(playerPokemon)
-		Pokemon wildPokemon = getTestPokemon()
+		Pokemon npcPokemon = getTestPokemon()
+		OwnerPokemon npcOwnerPokemon = getOwnerPokemon(npcPokemon, npc, 1)
+		addownerPokemonLink(npc, npcOwnerPokemon)
+		setMetaClasses()
 		
-		setMetaClasses(ownerPokemon)
-		
-		Fight fight = fightFactoryService.startFight(BattleType.PVN, player1, npc, wildPokemon, null)
+		Fight fight = fightFactoryService.startFight(BattleType.PVN, player1, npc, null, null)
 		fight.fightPlayer1.metaClass.getOwner = { -> return player1 }
 		fight.fightPlayer2.metaClass.getOwner = { -> return npc }
 		
+		
 		while (!fight.battleOver){			
 			Moves.setMove(fight, fight.fightPlayer1, getTackleMove(), false)
+			println "****"
+			fight.roundResult.toBattleString(fight.fightPlayer1).split(";").each{
+				println(it)
+			}
+		}
+	}
+	
+	@Test
+	public void pvnBattleMultiplePokemon(){
+		
+		Player player1 = getPlayer()
+		NpcAction npcAction = new NpcAction(
+			message: ""
+		)
+		Pokemon playerPokemon = getTestPokemon()
+		OwnerPokemon playerOwnerPokemon1 = getOwnerPokemon(playerPokemon, player1, 1)
+		OwnerPokemon playerOwnerPokemon2 = getOwnerPokemon(playerPokemon, player1, 2)
+		addownerPokemonLink(player, playerOwnerPokemon1)
+		addownerPokemonLink(player, playerOwnerPokemon2)
+		
+		Npc npc = new Npc(
+			ownerId: 3,
+			npcAction: npcAction,
+			rewardItems: [],
+			permanentLock: false,
+			name: "testNpc"
+		)
+		npc.save(flush:true)
+		
+		Pokemon npcPokemon = getTestPokemon()
+		OwnerPokemon npcOwnerPokemon1 = getOwnerPokemon(npcPokemon, npc, 1)
+		OwnerPokemon npcOwnerPokemon2 = getOwnerPokemon(npcPokemon, npc, 2)
+		addownerPokemonLink(npc, npcOwnerPokemon1)
+		//addownerPokemonLink(npc, npcOwnerPokemon2)
+		
+		setMetaClasses()
+		
+		Fight fight = fightFactoryService.startFight(BattleType.PVN, player1, npc, null, null)
+		fight.fightPlayer1.metaClass.getOwner = { -> return player1 }
+		fight.fightPlayer2.metaClass.getOwner = { -> return npc }
+		
+		
+		while (!fight.battleOver){
+			if (fight.fightPlayer1.fightPokemon.hp > 0){
+				Moves.setMove(fight, fight.fightPlayer1, new FailAction(), false)
+			}
+			else {
+				FightPokemon fightPokemon = fight.fightPlayer1.party.find{ it.hp > 0 }
+				assert fightPokemon
+				assert fight.switchRound
+				SwitchAction switchAction = new SwitchAction(fightPokemon: fightPokemon)
+				Moves.setMove(fight, fight.fightPlayer1, switchAction, false)
+			}
+			
 			println "****"
 			fight.roundResult.toBattleString(fight.fightPlayer1).split(";").each{
 				println(it)
@@ -84,11 +170,11 @@ class FightTest {
 		return battleAction
 	}
 	
-	private OwnerPokemon getOwnerPokemon(Pokemon playerPokemon){
+	private OwnerPokemon getOwnerPokemon(Pokemon playerPokemon, Owner owner, int partyPosition){
 		OwnerPokemon ownerPokemon = new OwnerPokemon(
 			level: 1,
 			id: 1,
-			partyPosition: 1,
+			partyPosition: partyPosition,
 			pokemon: playerPokemon,
 			hpIV: 1,
 			attackIV: 1,
@@ -96,17 +182,26 @@ class FightTest {
 			spAttackIV: 1,
 			spDefenseIV: 1,
 			speedIV: 1,
-			gender: Gender.Male
+			gender: Gender.Male,
+			ownerId: 1
 		)
 		ownerPokemon.hp = ownerPokemon.calculateHP()
-		ownerPokemon.owner = player
+		ownerPokemon.owner = owner
 		ownerPokemon.save()
 		return ownerPokemon
 	}
 	
-	private void setMetaClasses(OwnerPokemon ownerPokemon){
-		OwnerPokemon.metaClass.static.findAllByPartyPositionGreaterThanAndOwner = { int i, Owner o -> [ ownerPokemon ] }
-		Party.metaClass.static.getFirstAlivePokemon = { Owner owner -> return ownerPokemon }
+	private void setMetaClasses(){
+		OwnerPokemon.metaClass.static.findAllByPartyPositionGreaterThanAndOwner = { int i, Owner owner -> 
+			OwnerPokemonLink result = ownerPokemonLinks.find{ it.owner.name == owner.name }
+			assert result
+			return result.ownerPokemon
+		}
+		Party.metaClass.static.getFirstAlivePokemon = { Owner owner -> 
+			OwnerPokemonLink result = ownerPokemonLinks.find{ it.owner.name == owner.name }
+			assert result.ownerPokemon[0]
+			return result.ownerPokemon[0] // Geef gewoon de eerste terug
+		}
 		LearnableMove.metaClass.static.findAllByPokemonAndLearnLevelLessThanEquals = { Pokemon pokemon, int level -> return [ new LearnableMove(move: move) ] }
 		Effectiveness.metaClass.static.findByType1AndType2AndAttackType = { String pokemonType1, String pokemonType2, String attackType -> return new Effectiveness(effect: 1.0) }
 		Evolution.metaClass.static.findByFromPokemonAndLevel = { Pokemon pokemon, int level -> return null}
@@ -118,6 +213,7 @@ class FightTest {
 		Map map = new Map(name: "test")
 		
 		Player player = new Player(
+			ownerId: 1,
 			username:"kevin",
 			email:"verhoef.k@gmail.com",
 			password: "???",

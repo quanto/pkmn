@@ -14,7 +14,8 @@ import game.fight.log.InitialHpLog
 class Stats {
 
     public static void bringOutPokemon(Fight fight, FightPlayer fightPlayer, FightPokemon fightPokemon){
-        if (fightPlayer.ownerId){
+        
+		if (fightPlayer.playerType != PlayerType.wildPokemon){
             fight.roundResult.battleActions.add(new MessageLog("${fightPlayer.name} brings out ${fightPokemon.name}"))
         }
         else {
