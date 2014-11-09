@@ -52,7 +52,11 @@ class BattleController {
             render view: 'index', model: [fight:fight, myFightPlayer:myFightPlayer]
         }
         else {
-            render text:"No fight"
+            // Happens when application is closed when player is in a fight
+            player.view = View.ShowMap
+            player.save()
+            redirect controller: 'game', action: 'view'
+            //render text:"No fight"
         }
 
     }
