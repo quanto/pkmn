@@ -217,7 +217,7 @@ class PlayerImport {
                 pvnBattlesLost: Integer.parseInt(parts[18]),
                 pvpBattlesWon: Integer.parseInt(parts[18]),
                 pvpBattlesLost: Integer.parseInt(parts[20]),
-                characterImage: CharacterImage.values().find { it.toString() == parts[21] }
+                characterImage: CharacterImage.values().find { it.toString() == parts[21] }?: CharacterImage.player
         )
         player.save()
         Player.executeUpdate("update Player set password = :password where username = :username",[username:parts[0],password: parts[2]])

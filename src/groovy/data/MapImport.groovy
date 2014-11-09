@@ -482,11 +482,13 @@ class MapImport {
 
     public static void importMessage(def parts, Map map, AltMap altMap){
 
-        MapMessage action = new MapMessage(
-                message: parts[totalBaseActionProperties+1],
-        )
-        addMapOrAltMap(action, map, altMap)
-        addBaseActionProperties(action,parts)
+        if (parts[totalBaseActionProperties+1]){
+            MapMessage action = new MapMessage(
+                    message: parts[totalBaseActionProperties+1],
+            )
+            addMapOrAltMap(action, map, altMap)
+            addBaseActionProperties(action,parts)
+        }
     }
 
 }

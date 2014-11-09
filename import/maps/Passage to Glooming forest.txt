@@ -90,7 +90,7 @@ false
 
 -16
 actionObject spritely
-person1
+casualguy1
 llrr
 null
 </personAction>
