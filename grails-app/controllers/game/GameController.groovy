@@ -155,6 +155,8 @@ class GameController {
                         player.fightNr = fight.nr
                         player.view = View.Battle
                         render text: "updateViewAfterAnimation = true;"
+                        player.save(flush: true)
+                        return
                     }
                 }
 
