@@ -28,23 +28,6 @@ W2wCqtkOuL3obTN
 <mapTransition>
 16
 19
-KGtW2L0tmi8hnWx
-
-
-
-true
-false
-false
-false
-
-
-
-
-A9vkb30nTEaUwOa
-</mapTransition>
-<mapTransition>
-16
-19
 shHIvp4yRGpwH7M
 
 
@@ -58,6 +41,23 @@ false
 
 
 z9noB1AhZxRbqZb
+</mapTransition>
+<mapTransition>
+16
+19
+KGtW2L0tmi8hnWx
+
+
+
+true
+false
+false
+false
+
+
+
+
+A9vkb30nTEaUwOa
 </mapTransition>
 <mapTransition>
 6
@@ -207,6 +207,44 @@ llrrdddddduuuuuu
 l
 </personAction>
 <personAction>
+11
+12
+zRfp2N2mCNsKo7I
+
+
+
+false
+true
+false
+false
+/images/chars/guard.png
+
+-16
+actionObject spritely
+guard
+llrrdddddduuuuuu
+l
+</personAction>
+<personAction>
+17
+11
+681lRRwst4pjqqf
+
+
+
+false
+true
+false
+false
+/images/chars/labguy.png
+
+-16
+actionObject spritely
+labguy
+
+d
+</personAction>
+<personAction>
 17
 11
 681lRRwst4pjqqf
@@ -243,6 +281,44 @@ actionObject spritely
 guard
 
 d
+</personAction>
+<personAction>
+21
+15
+san5kdafJ6CvZxs
+
+
+
+false
+true
+false
+false
+/images/chars/guard.png
+
+-16
+actionObject spritely
+guard
+
+d
+</personAction>
+<personAction>
+8
+11
+vMLcuHAlcKsKWf7
+
+
+
+false
+true
+false
+false
+/images/chars/littlegirl1.png
+
+-16
+actionObject spritely
+littlegirl1
+uuuuullllldddddrrrrr
+u
 </personAction>
 <personAction>
 8
@@ -361,7 +437,26 @@ false
 -16
 actionObject spritely overworldPokemon
 66
+null
+d
+</pokemonAction>
+<pokemonAction>
+22
+15
+QkzDoP6xDLTqgxb
 
+
+
+false
+true
+false
+false
+/images/followers/66.png
+-8
+-16
+actionObject spritely overworldPokemon
+66
+null
 d
 </pokemonAction>
 
@@ -381,7 +476,7 @@ false
 -16
 actionObject spritely overworldPokemon
 66
-
+null
 d
 Machop!
 </messagePokemonAction>

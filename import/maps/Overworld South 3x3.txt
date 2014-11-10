@@ -67,10 +67,38 @@ false
 xxarSQLVLr2v9BD
 </mapTransition>
 
+
+
+
+
+
+
+
+
+
 <personAction>
 10
 5
 onasvc8fX0vosWG
+
+
+
+false
+true
+false
+false
+/images/chars/badboy1.png
+
+-16
+actionObject spritely
+badboy1
+
+u
+</personAction>
+<personAction>
+9
+5
+g6k7jhKghA4XBlX
 
 
 
@@ -139,23 +167,6 @@ true
 haveUndergroundPassageKey
 0
 </altMapData>
-<mapTransition>
-8
-10
-ngtGDLk6fzOQfiH
-
-
-
-true
-false
-false
-false
-
-
-
-
-ruiHwQbHarIdc6x
-</mapTransition>
 
 
 

@@ -57,6 +57,44 @@ l
 </personAction>
 <personAction>
 3
+10
+RwGlaArwY9r4Kzs
+
+
+
+false
+true
+false
+false
+/images/chars/badboy1.png
+
+-16
+actionObject spritely
+badboy1
+
+l
+</personAction>
+<personAction>
+3
+11
+hd3hwwF1D2dcSqc
+
+
+
+false
+true
+false
+false
+/images/chars/badboy1.png
+
+-16
+actionObject spritely
+badboy1
+
+l
+</personAction>
+<personAction>
+3
 11
 hd3hwwF1D2dcSqc
 
@@ -125,6 +163,31 @@ false
 true
 
 
+completedFakeUndergroundPassage
+1
+</altMapData>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<altMapData>
+false
+false
+true
+
+
 haveUndergroundPassageKey
 0
 </altMapData>
@@ -172,31 +235,6 @@ l
 
 dBFqz5JHLQDqv1G
 </npcAction>
-
-
-
-
-
-
-
-
-
-
-
-
-<altMapData>
-false
-false
-true
-
-
-completedFakeUndergroundPassage
-1
-</altMapData>
-
-
-
-
 
 
 

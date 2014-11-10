@@ -70,6 +70,25 @@ oldman1
 llrr
 d
 </personAction>
+<personAction>
+2
+7
+u3FM4o8TTpFNFlu
+
+
+
+false
+true
+false
+false
+/images/chars/oldman1.png
+
+-16
+actionObject spritely
+oldman1
+llrr
+d
+</personAction>
 
 <messagePersonAction>
 2

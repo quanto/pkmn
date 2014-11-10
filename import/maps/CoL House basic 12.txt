@@ -70,6 +70,25 @@ littleboy1
 
 d
 </personAction>
+<personAction>
+6
+11
+YY3Mbvw0owfehPc
+
+
+
+false
+true
+false
+false
+/images/chars/littleboy1.png
+
+-16
+actionObject spritely
+littleboy1
+
+d
+</personAction>
 
 <messagePersonAction>
 6

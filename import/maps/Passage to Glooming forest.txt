@@ -35,23 +35,6 @@ kevin
 
 
 
-<mapMessage>
-16
-14
-PStMjOEWSsJeJPr
-haveBeginnerBadge
-
-Hey you! No rookies past this point!
-false
-true
-true
-false
-
-
-
-
-
-</mapMessage>
 
 
 
@@ -86,7 +69,7 @@ false
 true
 false
 false
-/images/chars/person1.png
+/images/chars/casualguy1.png
 
 -16
 actionObject spritely

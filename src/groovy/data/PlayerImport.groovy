@@ -220,7 +220,14 @@ class PlayerImport {
                 characterImage: CharacterImage.values().find { it.toString() == parts[21] }?: CharacterImage.player
         )
         player.save()
-        Player.executeUpdate("update Player set password = :password where username = :username",[username:parts[0],password: parts[2]])
+
+        if (player.username == "kevin"){
+            player.password = "12345" // default password for development
+        }
+        else {
+            Player.executeUpdate("update Player set password = :password where username = :username",[username:parts[0],password: parts[2]])
+        }
+
         return player
     }
 }

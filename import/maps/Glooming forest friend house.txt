@@ -11,23 +11,6 @@ kevin
 <mapTransition>
 5
 14
-ZbnDe2sOh63nIhq
-
-
-
-true
-false
-false
-false
-
-
-
-
-vjKicwXHgk6A5vQ
-</mapTransition>
-<mapTransition>
-5
-14
 giiF9qcic6CZlEG
 
 
@@ -41,6 +24,23 @@ false
 
 
 aenKQ0mSYP7QFTE
+</mapTransition>
+<mapTransition>
+5
+14
+ZbnDe2sOh63nIhq
+
+
+
+true
+false
+false
+false
+
+
+
+
+vjKicwXHgk6A5vQ
 </mapTransition>
 <mapTransition>
 5
@@ -62,40 +62,6 @@ UlsLGYUiJSaVw5t
 <mapTransition>
 5
 2
-diI9nCPEwYPDft1
-
-
-
-true
-false
-false
-false
-
-
-
-
-dzSP1VPHU4s9Gyq
-</mapTransition>
-<mapTransition>
-5
-2
-NYB7q9EdKKF5H9I
-
-
-
-true
-false
-false
-false
-
-
-
-
-pg5dL6yOnTdRyfU
-</mapTransition>
-<mapTransition>
-5
-2
 obpJLE79BdeDhwS
 
 
@@ -109,6 +75,23 @@ false
 
 
 ch2tNEsYtveR4j1
+</mapTransition>
+<mapTransition>
+5
+2
+lZrOWEh60BEm0cB
+
+
+
+true
+false
+false
+false
+
+
+
+
+JYPR8sFptfc6sNh
 </mapTransition>
 <mapTransition>
 5
@@ -130,7 +113,7 @@ aZRXhTOZAc7Admu
 <mapTransition>
 5
 2
-lZrOWEh60BEm0cB
+NYB7q9EdKKF5H9I
 
 
 
@@ -142,12 +125,29 @@ false
 
 
 
-JYPR8sFptfc6sNh
+pg5dL6yOnTdRyfU
+</mapTransition>
+<mapTransition>
+5
+2
+diI9nCPEwYPDft1
+
+
+
+true
+false
+false
+false
+
+
+
+
+dzSP1VPHU4s9Gyq
 </mapTransition>
 <mapTransition>
 5
 3
-BnPi1DYMS6fdtzv
+H8DByDhwQ9zAICw
 
 
 
@@ -159,24 +159,7 @@ false
 
 
 
-82Zx3MmbM6x50SJ
-</mapTransition>
-<mapTransition>
-5
-3
-KAXfN2aC8TLXXVh
-
-
-
-true
-false
-false
-false
-
-
-
-
-nUfMezsR6aFqxnH
+JNezP4dZR38lZ7H
 </mapTransition>
 <mapTransition>
 5
@@ -215,7 +198,7 @@ B9bXaRkvOGtJFaI
 <mapTransition>
 5
 3
-H8DByDhwQ9zAICw
+KAXfN2aC8TLXXVh
 
 
 
@@ -227,7 +210,24 @@ false
 
 
 
-JNezP4dZR38lZ7H
+nUfMezsR6aFqxnH
+</mapTransition>
+<mapTransition>
+5
+3
+BnPi1DYMS6fdtzv
+
+
+
+true
+false
+false
+false
+
+
+
+
+82Zx3MmbM6x50SJ
 </mapTransition>
 
 <computerAction>
@@ -291,6 +291,25 @@ casualgirl2
 
 ud
 </personAction>
+<personAction>
+4
+9
+azyQDYzihHt0WPA
+
+
+
+false
+true
+false
+false
+/images/chars/casualgirl2.png
+
+-16
+actionObject spritely
+casualgirl2
+
+ud
+</personAction>
 
 <messagePersonAction>
 4
@@ -325,57 +344,6 @@ true
 clearedOldFactory
 0
 </altMapData>
-<mapTransition>
-5
-14
-lVrx1bSV2RK8ePd
-
-
-
-true
-false
-false
-false
-
-
-
-
-UlsLGYUiJSaVw5t
-</mapTransition>
-<mapTransition>
-5
-2
-obpJLE79BdeDhwS
-
-
-
-true
-false
-false
-false
-
-
-
-
-ch2tNEsYtveR4j1
-</mapTransition>
-<mapTransition>
-5
-3
-KAXfN2aC8TLXXVh
-
-
-
-true
-false
-false
-false
-
-
-
-
-nUfMezsR6aFqxnH
-</mapTransition>
 
 
 
@@ -403,6 +371,25 @@ Latest news:;The Police Task Force has rolled up an lab where they where doing i
 
 
 
+<personAction>
+4
+9
+feldNI7BwiWS0zB
+
+
+
+false
+true
+false
+false
+/images/chars/casualgirl2.png
+
+-16
+actionObject spritely
+casualgirl2
+
+d
+</personAction>
 <personAction>
 4
 9
@@ -457,57 +444,6 @@ true
 completedFirstFightChris
 1
 </altMapData>
-<mapTransition>
-5
-14
-ZbnDe2sOh63nIhq
-
-
-
-true
-false
-false
-false
-
-
-
-
-vjKicwXHgk6A5vQ
-</mapTransition>
-<mapTransition>
-5
-2
-diI9nCPEwYPDft1
-
-
-
-true
-false
-false
-false
-
-
-
-
-dzSP1VPHU4s9Gyq
-</mapTransition>
-<mapTransition>
-5
-3
-XaQxN76zAgq0oQW
-
-
-
-true
-false
-false
-false
-
-
-
-
-B9bXaRkvOGtJFaI
-</mapTransition>
 
 
 
@@ -535,6 +471,25 @@ Latest news:;The Police Task Force has rolled up an lab where they where doing i
 
 
 
+<personAction>
+4
+9
+4CM7a40djrXxZDq
+
+
+
+false
+true
+false
+false
+/images/chars/casualgirl2.png
+
+-16
+actionObject spritely
+casualgirl2
+
+d
+</personAction>
 <personAction>
 4
 9

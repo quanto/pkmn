@@ -101,7 +101,7 @@ ${action.cssClass?:''}"""
     public static String getPersonActionProperties(Action action){
         """${getBaseActionProperties(action)}
 ${action.characterImage.name()}
-${action.macro}
+${action.macro?:''}
 ${action.initialDirection}"""
     }
 
@@ -160,7 +160,7 @@ ${action.message}
             if(action in MessagePersonAction){
                 data += """<messagePersonAction>
 ${getPersonActionProperties(action)}
-${action.message}
+${action.message?:''}
 </messagePersonAction>
 """
             }
@@ -229,7 +229,7 @@ ${action.market.identifier}
 ${getBaseActionProperties(action)}
 ${action.characterImage.name()}
 ${action.initialDirection}
-${action.message}
+${action.message?:''}
 ${action.owner.identifier}
 </npcAction>
 """

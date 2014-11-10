@@ -28,7 +28,7 @@ false
 -16
 actionObject spritely
 casualgirl1
-
+d
 I'm way stronger then my sister. Bring it on!
 yummN0Mg4YSGv44
 </npcAction>
@@ -48,7 +48,7 @@ false
 -16
 actionObject spritely
 casualgirl1
-
+d
 I'm definitly stronger then my sister. Bring it on!
 E1QEBGHISuBOlwS
 </npcAction>

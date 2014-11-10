@@ -54,6 +54,25 @@ cook
 
 l
 </personAction>
+<personAction>
+7
+8
+h2uQu1UicDakBXD
+
+
+
+false
+true
+false
+false
+/images/chars/cook.png
+
+-16
+actionObject spritely
+cook
+
+l
+</personAction>
 
 <messagePersonAction>
 7

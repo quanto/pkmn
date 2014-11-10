@@ -54,6 +54,25 @@ oldman1
 
 dduu
 </personAction>
+<personAction>
+6
+8
+iWPGNPy6XBKb90F
+
+
+
+false
+true
+false
+false
+/images/chars/oldman1.png
+
+-16
+actionObject spritely
+oldman1
+
+dduu
+</personAction>
 
 <messagePersonAction>
 6

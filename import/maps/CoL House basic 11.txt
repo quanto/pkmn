@@ -74,6 +74,25 @@ casualgirl2
 lr
 l
 </personAction>
+<personAction>
+5
+11
+qnupwUPBwNWqERP
+
+
+
+false
+true
+false
+false
+/images/chars/casualgirl2.png
+
+-16
+actionObject spritely
+casualgirl2
+lr
+l
+</personAction>
 
 <messagePersonAction>
 5

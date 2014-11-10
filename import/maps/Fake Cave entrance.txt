@@ -71,6 +71,25 @@ band
 
 d
 </personAction>
+<personAction>
+2
+3
+uN6hGvrUh42DDDL
+
+
+
+false
+true
+false
+false
+/images/chars/band.png
+
+-16
+actionObject spritely
+band
+
+d
+</personAction>
 
 <messagePersonAction>
 2

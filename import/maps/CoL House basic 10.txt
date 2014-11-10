@@ -54,6 +54,25 @@ guard
 
 d
 </personAction>
+<personAction>
+6
+5
+lSiiVUk1haMKJg0
+
+
+
+false
+true
+false
+false
+/images/chars/guard.png
+
+-16
+actionObject spritely
+guard
+
+d
+</personAction>
 
 <messagePersonAction>
 6
@@ -92,7 +111,7 @@ false
 -16
 actionObject spritely overworldPokemon
 65
-
+null
 l
 </pokemonAction>
 

@@ -28,40 +28,6 @@ TWd781VMefOk4cI
 <mapTransition>
 8
 2
-pg5dL6yOnTdRyfU
-
-
-
-true
-false
-false
-false
-
-
-
-
-NYB7q9EdKKF5H9I
-</mapTransition>
-<mapTransition>
-8
-2
-JYPR8sFptfc6sNh
-
-
-
-true
-false
-false
-false
-
-
-
-
-lZrOWEh60BEm0cB
-</mapTransition>
-<mapTransition>
-8
-2
 dzSP1VPHU4s9Gyq
 
 
@@ -95,6 +61,57 @@ obpJLE79BdeDhwS
 </mapTransition>
 <mapTransition>
 8
+2
+JYPR8sFptfc6sNh
+
+
+
+true
+false
+false
+false
+
+
+
+
+lZrOWEh60BEm0cB
+</mapTransition>
+<mapTransition>
+8
+2
+pg5dL6yOnTdRyfU
+
+
+
+true
+false
+false
+false
+
+
+
+
+NYB7q9EdKKF5H9I
+</mapTransition>
+<mapTransition>
+8
+3
+JNezP4dZR38lZ7H
+
+
+
+true
+false
+false
+false
+
+
+
+
+H8DByDhwQ9zAICw
+</mapTransition>
+<mapTransition>
+8
 3
 82Zx3MmbM6x50SJ
 
@@ -109,23 +126,6 @@ false
 
 
 BnPi1DYMS6fdtzv
-</mapTransition>
-<mapTransition>
-8
-3
-B9bXaRkvOGtJFaI
-
-
-
-true
-false
-false
-false
-
-
-
-
-XaQxN76zAgq0oQW
 </mapTransition>
 <mapTransition>
 8
@@ -164,7 +164,7 @@ KAXfN2aC8TLXXVh
 <mapTransition>
 8
 3
-JNezP4dZR38lZ7H
+B9bXaRkvOGtJFaI
 
 
 
@@ -176,7 +176,7 @@ false
 
 
 
-H8DByDhwQ9zAICw
+XaQxN76zAgq0oQW
 </mapTransition>
 
 
@@ -215,102 +215,9 @@ false
 true
 
 
-completedFirstFightChris
-1
-</altMapData>
-<mapTransition>
-8
-2
-JYPR8sFptfc6sNh
-
-
-
-true
-false
-false
-false
-
-
-
-
-lZrOWEh60BEm0cB
-</mapTransition>
-<mapTransition>
-8
-3
-82Zx3MmbM6x50SJ
-
-
-
-true
-false
-false
-false
-
-
-
-
-BnPi1DYMS6fdtzv
-</mapTransition>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<altMapData>
-false
-false
-true
-
-
 clearedOldFactory
 0
 </altMapData>
-<mapTransition>
-8
-2
-aZRXhTOZAc7Admu
-
-
-
-true
-false
-false
-false
-
-
-
-
-TWd781VMefOk4cI
-</mapTransition>
-<mapTransition>
-8
-3
-9cp9036EvP3ZaoG
-
-
-
-true
-false
-false
-false
-
-
-
-
-Oau9sNxW2dkKudq
-</mapTransition>
 
 
 
@@ -335,6 +242,31 @@ r
 Can;t believe you defeated those bad guys all by your self.; Let me see how strong you are.
 9Hz7mnMhOB9wvKq
 </npcAction>
+
+
+
+
+
+
+
+
+
+
+
+
+<altMapData>
+false
+false
+true
+
+
+completedFirstFightChris
+1
+</altMapData>
+
+
+
+
 
 
 
