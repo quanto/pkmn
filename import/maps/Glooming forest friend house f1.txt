@@ -11,7 +11,7 @@ kevin
 <mapTransition>
 8
 2
-aZRXhTOZAc7Admu
+JYPR8sFptfc6sNh
 
 
 
@@ -23,7 +23,24 @@ false
 
 
 
-TWd781VMefOk4cI
+lZrOWEh60BEm0cB
+</mapTransition>
+<mapTransition>
+8
+2
+pg5dL6yOnTdRyfU
+
+
+
+true
+false
+false
+false
+
+
+
+
+NYB7q9EdKKF5H9I
 </mapTransition>
 <mapTransition>
 8
@@ -62,7 +79,7 @@ obpJLE79BdeDhwS
 <mapTransition>
 8
 2
-JYPR8sFptfc6sNh
+aZRXhTOZAc7Admu
 
 
 
@@ -74,58 +91,7 @@ false
 
 
 
-lZrOWEh60BEm0cB
-</mapTransition>
-<mapTransition>
-8
-2
-pg5dL6yOnTdRyfU
-
-
-
-true
-false
-false
-false
-
-
-
-
-NYB7q9EdKKF5H9I
-</mapTransition>
-<mapTransition>
-8
-3
-JNezP4dZR38lZ7H
-
-
-
-true
-false
-false
-false
-
-
-
-
-H8DByDhwQ9zAICw
-</mapTransition>
-<mapTransition>
-8
-3
-82Zx3MmbM6x50SJ
-
-
-
-true
-false
-false
-false
-
-
-
-
-BnPi1DYMS6fdtzv
+TWd781VMefOk4cI
 </mapTransition>
 <mapTransition>
 8
@@ -147,7 +113,7 @@ Oau9sNxW2dkKudq
 <mapTransition>
 8
 3
-nUfMezsR6aFqxnH
+82Zx3MmbM6x50SJ
 
 
 
@@ -159,7 +125,7 @@ false
 
 
 
-KAXfN2aC8TLXXVh
+BnPi1DYMS6fdtzv
 </mapTransition>
 <mapTransition>
 8
@@ -177,6 +143,40 @@ false
 
 
 XaQxN76zAgq0oQW
+</mapTransition>
+<mapTransition>
+8
+3
+JNezP4dZR38lZ7H
+
+
+
+true
+false
+false
+false
+
+
+
+
+H8DByDhwQ9zAICw
+</mapTransition>
+<mapTransition>
+8
+3
+nUfMezsR6aFqxnH
+
+
+
+true
+false
+false
+false
+
+
+
+
+KAXfN2aC8TLXXVh
 </mapTransition>
 
 
@@ -203,6 +203,31 @@ true
 
 
 </findItemAction>
+
+
+
+
+
+
+<altMapData>
+false
+false
+true
+
+
+completedFirstFightChris
+1
+</altMapData>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -242,31 +267,6 @@ r
 Can;t believe you defeated those bad guys all by your self.; Let me see how strong you are.
 9Hz7mnMhOB9wvKq
 </npcAction>
-
-
-
-
-
-
-
-
-
-
-
-
-<altMapData>
-false
-false
-true
-
-
-completedFirstFightChris
-1
-</altMapData>
-
-
-
-
 
 
 

@@ -8,7 +8,6 @@ import data.MapImport
 import data.ItemImport
 import map.View
 import data.PlayerImport
-import org.apache.commons.lang.RandomStringUtils
 
 class BootStrap {
 
@@ -119,6 +118,14 @@ class BootStrap {
                     """,
                     player: Player.findByUsername("kevin"),
                     date: new Date().parse("dd-MM-yyyy HH:mm:ss","22-10-2013 12:00:00")
+            ).save()
+
+            new NewsItem(
+                    message: """
+                        Large map update.
+                    """,
+                    player: Player.findByUsername("kevin"),
+                    date: new Date().parse("dd-MM-yyyy HH:mm:ss","11-10-2014 12:00:00")
             ).save()
         }
 
