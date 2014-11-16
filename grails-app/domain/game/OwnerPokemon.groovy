@@ -36,11 +36,13 @@ class OwnerPokemon {
     int confusion = 0
     int curse = 0
 
+    static fetchMode = [pokemon: 'eager']
+
     static constraints = {
         owner nullable:true
     }
 
-    static transients = ['baseExp']
+    static transients = ['baseExp', 'expPercentage', 'hpPercentage']
 
     int calculateHP()
     {
@@ -53,8 +55,18 @@ class OwnerPokemon {
         return Math.floor(hp);
     }
 
+    public int getHpPercentage(){
+        Math.round(100 / calculateHP() * hp)
+    }
+
     public int getBaseExp(){
         EXP.getExp(level,pokemon.levelRate)
     }
+
+    public int getExpPercentage(){
+        int percentage = EXP.getExpPercentage(level, pokemon.levelRate, xp)
+        return percentage>0?percentage:0
+    }
+
 
 }

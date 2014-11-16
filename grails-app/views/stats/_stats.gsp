@@ -9,10 +9,10 @@
             Wild battles
         </td>
         <td>
-            ${player.pveBattlesWon}
+            {{model.pveBattlesWon}}
         </td>
         <td>
-            ${player.pveBattlesLost}
+            {{model.pveBattlesLost}}
         </td>
     </tr>
     <tr>
@@ -20,10 +20,10 @@
             NPC battles
         </td>
         <td>
-            ${player.pvnBattlesWon}
+            {{model.pvnBattlesWon}}
         </td>
         <td>
-            ${player.pvnBattlesLost}
+            {{model.pvnBattlesLost}}
         </td>
     </tr>
     <tr>
@@ -31,10 +31,10 @@
             PVP battles
         </td>
         <td>
-            ${player.pvpBattlesWon}
+            {{model.pvpBattlesWon}}
         </td>
         <td>
-            ${player.pvpBattlesLost}
+            {{model.pvpBattlesLost}}
         </td>
     </tr>
 </table>

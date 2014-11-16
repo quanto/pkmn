@@ -2,6 +2,7 @@ package game
 
 import game.context.PlayerData
 import game.social.FriendRequest
+import grails.converters.JSON
 
 class OnlineController {
 
@@ -13,15 +14,28 @@ class OnlineController {
 
         def friendRequests = FriendRequest.findByInvitedPlayer(player)
 
-        render template: 'online', model: [friends: player.friends, ownPlayer: player, friendRequests: friendRequests, onlinePlayers: sessionRegistry.getAllPrincipals()]
+        def onlinePlayers = sessionRegistry.getAllPrincipals()
+
+        def model = [
+                friendRequests: friendRequests.collect { FriendRequest request -> [
+                    id: request.id,
+                    username: request.player.username,
+                ]},
+
+                friends: player.friends.collect {[
+                        username: it.username,
+                        online: onlinePlayers.contains{ it.username == player.username},
+                        map: it.map.name,
+                ]}
+        ]
+        render model as JSON
     }
 
     def invite(String playerName){
 
         Player invitedPlayer = Player.findByUsername(playerName)
         if (!invitedPlayer){
-            flash.errorMessage = "Username not found"
-            redirect action: 'index'
+            render text: "Username not found"
             return
         }
 
@@ -29,20 +43,17 @@ class OnlineController {
         Player player = playerData.getPlayer()
 
         if (invitedPlayer.username == player.username){
-            flash.errorMessage = "Cannot invite self"
-            redirect action: 'index'
+            render text: "Cannot invite self"
             return
         }
 
         if (player.friends.find{ it.username == invitedPlayer.username }){
-            flash.errorMessage = "User already in friends list"
-            redirect action: 'index'
+            render text: "User already in friends list"
             return
         }
 
         if (FriendRequest.findByPlayerAndInvitedPlayer(player,invitedPlayer)){
-            flash.errorMessage = "Friend request already send"
-            redirect action: 'index'
+            render text: "Friend request already send"
             return
         }
 
@@ -53,8 +64,7 @@ class OnlineController {
 
         friendRequest.save()
 
-        flash.message = "Friend request created"
-        redirect action: 'index'
+        render text: "Friend request created"
     }
 
     def acceptInvite(long id){
@@ -67,11 +77,12 @@ class OnlineController {
             FriendRequest.withSession {
                 friendRequest.player.addToFriends(player)
                 player.addToFriends(friendRequest.player)
-                friendRequest.delete()
-                flash.message = "Friend added"
+                friendRequest.delete(flush:true)
+                render text: "Friend added"
+                return
             }
         }
-        redirect action: 'index'
+        render text: ""
     }
 
     def declineInvite(long id){
@@ -82,11 +93,12 @@ class OnlineController {
 
         if (friendRequest){
             FriendRequest.withSession {
-                friendRequest.delete()
-                flash.message = "Friend request declined"
+                friendRequest.delete(flush:true)
+                render text: "Friend request declined"
+                return
             }
         }
-        redirect action: 'index'
+        render text: ""
     }
 
 }

@@ -10,7 +10,7 @@ class ChatMessageService {
 
     static transactional = false
 
-    String getChatMessages(Long lastChatId, Player player){
+    List<ChatMessage> getChatMessages(Long lastChatId, Player player){
 
         // Remove old messages
         chatMessages.removeAll{ it.date < new Date()-1 }
@@ -36,14 +36,7 @@ class ChatMessageService {
             return false
         }.sort{ !it.date }.collate(100)[0].sort{ it.date }
 
-        String string = chatMessageList?"<script>lastChatId = '${chatMessageList.max{it.id}.id }';</script>":'';
-
-        chatMessageList.each { ChatMessage chatMessage ->
-
-            string += "<div class='${chatMessage.chatScope.name()}'><strong>${chatMessage.player.username}@${chatMessage.chatScope==ChatScope.Private?chatMessage.toPlayer.username:chatMessage.chatScope.name()}:</strong><em class='chatTime'>(${chatMessage.date.format("dd/MM-mm:ss")})</em> ${chatMessage.message.encodeAsHTML()}</div>"
-        }
-
-        return string
+        return chatMessageList
     }
 
     void send(String chatScope, String message, Player player) {

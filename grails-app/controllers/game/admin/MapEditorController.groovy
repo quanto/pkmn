@@ -244,6 +244,7 @@ class MapEditorController {
         player.altMap = null
         player.positionX = x
         player.positionY = y
+        player.save(flush: true)
         redirect controller:'game'
     }
 

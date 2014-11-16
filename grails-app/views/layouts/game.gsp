@@ -34,17 +34,10 @@
         });
 
     </script>
-    <style>
-
-
-
-    </style>
     <g:layoutHead/>
-    <r:layoutResources />
 
 </head>
-<body>
-
+<body id="ngApp" ng-app="game">
 <table id="layout" cellspacing="0" rowspacing="0">
     <tr>
         <td colspan="2" id="top">
@@ -66,24 +59,26 @@
                         <div id="location"></div>
                     </div>
                     <h1>Online</h1>
-                    <div id="online">
-
+                    <div id="online" ng-controller="OnlineController">
+                        <g:render template="/online/online" />
                     </div>
                     <h1>Party</h1>
-                    <div id="party">
-
+                    <div id="party" ng-controller="PartyController">
+                        <g:render template="/party/partyAngular" />
                     </div>
                     <h1>News</h1>
-                    <div id="news">
-
+                    <div id="news" ng-controller="NewsController">
+                        <p ng-repeat="news in model">
+                            <strong>{{news.username}}:</strong><em class='chatTime'>({{news.date}})</em> {{news.message}}
+                        </p>
                     </div>
                     <h1>Stats</h1>
-                    <div id="stats">
-
+                    <div id="stats" ng-controller="StatsController">
+                        <g:render template="/stats/stats" />
                     </div>
                     <h1>Items</h1>
-                    <div id="items">
-
+                    <div id="items" ng-controller="BagController">
+                        <g:render template="/bag/ownerItems" />
                     </div>
                 </div>
             </td>
@@ -91,8 +86,14 @@
     </tr>
     <g:if test="${pageProperty(name: 'page.showBottomContent')}">
         <tr>
-            <td id="bottom" valign="bottom">
+            <td id="bottom" valign="bottom" ng-controller="ChatController">
                 <div class="chatBox" id="chatBox">
+
+                    <div ng-repeat="chatEntry in model | reverse" class='{{chatEntry.scope}}'>
+                        <strong>{{chatEntry.username}}@<span ng-show="{{chatEntry.scope == 'Private'}}">{{chatEntry.toUsername}}</span><span ng-show="{{chatEntry.scope != 'Private'}}">{{chatEntry.scope}}</span>:</strong>
+                        <em class='chatTime'>({{chatEntry.date}})</em> {{chatEntry.message}}
+                    </div>
+
                 </div>
                 <div>
                     <table style="width:100%;">
@@ -104,14 +105,13 @@
                                         scopes.add(ChatScope.Global)
                                     }
                                 %>
-                                <g:select name="chatScope" value="${ChatScope.Map}" from="${scopes}" onchange="\$('#chatMessage').select()" />
+                                <g:select name="chatScope" ng-model="scope" value="${ChatScope.Map}" from="${scopes}" />
                             </td>
                             <td width="80%">
-                                <input type="text" id="chatMessage" />
+                                <input type="text" id="chatMessage" ng-model="message" ng-enter="sendMessage()" />
                             </td>
                         </tr>
                     </table>
-
 
                 </div>
             </td>

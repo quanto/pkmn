@@ -1,30 +1,55 @@
-<%@ page import="grails.plugin.springsecurity.SpringSecurityUtils" %>
-<g:render template="itemCategories" />
-<table cellpadding="0" cellspacing="0" border='0'>
+<button ng-click="tab = 'usableItems'">Usable Items</button>
+<button ng-click="tab = 'badges'">Badges</button>
+<button ng-click="tab = 'keyItems'">Key Items</button>
+
+<table cellpadding="0" cellspacing="0" border='0' ng-show="tab == 'usableItems'">
     <tr>
         <td></td>
         <td>
             Name
         </td>
-        <g:if test="${!(ownerItems.count{it.item in game.item.KeyItem})}">
-            <td>
-                Quantity
-            </td>
-        </g:if>
+        <td>
+            Quantity
+        </td>
     </tr>
-    <g:each in="${ownerItems}" var="ownerItem">
-        <g:if test="${!ownerItem.item.hidden || SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')}">
-            <tr>
-                <td>
-                    <g:if test="${ownerItem.item.image}">
-                        <img src='${resource(uri:'')}/images/items/${ownerItem.item.image}'>
-                    </g:if>
-                </td>
-                <td style="width:200px;">${ownerItem.item.name}</td>
-                <g:if test="${!(ownerItem.item in game.item.KeyItem)}">
-                    <td>${ownerItem.quantity}</td>
-                </g:if>
-            </tr>
-        </g:if>
-    </g:each>
+    <tr ng-repeat="item in model.usableItems">
+        <td>
+            <span ng-show="item.image">
+                <img ng-src='${resource(uri:'')}/images/items/{{item.image}}'>
+            </span>
+        </td>
+        <td style="width:200px;">{{item.name}}</td>
+
+        <td>{{item.quantity}}</td>
+
+    </tr>
+
+</table>
+
+<table cellpadding="0" cellspacing="0" border='0' ng-show="tab == 'keyItems'">
+    <tr>
+        <td></td>
+        <td>
+            Name
+        </td>
+    </tr>
+    <tr ng-repeat="item in model.keyItems">
+        <td>
+            <span ng-show="item.image">
+                <img ng-src='${resource(uri:'')}/images/items/{{item.image}}'>
+            </span>
+        </td>
+        <td style="width:200px;">{{item.name}}</td>
+
+    </tr>
+
+</table>
+
+<table ng-show="tab == 'badges'">
+
+    <tr ng-repeat="item in model.badges">
+        <td><img ng-src='${resource(uri:'')}/images/badges/{{item.image}}'></td>
+        <td style="width:200px;">{{item.name}}</td>
+    </tr>
+
 </table>

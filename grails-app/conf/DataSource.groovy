@@ -19,12 +19,12 @@ environments {
             dbCreate = "create" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=TRUE"
 
-//            dbCreate = "update"
-//            driverClassName = "com.mysql.jdbc.Driver"
-//            dialect= "org.hibernate.dialect.MySQLInnoDBDialect"
-//            username = "root"
-//            password = ""
-//            url = "jdbc:mysql://127.0.0.1/pkmn3"
+            dbCreate = "update"
+            driverClassName = "com.mysql.jdbc.Driver"
+            dialect= "org.hibernate.dialect.MySQLInnoDBDialect"
+            username = "root"
+            password = ""
+            url = "jdbc:mysql://127.0.0.1/pkmn1"
 
         }
     }

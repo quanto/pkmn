@@ -1,6 +1,1 @@
-<%@ page import="game.fight.reward.EXP" %>
-<%
-    int percentage = EXP.getExpPercentage(level, levelRate, xp);
-    if (percentage < 0 ) percentage = 0
-%>
-<img src='${resource(uri:'')}/images/bar/exp.png'><g:if test="${percentage != 0}"><img src='${resource(uri:'')}/images/bar/blue.png' style='width:${percentage / 2}px;height:6px;'></g:if><g:if test="${percentage != 100}"><img src='${resource(uri:'')}/images/bar/grey.png' style='width:${(100 - percentage) / 2}px;height:6px;'></g:if><img src='${resource(uri:'')}/images/bar/right.png'>
+<img src='${resource(uri:'')}/images/bar/exp.png'><span ng-show="ownerPokemon.expPercentage != 0"><img src='${resource(uri:'')}/images/bar/blue.png' style='width:{{ownerPokemon.expPercentage / 2}}px;height:6px;'></span><span ng-show="ownerPokemon.expPercentage != 100"><img src='${resource(uri:'')}/images/bar/grey.png' style='width:{{(100 - ownerPokemon.expPercentage) / 2}}px;height:6px;'></span><img src='${resource(uri:'')}/images/bar/right.png'>

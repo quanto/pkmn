@@ -1,48 +1,40 @@
-<%@ page import="game.Player" %>
-<g:render template="/layouts/tiles/messages" />
 
 <table>
     <tr>
         <td>Player</td>
         <td>Map</td>
-        <td>Online?</td>
+        <td></td>
     </tr>
-    <g:each in="${friends}" var="player">
-        <g:if test="${ownPlayer != player || 1==1}">
-            <tr>
-                <td id='row'><a href="#" onclick="setPrivateMessage('${player.username}')">${player.username}</a></td>
-                <td id='row'>${player.map.name}</td>
-                <g:if test="${onlinePlayers.find{ it.username == player.username} }">
-                    <td class='online'>Online</td>
-                </g:if>
-                <g:else>
-                    <td class='offline'>Offline</td>
-                </g:else>
-            <tr>
-        </g:if>
-    </g:each>
+
+    <tr ng-repeat="friend in model.friends">
+        <td><a href="#" ng-click="setPrivateMessage(friend.username)">{{friend.username}}</a></td>
+        <td>{{friend.map}}</td>
+        <td ng-show="friend.online" class='online'>Online</td>
+        <td ng-show="!friend.online" class='offline'>Offline</td>
+    <tr>
 
 </table>
 <br />
-<g:if test="${friendRequests}">
-    <table>
-        <tr>
-            <td>Invite</td>
-            <td>
-            </td>
-        </tr>
-        <g:each in="${friendRequests}" var="friendRequest">
-            <tr>
-                <td>${friendRequest.player.username}</td>
-                <td>
-                    <g:link action="acceptInvite" controller="online" id="${friendRequest.id}">Accept</g:link> / <g:link action="declineInvite" controller="online" id="${friendRequest.id}">Decline</g:link>
-                </td>
-            </tr>
-        </g:each>
-    </table>
-</g:if>
 
-<g:form controller="online" action="invite">
-    Invite: <g:textField name="playerName"/>
-    <g:submitButton name="invite" value="invite" />
-</g:form>
+<table ng-show="model.friendRequests.length>0">
+    <tr>
+        <td>Invite</td>
+        <td>
+        </td>
+    </tr>
+
+    <tr ng-repeat="friendRequest in model.friendRequests">
+        <td>{{friendRequest.username}}</td>
+        <td>
+            <button ng-click="acceptInvite(friendRequest.id)">Accept</button>
+            <button ng-click="declineInvite(friendRequest.id)">Decline</button>
+        </td>
+    </tr>
+
+</table>
+
+
+Invite: <g:textField name="playerName" ng-model="inviteUsername" />
+<button ng-click="invitePlayer(inviteUsername)">invite</button>
+<br/>
+{{inviteFeedback}}

@@ -294,9 +294,6 @@ $(document).keypress(function(e)
                     actionA("up");
                 }
                 break;
-            case 13:
-                sendChatMessage();
-                break;
         };
 
         setTimeout(function(){ freeze = false },300)

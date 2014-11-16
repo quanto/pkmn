@@ -4,6 +4,8 @@ import game.context.PlayerData
 import game.item.Badge
 import game.item.KeyItem
 import game.item.UsableItem
+import grails.converters.JSON
+import grails.plugin.springsecurity.SpringSecurityUtils
 
 class BagController {
 
@@ -13,15 +15,25 @@ class BagController {
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
 
-        if (params.itemTab == "usableItems"){
+        def list = [
+                 usableItems: player.ownerItems.findAll{ it.item in UsableItem && showItem(it) }.collect{ OwnerItem ownerItem ->[
+                        name: ownerItem.item.name,
+                        image: ownerItem.item.image,
+                         quantity: ownerItem.quantity
+                 ]},
+                 keyItems: player.ownerItems.findAll{ it.item in KeyItem && showItem(it) }.collect{ OwnerItem ownerItem ->[
+                         name: ownerItem.item.name,
+                         image: ownerItem.item.image
+                 ]},
+                 badges: player.ownerItems.findAll{ it.item in Badge && showItem(it) }.collect{ OwnerItem ownerItem ->[
+                         name: ownerItem.item.name,
+                         image: ownerItem.item.image
+                 ]}
+        ]
+        render list as JSON
+    }
 
-            render text: g.render(template: 'ownerItems', model: [ownerItems:player.ownerItems.findAll{ it.item in UsableItem }])
-        }
-        else if (params.itemTab == "keyItems"){
-            render text: g.render(template: 'ownerItems', model: [ownerItems:player.ownerItems.findAll{ it.item in KeyItem }])
-        }
-        else {
-            render text: g.render(template: 'badges', model: [ownerItems:player.ownerItems.findAll{ it.item in Badge }])
-        }
+    private showItem(OwnerItem ownerItem){
+        return !ownerItem.item.hidden || SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')
     }
 }

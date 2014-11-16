@@ -1,5 +1,6 @@
 package game
 
+import grails.converters.JSON
 import map.View
 import game.context.PlayerData
 
@@ -9,10 +10,47 @@ class PartyController {
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
 
-        boolean computerView = false
         def ownerPokemonList = OwnerPokemon.findAllByPartyPositionGreaterThanAndOwner(0,player)
 
-        render text: g.render(template: 'party', model: [computerView:computerView,ownerPokemonList:ownerPokemonList])
+        render ownerPokemonList.collect {
+            [
+                id: it.id,
+                partyPosition: it.partyPosition,
+                gender: it.gender.toString(),
+                hp: it.hp,
+                totalHp: it.calculateHP(),
+                level: it.level,
+                hpPercentage: it.getHpPercentage(),
+                expPercentage: it.getExpPercentage(),
+                pokemon: [
+                        id: it.pokemon.id,
+                        name: it.pokemon.name,
+                        threeValueNumber: it.pokemon.threeValueNumber(),
+                        height: it.pokemon.height,
+                        weight: it.pokemon.weight
+                ]
+            ]
+        } as JSON
+    }
+
+    def computer = {
+
+        PlayerData playerData = session.playerData
+        Player player = playerData.getPlayer()
+
+        if (player.view != View.ShowComputer){
+            render text : "Zit niet bij de computer"
+        }
+        else {
+
+            boolean computerView = true
+
+            def ownerPokemonList = OwnerPokemon.findAllByOwner(player)
+            def partyList = ownerPokemonList?.findAll() { it.partyPosition > 0 }
+            def computerList = ownerPokemonList?.findAll() { it.partyPosition == 0 }
+
+            render text: g.render(template: 'computer', model: [computerView:computerView,partyList:partyList,computerList:computerList])
+        }
     }
 
     def moveUp = {
@@ -44,6 +82,8 @@ class PartyController {
             else {
                 ownerPokemon.partyPosition -= 1
                 switchOwnerPokemon.partyPosition += 1
+                ownerPokemon.save()
+                switchOwnerPokemon.save(flush:true)
                 redirect controller:'game',action:"index"
             }
         }
@@ -79,28 +119,10 @@ class PartyController {
             else {
                 ownerPokemon.partyPosition += 1
                 switchOwnerPokemon.partyPosition -= 1
+                ownerPokemon.save()
+                switchOwnerPokemon.save(flush:true)
                 redirect controller:'game',action:"index"
             }
-        }
-    }
-
-    def computer = {
-
-        PlayerData playerData = session.playerData
-        Player player = playerData.getPlayer()
-
-        if (player.view != View.ShowComputer){
-            render text : "Zit niet bij de computer"
-        }
-        else {
-
-            boolean computerView = true
-
-            def ownerPokemonList = OwnerPokemon.findAllByOwner(player)
-            def partyList = ownerPokemonList?.findAll() { it.partyPosition > 0 }
-            def computerList = ownerPokemonList?.findAll() { it.partyPosition == 0 }
-
-            render text: g.render(template: 'computer', model: [computerView:computerView,partyList:partyList,computerList:computerList])
         }
     }
 

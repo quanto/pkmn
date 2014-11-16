@@ -3,6 +3,16 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name='layout' content='game'/>
+    <script type="text/javascript" src="${resource(uri:'')}/js/external/angular.min.js"></script>
+
+    <script type="text/javascript" src="${resource(uri:'')}/js/angularGameController.js"></script>
+    <script type="text/javascript" src="${resource(uri:'')}/js/angularDirectives.js"></script>
+    <script type="text/javascript" src="${resource(uri:'')}/js/angularPartyController.js"></script>
+    <script type="text/javascript" src="${resource(uri:'')}/js/angularOnlineController.js"></script>
+    <script type="text/javascript" src="${resource(uri:'')}/js/angularNewsController.js"></script>
+    <script type="text/javascript" src="${resource(uri:'')}/js/angularStatsController.js"></script>
+    <script type="text/javascript" src="${resource(uri:'')}/js/angularBagController.js"></script>
+    <script type="text/javascript" src="${resource(uri:'')}/js/angularChatController.js"></script>
     <script type="text/javascript" src="${resource(uri:'')}/js/main.js"></script>
     <script type="text/javascript" src="${resource(uri:'')}/js/chat.js"></script>
     <script type="text/javascript" src="${resource(uri:'')}/js/uiFunctions.js"></script>
@@ -17,12 +27,16 @@
 </head>
 
 <body>
+
     <center>
         <h3 id="firebug" style="color:#FF0000;"></h3>
 
-        <div id="theMap"></div>
+        <div id="theMap">
 
-        <div id="textBox"></div>
+        </div>
+
+        <div id="textBox">
+        </div>
     </center>
 
 
@@ -45,6 +59,6 @@
             </tr>
         </table>
     </div>
-        
+
 </body>
 </html>
