@@ -104,17 +104,6 @@ class GameController {
         render text : ""
     }
 
-    def playerLocation(){
-        PlayerData playerData = session.playerData
-        Player player = playerData.getPlayer()
-
-        String json = """
-            {"player":[{"name" : "${player.name}", "x" : "${player.positionX}", "y" : "${player.positionY}", "map" : "${player.map.name}"}]}
-        """
-
-        render text: json
-    }
-
     def checkBattle(){
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
@@ -178,11 +167,7 @@ class GameController {
                 render text:"allowMove = true;"
                 return
             }
-//            else {
-//                player.discard()
-//                render text : "allowMove = false;"
-//                return
-//            }
+			
             String currentForegroundTile = getCurrentTile(mapLayout,player,false)
             if (!currentForegroundTile || currentForegroundTile != "0"){
                 player.discard()
@@ -272,5 +257,12 @@ class GameController {
             render text : "<iframe src='/game/battle' frameborder='0' width='500' height='500'></iframe>"
         }
     }
+	
+	def jsonView(){
+		PlayerData playerData = session.playerData
+		Player player = playerData.getPlayer()
+		
+		render text: player.view
+	}
 
 }
