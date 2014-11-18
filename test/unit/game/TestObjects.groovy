@@ -7,14 +7,6 @@ import game.fight.action.MoveAction
 
 class TestObjects {
 	
-	public static BattleAction getTackleBattleAction(){
-		Move move = getTackleMove()
-		BattleAction battleAction = new MoveAction(
-			move: move
-		)
-		return battleAction
-	}
-	
 	public static OwnerPokemon getOwnerPokemon(Pokemon playerPokemon, Owner owner, int partyPosition){
 		OwnerPokemon ownerPokemon = new OwnerPokemon(
 			level: 1,
@@ -63,6 +55,14 @@ class TestObjects {
 		return player
 	}
 	
+	public static BattleAction getTackleBattleAction(){
+		Move move = getTackleMove()
+		BattleAction battleAction = new MoveAction(
+			move: move
+		)
+		return battleAction
+	}
+	
 	public static Move getTackleMove(){
 		return new Move(
 			nr: 412,
@@ -77,6 +77,45 @@ class TestObjects {
 			implemented : 1,
 			priority: 0
 		)
+	}
+	
+	public static Move getTransformMove(){
+		return new Move(
+			nr: 432,
+			name: "Transform",
+			type: "normal",
+			category: MoveCategory.StatusMove,
+			power: 0,
+			accuracy : 0,
+			pp : 10,
+			effect : "User takes on the form and attacks of the opponent.",
+			effectProb : 0,
+			implemented : 1,
+			priority: 0
+		)
+	}
+	
+	public static Pokemon getTestPokemonDitto(){
+		Pokemon pokemon = new Pokemon(
+			nr: 1,
+			name: "Ditto",
+			type1: "normal",
+			type2: "",
+			baseHp: 48,
+			baseAttack: 48,
+			baseDefense: 48,
+			baseSpAttack: 48,
+			baseSpDefense: 48,
+			baseSpeed: 48,
+			maleRate: 0.0,
+			femaleRate: 0.0,
+			catchRate: 35,
+			baseEXP: 61,
+			levelRate: "Medium-Slow",
+			height: "1' 0\" (0.3m)",
+			weight: "8.8 lbs. (4kg)",
+		)
+		return pokemon
 	}
 	
 	public static Pokemon getTestPokemon(){

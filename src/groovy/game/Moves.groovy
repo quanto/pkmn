@@ -18,15 +18,15 @@ import game.context.FightPokemon
 
 class Moves {
 	
-	public static void setPlayerMove(Fight fight, FightPlayer myFightPlayer, int ownerPokemonMoveId){
+	public static void setPlayerMove(Fight fight, FightPlayer myFightPlayer, int ownerPokemonMoveId) {
 		
 		FightMove fightMove = fight.fightPlayer1.fightPokemon.fightMoves.find {  FightMove fightMove ->  fightMove.ownerMove.id == ownerPokemonMoveId }
 		
 		assert fightMove
 		Move move = fightMove.move
 
-		if (move == null || move.name == "Struggle") // Struggle || geen move
-		{
+		if (move == null || move.name == "Struggle") { // Struggle || geen move
+		
 			// Dit is geen eigen move, pp hoeft er niet af
 			Moves.setMove(fight, myFightPlayer, new MoveAction(move: move,ownerMoveForPP: null))
 		}
@@ -42,7 +42,7 @@ class Moves {
 	}
 
     /**
-     * Player sets a move
+     * Set a move
      */
     public static void setMove(Fight fight, FightPlayer fightPlayer, BattleAction battleAction)
     {

@@ -415,8 +415,14 @@ class StatusMove {
             attackingFightPlayer.protect = true
             moveInfo.accuracy = attackingFightPlayer.protectAccuracy
             attackingFightPlayer.protectAccuracy = Math.round(attackingFightPlayer.protectAccuracy / 2)
-
         }
+//		else if (move.name == "Transform")
+//		{
+//			
+//		}
+		else {
+			assert false
+		}
     }
 
 }
