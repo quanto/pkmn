@@ -36,30 +36,19 @@ environments {
     }
     production {
         dataSource {
-//            dbCreate = "update"
-//            url = "jdbc:h2:mem:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=TRUE"
-//            pooled = true
-//            properties {
-//               maxActive = -1
-//               minEvictableIdleTimeMillis=1800000
-//               timeBetweenEvictionRunsMillis=1800000
-//               numTestsPerEvictionRun=3
-//               testOnBorrow=true
-//               testWhileIdle=true
-//               testOnReturn=true
-//               validationQuery="SELECT 1"
-//            }
-
-            // Heroku postgres database
-            dbCreate = "create"
-            driverClassName = "org.postgresql.Driver"
-            dialect = org.hibernate.dialect.PostgreSQLDialect
-
-            uri = new URI("postgres://awdlkuegkloedn:uoxiTnAuQK-NkQXaq2Cs8MJ0fg@ec2-54-204-39-187.compute-1.amazonaws.com:5432/d2586ofuq5l1ur")
-
-            url = "jdbc:postgresql://"+uri.host+uri.path
-            username = uri.userInfo.split(":")[0]
-            password = uri.userInfo.split(":")[1]
+            dbCreate = "update"
+            url = "jdbc:h2:mem:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=TRUE"
+            pooled = true
+            properties {
+               maxActive = -1
+               minEvictableIdleTimeMillis=1800000
+               timeBetweenEvictionRunsMillis=1800000
+               numTestsPerEvictionRun=3
+               testOnBorrow=true
+               testWhileIdle=true
+               testOnReturn=true
+               validationQuery="SELECT 1"
+            }
 
         }
     }

@@ -35,7 +35,6 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         runtime 'mysql:mysql-connector-java:5.1.16'
-        runtime 'postgresql:postgresql:8.4-702.jdbc3'
 
     }
 
@@ -51,9 +50,6 @@ grails.project.dependency.resolution = {
         compile ':mail:1.0.7', {
             excludes 'spring-test'
         }
-
-        compile ':heroku:1.0.1'
-        compile ':cloud-support:1.0.8'
 
         runtime ":hibernate4:4.3.5.5" // or ":hibernate:3.6.10.17"
         runtime ":database-migration:1.4.0"
