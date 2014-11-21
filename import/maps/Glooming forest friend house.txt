@@ -11,23 +11,6 @@ kevin
 <mapTransition>
 5
 14
-giiF9qcic6CZlEG
-
-
-
-true
-false
-false
-false
-
-
-
-
-aenKQ0mSYP7QFTE
-</mapTransition>
-<mapTransition>
-5
-14
 ZbnDe2sOh63nIhq
 
 
@@ -41,6 +24,23 @@ false
 
 
 vjKicwXHgk6A5vQ
+</mapTransition>
+<mapTransition>
+5
+14
+giiF9qcic6CZlEG
+
+
+
+true
+false
+false
+false
+
+
+
+
+aenKQ0mSYP7QFTE
 </mapTransition>
 <mapTransition>
 5
@@ -62,23 +62,6 @@ UlsLGYUiJSaVw5t
 <mapTransition>
 5
 2
-obpJLE79BdeDhwS
-
-
-
-true
-false
-false
-false
-
-
-
-
-ch2tNEsYtveR4j1
-</mapTransition>
-<mapTransition>
-5
-2
 diI9nCPEwYPDft1
 
 
@@ -92,6 +75,23 @@ false
 
 
 dzSP1VPHU4s9Gyq
+</mapTransition>
+<mapTransition>
+5
+2
+obpJLE79BdeDhwS
+
+
+
+true
+false
+false
+false
+
+
+
+
+ch2tNEsYtveR4j1
 </mapTransition>
 <mapTransition>
 5
@@ -147,7 +147,7 @@ JYPR8sFptfc6sNh
 <mapTransition>
 5
 3
-XaQxN76zAgq0oQW
+BnPi1DYMS6fdtzv
 
 
 
@@ -159,7 +159,7 @@ false
 
 
 
-B9bXaRkvOGtJFaI
+82Zx3MmbM6x50SJ
 </mapTransition>
 <mapTransition>
 5
@@ -181,7 +181,7 @@ JNezP4dZR38lZ7H
 <mapTransition>
 5
 3
-KAXfN2aC8TLXXVh
+XaQxN76zAgq0oQW
 
 
 
@@ -193,7 +193,7 @@ false
 
 
 
-nUfMezsR6aFqxnH
+B9bXaRkvOGtJFaI
 </mapTransition>
 <mapTransition>
 5
@@ -215,7 +215,7 @@ false
 <mapTransition>
 5
 3
-BnPi1DYMS6fdtzv
+KAXfN2aC8TLXXVh
 
 
 
@@ -227,7 +227,7 @@ false
 
 
 
-82Zx3MmbM6x50SJ
+nUfMezsR6aFqxnH
 </mapTransition>
 
 <computerAction>
@@ -424,44 +424,7 @@ casualgirl2
 
 ud
 </personAction>
-<personAction>
-4
-9
-azyQDYzihHt0WPA
 
-
-
-false
-true
-false
-false
-/images/chars/casualgirl2.png
-
--16
-actionObject spritely
-casualgirl2
-
-ud
-</personAction>
-<personAction>
-4
-9
-azyQDYzihHt0WPA
-
-
-
-false
-true
-false
-false
-/images/chars/casualgirl2.png
-
--16
-actionObject spritely
-casualgirl2
-
-ud
-</personAction>
 
 <messagePersonAction>
 4

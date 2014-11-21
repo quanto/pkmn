@@ -79,23 +79,6 @@ fkBmXKOt78HUPsn
 <mapTransition>
 7
 18
-aenKQ0mSYP7QFTE
-
-
-
-true
-false
-false
-false
-
-
-
-
-giiF9qcic6CZlEG
-</mapTransition>
-<mapTransition>
-7
-18
 UlsLGYUiJSaVw5t
 
 
@@ -109,6 +92,23 @@ false
 
 
 lVrx1bSV2RK8ePd
+</mapTransition>
+<mapTransition>
+7
+18
+aenKQ0mSYP7QFTE
+
+
+
+true
+false
+false
+false
+
+
+
+
+giiF9qcic6CZlEG
 </mapTransition>
 <mapTransition>
 7
@@ -224,25 +224,6 @@ actionObject spritely
 guard
 llrrdddddduuuuuu
 l
-</personAction>
-<personAction>
-17
-11
-681lRRwst4pjqqf
-
-
-
-false
-true
-false
-false
-/images/chars/labguy.png
-
--16
-actionObject spritely
-labguy
-
-d
 </personAction>
 <personAction>
 17

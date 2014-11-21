@@ -11,6 +11,23 @@ kevin
 <mapTransition>
 8
 2
+aZRXhTOZAc7Admu
+
+
+
+true
+false
+false
+false
+
+
+
+
+TWd781VMefOk4cI
+</mapTransition>
+<mapTransition>
+8
+2
 JYPR8sFptfc6sNh
 
 
@@ -78,23 +95,6 @@ obpJLE79BdeDhwS
 </mapTransition>
 <mapTransition>
 8
-2
-aZRXhTOZAc7Admu
-
-
-
-true
-false
-false
-false
-
-
-
-
-TWd781VMefOk4cI
-</mapTransition>
-<mapTransition>
-8
 3
 9cp9036EvP3ZaoG
 
@@ -109,6 +109,23 @@ false
 
 
 Oau9sNxW2dkKudq
+</mapTransition>
+<mapTransition>
+8
+3
+nUfMezsR6aFqxnH
+
+
+
+true
+false
+false
+false
+
+
+
+
+KAXfN2aC8TLXXVh
 </mapTransition>
 <mapTransition>
 8
@@ -130,23 +147,6 @@ BnPi1DYMS6fdtzv
 <mapTransition>
 8
 3
-B9bXaRkvOGtJFaI
-
-
-
-true
-false
-false
-false
-
-
-
-
-XaQxN76zAgq0oQW
-</mapTransition>
-<mapTransition>
-8
-3
 JNezP4dZR38lZ7H
 
 
@@ -164,7 +164,7 @@ H8DByDhwQ9zAICw
 <mapTransition>
 8
 3
-nUfMezsR6aFqxnH
+B9bXaRkvOGtJFaI
 
 
 
@@ -176,7 +176,7 @@ false
 
 
 
-KAXfN2aC8TLXXVh
+XaQxN76zAgq0oQW
 </mapTransition>
 
 
@@ -203,31 +203,6 @@ true
 
 
 </findItemAction>
-
-
-
-
-
-
-<altMapData>
-false
-false
-true
-
-
-completedFirstFightChris
-1
-</altMapData>
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -267,6 +242,31 @@ r
 Can;t believe you defeated those bad guys all by your self.; Let me see how strong you are.
 9Hz7mnMhOB9wvKq
 </npcAction>
+
+
+
+
+
+
+
+
+
+
+
+
+<altMapData>
+false
+false
+true
+
+
+completedFirstFightChris
+1
+</altMapData>
+
+
+
+
 
 
 

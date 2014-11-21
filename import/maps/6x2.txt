@@ -109,25 +109,6 @@ actionObject spritely overworldPokemon
 llrr
 d
 </pokemonAction>
-<pokemonAction>
-5
-17
-QjWOLr1DsjTh0y7
-
-
-
-false
-true
-false
-false
-/images/followers/18.png
--8
--16
-actionObject spritely overworldPokemon
-18
-llrr
-d
-</pokemonAction>
 
 <messagePokemonAction>
 5
