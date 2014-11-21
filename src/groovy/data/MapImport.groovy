@@ -20,7 +20,11 @@ class MapImport {
 
         Map.withTransaction {
 
-            new File('import/maps/').listFiles().each { File file ->
+            URL url = Thread.currentThread().getContextClassLoader().getResource("import/maps/")
+            File dir = new File(url.toURI());
+            dir.listFiles().each { File file ->
+
+            //new File('import/maps/').listFiles().each { File file ->
 
                 Map map
                 AltMap altMap
@@ -178,7 +182,10 @@ class MapImport {
         }
 
         // Loop again to couple map transitions (Can only be coupled after they have been created)
-        new File('import/maps/').listFiles().each { File file ->
+        URL url = Thread.currentThread().getContextClassLoader().getResource("import/maps/")
+        File dir = new File(url.toURI());
+        dir.listFiles().each { File file ->
+        //new File('import/maps/').listFiles().each { File file ->
 
             def parts = []
             Map map

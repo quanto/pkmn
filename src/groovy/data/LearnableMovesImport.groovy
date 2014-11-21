@@ -8,7 +8,8 @@ class LearnableMovesImport {
 
     public static void importLearnableMoves(){
         println "Import learnableMove lines"
-        def file = new File('import/learnableMoves.txt')
+
+        def file = Thread.currentThread().getContextClassLoader().getResourceAsStream('import/learnableMoves.txt')
 
         int index = 0
         def parts = []

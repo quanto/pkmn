@@ -10,7 +10,7 @@ class MarketImport {
 
         println "Import market ${market.identifier}"
 
-        File file = new File('import/markets/' + market.identifier + '.txt')
+        def file = Thread.currentThread().getContextClassLoader().getResourceAsStream("import/markets/" + market.identifier + ".txt")
 
         String node = ""
 

@@ -7,7 +7,7 @@ class MarketBackup {
 
     public static void saveMarket(Market market){
         try{
-            File file = new File("import/markets/" + market.identifier + ".txt")
+            def file = Thread.currentThread().getContextClassLoader().getResourceAsStream("import/markets/" + market.identifier + ".txt")
 
             FileWriter fstream = new FileWriter(file);
             BufferedWriter out = new BufferedWriter(fstream);

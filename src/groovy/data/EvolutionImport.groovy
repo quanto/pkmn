@@ -13,7 +13,8 @@ import game.Pokemon
 class EvolutionImport {
 
     public static void importEvolution(){
-        def file = new File('import/evolution.txt')
+
+        def file = Thread.currentThread().getContextClassLoader().getResourceAsStream('import/evolution.txt')
 
         println "Import evolution lines"
 

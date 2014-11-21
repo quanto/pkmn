@@ -24,7 +24,9 @@ class PlayerImport {
 
         println "Import player lines"
 
-        new File('import/players/').listFiles().each { File file ->
+        URL url = Thread.currentThread().getContextClassLoader().getResource("import/players/")
+        File dir = new File(url.toURI());
+        dir.listFiles().each { File file ->
 
             String node = ""
 
@@ -92,7 +94,7 @@ class PlayerImport {
             }
 
         }
-        new File('import/players/').listFiles().each { File file ->
+        dir.listFiles().each { File file ->
 
             String node = ""
 

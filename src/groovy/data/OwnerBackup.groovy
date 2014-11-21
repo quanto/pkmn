@@ -16,7 +16,8 @@ class OwnerBackup {
 
     public static void saveNpc(Npc npc){
         try{
-            File file = new File("import/npcs/" + npc.identifier + ".txt")
+
+            def file = Thread.currentThread().getContextClassLoader().getResourceAsStream("import/npcs/" + npc.identifier + ".txt")
 
             FileWriter fstream = new FileWriter(file);
             BufferedWriter out = new BufferedWriter(fstream);

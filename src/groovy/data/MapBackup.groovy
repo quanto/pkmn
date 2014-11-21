@@ -12,8 +12,8 @@ class MapBackup {
         String data = ""
 
         try{
-            File file = new File("import/maps/" + map.name + ".txt")
-
+            // TODO Does this work in war?
+            def file = Thread.currentThread().getContextClassLoader().getResourceAsStream("import/maps/" + map.name + ".txt")
             FileWriter fstream = new FileWriter(file);
             BufferedWriter out = new BufferedWriter(fstream);
 

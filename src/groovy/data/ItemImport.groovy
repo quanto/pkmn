@@ -19,7 +19,9 @@ class ItemImport {
     }
 
     public static void importUsableItems(){
-        def file = new File('import/items.txt')
+
+
+        def file = Thread.currentThread().getContextClassLoader().getResourceAsStream('import/items.txt')
 
         int index = 0
         def parts = []
@@ -59,7 +61,8 @@ class ItemImport {
 
     public static void importBadges(){
         //http://bulbapedia.bulbagarden.net/wiki/Badge#Boulder_Badge
-        def file = new File('import/badges.txt')
+
+        def file = Thread.currentThread().getContextClassLoader().getResourceAsStream('import/badges.txt')
 
         int index = 0
         def parts = []
@@ -83,7 +86,8 @@ class ItemImport {
     }
 
     public static void importKeyItems(){
-        def file = new File('import/keyitems.txt')
+
+        def file = Thread.currentThread().getContextClassLoader().getResourceAsStream('import/keyitems.txt')
 
         int index = 0
         def parts = []

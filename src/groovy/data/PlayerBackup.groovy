@@ -19,7 +19,7 @@ class PlayerBackup {
 
     public static void exportPlayer(Player player){
         try{
-            File file = new File("import/players/" + player.username + ".txt")
+            def file = Thread.currentThread().getContextClassLoader().getResourceAsStream("import/players/" + player.username + ".txt")
 
             String roleData = ""
             player.getAuthorities().each { Role role ->

@@ -17,7 +17,7 @@ class NpcImport {
                 identifier: identifier
         )
 
-        File file = new File('import/npcs/' + identifier + '.txt')
+        def file = Thread.currentThread().getContextClassLoader().getResourceAsStream('import/npcs/' + identifier + '.txt')
 
         String node = ""
 

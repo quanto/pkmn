@@ -5,7 +5,8 @@ import game.Effectiveness
 class EffectivenessImport {
 
     public static void importEffectiveness(){
-        def file = new File('import/effectiveness.txt')
+
+        def file = Thread.currentThread().getContextClassLoader().getResourceAsStream('import/effectiveness.txt')
 
         println "Import effectiveness lines"
 

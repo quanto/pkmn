@@ -12,7 +12,10 @@ import game.Pokemon
 class PokemonImport {
 
     public static void importPokemon(){
-        def file = new File('import/pokemon.txt')
+
+
+
+        def file = Thread.currentThread().getContextClassLoader().getResourceAsStream('import/pokemon.txt')
         println "Import pokemon lines"
 
         int index = 0

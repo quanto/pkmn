@@ -3,17 +3,11 @@ package data
 import game.Move
 import game.context.MoveCategory
 
-/**
- * Created with IntelliJ IDEA.
- * User: kevinverhoef
- * Date: 01-10-12
- * Time: 19:14
- * To change this template use File | Settings | File Templates.
- */
 class MoveImport {
     
     public static void importMoves(){
-        def file = new File('import/moves.txt')
+
+        def file = Thread.currentThread().getContextClassLoader().getResourceAsStream('import/moves.txt')
 
         println "Import move lines"
 
