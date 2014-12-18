@@ -23,7 +23,7 @@ import game.lock.OneTimeActionLock
 
 class ActionFlow {
 
-    public static ActionResult decideAction(Player player, ActionTrigger actionTrigger, FightFactoryService fightFactoryService){
+    public static boolean decideAction(Player player, ActionTrigger actionTrigger, FightFactoryService fightFactoryService, ActionResult actionResult){
 
         Action action
         if (player.altMap){
@@ -34,7 +34,7 @@ class ActionFlow {
         }
 
         if (!action)
-            return null
+            return false
 
         // OneTimeActionLocks
         if (action.placeOneTimeActionLock){
@@ -44,7 +44,7 @@ class ActionFlow {
                 new OneTimeActionLock(player: player, action: action).save()
             }
             else {
-                return null
+                return false
             }
         }
 
@@ -52,13 +52,11 @@ class ActionFlow {
 
             // Check if we even should trigger the action
             if (!action.triggerBeforeStep && actionTrigger == ActionTrigger.Move){
-                return null
+                return false
             }
             else if (!action.triggerOnActionButton && actionTrigger == ActionTrigger.ActionBtn){
-                return null
+                return false
             }
-
-            ActionResult actionResult = new ActionResult()
 
             // Support condition on actions
             boolean conditionEval = true
@@ -66,26 +64,26 @@ class ActionFlow {
 
                 conditionEval = Condition.conditionEval(player,action.condition)
                 if (conditionEval && action.conditionMetMessage){
-                    actionResult.evalMessage += "setMessage('${action.conditionMetMessage?.encodeAsHTML()}');"
+                    actionResult.actions.put(MapAction.Message, action.conditionMetMessage?.encodeAsHTML())
                 }
             }
 
             // Action flow
             if (action.condition && !conditionEval){
                 if (action.conditionNotMetMessage){
-                    actionResult.evalMessage += "setMessage('${action.conditionNotMetMessage?.encodeAsHTML()}');"
+                    actionResult.actions.put(MapAction.Message, action.conditionNotMetMessage?.encodeAsHTML())
 
                     // Prevent the step
                     if (action.conditionalStep){
-                        actionResult.allowStep =  false
+                        actionResult.actions.put(MapAction.DisallowMove, null)
                     }
                 }
                 else {
-                    actionResult.evalMessage += "setMessage('Condition not met for condition: ${action.condition?.encodeAsHTML()}!');"
+                    actionResult.actions.put(MapAction.Message, 'Condition not met for condition: ${action.condition?.encodeAsHTML()}!')
 
                     // Prevent the step
                     if (action.conditionalStep){
-                        actionResult.allowStep =  false
+                        actionResult.actions.put(MapAction.DisallowMove, null)
                     }
                 }
             }
@@ -97,34 +95,37 @@ class ActionFlow {
                 player.positionY = mapTransition.jumpTo.positionY
                 player.setMap mapTransition.jumpTo.map
 
-                actionResult.evalMessage += "getView()"
+                player.save(flush: true)
+
+                actionResult.actions.put(MapAction.UpdateView, null)
             }
             else if (action in MapMessage){
                 MapMessage mapMessage = (MapMessage)action
-                actionResult.evalMessage += "setMessage(\"${MessageTranslator.proces(mapMessage.message,player)}\");"
+                actionResult.actions.put(MapAction.Message, MessageTranslator.proces(mapMessage.message,player))
             }
             else if (action in RecoverAction){
                 Recover.recoverParty(player)
                 // Set last recover position
                 player.lastRecoverAction = (RecoverAction)action
 
-                actionResult.evalMessage += "getParty();"
-                actionResult.evalMessage += "setMessage('Your pokemon have been recovered!');"
+                actionResult.actions.put(MapAction.GetParty, null)
+//                actionResult.evalMessage += "getParty();"
+                actionResult.actions.put(MapAction.Message, 'Your pokemon have been recovered!')
             }
             else if (action in ComputerAction){
                 player.view = View.ShowComputer
-                player.save(flush:true)
-                actionResult.evalMessage += "getView()"
+                player.save(flush: true)
+                actionResult.actions.put(MapAction.UpdateView, null)
             }
             else if (action in PvpSelectAction){
                 player.view = View.ShowPvpSelect
-                player.save(flush:true)
-                actionResult.evalMessage += "getView()"
+                player.save(flush: true)
+                actionResult.actions.put(MapAction.UpdateView, null)
             }
             else if (action in MarketAction){
                 player.view = View.ShowMarket
-                player.save(flush:true)
-                actionResult.evalMessage += "getView()"
+                player.save(flush: true)
+                actionResult.actions.put(MapAction.UpdateView, null)
             }
             else if (action in NpcAction){
 
@@ -135,13 +136,13 @@ class ActionFlow {
 
                 if (npcLock){
                     if (npcAction.owner.npcLockedMessage){
-                        actionResult.evalMessage += "setMessage('${npcAction.owner.npcLockedMessage?.encodeAsHTML()}');"
+                        actionResult.actions.put(MapAction.Message, npcAction.owner.npcLockedMessage?.encodeAsHTML())
                     }
                     else if (npcLock.permanent){
-                        actionResult.evalMessage += "setMessage('You already defeated ${npcAction.owner.name?.encodeAsHTML()}.');"
+                        actionResult.actions.put(MapAction.Message, 'You already defeated ${npcAction.owner.name?.encodeAsHTML()}.')
                     }
                     else {
-                        actionResult.evalMessage += "setMessage('You already defeated ${npcAction.owner.name?.encodeAsHTML()} today. ${npcAction.owner.name?.encodeAsHTML()} is still recovering, come back later.');"
+                        actionResult.actions.put(MapAction.Message, 'You already defeated ${npcAction.owner.name?.encodeAsHTML()} today. ${npcAction.owner.name?.encodeAsHTML()} is still recovering, come back later.')
                     }
                 }
                 else {
@@ -152,7 +153,7 @@ class ActionFlow {
                     player.view = View.Battle
 
                     player.save(flush:true)
-                    actionResult.evalMessage += "getView()"
+                    actionResult.actions.put(MapAction.UpdateView, null)
                 }
             }
             else if (action in FindItemAction){
@@ -162,7 +163,7 @@ class ActionFlow {
                     Items.addOwnerItem(player,rewardItem.item,false)
                     // Hidden items are used to make all kinds of conditional decisions. As a user we don't want to note them
                     if (!rewardItem.item.hidden){
-                        actionResult.evalMessage += "setMessage('You found an ${rewardItem.item.name?.encodeAsHTML()}.');"
+                        actionResult.actions.put(MapAction.Message, 'You found an ${rewardItem.item.name?.encodeAsHTML()}.')
                     }
                 }
 
@@ -172,9 +173,9 @@ class ActionFlow {
                 assert false
             }
 
-            return actionResult
+            return true
         }
-        return null
+        return false
     }
 
 }

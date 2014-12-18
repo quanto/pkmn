@@ -7,10 +7,6 @@ class ChoosePokemonController {
 
     def index() {
 
-        PlayerData playerData = session.playerData
-        Player player = playerData.getPlayer()
-
-        render text: g.render(template: 'choosePokemon')
     }
 
     def choose(){
@@ -20,13 +16,13 @@ class ChoosePokemonController {
 
         if (player.view == View.ChoosePokemon){
 
-            int pkmnId = Integer.parseInt(params.pkmn)
+            int pkmnId = Integer.parseInt(params.id)
 
             if(pkmnId == 1 || pkmnId == 4 || pkmnId == 7)
             {
                 PokemonCreator.addOwnerPokemonToOwner(Pokemon.get(pkmnId), 5, player)
                 player.view = View.ShowMap
-                player.save()
+                player.save(fllush: true)
                 render text: ""
             }
         }

@@ -567,3 +567,7 @@ a.skip {
 #chatBox .Private {
     color:#FF0080;
 }
+
+#player {
+    z-index: 2000;
+}

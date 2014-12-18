@@ -15,7 +15,8 @@
     <tr ng-repeat="item in model.usableItems">
         <td>
             <span ng-show="item.image">
-                <img ng-src='${resource(uri:'')}/images/items/{{item.image}}'>
+                <span ng-init="imageUrl = item.image?'${resource(uri:'')}/images/items/' + item.image:''"></span>
+                <img ng-src="{{imageUrl}}">
             </span>
         </td>
         <td style="width:200px;">{{item.name}}</td>

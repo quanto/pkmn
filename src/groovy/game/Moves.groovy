@@ -20,7 +20,7 @@ class Moves {
 	
 	public static void setPlayerMove(Fight fight, FightPlayer myFightPlayer, int ownerPokemonMoveId) {
 		
-		FightMove fightMove = fight.fightPlayer1.fightPokemon.fightMoves.find {  FightMove fightMove ->  fightMove.ownerMove.id == ownerPokemonMoveId }
+		FightMove fightMove = myFightPlayer.fightPokemon.fightMoves.find {  FightMove fightMove ->  fightMove.ownerMove.id == ownerPokemonMoveId }
 		
 		assert fightMove
 		Move move = fightMove.move
@@ -115,8 +115,7 @@ class Moves {
 
         int totalMoves = fightPlayer.fightPokemon.ownerPokemon.ownerMoves.size()
 
-        if (totalMoves < 4)
-        {
+        if (totalMoves < 4){
 
             OwnerMove ownerMove = new OwnerMove(
                     ownerPokemon : fightPlayer.fightPokemon.ownerPokemon,
@@ -129,15 +128,13 @@ class Moves {
             fight.roundResult.battleActions.add(new MessageLog(fightPlayer.fightPokemon.name + "learned " + move.name + "."))
 
         }
-        else
-        {
+        else{
             // zet learnMoves om te kunnen kiezen
             fightPlayer.learnMoves.add(move)
         }
     }
 
-    public static void setBaseMoves(OwnerPokemon ownerPokemon)
-    {
+    public static void setBaseMoves(OwnerPokemon ownerPokemon){
         List<LearnableMove> learnableMoveList = LearnableMove.findAllByPokemonAndLearnLevelLessThanEquals(ownerPokemon.pokemon,ownerPokemon.level).findAll{ it.move.implemented }
 
 

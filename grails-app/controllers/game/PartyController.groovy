@@ -6,51 +6,13 @@ import game.context.PlayerData
 
 class PartyController {
 
+    PartyService partyService
+
     def index() {
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
 
-        def ownerPokemonList = OwnerPokemon.findAllByPartyPositionGreaterThanAndOwner(0,player)
-
-        render ownerPokemonList.collect {
-            [
-                id: it.id,
-                partyPosition: it.partyPosition,
-                gender: it.gender.toString(),
-                hp: it.hp,
-                totalHp: it.calculateHP(),
-                level: it.level,
-                hpPercentage: it.getHpPercentage(),
-                expPercentage: it.getExpPercentage(),
-                pokemon: [
-                        id: it.pokemon.id,
-                        name: it.pokemon.name,
-                        threeValueNumber: it.pokemon.threeValueNumber(),
-                        height: it.pokemon.height,
-                        weight: it.pokemon.weight
-                ]
-            ]
-        } as JSON
-    }
-
-    def computer = {
-
-        PlayerData playerData = session.playerData
-        Player player = playerData.getPlayer()
-
-        if (player.view != View.ShowComputer){
-            render text : "Zit niet bij de computer"
-        }
-        else {
-
-            boolean computerView = true
-
-            def ownerPokemonList = OwnerPokemon.findAllByOwner(player)
-            def partyList = ownerPokemonList?.findAll() { it.partyPosition > 0 }
-            def computerList = ownerPokemonList?.findAll() { it.partyPosition == 0 }
-
-            render text: g.render(template: 'computer', model: [computerView:computerView,partyList:partyList,computerList:computerList])
-        }
+        render partyService.getPartyModel(player) as JSON
     }
 
     def moveUp = {
@@ -84,7 +46,7 @@ class PartyController {
                 switchOwnerPokemon.partyPosition += 1
                 ownerPokemon.save()
                 switchOwnerPokemon.save(flush:true)
-                redirect controller:'game',action:"index"
+                render text: ""
             }
         }
 
@@ -121,12 +83,12 @@ class PartyController {
                 switchOwnerPokemon.partyPosition -= 1
                 ownerPokemon.save()
                 switchOwnerPokemon.save(flush:true)
-                redirect controller:'game',action:"index"
+                redirect text: ""
             }
         }
     }
 
-    def add = {
+    def withdraw = {
 
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
@@ -157,7 +119,7 @@ class PartyController {
             }
         }
 
-        redirect controller: 'game', action:'index'
+        render text: ""
     }
 
     def release = {
@@ -201,16 +163,18 @@ class PartyController {
             {
                 render text:"Pokemon niet van eigenaar!"
             }
-            else if (OwnerPokemon.countByPartyPositionGreaterThanAndHpGreaterThan(0,0) > 0)
-            {
-                render text:"Pokemon kan niet uit het team worden gezet. Er moet minstens 1 levende pokemon aanwezig zijn"
-            }
+//            else if (OwnerPokemon.countByPartyPositionGreaterThanAndHpGreaterThan(0,0) == 0)
+//            {
+//                // TODO bovenstaande klopt niet
+//                render text:"Pokemon kan niet uit het team worden gezet. Er moet minstens 1 levende pokemon aanwezig zijn"
+//            }
 
             ownerPokemon.partyPosition = 0
-            ownerPokemon.save()
-        }
+            ownerPokemon.save(flush: true)
+            partyService.correctPartyPositions(player)
 
-        redirect controller: 'game', action:'index'
+            render text: ""
+        }
     }
 
     def exit = {
@@ -222,8 +186,8 @@ class PartyController {
         }
         else {
             player.view = View.ShowMap
-            player.save()
-            redirect controller: 'game', action:'index'
+            player.save(flush: true)
+            render text: ""
         }
     }
 

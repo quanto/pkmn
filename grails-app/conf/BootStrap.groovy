@@ -6,6 +6,11 @@ import data.LearnableMovesImport
 import data.EffectivenessImport
 import data.MapImport
 import data.ItemImport
+import game.action.Action
+import game.action.MapTransition
+import game.action.MarketAction
+import game.action.NpcAction
+import game.lock.OneTimeActionLock
 import map.View
 import data.PlayerImport
 
@@ -16,6 +21,49 @@ class BootStrap {
     def init = { servletContext ->
 
         boolean doImport = !Player.list().size() // Simple check to see if there's anything at all in the database.
+
+//        println "--- Find duplicate actions"
+//        Action.list().each { Action action ->
+//            try {
+//            List<Action> foundActions
+//            if (action.altMap){
+//                foundActions = Action.findAllByPositionXAndPositionYAndAltMap(action.positionX,action.positionY,action.altMap)
+//            }
+//            else {
+//                foundActions = Action.findAllByPositionXAndPositionYAndAltMapIsNull(action.positionX,action.positionY)
+//            }
+//            foundActions.eachWithIndex { Action entry, int i ->
+//                if (i>0){
+//
+//                    OneTimeActionLock.findAllByAction(entry).each { it.delete() }
+//
+//                    // Remove childs
+//                    if (entry in NpcAction){
+//                        entry.owner.delete()
+//                    }
+//                    else if (entry in MarketAction){
+//                        entry.market.delete()
+//                    }
+//                    else if (entry in MapTransition){
+//                        entry.jumpTo.delete()
+//                    }
+//
+//                    entry.delete(flush:true)
+//                }
+//            }
+//            }
+//            catch (Exception e){
+//                println e
+//            }
+//        }
+//        println "--- Find duplicate actions done"
+
+
+        // Reset Players in a fight
+        Player.findAllByView(View.Battle).each {
+            it.view = View.ShowMap
+            it.save(flush: true)
+        }
 
         if (doImport){
 

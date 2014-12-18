@@ -2,7 +2,6 @@ package map
 
 class ActionResult {
 
-    String evalMessage = ""
-    boolean allowStep = true
+    Map<MapAction, String> actions = [:]
 
 }

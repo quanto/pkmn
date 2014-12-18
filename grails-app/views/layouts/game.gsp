@@ -37,7 +37,7 @@
     <g:layoutHead/>
 
 </head>
-<body id="ngApp" ng-app="game">
+<body id="ngApp" ng-app="game" keypress-events="true">
 <table id="layout" cellspacing="0" rowspacing="0">
     <tr>
         <td colspan="2" id="top">

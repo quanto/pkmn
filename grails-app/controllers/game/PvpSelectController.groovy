@@ -7,28 +7,14 @@ class PvpSelectController {
 
     FightInviteService fightInviteService
 
-    def index() {
+    def cancelInvite(){
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
 
         if (player.view != View.ShowPvpSelect){
             render text : "Fout"
+            return
         }
-        else {
-            boolean haveInvite = fightInviteService.getInvite(player)
-
-            if (haveInvite){
-                render text: g.render(template: 'waiting')
-            }
-            else {
-                render text: g.render(template: 'inviteOverview', model: [invites:fightInviteService.getInvites(), player:player])
-            }
-        }
-    }
-
-    def cancelInvite(){
-        PlayerData playerData = session.playerData
-        Player player = playerData.getPlayer()
 
         fightInviteService.cancelInvite(player)
         redirect controller: 'game'
@@ -38,6 +24,11 @@ class PvpSelectController {
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
 
+        if (player.view != View.ShowPvpSelect){
+            render text : "Fout"
+            return
+        }
+
         render text: player.view == View.Battle
     }
 
@@ -45,9 +36,14 @@ class PvpSelectController {
         PlayerData playerData = session.playerData
         Player player = playerData.getPlayer()
 
+        if (player.view != View.ShowPvpSelect){
+            render text : "Fout"
+            return
+        }
+
         fightInviteService.createInvite(player)
 
-        redirect controller: "game"
+        render text: ""
     }
 
     def acceptInvite(){
@@ -57,7 +53,12 @@ class PvpSelectController {
         int inviteNr = Integer.parseInt(params.id)
         fightInviteService.acceptInvite(inviteNr,player)
 
-        redirect controller: "game"
+        if (player.view != View.ShowPvpSelect){
+            render text : "Fout"
+            return
+        }
+
+        render text: ""
     }
 
     def exit = {
@@ -72,7 +73,7 @@ class PvpSelectController {
 
             player.view = View.ShowMap
             player.save()
-            redirect controller: 'game', action:'index'
+            render text : ""
         }
     }
 

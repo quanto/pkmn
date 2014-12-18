@@ -13,8 +13,9 @@ import game.fight.log.InitialHpLog
 
 class EXP {
 
-    public static void giveEXP(Fight fight, FightPokemon fightPokemon, FightPlayer ownfightPlayer, FightPlayer opponentfightPlayer, boolean isWild, int exp, boolean isCurrentOwnerPokemon)
-    {
+    private static int EXP_RATING = 1000;
+
+    public static void giveEXP(Fight fight, FightPokemon fightPokemon, FightPlayer ownfightPlayer, FightPlayer opponentfightPlayer, boolean isWild, int exp, boolean isCurrentOwnerPokemon){
 
         OwnerPokemon ownerPokemon = fightPokemon.getOwnerPokemon()
 
@@ -39,8 +40,7 @@ class EXP {
                 Evolution evolution = Evolution.findByFromPokemonAndLevel(ownerPokemon.pokemon,newLevelLoop)
                 // kijk of pokemon evalueert
 
-                if (evolution)
-                {
+                if (evolution){
 
                     fight.roundResult.battleActions.add(new MessageLog(ownerPokemon.pokemon.name + " evolved into " + evolution.toPokemon.name + "."))
 
@@ -108,8 +108,7 @@ class EXP {
         fight.usedFightPokemon = [ownfightPlayer.fightPokemon]
     }
 
-    public static int calcXP(int baseXp, int level, boolean isWild)
-    {
+    public static int calcXP(int baseXp, int level, boolean isWild){
         int trainer = 1; // altijd 1, normaal gesproken factor hoger wanneer je niet dehuidige trainer bent
         // trainer 1 || 1.5 wanneer je niet de huidige eigenaar bent, 1.5
         // wild 1 || 1.5 wanneer je geen wilde pokemon vecht 1.5
@@ -119,13 +118,12 @@ class EXP {
         else
             wild = 1.5;
 
-        int xp = Math.floor(((baseXp * level) * trainer * wild) / 7);
+        int xp = Math.floor((((baseXp * level) * trainer * wild) / 7) * EXP_RATING)
 
         return xp;
     }
 
-    public static int getExpPercentage(int level, String levelRate, int exp)
-    {
+    public static int getExpPercentage(int level, String levelRate, int exp){
         int xpPrev = getExp(level,levelRate)
         int xpNext = getExp(level + 1,levelRate)
 

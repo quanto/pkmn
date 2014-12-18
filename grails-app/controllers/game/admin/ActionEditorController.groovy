@@ -193,6 +193,7 @@ class ActionEditorController {
                 item : Item.get(Integer.parseInt(params.item))
         )
         market.addToMarketItems(marketItem)
+        market.save(flush: true)
         render text: "done"
     }
 
@@ -200,7 +201,7 @@ class ActionEditorController {
         int actionId = Integer.parseInt(params.actionId)
         Action action = Action.get(actionId)
         action.properties = params
-
+        action.save(flush: true)
         flash.message = "Action ${actionId} aangepast"
 
         redirect action:'actions', id: action.map?.id?:action.altMap?.map?.id, params: [altMapId: action.altMap?.id]
@@ -224,7 +225,7 @@ class ActionEditorController {
             action.jumpTo.delete()
         }
 
-        action.delete()
+        action.delete(flash: true)
 
         render text: "done"
     }

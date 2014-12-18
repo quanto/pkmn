@@ -124,7 +124,8 @@ class Stats {
                 type2: ownerPokemon.pokemon.type2,
                 pokemonNr: ownerPokemon.pokemon.nr,
                 gender: ownerPokemon.gender,
-                partyPosition: ownerPokemon.partyPosition
+                partyPosition: ownerPokemon.partyPosition,
+                catchRate: ownerPokemon.pokemon.catchRate,
         )
 		// Set fightMoves
 		ownerPokemon.ownerMoves.each { OwnerMove ownerMove ->
@@ -152,8 +153,8 @@ class Stats {
     /**
      * Save stats after the battle
      */
-    public static void saveStats(FightPlayer fightPlayer, boolean endBattle = false)
-    {
+    public static void saveStats(FightPlayer fightPlayer){
+
         fightPlayer.party.each { FightPokemon fightPokemon ->
 
             OwnerPokemon ownerPokemon = fightPokemon.ownerPokemon
@@ -172,6 +173,7 @@ class Stats {
 			// Set pp left
 			fightPokemon.fightMoves.each { FightMove fightMove ->
 				fightMove.ownerMove.ppLeft = fightMove.ppLeft
+                fightMove.ownerMove = fightMove.ownerMove.merge()
 				fightMove.ownerMove.save()
 			}	
             ownerPokemon.save()

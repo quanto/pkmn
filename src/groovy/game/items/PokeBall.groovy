@@ -1,5 +1,6 @@
 package game.items
 
+import game.OwnerPokemon
 import game.context.Fight
 import game.Owner
 import game.item.Item
@@ -25,7 +26,7 @@ class PokeBall {
         }
         else if (item.name == "Net Ball")
         {
-            if (defendingFightPlayer.ownerPokemon.pokemon.hasType("bug") || defendingFightPlayer.ownerPokemon.pokemon.hasType("water"))
+            if (defendingFightPlayer.fightPokemon.hasType("bug") || defendingFightPlayer.fightPokemon.hasType("water"))
             {
                 catchFactor = 3
             }
@@ -50,30 +51,34 @@ class PokeBall {
 
         // :TODO implement catch formula
         // Haal pokemon op voor catchRate
-        int catchRate = defendingFightPlayer.ownerPokemon.pokemon.catchRate * catchFactor
-        int M = defendingFightPlayer.ownerPokemon.calculateHP()
-        int H = defendingFightPlayer.ownerPokemon.hp
-        int B = 1;
+        int catchRate = defendingFightPlayer.fightPokemon.catchRate * catchFactor
+
+        int M = defendingFightPlayer.fightPokemon.maxHp
+        int H = defendingFightPlayer.fightPokemon.hp
+        int B = 1
         int S = 1
         int X = (((3 * M - 2 * H) * (catchRate * B)) / (3 * M)) * S
 
         if (1==1)//if (throwPokeball(catchRate))
         {
 
-            fight.roundResult.battleActions.add(new MessageLog("You catcht ${defendingFightPlayer.ownerPokemon.pokemon.name}!"))
+            fight.roundResult.battleActions.add(new MessageLog("You catcht ${defendingFightPlayer.fightPokemon.name}!"))
             fight.battleOver = true
 
             // Add the caught pokemon
-            defendingFightPlayer.ownerPokemon.owner =  attackingFightPlayer.owner
-            defendingFightPlayer.ownerPokemon.partyPosition = Party.getOpenPartyPosition(attackingFightPlayer.owner)
-            defendingFightPlayer.ownerPokemon.save()
+
+            OwnerPokemon ownerPokemon = defendingFightPlayer.fightPokemon.ownerPokemon
+
+            ownerPokemon.owner =  attackingFightPlayer.owner
+            ownerPokemon.partyPosition = Party.getOpenPartyPosition(attackingFightPlayer.owner)
+            ownerPokemon.save()
 
             // Add moves
-            Moves.setBaseMoves(defendingFightPlayer.ownerPokemon)
+            Moves.setBaseMoves(ownerPokemon)
         }
         else
         {
-            fight.roundResult.battleActions.add(new MessageLog("You fail to catch ${defendingFightPlayer.ownerPokemon.pokemon.name}"))
+            fight.roundResult.battleActions.add(new MessageLog("You fail to catch ${defendingFightPlayer.fightPokemon.name}"))
         }
     }
 

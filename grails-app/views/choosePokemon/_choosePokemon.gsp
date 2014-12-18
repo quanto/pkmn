@@ -9,9 +9,9 @@ Please choose the Pok&eacute;mon you want to start with.<br />
         <td><img src="${resource(uri:'')}/images/pkmn/007ani.gif" /></td>
     </tr>
     <tr>
-        <td><input type="radio" value='1' name='pokemon' /></td>
-        <td><input type="radio" value='4' name='pokemon' /></td>
-        <td><input type="radio" value='7' name='pokemon' /></td>
+        <td><input type="radio" value='1' ng-model='pokemonId' /></td>
+        <td><input type="radio" value='4' ng-model='pokemonId' /></td>
+        <td><input type="radio" value='7' ng-model='pokemonId' /></td>
     </tr>
 </table>
-<input value='Choose' type='button' onclick='choose();' />
+<input value='Choose' type='button' ng-click='choose();' />

@@ -31,6 +31,7 @@ class FightPokemon {
     int accuracyStage
     int criticalStage
     int evasionStage
+    int catchRate
     String type1
     String type2
     int pokemonNr

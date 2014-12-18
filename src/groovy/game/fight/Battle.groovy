@@ -94,7 +94,7 @@ class Battle {
                     Faint.recoverPlayerToClosestCenter(fight)
                 }
                 else {
-                    Stats.saveStats(fight.fightPlayer1, true);
+                    Stats.saveStats(fight.fightPlayer1);
                 }
             }
         }
